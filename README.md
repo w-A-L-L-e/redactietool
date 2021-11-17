@@ -1,8 +1,9 @@
-# Subloader en Redactie tool
+# Redactie tool
 
 ## Synopsis
-Upload form for subtitles as collateral for mediaobject. Searches
-by pid. Shows flowplayer with subtitles after you upload a valid srt.
+Upload form for subtitles as collateral for mediaobject and editing metadata using calls
+to knowledge graph. Searches by pid. Shows overview page with selection to either edit metadata
+or upload new subtitle file. Shows flowplayer with subtitles after you upload a valid srt.
 Subtitle srt is converted to webvtt for pre-viewing in flowplayer.
 Finally submit to mediahaven (show confirmation dialog if a srt is already linked).
 Allows basically to upload both closed and open srt files to videos for 'testbeeld' tenant
@@ -20,7 +21,7 @@ Allows basically to upload both closed and open srt files to videos for 'testbee
 
 1. Clone this repository with:
 
-    `$ git clone https://github.com/viaacode/subloader.git`
+    `$ git clone https://github.com/viaacode/redactietool.git`
 
 2. Change into the new directory.
 
@@ -45,7 +46,7 @@ __________           .___              __  .__         ___________           .__
                  Develop mode, running on http://localhost:8080 
 
 
- * Serving Flask app "app.subloader" (lazy loading)
+ * Serving Flask app "app.redactietool" (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
@@ -84,7 +85,7 @@ $ make test
 ================================ test session starts =================================
 platform darwin -- Python 3.8.5, pytest-5.4.1, py-1.10.0, pluggy-0.13.1 
 cachedir: .pytest_cache
-rootdir: /Users/wschrep/FreelanceWork/VIAA/subloader
+rootdir: /Users/wschrep/FreelanceWork/VIAA/redactietool
 plugins: recording-0.11.0, cov-2.8.1
 collected 25 items                                                                   
 
@@ -130,7 +131,7 @@ Test coverage report can be generated with following coverage makefile command:
 $ make coverage
 ================================ test session starts =================================
 platform darwin -- Python 3.8.5, pytest-5.4.1, py-1.10.0, pluggy-0.13.1
-rootdir: /Users/wschrep/FreelanceWork/VIAA/subloader
+rootdir: /Users/wschrep/FreelanceWork/VIAA/redactietool
 plugins: recording-0.11.0, cov-2.8.1
 collected 25 items                                                                   
 
@@ -144,7 +145,7 @@ app/__init__.py             0      0   100%
 app/authorization.py       44      7    84%
 app/config.py              19      0   100%
 app/mediahaven_api.py      51      4    92%
-app/subloader.py          142      3    98%
+app/redactietool.py          142      3    98%
 app/subtitle_files.py      71      3    96%
 app/validation.py          21      3    86%
 -------------------------------------------
