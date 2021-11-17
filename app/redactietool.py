@@ -4,7 +4,7 @@
 #  @Author: Walter Schreppers and integrated 
 #           code from python-saml3 flask demo for SAML authorization
 #
-#  app/redactietool.py.py
+#  app/redactietool.py
 #
 #   Application to upload srt file and push into mediahaven.
 #   It stores and converts an uploaded srt file to webvtt format,

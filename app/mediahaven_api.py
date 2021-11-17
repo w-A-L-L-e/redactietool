@@ -3,7 +3,7 @@
 #
 #  @Author: Walter Schreppers
 #
-#  lib/mediahaven_api.py
+#  app/mediahaven_api.py
 #
 #   Make api calls to hetarchief/mediahaven
 #   find_video used to lookup video by pid and tenant
