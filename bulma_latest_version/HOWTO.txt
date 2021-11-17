@@ -1,0 +1,12 @@
+After initial git pull, you can install the npm dependencies like so:
+$ ./install_dev_dependencies.sh
+
+
+1. Customize your bulma distribution by editing:
+$ vi src/mystyles.scss 
+
+2. To rebuild a new compiled css with customized colors.
+$ ./compile.sh 
+
+3. See the results:
+$ open index.html

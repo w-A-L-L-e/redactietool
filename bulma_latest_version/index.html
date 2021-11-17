@@ -4,16 +4,47 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My custom Bulma website</title>
+    <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
+    <link rel="text/javascript" href="dist/js/bundle.js">
   </head>
   <body>
-     <h1 class="title">
-        Bulma
-      </h1>
 
-      <p class="subtitle">
-        Modern CSS framework based on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
+    <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+
+      <a class="navbar-link">
+        Menu
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            Metadata
+          </a>
+          <a class="navbar-item">
+            Ondertitels
+          </a>
+          <hr class="navbar-divider">
+          <div class="navbar-item">
+            Bulma v0.9.3
+          </div>
+        </div>
+      </div>
+
+      <a class="navbar-item">
+        Login 
+      </a>
+
+      <a class="navbar-item">
+        Logout
+      </a>
+    </nav>
+
+    <h1 class="title">
+      Redactietool
+    </h1>
+
+    <p class="subtitle">
+      Minimale test om te zien of we onze webpack en sassc compiler goed hebben nu.
       </p>
 
       <div class="field">
