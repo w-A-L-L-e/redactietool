@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  @Author: Walter Schreppers and integrated 
+#  @Author: Walter Schreppers and integrated
 #           code from python-saml3 flask demo for SAML authorization
 #
 #  app/redactietool.py
@@ -13,7 +13,7 @@
 #   Authorization is done by feching jwt token from oas.viaa.be and passing
 #   jwt between forms and pages as 'token'. This token is verified in the
 #   authorization.py module, using decorator @requires_authorization
-#   
+#
 #   Future work is also editing metadata for same PID entry with addition
 #   of calls to knowledgegraph api from Miel Vander Sande
 
@@ -82,10 +82,10 @@ def login():
     user = User()
     # login_user(user) # todo import login_manager here and wire up with SAML
 
-    if app.config['DEBUG'] is True and app.config['TESTING'] == False:
+    if app.config['DEBUG'] is True and not app.config['TESTING']:
         print('DISABLE login check FOR CSS RESTYLE')
         return redirect(
-          url_for('.search_media', token='debug_authorization_disabled')
+            url_for('.search_media', token='debug_authorization_disabled')
         )
 
     username = request.form.get('username')
@@ -469,5 +469,3 @@ def page_not_found(e):
 # =============== Main application startup without debug mode ================
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000, debug=False)
-
-
