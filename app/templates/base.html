@@ -1,0 +1,84 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Subloader</title>
+    
+
+    <!-- old version of vanilla style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- bulma css framework -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='flowplayer.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></script>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flowplayer.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></script>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='flowplayer.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='subtitles.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+  </head>
+
+<body>
+    <!-- section class="hero is-fullheight is-default is-bold">
+        {% include 'includes/navigation.html' %}
+    </section-->
+
+    <nav>
+      <span class="applogo"> 
+
+        <a href="{{ url_for('index') }}">
+        <img class="avo_logo" 
+        src="{{ url_for('static', filename='avo-logo-i.svg') }}" alt="Logo Het Archief voor Onderwijs">
+        </a> 
+      </span>
+      <span class="apptitle">Ondertitel en Redactie tool </span>
+
+      <!-- quick POC, this will be redone with bulma.css soon -->
+      <div class="login_logout" id="saml_auth_block">
+        {% if paint_logout %}
+        {% if attributes %}
+          <table class="table table-striped">
+            <thead>
+              <th>Name</th><th>Values</th>
+            </thead>
+            <tbody>
+              {% for attr in attributes %}
+                <tr><td>{{ attr.0 }}</td>
+                <td><ul class="list-unstyled">
+                  {% for val in attr.1 %}
+                    <li>{{ val }}</li>
+                  {% endfor %}
+                </ul></td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+        {% endif %}
+        <a href="?slo" class="btn btn-danger">Logout</a>
+      {% else %}
+        <a href="?sso" class="btn btn-primary">Login</a> <a href="?sso2" class="btn btn-info">Login and access to attrs page</a>
+      {% endif %}
+      </div>
+    </nav>
+    <section class="content">
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </section>
+
+</body>
+</html>
