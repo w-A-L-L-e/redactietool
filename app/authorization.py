@@ -46,8 +46,8 @@ def skip_signature_check():
 
 def verify_token(jwt_token):
     try:
-        # IN DEBUG MODE, DISABLE AUTH DURING CSS RE-STYLING
-        if current_app.config['DEBUG']:
+        if current_app.config['DEBUG'] is True and current_app.config['TESTING'] == False:
+            print('IN DEBUG MODE, DISABLE AUTH DURING CSS RE-STYLING')
             return True
 
         # we only validate signature if OAS_JWT_SECRET is supplied

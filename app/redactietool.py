@@ -82,8 +82,8 @@ def login():
     user = User()
     # login_user(user) # todo import login_manager here and wire up with SAML
 
-    # DISABLE login check FOR CSS RESTYLE
-    if app.config['DEBUG']:
+    if app.config['DEBUG'] is True and app.config['TESTING'] == False:
+        print('DISABLE login check FOR CSS RESTYLE')
         return redirect(
           url_for('.search_media', token='debug_authorization_disabled')
         )
@@ -450,10 +450,6 @@ def metadata():
     return resp
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000, debug=True)
-
-
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
 @app.route("/health/live")
 def liveness_check():
@@ -468,3 +464,10 @@ def unauthorized(e):
 @app.errorhandler(404)
 def page_not_found(e):
     return "<h1>404</h1><p>Page not found</p>", 404
+
+
+# =============== Main application startup without debug mode ================
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000, debug=False)
+
+

@@ -40,4 +40,5 @@ class DevConfig(Config):
 
 class TestConfig(Config):
     DEVELOPMENT = True
-    DEBUG = True
+    DEBUG = False
+    TESTING = True
