@@ -188,7 +188,7 @@ $ make server
 The root page is now a login screen that both supports a form based login and a one button/saml authentication
 which shares your login with other Meemoo applications.
 
-following this link <a href="http://127.0.0.1:8080/">Subloader</a> after you have the server running.
+following this link <a href="http://127.0.0.1:8080/">Redactietool localhost</a> after you have the server running.
 
 
 During development you can autoformat and check linting errors like so:
