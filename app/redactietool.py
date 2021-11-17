@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  @Author: Walter Schreppers and integrated code from python-saml3 flask demo
+#  @Author: Walter Schreppers and integrated 
+#           code from python-saml3 flask demo for SAML authorization
 #
-#  app/subloader.py
+#  app/redactietool.py.py
 #
 #   Application to upload srt file and push into mediahaven.
 #   It stores and converts an uploaded srt file to webvtt format,
@@ -12,7 +13,9 @@
 #   Authorization is done by feching jwt token from oas.viaa.be and passing
 #   jwt between forms and pages as 'token'. This token is verified in the
 #   authorization.py module, using decorator @requires_authorization
-#
+#   
+#   Future work is also editing metadata for same PID entry with addition
+#   of calls to knowledgegraph api from Miel Vander Sande
 
 import os
 import json

@@ -8,7 +8,7 @@
 import pytest
 from unittest.mock import MagicMock
 from flask_api import status
-from app.subloader import app
+from app.redactietool import app
 from .fixtures import jwt_token
 import io
 import os

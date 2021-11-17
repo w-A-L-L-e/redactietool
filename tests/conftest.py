@@ -8,7 +8,7 @@
 #
 
 import pytest
-from app.subloader import app
+from app.redactietool import app
 
 
 @pytest.fixture(scope='module')
