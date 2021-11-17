@@ -62,7 +62,7 @@ __________           .___              __  .__         ___________           .__
 
     `$ make test`
 
-5. Run the web application in optimal mode for benchmarking :
+5. To run the web application in production mode use this make command :
 
    `$ make server`
 
@@ -81,40 +81,34 @@ Or just visit this url in your browser http://127.0.0.1:8080
 ### Helper scripts
 To run the tests locally and also run flake8 linter/code checking:
 ```
+
 $ make test    
-================================ test session starts =================================
-platform darwin -- Python 3.8.5, pytest-5.4.1, py-1.10.0, pluggy-0.13.1 
+===================================== test session starts ======================================
+platform darwin -- Python 3.9.7, pytest-5.4.1, py-1.10.0, pluggy-0.13.1 -- /Users/wschrep/FreelanceWork/VIAA/subloader/python_env/bin/python
 cachedir: .pytest_cache
 rootdir: /Users/wschrep/FreelanceWork/VIAA/redactietool
-plugins: recording-0.11.0, cov-2.8.1
-collected 25 items                                                                   
+plugins: recording-0.11.0, cov-2.8.1, mock-3.5.1
+collected 29 items                                                                             
 
-tests/test_app.py::test_home PASSED                                            [  4%]
-tests/test_app.py::test_liveness_check PASSED                                  [  8%]
-tests/test_app.py::test_search_media_security PASSED                           [ 12%]
-tests/test_app.py::test_search_media PASSED                                    [ 16%]
-tests/test_app.py::test_invalid_pid_entry PASSED                               [ 20%]
-tests/test_app.py::test_empty_pid PASSED                                       [ 24%]
-tests/test_app.py::test_wrong_pid_entry PASSED                                 [ 28%]
-tests/test_app.py::test_working_pid_search PASSED                              [ 32%]
-tests/test_app.py::test_bad_srt_upload PASSED                                  [ 36%]
-tests/test_app.py::test_invalid_upload PASSED                                  [ 40%]
-tests/test_app.py::test_empty_upload PASSED                                    [ 44%]
-tests/test_app.py::test_valid_subtitle PASSED                                  [ 48%]
-tests/test_app.py::test_valid_subtitle_capitals PASSED                         [ 52%]
-tests/test_app.py::test_cancel_upload PASSED                                   [ 56%]
-tests/test_app.py::test_subtitle_videoplayer_route PASSED                      [ 60%]
-tests/test_app.py::test_subtitle_videoplayer_route_unknownfile PASSED          [ 64%]
-tests/test_app.py::test_send_to_mam_shows_confirmation PASSED                  [ 68%]
-tests/test_app.py::test_send_to_mam_confirm_works PASSED                       [ 72%]
-tests/test_app.py::test_send_to_mam_cancel_works PASSED                        [ 76%]
-tests/test_app.py::test_random_404 PASSED                                      [ 80%]
-tests/test_authorization.py::test_jwt PASSED                                   [ 84%]
-tests/test_authorization.py::test_bad_jwt PASSED                               [ 88%]
-tests/test_authorization.py::test_token_signature_bad_decode PASSED            [ 92%]
-tests/test_authorization.py::test_wrong_credentials PASSED                     [ 96%]
-tests/test_authorization.py::test_right_credentials PASSED                     [100%]
+tests/test_app.py::test_home PASSED                                                      [  3%]
+tests/test_app.py::test_liveness_check PASSED                                            [  6%]
+tests/test_app.py::test_search_media_security PASSED                                     [ 10%]
+tests/test_app.py::test_search_media PASSED                                              [ 13%]
+tests/test_app.py::test_invalid_pid_entry PASSED                                         [ 17%]
+tests/test_app.py::test_empty_pid PASSED                                                 [ 20%]
+tests/test_app.py::test_wrong_pid_entry PASSED                                           [ 24%]
+tests/test_app.py::test_working_pid_search PASSED                                        [ 27%]
+tests/test_app.py::test_bad_srt_upload PASSED                                            [ 31%]
+tests/test_app.py::test_invalid_upload PASSED                                            [ 34%]
+tests/test_app.py::test_empty_upload PASSED                                              [ 37%]
+tests/test_app.py::test_valid_subtitle PASSED                                            [ 41%]
+tests/test_app.py::test_valid_subtitle_capitals PASSED                                   [ 44%]
+tests/test_app.py::test_cancel_upload PASSED                                             [ 48%]
+tests/test_app.py::test_subtitle_videoplayer_route PASSED                                [ 51%]
+tests/test_app.py::test_subtitle_videoplayer_route_unknownfile PASSED                    [ 55%]
+...
 
+tests/test_sidecar.py::test_sidecar_v2 PASSED                                            [100%]
 ================================= 25 passed in 1.63s =================================
 Running flake8 linter...
 ALL OK
@@ -129,33 +123,34 @@ Test coverage report can be generated with following coverage makefile command:
 
 ```
 $ make coverage
-================================ test session starts =================================
-platform darwin -- Python 3.8.5, pytest-5.4.1, py-1.10.0, pluggy-0.13.1
-rootdir: /Users/wschrep/FreelanceWork/VIAA/redactietool
-plugins: recording-0.11.0, cov-2.8.1
-collected 25 items                                                                   
-
-tests/test_app.py ....................                                         [ 80%]
-tests/test_authorization.py .....                                              [100%]
-
----------- coverage: platform darwin, python 3.8.5-final-0 -----------
-Name                    Stmts   Miss  Cover
--------------------------------------------
-app/__init__.py             0      0   100%
-app/authorization.py       44      7    84%
-app/config.py              19      0   100%
-app/mediahaven_api.py      51      4    92%
-app/redactietool.py          142      3    98%
-app/subtitle_files.py      71      3    96%
-app/validation.py          21      3    86%
--------------------------------------------
-TOTAL                     348     20    94%
+Name                          Stmts   Miss  Cover
+-------------------------------------------------
+app/__init__.py                   0      0   100%
+app/authorization.py             50     24    52%
+app/config.py                    19      0   100%
+app/ftp_uploader.py              30      7    77%
+app/mediahaven_api.py            54     10    81%
+app/redactietool.py             243     95    61%
+app/subtitle_files.py           146      3    98%
+app/validation.py                35      6    83%
+debug.py                          3      3     0%
+list_videos.py                    8      8     0%
+tests/__init__.py                 2      0   100%
+tests/conftest.py                 9      0   100%
+tests/fixtures.py                21      0   100%
+tests/test_app.py               172      0   100%
+tests/test_authorization.py      31      0   100%
+tests/test_sidecar.py            14      0   100%
+wsgi.py                           3      3     0%
+-------------------------------------------------
+TOTAL                           840    159    81%
 Coverage HTML written to dir htmlcov
-
-
-================================= 25 passed in 1.92s =================================
 ```
 
+Then you can open the generated test coverage report here:
+```
+open htmlcov/index.html
+```
 
 ### Environment variables
 
@@ -218,7 +213,7 @@ If you want to rerecord the automated request responses used in some tests you c
 If you write new tests be sure to also filter out the authorization headers. Before this was done/configured we accidentally exposed a basic auth header in all
 generated yaml files (and this contains the pasword that is stored in normally an env var or secret because the header can be decoded).
 
-However by doing this in top of your tests. These headers are filtered and then all is safe to be pushed to a public git also:
+To filter out headers in recorded api responses best use this snippet:
 ```
 @pytest.fixture(scope="module")
 def vcr_config():
@@ -226,9 +221,4 @@ def vcr_config():
         "record_mode": "once",
         "filter_headers": ["authorization"]
     }
-
-
 ```
-
-
-
