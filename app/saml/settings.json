@@ -13,7 +13,7 @@
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
         "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-        "x509cert": "TODO: fetch with the idp xml response",
+        "x509cert": "FUTURE TODO: fetch with the idp xml response from url see TODO.txt and generate this json file on app startup",
         "privateKey": ""
     },
     "idp": {
@@ -26,7 +26,7 @@
             "url": "https://idp.viaa.be/saml2/idp/SingleLogoutService.php",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
-        "x509cert": "TODO: fetch with the idp xml response"
+        "x509cert": "FUTURE TODO: fetch with the idp xml response"
     }
 }
 
