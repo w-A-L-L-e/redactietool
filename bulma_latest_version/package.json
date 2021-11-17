@@ -4,7 +4,7 @@
   "description": "clean build of bulma latest version with npm",
   "main": "webpack.config.js",
   "dependencies": {
-    "bulma": "^0.9.3",
+    "bulma": "0.9.3",
     "css-loader": "^6.5.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "mini-css-extract-plugin": "^2.4.4",
