@@ -28,7 +28,26 @@ Allows basically to upload both closed and open srt files to videos for 'testbee
 ### Running locally
 
 There is a Makefile included now. If you run make without arguments you can
-see all available commands.
+see all available commands:
+
+```
+$ make
+Available make commands:
+
+  install               install packages and prepare environment
+  clean                 remove all temporary files
+  lint                  run the code linters
+  format                reformat code
+  test                  run all the tests
+  coverage              run tests and generate coverage report
+  server                start uvicorn development server and serve application locally
+  debug                 start server in debugging mode for auto restarting after code changes etc.
+  dockerrun             run docker image and serve web application in docker
+                        (normally only needed if there are deploy issues)
+  preview               Preview changed assets before copying into flask
+  precompile_assets     re-compile bulma core.css, overrides.css and 
+                        place into flask application assets folder
+```
 
 1. Start by running make install which installs the pip packages and sets up the environment.
 

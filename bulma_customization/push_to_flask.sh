@@ -1,3 +1,6 @@
+#!/bin/bash
+# Author: Walter Schreppers
+
 echo "re-compiling bulma components"
 ./compile.sh
 

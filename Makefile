@@ -18,6 +18,7 @@ help:
 	@echo "  debug                 start server in debugging mode for auto restarting after code changes etc."
 	@echo "  dockerrun             run docker image and serve web application in docker"
 	@echo "                        (normally only needed if there are deploy issues)"
+	@echo "  preview               Preview changed assets before copying into flask"
 	@echo "  precompile_assets     re-compile bulma core.css, overrides.css and "
 	@echo "                        place into flask application assets folder"
 	@echo ""
@@ -82,7 +83,11 @@ debug:
 	@. python_env/bin/activate; \
 	python debug.py
 
-.PHONY: debug
+.PHONY: precompile_assets 
 precompile_assets:
 	cd bulma_customization && ./push_to_flask.sh
+
+.PHONY: preview
+preview:
+	cd bulma_customization && ./preview_customization.sh
 
