@@ -6,66 +6,306 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
-    <link rel="text/javascript" href="dist/js/bundle.js">
   </head>
   <body>
 
-    <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+    <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
+    <nav class="navbar is-fixed-top has-background-primary has-text-white" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="/">
+          <img src="http://localhost:8080/static/avo-logo-i.svg" width="150" class="mr-4">
+          Meemoo Redactietool
+        </a>
 
-      <a class="navbar-link">
-        Menu
-      </a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
+        <!-- add class is-active to turn into a cross -->
+        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-white">
             Metadata
           </a>
-          <a class="navbar-item">
+
+          <a class="navbar-item has-text-white">
             Ondertitels
           </a>
-          <hr class="navbar-divider">
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link has-text-white">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/pid">
+                PID
+              </a>
+              <a class="navbar-item" href="/meta">
+                Metadata
+              </a>
+              <a class="navbar-item" href="/subs">
+                Ondertitels
+              </a>
+
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                Redactietool v0.1 alpha
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
           <div class="navbar-item">
-            Bulma v0.9.3
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-      <a class="navbar-item">
-        Login 
-      </a>
-
-      <a class="navbar-item">
-        Logout
-      </a>
     </nav>
 
-    <h1 class="title">
-      Redactietool
-    </h1>
 
-    <p class="subtitle">
-      Minimale test om te zien of we onze webpack en sassc compiler goed hebben nu.
-      </p>
 
-      <div class="field">
-        <div class="control">
-          <input class="input" type="text" placeholder="Input">
+
+
+    <!-- just a little temp spacing hack to be overridden using styling.css laterz -->
+    <div class="container"> 
+      <br/> <!-- temporary content-spacer, fix this later with extra style.css -->
+      <br/>
+      <br/>
+    </div>
+
+
+
+    <!-- main container -->
+    <div class="container mgt-large">
+      <h1 class="title">
+        <span class="icon">
+          <ion-icon name="home-outline"></ion-icon>
+        </span>
+        Redactietool 
+      </h1>
+
+      <p class="subtitle">
+        Minimale test om te zien of we onze webpack en sassc compiler goed hebben nu.
+        live reload?
+        </p>
+
+      <div class="container is-widescreen mb-5">
+        <div class="notification is-primary">
+          This container is <strong>fullwidth</strong> <em>until</em> the <code>$widescreen</code> breakpoint.
         </div>
       </div>
 
-      <div class="field">
-        <p class="control">
-          <span class="select">
-            <select>
-              <option>Select dropdown</option>
-            </select>
-          </span>
+      <h2 class="title">Example form elements</h2>
+        <div class="field">
+
+          <div class="control mb-2">
+            <input class="input" type="text" placeholder="Video title">
+          </div>
+          <div class="control mb-2">
+            <input class="input" type="text" placeholder="Video release date">
+          </div>
+          <div class="control mb-2">
+            <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+          </div>
+          
+          <div class="control mb-2">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="foobar">
+                Foo
+              </label>
+              <label class="radio">
+                <input type="radio" name="foobar" checked>
+                Bar
+              </label>
+            </div>
+          </div>
+
+          <div class="control mb-2">
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control mb-2">
+            <label class="checkbox">
+              <input type="checkbox">
+              I agree to the <a href="#">terms and conditions</a>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="field">
+          <p class="control">
+            <span class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>Easy as</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <div class="buttons">
+          <a class="button is-primary">Primary</a>
+          <a class="button is-link">Link</a>
+        </div>
+      </div>
+
+
+
+      <!-- modal dialog proof of concept -->
+      <div class="container">
+        <div class="modal" id='modal_dlg'>
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Warning this is just a testpage</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <!-- Content ... -->
+              <p>
+              Voorbeeldje van een modal dialog
+              </p>
+        <p>
+          Maecenas in vulputate nunc. Ut nec tortor nec tellus eleifend interdum eu suscipit risus. Nullam auctor nibh rhoncus nisi dictum sagittis. Morbi auctor vulputate varius. Cras fermentum dapibus rutrum. Etiam tempor risus lectus, id bibendum diam rutrum sit amet. Curabitur commodo nibh vitae vestibulum pharetra. Pellentesque cursus sagittis diam nec fermentum.
+
+              </p>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Save changes</button>
+              <button class="button">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
+        <button id="modal_btn" class="button is-primary is-large modal-button mt-5"> 
+          Launch example modal
+        </button>
+
+        <p class="mt-5">
+          Delete button example:
+        </p>
+        <p>
+          <button class="delete"></button>
         </p>
       </div>
 
-      <div class="buttons">
-        <a class="button is-primary">Primary</a>
-        <a class="button is-link">Link</a>
-      </div>
+
+  
+      <!-- random lorem ipsum to test scrolling and fixed header -->
+      <div class="container">
+        <h3 class="title mt-5">Lorem Ipsum Test</h1>
+        
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam massa diam, consectetur in augue a, auctor accumsan dui. Donec et aliquam sem. Pellentesque et ullamcorper nunc, malesuada congue ligula. Quisque fermentum sit amet neque quis pulvinar. Cras volutpat, metus in iaculis lobortis, felis justo eleifend nisi, eu scelerisque elit sem ac velit. Mauris in sapien eleifend, cursus lectus sed, congue neque. Vestibulum metus ante, ullamcorper et faucibus et, rutrum ac libero. Sed ultrices et lorem et ultrices. Donec pellentesque lobortis tellus ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse at ornare est, sit amet faucibus nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum pharetra posuere urna, quis tristique nisl aliquam vitae. Nunc varius leo id quam lobortis, non aliquam massa semper. Vestibulum dignissim turpis vitae maximus consectetur.
+        </p>
+
+        <p class="mt-5">
+          Nulla consequat, purus quis malesuada interdum, dolor ante laoreet nibh, vitae convallis urna libero at risus. Nunc vel magna tellus. Maecenas egestas, lectus ut viverra facilisis, lacus neque vulputate nibh, ut aliquam diam lectus sed metus. Nulla at dapibus nulla. Ut dapibus elit quis commodo eleifend. Ut fringilla diam eget ullamcorper condimentum. Suspendisse dolor dolor, interdum nec elit vel, gravida convallis tellus. Integer sagittis dignissim ante ac rutrum. Phasellus consequat ipsum eget purus maximus, id rhoncus mauris finibus. Etiam enim magna, fringilla id erat sed, ornare fermentum enim.
+        </p>
+        <p class="mt-5">
+          Suspendisse pellentesque dui molestie tincidunt tristique. Fusce vitae nisl vel diam rutrum accumsan. Duis iaculis, elit eu posuere pretium, elit quam facilisis dui, non tincidunt tortor lorem ac dui. Pellentesque eleifend, magna scelerisque lacinia aliquam, lectus mauris tristique turpis, eu convallis velit est ut libero. Sed auctor urna diam, sit amet rhoncus arcu semper id. Duis eget maximus mauris. Sed neque ipsum, interdum eu mi et, scelerisque pellentesque libero. Aliquam et nulla sed nisi fringilla blandit sed eget enim. Cras eget viverra ipsum, scelerisque euismod est. Duis convallis, justo a maximus sagittis, mauris lorem congue dolor, eu scelerisque nulla orci quis ante. Nulla consectetur quis justo nec porttitor. Suspendisse risus odio, efficitur hendrerit molestie sed, molestie aliquet lorem. Sed in nunc auctor leo convallis fringilla. Duis pharetra condimentum mi vel vestibulum. Aenean ut rhoncus ante. Etiam vitae pharetra augue, id interdum velit.
+        </p>
+        <p class="mt-5">
+          Nulla nisl lorem, elementum mollis tincidunt quis, vehicula ut lacus. Quisque ac eros quis urna commodo varius non ultrices leo. Pellentesque eleifend elit nibh, pretium aliquam velit fermentum eget. Curabitur eu metus aliquet, pharetra mauris eget, tincidunt est. Praesent faucibus, lorem sit amet interdum pretium, erat mauris lacinia ipsum, id iaculis risus magna at lectus. Nulla leo ligula, efficitur a vehicula non, fermentum non felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vitae varius felis. Donec ex lorem, mollis non ex vitae, sodales scelerisque elit. Quisque quis nisi scelerisque, tempor massa eu, imperdiet sem. Ut vel orci quis orci aliquet lacinia. Morbi tincidunt tortor ex.
+        </p>
+
+        <p class="mt-5">
+          Suspendisse pellentesque dui molestie tincidunt tristique. Fusce vitae nisl vel diam rutrum accumsan. Duis iaculis, elit eu posuere pretium, elit quam facilisis dui, non tincidunt tortor lorem ac dui. Pellentesque eleifend, magna scelerisque lacinia aliquam, lectus mauris tristique turpis, eu convallis velit est ut libero. Sed auctor urna diam, sit amet rhoncus arcu semper id. Duis eget maximus mauris. Sed neque ipsum, interdum eu mi et, scelerisque pellentesque libero. Aliquam et nulla sed nisi fringilla blandit sed eget enim. Cras eget viverra ipsum, scelerisque euismod est. Duis convallis, justo a maximus sagittis, mauris lorem congue dolor, eu scelerisque nulla orci quis ante. Nulla consectetur quis justo nec porttitor. Suspendisse risus odio, efficitur hendrerit molestie sed, molestie aliquet lorem. Sed in nunc auctor leo convallis fringilla. Duis pharetra condimentum mi vel vestibulum. Aenean ut rhoncus ante. Etiam vitae pharetra augue, id interdum velit.
+        </p>
+
+        <p class="mt-5">
+          Nulla nisl lorem, elementum mollis tincidunt quis, vehicula ut lacus. Quisque ac eros quis urna commodo varius non ultrices leo. Pellentesque eleifend elit nibh, pretium aliquam velit fermentum eget. Curabitur eu metus aliquet, pharetra mauris eget, tincidunt est. Praesent faucibus, lorem sit amet interdum pretium, erat mauris lacinia ipsum, id iaculis risus magna at lectus. Nulla leo ligula, efficitur a vehicula non, fermentum non felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vitae varius felis. Donec ex lorem, mollis non ex vitae, sodales scelerisque elit. Quisque quis nisi scelerisque, tempor massa eu, imperdiet sem. Ut vel orci quis orci aliquet lacinia. Morbi tincidunt tortor ex.
+        </p>
+
+        <p class="mt-5">
+          Suspendisse pellentesque dui molestie tincidunt tristique. Fusce vitae nisl vel diam rutrum accumsan. Duis iaculis, elit eu posuere pretium, elit quam facilisis dui, non tincidunt tortor lorem ac dui. Pellentesque eleifend, magna scelerisque lacinia aliquam, lectus mauris tristique turpis, eu convallis velit est ut libero. Sed auctor urna diam, sit amet rhoncus arcu semper id. Duis eget maximus mauris. Sed neque ipsum, interdum eu mi et, scelerisque pellentesque libero. Aliquam et nulla sed nisi fringilla blandit sed eget enim. Cras eget viverra ipsum, scelerisque euismod est. Duis convallis, justo a maximus sagittis, mauris lorem congue dolor, eu scelerisque nulla orci quis ante. Nulla consectetur quis justo nec porttitor. Suspendisse risus odio, efficitur hendrerit molestie sed, molestie aliquet lorem. Sed in nunc auctor leo convallis fringilla. Duis pharetra condimentum mi vel vestibulum. Aenean ut rhoncus ante. Etiam vitae pharetra augue, id interdum velit.
+        </p>
+      </div> <!-- content with lorem ipsum dummy text and example modal popup -->
+
+
+    <!-- open source ionicons for our icons (should we need them)-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
+
+  <script type="text/javascript">
+      // vanilla js for burger toggle
+      document.addEventListener('DOMContentLoaded', () => {
+
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
+      var modal_btn = document.getElementById('modal_btn');
+      var modal_dlg = document.getElementById('modal_dlg');
+      modal_btn.addEventListener('click', () => {
+        modal_dlg.classList.add('is-active');
+        // and use classList.remove for the other buttons to close again... 
+      });
+
+
+    });
+
+    // jquery or react versions can be done too, but this will increase the resulting js libraries to be loaded...:
+    // $(document).ready(function() {
+    // 
+    //   // Check for click events on the navbar burger icon
+    //   $(".navbar-burger").click(function() {
+    // 
+    //       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    //       $(".navbar-burger").toggleClass("is-active");
+    //       $(".navbar-menu").toggleClass("is-active");
+    // 
+    //   });
+    // });
+
+  </script>
+
 </html>
