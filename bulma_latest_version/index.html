@@ -11,11 +11,13 @@
   <body>
 
     <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
-    <nav class="navbar is-fixed-top has-background-primary has-text-white" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item has-text-white" href="/">
           <img src="http://localhost:8080/static/avo-logo-i.svg" width="150" class="mr-4">
-          Meemoo Redactietool
+
+          <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+          Redactietool
         </a>
 
         <!-- add class is-active to turn into a cross -->
@@ -30,7 +32,6 @@
         <div class="navbar-start">
 
           <a class="navbar-item has-text-white">
-            <ion-icon name="home-outline" class="mr-1 mb-1"></ion-icon>
             PID
           </a>
 
@@ -60,6 +61,7 @@
 
               <hr class="navbar-divider">
               <a class="navbar-item">
+                <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
                 Redactietool v0.1 alpha
               </a>
             </div>
@@ -85,10 +87,10 @@
     <!-- main container -->
     <div class="container main">
       <h1 class="title">
+        Redactietool 
         <span class="icon">
           <ion-icon name="create-outline"></ion-icon>
         </span>
-        Redactietool 
       </h1>
 
       <p class="subtitle">
@@ -134,7 +136,7 @@
                 <input class="file-input" type="file" name="resume">
                 <span class="file-cta">
                   <span class="file-icon">
-                    <i class="fas fa-upload"></i>
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
                   </span>
                   <span class="file-label">
                     Choose a file…
@@ -168,8 +170,8 @@
         </div>
 
         <div class="buttons">
-          <a class="button is-primary">Primary</a>
-          <a class="button is-link">Link</a>
+          <a class="button is-primary">Primary button</a>
+          <a class="button is-link">Link button</a>
         </div>
       </div>
 
@@ -202,11 +204,11 @@
         </div>
 
         <button id="modal_btn" class="button is-primary is-large modal-button mt-5"> 
-          Launch example modal
+          Open demo modal dialog box met een phat button ;)
         </button>
 
         <p class="mt-5">
-          Delete button example:
+          Alternatief delete button voorbeeld:
         </p>
         <p>
           <button class="delete"></button>
@@ -220,6 +222,10 @@
         <h3 class="title mt-5">Lorem Ipsum Test</h1>
         
         <p>
+        Wat dummy content om scrollbar/fixed header en menus te testen...
+        </p>
+
+        <p class="mt-5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam massa diam, consectetur in augue a, auctor accumsan dui. Donec et aliquam sem. Pellentesque et ullamcorper nunc, malesuada congue ligula. Quisque fermentum sit amet neque quis pulvinar. Cras volutpat, metus in iaculis lobortis, felis justo eleifend nisi, eu scelerisque elit sem ac velit. Mauris in sapien eleifend, cursus lectus sed, congue neque. Vestibulum metus ante, ullamcorper et faucibus et, rutrum ac libero. Sed ultrices et lorem et ultrices. Donec pellentesque lobortis tellus ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse at ornare est, sit amet faucibus nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum pharetra posuere urna, quis tristique nisl aliquam vitae. Nunc varius leo id quam lobortis, non aliquam massa semper. Vestibulum dignissim turpis vitae maximus consectetur.
         </p>
 
