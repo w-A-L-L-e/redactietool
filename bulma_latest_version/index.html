@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
+    <link rel="stylesheet" href="src/overrides.css">
   </head>
   <body>
 
@@ -27,6 +28,12 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
+
+          <a class="navbar-item has-text-white">
+            <ion-icon name="home-outline" class="mr-1 mb-1"></ion-icon>
+            PID
+          </a>
+
           <a class="navbar-item has-text-white">
             Metadata
           </a>
@@ -74,24 +81,12 @@
       </div>
     </nav>
 
-
-
-
-
-    <!-- just a little temp spacing hack to be overridden using styling.css laterz -->
-    <div class="container"> 
-      <br/> <!-- temporary content-spacer, fix this later with extra style.css -->
-      <br/>
-      <br/>
-    </div>
-
-
-
+ 
     <!-- main container -->
-    <div class="container mgt-large">
+    <div class="container main">
       <h1 class="title">
         <span class="icon">
-          <ion-icon name="home-outline"></ion-icon>
+          <ion-icon name="create-outline"></ion-icon>
         </span>
         Redactietool 
       </h1>
@@ -107,7 +102,7 @@
         </div>
       </div>
 
-      <h2 class="title">Example form elements</h2>
+      <h2 class="title">Form elements</h2>
         <div class="field">
 
           <div class="control mb-2">
@@ -117,7 +112,7 @@
             <input class="input" type="text" placeholder="Video release date">
           </div>
           <div class="control mb-2">
-            <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+            <textarea class="textarea" placeholder="Hello world"></textarea>
           </div>
           
           <div class="control mb-2">
