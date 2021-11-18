@@ -1,0 +1,8 @@
+python_env
+*secret*
+__pycache__
+.coverage
+htmlcov
+*.pem
+*.key
+
