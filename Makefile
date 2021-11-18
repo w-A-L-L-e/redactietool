@@ -8,15 +8,18 @@ FOLDERS := ./app/ ./tests/
 help:
 	@echo "Available make commands:"
 	@echo ""
-	@echo "  install     install packages and prepare environment"
-	@echo "  clean       remove all temporary files"
-	@echo "  lint        run the code linters"
-	@echo "  format      reformat code"
-	@echo "  test        run all the tests"
-	@echo "  coverage    run tests and generate coverage report"
-	@echo "  server      start uvicorn development server and serve application locally"
-	@echo "  debug			 start server in debugging mode for auto restarting after code changes etc."
-	@echo "  dockerrun   run docker image and serve web application in docker (normally only needed if there are deploy issues)"
+	@echo "  install               install packages and prepare environment"
+	@echo "  clean                 remove all temporary files"
+	@echo "  lint                  run the code linters"
+	@echo "  format                reformat code"
+	@echo "  test                  run all the tests"
+	@echo "  coverage              run tests and generate coverage report"
+	@echo "  server                start uvicorn development server and serve application locally"
+	@echo "  debug                 start server in debugging mode for auto restarting after code changes etc."
+	@echo "  dockerrun             run docker image and serve web application in docker"
+	@echo "                        (normally only needed if there are deploy issues)"
+	@echo "  precompile_assets     re-compile bulma core.css, overrides.css and "
+	@echo "                        place into flask application assets folder"
 	@echo ""
 
 
@@ -78,4 +81,8 @@ debug:
 	@echo "                 Develop and debugging mode, running on http://localhost:8080 \n\n"
 	@. python_env/bin/activate; \
 	python debug.py
+
+.PHONY: debug
+precompile_assets:
+	cd bulma_customization && ./push_to_flask.sh
 

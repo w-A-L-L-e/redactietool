@@ -196,6 +196,38 @@ Auto reformatting (a lot like rubocop but then with python):
 $ make format
 ```
 
+
+### Updating the bulma styling
+
+To keep inline with most of our other web applications. A new makefile command called precompile_assets was added.
+This recompiles the bulma sass files with your customized variables and then places this in the correct location in the
+flask application static assets folder:
+
+```
+$ make precompile_assets
+cd bulma_customization && ./push_to_flask.sh
+re-compiling bulma components
+
+> bulma_latest_version@0.9.3 build /Users/wschrep/FreelanceWork/VIAA/redactietool/bulma_customization
+> webpack --mode production
+
+asset css/mystyles.css 169 KiB [compared for emit] (name: main)
+asset js/bundle.js 349 bytes [compared for emit] [minimized] (name: main)
+Entrypoint main 170 KiB = css/mystyles.css 169 KiB js/bundle.js 349 bytes
+orphan modules 172 KiB (javascript) 937 bytes (runtime) [orphan] 7 modules
+runtime modules 274 bytes 1 module
+cacheable modules 79 bytes (javascript) 169 KiB (css/mini-extract)
+  javascript modules 79 bytes
+    ./src/index.js 29 bytes [built] [code generated]
+    ./src/mystyles.scss 50 bytes [built] [code generated]
+  css modules 169 KiB
+    css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./src/mystyles.scss 68 bytes [built] [code generated]
+    css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./src/mystyles.scss (1) 169 KiB [built] [code generated]
+webpack 5.64.1 compiled successfully in 1236 ms
+updating flask core css and overrides...
+all done.
+```
+
 ### Verification of bearer token
 
 In order to verify bearer token the secret key is shared. This is base64 encode hs256 jwt key. We share the key as environment variable OAS_JWT_SECRET
