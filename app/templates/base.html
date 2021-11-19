@@ -26,8 +26,6 @@
   </head>
 
 <body>
-
-
     <!-- section class="hero is-fullheight is-default is-bold">
         {% include 'includes/navigation.html' %}
     -->
@@ -98,42 +96,50 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
+              
+              <!-- quick POC, this will be redone with bulma.css soon -->
+              <div class="login_logout" id="saml_auth_block">
+                {% if paint_logout %}
+                {% if attributes %}
+                  <table class="table table-striped">
+                    <thead>
+                      <th>Name</th><th>Values</th>
+                    </thead>
+                    <tbody>
+                      {% for attr in attributes %}
+                        <tr><td>{{ attr.0 }}</td>
+                        <td><ul class="list-unstyled">
+                          {% for val in attr.1 %}
+                            <li>{{ val }}</li>
+                          {% endfor %}
+                        </ul></td></tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% else %}
+                  <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+                {% endif %}
+
+                <a href="?slo" class="button is-primary">
+                  <strong>Logout</strong>
+                </a>
+
+              {% else %}
+                <a  href="?sso" 
+                    class="button is-light">
+                  Login
+                </a> 
+
+                <a  href="?sso2" 
+                    class="button is-light">
+                  Login and access to attrs page
+                </a>
+
+              {% endif %}
+              </div>
+
             </div>
           </div>
-        </div>
-
-       <!-- quick POC, this will be redone with bulma.css soon -->
-        <div class="login_logout" id="saml_auth_block">
-          {% if paint_logout %}
-          {% if attributes %}
-            <table class="table table-striped">
-              <thead>
-                <th>Name</th><th>Values</th>
-              </thead>
-              <tbody>
-                {% for attr in attributes %}
-                  <tr><td>{{ attr.0 }}</td>
-                  <td><ul class="list-unstyled">
-                    {% for val in attr.1 %}
-                      <li>{{ val }}</li>
-                    {% endfor %}
-                  </ul></td></tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          {% else %}
-            <div class="alert alert-danger" role="alert">You don't have any attributes</div>
-          {% endif %}
-          <a href="?slo" class="btn btn-danger">Logout</a>
-        {% else %}
-          <a href="?sso" class="btn btn-primary">Login</a> <a href="?sso2" class="btn btn-info">Login and access to attrs page</a>
-        {% endif %}
         </div>
 
       </div>
@@ -162,6 +168,5 @@
     </div> 
     <!-- end of main container -->
 
-    
 </body>
 </html>
