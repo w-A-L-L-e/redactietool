@@ -30,7 +30,7 @@ input {
   margin: 0.5em;
   width: 240px;
   border: 1px solid #bac7d1;
-  height: 2em;
+  height: 32px;
   border-radius: 5px;
   padding-left: 1em;
   transition: ease-in-out, width .35 ease-in-out;
