@@ -7,5 +7,6 @@ npm install sass-loader --save-dev
 npm install style-loader --save-dev
 npm install webpack --save-dev
 npm install webpack-cli --save-dev
+npm install slim-select --save-dev
 npm install webpack
 
