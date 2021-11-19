@@ -62,11 +62,10 @@ textarea {
   height: 210px;
 }
 
-
 form.login_form input[type=submit]{
-  margin-left: 280px;
+  margin-left: 135px;
+  height: 40px;
 }
-
 
 form.upload_form {
   width: 30em;
@@ -342,6 +341,6 @@ input[type=submit]:disabled.cancel{
 }
 
 .saml {
-  margin-left: 34% !important;
-  margin-top: -10px !important;
+  margin-left: 34%;
+  margin-top: 5px;
 }

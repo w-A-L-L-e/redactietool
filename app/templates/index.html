@@ -40,7 +40,8 @@ Login
       {% endif %}
 
       <input 
-        id="login_submit"
+        id="legacy_login"
+        class="button is-primary"
         onClick="loginSubmit(this);"
         type="submit" 
         value="Login"/>
@@ -52,7 +53,7 @@ Login
       kunt gebruiken met 1 login/logout.
     </p>
     <a href="{{ url_for('.saml_login')}}" 
-      class="button saml">
+      class="button is-info saml">
       SAML Login
     </a>
 
