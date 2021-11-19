@@ -7,6 +7,7 @@ echo "re-compiling bulma components"
 echo "updating flask core css and overrides..."
 cp -r dist/css/mystyles.css ../app/static/bulma/core.css
 cp src/overrides.css ../app/static/bulma/overrides.css
+cp dist/js/bundle.js ../app/static/bulma/bundle.js
 
 echo "all done."
 

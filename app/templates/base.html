@@ -2,75 +2,155 @@
 <!doctype html>
 <html>
   <head>
-    <title>Subloader</title>
-    
-
-    <!-- old version of vanilla style.css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Redactietool</title>
+    <!-- old version of vanilla style.css 
+    -->
 
     <!-- bulma css framework -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/bulma.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.min.css') }}">
-
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='flowplayer.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></script>
-
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/overrides.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- flowplayer styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='flowplayer.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></script>
 
+    <!-- deprecated stylesheets
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    -->
 
+    <script type="text/javascript" src="{{ url_for('static', filename='bulma/bundle.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='flowplayer.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='subtitles.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
   </head>
 
 <body>
+
+
     <!-- section class="hero is-fullheight is-default is-bold">
         {% include 'includes/navigation.html' %}
-    </section-->
+    -->
 
-    <nav>
-      <span class="applogo"> 
+    <!-- ////////////////////////////////////////// MAIN MENU ///////////////////////////////////////////// -->
+    <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="/">
+          <img 
+            src="{{ url_for('static', filename='avo-logo-i.svg') }}" alt="Logo Het Archief voor Onderwijs"
+            width="150" 
+            class="mr-4"
+          >
+          <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+          Redactietool
+        </a>
 
-        <a href="{{ url_for('index') }}">
-        <img class="avo_logo" 
-        src="{{ url_for('static', filename='avo-logo-i.svg') }}" alt="Logo Het Archief voor Onderwijs">
-        </a> 
-      </span>
-      <span class="apptitle">Ondertitel en Redactie tool </span>
+        <!-- add class is-active to turn into a cross -->
+        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-      <!-- quick POC, this will be redone with bulma.css soon -->
-      <div class="login_logout" id="saml_auth_block">
-        {% if paint_logout %}
-        {% if attributes %}
-          <table class="table table-striped">
-            <thead>
-              <th>Name</th><th>Values</th>
-            </thead>
-            <tbody>
-              {% for attr in attributes %}
-                <tr><td>{{ attr.0 }}</td>
-                <td><ul class="list-unstyled">
-                  {% for val in attr.1 %}
-                    <li>{{ val }}</li>
-                  {% endfor %}
-                </ul></td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+
+          <a class="navbar-item">
+            PID
+          </a>
+          <a class="navbar-item">
+            Preview
+          </a>
+          <a class="navbar-item">
+            Metadata
+          </a>
+
+          <a class="navbar-item">
+            Ondertitels
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/pid">
+                PID
+              </a>
+              <a class="navbar-item" href="/meta">
+                Metadata
+              </a>
+              <a class="navbar-item" href="/subs">
+                Ondertitels
+              </a>
+
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+                Redactietool v0.1 alpha
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+
+       <!-- quick POC, this will be redone with bulma.css soon -->
+        <div class="login_logout" id="saml_auth_block">
+          {% if paint_logout %}
+          {% if attributes %}
+            <table class="table table-striped">
+              <thead>
+                <th>Name</th><th>Values</th>
+              </thead>
+              <tbody>
+                {% for attr in attributes %}
+                  <tr><td>{{ attr.0 }}</td>
+                  <td><ul class="list-unstyled">
+                    {% for val in attr.1 %}
+                      <li>{{ val }}</li>
+                    {% endfor %}
+                  </ul></td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+          {% endif %}
+          <a href="?slo" class="btn btn-danger">Logout</a>
         {% else %}
-          <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+          <a href="?sso" class="btn btn-primary">Login</a> <a href="?sso2" class="btn btn-info">Login and access to attrs page</a>
         {% endif %}
-        <a href="?slo" class="btn btn-danger">Logout</a>
-      {% else %}
-        <a href="?sso" class="btn btn-primary">Login</a> <a href="?sso2" class="btn btn-info">Login and access to attrs page</a>
-      {% endif %}
+        </div>
+
       </div>
     </nav>
-    <section class="content">
+
+    <!-- ///////////////////////////////////////////// END MENU ///////////////////////////////////////////// -->
+
+
+    <!-- ////////////////////////////////////////// MAIN CONTAINER ////////////////////////////////////////// -->
+    <div class="container main">
+      <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+      </h1>
+
       <header>
         {% block header %}{% endblock %}
       </header>
@@ -78,7 +158,10 @@
         <div class="flash">{{ message }}</div>
       {% endfor %}
       {% block content %}{% endblock %}
-    </section>
 
+    </div> 
+    <!-- end of main container -->
+
+    
 </body>
 </html>
