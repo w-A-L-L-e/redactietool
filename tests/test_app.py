@@ -174,7 +174,8 @@ def test_valid_subtitle(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert '<h1>Ondertitelbestand</h1>' in res.data.decode()
+    assert 'Ondertitelbestand' in res.data.decode()
+    assert 'PID' in res.data.decode()
     assert 'qsxs5jbm5c' in res.data.decode()
     assert 'qsxs5jbm5c.srt' in res.data.decode()
     assert 'Toevoegen' in res.data.decode()
@@ -201,7 +202,8 @@ def test_valid_subtitle_capitals(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert '<h1>Ondertitelbestand</h1>' in res.data.decode()
+    assert 'Ondertitelbestand' in res.data.decode()
+    assert 'PID' in res.data.decode()
     assert 'qsxs5jbm5c' in res.data.decode()
     assert 'qsxs5jbm5c.srt' in res.data.decode()
     assert 'Toevoegen' in res.data.decode()
@@ -340,7 +342,8 @@ def test_valid_subtitle_for_ftp(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert '<h1>Ondertitelbestand</h1>' in res.data.decode()
+    assert 'PID' in res.data.decode()
+    assert 'Ondertitelbestand' in res.data.decode()
     assert 'qsxs5jbm5c' in res.data.decode()
     assert 'qsxs5jbm5c.srt' in res.data.decode()
     assert 'Toevoegen' in res.data.decode()

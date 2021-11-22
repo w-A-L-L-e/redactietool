@@ -54,29 +54,42 @@ Ondertitels valideren
       <input type="hidden" name="subtitle_file" value='{{subtitle_file}}'/> 
       <input type="hidden" name="vtt_file" value='{{vtt_file}}'/>
 
-      <label>Bestandsnaam</label><br/> 
-      <select name="subtitle_type" id="subtitle_type">
-        <option value="open" {{'selected="selected"' if subtitle_type=='open'}}>Open</option>
-        <option value="closed" {{'selected="selected"' if subtitle_type=='closed'}}>Closed</option>
-      </select>
+      <div class="field">
+        <label class="label">Type</label>
+        <div class="control">
+          <div class="select">
+            <select name="subtitle_type" id="subtitle_type">
+              <option value="open" {{'selected="selected"' if subtitle_type=='open'}}>Open</option>
+              <option value="closed" {{'selected="selected"' if subtitle_type=='closed'}}>Closed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Bestandsnaam</label>
+        <div class="control">
+          {{subtitle_file}} 
+        </div>
+      </div>
+
+      <!-- 
       <input readonly=readonly name="subtitle_show_path" id="subtitle_file" value='{{subtitle_file}}'/>
-      <br/><br/>
+
       <label>Toevoegen met</label><br/>
       <select name="transfer_method" id="transfer_method">
         <option value="ftp" {{'selected="selected"'}}>FTP upload</option>
-        <!-- disable api mode until issue on mh_api side is fixed -->
-        <!-- option value="api">Mediahaven API</option -->
+        -- disable api mode until issue on mh_api side is fixed --
+        -- option value="api">Mediahaven API</option> --
       </select>
-      <br/>
+      -->
 
       {% if validation_errors %}
-      <span class="form_errors">{{validation_errors}}</span>
+      <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span> <br/>
+      {% else %}
+        <br/>
       {% endif %}
 
-    
-
-      <br/>
-      <br/>
       <div class="field is-grouped is-pulled-right">
         <div class="control">
           <a href="{{ url_for('.cancel_upload', 

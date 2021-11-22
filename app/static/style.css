@@ -154,6 +154,18 @@ a.cancel-button.disabled{
 
 
 
+
+
+.pid-view {
+  display: inline-block;
+  word-break: break-all;
+  width: 245px;
+  vertical-align: top;
+  margin-top: 8px;
+}
+
+
+/* to be stripped, because of... BULMA!
 form.validate_form label {
   padding-left: 1em;
   width: 9em;
@@ -174,17 +186,6 @@ form.validate_form{
 form.validate_form a.cancel-button {
   margin-left: 170px;
 }
-
-.pid-view {
-  display: inline-block;
-  word-break: break-all;
-  width: 245px;
-  vertical-align: top;
-  margin-top: 8px;
-}
-
-
-/* to be stripped, because of... BULMA!
 select {
   border: 1px solid #bac7d1;
   padding: 0.4em;

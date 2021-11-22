@@ -39,38 +39,36 @@ Ondertitelbestand
 
   <div class="column is-half">
     <form class="upload_form" action="/upload" method="POST" enctype="multipart/form-data">
-        {% include 'upload_hidden_fields.html' %}
-         
-        <div class="field">
-          <label class="label">Selecteer type ondertitelbestand</label>
-          <div class="control">
-            <div class="select">
-              
-              <select name="subtitle_type" id="subtitle_type">
-                <option value="closed">Closed</option>
-                <option value="open">Open</option>
-              </select>
+      {% include 'upload_hidden_fields.html' %}
+       
+      <div class="field">
+        <label class="label">Selecteer type ondertitelbestand</label>
+        <div class="control">
+          <div class="select">
+            
+            <select name="subtitle_type" id="subtitle_type">
+              <option value="closed">Closed</option>
+              <option value="open">Open</option>
+            </select>
 
-            </div>
           </div>
         </div>
+      </div>
 
-        <div class="field">
-          <label class="label">Kies ondertitelbestand</label>
-          <div class="control">
-            <input name="subtitle_file" class="input" type="file" placeholder="SRT bestand">
-          </div>
+      <div class="field">
+        <label class="label">Kies ondertitelbestand</label>
+        <div class="control">
+          <input name="subtitle_file" class="input" type="file" placeholder="SRT bestand">
         </div>
-
-
-
-        {% if validation_errors %}
-        <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span>
-        {% endif %}
-
+      </div>
 
       <br/>
-      <br/>
+      {% if validation_errors %}
+      <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span> <br/>
+      {% else %}
+        <br/>
+      {% endif %}
+
       <div class="field is-grouped is-pulled-right">
         <div class="control">
           <a id="upload_cancel" class="button is-link is-light"
