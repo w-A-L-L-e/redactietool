@@ -11,55 +11,84 @@ Login
 
   <!-- styling to be done with bulma soon... -->
   <div class="center_page">
-  <p>
-   <form action="/login" class="login_form" method="POST">
+    <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+    </h1>
 
-      <label>E-mailadres</label>
-      <input name="username"/> <br/>
-
-      <label>Wachtwoord</label>
-      <input name="password" type="password"/><br/>
-
-      {% if validation_errors %}
-      <span class="form_errors">{{validation_errors}}</span>
-      {% endif %}
-
-
-      {% if errors %}
-        <div class="alert alert-danger" role="alert">
-          <strong>Errors:</strong>
-          <ul class="list-unstyled">
-              {% for err in errors %}
-                <li>{{err}}</li>
-              {% endfor %}
-          </ul>
-          {% if error_reason %}
-              <span>{{error_reason}}</span>
-          {% endif %}
-        </div>
-      {% endif %}
-
-      <input 
-        id="legacy_login"
-        class="button is-primary"
-        onClick="loginSubmit(this);"
-        type="submit" 
-        value="Login"/>
-
-
-    <hr/>
     <p>
-      De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
-      kunt gebruiken met 1 login/logout.
+     <form action="/login" class="login_form box" method="POST">
+       
+        <!-- original implementation, will be deprecated soon -->
+        <div class="field">
+          <label class="label">E-mailadres</label>
+          <div class="control">
+            <input name="username" class="input" placeholder="Meemoo account e-mail"/>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <label class="label">Wachtwoord</label>
+          <div class="control">
+            <input name="password" type="password" class="input"/>
+          </div>
+        </div>
+
+        <!--
+        <label>E-mailadres</label>
+        <input name="username"/> <br/>
+        <label>Wachtwoord</label>
+        <input name="password" type="password"/><br/>
+        -->
+
+        {% if validation_errors %}
+        <span class="form_errors">{{validation_errors}}</span>
+        {% endif %}
+
+
+        {% if errors %}
+          <div class="alert alert-danger" role="alert">
+            <strong>Errors:</strong>
+            <ul class="list-unstyled">
+                {% for err in errors %}
+                  <li>{{err}}</li>
+                {% endfor %}
+            </ul>
+            {% if error_reason %}
+                <span>{{error_reason}}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="field is-pulled-right">
+          <div class="control">
+            <button 
+              type="submit"
+              class="button is-primary"
+              onClick="loginSubmit(this);"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+        <br/>
+        <br/>
+
+      <hr class="is-info"/>
+      <p>
+        De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
+        kunt gebruiken met 1 login/logout.
+      </p>
+      <a href="{{ url_for('.saml_login')}}" 
+        class="button is-info saml">
+        SAML Login
+      </a>
+
+    </form>
     </p>
-    <a href="{{ url_for('.saml_login')}}" 
-      class="button is-info saml">
-      SAML Login
-    </a>
-
-  </form>
-
-  </p>
   </div>
 
   <script>
