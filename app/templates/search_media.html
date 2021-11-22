@@ -16,22 +16,36 @@ Ondertitels toevoegen
    <form action="/search_media" method="POST">
       <input name="token" value='{{token}}' type="hidden"/> <!-- supply auth token -->
 
-      <select name="department" id="tenant">
-        <option value="testbeeld">Testbeeld</option>
-      </select> 
-      <input name="pid" placeholder="Item pid" autofocus/> <br/>
+      <div class="field">
+        <label class="label">Tenant</label>
+        <div class="control">
+          <div class="select">
+            <select name="department" id="tenant">
+              <option value="testbeeld">Testbeeld</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Kies content via item pid</label>
+        <div class="control">
+          <input class="input" type="text" name="pid" placeholder="Item pid" autofocus/>
+        </div>
+      </div>
 
       {% if validation_errors %}
-      <span class="form_errors">{{validation_errors}}</span>
+      <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span> <br/>
+      {% else %}
+        <br/>
       {% endif %}
-
-    <input 
-      class="button is-primary ml-4"
-      type="submit" 
-      value="Opvragen"
-      onClick="pidSubmit(this);"
-    />
-
+      
+      <input 
+        class="button is-primary is-pulled-right"
+        type="submit" 
+        value="Opvragen"
+        onClick="pidSubmit(this);"
+      />
   </form>
 
   </p>
