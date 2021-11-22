@@ -257,7 +257,7 @@ def test_send_to_mam_shows_confirmation(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert '<h1>Ondertitelbestand bestaat al voor deze video</h1>' in res.data.decode()
+    assert 'Ondertitelbestand bestaat al voor deze video' in res.data.decode()
     assert 'bestaande ondertitelbestand qsxs5jbm5c_closed.srt. Wil je het vervangen?' in res.data.decode()
 
 
@@ -282,7 +282,7 @@ def test_send_to_mam_confirm_works(client):
 
     assert res.status_code == 200
     print(res.data.decode(), flush=True)
-    assert '<h2>Ondertitels en sidecar zijn verstuurd</h2>' in res.data.decode()
+    assert 'Ondertitels en sidecar zijn verstuurd' in res.data.decode()
 
 
 @pytest.mark.vcr
@@ -305,7 +305,7 @@ def test_send_to_mam_cancel_works(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert '<h2>Bestaande ondertitels behouden</h2>' in res.data.decode()
+    assert 'Bestaande ondertitels werden behouden' in res.data.decode()
 
 
 def test_random_404(client, setup):
@@ -392,5 +392,5 @@ def test_subtitle_ftp_upload(client, mocker):
 
     assert res.status_code == 200
     print(res.data.decode(), flush=True)
-    assert '<h2>Ondertitels en sidecar zijn verstuurd</h2>' in res.data.decode()
+    assert 'Ondertitels en sidecar zijn verstuurd' in res.data.decode()
     assert '226 Transfer complete' in res.data.decode()
