@@ -10,19 +10,24 @@ Ondertitelbestand
 {% block content %}
 
 <h1 class="title">{{title}}</h1>
-<hr/>
 
 <div class="columns">
 
   <div class="column is-half">
-    <h3 class="video_title">{{title}}</h3>
+    <!-- TODO: also strip out video_title css -->
+    <!-- label>PID</label> <div class="pid-view"> {{pid}}</div> <div class="check"></div -->
+
+    <h2 class="subtitle"><b>PID: {{pid}} </b></h2>
     <div id="player_container"></div>
+
+    <!-- we can re-introduce this if wanted... keeping it as comment now
     <table class="video_details">
       <tr><td colspan="2">{{description}}</td></tr>
       <tr><td>Created</td><td>{{created}}</td></tr>
       <tr><td>Archived</td><td>{{archived}}</td></tr>
       <tr><td>Original CP</td><td>{{original_cp}}</td></tr>
     </table>
+    -->
 
     <script>
       flowplayer('#player_container', {
@@ -36,32 +41,59 @@ Ondertitelbestand
     <form class="upload_form" action="/upload" method="POST" enctype="multipart/form-data">
         {% include 'upload_hidden_fields.html' %}
          
-        <label>PID</label> <div class="pid-view"> {{pid}}</div> <div class="check"></div>
-        <br/><br/>
-        <label>Ondertitelbestand</label><br/> 
+        <div class="field">
+          <label class="label">Selecteer type ondertitelbestand</label>
+          <div class="control">
+            <div class="select">
+              
+              <select name="subtitle_type" id="subtitle_type">
+                <option value="closed">Closed</option>
+                <option value="open">Open</option>
+              </select>
 
-        <select name="subtitle_type" id="subtitle_type">
-          <option value="closed">Closed</option>
-          <option value="open">Open</option>
-        </select>
+            </div>
+          </div>
+        </div>
 
-        <input name="subtitle_file" type="file"> <br/>
+        <div class="field">
+          <label class="label">Kies ondertitelbestand</label>
+          <div class="control">
+            <input name="subtitle_file" class="input" type="file" placeholder="SRT bestand">
+          </div>
+        </div>
+
+
 
         {% if validation_errors %}
-        <span class="form_errors">{{validation_errors}}</span>
+        <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span>
         {% endif %}
 
 
-      <a class="grey-button" 
-          id="upload_cancel"
-          onclick="uploadCancel(this);"
-          href="/search_media?token={{token}}"> Annuleren </a>
-      <input  
-        type="submit" 
-        id="upload_submit"
-        value="Preview"
-        onClick="uploadSubmit(this);"
-      />
+      <br/>
+      <br/>
+      <div class="field is-grouped is-pulled-right">
+
+        <div class="control">
+          <a id="upload_cancel" class="button is-link is-light"
+            onclick="uploadCancel(this);"
+            href="/search_media?token={{token}}">
+            Annuleren
+          </a>
+        </div>
+
+        <div class="control">
+          <button 
+            type="submit"
+            class="button is-link"
+            onClick="uploadSubmit(this);"
+          >
+            Preview
+          </button>
+        </div>
+        
+      </div>
+
+
     </form>
   </div>
 

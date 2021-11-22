@@ -99,7 +99,7 @@ def test_working_pid_search(client):
     }, follow_redirects=True)
 
     assert res.status_code == 200
-    assert 'Ondertitelbestand' in res.data.decode()
+    assert 'Kies ondertitelbestand' in res.data.decode()
 
 
 @pytest.mark.vcr

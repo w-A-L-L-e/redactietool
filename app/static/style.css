@@ -1,3 +1,11 @@
+
+#player_container{
+  border-radius: 8px;
+}
+
+
+/* to be stripped 
+ 
 pre {
   background-color: #ddefef;
   border: 1px solid #324b5e;
@@ -11,11 +19,6 @@ label {
   display:inline-block;
   width: 7.8em;
   text-align: right;
-}
-
-
-#player_container{
-  border-radius: 8px;
 }
 
 
@@ -87,6 +90,15 @@ form.upload_form a.grey-button{
   padding-left: 20px;
   padding-right: 20px;
 }
+
+
+#subtitle_type, #transfer_method {
+  width: 140px;
+  margin-top: 5px;
+}
+
+
+ */
 
 
 a.button.disabled {
@@ -171,6 +183,8 @@ form.validate_form a.cancel-button {
   margin-top: 8px;
 }
 
+
+/* to be stripped, because of... BULMA!
 select {
   border: 1px solid #bac7d1;
   padding: 0.4em;
@@ -184,6 +198,7 @@ input[type=file] {
   padding-left: 0.3em;
   width: 270px;
 }
+*/
 
 form.validate_form #subtitle_file {
   border: none; 
@@ -220,11 +235,6 @@ textarea.subtitles {
   margin-left: 1em;
   width: 33em;
   height: 10em;
-}
-
-#subtitle_type, #transfer_method {
-  width: 140px;
-  margin-top: 5px;
 }
 
 .check {
