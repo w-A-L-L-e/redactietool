@@ -74,7 +74,7 @@ server:
 	@cat "app/static/ascii_logo.txt"
 	@echo "                 Server/benchmark mode, running on http://localhost:8080 \n\n"
 	@. python_env/bin/activate; \
-	uwsgi -i uwsgi.ini
+	FLASK_ENV=PRODUCTION uwsgi -i uwsgi.ini
 
 .PHONY: debug
 debug:

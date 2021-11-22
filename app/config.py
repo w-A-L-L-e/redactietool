@@ -31,6 +31,7 @@ class Config(object):
 
 class PrdConfig(Config):
     DEBUG = False
+    TESTING = False
 
 
 class DevConfig(Config):
