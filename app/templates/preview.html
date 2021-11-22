@@ -10,87 +10,101 @@ Ondertitels valideren
 {% block content %}
 
 <h1 class="title">{{title}}</h1>
-<div class="left_page">
-  <form class="validate_form" action="/send_to_mam" method="POST" enctype="multipart/form-data">
 
-    {% include 'upload_hidden_fields.html' %}
-    <input type="hidden" name="subtitle_file" value='{{subtitle_file}}'/> 
-    <input type="hidden" name="vtt_file" value='{{vtt_file}}'/>
+<div class="columns">
 
-    <label>PID</label> <div class="pid-view"> {{pid}}</div> <div class="check"></div>
-    <br/><br/>
-    <label>Ondertitelbestand</label><br/> 
-    <select name="subtitle_type" id="subtitle_type">
-      <option value="open" {{'selected="selected"' if subtitle_type=='open'}}>Open</option>
-      <option value="closed" {{'selected="selected"' if subtitle_type=='closed'}}>Closed</option>
-    </select>
-    <input readonly=readonly name="subtitle_show_path" id="subtitle_file" value='{{subtitle_file}}'/>
-    <br/><br/>
-    <label>Toevoegen met</label><br/>
-    <select name="transfer_method" id="transfer_method">
-      <option value="ftp" {{'selected="selected"'}}>FTP upload</option>
-      <!-- disable api mode until issue on mh_api side is fixed -->
-      <!-- option value="api">Mediahaven API</option -->
-    </select>
-    <br/>
+  <div class="column is-half">
+    <h2 class="subtitle"><b>PID: {{pid}} </b></h2>
 
-    {% if validation_errors %}
-    <span class="form_errors">{{validation_errors}}</span>
-    {% endif %}
+    <div id="player_container"></div>
+    <!-- We can re-add this back later if wanted
+      <table class="video_details">
+      <tr><td colspan="2">{{description}}</td></tr>
+      <tr><td>Created</td><td>{{created}}</td></tr>
+      <tr><td>Archived</td><td>{{archived}}</td></tr>
+      <tr><td>Original CP</td><td>{{original_cp}}</td></tr>
+    </table>
+    -->
 
-    <a href="{{ url_for('.cancel_upload', 
-        pid=pid, 
-        department=department,
-        srt_file=subtitle_file, 
-        vtt_file=vtt_file,
-        token=token
-       )}}" 
-       id="preview_cancel"
-       onclick="previewCancel(this);"
-      class="cancel-button">
-     Wissen
-    </a>
+    <script>
+      flowplayer('#player_container', {
+        token: '{{flowplayer_token}}',
+        src: '{{video_url}}',
+        subtitles:{ 
+          tracks:[
+            { 
+              src: "/subtitles/{{vtt_file}}",
+              label: "English",
+              id: "English-en",
+              default: true,
+              crossorigin: "anonymous" 
+            }
+          ]
+        }
+      })
+    </script>
+  </div>
 
-    <input 
-      id="preview_submit"
-      type="submit" 
-      value="Toevoegen"
-      onClick="previewSubmit(this);"
-    />
+  <div class="column is-half">
+    <h2 class="subtitle"><b>Ondertitelbestand</b><div class="check"></div></h2>
 
-  </form>
+    <form class="validate_form" action="/send_to_mam" method="POST" enctype="multipart/form-data">
+
+      {% include 'upload_hidden_fields.html' %}
+      <input type="hidden" name="subtitle_file" value='{{subtitle_file}}'/> 
+      <input type="hidden" name="vtt_file" value='{{vtt_file}}'/>
+
+      <label>Bestandsnaam</label><br/> 
+      <select name="subtitle_type" id="subtitle_type">
+        <option value="open" {{'selected="selected"' if subtitle_type=='open'}}>Open</option>
+        <option value="closed" {{'selected="selected"' if subtitle_type=='closed'}}>Closed</option>
+      </select>
+      <input readonly=readonly name="subtitle_show_path" id="subtitle_file" value='{{subtitle_file}}'/>
+      <br/><br/>
+      <label>Toevoegen met</label><br/>
+      <select name="transfer_method" id="transfer_method">
+        <option value="ftp" {{'selected="selected"'}}>FTP upload</option>
+        <!-- disable api mode until issue on mh_api side is fixed -->
+        <!-- option value="api">Mediahaven API</option -->
+      </select>
+      <br/>
+
+      {% if validation_errors %}
+      <span class="form_errors">{{validation_errors}}</span>
+      {% endif %}
+
+    
+
+      <br/>
+      <br/>
+      <div class="field is-grouped is-pulled-right">
+        <div class="control">
+          <a href="{{ url_for('.cancel_upload', 
+              pid=pid, 
+              department=department,
+              srt_file=subtitle_file, 
+              vtt_file=vtt_file,
+              token=token
+             )}}" 
+             id="preview_cancel"
+             onclick="previewCancel(this);"
+            class="button is-link is-light">
+           Wissen
+          </a>
+        </div>
+        <div class="control">
+          <button id="preview_submit" type="submit"
+                  class="button is-link"
+                  onClick="previewSubmit(this);">
+            Toevoegen
+          </button>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+
 </div>
 
-<div class="right_page">
-
-  <div id="player_container"></div>
-
-  <!-- We can re-add this back later if wanted
-    <table class="video_details">
-    <tr><td colspan="2">{{description}}</td></tr>
-    <tr><td>Created</td><td>{{created}}</td></tr>
-    <tr><td>Archived</td><td>{{archived}}</td></tr>
-    <tr><td>Original CP</td><td>{{original_cp}}</td></tr>
-  </table>
-  -->
-
-  <script>
-    flowplayer('#player_container', {
-      token: '{{flowplayer_token}}',
-      src: '{{video_url}}',
-      subtitles:{ 
-        tracks:[
-          { 
-            src: "/subtitles/{{vtt_file}}",
-            label: "English",
-            id: "English-en",
-            default: true,
-            crossorigin: "anonymous" 
-          }
-        ]
-      }
-    })
-  </script>
-
-</div>
 {% endblock %}
