@@ -7,6 +7,7 @@
     <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
     <link rel="stylesheet" href="src/overrides.css">
+    <script src="src/modal_dialog.js"></script>
     <script src="dist/js/bundle.js"></script>
   </head>
   <body>
@@ -194,13 +195,32 @@
         });
       }
 
-
-      // button to open the modal dialog
+      //some code duplication just for kicks. this is just a demo
+      //page used to check our layout and styling. (yes similar code is in
+      // index.html and ofcourse as example in modal_dialog.js
       var modal_btn = document.getElementById('modal_btn');
-      var modal_dlg = document.getElementById('modal_dlg');
       modal_btn.addEventListener('click', () => {
-        modal_dlg.classList.add('is-active');
-        // and use classList.remove for the other buttons to close again... 
+        showModalAlert(
+          "Waarschuwing titel",
+          "Hier de boodschap die je wilt tonen"
+        ); 
+      });
+      
+      // events to close the modal dialog
+      var modal_close_btn = getModalCloseBtn();
+      modal_close_btn.addEventListener('click', () => {
+        modalCloseClicked();
+      });
+      
+      var modal_save_btn = getModalSaveBtn();
+      modal_save_btn.addEventListener('click', () => {
+        modalSaveClicked();
+      });
+      
+      
+      var modal_cancel_btn = getModalCancelBtn();
+      modal_cancel_btn.addEventListener('click', () => {
+        modalCancelClicked();
       });
 
 
