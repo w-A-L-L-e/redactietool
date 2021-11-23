@@ -117,11 +117,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //// TODO: catch navigation event..
   // showNavigationWarning();
+
+  // test beforeunload for our custom alert box, this needs some further work and state:
+  // when we add this listener we get the browser default popups.
+  // window.addEventListener('beforeunload', function (e) {
+  //   console.log("EVENT: beforeunload detected!");
+  //   // Cancel the event
+  //   e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  //   // Chrome requires returnValue to be set
+  //   e.returnValue = '';
+
+  //         //possibly do something like this, not sure yet:
+  //         // setInterval(function(){
+  //         //    if modalCancelled return false;
+  //         //    if modalConfirmed return true;
+  //         // }, 800);
+
+  //   // the absence of a returnValue property on the event will guarantee the browser unload happens
+  //   delete e['returnValue'];
+  // });
    
-  //// close it automagically like this
-  //setTimeout(function(){
-  //  closeModalAlert();
-  //}, 3000);
+  // close it automagically like this
+  // setTimeout(function(){
+  //   closeModalAlert();
+  // }, 3000);
 
 
   //TODO: slim select for multi select component
