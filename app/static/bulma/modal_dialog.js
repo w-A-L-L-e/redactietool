@@ -1,9 +1,9 @@
 // Author: Walter Schreppers
 // Super tiny js helper file to control the modal dialog for redactietool.
 
-// keep some state with these variables (we might refactor this later on)
-var modalCancelled = false;
-var modalConfirmed = false;
+// possibly add some state with these variables (we might refactor this later on)
+// var modalCancelled = false;
+// var modalConfirmed = false;
 
 function getModalDialog(){
   return document.getElementById('modal_dlg');
