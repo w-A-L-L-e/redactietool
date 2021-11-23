@@ -19,13 +19,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     -->
 
-    <script type="text/javascript" src="{{ url_for('static', filename='bulma/bundle.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='flowplayer.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='subtitles.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='bulma/bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='bulma/modal_dialog.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 </head>
 
 <body>
@@ -157,13 +159,6 @@
 
     <!-- ////////////////////////////////////////// MAIN CONTAINER ////////////////////////////////////////// -->
     <div class="container main">
-      <!-- h1 class="title">
-        Redactietool 
-        <span class="icon">
-          <ion-icon name="create-outline"></ion-icon>
-        </span>
-      </h1-->
-
       <header>
         {% block header %}{% endblock %}
       </header>
@@ -173,6 +168,28 @@
       {% block content %}{% endblock %}
 
     </div> 
+
+    <!-- dynamic modal dialog -->
+    <div class="modal" id='modal_dlg'>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Modal dialog title</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <p>
+            Modal dialog content 
+          </p>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Ok</button>
+          <button class="button">Annuleren</button>
+        </footer>
+      </div>
+    </div>
+
     <!-- end of main container -->
 
 </body>

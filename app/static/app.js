@@ -1,3 +1,6 @@
+// Author: Walter Schreppers
+// Animate buttons and handle top menu events.
+
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
@@ -74,24 +77,10 @@ function newUploadClicked(ref){
   ref.className += ' disabled';
 }
 
-function openModalDialog(btn_id, dialog_id){
-  // button to open the modal dialog
-  var modal_btn = document.getElementById(btn_id);
-  var modal_dlg = document.getElementById(dialog_id);
 
-  if(!modal_btn){
-    console.log('modal dialog not present on page...');
-    return;
-  }
-
-  //add onclick event listener
-  modal_btn.addEventListener('click', () => {
-    modal_dlg.classList.add('is-active');
-    // and use classList.remove for the other buttons to close again... 
-  });
-}
-
-// vanilla js for burger toggle
+// vanilla script for burger toggle from bulma.io example
+// alternate versions for jquery etc can also be found here:
+// https://bulma.io/documentation/components/navbar/
 document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -115,24 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  openModalDialog('modal_btn', 'modal_dlg');
+  //// TODO: catch navigation event..
+  //showModalAlert(
+  //  "Waarschuwing",
+  //  "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+  //); 
+
+  //// close it automagically like this
+  //setTimeout(function(){
+  //  closeModalAlert();
+  //}, 3000);
+
 
   //TODO: slim select for multi select component
   //new SlimSelect({
   //  select: '#multiple'
   //})
 });
-
-// jquery or react versions can be done too, but this will increase the resulting js libraries to be loaded...:
-// $(document).ready(function() {
-// 
-//   // Check for click events on the navbar burger icon
-//   $(".navbar-burger").click(function() {
-// 
-//       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-//       $(".navbar-burger").toggleClass("is-active");
-//       $(".navbar-menu").toggleClass("is-active");
-// 
-//   });
-// });
 
