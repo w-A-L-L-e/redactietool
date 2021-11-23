@@ -1,6 +1,6 @@
 /*!
 Bootstrap modal dialog (for jQuery Dirty Forms) | v2.0.0 | github.com/snikch/jquery.dirtyforms
-(c) 2015 Shad Storhaug
+(c) 2015 Shad Storhaug, heavily refactored into Bulma version by Walter Schreppers
 License MIT
 */
 
@@ -12,11 +12,9 @@ License MIT
     // Support: Firefox 18+
     //"use strict";
 
-    var exclamationGlyphicon = '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ';
-
     $.DirtyForms.dialog = {
         // Custom properties and methods to allow overriding (may differ per dialog)
-        title: exclamationGlyphicon + 'Are you sure you want to do that?',
+        title: 'Are you sure you want to do that?',
         proceedButtonClass: 'dirty-proceed',
         proceedButtonText: 'Leave This Page',
         stayButtonClass: 'dirty-stay',
@@ -82,7 +80,12 @@ License MIT
                 }
             };
             // NOTE: Bootstrap 3 requires jQuery 1.9, so we can use on and off here.
-            $dialog.find('.' + this.proceedButtonClass).off('click', onContinueClick).on('click', onContinueClick);
+            $dialog.find(
+              '.' + this.proceedButtonClass).off(
+                'click', onContinueClick).on(
+                  'click', onContinueClick
+                );
+
             $dialog.off('hidden.bs.modal', onHidden).on('hidden.bs.modal', onHidden);
 
             // Show the dialog
@@ -91,7 +94,7 @@ License MIT
 
         // Support for Dirty Forms < 2.0
         fire: function (message, title) {
-            this.title = exclamationGlyphicon + title;
+            this.title = title;
             this.open({ isDF1: true }, message);
         },
 
