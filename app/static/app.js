@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //// TODO: catch navigation event..
   // showNavigationWarning();
 
-  // test beforeunload for our custom alert box, this needs some further work and state:
+  // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
   // when we add this listener we get the browser default popups.
   // window.addEventListener('beforeunload', function (e) {
   //   console.log("EVENT: beforeunload detected!");
@@ -136,6 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
   //   // the absence of a returnValue property on the event will guarantee the browser unload happens
   //   delete e['returnValue'];
   // });
+  //
+  // We might need to rely on something like this instead https://github.com/codedance/jquery.AreYouSure
+  // that will however also introduce jquery into the mix, making our js dependencies around 86k larger...
    
   // close it automagically like this
   // setTimeout(function(){
