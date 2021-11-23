@@ -1,12 +1,10 @@
 // Author: Walter Schreppers
 // Animate buttons and handle top menu events.
-
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
   btn.value=label;
 }
-
 
 function loginSubmit(btn){
   execute(btn, "Authenticeren..."); 
@@ -15,7 +13,6 @@ function loginSubmit(btn){
 function pidSubmit(btn){
   execute(btn, 'Zoeken...');
 }
-
 
 function uploadSubmit(btn){
   execute(btn, 'Opladen...');
@@ -48,7 +45,6 @@ function previewCancel(ref){
   ref.className += ' disabled';
 }
 
-
 function confirmSubmit(btn){
   execute(btn, 'Versturen...');
 
@@ -75,6 +71,21 @@ function logoutClicked(ref){
 // #new_upload_btn
 function newUploadClicked(ref){
   ref.className += ' disabled';
+}
+
+function showNavigationWarning(){
+  //v1
+  //showModalAlert(
+  //    "Waarschuwing",
+  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+  //);
+
+  //v2.1
+  showModalAlert(
+      "Ben je zeker dat je deze pagina wilt verlaten?",
+      "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
+  );
+
 }
 
 
@@ -105,11 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //// TODO: catch navigation event..
-  //showModalAlert(
-  //  "Waarschuwing",
-  //  "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
-  //); 
-
+  // showNavigationWarning();
+   
   //// close it automagically like this
   //setTimeout(function(){
   //  closeModalAlert();
