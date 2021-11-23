@@ -42,7 +42,7 @@
             Metadata
           </a>
 
-          <a class="navbar-item">
+          <a class="navbar-item" href="subtitles_sent.html">
             Ondertitels
           </a>
 
@@ -58,7 +58,7 @@
               <a class="navbar-item" href="/meta">
                 Metadata
               </a>
-              <a class="navbar-item" href="/subs">
+              <a class="navbar-item" href="subtitles_sent.html">
                 Ondertitels
               </a>
 
@@ -320,8 +320,19 @@
         getModalDialog().classList.remove('is-active')
       }
 
-      function showModalAlert(){
-        getModalDialog().classList.add('is-active');
+      function showModalAlert(title, content){
+        var modal_dlg = getModalDialog();
+        
+        var modal_title = modal_dlg.getElementsByClassName('modal-card-title')[0];
+        // modal_title.innerHTML = title; // allows raw html, use with caution
+        modal_title.innerText = title;
+        
+        var modal_content = modal_dlg.getElementsByClassName('modal-card-body')[0];
+        // modal_content.innerHTML = content; // allows raw html, use with caution
+        modal_content.innerText = content;
+
+        // show customized modal dialog
+        modal_dlg.classList.add('is-active');
       }
 
       function getModalCloseBtn(){
@@ -382,7 +393,10 @@
      // logic here later on...
       var modal_btn = document.getElementById('modal_btn');
       modal_btn.addEventListener('click', () => {
-        showModalAlert(); 
+        showModalAlert(
+          "Waarschuwing titel",
+          "Hier de boodschap die je wilt tonen"
+        ); 
       });
 
       // events to close the modal dialog
