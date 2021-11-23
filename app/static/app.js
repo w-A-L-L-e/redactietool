@@ -137,8 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //   delete e['returnValue'];
   // });
   //
-  // We might need to rely on something like this instead https://github.com/codedance/jquery.AreYouSure
-  // that will however also introduce jquery into the mix, making our js dependencies around 86k larger...
+  // Found an interesting jquery/bootstrap based module that matches more what is described
+  // in ticket DEV-1794:
+  // https://github.com/NightOwl888/jquery.dirtyforms.dialogs.bootstrap.dist. 
+  // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
+  // do something similar for bulma instead.
+  // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
    
   // close it automagically like this
   // setTimeout(function(){
