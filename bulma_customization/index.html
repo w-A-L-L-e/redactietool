@@ -96,9 +96,21 @@
         </span>
       </h1>
 
-      <p class="subtitle">
-      Some of the common bulma components we will be using in Redactietool:
-        </p>
+      
+
+
+      <!-- sandbox to test out new components here... -->
+
+      <h2 class="title">
+        Some common bulma components for Redactietool:
+      </h2>
+ 
+      <div class="buttons">
+        <button id="modal_btn" class="button is-primary is-large modal-button mt-5"> 
+          Open warning/alert example.
+        </button>
+      </div>
+
 
       <div class="container is-widescreen mb-5">
         <div class="notification is-primary">
@@ -239,18 +251,13 @@
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Modal warning or error message</p>
+              <p class="modal-card-title">Modal dialog title</p>
               <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
               <!-- Content ... -->
               <p>
-                Modal dialog example. The close button events are not implemented.
-                Just refresh the page to get rid of it for now...
-              </p>
-        <p>
-          Maecenas in vulputate nunc. Ut nec tortor nec tellus eleifend interdum eu suscipit risus. Nullam auctor nibh rhoncus nisi dictum sagittis. Morbi auctor vulputate varius. Cras fermentum dapibus rutrum. Etiam tempor risus lectus, id bibendum diam rutrum sit amet. Curabitur commodo nibh vitae vestibulum pharetra. Pellentesque cursus sagittis diam nec fermentum.
-
+                Modal dialog content 
               </p>
             </section>
             <footer class="modal-card-foot">
@@ -260,9 +267,7 @@
           </div>
         </div>
 
-        <button id="modal_btn" class="button is-primary is-large modal-button mt-5"> 
-          Open demo modal dialog box met een phat button ;)
-        </button>
+      
 
         <p class="mt-5">
           Alternate delete button
@@ -287,16 +292,6 @@
         </p>
 
         <p class="mt-5">
-          Nulla consequat, purus quis malesuada interdum, dolor ante laoreet nibh, vitae convallis urna libero at risus. Nunc vel magna tellus. Maecenas egestas, lectus ut viverra facilisis, lacus neque vulputate nibh, ut aliquam diam lectus sed metus. Nulla at dapibus nulla. Ut dapibus elit quis commodo eleifend. Ut fringilla diam eget ullamcorper condimentum. Suspendisse dolor dolor, interdum nec elit vel, gravida convallis tellus. Integer sagittis dignissim ante ac rutrum. Phasellus consequat ipsum eget purus maximus, id rhoncus mauris finibus. Etiam enim magna, fringilla id erat sed, ornare fermentum enim.
-        </p>
-        <p class="mt-5">
-          Suspendisse pellentesque dui molestie tincidunt tristique. Fusce vitae nisl vel diam rutrum accumsan. Duis iaculis, elit eu posuere pretium, elit quam facilisis dui, non tincidunt tortor lorem ac dui. Pellentesque eleifend, magna scelerisque lacinia aliquam, lectus mauris tristique turpis, eu convallis velit est ut libero. Sed auctor urna diam, sit amet rhoncus arcu semper id. Duis eget maximus mauris. Sed neque ipsum, interdum eu mi et, scelerisque pellentesque libero. Aliquam et nulla sed nisi fringilla blandit sed eget enim. Cras eget viverra ipsum, scelerisque euismod est. Duis convallis, justo a maximus sagittis, mauris lorem congue dolor, eu scelerisque nulla orci quis ante. Nulla consectetur quis justo nec porttitor. Suspendisse risus odio, efficitur hendrerit molestie sed, molestie aliquet lorem. Sed in nunc auctor leo convallis fringilla. Duis pharetra condimentum mi vel vestibulum. Aenean ut rhoncus ante. Etiam vitae pharetra augue, id interdum velit.
-        </p>
-        <p class="mt-5">
-          Nulla nisl lorem, elementum mollis tincidunt quis, vehicula ut lacus. Quisque ac eros quis urna commodo varius non ultrices leo. Pellentesque eleifend elit nibh, pretium aliquam velit fermentum eget. Curabitur eu metus aliquet, pharetra mauris eget, tincidunt est. Praesent faucibus, lorem sit amet interdum pretium, erat mauris lacinia ipsum, id iaculis risus magna at lectus. Nulla leo ligula, efficitur a vehicula non, fermentum non felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vitae varius felis. Donec ex lorem, mollis non ex vitae, sodales scelerisque elit. Quisque quis nisi scelerisque, tempor massa eu, imperdiet sem. Ut vel orci quis orci aliquet lacinia. Morbi tincidunt tortor ex.
-        </p>
-
-        <p class="mt-5">
           Suspendisse pellentesque dui molestie tincidunt tristique. Fusce vitae nisl vel diam rutrum accumsan. Duis iaculis, elit eu posuere pretium, elit quam facilisis dui, non tincidunt tortor lorem ac dui. Pellentesque eleifend, magna scelerisque lacinia aliquam, lectus mauris tristique turpis, eu convallis velit est ut libero. Sed auctor urna diam, sit amet rhoncus arcu semper id. Duis eget maximus mauris. Sed neque ipsum, interdum eu mi et, scelerisque pellentesque libero. Aliquam et nulla sed nisi fringilla blandit sed eget enim. Cras eget viverra ipsum, scelerisque euismod est. Duis convallis, justo a maximus sagittis, mauris lorem congue dolor, eu scelerisque nulla orci quis ante. Nulla consectetur quis justo nec porttitor. Suspendisse risus odio, efficitur hendrerit molestie sed, molestie aliquet lorem. Sed in nunc auctor leo convallis fringilla. Duis pharetra condimentum mi vel vestibulum. Aenean ut rhoncus ante. Etiam vitae pharetra augue, id interdum velit.
         </p>
 
@@ -316,6 +311,46 @@
   </body>
 
   <script type="text/javascript">
+
+      function getModalDialog(){
+        return document.getElementById('modal_dlg');
+      }
+
+      function closeModalAlert(){
+        getModalDialog().classList.remove('is-active')
+      }
+
+      function showModalAlert(){
+        getModalDialog().classList.add('is-active');
+      }
+
+      function getModalCloseBtn(){
+        return getModalDialog().getElementsByClassName("delete")[0]
+      }
+
+      function getModalCancelBtn(){
+        return getModalDialog().getElementsByClassName("button")[1]
+      }
+
+      function getModalSaveBtn(){
+        return getModalDialog().getElementsByClassName("is-success")[0]
+      }
+
+      function modalCloseClicked(){
+        console.log("modal close clicked");
+        closeModalAlert();
+      }
+
+      function modalSaveClicked(){
+        console.log("modal save button clicked");
+        closeModalAlert();
+      }
+
+      function modalCancelClicked(){
+        console.log("modal cancel button clicked");
+        closeModalAlert();
+      }
+
       // vanilla js for burger toggle
       document.addEventListener('DOMContentLoaded', () => {
 
@@ -342,12 +377,29 @@
       }
 
 
-      // button to open the modal dialog
+     // Wire up modal dialog events so that the buttons work
+     // look in dev console to see output of events, easy to add some further
+     // logic here later on...
       var modal_btn = document.getElementById('modal_btn');
-      var modal_dlg = document.getElementById('modal_dlg');
       modal_btn.addEventListener('click', () => {
-        modal_dlg.classList.add('is-active');
-        // and use classList.remove for the other buttons to close again... 
+        showModalAlert(); 
+      });
+
+      // events to close the modal dialog
+      var modal_close_btn = getModalCloseBtn();
+      modal_close_btn.addEventListener('click', () => {
+        modalCloseClicked();
+      });
+
+      var modal_save_btn = getModalSaveBtn();
+      modal_save_btn.addEventListener('click', () => {
+        modalSaveClicked();
+      });
+
+
+      var modal_cancel_btn = getModalCancelBtn();
+      modal_cancel_btn.addEventListener('click', () => {
+        modalCancelClicked();
       });
 
 
@@ -358,7 +410,8 @@
 
     });
 
-    // jquery or react versions can be done too, but this will increase the resulting js libraries to be loaded...:
+    // jquery or react versions can be done too
+    // here's a jquery example:
     // $(document).ready(function() {
     // 
     //   // Check for click events on the navbar burger icon
