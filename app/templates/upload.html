@@ -65,11 +65,7 @@ Ondertitelbestand
         </div>
       </div>
 
-      {% if validation_errors %}
-      <span class="has-text-danger-dark	is-pulled-right">{{validation_errors}}</span> <br/>
-      {% else %}
-        <br/>
-      {% endif %}
+      {% include 'includes/form_errors.html' %}
       <br/>
 
       <div class="field is-grouped is-pulled-right">

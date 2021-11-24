@@ -3,102 +3,32 @@
   border-radius: 8px;
 }
 
-
-/* to be stripped 
- 
-pre {
-  background-color: #ddefef;
-  border: 1px solid #324b5e;
-  padding: 1em;
-  padding-bottom: 0;
-  border-radius: 5px;
-  padding-bottom: 1.2em;
-}
-
-label {
-  display:inline-block;
-  width: 7.8em;
-  text-align: right;
-}
-
-
-form {
-  padding: 0.5em;
-  border: 1px solid #324b5e;
-  border-radius: 8px;
-  background-color: #fff;
-  width: 440px;
-}
-input {
-  margin: 0.5em;
-  width: 240px;
-  border: 1px solid #bac7d1;
-  height: 32px;
-  border-radius: 5px;
-  padding-left: 1em;
-  transition: ease-in-out, width .35 ease-in-out;
-}
-input.readonly {
-  border: none;
-  background-color: #fff;
-}
-
-textarea:read-only {
-  border: none;
-  background-color: #fff;
-}
-
-input:disabled {
-  border: none;
-  background-color: #fff;
-}
-
-textarea:disabled {
-  border: none;
-  background-color: #fff;
-}
-
-
-textarea {
-  vertical-align: top;
-  width: 370px;
-  height: 210px;
-}
-
-form.login_form input[type=submit]{
-  margin-left: 135px;
-  height: 40px;
-}
-
-form.upload_form {
-  width: 30em;
-}
-
-form.upload_form label {
-  padding-left: 1em;
-  width: 9em;
-  text-align:left;
-}
-
-form.upload_form input[type=submit]{
-  margin-left: 10px;
-}
-
-form.upload_form a.grey-button{
-  margin-left: 214px;
-  padding:5px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-
-#subtitle_type, #transfer_method {
-  width: 140px;
-  margin-top: 5px;
-}
-
-
+/* inspiration https://code-boxx.com/ 
+ * wiggle the validation error line so that it gets the users attention
  */
+.animate-errors{
+  animation: wiggle 0.5s;
+  animation-direction: alternate;
+  animation-iteration-count: 3;
+}
+
+@keyframes wiggle { 
+  0% {
+    transform: translateX(0); 
+  }
+  10% {
+    transform: translateX(-5px); 
+  }
+  30% { 
+    transform: translateX(-30px); 
+  }
+  50% { 
+    transform: translateX(-20); 
+  }
+  100% { 
+    transform: translateX(0px); 
+  }
+}
 
 
 a.button.disabled {
@@ -151,11 +81,6 @@ a.cancel-button.disabled{
   background-color: #ccc;
 }
 
-
-
-
-
-
 .pid-view {
   display: inline-block;
   word-break: break-all;
@@ -165,42 +90,7 @@ a.cancel-button.disabled{
 }
 
 
-/* to be stripped, because of... BULMA!
-form.validate_form label {
-  padding-left: 1em;
-  width: 9em;
-  text-align: left;
-}
-
-form.validate_form input[type=submit]{
-  margin-top: 19px;
-  margin-left: 1em;
-  width: 10em;
-}
-
-
-form.validate_form{
-  width: 100%;
-}
-
-form.validate_form a.cancel-button {
-  margin-left: 170px;
-}
-select {
-  border: 1px solid #bac7d1;
-  padding: 0.4em;
-  border-radius: 5px;
-  margin-left: 1.3em;
-  width: 132px;
-}
-
-input[type=file] {
-  padding-top: 0.3em;
-  padding-left: 0.3em;
-  width: 270px;
-}
-*/
-
+/* TODO: cleanup/strip some unused parts here also... */
 form.validate_form #subtitle_file {
   border: none; 
   width: 280px;
