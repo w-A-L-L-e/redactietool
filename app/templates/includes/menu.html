@@ -26,20 +26,24 @@
         PID
       </a>
 
-      <a class="navbar-item"
-         href="/search_media?token={{token}}">
-        Details
-      </a>
+      {% if pid %}
+        <!-- 
+        <a class="navbar-item"
+           href="/search_media?token={{token}}">
+          Details
+        </a>
+        -->
 
-      <a class="navbar-item"
-        href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-        Metadata
-      </a>
+        <a class="navbar-item"
+           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+          Ondertitels
+        </a>
 
-      <a class="navbar-item"
-         href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-        Ondertitels
-      </a>
+        <a class="navbar-item"
+          href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+          Metadata
+        </a>
+      {% endif %}
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -51,19 +55,26 @@
             href="/search_media?token={{token}}">
             PID
           </a>
-          <a class="navbar-item" 
-            href="/search_media?token={{token}}">
-            Details
-          </a>
-          <a class="navbar-item" 
-             href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-            Metadata
-          </a>
 
-          <a class="navbar-item" 
-             href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-            Ondertitels
-          </a>
+          {% if pid %}
+            <!--
+            <a class="navbar-item" 
+              href="/search_media?token={{token}}">
+              Details
+            </a>
+            -->
+
+            <a class="navbar-item" 
+               href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+              Ondertitels
+            </a>
+
+            <a class="navbar-item" 
+               href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+              Metadata
+            </a>
+            
+          {% endif %}
 
           <hr class="navbar-divider">
           <a class="navbar-item">
