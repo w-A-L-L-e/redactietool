@@ -126,11 +126,12 @@ def post_media():
     if not pid:
         return pid_error(token, pid, 'Geef een PID')
     else:
-        # if request.form['action'] == 'Ondertitels bewerken':
-        #     logger.info('post_media, editing subtitles', data={'pid': pid})
-        #     return redirect(url_for('.get_upload', **locals()))
-        logger.info('post_media, editing metadata', data={'pid': pid})
-        return redirect(url_for('.edit_metadata', **locals()))
+        if request.form.get('redirect_subtitles') == 'yes':
+            logger.info('post_media, editing subtitles', data={'pid': pid})
+            return redirect(url_for('.get_upload', **locals()))
+        else:
+            logger.info('post_media, editing metadata', data={'pid': pid})
+            return redirect(url_for('.edit_metadata', **locals()))
  
 
 @app.route('/upload', methods=['GET'])

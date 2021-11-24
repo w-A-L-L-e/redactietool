@@ -10,9 +10,23 @@ function loginSubmit(btn){
   execute(btn, "Authenticeren..."); 
 }
 
-function pidSubmit(btn){
-  execute(btn, 'Zoeken...');
+// original version
+// function pidSubmit(btn){
+//   execute(btn, 'Zoeken...');
+// }
+
+function pidSubmitForSubtitles(btn){
+  hf = document.getElementById('redirect_subtitles');
+  hf.value = 'yes';
+  execute(btn, 'Item opzoeken...');
 }
+
+function pidSubmitForMetadata(btn){
+  hf = document.getElementById('redirect_subtitles');
+  hf.value = 'no';
+  execute(btn, 'Item opzoeken...');
+}
+
 
 function uploadSubmit(btn){
   execute(btn, 'Opladen...');

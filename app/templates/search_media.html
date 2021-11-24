@@ -33,27 +33,26 @@ Ondertitels toevoegen
           <input class="input" type="text" name="pid" placeholder="Item pid" autofocus/>
         </div>
       </div>
+      <input type="hidden" value="no" name="redirect_subtitles" id="redirect_subtitles"/>
 
       {% include 'includes/form_errors.html' %}
       
-      <div class="buttons is-pulled-right pt-2">
+      <div class="buttons pt-2">
         <input 
           name="action"
           class="button is-primary"
           type="submit" 
-          value="Opzoeken"
-          onClick="pidSubmit(this);"
+          value="Metadata bewerken"
+          onClick="pidSubmitForMetadata(this);"
         />
 
-        <!--
         <input 
           name="action"
           class="button is-primary"
           type="submit" 
           value="Ondertitels bewerken"
-          onClick="pidSubmit(this);"
+          onClick="pidSubmitForSubtitles(this);"
         />
-        -->
 
       </div>
   </form>
