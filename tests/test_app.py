@@ -95,7 +95,8 @@ def test_working_pid_search(client):
     res = client.post("/search_media", data={
         'token': jwt_token(),
         'department': 'testbeeld',
-        'pid': 'qsxs5jbm5c'
+        'pid': 'qsxs5jbm5c',
+        'redirect_subtitles': 'yes'
     }, follow_redirects=True)
 
     assert res.status_code == 200
