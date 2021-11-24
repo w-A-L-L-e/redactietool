@@ -9,13 +9,10 @@ Metadata bewerken
 
 {% block content %}
 
-<h1 class="title">{{title}}</h1>
-<h2 class="title">Metadata edit is W.I.P.</h2>
+<h1 class="title">{{title}} / PID: {{pid}}</h1>
 
 <div class="columns">
-
   <div class="column">
-    <h2 class="subtitle"><b>PID: {{pid}} </b></h2>
     <div id="player_container"></div>
 
     <script>
@@ -24,19 +21,124 @@ Metadata bewerken
         token: '{{flowplayer_token}}'
       })
     </script>
+  </div>
+</div>
 
-    <h3 class="title"> Giant form here soon... </h3>
-  
-    <form>
-      <input name="todo" value="first field here..."/>
+<form> <!-- metadata edit form -->
 
-      {% include 'includes/form_errors.html' %}
-      <br/>
-      Buttons here...
-    </form>
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">Algememene metadata</h2>
+      <hr/>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-half">
+      
+      <b>Algemeen</b> <br/>
+      Beherende CP <br/>
+      Testbeeldpid <br/>
+      Hoofd Lokale CP ID <br/>
+      <input name="todo" value="first field here..."/> <br/>
+
+
+      <b>Datum</b> <br/>
+      Uitzenddatum: ... <br/>
+      Creatiedatum: ... <br/>
+    </div>
+
+    <div class="column is-half">
+      <b>Titel</b> <br/>
+      Ontsluitingstitle: ... <br/>
+      Serie: ... <br/>
+      Hoofdtitel: ... <br/>
+      Alternatief: ... <br/>
+      Programma: ... <br/>
+      Seizoen: ... <br/>
+      Reeks: ... <br/>
+      Extra velden indien beschikbaar: ... <br/>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">Productie</h2>
+      <hr/>
+      ... widget met Maker, publisher etc...
+
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">Inhoud</h2>
+      <hr/>
+
+      <h3 class="subtitle">Originele hoofdbeschrijving</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Originele uitgebreide beschrijving</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Ondertitels</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Programma omschrijving</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Cast</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Transcriptie</h3>
+      <textarea>Niet editeerbaar</textarea>
+
+      <h3 class="subtitle">Het archief voor Onderwijs beschrijving</h3>
+      <textarea>Editeerbaar (indien mogelijk, rich text edit)</textarea>
+
+
+    </div>
   </div>
 
 
-</div>
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">LOM 1</h2>
+      <hr/>
+      Type, beoogde eindgebruiker ...
+      <br/>
+      Thema edit enz.
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">LOM 2</h2>
+      <hr/>
+      Vakken (met niet editeerbare selections?
+
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h2 class="title">LOM 3</h2>
+      <hr/>
+      Trefwoorden ... niet editeerbare velden en autosuggest?
+
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="buttons is-pulled-right pt-2">
+        {% include 'includes/form_errors.html' %}
+        <button type="submit" class="button is-primary">
+          Save metadata
+        </button>
+      </div>
+    </div>
+  </div>
+</form> <!-- end of metadata edit form -->
 
 {% endblock %}
