@@ -35,20 +35,40 @@ Metadata bewerken
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">Algememene metadata</h2>
+      <h2 class="title">Algemene metadata</h2>
       <hr/>
     </div>
   </div>
 
   <div class="columns">
     <div class="column is-half">
+      <h3 class="subtitle">Algemeen</h3>
       
-      <b>Algemeen</b> <br/>
-      Beherende CP <br/>
-      Testbeeldpid <br/>
-      Hoofd Lokale CP ID <br/>
-      <input name="todo" value="first field here..."/> <br/>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Beherende&nbsp;CP</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP">
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Testbeeld&nbsp;PID</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input name="testbeeld_pid" class="input is-small" type="text" placeholder="PID" value={{pid}}/>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <b>Datum</b> <br/>
       Uitzenddatum: ... <br/>
@@ -56,7 +76,8 @@ Metadata bewerken
     </div>
 
     <div class="column is-half">
-      <b>Titel</b> <br/>
+      <h3 class="subtitle">Titel</h3>
+
       Ontsluitingstitle: ... <br/>
       Serie: ... <br/>
       Hoofdtitel: ... <br/>
@@ -79,30 +100,129 @@ Metadata bewerken
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">Inhoud</h2>
-      <hr/>
 
-      <h3 class="subtitle">Originele hoofdbeschrijving</h3>
-      <textarea>Niet editeerbaar</textarea>
+        <h2 class="panel-heading">
+          Inhoud
+        </h2>
 
-      <h3 class="subtitle">Originele uitgebreide beschrijving</h3>
-      <textarea>Niet editeerbaar</textarea>
+          <!-- todo make this type of panel a partial view asap -->
+          <div class="columns">
+            <div class="column">
+              <article class="panel">
+                <p class="panel-heading">
+                  Originele hoofdbeschrijving
+                </p>
+                <div class="panel-block">
+                  <p class="control">
+                    <textarea name="originele_hoofdbeschrijving"
+                      class="textarea is-hover" 
+                      placeholder="Originele hoofdbeschrijving (disabled)" 
+                      cols="45"
+                      rows="5"></textarea>
+                  </p>
 
-      <h3 class="subtitle">Ondertitels</h3>
-      <textarea>Niet editeerbaar</textarea>
+                </div>
+              </article>
+            </div>
+          </div>
 
-      <h3 class="subtitle">Programma omschrijving</h3>
-      <textarea>Niet editeerbaar</textarea>
+          <article class="panel">
+            <p class="panel-heading">
+              Originele uitgebreide hoofdbeschrijving
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="Originele uitgebreide hoofdbeschrijving (disabled)"
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
 
-      <h3 class="subtitle">Cast</h3>
-      <textarea>Niet editeerbaar</textarea>
+            </div>
+          </article>
 
-      <h3 class="subtitle">Transcriptie</h3>
-      <textarea>Niet editeerbaar</textarea>
+          <article class="panel">
+            <p class="panel-heading">
+              Ondertitels
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="Ondertitles (disabled)" 
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
 
-      <h3 class="subtitle">Het archief voor Onderwijs beschrijving</h3>
-      <textarea>Editeerbaar (indien mogelijk, rich text edit)</textarea>
+            </div>
+          </article>
 
+          <article class="panel">
+            <p class="panel-heading">
+              Programma omschrijving
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="Programma beschrijving (disabled)" 
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
+
+            </div>
+          </article>
+
+
+          <article class="panel">
+            <p class="panel-heading">
+              Cast 
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="Cast (disabled)" 
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
+
+            </div>
+          </article>
+
+          <article class="panel">
+            <p class="panel-heading">
+              Transcriptie
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="Transcriptie (disabled)" 
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
+
+            </div>
+          </article>
+
+          <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
+          <article class="panel">
+            <p class="panel-heading">
+              Het archief voor Onderwijs beschrijving
+            </p>
+            <div class="panel-block">
+              <p class="control">
+                <textarea name="originele_hoofdbeschrijving"
+                  class="textarea is-hover" 
+                  placeholder="AVO beschrijving. (editable), later on maybe also richtext here" 
+                  cols="45"
+                  rows="5"></textarea>
+              </p>
+
+            </div>
+          </article>
 
     </div>
   </div>
