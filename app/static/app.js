@@ -88,6 +88,17 @@ function showNavigationWarning(){
 
 }
 
+function flashModalWarning(){
+  showModalAlert(
+      "Sync is misgelopen",
+      "Deze alert gaat na 3 seconden automatisch dicht..."
+  );
+
+  setTimeout(function(){
+    closeModalAlert();
+  }, 3000);
+}
+
 
 // vanilla script for burger toggle from bulma.io example
 // alternate versions for jquery etc can also be found here:
@@ -143,13 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
   // do something similar for bulma instead.
   // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
-   
-  // close it automagically like this
-  // setTimeout(function(){
-  //   closeModalAlert();
-  // }, 3000);
-
-
+  
   //TODO: slim select for multi select component
   //new SlimSelect({
   //  select: '#multiple'
