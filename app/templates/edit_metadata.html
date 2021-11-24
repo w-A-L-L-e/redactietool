@@ -9,7 +9,19 @@ Metadata bewerken
 
 {% block content %}
 
-<h1 class="title">{{title}} / PID: {{pid}}</h1>
+<div class="columns">
+  <div class="column">
+
+    <h1 class="title is-pulled-left">{{title}} / PID: {{pid}}</h1>
+
+    <div class="buttons is-pulled-right pt-2">
+            <a class="button is-link mb-5"
+               href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+              Bewerk ondertitels
+            </a>
+    </div>
+  </div>
+</div>
 
 <div class="columns">
   <div class="column">
@@ -256,7 +268,7 @@ Metadata bewerken
     </div>
   </div>
 
-  <div class="columns">
+  <div class="columns sticky-submit-button">
     <div class="column">
       <div class="buttons is-pulled-right pt-2">
         {% include 'includes/form_errors.html' %}

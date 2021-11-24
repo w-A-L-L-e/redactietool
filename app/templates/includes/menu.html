@@ -37,13 +37,13 @@
         -->
 
         <a class="navbar-item"
-           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-          Ondertitels
+          href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+          Metadata
         </a>
 
         <a class="navbar-item"
-          href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-          Metadata
+           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+          Ondertitels
         </a>
       {% endif %}
 
@@ -56,7 +56,7 @@
         <div class="navbar-dropdown">
           <a class="navbar-item" 
             href="/search_media?token={{token}}">
-            PID
+            PID opzoeken
           </a>
 
           {% if pid %}
@@ -68,14 +68,15 @@
             -->
 
             <a class="navbar-item" 
-               href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-              Ondertitels
+               href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+              Metadata bewerken
             </a>
 
             <a class="navbar-item" 
-               href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-              Metadata
+               href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+              Ondertitels toevoegen
             </a>
+
             
           {% endif %}
 
