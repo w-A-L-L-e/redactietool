@@ -252,3 +252,6 @@ input[type=submit]:disabled.cancel{
     right: 17%;
 }
 
+.label {
+  min-width: 120px;
+}
