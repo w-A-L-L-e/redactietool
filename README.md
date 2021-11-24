@@ -13,7 +13,7 @@ Allows basically to upload both closed and open srt files to videos for 'testbee
 
 * Git
 * Docker
-* Python 3.6+
+* Python 3.7+
 * Linux (if you want to run it locally, uwsgi is not available on other platforms.)
 * Access to the meemoo PyPi
 

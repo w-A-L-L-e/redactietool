@@ -1,10 +1,10 @@
-FROM python:3.6-slim
+FROM python:3.7
 
 # Applications should run on port 8080 so NGINX can auto discover them.
 EXPOSE 8080
 
 # Make a new group and user so we don't run as root.
-RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+RUN addgroup --system appgroup && adduser -u 1001 --system appuser --ingroup appgroup
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN chown -R appuser:appgroup /app
 
 # Install gcc and libc6-dev to be able to compile uWSGI
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y gcc libc6-dev libpq-dev && \
+    apt-get install --no-install-recommends -y libxml2-dev libxmlsec1-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # We install all our Python dependencies. Add the extra index url because some
