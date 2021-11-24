@@ -19,16 +19,16 @@ Login
     </h1>
 
     <p>
-     <form action="/login" class="login_form box" method="POST">
+     <form action="/login" class="login_form box is-light" method="POST">
        
         <!-- original implementation, will be deprecated soon -->
         <div class="field">
           <label class="label">E-mailadres</label>
           <div class="control">
             <input  name="username" 
-                    class="input" 
+                    class="input is-hovered"
                     autocomplete="username"
-                    placeholder="Meemoo account e-mail"/>
+                    placeholder="E-mailadres"/>
           </div>
         </div>
 
@@ -37,8 +37,10 @@ Login
           <label class="label">Wachtwoord</label>
           <div class="control">
             <input  name="password" 
+                    type="password"
+                    class="input is-hovered"
                     autocomplete="current-password"
-                    type="password" class="input"/>
+                    placeholder="Wachtwoord"/>
           </div>
         </div>
 

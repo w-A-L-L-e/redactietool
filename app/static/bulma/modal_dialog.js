@@ -1,9 +1,6 @@
 // Author: Walter Schreppers
-// Super tiny js helper file to control the modal dialog for redactietool.
-
-// possibly add some state with these variables (we might refactor this later on)
-// var modalCancelled = false;
-// var modalConfirmed = false;
+// We might put this in a class or prototype later on
+// for now this is easy enough to use in our redactietool.
 
 function getModalDialog(){
   return document.getElementById('modal_dlg');
@@ -16,11 +13,6 @@ function closeModalAlert(){
 function showModalAlert(title, content){
   var modal_dlg = getModalDialog();
   
-  if(!modal_dlg){
-    console.log('Error in modal_dialog.js : dialog not present on page...');
-    return;
-  }
-
   var modal_title = modal_dlg.getElementsByClassName('modal-card-title')[0];
   // modal_title.innerHTML = title; // allows raw html, use with caution
   modal_title.innerText = title;
