@@ -51,13 +51,6 @@ Redactietool - Ondertitelbestand
 
   </table>
 
-  <!-- div class="buttons">
-    <a class="button is-primary">Primary button</a>
-    <a class="button is-link">Link button</a>
-
-      onclick="newUploadClicked(this)"
-  </div-->
-
   <div class="field is-grouped is-pulled-right">
     <div class="control">
       <a id="change_pid" class="button is-link is-light"
@@ -70,7 +63,7 @@ Redactietool - Ondertitelbestand
         id="change_metadata"
         type="submit"
         class="button is-link"
-        href="/metadata?token={{token}}"
+        href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}"
       >
         Metadata aanpassen
       </a>

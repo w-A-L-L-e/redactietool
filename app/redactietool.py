@@ -450,6 +450,77 @@ def metadata():
     return resp
 
 
+
+# ================= NEW METADATA EDITING ROUTES ============
+@app.route('/edit_metadata', methods=['GET'])
+@requires_authorization
+def edit_metadata():
+    logger.info('GET item_meta route')
+
+    token = request.args.get('token')
+    pid = request.args.get('pid').strip()
+    department = request.args.get('department')
+    errors = request.args.get('validation_errors')
+
+    validation_error = validate_input(pid, department)
+    if validation_error:
+        return pid_error(token, pid, validation_error)
+
+    mh_api = MediahavenApi()
+    mam_data = mh_api.find_video(department, pid)
+    if not mam_data:
+        return pid_error(token, pid, f"PID niet gevonden in {department}")
+
+    return render_template(
+        'edit_metadata.html',
+        token=token,
+        pid=pid,
+        department=department,
+        mam_data=json.dumps(mam_data),
+        title=mam_data.get('title'),
+        description=mam_data.get('description'),
+        created=get_property(mam_data, 'CreationDate'),
+        archived=get_property(mam_data, 'created_on'),
+        original_cp=get_property(mam_data, 'Original_CP'),
+        # for v2 mam_data['Internal']['PathToVideo']
+        video_url=mam_data.get('videoPath'),
+        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
+        validation_errors=errors)
+
+
+@app.route('/edit_metadata', methods=['POST'])
+@requires_authorization
+def save_item_metadata():
+    tp = {
+        'token': request.form.get('token'),
+        'pid': request.form.get('pid'),
+        'department': request.form.get('department'),
+        'mam_data': request.form.get('mam_data'),
+        'video_url': request.form.get('video_url'),
+        'subtitle_type': request.form.get('subtitle_type')
+    }
+
+    # change this to different template soon...
+    return render_template(
+        'edit_metadata.html',
+        token=token,
+        pid=pid,
+        department=department,
+        mam_data=json.dumps(mam_data),
+        title=mam_data.get('title'),
+        description=mam_data.get('description'),
+        created=get_property(mam_data, 'CreationDate'),
+        archived=get_property(mam_data, 'created_on'),
+        original_cp=get_property(mam_data, 'Original_CP'),
+        # for v2 mam_data['Internal']['PathToVideo']
+        video_url=mam_data.get('videoPath'),
+        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
+        validation_errors=errors)
+
+
+
+
+
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
 @app.route("/health/live")
 def liveness_check():
