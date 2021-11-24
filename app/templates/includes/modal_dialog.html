@@ -1,20 +1,18 @@
-<!-- dynamic modal dialog -->
 <div class="modal" id='modal_dlg'>
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal dialog title</p>
-      <button class="delete" aria-label="close"></button>
+      <p class="modal-card-title">Title</p>
+      <button class="delete" aria-label="close" onClick="modalCloseClicked();" ></button>
     </header>
     <section class="modal-card-body">
-      <!-- Content ... -->
       <p>
-        Modal dialog content 
+        Content
       </p>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Ok</button>
-      <button class="button">Annuleren</button>
+      <button class="button is-success" onClick="modalSaveClicked();">Ok</button>
+      <button class="button" onClick="modalCancelClicked();">Annuleren</button>
     </footer>
   </div>
 </div>

@@ -1,131 +1,127 @@
-<!-- ////////////////////////////////////////// MAIN MENU ///////////////////////////////////////////// -->
-    <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item has-text-white" href="/">
-          <img 
-            src="{{ url_for('static', filename='avo-logo-i.svg') }}" alt="Logo Het Archief voor Onderwijs"
-            width="150" 
-            class="mr-4"
-          >
-          <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
-          Redactietool
+<nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item has-text-white" href="/">
+      <img 
+        src="{{ url_for('static', filename='avo-logo-i.svg') }}" alt="Logo Het Archief voor Onderwijs"
+        width="150" 
+        class="mr-4"
+      >
+      <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+      Redactietool
+    </a>
+
+    <!-- add class is-active to turn into a cross -->
+    <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+
+      <a class="navbar-item"
+         href="/search_media?token={{token}}">
+        PID
+      </a>
+
+      <a class="navbar-item"
+         href="/search_media?token={{token}}">
+        Details
+      </a>
+
+      <a class="navbar-item"
+        href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+        Metadata
+      </a>
+
+      <a class="navbar-item"
+         href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+        Ondertitels
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Geavanceerd
         </a>
 
-        <!-- add class is-active to turn into a cross -->
-        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-
-          <a class="navbar-item"
-             href="/search_media?token={{token}}">
+        <div class="navbar-dropdown">
+          <a class="navbar-item" 
+            href="/search_media?token={{token}}">
             PID
           </a>
-
-          <a class="navbar-item"
-             href="/search_media?token={{token}}">
+          <a class="navbar-item" 
+            href="/search_media?token={{token}}">
             Details
           </a>
-
-          <a class="navbar-item"
-            href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+          <a class="navbar-item" 
+             href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
             Metadata
           </a>
 
-          <a class="navbar-item"
+          <a class="navbar-item" 
              href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
             Ondertitels
           </a>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Geavanceerd
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+            Redactietool v0.2 alpha
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          
+          <!-- quick POC, this will be redone with bulma.css soon -->
+          <div class="login_logout" id="saml_auth_block">
+            {% if paint_logout %}
+            {% if attributes %}
+              <table class="table table-striped">
+                <thead>
+                  <th>Name</th><th>Values</th>
+                </thead>
+                <tbody>
+                  {% for attr in attributes %}
+                    <tr><td>{{ attr.0 }}</td>
+                    <td><ul class="list-unstyled">
+                      {% for val in attr.1 %}
+                        <li>{{ val }}</li>
+                      {% endfor %}
+                    </ul></td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+            {% endif %}
+
+            <a href="?slo" class="button is-primary">
+              <strong>Logout</strong>
             </a>
 
-            <div class="navbar-dropdown">
-              <a class="navbar-item" 
-                href="/search_media?token={{token}}">
-                PID
-              </a>
-              <a class="navbar-item" 
-                href="/search_media?token={{token}}">
-                Details
-              </a>
-              <a class="navbar-item" 
-                 href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-                Metadata
-              </a>
+          {% else %}
+            <a  href="?sso2" 
+                class="button is-primary">
+              <strong>Login and attrs page</strong>
+            </a>
 
-              <a class="navbar-item" 
-                 href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-                Ondertitels
-              </a>
-
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
-                Redactietool v0.2 alpha
-              </a>
-            </div>
+            <a  href="?sso" 
+                class="button is-light">
+              Login
+            </a> 
+          {% endif %}
           </div>
+
         </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              
-              <!-- quick POC, this will be redone with bulma.css soon -->
-              <div class="login_logout" id="saml_auth_block">
-                {% if paint_logout %}
-                {% if attributes %}
-                  <table class="table table-striped">
-                    <thead>
-                      <th>Name</th><th>Values</th>
-                    </thead>
-                    <tbody>
-                      {% for attr in attributes %}
-                        <tr><td>{{ attr.0 }}</td>
-                        <td><ul class="list-unstyled">
-                          {% for val in attr.1 %}
-                            <li>{{ val }}</li>
-                          {% endfor %}
-                        </ul></td></tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                {% else %}
-                  <div class="alert alert-danger" role="alert">You don't have any attributes</div>
-                {% endif %}
-
-                <a href="?slo" class="button is-primary">
-                  <strong>Logout</strong>
-                </a>
-
-              {% else %}
-                <a  href="?sso2" 
-                    class="button is-primary">
-                  <strong>Login and attrs page</strong>
-                </a>
-
-                <a  href="?sso" 
-                    class="button is-light">
-                  Login
-                </a> 
-              {% endif %}
-              </div>
-
-            </div>
-          </div>
-        </div>
-
       </div>
-    </nav>
+    </div>
 
-    <!-- ///////////////////////////////////////////// END MENU ///////////////////////////////////////////// -->
-
+  </div>
+</nav>
 
