@@ -1,0 +1,180 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  annotations:
+    tags: "web-app"
+  name: "redactietool"
+  labels:
+    app: "redactietool"
+objects:
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: "redactietool-${env}"
+      namespace: "media-dist"
+      labels:
+        app: "redactietool"
+        app.kubernetes.io/component: "redactietool-${env}"
+        app.kubernetes.io/instance: "redactietool-${env}"
+        app.kubernetes.io/name: "redactietool"
+        app.kubernetes.io/part-of: "redactietool"
+        app.openshift.io/runtime: "redactietool"
+        app.openshift.io/runtime-version: "${env}"
+        env: ${env}
+    spec:
+      ports:
+        - protocol: TCP
+          port: ${{svc_port}}
+          targetPort: ${{svc_port}}
+          name: http
+      selector:
+        app: "redactietool"
+        env: ${env}
+      clusterIP:
+      type: ClusterIP
+      sessionAffinity: None
+    status:
+      loadBalancer: {}
+  - kind: Deployment
+    apiVersion: apps/v1
+    metadata:
+      annotations:
+        alpha.image.policy.openshift.io/resolve-names: "*"
+      name: "redactietool-${env}"
+      namespace: "media-dist"
+      labels:
+        app: "redactietool"
+        app.kubernetes.io/component: "redactietool-${env}"
+        app.kubernetes.io/instance: "redactietool-${env}"
+        app.kubernetes.io/name: "redactietool"
+        app.kubernetes.io/part-of: "redactietool"
+        app.openshift.io/runtime: "redactietool"
+        app.openshift.io/runtime-version: ${env}
+        env: ${env}
+    spec:
+      replicas: 0
+      selector:
+        matchLabels:
+          app: "redactietool"
+          env: ${env}
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: "redactietool"
+            deploymentconfig: "redactietool-${env}"
+            env: ${env}
+          annotations:
+            openshift.io/generated-by: OpenShiftWebConsole
+        spec:
+          containers:
+            - name: "redactietool-${env}"
+              terminationMessagePath: /dev/termination-log
+              resources:
+                limits:
+                  cpu: '${cpu_limit}m'
+                  memory: '${memory_limit}Mi'
+                requests:
+                  cpu: '${cpu_requested}m'
+                  memory: '${memory_requested}Mi'
+              ports:
+                - containerPort: ${{svc_port}}
+                  protocol: TCP
+              imagePullPolicy: IfNotPresent
+              livenessProbe:
+                httpGet:
+                  path: /health/live
+                  port: ${{svc_port}}
+                initialDelaySeconds: 15
+                periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 1
+                failureThreshold: 3
+              readinessProbe:
+                tcpSocket:
+                  port: ${{svc_port}}
+                initialDelaySeconds: 15
+                periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 1
+                failureThreshold: 3
+              terminationMessagePolicy: File
+              envFrom:
+                - configMapRef:
+                    name: "redactietool-${env}"
+                - secretRef:
+                    name: "redactietool-${env}"
+              image: >-
+                image-registry.openshift-image-registry.svc:5000/media-dist/redactietool:${env}
+          restartPolicy: Always
+          terminationGracePeriodSeconds: 30
+          dnsPolicy: ClusterFirst
+          securityContext:
+            runAsUser: 1001
+          schedulerName: default-scheduler
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 25%
+          maxSurge: 25%
+      revisionHistoryLimit: 10
+      progressDeadlineSeconds: 600
+  - kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: "redactietool-${env}"
+      namespace: "media-dist"
+      labels:
+        app: "redactietool"
+        app.kubernetes.io/component: "redactietool-${env}"
+        app.kubernetes.io/instance: "redactietool-${env}"
+        app.kubernetes.io/name: "redactietool"
+        app.kubernetes.io/part-of: "redactietool"
+        app.openshift.io/runtime: "redactietool"
+        app.openshift.io/runtime-version: ${env}
+        env: ${env}
+    data:
+      OAS_SERVER: ''
+      OAS_APPNAME: ''
+      MEDIAHAVEN_API: ''
+      DEPARTMENT_ID: ''
+      FTP_SERVER: ''
+      FTP_DIR: ''
+      TESTBEELD_PERM_ID: ''
+      ONDERWIJS_PERM_ID: ''
+      ADMIN_PERM_ID: ''
+      FLASK_ENV: ''
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: "redactietool-${env}"
+      namespace: "media-dist"
+      labels:
+        app: "redactietool"
+        app.kubernetes.io/component: "redactietool-${env}"
+        app.kubernetes.io/instance: "redactietool-${env}"
+        app.kubernetes.io/name: "redactietool"
+        app.kubernetes.io/part-of: "redactietool"
+        app.openshift.io/runtime: "redactietool"
+        app.openshift.io/runtime-version: ${env}
+        env: ${env}
+    stringData:
+      FLOWPLAYER_TOKEN: ''
+      FTP_PASS: ''
+      FTP_USER: ''
+      MEDIAHAVEN_PASS: ''
+      MEDIAHAVEN_USER: ''
+      OAS_JWT_SECRET: ''
+parameters:
+  - name: env
+    value: "env"
+  - name: "memory_requested"
+    value: "128"
+  - name: "memory_limit"
+    value: "328"
+  - name: "cpu_requested"
+    value: "100"
+  - name: "cpu_limit"
+    value: "300"
+  - name: "svc_port"
+    value: "8080"
