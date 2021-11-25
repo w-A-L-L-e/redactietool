@@ -507,7 +507,15 @@ def save_item_metadata():
     # with our javascript flashAlertMessage method.
     tp, json_data, errors = data_mapping.form_to_mh(request)
 
-    # change this to different template soon...
+    # TODO: refactor this part out into services 
+    mh_api = MediahavenApi()
+    mam_data = mh_api.find_video(tp['department'], tp['pid'])
+    if not mam_data:
+        return pid_error(token, pid, f"PID niet gevonden in {department}")
+
+
+
+    # TODO: change this to different template or trigger the flashAlertMessage here
     return render_template(
         'edit_metadata.html',
         token=tp.get('token'),
@@ -516,14 +524,14 @@ def save_item_metadata():
         mam_data=json.dumps(tp.get('mam_data')),
         video_url=tp.get('video_url'),
         subitle_type=tp.get('subtitle_type'),
-        # title=mam_data.get('title'),
-        # description=mam_data.get('description'),
-        # created=get_property(mam_data, 'CreationDate'),
-        # archived=get_property(mam_data, 'created_on'),
-        # original_cp=get_property(mam_data, 'Original_CP'),
+        title=mam_data.get('title'),
+        description=mam_data.get('description'),
+        created=get_property(mam_data, 'CreationDate'),
+        archived=get_property(mam_data, 'created_on'),
+        original_cp=get_property(mam_data, 'Original_CP'),
         #  for v2 mam_data['Internal']['PathToVideo']
         # video_url=mam_data.get('videoPath'),
-        # flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
+        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
         validation_errors=errors)
 
 

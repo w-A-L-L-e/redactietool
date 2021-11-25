@@ -65,7 +65,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="beherende_cp" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP" value="{{original_cp}}"/>
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="creatiedatum" class="input is-small" type="text" placeholder="MAPPING?" value=""/>
+              <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}"/>
             </div>
           </div>
         </div>
@@ -344,7 +344,7 @@ Publisher:
                       class="textarea is-hover" 
                       placeholder="Originele hoofdbeschrijving (disabled)" 
                       cols="45"
-                      rows="5" readonly></textarea>
+                      rows="5" readonly>{{description}}</textarea>
                   </p>
 
                 </div>
