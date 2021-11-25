@@ -424,6 +424,9 @@ def saml_login():
     )
 
 
+
+# TODO: secure this route or further check if it's actually needed 
+# IMPORTANT DOUBLE CHECK THIS BEFORE A PRD RELEASE!!!
 @app.route('/attrs/')
 def attrs():
     paint_logout = False
@@ -497,18 +500,12 @@ def edit_metadata():
 
 @app.route('/edit_metadata', methods=['POST'])
 @requires_authorization
-def save_item_metadata():
-    tp = {
-        'token': request.form.get('token'),
-        'pid': request.form.get('pid'),
-        'department': request.form.get('department'),
-        'mam_data': request.form.get('mam_data'),
-        'video_url': request.form.get('video_url'),
-        'subtitle_type': request.form.get('subtitle_type')
-    }
+def save_item_metadata(): 
+    data_mapping = RmhMapping()
 
-    tp = tp  # todo MAPPING HERE!
-    errors = None  # for now ;)
+    # possibly also return a title + message here to show
+    # with our javascript flashAlertMessage method.
+    tp, json_data, errors = data_mapping.form_to_mh(request)
 
     # change this to different template soon...
     return render_template(

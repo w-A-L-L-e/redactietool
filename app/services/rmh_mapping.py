@@ -10,6 +10,7 @@
 #
 
 import os
+import json
 from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
@@ -21,15 +22,28 @@ class RmhMapping:
     def __init__(self):
         print("RmhMapping initialized")
 
-    def form_to_mh(self, form_metadata):
+    def form_to_mh(self, request):
         """
         convert form metadata hash into json data
         """
-        print("TODO: convert following metadata:\n", form_metadata)
+        print("TODO: convert following metadata:\n", request.form)
+
+        tp = {
+            'token': request.form.get('token'),
+            'pid': request.form.get('pid'),
+            'department': request.form.get('department'),
+            'mam_data': request.form.get('mam_data'),
+            'video_url': request.form.get('video_url'),
+            'subtitle_type': request.form.get('subtitle_type')
+        }
+
+        errors = None  # for now ;)
+
 
         # TODO: figure out how to turn our submitted params into the correct
         # json data or xml sidecar in order to update the wanted fields
-        return {}  # for now just an empty dictionary
+        # for now return the template params as json
+        return tp, json.dumps(tp), errors
 
     def mh_to_form(self, json_metadata):
         """

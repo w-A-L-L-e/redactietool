@@ -36,7 +36,9 @@ Metadata bewerken
   </div>
 </div>
 
-<form> 
+<form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
+
+  {% include 'upload_hidden_fields.html' %}
 
   <!-- 
     metadata edit form 
@@ -240,27 +242,85 @@ Metadata bewerken
       
       <h2 class="subtitle">Maker</h2>
       <hr/>
-      TODO... Waarom 3 aparte lijsten met daarin nog een dropdown om het te laten switchen in lijst?
-      Dit geeft geen enkele meerwaarde buiten het moeilijker te maken om te implementeren...
-      <br/><br/><br/>
 
-      <h2 class="subtitle">Bijdrager</h2>
-      <hr/>
-      TODO: Dus hier kies je ook bijdrager + net als hierboven maar dan kan je toch wisselen naar Maker of publisher zeker?
-      <br/><br/><br/>
+      <pre> 
+      TODO: 
+Maker lijst (met volgende opties in dropdown):
 
-      <h2 class="subtitle">Publisher</h2>
-      <hr/>
-      <p>
-      TODO: Waarom niet gewoon 1 button met een + en dan daaronder inderdaad maker, bijdrager of publisher als dropdown samen met een textveld en een x om het te verwijderen??? T'is niet dat dit niet gaat. Het is gewoon onnodig complex om te implementeren en eigenlijk ook helemaal geen standaard nog geeft het een echte meerwaarde voor deze form...
-      </p>
-      <p>
-      <br/>
-      <section class="has-text-danger"> Wat is de api call om de waardes Maker, Bijdrager, Publisher en eventuele extra items voor de dropdown op te halen? </section>
+  Maker 
+  Archiefvormer 
+  Auteur 
+  Acteur 
+  Cineast 
+  Componist 
+  Choreograaf 
+  Danser 
+  Documentairemaker 
+  Fotograaf 
+  Geïnterviewde 
+  Interviewer 
+  Kunstenaar 
+  Muzikant 
+  Performer 
+  Producer 
+  Productiehuis 
+  Regisseur 
+  Schrijver 
+  Opdrachtgever
 
-      <br/>
+Bijdrager lijst (met volgende opties in dropdown):
+
+  Aanwezig 
+  Adviseur 
+  Afwezig
+  Archivaris
+  Arrangeur
+  ArtistiekDirecteur
+  Assistent
+  Auteur
+  Belichting
+  Bijdrager
+  Cameraman
+  Co-producer
+  Commentator
+  Componist
+  DecorOntwerper
+  Digitaliseringspartner
+  Dirigent
+  Dramaturg
+  Fotografie
+  Geluid 
+  Geluidsman
+  GrafischOntwerper
+  KostuumOntwerper
+  Kunstenaar
+  Make-up
+  Muzikant
+  Nieuwsanker
+  Omroeper
+  Onderzoeker
+  Post-productie
+  Producer
+  Reporter
+  Scenarist
+  Soundtrack 
+  Sponsor
+  TechnischAdviseur
+  Uitvoerder
+  Verontschuldigd ??? dat is een bijdrager ??? 
+  Vertaler
+  Verteller
+  Voorzitter
 
 
+Publisher:
+
+  Distributeur 
+  Exposant
+  Persagentschap
+  Publisher
+      </pre>
+      
     </div>
   </div>
 
@@ -565,17 +625,6 @@ Metadata bewerken
     </div>
   </div>
 
-    <div class="columns">
-      <div class="column">
-        <div class="buttons sticky-submit-button pt-2">
-          {% include 'includes/form_errors.html' %}
-          <button type="submit" class="button is-primary">
-            Save metadata
-          </button>
-        </div>
-      </div>
-    </div>
-
 
   <div class="columns">
     <div class="column">
@@ -586,6 +635,17 @@ Metadata bewerken
         Dit item mag gepubliceerd worden op 
         <a target="blank" href="https://onderwijs.hetarchief.be">Het Archief voor Onderwijs.</a>
       </label>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="buttons sticky-submit-button pt-2">
+        {% include 'includes/form_errors.html' %}
+        <button type="submit" class="button is-primary spring">
+          Save metadata
+        </button>
+      </div>
     </div>
   </div>
 
