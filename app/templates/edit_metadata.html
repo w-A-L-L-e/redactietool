@@ -422,50 +422,57 @@ Metadata bewerken
         </div>
       </div>
 
-      <!-- TODO: make multi-select -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Beoogde eindgebruiker</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_beoogde_eindgebruiker" id="lom1_type">
+          <div class="select is-multiple">
+            <!-- TODO: multiple size="3" of meer? -->
+            <select name="lom1_beoogde_eindgebruiker" id="lom1_beoogde_eindgebruiker">
               <option value="value1">Api call of mapping voor eindgebruikers?</option>
+              <option value="user_1">Eindgebruiker 1</option>
+              <option value="user_2">Eindgebruiker 2</option>
+              <option value="user_3">Eindgebruiker 3</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- TODO: make multi-select -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Taal</label>
         </div>
         <div class="field-body">
           <div class="select">
-            <select name="lom1_taal" id="lom1_type">
+            <!-- TODO: multiple size="3" of meer? -->
+            <select name="lom1_taal" id="lom1_taal">
               <option value="value1">Api call, mapping of waardes voor taal?</option>
+              <option value="nl">Nederlands</option>
+              <option value="fr">Frans</option>
+              <option value="en">Engels</option>
+              <option value="de">Duits</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- TODO: make multi-select -->
       <!-- TODO: validation error on empty value for onderwijsniveaus -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Onderwijsniveaus</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_onderwijsniveaus" id="lom1_type">
+          <div class="select is-multiple">
+            <!-- TODO: multiple size="2" -->
+            <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
               <option value="value1">Api call, mapping of waardes voor onderwijsniveaus?</option>
+              <option value="value2">Tweede niveau</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- TODO: make multi-select -->
       <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
       <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
       <div class="field is-horizontal">
@@ -473,9 +480,11 @@ Metadata bewerken
           <label class="label">Onderwijsgraden</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_onderwijsgraden" id="lom1_type">
+          <div class="select is-multiple">
+            <!-- TODO: multiple size="2" -->
+            <select name="lom1_onderwijsgraden" id="lom1_onderwijsgraden">
               <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
+              <option value="value2">Tweede graad</option>
             </select>
           </div>
         </div>
@@ -488,8 +497,8 @@ Metadata bewerken
         </div>
         <div class="field-body">
           <div class="select">
-            <select name="lom1_themas" id="lom1_type">
-              <option value="value1">Mapping van mogelijke themas? En dus niet diteerbaar?</option>
+            <select name="lom1_themas" id="lom1_themas">
+              <option value="value1">Mapping van mogelijke themas? En dus niet editeerbaar?</option> -> niet editaarbaar, waarom dan niet gewoon wat labels hier?
             </select>
           </div>
         </div>
@@ -509,9 +518,10 @@ Metadata bewerken
           <label class="label">Vakken</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom2_vakken" id="lom1_type">
+          <div class="select is-multiple">
+            <select name="lom2_vakken" id="lom2_vakken">
               <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
+              <option value="value1">tweede vak</option>
             </select>
           </div>
         </div>
@@ -532,9 +542,10 @@ Metadata bewerken
           <label class="label">Trefwoorden</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom3_trefwoorden" id="lom1_type">
+          <div class="select is-multiple">
+            <select name="lom3_trefwoorden" id="lom3_trefwoorden">
               <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
+              <option value="value2">tweede trefwoord</option>
             </select>
           </div>
         </div>
