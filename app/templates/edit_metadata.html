@@ -389,14 +389,98 @@ Metadata bewerken
     </div>
   </div>
 
+  <!--
+  <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Welke extra velden?</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input name="reeks" class="input is-small" type="text" placeholder="En de mapping?">
+            </div>
+          </div>
+        </div>
+      </div>
+  -->
 
   <div class="columns">
     <div class="column">
       <h2 class="title">LOM 1</h2>
       <hr/>
-      Type, beoogde eindgebruiker ...
-      <br/>
-      Thema edit enz.
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Type</label>
+        </div>
+        <div class="field-body">
+          <div class="select">
+            <select name="lom1_type" id="lom1_type">
+              <option value="value1">Api call of mapping voor types?</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: make multi-select -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Beoogde eindgebruiker</label>
+        </div>
+        <div class="field-body">
+          <div class="select">
+            <select name="lom1_beoogde_eindgebruiker" id="lom1_type">
+              <option value="value1">Api call of mapping voor eindgebruikers?</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: make multi-select -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Taal</label>
+        </div>
+        <div class="field-body">
+          <div class="select">
+            <select name="lom1_taal" id="lom1_type">
+              <option value="value1">Api call, mapping of waardes voor taal?</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: make multi-select -->
+      <!-- TODO: validation error on empty value for onderwijsniveaus -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Onderwijsniveaus</label>
+        </div>
+        <div class="field-body">
+          <div class="select">
+            <select name="lom1_onderwijsniveaus" id="lom1_type">
+              <option value="value1">Api call, mapping of waardes voor onderwijsniveaus?</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: make multi-select -->
+      <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
+      <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Onderwijsgraden</label>
+        </div>
+        <div class="field-body">
+          <div class="select">
+            <select name="lom1_onderwijsgraden" id="lom1_type">
+              <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
