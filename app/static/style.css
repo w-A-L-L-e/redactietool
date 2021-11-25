@@ -62,7 +62,7 @@ input[type=button].spring:hover {
 .spring {
   animation: spring 2s;
   animation-timing-function: ease;
-  animation-iteration-count: 3;
+  animation-iteration-count: 1;
 }
 
 /************** END OF CSS ANIMATION EYE CANDY ***************************/
