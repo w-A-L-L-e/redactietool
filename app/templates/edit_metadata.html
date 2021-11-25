@@ -63,7 +63,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP">
+              <input name="beherende_cp" class="input is-small" type="text" placeholder="Mapping?">
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@ Metadata bewerken
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Extra velden?</label>
+          <label class="label">Welke extra velden?</label>
         </div>
         <div class="field-body">
           <div class="field">
@@ -251,8 +251,15 @@ Metadata bewerken
 
       <h2 class="subtitle">Publisher</h2>
       <hr/>
+      <p>
       TODO: Waarom niet gewoon 1 button met een + en dan daaronder inderdaad maker, bijdrager of publisher als dropdown samen met een textveld en een x om het te verwijderen??? T'is niet dat dit niet gaat. Het is gewoon onnodig complex om te implementeren en eigenlijk ook helemaal geen standaard nog geeft het een echte meerwaarde voor deze form...
-      <br/><br/><br/>
+      </p>
+      <p>
+      <br/>
+      <section class="has-text-danger"> Wat is de api call om de waardes Maker, Bijdrager, Publisher en eventuele extra items voor de dropdown op te halen? </section>
+
+      <br/>
+
 
     </div>
   </div>
@@ -277,7 +284,7 @@ Metadata bewerken
                       class="textarea is-hover" 
                       placeholder="Originele hoofdbeschrijving (disabled)" 
                       cols="45"
-                      rows="5"></textarea>
+                      rows="5" readonly></textarea>
                   </p>
 
                 </div>
@@ -295,9 +302,8 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="Originele uitgebreide hoofdbeschrijving (disabled)"
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
-
             </div>
           </article>
 
@@ -311,9 +317,8 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="Ondertitles (disabled)" 
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
-
             </div>
           </article>
 
@@ -327,9 +332,8 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="Programma beschrijving (disabled)" 
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
-
             </div>
           </article>
 
@@ -344,9 +348,8 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="Cast (disabled)" 
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
-
             </div>
           </article>
 
@@ -360,7 +363,7 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="Transcriptie (disabled)" 
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
 
             </div>
@@ -377,7 +380,7 @@ Metadata bewerken
                   class="textarea is-hover" 
                   placeholder="AVO beschrijving. (editable), later on maybe also richtext here" 
                   cols="45"
-                  rows="5"></textarea>
+                  rows="5" readonly></textarea>
               </p>
 
             </div>
