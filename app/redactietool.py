@@ -41,6 +41,8 @@ from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from flask_login import UserMixin  # , login_user, current_user  # , login_required
 
+from app.services.rmh_mapping import RmhMapping
+
 
 app = Flask(__name__)
 config = ConfigParser()
@@ -472,6 +474,9 @@ def edit_metadata():
     mam_data = mh_api.find_video(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
+
+    data_mapping = RmhMapping()
+    template_data = data_mapping.mh_to_form(mam_data)
 
     return render_template(
         'edit_metadata.html',
