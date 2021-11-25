@@ -39,8 +39,7 @@ from app.validation import (pid_error, upload_error, validate_input,
 
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
-
-from flask_login import UserMixin, login_user, current_user  # , login_required
+from flask_login import UserMixin  # , login_user, current_user  # , login_required
 
 
 app = Flask(__name__)
@@ -57,6 +56,7 @@ app.config['SECRET_KEY'] = 'meemoo_saml_secret_to_be_set_using_configmap_or_secr
 app.config['SAML_PATH'] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'saml'
 )
+
 
 # POC: user mixin/model for current_user method of flask login
 class User(UserMixin):
@@ -77,7 +77,8 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    user = User()
+    # TODO: soon use this with saml
+    # user = User()
     # login_user(user) # todo import login_manager here and wire up with SAML
 
     if app.config['DEBUG'] is True and not app.config['TESTING']:
@@ -132,7 +133,7 @@ def post_media():
         else:
             logger.info('post_media, editing metadata', data={'pid': pid})
             return redirect(url_for('.edit_metadata', **locals()))
- 
+
 
 @app.route('/upload', methods=['GET'])
 @requires_authorization
@@ -452,7 +453,6 @@ def metadata():
     return resp
 
 
-
 # ================= NEW METADATA EDITING ROUTES ============
 @app.route('/edit_metadata', methods=['GET'])
 @requires_authorization
@@ -502,25 +502,27 @@ def save_item_metadata():
         'subtitle_type': request.form.get('subtitle_type')
     }
 
+    tp = tp  # todo MAPPING HERE!
+    errors = None  # for now ;)
+
     # change this to different template soon...
     return render_template(
         'edit_metadata.html',
-        token=token,
-        pid=pid,
-        department=department,
-        mam_data=json.dumps(mam_data),
-        title=mam_data.get('title'),
-        description=mam_data.get('description'),
-        created=get_property(mam_data, 'CreationDate'),
-        archived=get_property(mam_data, 'created_on'),
-        original_cp=get_property(mam_data, 'Original_CP'),
-        # for v2 mam_data['Internal']['PathToVideo']
-        video_url=mam_data.get('videoPath'),
-        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
+        token=tp.get('token'),
+        pid=tp.get('pid'),
+        department=tp.get('department'),
+        mam_data=json.dumps(tp.get('mam_data')),
+        video_url=tp.get('video_url'),
+        subitle_type=tp.get('subtitle_type'),
+        # title=mam_data.get('title'),
+        # description=mam_data.get('description'),
+        # created=get_property(mam_data, 'CreationDate'),
+        # archived=get_property(mam_data, 'created_on'),
+        # original_cp=get_property(mam_data, 'Original_CP'),
+        #  for v2 mam_data['Internal']['PathToVideo']
+        # video_url=mam_data.get('videoPath'),
+        # flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
         validation_errors=errors)
-
-
-
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
