@@ -8,10 +8,10 @@
 #   Do mapping between redactietool form and mh target data for saving changes.
 #   Similarly load json data from MediahavenApi and populate form back.
 #
+# import os
+# from requests import Session
 
-import os
 import json
-from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
 
@@ -37,8 +37,8 @@ class RmhMapping:
             'subtitle_type': request.form.get('subtitle_type')
         }
 
-        errors = None  # for now ;)
-
+        errors = None  # for now, there will however be a lot more
+        # logic and checks here that can generate errors, warnings etc.
 
         # TODO: figure out how to turn our submitted params into the correct
         # json data or xml sidecar in order to update the wanted fields

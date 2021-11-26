@@ -5,9 +5,9 @@
 #           code from python-saml3 flask demo for SAML authorization
 #
 #           Thanks to 'suggest library' from Miel Vander Sande that will
-#           be used to populate the dropdowns in the metadata 
+#           be used to populate the dropdowns in the metadata
 #           form's LOM sections. Suggest is part of the KnowledeGraph project.
-# 
+#
 #  app/redactietool.py
 #
 #   Application to upload srt file and push into mediahaven.
@@ -428,8 +428,7 @@ def saml_login():
     )
 
 
-
-# TODO: secure this route or further check if it's actually needed 
+# TODO: secure this route or further check if it's actually needed
 # IMPORTANT DOUBLE CHECK THIS BEFORE A PRD RELEASE!!!
 @app.route('/attrs/')
 def attrs():
@@ -493,7 +492,12 @@ def edit_metadata():
     # to have support for these.
 
     data_mapping = RmhMapping()
-    template_data = data_mapping.mh_to_form(mam_data)
+    td = data_mapping.mh_to_form(mam_data)
+
+    # todo use td below instead of the get_property calls etc as there will
+    td = td
+    # also be more logic involved to prepare the values of lists for instance in the
+    # productie section etc.
 
     return render_template(
         'edit_metadata.html',
@@ -514,27 +518,30 @@ def edit_metadata():
 
 @app.route('/edit_metadata', methods=['POST'])
 @requires_authorization
-def save_item_metadata(): 
+def save_item_metadata():
     data_mapping = RmhMapping()
 
     # possibly also return a title + message here to show
     # with our javascript flashAlertMessage method.
     tp, json_data, errors = data_mapping.form_to_mh(request)
+    token = tp.get('token')
+    pid = tp.get('pid')
+    department = tp.get('department')
 
-    # TODO: refactor this part out into services 
+    # TODO: refactor this part out into services
     mh_api = MediahavenApi()
-    mam_data = mh_api.find_video(tp['department'], tp['pid'])
+    mam_data = mh_api.find_video(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-
-
-    # TODO: change this to different template or trigger the flashAlertMessage here
+    # TODO: change this to different template or
+    # trigger the flashAlertMessage jscode here depending on errors
+    # and possibly other values return from our RmhMapping.form_to_mh call
     return render_template(
         'edit_metadata.html',
-        token=tp.get('token'),
-        pid=tp.get('pid'),
-        department=tp.get('department'),
+        token=token,
+        pid=pid,
+        department=department,
         mam_data=json.dumps(tp.get('mam_data')),
         video_url=tp.get('video_url'),
         subitle_type=tp.get('subtitle_type'),
