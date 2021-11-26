@@ -114,6 +114,16 @@ function flashModalWarning(){
 }
 
 
+function addMakerInput(ev){
+  console.log("addMakerInput called with ev=", ev);
+
+  //prd_maker_input
+
+  return false;
+}
+
+
+
 // vanilla script for burger toggle from bulma.io example
 // alternate versions for jquery etc can also be found here:
 // https://bulma.io/documentation/components/navbar/

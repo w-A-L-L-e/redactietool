@@ -40,13 +40,6 @@ Metadata bewerken
 
   {% include 'upload_hidden_fields.html' %}
 
-  <!-- 
-    metadata edit form 
-    REMARK/TODO: 
-    this form will most likely grow a lot. Most likely
-    split this up into multiple partial views...
-  -->
-
   <div class="columns">
     <div class="column">
       <h2 class="title">Algemene metadata</h2>
@@ -244,15 +237,16 @@ Metadata bewerken
         <div class="field-label is-normal">
           <label class="label">
             Maker
-            <a href="todo" onclick="" 
-              class="button is-small is-rounded pu">+</a>
+            <button onclick="addMakerInput(this); return false;" 
+              class="button is-small is-rounded pu">+
+            </button>
           </label>
         </div>
         <div class="field-body">
         </div>
       </div>
 
-      <div class="field is-horizontal">
+      <div class="field is-horizontal" id="prd_maker_input">
         <div class="field-label is-normal">
           <label class="label">Maker</label>
         </div>
