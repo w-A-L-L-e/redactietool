@@ -4,6 +4,10 @@
 #  @Author: Walter Schreppers and integrated
 #           code from python-saml3 flask demo for SAML authorization
 #
+#           Thanks to 'suggest library' from Miel Vander Sande that will
+#           be used to populate the dropdowns in the metadata 
+#           form's LOM sections. Suggest is part of the KnowledeGraph project.
+# 
 #  app/redactietool.py
 #
 #   Application to upload srt file and push into mediahaven.
@@ -477,6 +481,16 @@ def edit_metadata():
     mam_data = mh_api.find_video(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
+
+    # also don't forget to make calls here using the suggest library from Miel.
+    # we will be getting back id's from mediahaven and in order to populate
+    # the dropdowns in form we will need some extra calls in order to fetch
+    # the actual label and description:
+    # https://github.com/viaacode/skos-scripts-redactietool
+
+    # for the post call we don't need it as the id's will be directly pushed to mediahaven api
+    # but this is something for later as Caroline needs to extend MAM structure
+    # to have support for these.
 
     data_mapping = RmhMapping()
     template_data = data_mapping.mh_to_form(mam_data)
