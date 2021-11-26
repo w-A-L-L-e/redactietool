@@ -295,3 +295,7 @@ input[type=submit]:disabled.cancel{
 .pu {
   margin-top: -3px;
 }
+
+.narrow-input {
+  max-width: 12em;
+}
