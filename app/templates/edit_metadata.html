@@ -556,23 +556,7 @@ Metadata bewerken
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Taal</label>
-        </div>
-        <div class="field-body">
-          <div class="select">
-            <!-- TODO: multiple size="3" of meer? -->
-            <select name="lom1_taal" id="lom1_taal">
-              <option value="value1">Api call, mapping of waardes voor taal?</option>
-              <option value="nl">Nederlands</option>
-              <option value="fr">Frans</option>
-              <option value="en">Engels</option>
-              <option value="de">Duits</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      {% include 'components/language_selector.html' %}
 
       <!-- TODO: validation error on empty value for onderwijsniveaus -->
       <div class="field is-horizontal">
