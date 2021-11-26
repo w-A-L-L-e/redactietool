@@ -58,7 +58,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP" value="{{original_cp}}"/>
+              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP" value="{{original_cp}}" readonly/>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="testbeeld_pid" class="input is-small" type="text" placeholder="PID" value="{{pid}}"/>
+              <input name="testbeeld_pid" class="input is-small" type="text" placeholder="PID" value="{{pid}}" readonly/>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value=""/>
+              <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value="" readonly/>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="uitzenddatum" class="input is-small" type="text" placeholder="MAPPING?" value=""/>
+              <input name="uitzenddatum" class="input is-small" type="text" placeholder="prefilled but also editable?" value=""/>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}"/>
+              <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}" readonly/>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Prefilled, but editable?">
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="serie" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="hoofdtitel" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="hoofdtitel" class="input is-small" type="text" placeholder="todo" readonly>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="alternatief" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="alternatief" class="input is-small" type="text" placeholder="" readonly>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="programma" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="programma" class="input is-small" type="text" placeholder="todo map this" readonly>
             </div>
           </div>
         </div>
@@ -192,7 +192,7 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?" readonly>
             </div>
           </div>
         </div>
@@ -205,24 +205,26 @@ Metadata bewerken
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="reeks" class="input is-small" type="text" placeholder="Mapping?">
+              <input name="reeks" class="input is-small" type="text" placeholder="mapping?" readonly>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Welke extra velden?</label>
+          <label class="label">Extra velden</label>
         </div>
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input name="reeks" class="input is-small" type="text" placeholder="En de mapping?">
+              <input name="bonus_fields" class="input is-small" type="text" placeholder="En de mapping?">
             </div>
           </div>
         </div>
       </div>
+      -->
 
 
     </div>
