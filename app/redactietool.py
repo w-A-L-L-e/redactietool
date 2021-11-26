@@ -490,6 +490,7 @@ def edit_metadata():
     # for the post call we don't need it as the id's will be directly pushed to mediahaven api
     # but this is something for later as Caroline needs to extend MAM structure
     # to have support for these.
+    # more details in jira ticket https://meemoo.atlassian.net/browse/DEV-1821
 
     data_mapping = RmhMapping()
     td = data_mapping.mh_to_form(mam_data)
