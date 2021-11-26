@@ -291,3 +291,7 @@ input[type=submit]:disabled.cancel{
 .label {
   min-width: 120px;
 }
+
+.pu {
+  margin-top: -3px;
+}
