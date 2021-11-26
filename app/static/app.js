@@ -116,12 +116,13 @@ function flashModalWarning(){
 
 function addMakerInput(ev){
   console.log("addMakerInput called with ev=", ev);
-
-  //prd_maker_input
+  //work in progress, but this is promising already:
+  var mkr_input = document.getElementById("prd_maker_input");
+  var mkr_clone = mkr_input.cloneNode(true)
+  mkr_input.append(mkr_clone)
 
   return false;
 }
-
 
 
 // vanilla script for burger toggle from bulma.io example
