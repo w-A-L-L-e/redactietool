@@ -124,6 +124,17 @@ function addMakerInput(ev){
   return false;
 }
 
+function sectionToggle(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(form_section.style.display == 'none'){
+    // form_section.style.display="flex"
+    form_section.style.display="block";
+  }
+  else{
+    form_section.style.display="none";
+  }
+}
+
 
 // vanilla script for burger toggle from bulma.io example
 // alternate versions for jquery etc can also be found here:

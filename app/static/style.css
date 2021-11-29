@@ -304,4 +304,7 @@ hr {
   margin-top: -14px;
   background: #363636;
   height: 1px;
+  /* imho this looks nicer:
+   * display: none;
+   */
 }

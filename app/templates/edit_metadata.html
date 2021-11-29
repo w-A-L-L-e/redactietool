@@ -36,503 +36,513 @@ Metadata bewerken
   </div>
 </div>
 
+
+
 <form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
 
   {% include 'upload_hidden_fields.html' %}
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">Algemene metadata</h2>
+      <h2 class="title is-clickable" onclick="sectionToggle('algemene_metadata')">Algemene metadata</h2>
       <hr/>
     </div>
   </div>
 
-  <div class="columns">
-    <div class="column is-half">
-      <h3 class="subtitle">Algemeen</h3>
-      
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Beherende&nbsp;CP</label>
+  <div id="algemene_metadata">
+    <div class="columns">
+      <div class="column is-half">
+        <h3 class="subtitle">Algemeen</h3>
+        
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Beherende&nbsp;CP</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP" value="{{original_cp}}" readonly/>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="beherende_cp" class="input is-small" type="text" placeholder="Beherende CP" value="{{original_cp}}" readonly/>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Testbeeld&nbsp;PID</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="testbeeld_pid" class="input is-small" type="text" placeholder="PID" value="{{pid}}" readonly/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Datum </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value="" readonly/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Uitzenddatum</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="uitzenddatum" class="input is-small" type="text" placeholder="prefilled but also editable?" value=""/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Creatiedatum</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}" readonly/>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Testbeeld&nbsp;PID</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="testbeeld_pid" class="input is-small" type="text" placeholder="PID" value="{{pid}}" readonly/>
+      <div class="column is-half">
+        <h3 class="subtitle">Titel</h3>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Ontsluitingstitel</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Prefilled, but editable?">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Datum </label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value="" readonly/>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Serie</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Uitzenddatum</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="uitzenddatum" class="input is-small" type="text" placeholder="prefilled but also editable?" value=""/>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Hoofdtitel</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="hoofdtitel" class="input is-small" type="text" placeholder="todo" readonly>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Creatiedatum</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}" readonly/>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Alternatief</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="alternatief" class="input is-small" type="text" placeholder="" readonly>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="column is-half">
-      <h3 class="subtitle">Titel</h3>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Ontsluitingstitel</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Prefilled, but editable?">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Programma</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="programma" class="input is-small" type="text" placeholder="todo map this" readonly>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Serie</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Seizoen</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?" readonly>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Hoofdtitel</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="hoofdtitel" class="input is-small" type="text" placeholder="todo" readonly>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Reeks</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="reeks" class="input is-small" type="text" placeholder="mapping?" readonly>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Alternatief</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="alternatief" class="input is-small" type="text" placeholder="" readonly>
+        <!-- 
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Extra velden</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="bonus_fields" class="input is-small" type="text" placeholder="En de mapping?">
+              </div>
             </div>
           </div>
         </div>
+        -->
+
+
       </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Programma</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="programma" class="input is-small" type="text" placeholder="todo map this" readonly>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Seizoen</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?" readonly>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Reeks</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="reeks" class="input is-small" type="text" placeholder="mapping?" readonly>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Extra velden</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="bonus_fields" class="input is-small" type="text" placeholder="En de mapping?">
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
-
-
-    </div>
+    </div> <!-- section wrapper div for hide/unhide -->
   </div>
+
+
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">Productie</h2>
+      <h2 class="title is-clickable" onclick="sectionToggle('productie_section')">Productie</h2>
       <hr/>
       
+      <div id="productie_section">
       {% include 'components/maker_select.html' %}
       {% include 'components/bijdrager_select.html' %}
       {% include 'components/publisher_select.html' %}
+      </div>
  
     </div>
   </div>
 
+
+
+
   <div class="columns">
     <div class="column">
-      <h2 class="title">Inhoud</h2>
+      <h2 class="title is-clickable" onclick="sectionToggle('inhoud_section')">Inhoud</h2>
       <hr/>
 
-      <article class="panel">
-         <p class="panel-heading">
-           Originele hoofdbeschrijving
-         </p>
-         <div class="panel-block">
-           <p class="control">
-             <textarea name="originele_hoofdbeschrijving"
-               class="textarea is-hover" 
-               placeholder="Originele hoofdbeschrijving"
-               cols="45"
-               rows="5" readonly>{{description}}</textarea>
+      <div id="inhoud_section">
+        <article class="panel">
+           <p class="panel-heading">
+             Originele hoofdbeschrijving
            </p>
+           <div class="panel-block">
+             <p class="control">
+               <textarea name="originele_hoofdbeschrijving"
+                 class="textarea is-hover" 
+                 placeholder="Originele hoofdbeschrijving"
+                 cols="45"
+                 rows="5" readonly>{{description}}</textarea>
+             </p>
 
-         </div>
-      </article>
+           </div>
+        </article>
 
-      <article class="panel">
-        <p class="panel-heading">
-          Originele uitgebreide hoofdbeschrijving
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_uitgebreide_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="Originele uitgebreide hoofdebeschrijving"
-              cols="45"
-              rows="5" readonly>{{dc_description_lang}}</textarea>
+        <article class="panel">
+          <p class="panel-heading">
+            Originele uitgebreide hoofdbeschrijving
           </p>
-        </div>
-      </article>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_uitgebreide_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="Originele uitgebreide hoofdebeschrijving"
+                cols="45"
+                rows="5" readonly>{{dc_description_lang}}</textarea>
+            </p>
+          </div>
+        </article>
 
-      <article class="panel">
-        <p class="panel-heading">
-          Ondertitels
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="Ondertitles (disabled)" 
-              cols="45"
-              rows="5" readonly></textarea>
+        <article class="panel">
+          <p class="panel-heading">
+            Ondertitels
           </p>
-        </div>
-      </article>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="Ondertitles (disabled)" 
+                cols="45"
+                rows="5" readonly></textarea>
+            </p>
+          </div>
+        </article>
 
-      <article class="panel">
-        <p class="panel-heading">
-          Programma omschrijving
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="Programma beschrijving (disabled)" 
-              cols="45"
-              rows="5" readonly></textarea>
+        <article class="panel">
+          <p class="panel-heading">
+            Programma omschrijving
           </p>
-        </div>
-      </article>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="Programma beschrijving (disabled)" 
+                cols="45"
+                rows="5" readonly></textarea>
+            </p>
+          </div>
+        </article>
 
 
-      <article class="panel">
-        <p class="panel-heading">
-          Cast 
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="Cast (disabled)" 
-              cols="45"
-              rows="5" readonly></textarea>
+        <article class="panel">
+          <p class="panel-heading">
+            Cast 
           </p>
-        </div>
-      </article>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="Cast (disabled)" 
+                cols="45"
+                rows="5" readonly></textarea>
+            </p>
+          </div>
+        </article>
 
-      <article class="panel">
-        <p class="panel-heading">
-          Transcriptie
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="Transcriptie (disabled)" 
-              cols="45"
-              rows="5" readonly></textarea>
+        <article class="panel">
+          <p class="panel-heading">
+            Transcriptie
           </p>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="Transcriptie (disabled)" 
+                cols="45"
+                rows="5" readonly></textarea>
+            </p>
 
-        </div>
-      </article>
+          </div>
+        </article>
 
-      <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
-      <article class="panel">
-        <p class="panel-heading">
-          Het archief voor Onderwijs beschrijving
-        </p>
-        <div class="panel-block">
-          <p class="control">
-            <textarea name="originele_hoofdbeschrijving"
-              class="textarea is-hover" 
-              placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
-              cols="45"
-              rows="5"></textarea>
+        <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
+        <article class="panel">
+          <p class="panel-heading">
+            Het archief voor Onderwijs beschrijving
           </p>
+          <div class="panel-block">
+            <p class="control">
+              <textarea name="originele_hoofdbeschrijving"
+                class="textarea is-hover" 
+                placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
+                cols="45"
+                rows="5"></textarea>
+            </p>
 
-        </div>
-      </article>
+          </div>
+        </article>
+      </div> <!-- inhoud_section -->
 
     </div>
   </div>
 
-  <!--
-  <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Welke extra velden?</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input name="reeks" class="input is-small" type="text" placeholder="En de mapping?">
+  
+  <div class="columns">
+    <div class="column">
+      <h2 class="title is-clickable" onclick="sectionToggle('lom1_section')">LOM 1</h2>
+      <hr/>
+
+      <div id="lom1_section">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Type</label>
+          </div>
+          <div class="field-body">
+            <div class="select">
+              <select name="lom1_type" id="lom1_type">
+                <option value="video">Video</option>
+                <option value="audio">Audio</option>
+              </select>
             </div>
           </div>
         </div>
-      </div>
-  -->
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Beoogde eindgebruiker</label>
+          </div>
+          <div class="field-body">
+            <div class="select is-multiple">
+              <!-- TODO: multiple size="3" of meer? -->
+              <select name="lom1_beoogde_eindgebruiker" id="lom1_beoogde_eindgebruiker">
+                <option value="Docent">Docent</option>
+                <option value="Student">Student</option>
+                <option value="Directie">Directie</option>
+                <option value="ICT-coördinator">ICT-coördinator</option>
+                <option value="Systeembeheerder">Systeembeheerder</option>
+                <option value="Preventieadviseur">Preventieadviseur</option>
+                <option value="GOK">GOK / Zorgcoördinator</option>
+                <option value="Pedagogisch begeleider">Pedagogisch begeleider</option>
+                <option value="Inspectielid">Inspectielid</option>
+                <option value="Administratief personeel">Administratief personeel</option>
+                <option value="Met pensioen">Met pensioen</option>
+                <option value="Ouder">Ouder</option>
+                <option value="Ander">Ander</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {% include 'components/language_select.html' %}
+
+        <!-- TODO: validation error on empty value for onderwijsniveaus -->
+        <!-- of gewoon by default een selectie? -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Onderwijsniveaus</label>
+          </div>
+          <div class="field-body">
+            <div class="select is-multiple">
+              <!-- TODO: multiple size="2" -->
+              <!-- TODO: lookup in ACM+ldap-api if these need to be 
+                lower-case values or not same for above eindgebruiker field -->
+              <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
+                <option value="Kleuteronderwijs">Kleuteronderwijs</option>
+                <option value="Lager onderwijs">Lager onderwijs</option>
+                <option value="Secundair onderwijs">Secundair onderwijs</option>
+                <option value="Volwassenenonderwijs">Volwassenenonderwijs</option>
+                <option value="Hoger onderwijs">Hoger onderwijs</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
+        <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Onderwijsgraden</label>
+          </div>
+          <div class="field-body">
+            <div class="select is-multiple">
+              <!-- TODO: multiple size="2" -->
+              <select name="lom1_onderwijsgraden" id="lom1_onderwijsgraden">
+                <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
+                <option value="value2">Tweede graad</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODO: thema's are from knowledge graph or? -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Thema</label>
+          </div>
+          <div class="field-body">
+            <div class="select">
+              <select name="lom1_themas" id="lom1_themas">
+                <option value="value1">Thema's zijn gewoon lijsten van woorden waarom een modal met pills hiervoor?</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div> <!-- lom1_section -->
+    </div>
+  </div>
+
+
+
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">LOM 1</h2>
+      <h2 class="title is-clickable" onclick="sectionToggle('lom2_section')">LOM 2</h2>
       <hr/>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Type</label>
-        </div>
-        <div class="field-body">
-          <div class="select">
-            <select name="lom1_type" id="lom1_type">
-              <option value="video">Video</option>
-              <option value="audio">Audio</option>
-            </select>
+      <div id="lom2_section">
+        <!-- waarom niet gewoon een multi-select hier? het is toch niet editeerbaar, waarom die 'X' op de wireframe? -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Vakken</label>
+          </div>
+          <div class="field-body">
+            <div class="select is-multiple">
+              <select name="lom2_vakken" id="lom2_vakken">
+                <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
+                <option value="value1">tweede vak</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Beoogde eindgebruiker</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-multiple">
-            <!-- TODO: multiple size="3" of meer? -->
-            <select name="lom1_beoogde_eindgebruiker" id="lom1_beoogde_eindgebruiker">
-              <option value="Docent">Docent</option>
-              <option value="Student">Student</option>
-              <option value="Directie">Directie</option>
-              <option value="ICT-coördinator">ICT-coördinator</option>
-              <option value="Systeembeheerder">Systeembeheerder</option>
-              <option value="Preventieadviseur">Preventieadviseur</option>
-              <option value="GOK">GOK / Zorgcoördinator</option>
-              <option value="Pedagogisch begeleider">Pedagogisch begeleider</option>
-              <option value="Inspectielid">Inspectielid</option>
-              <option value="Administratief personeel">Administratief personeel</option>
-              <option value="Met pensioen">Met pensioen</option>
-              <option value="Ouder">Ouder</option>
-              <option value="Ander">Ander</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {% include 'components/language_select.html' %}
-
-      <!-- TODO: validation error on empty value for onderwijsniveaus -->
-      <!-- of gewoon by default een selectie? -->
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsniveaus</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-multiple">
-            <!-- TODO: multiple size="2" -->
-            <!-- TODO: lookup in ACM+ldap-api if these need to be 
-              lower-case values or not same for above eindgebruiker field -->
-            <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
-              <option value="Kleuteronderwijs">Kleuteronderwijs</option>
-              <option value="Lager onderwijs">Lager onderwijs</option>
-              <option value="Secundair onderwijs">Secundair onderwijs</option>
-              <option value="Volwassenenonderwijs">Volwassenenonderwijs</option>
-              <option value="Hoger onderwijs">Hoger onderwijs</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
-      <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsgraden</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-multiple">
-            <!-- TODO: multiple size="2" -->
-            <select name="lom1_onderwijsgraden" id="lom1_onderwijsgraden">
-              <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
-              <option value="value2">Tweede graad</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- TODO: thema's are from knowledge graph or? -->
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Thema</label>
-        </div>
-        <div class="field-body">
-          <div class="select">
-            <select name="lom1_themas" id="lom1_themas">
-              <option value="value1">Thema's zijn gewoon lijsten van woorden waarom een modal met pills hiervoor?</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      </div> <!-- lom2_section -->
 
     </div>
   </div>
 
-  <div class="columns">
-    <div class="column">
-      <h2 class="title">LOM 2</h2>
-      <hr/>
 
-      <!-- waarom niet gewoon een multi-select hier? het is toch niet editeerbaar, waarom die 'X' op de wireframe? -->
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Vakken</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-multiple">
-            <select name="lom2_vakken" id="lom2_vakken">
-              <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
-              <option value="value1">tweede vak</option>
-            </select>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  </div>
+
 
   <div class="columns">
     <div class="column">
-      <h2 class="title">LOM 3</h2>
+      <h2 class="title is-clickable" onclick="sectionToggle('lom3_section')">LOM 3</h2>
       <hr/>
 
-      <!-- waarom niet gewoon een een searchable 
-        multi-select hier? en wat is de api call hiervoor, knowledge graph of elders? -->
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Trefwoorden</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-multiple">
-            <select name="lom3_trefwoorden" id="lom3_trefwoorden">
-              <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
-              <option value="value2">tweede trefwoord</option>
-            </select>
+      <div id="lom3_section">
+        <!-- waarom niet gewoon een een searchable 
+          multi-select hier? en wat is de api call hiervoor, knowledge graph of elders? -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Trefwoorden</label>
+          </div>
+          <div class="field-body">
+            <div class="select is-multiple">
+              <select name="lom3_trefwoorden" id="lom3_trefwoorden">
+                <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
+                <option value="value2">tweede trefwoord</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label"></label>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label"></label>
+          </div>
+          <div class="field-body">
+              <a target="_blank" href="http://link_trefwoorden_content_partners?">
+                Bekijk trefwoorden van Content Partners
+              </a>
+          </div>
         </div>
-        <div class="field-body">
-            <a target="_blank" href="http://link_trefwoorden_content_partners?">
-              Bekijk trefwoorden van Content Partners
-            </a>
-        </div>
-      </div>
-
+      </div> <!-- lom3_section -->
     </div>
   </div>
 
