@@ -113,7 +113,8 @@ function flashModalWarning(){
   }, 3000);
 }
 
-
+// TODO: refactor out code duplication here
+// (will pick this up when implementing the delete buttons)
 function addMaker(ev){
   var mkr_input = document.getElementById("prd_maker_input");
   var mkr_clone = mkr_input.cloneNode(true)
