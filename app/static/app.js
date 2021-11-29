@@ -144,7 +144,6 @@ function deletePrdItem(del_btn){
   return false;
 }
 
-
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
 
@@ -165,10 +164,16 @@ function sectionToggle(section_div_id){
   }
 }
 
+function collapseEmptyTextarea(area_id){
+  var ta = document.getElementById(area_id);
+  if( ta && ta.innerHTML.length == 0){
+    ta.parentNode.parentNode.style.display="none";
+    console.log("found empty area", area_id, "collapsing, TODO: change folded/unfolded icon...");
+  }
+}
 
-// vanilla script for burger toggle from bulma.io example
-// alternate versions for jquery etc can also be found here:
-// https://bulma.io/documentation/components/navbar/
+// document on-ready handler
+// handles burger menu and collapsing of empty items in Inhoud section
 document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -192,6 +197,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Inhoud section hide unused/empty textarea's for current item
+  collapseEmptyTextarea("originele_hoofdbeschrijving");
+  collapseEmptyTextarea("originele_uitgebreide_hoofdbeschrijving");
+  collapseEmptyTextarea("ondertitels");
+  collapseEmptyTextarea("programma_omschrijving");
+  collapseEmptyTextarea("cast");
+  collapseEmptyTextarea("transcriptie");
+
+  
+  // This below stuff might come in handy later...
   //// TODO: catch navigation event..
   // showNavigationWarning();
 

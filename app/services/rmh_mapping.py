@@ -58,7 +58,11 @@ class RmhMapping:
             mam_data,
             'dc_description_lang'
         )
-        # print("uitgebreide hoofdbeschrijving=", dc_description_lang)
+
+        # TODO: check tomorrow if we should make this the
+        # default behaviour for get_property
+        if dc_description_lang is None:
+            dc_description_lang = ''
 
         # also don't forget to make calls here using the suggest library from Miel.
         # we will be getting back id's from mediahaven and in order to populate
@@ -81,7 +85,7 @@ class RmhMapping:
             'mam_data': json.dumps(mam_data),
             'title': mam_data.get('title'),
             'description': mam_data.get('description'),
-            'dc_description_lang': dc_description_lang,
+            'dc_description_lang': dc_description_lang,  # orig uitgebreide beschrijving
             'created': get_property(mam_data, 'CreationDate'),
             'archived': get_property(mam_data, 'created_on'),
             'original_cp': get_property(mam_data, 'Original_CP'),
