@@ -126,12 +126,21 @@ function addMakerInput(ev){
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
+
+  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
+  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
+
   if(form_section.style.display == 'none'){
     // form_section.style.display="flex"
     form_section.style.display="block";
+    unfolded_icon.style.display="block";
+    folded_icon.style.display="none";
   }
   else{
     form_section.style.display="none";
+    unfolded_icon.style.display="none";
+    folded_icon.style.display="block";
   }
 }
 

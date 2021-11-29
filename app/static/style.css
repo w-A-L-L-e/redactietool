@@ -308,3 +308,11 @@ hr {
    * display: none;
    */
 }
+
+.minimize-icon-wrapper{
+  float: right;
+}
+
+.icon-folded {
+  display: none;
+}
