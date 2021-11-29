@@ -244,125 +244,118 @@ Metadata bewerken
 
   <div class="columns">
     <div class="column">
+      <h2 class="title">Inhoud</h2>
+      <hr/>
 
-        <h2 class="panel-heading">
-          Inhoud
-        </h2>
+      <article class="panel">
+         <p class="panel-heading">
+           Originele hoofdbeschrijving
+         </p>
+         <div class="panel-block">
+           <p class="control">
+             <textarea name="originele_hoofdbeschrijving"
+               class="textarea is-hover" 
+               placeholder="Originele hoofdbeschrijving"
+               cols="45"
+               rows="5" readonly>{{description}}</textarea>
+           </p>
 
-          <!-- todo make this type of panel a partial view asap -->
-          <div class="columns">
-            <div class="column">
-              <article class="panel">
-                <p class="panel-heading">
-                  Originele hoofdbeschrijving
-                </p>
-                <div class="panel-block">
-                  <p class="control">
-                    <textarea name="originele_hoofdbeschrijving"
-                      class="textarea is-hover" 
-                      placeholder="Originele hoofdbeschrijving"
-                      cols="45"
-                      rows="5" readonly>{{description}}</textarea>
-                  </p>
+         </div>
+      </article>
 
-                </div>
-              </article>
-            </div>
-          </div>
+      <article class="panel">
+        <p class="panel-heading">
+          Originele uitgebreide hoofdbeschrijving
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_uitgebreide_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="Originele uitgebreide hoofdebeschrijving"
+              cols="45"
+              rows="5" readonly>{{dc_description_lang}}</textarea>
+          </p>
+        </div>
+      </article>
 
-          <article class="panel">
-            <p class="panel-heading">
-              Originele uitgebreide hoofdbeschrijving
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_uitgebreide_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="Originele uitgebreide hoofdebeschrijving"
-                  cols="45"
-                  rows="5" readonly>{{dc_description_lang}}</textarea>
-              </p>
-            </div>
-          </article>
+      <article class="panel">
+        <p class="panel-heading">
+          Ondertitels
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="Ondertitles (disabled)" 
+              cols="45"
+              rows="5" readonly></textarea>
+          </p>
+        </div>
+      </article>
 
-          <article class="panel">
-            <p class="panel-heading">
-              Ondertitels
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="Ondertitles (disabled)" 
-                  cols="45"
-                  rows="5" readonly></textarea>
-              </p>
-            </div>
-          </article>
-
-          <article class="panel">
-            <p class="panel-heading">
-              Programma omschrijving
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="Programma beschrijving (disabled)" 
-                  cols="45"
-                  rows="5" readonly></textarea>
-              </p>
-            </div>
-          </article>
+      <article class="panel">
+        <p class="panel-heading">
+          Programma omschrijving
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="Programma beschrijving (disabled)" 
+              cols="45"
+              rows="5" readonly></textarea>
+          </p>
+        </div>
+      </article>
 
 
-          <article class="panel">
-            <p class="panel-heading">
-              Cast 
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="Cast (disabled)" 
-                  cols="45"
-                  rows="5" readonly></textarea>
-              </p>
-            </div>
-          </article>
+      <article class="panel">
+        <p class="panel-heading">
+          Cast 
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="Cast (disabled)" 
+              cols="45"
+              rows="5" readonly></textarea>
+          </p>
+        </div>
+      </article>
 
-          <article class="panel">
-            <p class="panel-heading">
-              Transcriptie
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="Transcriptie (disabled)" 
-                  cols="45"
-                  rows="5" readonly></textarea>
-              </p>
+      <article class="panel">
+        <p class="panel-heading">
+          Transcriptie
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="Transcriptie (disabled)" 
+              cols="45"
+              rows="5" readonly></textarea>
+          </p>
 
-            </div>
-          </article>
+        </div>
+      </article>
 
-          <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
-          <article class="panel">
-            <p class="panel-heading">
-              Het archief voor Onderwijs beschrijving
-            </p>
-            <div class="panel-block">
-              <p class="control">
-                <textarea name="originele_hoofdbeschrijving"
-                  class="textarea is-hover" 
-                  placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
-                  cols="45"
-                  rows="5"></textarea>
-              </p>
+      <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
+      <article class="panel">
+        <p class="panel-heading">
+          Het archief voor Onderwijs beschrijving
+        </p>
+        <div class="panel-block">
+          <p class="control">
+            <textarea name="originele_hoofdbeschrijving"
+              class="textarea is-hover" 
+              placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
+              cols="45"
+              rows="5"></textarea>
+          </p>
 
-            </div>
-          </article>
+        </div>
+      </article>
 
     </div>
   </div>

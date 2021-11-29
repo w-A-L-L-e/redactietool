@@ -299,3 +299,9 @@ input[type=submit]:disabled.cancel{
 .narrow-input {
   max-width: 12em;
 }
+
+hr {
+  margin-top: -14px;
+  background: #363636;
+  height: 1px;
+}
