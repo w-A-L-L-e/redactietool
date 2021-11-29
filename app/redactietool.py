@@ -36,8 +36,10 @@ from app.authorization import (get_token, requires_authorization,
                                verify_token, OAS_APPNAME)
 from app.mediahaven_api import MediahavenApi
 from app.ftp_uploader import FtpUploader
-from app.services.subtitle_files import (save_subtitles, delete_files, save_sidecar_xml,
-                                move_subtitle, get_property, not_deleted)
+from app.services.subtitle_files import (
+    save_subtitles, delete_files, save_sidecar_xml,
+    move_subtitle, get_property, not_deleted
+)
 from app.validation import (pid_error, upload_error, validate_input,
                             validate_upload, validate_conversion)
 
@@ -484,13 +486,11 @@ def edit_metadata():
     data_mapping = RmhMapping()
     td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
 
-    # also be more logic involved to prepare the values of lists for instance in the
-    # productie section etc.
-
     return render_template(
         'edit_metadata.html',
         **td
     )
+
 
 @app.route('/edit_metadata', methods=['POST'])
 @requires_authorization

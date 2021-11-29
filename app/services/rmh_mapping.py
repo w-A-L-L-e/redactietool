@@ -71,8 +71,9 @@ class RmhMapping:
         # to have support for these.
         # more details in jira ticket https://meemoo.atlassian.net/browse/DEV-1821
 
-        # TODO: return these + the new above mapped values to populate form presets
-        # # and add validation errors!
+        # TODO: also be more logic involved to prepare the values of
+        # lists for instance in the productie section etc.
+
         return {
             'token': token,
             'pid': pid,
