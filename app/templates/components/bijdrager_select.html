@@ -1,67 +1,73 @@
-<div class="field is-horizontal">
+<div class="field is-horizontal mt-5">
   <div class="field-label is-normal">
     <label class="label">
-      Bijdrager <a href="todo" onclick="" class="button is-small is-rounded pu">+</a>
+      Bijdrager(s)
+      <button onclick="addBijdrager(this); return false;" 
+        class="button is-small is-rounded pu">+
+      </button>
     </label>
   </div>
   <div class="field-body">
   </div>
 </div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <label class="label">Bijdrager</label>
-  </div>
-  <div class="field-body">
-    <div class="select is-small">
-      <select name="maker" id="meta_maker">
-        <option value="aanwezig">Aanwezig</a> 
-        <option value="adviseur">Adviseur</a> 
-        <option value="afwezig">Afwezig</a>
-        <option value="archivaris">Archivaris</a>
-        <option value="arrangeur">Arrangeur</a>
-        <option value="artistiekdirecteur">ArtistiekDirecteur</a>
-        <option value="assistent">Assistent</a>
-        <option value="auteur">Auteur</a>
-        <option value="belichting">Belichting</a>
-        <option value="bijdrager">Bijdrager</a>
-        <option value="cameraman">Cameraman</a>
-        <option value="co-producer">Co-producer</a>
-        <option value="commentator">Commentator</a>
-        <option value="componist">Componist</a>
-        <option value="decorontwerper">DecorOntwerper</a>
-        <option value="digitaliseringspartner">Digitaliseringspartner</a>
-        <option value="dirigent">Dirigent</a>
-        <option value="dramaturg">Dramaturg</a>
-        <option value="fotografie">Fotografie</a>
-        <option value="geluid">Geluid </a>
-        <option value="geluidsman">Geluidsman</a>
-        <option value="grafischOntwerper">GrafischOntwerper</a>
-        <option value="kostuumOntwerper">KostuumOntwerper</a>
-        <option value="kunstenaar">Kunstenaar</a>
-        <option value="make-up">Make-up</a>
-        <option value="muzikant">Muzikant</a>
-        <option value="nieuwsanker">Nieuwsanker</a>
-        <option value="omroeper">Omroeper</a>
-        <option value="onderzoeker">Onderzoeker</a>
-        <option value="post-productie">Post-productie</a>
-        <option value="producer">Producer</a>
-        <option value="reporter">Reporter</a>
-        <option value="scenarist">Scenarist</a>
-        <option value="soundtrack">Soundtrack </a>
-        <option value="sponsor">Sponsor</a>
-        <option value="technischadviseur">TechnischAdviseur</a>
-        <option value="uitvoerder">Uitvoerder</a>
-        <option value="verontschuldigd">Verontschuldigd : klopt dit wel??? </a>
-        <option value="vertaler">Vertaler</a>
-        <option value="verteller">Verteller</a>
-        <option value="voorzitter">Voorzitter</a>
-      </select>
+
+<div id="prd_bijdragers">
+  <div class="field is-horizontal is-pulled-left" id="prd_bijdrager_input">
+    <div class="field-label is-normal">
+      <label class="label">Bijdrager</label>
     </div>
+    <div class="field-body">
+      <div class="select is-small">
+        <select name="maker" id="meta_maker">
+          <option value="aanwezig">Aanwezig</a> 
+          <option value="adviseur">Adviseur</a> 
+          <option value="afwezig">Afwezig</a>
+          <option value="archivaris">Archivaris</a>
+          <option value="arrangeur">Arrangeur</a>
+          <option value="artistiekdirecteur">ArtistiekDirecteur</a>
+          <option value="assistent">Assistent</a>
+          <option value="auteur">Auteur</a>
+          <option value="belichting">Belichting</a>
+          <option value="bijdrager">Bijdrager</a>
+          <option value="cameraman">Cameraman</a>
+          <option value="co-producer">Co-producer</a>
+          <option value="commentator">Commentator</a>
+          <option value="componist">Componist</a>
+          <option value="decorontwerper">DecorOntwerper</a>
+          <option value="digitaliseringspartner">Digitaliseringspartner</a>
+          <option value="dirigent">Dirigent</a>
+          <option value="dramaturg">Dramaturg</a>
+          <option value="fotografie">Fotografie</a>
+          <option value="geluid">Geluid </a>
+          <option value="geluidsman">Geluidsman</a>
+          <option value="grafischOntwerper">GrafischOntwerper</a>
+          <option value="kostuumOntwerper">KostuumOntwerper</a>
+          <option value="kunstenaar">Kunstenaar</a>
+          <option value="make-up">Make-up</a>
+          <option value="muzikant">Muzikant</a>
+          <option value="nieuwsanker">Nieuwsanker</a>
+          <option value="omroeper">Omroeper</a>
+          <option value="onderzoeker">Onderzoeker</a>
+          <option value="post-productie">Post-productie</a>
+          <option value="producer">Producer</a>
+          <option value="reporter">Reporter</a>
+          <option value="scenarist">Scenarist</a>
+          <option value="soundtrack">Soundtrack </a>
+          <option value="sponsor">Sponsor</a>
+          <option value="technischadviseur">TechnischAdviseur</a>
+          <option value="uitvoerder">Uitvoerder</a>
+          <option value="verontschuldigd">Verontschuldigd : klopt dit wel??? </a>
+          <option value="vertaler">Vertaler</a>
+          <option value="verteller">Verteller</a>
+          <option value="voorzitter">Voorzitter</a>
+        </select>
+      </div>
 
-    <input name="bijdrager_custom" 
-    class="input is-small ml-2 narrow-input" type="text" placeholder="tekstveld">
+      <input name="bijdrager_custom" 
+      class="input is-small ml-2 narrow-input" type="text" placeholder="tekstveld">
+    </div> <!-- field-body -->
+  </div> <!--field-->
+</div> <!-- bijdrager list -->
 
-
-  </div>
-</div>
+<div class="is-clearfix"></div>

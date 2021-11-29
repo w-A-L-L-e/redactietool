@@ -114,15 +114,30 @@ function flashModalWarning(){
 }
 
 
-function addMakerInput(ev){
-  console.log("addMakerInput called with ev=", ev);
-  //work in progress, but this is promising already:
+function addMaker(ev){
   var mkr_input = document.getElementById("prd_maker_input");
   var mkr_clone = mkr_input.cloneNode(true)
-  mkr_input.append(mkr_clone)
-
+  var mkr_list = document.getElementById("prd_makers");
+  mkr_list.append(mkr_clone)
   return false;
 }
+
+function addBijdrager(ev){
+  var bdr_input = document.getElementById("prd_bijdrager_input");
+  var bdr_clone = bdr_input.cloneNode(true)
+  var bdr_list = document.getElementById("prd_bijdragers");
+  bdr_list.append(bdr_clone)
+  return false;
+}
+
+function addPublisher(ev){
+  var bdr_input = document.getElementById("prd_publisher_input");
+  var bdr_clone = bdr_input.cloneNode(true)
+  var bdr_list = document.getElementById("prd_publishers");
+  bdr_list.append(bdr_clone)
+  return false;
+}
+
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
