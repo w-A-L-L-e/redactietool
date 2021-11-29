@@ -235,149 +235,10 @@ Metadata bewerken
       <h2 class="title">Productie</h2>
       <hr/>
       
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">
-            Maker
-            <button onclick="addMakerInput(this); return false;" 
-              class="button is-small is-rounded pu">+
-            </button>
-          </label>
-        </div>
-        <div class="field-body">
-        </div>
-      </div>
-
-      <div class="field is-horizontal" id="prd_maker_input">
-        <div class="field-label is-normal">
-          <label class="label">Maker</label>
-        </div>
-        <div class="field-body">
-          <div class="select is-small">
-            <select name="maker" id="meta_maker">
-              <option value="maker">Maker</a>
-              <option value="archiefvormer">Archiefvormer</a>
-              <option value="auteur">Auteur</a> 
-              <option value="acteur">Acteur</a> 
-              <option value="cineast">Cineast</a> 
-              <option value="componist">Componist</a> 
-              <option value="choreograaf">Choreograaf</a>
-              <option value="danser">Danser</a> 
-              <option value="documentairemaker">Documentairemaker</a>
-              <option value="fotograaf">Fotograaf</a> 
-              <option value="geïnterviewde">Geïnterviewde</a> 
-              <option value="interviewer">Interviewer</a> 
-              <option value="kunstenaar">Kunstenaar</a> 
-              <option value="muzikant">Muzikant</a> 
-              <option value="performer">Performer</a> 
-              <option value="producer">Producer</a> 
-              <option value="productiehuis">Productiehuis</a> 
-              <option value="regisseur">Regisseur</a> 
-              <option value="schrijver">Schrijver</a> 
-              <option value="opdrachtgever">Opdrachtgever</a>
-            </select>
-          </div>
-
-          <input name="maker_custom" 
-          class="input is-small ml-2 narrow-input" type="text" placeholder="maker_custom">
-
-        </div>
-      </div>
-
-
-
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">
-            Bijdrager <a href="todo" onclick="" class="button is-small is-rounded pu">+</a>
-          </label>
-        </div>
-        <div class="field-body">
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Bijdrager</label>
-        </div>
-        <div class="field-body">
-          <div class="select">
-            <select name="maker" id="meta_maker">
-              <option value="aanwezig">Aanwezig</a> 
-              <option value="adviseur">Adviseur</a> 
-              <option value="afwezig">Afwezig</a>
-              <option value="archivaris">Archivaris</a>
-              <option value="arrangeur">Arrangeur</a>
-              <option value="artistiekdirecteur">ArtistiekDirecteur</a>
-              <option value="assistent">Assistent</a>
-              <option value="auteur">Auteur</a>
-              <option value="belichting">Belichting</a>
-              <option value="bijdrager">Bijdrager</a>
-              <option value="cameraman">Cameraman</a>
-              <option value="co-producer">Co-producer</a>
-              <option value="commentator">Commentator</a>
-              <option value="componist">Componist</a>
-              <option value="decorontwerper">DecorOntwerper</a>
-              <option value="digitaliseringspartner">Digitaliseringspartner</a>
-              <option value="dirigent">Dirigent</a>
-              <option value="dramaturg">Dramaturg</a>
-              <option value="fotografie">Fotografie</a>
-              <option value="geluid">Geluid </a>
-              <option value="geluidsman">Geluidsman</a>
-              <option value="grafischOntwerper">GrafischOntwerper</a>
-              <option value="kostuumOntwerper">KostuumOntwerper</a>
-              <option value="kunstenaar">Kunstenaar</a>
-              <option value="make-up">Make-up</a>
-              <option value="muzikant">Muzikant</a>
-              <option value="nieuwsanker">Nieuwsanker</a>
-              <option value="omroeper">Omroeper</a>
-              <option value="onderzoeker">Onderzoeker</a>
-              <option value="post-productie">Post-productie</a>
-              <option value="producer">Producer</a>
-              <option value="reporter">Reporter</a>
-              <option value="scenarist">Scenarist</a>
-              <option value="soundtrack">Soundtrack </a>
-              <option value="sponsor">Sponsor</a>
-              <option value="technischadviseur">TechnischAdviseur</a>
-              <option value="uitvoerder">Uitvoerder</a>
-              <option value="verontschuldigd">Verontschuldigd : klopt dit wel??? </a>
-              <option value="vertaler">Vertaler</a>
-              <option value="verteller">Verteller</a>
-              <option value="voorzitter">Voorzitter</a>
-            </select>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">
-            Publisher <a href="todo" onclick="" class="button is-small is-rounded pu">+</a>
-          </label>
-        </div>
-        <div class="field-body">
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Publisher</label>
-        </div>
-        <div class="field-body">
-          <div class="select">
-            <select name="publisher" id="publisher">
-              <option value="distributeur">Distributeur</a>
-              <option value="exposant">Exposant</a>
-              <option value="persagentschap">Persagentschap</a>
-              <option value="publisher">Publisher</a>
-            </select>
-          </div>
-        </div>
-      </div>
-
+      {% include 'components/maker_select.html' %}
+      {% include 'components/bijdrager_select.html' %}
+      {% include 'components/publisher_select.html' %}
+ 
     </div>
   </div>
 
@@ -495,9 +356,9 @@ Metadata bewerken
               <p class="control">
                 <textarea name="originele_hoofdbeschrijving"
                   class="textarea is-hover" 
-                  placeholder="AVO beschrijving. (editable), later on maybe also richtext here" 
+                  placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
                   cols="45"
-                  rows="5" readonly></textarea>
+                  rows="5"></textarea>
               </p>
 
             </div>
@@ -566,7 +427,7 @@ Metadata bewerken
         </div>
       </div>
 
-      {% include 'components/language_selector.html' %}
+      {% include 'components/language_select.html' %}
 
       <!-- TODO: validation error on empty value for onderwijsniveaus -->
       <!-- of gewoon by default een selectie? -->
