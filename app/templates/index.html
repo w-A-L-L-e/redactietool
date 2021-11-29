@@ -18,9 +18,7 @@ Login
         </span>
     </h1>
 
-    <p>
      <form action="/login" class="login_form box is-light" method="POST">
-       
         <!-- original implementation, will be deprecated soon -->
         <div class="field">
           <label class="label">E-mailadres</label>
@@ -31,7 +29,6 @@ Login
                     placeholder="E-mailadres"/>
           </div>
         </div>
-
 
         <div class="field">
           <label class="label">Wachtwoord</label>
@@ -71,21 +68,18 @@ Login
             </button>
           </div>
         </div>
-        <br/>
-        <br/>
-
-      <hr class="is-info"/>
-      <p>
-        De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
-        kunt gebruiken met 1 login/logout.
-      </p>
-      <a href="{{ url_for('.saml_login')}}" 
-        class="button is-info saml">
-        SAML Login
-      </a>
-
+      
+        <br/><br/><br/>
+        <hr class="is-info"/>
+        <p>
+          De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
+          kunt gebruiken met 1 login/logout.
+        </p>
+        <a href="{{ url_for('.saml_login')}}" 
+          class="button is-info saml">
+          SAML Login
+        </a>
     </form>
-    </p>
   </div>
 
   <script>
