@@ -139,6 +139,11 @@ function addPublisher(ev){
   return false;
 }
 
+function deletePrdItem(del_btn){
+  del_btn.parentNode.parentNode.remove()
+  return false;
+}
+
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
