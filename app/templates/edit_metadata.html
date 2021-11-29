@@ -533,7 +533,8 @@ Metadata bewerken
         <div class="field-body">
           <div class="select">
             <select name="lom1_type" id="lom1_type">
-              <option value="value1">Api call of mapping voor types?</option>
+              <option value="video">Video</option>
+              <option value="audio">Audio</option>
             </select>
           </div>
         </div>
@@ -547,10 +548,19 @@ Metadata bewerken
           <div class="select is-multiple">
             <!-- TODO: multiple size="3" of meer? -->
             <select name="lom1_beoogde_eindgebruiker" id="lom1_beoogde_eindgebruiker">
-              <option value="value1">Api call of mapping voor eindgebruikers?</option>
-              <option value="user_1">Eindgebruiker 1</option>
-              <option value="user_2">Eindgebruiker 2</option>
-              <option value="user_3">Eindgebruiker 3</option>
+              <option value="Docent">Docent</option>
+              <option value="Student">Student</option>
+              <option value="Directie">Directie</option>
+              <option value="ICT-coördinator">ICT-coördinator</option>
+              <option value="Systeembeheerder">Systeembeheerder</option>
+              <option value="Preventieadviseur">Preventieadviseur</option>
+              <option value="GOK">GOK / Zorgcoördinator</option>
+              <option value="Pedagogisch begeleider">Pedagogisch begeleider</option>
+              <option value="Inspectielid">Inspectielid</option>
+              <option value="Administratief personeel">Administratief personeel</option>
+              <option value="Met pensioen">Met pensioen</option>
+              <option value="Ouder">Ouder</option>
+              <option value="Ander">Ander</option>
             </select>
           </div>
         </div>
@@ -559,6 +569,7 @@ Metadata bewerken
       {% include 'components/language_selector.html' %}
 
       <!-- TODO: validation error on empty value for onderwijsniveaus -->
+      <!-- of gewoon by default een selectie? -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Onderwijsniveaus</label>
@@ -566,9 +577,14 @@ Metadata bewerken
         <div class="field-body">
           <div class="select is-multiple">
             <!-- TODO: multiple size="2" -->
+            <!-- TODO: lookup in ACM+ldap-api if these need to be 
+              lower-case values or not same for above eindgebruiker field -->
             <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
-              <option value="value1">Api call, mapping of waardes voor onderwijsniveaus?</option>
-              <option value="value2">Tweede niveau</option>
+              <option value="Kleuteronderwijs">Kleuteronderwijs</option>
+              <option value="Lager onderwijs">Lager onderwijs</option>
+              <option value="Secundair onderwijs">Secundair onderwijs</option>
+              <option value="Volwassenenonderwijs">Volwassenenonderwijs</option>
+              <option value="Hoger onderwijs">Hoger onderwijs</option>
             </select>
           </div>
         </div>
@@ -684,7 +700,7 @@ Metadata bewerken
       <div class="buttons sticky-submit-button pt-2">
         {% include 'includes/form_errors.html' %}
         <button type="submit" class="button is-primary spring">
-          Sync naar MAM
+          Metadata opslaan
         </button>
       </div>
     </div>
