@@ -36,7 +36,7 @@ from app.authorization import (get_token, requires_authorization,
                                verify_token, OAS_APPNAME)
 from app.mediahaven_api import MediahavenApi
 from app.ftp_uploader import FtpUploader
-from app.subtitle_files import (save_subtitles, delete_files, save_sidecar_xml,
+from app.services.subtitle_files import (save_subtitles, delete_files, save_sidecar_xml,
                                 move_subtitle, get_property, not_deleted)
 from app.validation import (pid_error, upload_error, validate_input,
                             validate_upload, validate_conversion)
@@ -481,41 +481,16 @@ def edit_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-    # also don't forget to make calls here using the suggest library from Miel.
-    # we will be getting back id's from mediahaven and in order to populate
-    # the dropdowns in form we will need some extra calls in order to fetch
-    # the actual label and description:
-    # https://github.com/viaacode/skos-scripts-redactietool
-
-    # for the post call we don't need it as the id's will be directly pushed to mediahaven api
-    # but this is something for later as Caroline needs to extend MAM structure
-    # to have support for these.
-    # more details in jira ticket https://meemoo.atlassian.net/browse/DEV-1821
-
     data_mapping = RmhMapping()
-    td = data_mapping.mh_to_form(mam_data)
+    td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
 
-    # todo use td below instead of the get_property calls etc as there will
-    td = td
     # also be more logic involved to prepare the values of lists for instance in the
     # productie section etc.
 
     return render_template(
         'edit_metadata.html',
-        token=token,
-        pid=pid,
-        department=department,
-        mam_data=json.dumps(mam_data),
-        title=mam_data.get('title'),
-        description=mam_data.get('description'),
-        created=get_property(mam_data, 'CreationDate'),
-        archived=get_property(mam_data, 'created_on'),
-        original_cp=get_property(mam_data, 'Original_CP'),
-        # for v2 mam_data['Internal']['PathToVideo']
-        video_url=mam_data.get('videoPath'),
-        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
-        validation_errors=errors)
-
+        **td
+    )
 
 @app.route('/edit_metadata', methods=['POST'])
 @requires_authorization

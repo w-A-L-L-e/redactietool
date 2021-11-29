@@ -6,8 +6,8 @@
 #
 
 import pytest
-from app.subtitle_files import save_sidecar_xml_v1
-from app.subtitle_files import save_sidecar_xml
+from app.services.subtitle_files import save_sidecar_xml_v1
+from app.services.subtitle_files import save_sidecar_xml
 from .fixtures import sub_params, sub_meta, sidecar_v1_output, sidecar_v2_output
 
 pytestmark = [pytest.mark.vcr(ignore_localhost=True)]
