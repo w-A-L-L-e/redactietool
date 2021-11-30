@@ -113,7 +113,7 @@ function flashModalWarning(){
   }, 3000);
 }
 
-// generic add item for productie section
+// add item method for 'productie' section
 function addPrdItem(item_list_id, item_input_id){
   var item_input = document.getElementById(item_input_id);
   var item_clone = item_input.cloneNode(true);
@@ -122,26 +122,11 @@ function addPrdItem(item_list_id, item_input_id){
   return false;
 }
 
-// generic delete production section item
+// delete item method for 'productie' section item
 function deletePrdItem(del_btn){
   del_btn.parentNode.parentNode.remove();
   return false;
 }
-
-// TODO: deprecate these next 3 methods by by putting the call directly in view
-function addMaker(ev){
-  return addPrdItem('prd_makers', 'prd_maker_input');
-}
-
-function addBijdrager(ev){
-  return addPrdItem('prd_bijdragers', 'prd_bijdrager_input');
-}
-
-function addPublisher(ev){
-  return addPrdItem('prd_publishers', 'prd_publisher_input')
-}
-
-// end of to be deprecated methods
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
