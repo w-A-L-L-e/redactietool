@@ -1,5 +1,16 @@
 // Author: Walter Schreppers
-// Animate buttons and handle top menu events.
+//
+//  File: app/static/app.js
+//
+// Animate submit buttons and handle fixed bulma menu events.
+//
+// Handle collapsing of sections and adding/removing items
+// in productie section metadata form. 
+//
+// future work: we might split this up in seperate js files and
+// have some minification done in our precompile assets makefile target.
+//
+
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
@@ -9,11 +20,6 @@ function execute(btn, label){
 function loginSubmit(btn){
   execute(btn, "Authenticeren..."); 
 }
-
-// original version
-// function pidSubmit(btn){
-//   execute(btn, 'Zoeken...');
-// }
 
 function pidSubmitForSubtitles(btn){
   hf = document.getElementById('redirect_subtitles');
@@ -26,7 +32,6 @@ function pidSubmitForMetadata(btn){
   hf.value = 'no';
   execute(btn, 'Item opzoeken...');
 }
-
 
 function uploadSubmit(btn){
   execute(btn, 'Opladen...');
@@ -156,44 +161,18 @@ function collapseEmptyTextarea(area_id){
   }
 }
 
-// document on-ready handler
-// handles burger menu and collapsing of empty items in Inhoud section
-document.addEventListener('DOMContentLoaded', () => {
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-  // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-
-    // Add a click event on each of them
-    $navbarBurgers.forEach( el => {
-      el.addEventListener('click', () => {
-
-        // Get the target from the "data-target" attribute
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-
-      });
-    });
-  }
-
-  // Inhoud section hide unused/empty textarea's for current item
+// Inhoud section hide unused/empty textarea's for current item
+function collapseEmptyTextareas(){
   collapseEmptyTextarea("originele_hoofdbeschrijving");
   collapseEmptyTextarea("originele_uitgebreide_hoofdbeschrijving");
   collapseEmptyTextarea("ondertitels");
   collapseEmptyTextarea("programma_omschrijving");
   collapseEmptyTextarea("cast");
   collapseEmptyTextarea("transcriptie");
+}
 
-  
-  // This below stuff might come in handy later...
-  //// TODO: catch navigation event..
-  // showNavigationWarning();
-
+function addUnloadHooks(){
   // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
   // when we add this listener we get the browser default popups.
   // window.addEventListener('beforeunload', function (e) {
@@ -219,10 +198,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
   // do something similar for bulma instead.
   // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
-  
-  //TODO: slim select for multi select component
-  //new SlimSelect({
-  //  select: '#multiple'
-  //})
+}
+
+// document on-ready handler
+// handles burger menu and collapsing of
+// empty items in Inhoud section
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+  collapseEmptyTextareas();
+   
+  // showNavigationWarning();
+  // flashModalWarning();
+  // showModalAlert("hello", "world");
+
+  // beforeunload confirm/cancel example
+  // addUnloadHooks();
+
+  // TODO: slim select for multi select component
+  // new SlimSelect({
+  //   select: '#multiple'
+  // })
 });
 
