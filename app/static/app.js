@@ -161,17 +161,25 @@ function sectionToggle(section_div_id){
   }
 }
 
-function collapseEmptyTextarea(area_id){
+function collapseEmptyTextarea(area_id, uncollapsable=false){
   var ta = document.getElementById(area_id);
   if( ta && ta.innerHTML.length == 0){
-    ta.parentNode.parentNode.style.display="none";
-    console.log("found empty area", area_id, "collapsing, TODO: change folded/unfolded icon...");
+    if(uncollapsable){
+      ta.parentNode.parentNode.style.display="none";
+      console.log("found empty area", area_id, "TODO: change folded/unfolded icon...");
+    }
+    else{
+      ta.parentNode.parentNode.parentNode.style.display="none";
+    }
   }
 }
 
 
 // Inhoud section hide unused/empty textarea's for current item
 function collapseEmptyTextareas(){
+  // when passing 'true' we show a collapse/uncollapse icon and 
+  // keep the heading in our section around the textarea when its collapsed
+  // collapseEmptyTextarea("originele_hoofdbeschrijving", true);
   collapseEmptyTextarea("originele_hoofdbeschrijving");
   collapseEmptyTextarea("originele_uitgebreide_hoofdbeschrijving");
   collapseEmptyTextarea("ondertitels");
