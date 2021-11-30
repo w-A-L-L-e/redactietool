@@ -113,36 +113,35 @@ function flashModalWarning(){
   }, 3000);
 }
 
-// TODO: refactor out code duplication here
-// (will pick this up when implementing the delete buttons)
-function addMaker(ev){
-  var mkr_input = document.getElementById("prd_maker_input");
-  var mkr_clone = mkr_input.cloneNode(true)
-  var mkr_list = document.getElementById("prd_makers");
-  mkr_list.append(mkr_clone)
+// generic add item for productie section
+function addPrdItem(item_list_id, item_input_id){
+  var item_input = document.getElementById(item_input_id);
+  var item_clone = item_input.cloneNode(true);
+  var item_list = document.getElementById(item_list_id);
+  item_list.append(item_clone);
   return false;
+}
+
+// generic delete production section item
+function deletePrdItem(del_btn){
+  del_btn.parentNode.parentNode.remove();
+  return false;
+}
+
+// TODO: deprecate these next 3 methods by by putting the call directly in view
+function addMaker(ev){
+  return addPrdItem('prd_makers', 'prd_maker_input');
 }
 
 function addBijdrager(ev){
-  var bdr_input = document.getElementById("prd_bijdrager_input");
-  var bdr_clone = bdr_input.cloneNode(true)
-  var bdr_list = document.getElementById("prd_bijdragers");
-  bdr_list.append(bdr_clone)
-  return false;
+  return addPrdItem('prd_bijdragers', 'prd_bijdrager_input');
 }
 
 function addPublisher(ev){
-  var bdr_input = document.getElementById("prd_publisher_input");
-  var bdr_clone = bdr_input.cloneNode(true)
-  var bdr_list = document.getElementById("prd_publishers");
-  bdr_list.append(bdr_clone)
-  return false;
+  return addPrdItem('prd_publishers', 'prd_publisher_input')
 }
 
-function deletePrdItem(del_btn){
-  del_btn.parentNode.parentNode.remove()
-  return false;
-}
+// end of to be deprecated methods
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
