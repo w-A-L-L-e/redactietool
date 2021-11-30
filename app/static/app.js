@@ -11,6 +11,8 @@
 // have some minification done in our precompile assets makefile target.
 //
 
+
+// ============================== SUBTITLE FORMS ===============================
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
@@ -82,6 +84,8 @@ function confirmCancel(btn){
   }
 }
 
+
+// ============================ LOGIN/LOGOUT FORMS =============================
 // #logout_btn
 function logoutClicked(ref){
   ref.className += ' disabled';
@@ -92,6 +96,8 @@ function newUploadClicked(ref){
   ref.className += ' disabled';
 }
 
+
+// ============================= MODAL DIALOG ==================================
 function showNavigationWarning(){
   //v1
   //showModalAlert(
@@ -118,6 +124,8 @@ function flashModalWarning(){
   }, 3000);
 }
 
+
+// =========================== METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_input_id){
   var item_input = document.getElementById(item_input_id);
@@ -200,6 +208,10 @@ function addUnloadHooks(){
   // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
 }
 
+
+
+
+// ====================================== DOCUMENT READY EVENT ========================================
 // document on-ready handler
 // handles burger menu and collapsing of
 // empty items in Inhoud section
@@ -227,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   collapseEmptyTextareas();
-   
+  
   // showNavigationWarning();
   // flashModalWarning();
   // showModalAlert("hello", "world");
