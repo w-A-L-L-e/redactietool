@@ -21,6 +21,9 @@ function execute(btn, label){
 
 function loginSubmit(btn){
   execute(btn, "Authenticeren..."); 
+  btn.form.submit();
+  btn.disabled=true;
+  btn.classList.add('is-loading')
 }
 
 function pidSubmitForSubtitles(btn){
