@@ -1,71 +1,11 @@
 
+/*********************** START OF PAGE CSS CUSTOMIZATION ***********************
+ * Author: Walter Schreppers
+ ******************************************************************************/
+
 #player_container{
   border-radius: 8px;
 }
-
-/* inspiration https://code-boxx.com/ 
- * wiggle the validation error line so that it gets the users attention
- */
-.animate-errors{
-  animation: wiggle 0.5s;
-  animation-direction: alternate;
-  animation-iteration-count: 3;
-}
-
-@keyframes wiggle { 
-  0% {
-    transform: translateX(0); 
-  }
-  10% {
-    transform: translateX(-5px); 
-  }
-  30% { 
-    transform: translateX(-30px); 
-  }
-  50% { 
-    transform: translateX(-20); 
-  }
-  100% { 
-    transform: translateX(0px); 
-  }
-}
-
-input[type=button].spring {
-  background: #ffd6c9;
-  border: 2px solid #e21818;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 16px;
-}
-input[type=button].spring:hover {
-  animation: none;
-}
-
-@keyframes spring { 
-  0% {
-    transform: scale(1) translateY(0); 
-  }
-  10% {
-    transform: scale(1.2, 0.6); 
-  }
-  30% { 
-    transform: scale(0.8, 1.1) translateY(-30px); 
-  }
-  50% { 
-    transform: scale(1) translateY(0); 
-  }
-  100% { 
-    transform: translateY(0); 
-  }
-}
-
-.spring {
-  animation: spring 2s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
-}
-
-/************** END OF CSS ANIMATION EYE CANDY ***************************/
 
 a.button.disabled {
   background-color: #ccc;
@@ -125,43 +65,16 @@ a.cancel-button.disabled{
   margin-top: 8px;
 }
 
-
-/* TODO: cleanup/strip some unused parts here also... */
 form.validate_form #subtitle_file {
   border: none; 
   width: 280px;
   padding-left: 0px;
 }
 
-
 .center_page{
   width: 25em;
   margin: auto;
   margin-top: 4em;
-}
-
-
-.form_errors {
-  float: right;
-  margin-right: 2em;
-  color: #aa0000;
-}
-
-.left_page {
-  width: 48%;
-  float: left;
-}
-
-.right_page{
-  width: 48%;
-  float: right;
-}
-
-
-textarea.subtitles {
-  margin-left: 1em;
-  width: 33em;
-  height: 10em;
 }
 
 .check {
@@ -209,9 +122,6 @@ table.video_details td {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-
-
-
 
 
 form.confirm_form {
@@ -323,3 +233,68 @@ hr {
     margin-bottom: -5px;
   }
 }
+
+
+/********************* START OF CSS ANIMATION EYE CANDY ***********************/
+/* inspiration https://code-boxx.com/ 
+ * wiggle the validation error line so that it gets the users attention
+ */
+.animate-errors{
+  animation: wiggle 0.5s;
+  animation-direction: alternate;
+  animation-iteration-count: 3;
+}
+
+@keyframes wiggle { 
+  0% {
+    transform: translateX(0); 
+  }
+  10% {
+    transform: translateX(-5px); 
+  }
+  30% { 
+    transform: translateX(-30px); 
+  }
+  50% { 
+    transform: translateX(-20); 
+  }
+  100% { 
+    transform: translateX(0px); 
+  }
+}
+
+input[type=button].spring {
+  background: #ffd6c9;
+  border: 2px solid #e21818;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=button].spring:hover {
+  animation: none;
+}
+
+@keyframes spring { 
+  0% {
+    transform: scale(1) translateY(0); 
+  }
+  10% {
+    transform: scale(1.2, 0.6); 
+  }
+  30% { 
+    transform: scale(0.8, 1.1) translateY(-30px); 
+  }
+  50% { 
+    transform: scale(1) translateY(0); 
+  }
+  100% { 
+    transform: translateY(0); 
+  }
+}
+
+.spring {
+  animation: spring 2s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+/*********************** END OF CSS ANIMATION EYE CANDY ***********************/
