@@ -108,6 +108,22 @@ def get_property(mam_data, attribute):
     return result
 
 
+# TODO:
+# {
+#          "value":[
+#             {
+#                "value":"EVS",
+#                "attribute":"serie",
+#                "dottedKey":"None"
+#             }
+#          ],
+#          "attribute":"dc_titles",
+#          "dottedKey":"None"
+#       },
+def get_array_property(mam_data, attribute, val_attribute):
+    return "EVS"
+
+
 def save_sidecar_xml_v1(upload_folder, metadata, tp):
     TESTBEELD_PERM_ID = os.environ.get(
         'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
