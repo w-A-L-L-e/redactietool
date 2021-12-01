@@ -172,7 +172,39 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: serie"
+                value="{{titel_serie}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Episode</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: episode"
+                value="{{titel_episode}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Aflevering</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: aflevering"
+                value="{{titel_aflevering}}">
               </div>
             </div>
           </div>
@@ -185,7 +217,10 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="alternatief" class="input is-small" type="text" placeholder="" readonly>
+                <input name="alternatief" class="input is-small" type="text" 
+                placeholder="Secundaire titel: aflevering" 
+                value="{{titel_alternatief}}"
+                readonly>
               </div>
             </div>
           </div>
@@ -198,7 +233,26 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="programma" class="input is-small" type="text" placeholder="todo map this" readonly>
+                <input name="programma" class="input is-small" type="text" 
+                  placeholder="Secundaire titel: programma" 
+                  value="{{titel_programma}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Serienummer</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serienummer" class="input is-small" type="text" 
+                  placeholder="Secundaire titel: serienummer" 
+                  value="{{titel_serienummer}}"
+                  readonly>
               </div>
             </div>
           </div>
@@ -211,7 +265,66 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?" readonly>
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: seizoen" 
+                  value="{{titel_seizoen}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Nummer</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: seizoen nummer" 
+                  value="{{titel_seizoen_nr}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Archief</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: archief" 
+                  value="{{titel_archief}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Deelarchief</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: deelarchief" 
+                  value="{{titel_deelarchief}}"
+                  readonly>
               </div>
             </div>
           </div>
@@ -224,27 +337,52 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="reeks" class="input is-small" type="text" placeholder="mapping?" readonly>
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: reeks" 
+                  value="{{titel_reeks}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label">Extra velden</label>
+            <label class="label">Deelreeks</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="bonus_fields" class="input is-small" type="text" placeholder="En de mapping?">
+                <input name="deelreeks" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: deelreeks" 
+                  value="{{titel_deelreeks}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
-        -->
 
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Registratie</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="deelreeks" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: registratie" 
+                  value="{{titel_registratie}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div> <!-- section wrapper div for hide/unhide -->
