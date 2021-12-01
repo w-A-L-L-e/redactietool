@@ -191,6 +191,57 @@ function collapseEmptyTextareas(){
   collapseEmptyTextarea("transcriptie");
 }
 
+
+function hideTitleInput(input_id){
+  var input_field = document.getElementById(input_id);
+  if( input_field ){
+    var input_box = input_field.getElementsByTagName("input")[0];
+    if( input_box && input_box.value.length == 0){
+      //console.log("hiding field", input_id);
+      input_field.style.display = "none";
+    }
+  }
+}
+
+function hideEmptyTitles(){
+  hideTitleInput("titel_serie");
+  hideTitleInput("titel_episode")
+  hideTitleInput("titel_aflevering");
+  hideTitleInput("titel_alternatief");
+  hideTitleInput("titel_programma");
+  hideTitleInput("titel_serienummer");
+  hideTitleInput("titel_seizoen");
+  hideTitleInput("titel_nummer");
+  hideTitleInput("titel_archief");
+  hideTitleInput("titel_deelarchief");
+  hideTitleInput("titel_reeks");
+  hideTitleInput("titel_deelreeks");
+  hideTitleInput("titel_registratie");
+}
+
+function showTitleInput(input_id){
+  var input_field = document.getElementById(input_id);
+  if( input_field ){
+    input_field.style.display = "flex";
+  }
+}
+
+function showEmptyTitles(){
+  showTitleInput("titel_serie");
+  showTitleInput("titel_episode")
+  showTitleInput("titel_aflevering");
+  showTitleInput("titel_alternatief");
+  showTitleInput("titel_programma");
+  showTitleInput("titel_serienummer");
+  showTitleInput("titel_seizoen");
+  showTitleInput("titel_nummer");
+  showTitleInput("titel_archief");
+  showTitleInput("titel_deelarchief");
+  showTitleInput("titel_reeks");
+  showTitleInput("titel_deelreeks");
+  showTitleInput("titel_registratie");
+}
+
 function addUnloadHooks(){
   // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
   // when we add this listener we get the browser default popups.
@@ -248,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   collapseEmptyTextareas();
+  hideEmptyTitles();
   
   // showNavigationWarning();
   // flashModalWarning();
