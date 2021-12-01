@@ -2,3 +2,4 @@ pandas
 argparse
 skosify
 SPARQLWrapper
+sparql-endpoint-fixture
