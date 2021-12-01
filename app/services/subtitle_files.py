@@ -100,10 +100,10 @@ def move_subtitle(upload_folder, tp):
 
 def get_property(mam_data, attribute):
     props = mam_data.get('mdProperties', [])
-    result = None
+    result = ''
     for prop in props:
         if prop.get('attribute') == attribute:
-            return prop.get('value')
+            return prop.get('value', '')
 
     return result
 

@@ -53,16 +53,16 @@ class RmhMapping:
         """
 
         # debug data for in logs:
-        print("TODO: find mapped fields in json_data:\n", mam_data)
-        dc_description_lang = get_property(
-            mam_data,
-            'dc_description_lang'
-        )
+        print("DEBUG: mediahaven json_data:\n", mam_data)
+        dc_description_lang = get_property(mam_data, 'dc_description_lang')
+        beschrijving_meemoo_redactie = get_property(mam_data, 'dcterms_abstract')
+        ondertitels = get_property(mam_data, 'dc_description_ondertitels')
+        programma_beschrijving = get_property(mam_data, 'dc_description_programma')
+        cast = get_property(mam_data, 'dc_description_cast')
+        transcriptie = get_property(mam_data, 'dc_description_transcriptie')
 
-        # TODO: check tomorrow if we should make this the
-        # default behaviour for get_property
-        if dc_description_lang is None:
-            dc_description_lang = ''
+        # Mapping expliciet aan Koen gevraagd op 1/12/2021
+        # avo_beschrijving = get_property(mam_data, 'dcterms_avo')
 
         # also don't forget to make calls here using the suggest library from Miel.
         # we will be getting back id's from mediahaven and in order to populate
@@ -85,7 +85,12 @@ class RmhMapping:
             'mam_data': json.dumps(mam_data),
             'title': mam_data.get('title'),
             'description': mam_data.get('description'),
-            'dc_description_lang': dc_description_lang,  # orig uitgebreide beschrijving
+            'beschrijving_meemoo_redactie': beschrijving_meemoo_redactie,
+            'ondertitels': ondertitels,
+            'programma_beschrijving': programma_beschrijving,
+            'cast': cast,
+            'transcriptie': transcriptie,
+            'dc_description_lang': dc_description_lang,  # orig uitgebr. beschr
             'created': get_property(mam_data, 'CreationDate'),
             'archived': get_property(mam_data, 'created_on'),
             'original_cp': get_property(mam_data, 'Original_CP'),
