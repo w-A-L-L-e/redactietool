@@ -78,12 +78,22 @@ class RmhMapping:
         # TODO: also be more logic involved to prepare the values of
         # lists for instance in the productie section etc.
 
+
         return {
             'token': token,
-            'pid': pid,
             'department': department,
             'mam_data': json.dumps(mam_data),
+            'original_cp': get_property(mam_data, 'Original_CP'),
+            'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
+            'pid': pid,
             'title': mam_data.get('title'),
+            'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            # 'ontsluitingstitel': get_property(mam_data, 'dc_title'),
             'description': mam_data.get('description'),
             'beschrijving_meemoo_redactie': beschrijving_meemoo_redactie,
             'ondertitels': ondertitels,
@@ -92,8 +102,9 @@ class RmhMapping:
             'transcriptie': transcriptie,
             'dc_description_lang': dc_description_lang,  # orig uitgebr. beschr
             'created': get_property(mam_data, 'CreationDate'),
+            'dcterms_issued': get_property(mam_data, 'dcterms_issued'), 
+            'dcterms_created': get_property(mam_data, 'dcterms_created'), # not used in form! 
             'archived': get_property(mam_data, 'created_on'),
-            'original_cp': get_property(mam_data, 'Original_CP'),
             # for v2 mam_data['Internal']['PathToVideo']
             'video_url': mam_data.get('videoPath'),
             'flowplayer_token': os.environ.get(

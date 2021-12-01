@@ -92,12 +92,14 @@ Metadata bewerken
 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label">Datum </label>
+            <label class="label">Lokale CP ID</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value="" readonly/>
+                <input name="testbeeld_pid" 
+                class="input is-small" type="text" 
+                placeholder="PID" value="{{dc_identifier_localid}}" readonly/>
               </div>
             </div>
           </div>
@@ -110,7 +112,7 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="uitzenddatum" class="input is-small" type="text" placeholder="prefilled but also editable?" value=""/>
+                <input name="uitzenddatum" class="input is-small" type="text" placeholder="dcterms_issued" value="{{dcterms_issued}}"/>
               </div>
             </div>
           </div>
@@ -140,7 +142,24 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Prefilled, but editable?">
+                <input name="ontsluitingstitel" 
+                  class="input is-small" type="text" 
+                  placeholder="editable" value="{{ontsluitingstitel}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Hoofdtitel</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="hoofdtitel" 
+                  class="input is-small" type="text" 
+                  placeholder="title" value="{{title}}" readonly>
               </div>
             </div>
           </div>
@@ -154,19 +173,6 @@ Metadata bewerken
             <div class="field">
               <div class="control">
                 <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Hoofdtitel</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input name="hoofdtitel" class="input is-small" type="text" placeholder="todo" readonly>
               </div>
             </div>
           </div>

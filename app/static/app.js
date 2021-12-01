@@ -1,3 +1,4 @@
+// ============================== App JavaScript ===============================
 // Author: Walter Schreppers
 //
 //  File: app/static/app.js
@@ -9,7 +10,6 @@
 //
 // future work: we might split this up in seperate js files and
 // have some minification done in our precompile assets makefile target.
-//
 
 
 // ============================== SUBTITLE FORMS ===============================
@@ -89,13 +89,13 @@ function confirmCancel(btn){
 
 
 // ============================ LOGIN/LOGOUT FORMS =============================
-// #logout_btn
 function logoutClicked(ref){
+  // #logout_btn
   ref.className += ' disabled';
 }
 
-// #new_upload_btn
 function newUploadClicked(ref){
+  // #new_upload_btn
   ref.className += ' disabled';
 }
 
@@ -177,7 +177,6 @@ function collapseEmptyTextarea(area_id, uncollapsable=false){
   }
 }
 
-
 // Inhoud section hide unused/empty textarea's for current item
 function collapseEmptyTextareas(){
   // when passing 'true' we show a collapse/uncollapse icon and 
@@ -219,8 +218,6 @@ function addUnloadHooks(){
   // do something similar for bulma instead.
   // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
 }
-
-
 
 
 // ====================================== DOCUMENT READY EVENT ========================================
