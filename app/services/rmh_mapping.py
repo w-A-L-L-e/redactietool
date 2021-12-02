@@ -40,19 +40,21 @@ class RmhMapping:
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
 
-        # first example of actually editing field and putting back into
-        # json blob
+        # mam_data modification, TODO: abstract a method to make this shorter and more DRY
         ontsluitingstitel_edited = request.form.get('ontsluitingstitel')
-
-        print("\n now save edited title in mam_data", ontsluitingstitel_edited)
-        # mam_data
+        print("\n aangepaste ontsluitingstitel opslaan in mam_data", ontsluitingstitel_edited)
         for prop in mam_data['mdProperties']:
             if prop.get('attribute') == 'dc_title':
                 prop['value'] = ontsluitingstitel_edited
 
-        # make mediahaven PUT CALL HERE with transformed ontsluitingstitel and
-        # other changed fields do same as above. after put call. make new get request
-        # and update mam_data json then return our tp and/or possibly some req errors
+        avo_beschrijving_edited = request.form.get('avo_beschrijving')
+        print("\n aangepaste omschrijving opslaan in mam_data", avo_beschrijving_edited)
+        for prop in mam_data['mdProperties']:
+            if prop.get('attribute') == 'dcterms_abstract':
+                prop['value'] = avo_beschrijving_edited
+
+        # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
+        print("\nMediahaven API PUT call here...")
 
         tp = {
             'token': token,
