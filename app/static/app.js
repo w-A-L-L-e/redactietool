@@ -128,7 +128,7 @@ function flashModalWarning(){
 }
 
 
-// =========================== METADATA EDIT FORM =============================
+// ============================ METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_input_id){
   var item_input = document.getElementById(item_input_id);
@@ -254,13 +254,19 @@ function autoCloseSavedAlert(){
   }, 4000); 
 }
 
+
+// ======================== FORMs onbeforeunload handlers ======================
+// this is found by googling around some, not sure yet if we'll take this route
 function addUnloadHooks(){
-  // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
+  // some vanilla onbeforeunload for our custom alert box, 
+  // this needs some further work and state:
   // when we add this listener we get the browser default popups.
+  //
   // window.addEventListener('beforeunload', function (e) {
   //   console.log("EVENT: beforeunload detected!");
   //   // Cancel the event
-  //   e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  //   // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  //   e.preventDefault(); 
   //   // Chrome requires returnValue to be set
   //   e.returnValue = '';
   //     //possibly do something like this, not sure yet:
@@ -277,17 +283,21 @@ function addUnloadHooks(){
   // https://github.com/NightOwl888/jquery.dirtyforms.dialogs.bootstrap.dist. 
   // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
   // do something similar for bulma instead.
-  // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
+  // That will however also introduce jquery into the mix, 
+  // making our js dependencies around 86k larger.
 }
 
 
-// ====================================== DOCUMENT READY EVENT ========================================
-// document on-ready handler
-// handles burger menu and collapsing of
-// empty items in Inhoud section
+// =========================== DOCUMENT READY EVENT ============================
+// document on-ready handler, similar to bulma.io docs, adapted and customized
+// for our nees. We also added collapsing and hiding of inputs, textareas and 
+// notifications here.
+// We also handle burger menu open/close here.
 document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  const $navbarBurgers = Array.prototype.slice.call(
+    document.querySelectorAll('.navbar-burger'), 0
+  );
 
   // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
@@ -312,7 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
   hideEmptyTitles();
   autoCloseSavedAlert();
   
-  // For demo, show modal dialogs here
+  // For demo, show modal dialogs
+  // ============================
   // showNavigationWarning();
   // flashModalWarning();
   // showModalAlert("hello", "world");

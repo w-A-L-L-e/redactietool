@@ -28,12 +28,6 @@ class RmhMapping:
         convert form metadata hash into json data
         """
         print("TODO: convert following metadata:\n", request.form)
-        # tp = {
-        #     'mam_data': request.form.get('mam_data'),
-        #     'video_url': request.form.get('video_url'),
-        #     'subtitle_type': request.form.get('subtitle_type')
-        # }
-
         errors = None  # for now, there will however be a lot more
         # logic and checks here that can generate errors, warnings etc.
 
@@ -45,6 +39,20 @@ class RmhMapping:
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
+
+        # first example of actually editing field and putting back into
+        # json blob
+        ontsluitingstitel_edited = request.form.get('ontsluitingstitel')
+
+        print("\n now save edited title in mam_data", ontsluitingstitel_edited)
+        # mam_data
+        for prop in mam_data['mdProperties']:
+            if prop.get('attribute') == 'dc_title':
+                prop['value'] = ontsluitingstitel_edited
+
+        # make mediahaven PUT CALL HERE with transformed ontsluitingstitel and
+        # other changed fields do same as above. after put call. make new get request
+        # and update mam_data json then return our tp and/or possibly some req errors
 
         tp = {
             'token': token,

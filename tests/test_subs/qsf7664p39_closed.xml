@@ -6,13 +6,13 @@
   </mhs:Descriptive>
   <mhs:RightsManagement>
     <mh:Permissions>
-      <mh:Read>config_testbeeld_uuid</mh:Read>
-      <mh:Read>config_onderwijs_uuid</mh:Read>
-      <mh:Read>config_admin_uuid</mh:Read>
-      <mh:Write>config_testbeeld_uuid</mh:Write>
-      <mh:Write>config_admin_uuid</mh:Write>
-      <mh:Export>config_testbeeld_uuid</mh:Export>
-      <mh:Export>config_admin_uuid</mh:Export>
+      <mh:Read>dd111b7a-efd0-44e3-8816-0905572421da</mh:Read>
+      <mh:Read>26276bde-be5f-4e17-a40a-49dceb722c64</mh:Read>
+      <mh:Read>b75571b1-d7a3-4d6f-939e-deb345c1078a</mh:Read>
+      <mh:Write>dd111b7a-efd0-44e3-8816-0905572421da</mh:Write>
+      <mh:Write>b75571b1-d7a3-4d6f-939e-deb345c1078a</mh:Write>
+      <mh:Export>dd111b7a-efd0-44e3-8816-0905572421da</mh:Export>
+      <mh:Export>b75571b1-d7a3-4d6f-939e-deb345c1078a</mh:Export>
     </mh:Permissions>
   </mhs:RightsManagement>
   <mhs:Dynamic>
