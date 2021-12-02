@@ -263,13 +263,11 @@ function addUnloadHooks(){
   //   e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
   //   // Chrome requires returnValue to be set
   //   e.returnValue = '';
-
-  //         //possibly do something like this, not sure yet:
-  //         // setInterval(function(){
-  //         //    if modalCancelled return false;
-  //         //    if modalConfirmed return true;
-  //         // }, 800);
-
+  //     //possibly do something like this, not sure yet:
+  //     setInterval(function(){
+  //        if modalCancelled return false;
+  //        if modalConfirmed return true;
+  //     }, 800);
   //   // the absence of a returnValue property on the event will guarantee the browser unload happens
   //   delete e['returnValue'];
   // });
@@ -314,14 +312,18 @@ document.addEventListener('DOMContentLoaded', () => {
   hideEmptyTitles();
   autoCloseSavedAlert();
   
+  // For demo, show modal dialogs here
   // showNavigationWarning();
   // flashModalWarning();
   // showModalAlert("hello", "world");
 
+  // simple version of unload hook, we however have
+  // a more advanced dirtyforms proof of concept in bulma_customization
+  // to be determined if we actually want/need this later on.
   // beforeunload confirm/cancel example
   // addUnloadHooks();
 
-  // TODO: slim select for multi select component
+  // TODO: slim select : example of a multi-select component
   // new SlimSelect({
   //   select: '#multiple'
   // })
