@@ -114,6 +114,10 @@ class RmhMapping:
         errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here
 
+        # we can even do another GET call here too if we want to validate the
+        # changes have propagated (for instance charlotte noticed some titel field
+        # sometimes causes a save to mh to fail).
+
         tp = self.form_params(token, pid, department, errors, mam_data)
 
         # if no errors from mediahaven put call signal a sucess notification:
