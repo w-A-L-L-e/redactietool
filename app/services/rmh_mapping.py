@@ -23,6 +23,14 @@ class RmhMapping:
     def __init__(self):
         print("RmhMapping initialized")
 
+    def set_property(self, mam_data, akey, avalue):
+        for prop in mam_data['mdProperties']:
+            if prop.get('attribute') == akey:
+                print("saving ", akey, "in mam_data with value=", avalue)
+                prop['value'] = avalue
+
+        return mam_data
+
     def form_to_mh(self, request, mam_data):
         """
         convert form metadata hash into json data
@@ -40,18 +48,16 @@ class RmhMapping:
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
 
-        # mam_data modification, TODO: abstract a method to make this shorter and more DRY
-        ontsluitingstitel_edited = request.form.get('ontsluitingstitel')
-        print("\n aangepaste ontsluitingstitel opslaan in mam_data", ontsluitingstitel_edited)
-        for prop in mam_data['mdProperties']:
-            if prop.get('attribute') == 'dc_title':
-                prop['value'] = ontsluitingstitel_edited
+        # save some fields back into mam_data
+        mam_data = set_property(
+            mam_data, 'dc_title',
+            request.form.get('ontsluitingstitel')
+        )
 
-        avo_beschrijving_edited = request.form.get('avo_beschrijving')
-        print("\n aangepaste omschrijving opslaan in mam_data", avo_beschrijving_edited)
-        for prop in mam_data['mdProperties']:
-            if prop.get('attribute') == 'dcterms_abstract':
-                prop['value'] = avo_beschrijving_edited
+        mam_data = set_property(
+            mam_data, 'dcterms_abstract',
+            request.form.get('avo_beschrijving')
+        )
 
         # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
         print("\nMediahaven API PUT call here...")
