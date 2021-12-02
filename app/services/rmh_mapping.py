@@ -23,23 +23,72 @@ class RmhMapping:
     def __init__(self):
         print("RmhMapping initialized")
 
-    def form_to_mh(self, request):
+    def form_to_mh(self, request, mam_data):
         """
         convert form metadata hash into json data
         """
         print("TODO: convert following metadata:\n", request.form)
-
-        tp = {
-            'token': request.form.get('token'),
-            'pid': request.form.get('pid'),
-            'department': request.form.get('department'),
-            'mam_data': request.form.get('mam_data'),
-            'video_url': request.form.get('video_url'),
-            'subtitle_type': request.form.get('subtitle_type')
-        }
+        # tp = {
+        #     'mam_data': request.form.get('mam_data'),
+        #     'video_url': request.form.get('video_url'),
+        #     'subtitle_type': request.form.get('subtitle_type')
+        # }
 
         errors = None  # for now, there will however be a lot more
         # logic and checks here that can generate errors, warnings etc.
+
+        pid = request.form.get('pid')
+        token = request.form.get('token')
+        department = request.form.get('department')
+
+        dc_description_lang = get_property(mam_data, 'dc_description_lang')
+        ondertitels = get_property(mam_data, 'dc_description_ondertitels')
+        cast = get_property(mam_data, 'dc_description_cast')
+        transcriptie = get_property(mam_data, 'dc_description_transcriptie')
+
+        tp = {
+            'token': token,
+            'department': department,
+            'mam_data': json.dumps(mam_data),
+            'original_cp': get_property(mam_data, 'Original_CP'),
+            'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
+            'pid': pid,
+            'title': mam_data.get('title'),
+            'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+            'titel_serie': get_array_property(mam_data, 'dc_titles', 'serie'),
+            'titel_episode': get_array_property(mam_data, 'dc_titles', 'episode'),
+            'titel_aflevering': get_array_property(mam_data, 'dc_titles', 'aflevering'),
+            'titel_alternatief': get_array_property(mam_data, 'dc_titles', 'alternatief'),
+            'titel_programma': get_array_property(mam_data, 'dc_titles', 'programma'),
+            'titel_serienummer': get_array_property(mam_data, 'dc_titles', 'serienummer'),
+            'titel_seizoen': get_array_property(mam_data, 'dc_titles', 'seizoen'),
+            'titel_seizoen_nr': get_array_property(mam_data, 'dc_titles', 'seizoen_nr'),
+            'titel_archief': get_array_property(mam_data, 'dc_titles', 'archief'),
+            'titel_deelarchief': get_array_property(mam_data, 'dc_titles', 'deelarchief'),
+            'titel_reeks': get_array_property(mam_data, 'dc_titles', 'reeks'),
+            'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
+            'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
+            'description': mam_data.get('description'),
+            # deze is zelfde waarde, stond fout in wireframes Koen
+            # 'beschrijving_meemoo_redactie': get_property(mam_data, 'dcterms_abstract'),
+            'avo_beschrijving': get_property(mam_data, 'dcterms_abstract'),
+            'ondertitels': ondertitels,
+            'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
+            'cast': cast,
+            'transcriptie': transcriptie,
+            'dc_description_lang': dc_description_lang,  # orig uitgebr. beschr
+            'created': get_property(mam_data, 'CreationDate'),
+            'dcterms_issued': get_property(mam_data, 'dcterms_issued'),
+            'dcterms_created': get_property(mam_data, 'dcterms_created'),  # not used in form yet?
+            'archived': get_property(mam_data, 'created_on'),
+            # for v2 mam_data['Internal']['PathToVideo']
+            'video_url': mam_data.get('videoPath'),
+            'flowplayer_token': os.environ.get(
+                'FLOWPLAYER_TOKEN', 'set_in_secrets'
+            ),
+            'validation_errors': errors,
+            'data_saved_to_mam': True
+        }
 
         # TODO: figure out how to turn our submitted params into the correct
         # json data or xml sidecar in order to update the wanted fields
@@ -69,7 +118,6 @@ class RmhMapping:
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
-
 
         return {
             'token': token,

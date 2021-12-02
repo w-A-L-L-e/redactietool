@@ -241,6 +241,19 @@ function showEmptyTitles(){
   showTitleInput("titel_registratie");
 }
 
+function closeSavedAlert(){
+  var alert_box = document.getElementById("data_saved_alert_box");
+  if(alert_box){
+    alert_box.style.display = "none";
+  }
+}
+
+function autoCloseSavedAlert(){
+  setTimeout(function(){
+    closeSavedAlert();
+  }, 4000); 
+}
+
 function addUnloadHooks(){
   // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
   // when we add this listener we get the browser default popups.
@@ -299,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   collapseEmptyTextareas();
   hideEmptyTitles();
+  autoCloseSavedAlert();
   
   // showNavigationWarning();
   // flashModalWarning();

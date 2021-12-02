@@ -20,8 +20,20 @@ Metadata bewerken
               Bewerk ondertitels
             </a>
     </div>
-  </div>
+  </div> 
 </div>
+
+
+{% if data_saved_to_mam %}
+  <div class="columns" id="data_saved_alert_box">
+    <div class="column">
+      <div class="notification is-success">
+        <button class="delete" onclick="closeSavedAlert(); return false;"></button>
+        De metadata voor item <b>{{pid}}</b> is bewaard op Mediahaven. 
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 <div class="columns">
   <div class="column">
