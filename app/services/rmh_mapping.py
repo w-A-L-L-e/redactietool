@@ -65,17 +65,11 @@ class RmhMapping:
         # debug data for in logs:
         print("DEBUG: mediahaven json_data:\n", mam_data)
 
-        # Mapping expliciet aan Koen gevraagd op 1/12/2021.
-        # van charlotte gelukkig al alle andere velden gehad
-        # maar deze ontbreekt nog steeds!
-        # avo_beschrijving = get_property(mam_data, 'dcterms_avo')
-
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
-        beschrijving_meemoo_redactie = get_property(mam_data, 'dcterms_abstract')
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
-        programma_beschrijving = get_property(mam_data, 'dc_description_programma')
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
+
 
         return {
             'token': token,
@@ -86,9 +80,6 @@ class RmhMapping:
             'pid': pid,
             'title': mam_data.get('title'),
             'ontsluitingstitel': get_property(mam_data, 'dc_title'),
-
-            # I'm taking some assumptions here because these fields
-            # are not on my test pid. only dc_titles/serie is present
             'titel_serie': get_array_property(mam_data, 'dc_titles', 'serie'),
             'titel_episode': get_array_property(mam_data, 'dc_titles', 'episode'),
             'titel_aflevering': get_array_property(mam_data, 'dc_titles', 'aflevering'),
@@ -102,12 +93,12 @@ class RmhMapping:
             'titel_reeks': get_array_property(mam_data, 'dc_titles', 'reeks'),
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
-
-            # these are mapped and working correctly again
             'description': mam_data.get('description'),
-            'beschrijving_meemoo_redactie': beschrijving_meemoo_redactie,
+            # deze is zelfde waarde, stond fout in wireframes Koen
+            # 'beschrijving_meemoo_redactie': get_property(mam_data, 'dcterms_abstract'),
+            'avo_beschrijving': get_property(mam_data, 'dcterms_abstract'),
             'ondertitels': ondertitels,
-            'programma_beschrijving': programma_beschrijving,
+            'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
             'cast': cast,
             'transcriptie': transcriptie,
             'dc_description_lang': dc_description_lang,  # orig uitgebr. beschr

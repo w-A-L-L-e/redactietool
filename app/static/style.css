@@ -234,6 +234,13 @@ hr {
   }
 }
 
+/* make it more visible what controls are readonly */
+.input[readonly], .textarea[readonly] {
+    box-shadow: none;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
 
 /********************* START OF CSS ANIMATION EYE CANDY ***********************/
 /* inspiration https://code-boxx.com/ 

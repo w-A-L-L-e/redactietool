@@ -183,7 +183,6 @@ function collapseEmptyTextareas(){
   // keep the heading in our section around the textarea when its collapsed
   // collapseEmptyTextarea("originele_hoofdbeschrijving", true);
   collapseEmptyTextarea("originele_hoofdbeschrijving");
-  collapseEmptyTextarea("beschrijving_meemoo_redactie");
   collapseEmptyTextarea("originele_uitgebreide_hoofdbeschrijving");
   collapseEmptyTextarea("ondertitels");
   collapseEmptyTextarea("programma_beschrijving");
