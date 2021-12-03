@@ -15,6 +15,7 @@ import os
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property
+from app.services.mediahaven_api import MediahavenApi
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -23,11 +24,20 @@ class RmhMapping:
     def __init__(self):
         print("RmhMapping initialized")
 
-    def set_property(self, mam_data, akey, avalue):
+    def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
-            if prop.get('attribute') == akey:
-                print("saving ", akey, "in mam_data with value=", avalue)
-                prop['value'] = avalue
+            if prop.get('attribute') == propkey:
+                print("saving ", propkey, "in mam_data with value=", propvalue)
+                prop['value'] = propvalue
+                return mam_data
+
+        # if we get here. we need to add a new property as it was cleared and
+        # is not present anymore
+        mam_data['mdProperties'].append({
+            'value': propvalue,
+            'attribute': propkey,
+            'dottedKey': None
+        })
 
         return mam_data
 
@@ -84,7 +94,7 @@ class RmhMapping:
         """
         convert form metadata hash into json data
         """
-        print("TODO: convert following metadata:\n", request.form)
+        # print("DEBUG form metadata:\n", request.form)
         # logic and checks here that can generate errors, warnings etc.
 
         pid = request.form.get('pid')
@@ -92,31 +102,36 @@ class RmhMapping:
         department = request.form.get('department')
 
         # save some fields back into mam_data
-        print("\nEditable properties saved in mam_data.json:")
+        print("\n ontsluitingstitel=", request.form.get('ontsluitingstitel'))
         mam_data = self.set_property(
             mam_data, 'dc_title',
             request.form.get('ontsluitingstitel')
         )
 
-        mam_data = self.set_property(
-            mam_data, 'dcterms_abstract',
-            request.form.get('avo_beschrijving')
-        )
-
+        print("uitzenddatum=", request.form.get('uitzenddatum'))
         mam_data = self.set_property(
             mam_data, 'dcterms_issued',
             request.form.get('uitzenddatum')
         )
 
+        print("avo_beschrijving=", request.form.get('avo_beschrijving'))
+        mam_data = self.set_property(
+            mam_data, 'dcterms_abstract',
+            request.form.get('avo_beschrijving')
+        )
+
         # maybe also serie, episode and aflevering editable (double check this tomorrow).
         # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
+        mh_api = MediahavenApi()
+        mh_api.update_metadata(department, mam_data)
 
         errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here
 
         # we can even do another GET call here too if we want to validate the
-        # changes have propagated (for instance charlotte noticed some titel field
-        # sometimes causes a save to mh to fail).
+        # changes have propagated this is even described in the mh documenation
+        # as the call is async so we can check a modified timestamp and
+        # wait until it changes...
 
         tp = self.form_params(token, pid, department, errors, mam_data)
 

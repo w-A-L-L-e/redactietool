@@ -34,7 +34,7 @@ from viaa.observability import logging
 from app.config import flask_environment
 from app.authorization import (get_token, requires_authorization,
                                verify_token, OAS_APPNAME)
-from app.mediahaven_api import MediahavenApi
+from app.services.mediahaven_api import MediahavenApi
 from app.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,

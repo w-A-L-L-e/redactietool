@@ -3,7 +3,7 @@
 #
 #  @Author: Walter Schreppers
 #
-#  app/mediahaven_api.py
+#  app/services/mediahaven_api.py
 #
 #   Make api calls to hetarchief/mediahaven
 #   find_video used to lookup video by pid and tenant
@@ -15,6 +15,7 @@ import os
 from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
+from app.services.subtitle_files import get_property  # , get_array_property
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -127,38 +128,49 @@ class MediahavenApi:
 
         return response.json()
 
-
-    # DO NOT USE THIS YET. It's work in progress.
-    # Also with API v2 will be easier to make this call
+    # This is far from finished. but as poc we truly propagate the dcterms_abstract to MH now ;)
+    # problems:
+    #   1 this is async so the get takes a while before showing true updated data
+    #   2 we will in the end be moving to xml for batch field update with 1 call for multiple fields
+    #
+    # Also with API v2 will be easier to make this call using json directly
     # but requires different authentication (this is something for a future release to consider).
+    # we know however v1 is still staying around until 2023.
     def update_metadata(self, department, metadata):
         # responses to handle:
         # 200 Ok: Record object
         # 400 Bad request: error result
         # 409 Conflict:
         # metadata = json.loads(tp['mam_data'])
-        send_url = f"{self.API_SERVER}/resources/media/"
+        #  We can opt to also add some eventType or reason as params ex:
+        #  -F "value=new title" -F "reason=my reason -F "eventType=my event type"
 
-        # tp['srt_file'] = move_subtitle(upload_folder(), tp)
-        # tp['xml_file'], tp['xml_sidecar'] = save_sidecar_xml(
-        #     upload_folder(), metadata, tp)
+        print("DEBUG: sending metadata for department=", department, " to mediahaven:", metadata)
+        fragment_id = metadata['fragmentId']
+        avo_beschrijving = get_property(metadata, 'dcterms_abstract')
+        print("sending this to mediahaven now: ", avo_beschrijving)
+
+        # we only update dcterms_abstract for now:
+        send_url = f"{self.API_SERVER}/resources/media/{fragment_id}/dcterms_abstract"
+
+        # for now we skip these, but will do this later when we switch to bach update.
+        # dc_title, dcterms_issued
         metadata_fields = {
             'departmentId': ('', self.DEPARTMENT_ID),
-            # 'file': (tp['srt_file'], open(srt_path, 'rb')),
-            # 'metadata': (tp['xml_file'], open(xml_path, 'rb')),
-            'fragmentId': ('', f"{metadata['fragmentId']}"),
-            #'externalId': ('', f"{metadata['externalId']}"),
-            'metadata': metadata,
+            # 'fragmentId': ('', f"{metadata['fragmentId']}"),
+            # 'metadata': metadata,
+            'dcterms_abstract': ('', avo_beschrijving),
             'autoPublish': ('', 'true')
         }
 
-        logger.info("posting metadata to mam", data=metadata_fields)
+        logger.info("posting metadata to mam:", data=metadata_fields)
         response = self.session.post(
             url=send_url,
             auth=(self.api_user(department), self.API_PASSWORD),
             files=metadata_fields,
         )
-        return response.json()
+        # return response.json()
+        return response.status_code
 
     # below two methods are extra helpers only used by maintenance scripts
     def get_object(self, object_id, department='testbeeld'):
