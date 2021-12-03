@@ -118,13 +118,46 @@ class MediahavenApi:
             'autoPublish': ('', 'true')
         }
 
-        logger.info("posting to mam", data=file_fields)
+        logger.info("posting subtitles to mam", data=file_fields)
         response = self.session.post(
             url=send_url,
             auth=(self.api_user(tp['department']), self.API_PASSWORD),
             files=file_fields,
         )
 
+        return response.json()
+
+
+    # DO NOT USE THIS YET. It's work in progress.
+    # Also with API v2 will be easier to make this call
+    # but requires different authentication (this is something for a future release to consider).
+    def update_metadata(self, department, metadata):
+        # responses to handle:
+        # 200 Ok: Record object
+        # 400 Bad request: error result
+        # 409 Conflict:
+        # metadata = json.loads(tp['mam_data'])
+        send_url = f"{self.API_SERVER}/resources/media/"
+
+        # tp['srt_file'] = move_subtitle(upload_folder(), tp)
+        # tp['xml_file'], tp['xml_sidecar'] = save_sidecar_xml(
+        #     upload_folder(), metadata, tp)
+        metadata_fields = {
+            'departmentId': ('', self.DEPARTMENT_ID),
+            # 'file': (tp['srt_file'], open(srt_path, 'rb')),
+            # 'metadata': (tp['xml_file'], open(xml_path, 'rb')),
+            'fragmentId': ('', f"{metadata['fragmentId']}"),
+            #'externalId': ('', f"{metadata['externalId']}"),
+            'metadata': metadata,
+            'autoPublish': ('', 'true')
+        }
+
+        logger.info("posting metadata to mam", data=metadata_fields)
+        response = self.session.post(
+            url=send_url,
+            auth=(self.api_user(department), self.API_PASSWORD),
+            files=metadata_fields,
+        )
         return response.json()
 
     # below two methods are extra helpers only used by maintenance scripts

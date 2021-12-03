@@ -109,8 +109,8 @@ class RmhMapping:
         )
 
         # maybe also serie, episode and aflevering editable (double check this tomorrow).
-
         # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
+
         errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here
 
