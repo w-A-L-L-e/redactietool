@@ -1,6 +1,12 @@
 <html>
 
   <head>
+
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+    <!-- just a little hack to have dutch menus -->
     <style>
         .wrapper-later-with-bulma{
           width: 500px;
@@ -8,11 +14,24 @@
           margin-right: auto;
           height: 15em;
         }
+
+        .ql-snow .ql-picker.ql-header .ql-picker-label::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item::before {
+          content: 'Normaal';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+          content: 'Titel h1';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+          content: 'Titel h2';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+          content: 'Titel h3';
+        }
     </style>
-
-
-    <!-- Include stylesheet -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 
     <!-- Include the Quill library -->
@@ -29,24 +48,21 @@
       <div id="redactietool-richtext-editor">
         <h1>Proof of concept richtext editor</h1>
 
-        <p> Samen met Miel bekeken of de output wel clean is. Probleem is wel dat we de paste event ook moeten opvangen en ervoor zorgen
-        dat ze enkel plain text kunnen pasten en niet iets met markdown in uit een word document ofzo...</p>
-
-        <p>Hello World!</p>
-        <p>Some initial <strong>bold</strong> text</p>
+        <p> Samen met Miel bekeken of de output wel clean genoeg is. 
+        TODO: eerste probleem dat we al zien is wel dat we de paste events ook moeten gaan opvangen.
+        Dit om ervoor te zorgen dat ze enkel plain text kunnen pasten en niet iets met markdown uit een word document ofzo...</p>
 
         <p>
-        Goede aan quill editor is dat de output nog redelijk clean blijft zolang je enkel de gegeven buttons gebruikt.
-        Nadeel is dus wel dat we zowel paste event moeten opvangen als ook extra html parsing in backend moeten steken om zeker te zijn
-        dat er maar enkel 'clean' html in de metadata field naar mediahaven kan gaan.
+        Goede aan <a href="https://quilljs.com/docs/quickstart/">quill editor</a> is dat de 
+        output nog redelijk clean blijft. <b>Verder ook voor zekerheid en security moeten we dan server side (in backend) ook de html parsen en rejecten
+          als er tags in zitten die we niet willen opslaan in Mediahaven...</b>
         </p>
-
-        <p>Documentatie hier: https://quilljs.com/docs/quickstart/ </p>
 
       </div>
 
       <br/>
-      <textarea id="onderwijs_beschrijving" rows="5" cols="70">
+      Editor output: <br/>
+      <textarea id="onderwijs_beschrijving" rows="15" cols="70">
       </textarea>
     </div>
 
@@ -56,10 +72,10 @@
       toolbar: [
         [{ header: [1, 2, false] }],
         ['bold', 'italic', 'underline'],
-        //['image', 'code-block']
+        //['image', 'code-block'] //no images and no files!
       ]
     },
-    placeholder: 'Compose an epic...',
+    placeholder: 'Het archief voor Onderwijs beschrijving',
     theme: 'snow'  // or 'bubble'
   });
 
