@@ -141,29 +141,27 @@ class MediahavenApi:
         # 200 Ok: Record object
         # 400 Bad request: error result
         # 409 Conflict:
-        # metadata = json.loads(tp['mam_data'])
-        #  We can opt to also add some eventType or reason as params ex:
-        #  -F "value=new title" -F "reason=my reason -F "eventType=my event type"
-
         print("DEBUG: sending metadata for department=", department, " to mediahaven:", metadata)
         fragment_id = metadata['fragmentId']
         avo_beschrijving = get_property(metadata, 'dcterms_abstract')
         print("sending this to mediahaven now: ", avo_beschrijving)
 
-        # we only update dcterms_abstract for now:
+        # update dcterms_abstract
         send_url = f"{self.API_SERVER}/resources/media/{fragment_id}/dcterms_abstract"
 
         # for now we skip these, but will do this later when we switch to bach update.
-        # dc_title, dcterms_issued
         metadata_fields = {
             'departmentId': ('', self.DEPARTMENT_ID),
             # 'fragmentId': ('', f"{metadata['fragmentId']}"),
-            # 'metadata': metadata,
             'dcterms_abstract': ('', avo_beschrijving),
             'autoPublish': ('', 'true')
         }
 
-        logger.info("posting metadata to mam:", data=metadata_fields)
+        # if we also want these to update with 1 call
+        # we need to switch into xml batch updating instead.
+        # this is also a post request but instead we supply an xml string with changed values.
+        # dc_title
+        # dcterms_issued
         response = self.session.post(
             url=send_url,
             auth=(self.api_user(department), self.API_PASSWORD),
