@@ -111,6 +111,6 @@ def requires_authorization(f):
 
         if not jwt_token or not verify_token(jwt_token):
             abort(401, jsonify(message='invalid jwt token'))
-        
+
         return f(*args, **kwargs)
     return decorated

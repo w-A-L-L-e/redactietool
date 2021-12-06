@@ -46,7 +46,7 @@
       {% if token %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
-                TODO: Voornaam Achternaam 
+                {{ profile_name | default('Voornaam Achternaam', true) }}
              </a>
              <div class="navbar-dropdown is-right">
                <a class="navbar-item button is-info ml-2 mr-2"

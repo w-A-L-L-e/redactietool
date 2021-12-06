@@ -131,7 +131,8 @@ class RmhMapping:
         # disable until we generate batch update xml sidecar (theres a bug in the
         # single update field call which is not according to the docs). However we will
         # fix this tomorrow.
-        # mh_api = MediahavenApi()
+        mh_api = MediahavenApi()
+        mh_api = mh_api  # temp lint fix until tomorrow
         # mh_api.update_metadata(department, mam_data)
 
         errors = None  # for now always none, hoever mh can give errors
