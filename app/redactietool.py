@@ -32,16 +32,16 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 
 from app.config import flask_environment
-from app.authorization import (get_token, requires_authorization,
-                               verify_token, OAS_APPNAME)
+from app.services.authorization import (get_token, requires_authorization,
+                                        verify_token, OAS_APPNAME)
 from app.services.mediahaven_api import MediahavenApi
-from app.ftp_uploader import FtpUploader
+from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
     move_subtitle, get_property, not_deleted
 )
-from app.validation import (pid_error, upload_error, validate_input,
-                            validate_upload, validate_conversion)
+from app.services.validation import (pid_error, upload_error, validate_input,
+                                     validate_upload, validate_conversion)
 
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils

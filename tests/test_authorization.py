@@ -9,7 +9,7 @@ import pytest
 import os
 
 from app.redactietool import app
-from app.authorization import verify_token
+from app.services.authorization import verify_token
 from .fixtures import jwt_token
 from werkzeug.exceptions import Unauthorized
 

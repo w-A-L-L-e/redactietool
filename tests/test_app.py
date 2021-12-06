@@ -369,7 +369,7 @@ def test_subtitle_ftp_upload(client, mocker):
         return ftp_mock
 
     mocker.patch(
-        'app.ftp_uploader.FtpUploader.ftp_client',
+        'app.services.ftp_uploader.FtpUploader.ftp_client',
         mock_ftp_client
     )
 
