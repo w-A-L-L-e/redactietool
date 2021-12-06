@@ -49,7 +49,7 @@ class RmhMapping:
 
         keyframe_edit_url = '{}{}'.format(
             os.environ.get('KEYFRAME_EDITING_LINK', 'https://set_in_secrets?id='),
-            mam_data['mediaObjectId']  # but this might be wrong see comment DEV-1788
+            mam_data['fragmentId']  # but this might be wrong see comment DEV-1788
         )
 
         return {
