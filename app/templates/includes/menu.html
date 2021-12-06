@@ -19,8 +19,9 @@
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
 
+
+    <div class="navbar-start">
       {% if token %}
         <a class="navbar-item"
            href="/search_media?token={{token}}">
@@ -29,13 +30,6 @@
       {% endif %}
 
       {% if pid and token %}
-        <!-- 
-        <a class="navbar-item"
-           href="/search_media?token={{token}}">
-          Details
-        </a>
-        -->
-
         <a class="navbar-item"
           href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
           Metadata
@@ -46,108 +40,74 @@
           Ondertitels
         </a>
       {% endif %}
-
-      {% if token %}
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Geavanceerd
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item" 
-            href="/search_media?token={{token}}">
-            PID opzoeken
-          </a>
-
-          {% if pid %}
-            <!--
-            <a class="navbar-item" 
-              href="/search_media?token={{token}}">
-              Details
-            </a>
-            -->
-
-            <a class="navbar-item" 
-               href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-              Metadata bewerken
-            </a>
-
-            <a class="navbar-item" 
-               href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-              Ondertitels toevoegen
-            </a>
-
-            
-          {% endif %}
-
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
-            Redactietool v0.8 beta
-          </a>
-        </div>
-      </div>
-      {% endif %}
     </div>
 
+    <div class="navbar-end "> 
+      {% if token %}
+          <div class="navbar-item has-dropdown is-hoverable">
+             <a class="navbar-link">
+                TODO: Voornaam Achternaam 
+             </a>
+             <div class="navbar-dropdown is-right">
+               <a class="navbar-item button is-info ml-2 mr-2"
+                   href="/">
+                   Logout
+                 </a>
 
-    {% if token %}
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a href="/" class="button is-info pull-right">
-              Logout
-            </a>
+               <br/>
+               <hr class="navbar-divider">
+               <a class="navbar-item">
+                 <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+                 Redactietool v0.9 beta
+               </a>
+             </div>
           </div>
-        </div>
-      </div>
-    {% else %}
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <div class="login_logout" id="saml_auth_block">
-              {% if paint_logout %}
-              {% if attributes %}
-                <table class="table table-striped">
-                  <thead>
-                    <th>Name</th><th>Values</th>
-                  </thead>
-                  <tbody>
-                    {% for attr in attributes %}
-                      <tr><td>{{ attr.0 }}</td>
-                      <td><ul class="list-unstyled">
-                        {% for val in attr.1 %}
-                          <li>{{ val }}</li>
-                        {% endfor %}
-                      </ul></td></tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+      {% else %}
+          <div class="navbar-item">
+            <div class="buttons">
+              <div class="login_logout" id="saml_auth_block">
+                {% if paint_logout %}
+                {% if attributes %}
+                  <table class="table table-striped">
+                    <thead>
+                      <th>Name</th><th>Values</th>
+                    </thead>
+                    <tbody>
+                      {% for attr in attributes %}
+                        <tr><td>{{ attr.0 }}</td>
+                        <td><ul class="list-unstyled">
+                          {% for val in attr.1 %}
+                            <li>{{ val }}</li>
+                          {% endfor %}
+                        </ul></td></tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% else %}
+                  <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+                {% endif %}
+
+                <a href="?slo" class="button is-primary">
+                  <strong>Logout</strong>
+                </a>
+
               {% else %}
-                <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+                <a  href="?sso2" 
+                    class="button is-link is-light">
+                  <strong>Login (debug)</strong>
+                </a>
+
+                <a  href="?sso" 
+                    class="button is-info">
+                  Login
+                </a> 
               {% endif %}
+              </div>
 
-              <a href="?slo" class="button is-primary">
-                <strong>Logout</strong>
-              </a>
-
-            {% else %}
-              <a  href="?sso2" 
-                  class="button is-link is-light">
-                <strong>Login (debug)</strong>
-              </a>
-
-              <a  href="?sso" 
-                  class="button is-info">
-                Login
-              </a> 
-            {% endif %}
             </div>
-
           </div>
-        </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
 
   </div>
 </nav>

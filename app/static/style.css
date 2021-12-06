@@ -242,6 +242,21 @@ hr {
 }
 
 
+/* menu login/logout tweaks to pull to right */
+@media screen and (min-width: 1024px){
+  .navbar-login-logout {
+    right: 10px;
+    position: fixed;
+    height: 52px;
+  }
+
+  .navbar-item.button.is-info.ml-2.mr-2:hover{
+    background-color: #3082c5;
+    border-color: transparent;
+    color: #fff;
+  }
+}
+
 /********************* START OF CSS ANIMATION EYE CANDY ***********************/
 /* inspiration https://code-boxx.com/ 
  * wiggle the validation error line so that it gets the users attention

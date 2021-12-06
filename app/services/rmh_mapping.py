@@ -128,8 +128,11 @@ class RmhMapping:
 
         # maybe also serie, episode and aflevering editable (double check this tomorrow).
         # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
-        mh_api = MediahavenApi()
-        mh_api.update_metadata(department, mam_data)
+        # disable until we generate batch update xml sidecar (theres a bug in the
+        # single update field call which is not according to the docs). However we will
+        # fix this tomorrow.
+        # mh_api = MediahavenApi()
+        # mh_api.update_metadata(department, mam_data)
 
         errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here
@@ -147,21 +150,20 @@ class RmhMapping:
         # return our params that are now saved in MH (or return responded errors)
         return tp, json.dumps(tp), errors
 
-    # TODO: also don't forget to make calls here using the suggest library from Miel.
-    # we will be getting back id's from mediahaven and in order to populate
-    # the dropdowns in form we will need some extra calls in order to fetch
-    # the actual label and description:
-    # https://github.com/viaacode/skos-scripts-redactietool
-
     # for the post call we don't need it as the id's will be directly pushed to mediahaven api
     # but this is something for later as Caroline needs to extend MAM structure
-    # to have support for these.
+    # to have support for these:
     # more details in jira ticket https://meemoo.atlassian.net/browse/DEV-1821
     def mh_to_form(self, token, pid, department, errors, mam_data):
         """
         convert json metadata from MediahavenApi back into a
         python hash for populating the view
         """
+        # TODO: also don't forget to make calls here using the suggest library from Miel.
+        # we will be getting back id's from mediahaven and in order to populate
+        # the dropdowns in form we will need some extra calls in order to fetch
+        # the actual label and description:
+        # https://github.com/viaacode/skos-scripts-redactietool
 
         # debug data for in logs:
         print("DEBUG: mediahaven json_data:\n", mam_data)
