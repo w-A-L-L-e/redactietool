@@ -47,6 +47,11 @@ class RmhMapping:
         cast = get_property(mam_data, 'dc_description_cast')
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
 
+        keyframe_edit_url = '{}{}'.format(
+            os.environ.get('KEYFRAME_EDITING_LINK', 'https://set_in_secrets?id='),
+            mam_data['mediaObjectId']  # but this might be wrong see comment DEV-1788
+        )
+
         return {
             'token': token,
             'department': department,
@@ -82,6 +87,7 @@ class RmhMapping:
             'dcterms_issued': get_property(mam_data, 'dcterms_issued'),
             'dcterms_created': get_property(mam_data, 'dcterms_created'),  # not used in form yet?
             'archived': get_property(mam_data, 'created_on'),
+            'keyframe_edit_url': keyframe_edit_url,
             # for v2 mam_data['Internal']['PathToVideo']
             'video_url': mam_data.get('videoPath'),
             'flowplayer_token': os.environ.get(
