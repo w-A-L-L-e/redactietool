@@ -24,6 +24,7 @@ class User(UserMixin):
         self.name = 'Debug Login'
         self.email = 'wstest@meemoo.be'
 
+    # TODO: once we switch to true SAML this is the only method that needs a changin
     def save_jwt_username(self, token):
         try:
             dt = jwt.decode(
