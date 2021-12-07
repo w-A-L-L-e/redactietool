@@ -25,10 +25,12 @@
       {% if token %}
         <a class="navbar-item"
            href="/search_media?token={{token}}">
-          PID
+          Selecteer PID
         </a>
       {% endif %}
+    </div>
 
+    <div class="navbar-end "> 
       {% if pid and token %}
         <a class="navbar-item"
           href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
@@ -40,9 +42,6 @@
           Ondertitels
         </a>
       {% endif %}
-    </div>
-
-    <div class="navbar-end "> 
       {% if token %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
