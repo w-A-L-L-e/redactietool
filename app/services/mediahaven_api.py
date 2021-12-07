@@ -93,8 +93,12 @@ class MediahavenApi:
         matched_videos = self.list_objects(
             department, search=f"%2B(ExternalId:{pid})")
 
-        if matched_videos.get('totalNrOfResults') == 1:
+        nr_results = matched_videos.get('totalNrOfResults')
+        if nr_results == 1:
             return matched_videos.get('mediaDataList', [{}])[0]
+        elif nr_results > 1:
+            # future todo, iterate them and pick a certain one to return?
+            return matched_videos.get('mediaDataList', [{}])[1]
         else:
             return None
 
