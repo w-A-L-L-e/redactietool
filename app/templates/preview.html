@@ -9,13 +9,17 @@ Ondertitels valideren
 
 {% block content %}
 
-<h1 class="title">{{title}}</h1>
+<div class="columns">
+  <div class="column">
+    <h1 class="title">{{title}}</h1>
+    <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
+  </div>
+</div>
+
 
 <div class="columns">
 
   <div class="column is-half">
-    <h2 class="subtitle"><b>PID: {{pid}} </b></h2>
-
     <div id="player_container"></div>
     <!-- We can re-add this back later if wanted
       <table class="video_details">
