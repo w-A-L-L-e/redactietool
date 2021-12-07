@@ -34,7 +34,9 @@ Metadata bewerken
       <div class="notification is-success">
         <button class="delete" onclick="closeSavedAlert(); return false;"></button>
         De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
+        <!--
         Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
+        -->
       </div>
     </div>
   </div>
@@ -657,16 +659,18 @@ Metadata bewerken
 
         <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
         <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
+        <!-- field is disabled tot dat onderwijsniveau is gekozen en api call response er is om
+          het veld in te vullen-->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Onderwijsgraden</label>
           </div>
           <div class="field-body">
-            <div class="select is-multiple">
+            <div class="select is-multiple is-loading" >
               <!-- TODO: multiple size="2" -->
               <select name="lom1_onderwijsgraden" id="lom1_onderwijsgraden">
-                <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
-                <option value="value2">Tweede graad</option>
+                <option value="value1">Api call met als parameter onderwijsnivea...</option>
+                <option value="value2">toon effectieve graden na response api call.</option>
               </select>
             </div>
           </div>
@@ -680,11 +684,16 @@ Metadata bewerken
           <div class="field-body">
             <div class="select">
               <select name="lom1_themas" id="lom1_themas">
-                <option value="value1">Thema's zijn gewoon lijsten van woorden waarom een modal met pills hiervoor?</option>
+                <option value="value1">Thema kan ook met cards, of inline multi-select...</option>
               </select>
-            </div>
+            </div> 
           </div>
         </div>
+
+        <div class="notification is-warning">
+       Verwijderen van een thema zou enkel een popup moeten tonen indien er vakken zijn geselecteerd die aan dit thema hangen (de 'ok' van die popup verwijdert de vakken, de 'annuleren' doet een undo van het verwijderen van dat thema). Een thema toevoegen of een verwijderen die geen related vakken heeft zou gewoon transparant moeten werken. Opmerking: en zolang je niet op 'Metadata opslaan' clicked kan je altijd nog de wijziging ongedaan maken door weg te navigeren en terug te komen (of refresh...).
+        </div>
+
       </div> <!-- lom1_section -->
     </div>
   </div>
@@ -708,7 +717,12 @@ Metadata bewerken
       <hr/>
 
       <div id="lom2_section">
-        <!-- waarom niet gewoon een multi-select hier? het is toch niet editeerbaar, waarom die 'X' op de wireframe? -->
+        <!-- waarom niet gewoon een multi-select hier? 
+          het is toch niet editeerbaar, waarom die 'X' op de wireframe? 
+
+          Je wilt gewoon een deel-lijstje van vakken uit alle mogelijke vakken selecteren
+          dat is een bestaande component en heet een multiselect...
+        -->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Vakken</label>
@@ -747,8 +761,16 @@ Metadata bewerken
       <hr/>
 
       <div id="lom3_section">
-        <!-- waarom niet gewoon een een searchable 
-          multi-select hier? en wat is de api call hiervoor, knowledge graph of elders? -->
+        <!-- 
+          Dus trefwoorden is een searchable dropdown die suggesties geeft als je typt.
+          Indien je een niet bestaande trefwoord kiest mag hier een popup komen met:
+
+          Ben je zeker dat je een nieuw trefwoord wilt toevoegen dat nog niet op
+          Het Archief voor Onderwijs staat?
+
+          JA / Annuleren -> en dus ja zal een call moeten maken om dit ergens op te slaan.
+          Annuleren moet gewoon de plus negeren en select weer leeg maken
+        -->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Trefwoorden</label>
@@ -756,10 +778,13 @@ Metadata bewerken
           <div class="field-body">
             <div class="select is-multiple">
               <select name="lom3_trefwoorden" id="lom3_trefwoorden">
-                <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
-                <option value="value2">tweede trefwoord</option>
+                <option value="value1">TODO: Searchable select hier</option>
+                <option value="value2"></option>
               </select>
             </div>
+
+            <button onclick="addTrefwoord('trefwoorden_lijst', 'some_div'); return false;" 
+              class="button is-info ml-2">+</button>
           </div>
         </div>
 
