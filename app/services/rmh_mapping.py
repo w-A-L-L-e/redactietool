@@ -16,6 +16,7 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property
 from app.services.mediahaven_api import MediahavenApi
+from flask import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -27,7 +28,7 @@ class RmhMapping:
     def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
             if prop.get('attribute') == propkey:
-                print("saving ", propkey, "in mam_data with value=", propvalue)
+                print("saving ", propkey, "in mam_data with value=", escape(propvalue))
                 prop['value'] = propvalue
                 return mam_data
 
@@ -103,23 +104,24 @@ class RmhMapping:
         # print("DEBUG form metadata:\n", request.form)
         # logic and checks here that can generate errors, warnings etc.
 
-        pid = request.form.get('pid')
-        token = request.form.get('token')
-        department = request.form.get('department')
+        pid = escape(request.form.get('pid'))
+        token = escape(request.form.get('token'))
+        department = escape(escape(request.form.get('department')))
 
         # save some fields back into mam_data
-        print("\n ontsluitingstitel=", request.form.get('ontsluitingstitel'))
+        print("\n ontsluitingstitel=", escape(request.form.get('ontsluitingstitel')))
         mam_data = self.set_property(
             mam_data, 'dc_title',
             request.form.get('ontsluitingstitel')
         )
 
-        print("uitzenddatum=", request.form.get('uitzenddatum'))
+        print("uitzenddatum=", escape(request.form.get('uitzenddatum')))
         mam_data = self.set_property(
             mam_data, 'dcterms_issued',
             request.form.get('uitzenddatum')
         )
 
+        # deze nog eventjes un-escaped
         print("avo_beschrijving=", request.form.get('avo_beschrijving'))
         mam_data = self.set_property(
             mam_data, 'dcterms_abstract',

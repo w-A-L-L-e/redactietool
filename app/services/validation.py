@@ -13,6 +13,7 @@ import re
 from flask import redirect, url_for
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
+from flask import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -22,8 +23,8 @@ def pid_error(token, pid, msg):
     return redirect(
         url_for(
             '.search_media',
-            token=token,
-            pid=pid,
+            token=escape(token),
+            pid=escape(pid),
             validation_errors=msg
         )
     )
@@ -34,9 +35,9 @@ def upload_error(template_params, error_msg):
     return redirect(
         url_for(
             '.get_upload',
-            token=template_params['token'],
-            pid=template_params['pid'],
-            department=template_params['department'],
+            token=escape(template_params['token']),
+            pid=escape(template_params['pid']),
+            department=escape(template_params['department']),
             validation_errors=error_msg
         )
     )
