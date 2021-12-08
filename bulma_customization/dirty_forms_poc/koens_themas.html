@@ -20,7 +20,7 @@
         margin-left: auto;
         margin-right: auto;
       }
-      .modal-content{
+      .big-modal-content{
         width: 710px;  /*just a hack here...*/
       }
     </style>
@@ -54,7 +54,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content big-modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Kies een thema</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -686,18 +686,23 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Opgepast unselect van bestaande thema</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        De volgende taken zitten al in dit thema <br/>
+        De volgende vakken zitten al in dit thema <br/>
         ben je zeker dat je dit thema 54 wilt unlinken?
+        <ul>
+          <li>Vak 1</li>
+          <li>Vak 2</li>
+          <li>Vak 3</li>
+        </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleer</button>
+        <button type="button" class="btn btn-primary">Thema verwijderen</button>
       </div>
     </div>
   </div>
