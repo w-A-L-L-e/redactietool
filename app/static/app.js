@@ -254,6 +254,13 @@ function autoCloseSavedAlert(){
   }, 4000); 
 }
 
+function clearButtonLoadingState(){
+  console.log("TODO: put all buttons back in original state");
+  // find all buttons and return to original state
+  // this is similar to hideEmptyTitles but instead we modify
+  // a class and/or replace the button.value
+}
+
 
 // ======================== FORMs onbeforeunload handlers ======================
 // this is found by googling around some, not sure yet if we'll take this route
@@ -321,6 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   collapseEmptyTextareas();
   hideEmptyTitles();
   autoCloseSavedAlert();
+  clearButtonLoadingState();
   
   // For demo, show modal dialogs
   // ============================
