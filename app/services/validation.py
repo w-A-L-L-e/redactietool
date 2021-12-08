@@ -13,7 +13,7 @@ import re
 from flask import redirect, url_for
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from flask import escape
+from markupsafe import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 

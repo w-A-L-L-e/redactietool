@@ -16,7 +16,7 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property
 from app.services.mediahaven_api import MediahavenApi
-from flask import escape
+from markupsafe import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
