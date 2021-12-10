@@ -1,0 +1,3344 @@
+@prefix graad: <https://data.meemoo.be/terms/ond/graad#> .
+@prefix niveau: <https://data.meemoo.be/terms/ond/niveau#> .
+@prefix ond: <https://data.meemoo.be/terms/ond/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix thema: <https://data.meemoo.be/terms/ond/thema#> .
+@prefix vak: <https://data.meemoo.be/terms/ond/vak#> .
+
+ond:graad a skos:Collection ;
+    rdfs:label "Onderwijsgraden"@nl ;
+    skos:member graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad .
+
+ond:niveau a skos:Collection ;
+    rdfs:label "Onderwijsniveaus"@nl ;
+    skos:member niveau:hoger-onderwijs,
+        niveau:kleuteronderwijs,
+        niveau:lager-onderwijs,
+        niveau:secundair-onderwijs,
+        niveau:volwassenenonderwijs .
+
+<https://data.meemoo.be/terms/ond/vak#%22instrument%3A-folk--en-wereldmuziek> skos:related thema:podiumkunsten .
+
+<https://data.meemoo.be/terms/ond/vak#%22instrument%3A-jazz-pop-rock> skos:related thema:podiumkunsten .
+
+<https://data.meemoo.be/terms/ond/vak#%22instrument%3A-klassiek> skos:related thema:podiumkunsten .
+
+vak:project-algemene-vakken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "project algemene vakken"@nl ;
+    skos:topConceptOf ond:vak .
+
+vak:sociale-activiteit a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "sociale activiteit"@nl ;
+    skos:topConceptOf ond:vak .
+
+niveau:hoger-onderwijs a skos:Concept ;
+    skos:definition "Hoger onderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Hoger onderwijs"@nl ;
+    skos:topConceptOf ond:structuur .
+
+niveau:kleuteronderwijs a skos:Concept ;
+    skos:definition "Kleuteronderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Kleuteronderwijs"@nl ;
+    skos:topConceptOf ond:structuur .
+
+niveau:volwassenenonderwijs a skos:Concept ;
+    skos:definition "Volwassenenonderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Volwassenenonderwijs"@nl ;
+    skos:topConceptOf ond:structuur .
+
+thema:beroepen a skos:Concept ;
+    skos:definition "Alles over de arbeidsmarkt, arbeidsomstandigheden, beroepen, vakbonden, solliciteren, arbeidswetgeving, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Beroepen"@nl ;
+    skos:related vak:militaire-vorming ;
+    skos:topConceptOf ond:themas .
+
+thema:fauna-en-flora-%28verwijderen--%3E-naar-milieu-en-ecologie%29 a skos:Concept ;
+    skos:definition "in de samenleving / fauna en flora"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Fauna en flora (verwijderen -> naar milieu en ecologie)"@nl ;
+    skos:related vak:dierenzorg ;
+    skos:topConceptOf ond:themas .
+
+thema:armoede-en-welvaart a skos:Concept ;
+    skos:definition "Alles over armoede, kansarmoede, armoedebestrijding, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Armoede en welvaart"@nl ;
+    skos:related vak:cultuurwetenschappen,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:bevolking-en-ruimtelijke-ordening a skos:Concept ;
+    skos:definition "Demografie en ruimtelijke planning"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Bevolking en ruimtelijke ordening"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:het-heelal a skos:Concept ;
+    skos:definition "To space ... and beyond"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Het heelal"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:leren-en-onderzoeken a skos:Concept ;
+    skos:definition "Hoe leren mensen en alles over onderzoekscompetenties en het onderwijs"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Leren en onderzoeken"@nl ;
+    skos:related vak:exploratie,
+        vak:leren-leren ;
+    skos:topConceptOf ond:themas .
+
+thema:rampen-en-conflicten a skos:Concept ;
+    skos:definition "Denk aan oorlog, hongersnood, Arabische lente, treinramp Buizingen, Fukushima, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Rampen en conflicten"@nl ;
+    skos:related vak:geschiedenis,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:weer-en-klimaat a skos:Concept ;
+    skos:definition "Alles over het weer en het klimaat"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Weer en klimaat"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:wiskunde a skos:Concept ;
+    skos:definition "Wiskunde"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Wiskunde"@nl ;
+    skos:related vak:project-stem,
+        vak:wiskunde ;
+    skos:topConceptOf ond:themas .
+
+vak:administratie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "administratie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:bedrijfsbeheer ;
+    skos:topConceptOf ond:vak .
+
+vak:afwerking-bouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "afwerking bouw"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:agrarische-technieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "agrarische technieken"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:apotheek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "apotheek"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:chemie ;
+    skos:topConceptOf ond:vak .
+
+vak:autorijtechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "autorijtechnieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:autotechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "autotechnieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:besturing-bouwmachines a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "besturing bouwmachines"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:binnenhuiskunst a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "binnenhuiskunst"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:bosbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bosbouw"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:centrale-verwarming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "centrale verwarming"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:dakwerken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "dakwerken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:filosofie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "filosofie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:filosofie ;
+    skos:topConceptOf ond:vak .
+
+vak:groendecoratie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groendecoratie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:human-resources a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "human resources"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:bedrijfsbeheer ;
+    skos:topConceptOf ond:vak .
+
+vak:instrumentenbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "instrumentenbouw"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:koetswerk a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "koetswerk"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:kunststoffen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "kunststoffen"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:lassen-constructie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "lassen-constructie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:mechanische-vormgeving a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "mechanische vormgeving"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:natuurbeheer a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "natuurbeheer"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:nautische-technieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "nautische technieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:verkeer-en-mobiliteit ;
+    skos:topConceptOf ond:vak .
+
+vak:opvoedkunde a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "opvoedkunde"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:opvoeding-en-ontwikkeling ;
+    skos:topConceptOf ond:vak .
+
+vak:orthopedie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "orthopedie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:pedagogiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "pedagogiek"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:opvoeding-en-ontwikkeling ;
+    skos:topConceptOf ond:vak .
+
+vak:praktische-harmonie%3A-folk-en-wereldmuziek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "praktische harmonie: folk-en wereldmuziek"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:praktische-harmonie%3A-jazz-pop-rock a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "praktische harmonie: jazz-pop-rock"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:praktische-harmonie%3A-klassiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "praktische harmonie: klassiek"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:productie-industrie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "productie-industrie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:public-relations a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "public relations"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:media-en-communicatie ;
+    skos:topConceptOf ond:vak .
+
+vak:recht a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "recht"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:recht ;
+    skos:topConceptOf ond:vak .
+
+vak:ruwbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "ruwbouw"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:sanitair a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "sanitair"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:scheepswerktuigkunde a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "scheepswerktuigkunde"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:techniek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "techniek"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:technologische-opvoeding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "technologische opvoeding"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-beeldende-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste beeldende vorming"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:topsport a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "topsport"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        thema:sport-en-spel ;
+    skos:topConceptOf ond:vak .
+
+vak:verpleegkunde a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "verpleegkunde"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg ;
+    skos:topConceptOf ond:vak .
+
+vak:vrije-beeldende-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "vrije beeldende vorming"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:waarnemingstekenen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "waarnemingstekenen"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:wegenwerken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "wegenwerken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:verkeer-en-mobiliteit ;
+    skos:topConceptOf ond:vak .
+
+thema:erfgoed a skos:Concept ;
+    skos:definition "Materieel en immaterieel erfgoed (tradities, rituelen, ...), alles over hoe we vandaag naar het verleden kijken"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Erfgoed"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:hedendaagse-tijd a skos:Concept ;
+    skos:definition "Alles over de hedendaagse tijd (na WO II - 10 jaar geleden)"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Hedendaagse tijd"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:landschap-en-reli%C3%ABf a skos:Concept ;
+    skos:definition "Fysische geografie"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Landschap en reliëf"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:mens-en-maatschappij,
+        vak:rijn--en-binnenvaart ;
+    skos:topConceptOf ond:themas .
+
+thema:middeleeuwen a skos:Concept ;
+    skos:definition "Alles over de middeleeuwen"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Middeleeuwen"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:moderne-tijd a skos:Concept ;
+    skos:definition "Alles over de moderne tijd"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Moderne tijd"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:nederlandse-taal a skos:Concept ;
+    skos:definition "Taalkunde, exclusief literatuur, voor de Nederlandse taal"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Nederlandse taal"@nl ;
+    skos:related vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:zakelijke-communicatie ;
+    skos:topConceptOf ond:themas .
+
+thema:prehistorie a skos:Concept ;
+    skos:definition "Alles over de prehistorie"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Prehistorie"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:vroegmoderne-tijd a skos:Concept ;
+    skos:definition "Alles over de vroegmoderne tijd"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Vroegmoderne tijd"@nl ;
+    skos:related vak:geschiedenis,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+vak:algemene-muziekleer a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "algemene muziekleer"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:architecturale-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "architecturale vorming"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:architectuurtekenen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "architectuurtekenen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:atelier-drama a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "atelier drama"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:atelier-woord a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "atelier woord"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:beeldende-kunsten a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "beeldende kunsten"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:beeldende-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "beeldende vorming"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:biochemie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "biochemie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:biologie,
+        thema:chemie ;
+    skos:topConceptOf ond:vak .
+
+vak:bouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bouw"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:bouwkunst a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bouwkunst"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:chemie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "chemie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:chemie ;
+    skos:topConceptOf ond:vak .
+
+vak:commerci%C3%ABle-technieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "commerciële technieken"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        thema:bedrijfsbeheer ;
+    skos:topConceptOf ond:vak .
+
+vak:creatief-musiceren a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "creatief musiceren"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:ecologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "ecologie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:land--en-tuinbouw,
+        thema:milieu-en-ecologie ;
+    skos:topConceptOf ond:vak .
+
+vak:esthetica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "esthetica"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:exploratie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "exploratie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:leren-en-onderzoeken ;
+    skos:topConceptOf ond:vak .
+
+vak:fotografie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "fotografie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:fysica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "fysica"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:grafische-technieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "grafische technieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:grime a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "grime"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:lichamelijke-verzorging ;
+    skos:topConceptOf ond:vak .
+
+vak:groepsmusiceren%3A-folk--en-wereldmuziek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groepsmusiceren: folk- en wereldmuziek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:groepsmusiceren%3A-jazz-pop-rock a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groepsmusiceren: jazz-pop-rock"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:groepsmusiceren%3A-klassiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groepsmusiceren: klassiek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:groepsmusiceren%3A-musical a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groepsmusiceren: musical"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:groepsmusiceren%3A-opera%2Fmuziektheater a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "groepsmusiceren: opera/muziektheater"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:haarverzorging a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "haarverzorging"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:lichamelijke-verzorging ;
+    skos:topConceptOf ond:vak .
+
+vak:hedendaagse-dans a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "hedendaagse dans"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:hoefverzorging a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "hoefverzorging"@nl ;
+    skos:related graad:secundair-2de-graad,
+        thema:biologie,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:hotel a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "hotel"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:hout a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "hout"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:indirecte-zorg a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "indirecte zorg"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg ;
+    skos:topConceptOf ond:vak .
+
+vak:instrument%3A-folk--en-wereldmuziek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "instrument: folk- en wereldmuziek (accordeon, contrabas, doedelzak, folkgitaar, folkviool, Keltische harp, mandoline, slagwerk)"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:instrument%3A-jazz-pop-rock a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "instrument: jazz-pop-rock (accordeon, bugel, contrabas, cornet, dwarsfluit, gitaar, hoorn, keyboard, klarinet, piano, saxofoon, slagwerk, trombone, trompet, tuba, viool)"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:instrument%3A-klassiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "instrument: klassiek (althoorn, altviool, bariton, blokfluit, bugel, cello, contrabas, dwarsfluit, Engelse hoorn, fagot, gamba, gitaar, harp, hobo, hoorn, klarinet, klavecimbel, kornet, luit, orgel, piano, saxofoon, slagwerk, traverso, trombone, trompet, viool)"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:keukentechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "keukentechnieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:klassieke-dans a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "klassieke dans"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:koeltechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "koeltechnieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:landbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "landbouw"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:land--en-tuinbouw ;
+    skos:topConceptOf ond:vak .
+
+vak:mechanica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "mechanica"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:meubelmakerij a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "meubelmakerij"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:militaire-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "militaire vorming"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beroepen ;
+    skos:topConceptOf ond:vak .
+
+vak:mode a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "mode"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:muziektheorie%3A-folk-en-wereldmuziek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "muziektheorie: folk-en wereldmuziek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:muziektheorie%3A-jazz-pop-rock a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "muziektheorie: jazz-pop-rock"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:muziektheorie%3A-klassiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "muziektheorie: klassiek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:onthaal a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "onthaal"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:media-en-communicatie ;
+    skos:topConceptOf ond:vak .
+
+vak:optiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "optiek"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:biologie,
+        thema:gezondheid-en-gezondheidszorg ;
+    skos:topConceptOf ond:vak .
+
+vak:podiumtechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "podiumtechnieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:restauranttechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "restauranttechnieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:restauratie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "restauratie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:scheepvaart a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "scheepvaart"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:verkeer-en-mobiliteit ;
+    skos:topConceptOf ond:vak .
+
+vak:schoonheidsverzorging a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "schoonheidsverzorging"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:lichamelijke-verzorging ;
+    skos:topConceptOf ond:vak .
+
+vak:schoonmaak a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "schoonmaak"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:lichamelijke-verzorging ;
+    skos:topConceptOf ond:vak .
+
+vak:schrijnwerkerij a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "schrijnwerkerij"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:slagerij a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "slagerij"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:sport a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "sport"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:sport-en-spel ;
+    skos:topConceptOf ond:vak .
+
+vak:steen--en-marmerbewerking a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "steen- en marmerbewerking"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:steigerbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "steigerbouw"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:tandtechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "tandtechnieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:lichamelijke-verzorging ;
+    skos:topConceptOf ond:vak .
+
+vak:textielverzorging a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "textielverzorging"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-biologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste biologie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-chemie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste chemie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:chemie ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-fysica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste fysica"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:toerisme a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toerisme"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:tuinbouw a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "tuinbouw"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:milieu-en-ecologie ;
+    skos:topConceptOf ond:vak .
+
+vak:uurwerkmaken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "uurwerkmaken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie ;
+    skos:topConceptOf ond:vak .
+
+vak:zakelijke-communicatie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zakelijke communicatie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:media-en-communicatie,
+        thema:nederlandse-taal ;
+    skos:topConceptOf ond:vak .
+
+vak:zang%3A-folk--en-wereldmuziek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zang: folk- en wereldmuziek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:zang%3A-jazz-pop-rock a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zang: jazz-pop-rock"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:zang%3A-klassiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zang: klassiek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:zang%3A-musical a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zang: musical"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:zang%3A-opera%2Fmuziektheater a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zang: opera/muziektheater"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+niveau:lager-onderwijs a skos:Concept ;
+    skos:definition "Lager onderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:narrower graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad ;
+    skos:prefLabel "Lager onderwijs"@nl ;
+    skos:topConceptOf ond:structuur .
+
+niveau:secundair-onderwijs a skos:Concept ;
+    skos:definition "Secundair onderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:narrower graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad ;
+    skos:prefLabel "Secundair onderwijs"@nl ;
+    skos:topConceptOf ond:structuur .
+
+thema:klassieke-talen a skos:Concept ;
+    skos:definition "Taalkunde, exclusief literatuur, voor de klassieke talen"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Klassieke talen"@nl ;
+    skos:related vak:grieks,
+        vak:hebreeuws,
+        vak:latijn,
+        vak:oud-hebreeuws ;
+    skos:topConceptOf ond:themas .
+
+thema:omgaan-met-geld a skos:Concept ;
+    skos:definition "Persoonlijke financiële geletterdheid"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Omgaan met geld"@nl ;
+    skos:related vak:boekhouding,
+        vak:economie-,
+        vak:maatschappelijke-vorming,
+        vak:toegepaste-economie ;
+    skos:topConceptOf ond:themas .
+
+thema:participatie a skos:Concept ;
+    skos:definition "Maatschappelijke participatie"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Participatie"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:psychologie a skos:Concept ;
+    skos:definition "Alles over psychologie en mentaal welzijn"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Psychologie"@nl ;
+    skos:related vak:gedragswetenschappen,
+        vak:mens-en-maatschappij,
+        vak:psychologie,
+        vak:toegepaste-psychologie ;
+    skos:topConceptOf ond:themas .
+
+thema:relaties-en-seksualiteit a skos:Concept ;
+    skos:definition "Alles over persoonlijke relaties, inclusief familiebanden en vriendschap, en seksualiteit"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Relaties en seksualiteit"@nl ;
+    skos:related vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:sociale-vaardigheden,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+thema:sport-en-spel a skos:Concept ;
+    skos:definition "Alles over lichaamsbeweging, (top)sport, spellen en spelen"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Sport en spel"@nl ;
+    skos:related vak:bewegingswetenschappen,
+        vak:lichamelijke-opvoeding,
+        vak:sport,
+        vak:topsport ;
+    skos:topConceptOf ond:themas .
+
+vak:algemene-verbale-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "algemene verbale vorming"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:audiovisuele-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "audiovisuele vorming"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:digitale-vaardigheden-en-informatica ;
+    skos:topConceptOf ond:vak .
+
+vak:bakkerij a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bakkerij"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:bewegingswetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bewegingswetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:sport-en-spel ;
+    skos:topConceptOf ond:vak .
+
+vak:boekhouding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "boekhouding"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:omgaan-met-geld ;
+    skos:topConceptOf ond:vak .
+
+vak:communicatiewetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "communicatiewetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:media-en-communicatie,
+        thema:mediawijsheid ;
+    skos:topConceptOf ond:vak .
+
+vak:decoratieve-technieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "decoratieve technieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:diamant a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "diamant"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:eigen-cultuur-en-religie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "eigen cultuur en religie"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:religie-en-geloof ;
+    skos:topConceptOf ond:vak .
+
+vak:elektronica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "elektronica"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:digitale-vaardigheden-en-informatica ;
+    skos:topConceptOf ond:vak .
+
+vak:glastechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "glastechnieken"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:goud-en-juwelen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "goud en juwelen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:informaticawetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "informaticawetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:mediawijsheid ;
+    skos:topConceptOf ond:vak .
+
+vak:italiaans a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Italiaans"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:leren-leren a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Leren leren"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:leren-en-onderzoeken ;
+    skos:topConceptOf ond:vak .
+
+vak:logistiek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "logistiek"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:economie ;
+    skos:topConceptOf ond:vak .
+
+vak:muzikale-opvoeding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "muzikale opvoeding"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        thema:podiumkunsten,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:plastische-opvoeding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "plastische opvoeding"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        thema:beeldende-kunsten,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:psychologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "psychologie"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:opvoeding-en-ontwikkeling,
+        thema:psychologie ;
+    skos:topConceptOf ond:vak .
+
+vak:publiciteitstekenen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "publiciteitstekenen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:media-en-communicatie,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:rijn--en-binnenvaart a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Rijn- en binnenvaart"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:landschap-en-reli%C3%ABf,
+        thema:verkeer-en-mobiliteit ;
+    skos:topConceptOf ond:vak .
+
+vak:russisch a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Russisch"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:schilderen-en-decoratie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "schilderen en decoratie"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:spaans a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Spaans"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:textielproductie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "textielproductie"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-biochemie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste biochemie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie,
+        thema:chemie ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-informatica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste informatica"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:digitale-vaardigheden-en-informatica ;
+    skos:topConceptOf ond:vak .
+
+vak:veiligheidstechnieken a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "veiligheidstechnieken"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:media-en-communicatie,
+        thema:recht ;
+    skos:topConceptOf ond:vak .
+
+vak:verzorging a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "verzorging"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:gezondheid-en-gezondheidszorg ;
+    skos:topConceptOf ond:vak .
+
+vak:voeding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "voeding"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:voeding-en-horeca ;
+    skos:topConceptOf ond:vak .
+
+vak:zeemanschap a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "zeemanschap"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:verkeer-en-mobiliteit ;
+    skos:topConceptOf ond:vak .
+
+thema:lichamelijke-verzorging a skos:Concept ;
+    skos:definition "Persoonlijke hygiëne, haartooi, cosmetica, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Lichamelijke verzorging"@nl ;
+    skos:related vak:grime,
+        vak:haarverzorging,
+        vak:schoonheidsverzorging,
+        vak:schoonmaak,
+        vak:tandtechnieken ;
+    skos:topConceptOf ond:themas .
+
+thema:politiek-en-overheid a skos:Concept ;
+    skos:definition "Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Politiek en overheid"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij ;
+    skos:topConceptOf ond:themas .
+
+thema:religie-en-geloof a skos:Concept ;
+    skos:definition "Alles over religies, geloofsovertuigingen en godsdiensten"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Religie en geloof"@nl ;
+    skos:related vak:cultuurbeschouwing,
+        vak:eigen-cultuur-en-religie,
+        vak:godsdienst-,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:niet-confessionele-zedenleer- ;
+    skos:topConceptOf ond:themas .
+
+thema:rolpatronen-en-stereotypen a skos:Concept ;
+    skos:definition "Alles over de rollen die mensen opnemen in de maatschappij en de stereotypen die daar bij komen. Ook racisme, seksisme, discriminatie, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Rolpatronen en stereotypen"@nl ;
+    skos:related vak:cultuurwetenschappen,
+        vak:gedragswetenschappen,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+vak:artistieke-creatie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "artistieke creatie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:podiumkunsten,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:artistieke-expressie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "artistieke expressie"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:bedrijfswetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "bedrijfswetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:economie,
+        thema:recht ;
+    skos:topConceptOf ond:vak .
+
+vak:beeld--en-mediacultuur a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "beeld- en mediacultuur"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:media-en-communicatie,
+        thema:mediawijsheid ;
+    skos:topConceptOf ond:vak .
+
+vak:biologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "biologie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:milieu-en-ecologie ;
+    skos:topConceptOf ond:vak .
+
+vak:dierenzorg a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "dierenzorg"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie,
+        thema:fauna-en-flora-%28verwijderen--%3E-naar-milieu-en-ecologie%29,
+        thema:gezondheid-en-gezondheidszorg ;
+    skos:topConceptOf ond:vak .
+
+vak:duits a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Duits"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:economie- a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "economie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:economie,
+        thema:omgaan-met-geld ;
+    skos:topConceptOf ond:vak .
+
+vak:elektriciteit a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "elektriciteit"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:elektromechanica a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "elektromechanica"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:ict a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "ICT"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:mediawijsheid ;
+    skos:topConceptOf ond:vak .
+
+vak:interlevensbeschouwelijke-dialoog a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "interlevensbeschouwelijke dialoog"@nl ;
+    skos:related graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:filosofie,
+        thema:normen-en-waarden,
+        thema:religie-en-geloof ;
+    skos:topConceptOf ond:vak .
+
+vak:kunstbeschouwing a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "kunstbeschouwing"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:beeldende-kunsten,
+        thema:podiumkunsten,
+        thema:toegepaste-kunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:printmedia a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "printmedia"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:constructie-en-productie,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:media-en-communicatie ;
+    skos:topConceptOf ond:vak .
+
+vak:sociale-vaardigheden a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Sociale vaardigheden"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:media-en-communicatie,
+        thema:relaties-en-seksualiteit ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-natuurwetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste natuurwetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie,
+        thema:chemie,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-psychologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste psychologie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:media-en-communicatie,
+        thema:opvoeding-en-ontwikkeling,
+        thema:psychologie ;
+    skos:topConceptOf ond:vak .
+
+vak:verkoop a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "verkoop"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:economie,
+        thema:media-en-communicatie ;
+    skos:topConceptOf ond:vak .
+
+thema:economie a skos:Concept ;
+    skos:definition "Micro- en macro-economie"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Economie"@nl ;
+    skos:related vak:bedrijfswetenschappen,
+        vak:cultuurwetenschappen,
+        vak:economie-,
+        vak:logistiek,
+        vak:toegepaste-economie,
+        vak:verkoop ;
+    skos:topConceptOf ond:themas .
+
+thema:milieu-en-ecologie a skos:Concept ;
+    skos:definition "Ecosystemen, biodiversiteit, habitat, milieuvervuiling, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Milieu en ecologie"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:biologie,
+        vak:ecologie,
+        vak:mens-en-maatschappij,
+        vak:tuinbouw,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+thema:moderne-talen a skos:Concept ;
+    skos:definition "Taalkunde, exclusief literatuur, voor alle moderne talen"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Moderne talen"@nl ;
+    skos:related vak:duits,
+        vak:engels-,
+        vak:frans,
+        vak:italiaans,
+        vak:russisch,
+        vak:spaans ;
+    skos:topConceptOf ond:themas .
+
+thema:opvoeding-en-ontwikkeling a skos:Concept ;
+    skos:definition "Opvoeding van kinderen en ontwikkeling van de mens"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Opvoeding en ontwikkeling"@nl ;
+    skos:related vak:gedragswetenschappen,
+        vak:mens-en-maatschappij,
+        vak:opvoedkunde,
+        vak:pedagogiek,
+        vak:psychologie,
+        vak:toegepaste-psychologie ;
+    skos:topConceptOf ond:themas .
+
+vak:engels- a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Engels"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:hebreeuws a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Hebreeuws"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:klassieke-talen,
+        thema:literatuur,
+        thema:oudheid,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:muzische-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Muzische vorming"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:beeldende-kunsten,
+        thema:media-en-communicatie,
+        thema:podiumkunsten ;
+    skos:topConceptOf ond:vak .
+
+vak:natuurwetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "natuurwetenschappen"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:biologie,
+        thema:chemie,
+        thema:fysica ;
+    skos:topConceptOf ond:vak .
+
+vak:nederlands-voor-nieuwkomers a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Nederlands voor nieuwkomers (vak voorbehouden aan OKAN)"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        thema:literatuur,
+        thema:nederlandse-taal ;
+    skos:topConceptOf ond:vak .
+
+vak:oud-hebreeuws a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Oud-Hebreeuws"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:klassieke-talen,
+        thema:literatuur,
+        thema:oudheid,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:project-stem a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "project STEM"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        thema:biologie,
+        thema:chemie,
+        thema:constructie-en-productie,
+        thema:fysica,
+        thema:wiskunde ;
+    skos:topConceptOf ond:vak .
+
+vak:toegepaste-economie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "toegepaste economie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bedrijfsbeheer,
+        thema:economie,
+        thema:omgaan-met-geld,
+        thema:recht ;
+    skos:topConceptOf ond:vak .
+
+thema:mediawijsheid a skos:Concept ;
+    skos:definition "Mediawijsheid, beeldgeletterdheid, kritische zin"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Mediawijsheid"@nl ;
+    skos:related vak:beeld--en-mediacultuur,
+        vak:communicatiewetenschappen,
+        vak:ict,
+        vak:informaticawetenschappen,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+thema:oudheid a skos:Concept ;
+    skos:definition "Alles over de oudheid"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Oudheid"@nl ;
+    skos:related vak:geschiedenis,
+        vak:grieks,
+        vak:hebreeuws,
+        vak:latijn,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:oud-hebreeuws ;
+    skos:topConceptOf ond:themas .
+
+thema:verkeer-en-mobiliteit a skos:Concept ;
+    skos:definition "Organisatie van het verkeer, verkeersveiligheid, files, geschiedenis van de fiets"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Verkeer en mobiliteit"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:mens-en-maatschappij,
+        vak:nautische-technieken,
+        vak:rijn--en-binnenvaart,
+        vak:scheepvaart,
+        vak:wegenwerken,
+        vak:zeemanschap ;
+    skos:topConceptOf ond:themas .
+
+thema:voeding-en-horeca a skos:Concept ;
+    skos:definition "Alles over voeding en alle aspecten van de horeca"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Voeding en horeca"@nl ;
+    skos:related vak:bakkerij,
+        vak:hotel,
+        vak:keukentechnieken,
+        vak:mens-en-maatschappij,
+        vak:restauranttechnieken,
+        vak:slagerij,
+        vak:voeding ;
+    skos:topConceptOf ond:themas .
+
+vak:frans a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Frans"@nl ;
+    skos:related graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:moderne-talen,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:grieks a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Grieks"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:klassieke-talen,
+        thema:literatuur,
+        thema:oudheid,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:latijn a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Latijn"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:klassieke-talen,
+        thema:literatuur,
+        thema:oudheid,
+        thema:toerisme ;
+    skos:topConceptOf ond:vak .
+
+vak:lichamelijke-opvoeding a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "lichamelijke opvoeding"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:sport-en-spel ;
+    skos:topConceptOf ond:vak .
+
+vak:wiskunde a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "wiskunde"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:wiskunde ;
+    skos:topConceptOf ond:vak .
+
+thema:filosofie a skos:Concept ;
+    skos:definition "Alles over filosofie, (rationele) levensbeschouwingen en ethische vraagstukken"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Filosofie"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:filosofie,
+        vak:godsdienst-,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:mens-en-maatschappij,
+        vak:niet-confessionele-zedenleer- ;
+    skos:topConceptOf ond:themas .
+
+thema:land--en-tuinbouw a skos:Concept ;
+    skos:definition "Van landbouw tot bosbeheer, van veeteelt tot tuinbouw"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Land- en tuinbouw"@nl ;
+    skos:related vak:agrarische-technieken,
+        vak:bosbouw,
+        vak:ecologie,
+        vak:groendecoratie,
+        vak:hoefverzorging,
+        vak:landbouw,
+        vak:natuurbeheer,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+vak:gedragswetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "gedragswetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:identiteit,
+        thema:normen-en-waarden,
+        thema:opvoeding-en-ontwikkeling,
+        thema:psychologie,
+        thema:rolpatronen-en-stereotypen ;
+    skos:topConceptOf ond:vak .
+
+thema:bedrijfsbeheer a skos:Concept ;
+    skos:definition "Bedrijfseconomie, ondernemerschap, alle aspecten van bedrijfskunde"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Bedrijfsbeheer"@nl ;
+    skos:related vak:administratie,
+        vak:bedrijfswetenschappen,
+        vak:boekhouding,
+        vak:commerci%C3%ABle-technieken,
+        vak:economie-,
+        vak:human-resources,
+        vak:logistiek,
+        vak:onthaal,
+        vak:toegepaste-economie ;
+    skos:topConceptOf ond:themas .
+
+thema:chemie a skos:Concept ;
+    skos:definition "Chemie (theorie/praktijk)"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Chemie"@nl ;
+    skos:related vak:apotheek,
+        vak:biochemie,
+        vak:chemie,
+        vak:natuurwetenschappen,
+        vak:project-stem,
+        vak:toegepaste-biochemie,
+        vak:toegepaste-chemie,
+        vak:toegepaste-natuurwetenschappen,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+thema:digitale-vaardigheden-en-informatica a skos:Concept ;
+    skos:definition "Digitale technologieën, programmeren, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Digitale vaardigheden en informatica"@nl ;
+    skos:related vak:audiovisuele-vorming,
+        vak:beeld--en-mediacultuur,
+        vak:elektromechanica,
+        vak:elektronica,
+        vak:ict,
+        vak:informaticawetenschappen,
+        vak:printmedia,
+        vak:toegepaste-informatica,
+        vak:verkoop ;
+    skos:topConceptOf ond:themas .
+
+thema:fysica a skos:Concept ;
+    skos:definition "Fysica (theorie/praktijk)"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Fysica"@nl ;
+    skos:related vak:elektriciteit,
+        vak:elektromechanica,
+        vak:fysica,
+        vak:koeltechnieken,
+        vak:natuurwetenschappen,
+        vak:project-stem,
+        vak:toegepaste-fysica,
+        vak:toegepaste-natuurwetenschappen,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+thema:identiteit a skos:Concept ;
+    skos:definition "Het zelfbeeld van individuen en groepen. Gaande van persoonlijke, sociale, culturele tot nationale identiteitsvorming. Ook gender."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Identiteit"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:gedragswetenschappen,
+        vak:godsdienst-,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+thema:normen-en-waarden a skos:Concept ;
+    skos:definition "Alles over de waarden (idealen en motieven) van een maatschappij en de normen (richtlijnen, gedragsregels) die moeten leiden tot die waarden, plus deviant gedrag"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Normen en waarden"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurwetenschappen,
+        vak:gedragswetenschappen,
+        vak:godsdienst-,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+vak:cultuurbeschouwing a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "cultuurbeschouwing"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:filosofie,
+        thema:identiteit,
+        thema:participatie,
+        thema:politiek-en-overheid,
+        thema:recht,
+        thema:religie-en-geloof ;
+    skos:topConceptOf ond:vak .
+
+vak:nederlands a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Nederlands"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:literatuur,
+        thema:media-en-communicatie,
+        thema:nederlandse-taal ;
+    skos:topConceptOf ond:vak .
+
+vak:sociologie a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "sociologie"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:identiteit,
+        thema:mediawijsheid,
+        thema:normen-en-waarden,
+        thema:recht,
+        thema:relaties-en-seksualiteit,
+        thema:rolpatronen-en-stereotypen ;
+    skos:topConceptOf ond:vak .
+
+vak:wetenschappen-en-techniek a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Wetenschappen en techniek"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:biologie,
+        thema:chemie,
+        thema:constructie-en-productie,
+        thema:fysica,
+        thema:land--en-tuinbouw,
+        thema:milieu-en-ecologie ;
+    skos:topConceptOf ond:vak .
+
+thema:culturele-diversiteit a skos:Concept ;
+    skos:definition "Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Culturele diversiteit"@nl ;
+    skos:related vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:gedragswetenschappen,
+        vak:godsdienst-,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociologie ;
+    skos:topConceptOf ond:themas .
+
+thema:gezondheid-en-gezondheidszorg a skos:Concept ;
+    skos:definition "Alle aspecten van de gezondheidszorg, lichamelijke gezondheid"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Gezondheid en gezondheidszorg"@nl ;
+    skos:related vak:bewegingswetenschappen,
+        vak:biologie,
+        vak:dierenzorg,
+        vak:indirecte-zorg,
+        vak:mens-en-maatschappij,
+        vak:optiek,
+        vak:psychologie,
+        vak:veiligheidstechnieken,
+        vak:verpleegkunde,
+        vak:verzorging ;
+    skos:topConceptOf ond:themas .
+
+thema:recht a skos:Concept ;
+    skos:definition "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Recht"@nl ;
+    skos:related vak:bedrijfswetenschappen,
+        vak:burgerschap,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:maatschappelijke-vorming,
+        vak:mens-en-maatschappij,
+        vak:recht,
+        vak:sociologie,
+        vak:toegepaste-economie,
+        vak:veiligheidstechnieken ;
+    skos:topConceptOf ond:themas .
+
+vak:aardrijkskunde a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "aardrijkskunde"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:bevolking-en-ruimtelijke-ordening,
+        thema:het-heelal,
+        thema:landschap-en-reli%C3%ABf,
+        thema:milieu-en-ecologie,
+        thema:toerisme,
+        thema:verkeer-en-mobiliteit,
+        thema:weer-en-klimaat ;
+    skos:topConceptOf ond:vak .
+
+vak:burgerschap a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "burgerschap"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:filosofie,
+        thema:identiteit,
+        thema:normen-en-waarden,
+        thema:participatie,
+        thema:politiek-en-overheid,
+        thema:recht ;
+    skos:topConceptOf ond:vak .
+
+thema:biologie a skos:Concept ;
+    skos:definition "Biologie (theorie/praktijk)"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Biologie"@nl ;
+    skos:related vak:biochemie,
+        vak:biologie,
+        vak:dierenzorg,
+        vak:hoefverzorging,
+        vak:natuurwetenschappen,
+        vak:optiek,
+        vak:project-stem,
+        vak:toegepaste-biochemie,
+        vak:toegepaste-biologie,
+        vak:toegepaste-natuurwetenschappen,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+vak:geschiedenis a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "geschiedenis"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:erfgoed,
+        thema:hedendaagse-tijd,
+        thema:middeleeuwen,
+        thema:moderne-tijd,
+        thema:oudheid,
+        thema:prehistorie,
+        thema:rampen-en-conflicten,
+        thema:vroegmoderne-tijd ;
+    skos:topConceptOf ond:vak .
+
+vak:godsdienst- a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "godsdienst"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:filosofie,
+        thema:identiteit,
+        thema:normen-en-waarden,
+        thema:religie-en-geloof ;
+    skos:topConceptOf ond:vak .
+
+vak:niet-confessionele-zedenleer- a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "niet-confessionele zedenleer"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:filosofie,
+        thema:identiteit,
+        thema:normen-en-waarden,
+        thema:religie-en-geloof ;
+    skos:topConceptOf ond:vak .
+
+vak:cultuurwetenschappen a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "cultuurwetenschappen"@nl ;
+    skos:related graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:armoede-en-welvaart,
+        thema:culturele-diversiteit,
+        thema:economie,
+        thema:filosofie,
+        thema:identiteit,
+        thema:media-en-communicatie,
+        thema:normen-en-waarden,
+        thema:politiek-en-overheid,
+        thema:recht,
+        thema:rolpatronen-en-stereotypen ;
+    skos:topConceptOf ond:vak .
+
+graad:lager-1ste-graad a skos:Concept ;
+    skos:broader niveau:lager-onderwijs ;
+    skos:definition "Lager 1ste graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Lager 1ste graad"@nl ;
+    skos:related vak:godsdienst-,
+        vak:ict,
+        vak:leren-leren,
+        vak:lichamelijke-opvoeding,
+        vak:mens-en-maatschappij,
+        vak:muzische-vorming,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociale-vaardigheden,
+        vak:wetenschappen-en-techniek,
+        vak:wiskunde .
+
+graad:lager-2de-graad a skos:Concept ;
+    skos:broader niveau:lager-onderwijs ;
+    skos:definition "Lager 2de graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Lager 2de graad"@nl ;
+    skos:related vak:godsdienst-,
+        vak:ict,
+        vak:leren-leren,
+        vak:lichamelijke-opvoeding,
+        vak:mens-en-maatschappij,
+        vak:muzische-vorming,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociale-vaardigheden,
+        vak:wetenschappen-en-techniek,
+        vak:wiskunde .
+
+thema:literatuur a skos:Concept ;
+    skos:definition "Alles over literatuur, in alle talen"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Literatuur"@nl ;
+    skos:related vak:algemene-verbale-vorming,
+        vak:duits,
+        vak:engels-,
+        vak:frans,
+        vak:grieks,
+        vak:hebreeuws,
+        vak:italiaans,
+        vak:latijn,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:oud-hebreeuws,
+        vak:russisch,
+        vak:spaans ;
+    skos:topConceptOf ond:themas .
+
+thema:toerisme a skos:Concept ;
+    skos:definition "Alles over toerisme"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Toerisme"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:duits,
+        vak:engels-,
+        vak:frans,
+        vak:grieks,
+        vak:hebreeuws,
+        vak:italiaans,
+        vak:latijn,
+        vak:mens-en-maatschappij,
+        vak:oud-hebreeuws,
+        vak:russisch,
+        vak:spaans,
+        vak:toerisme ;
+    skos:topConceptOf ond:themas .
+
+graad:lager-3de-graad a skos:Concept ;
+    skos:broader niveau:lager-onderwijs ;
+    skos:definition "Lager 3de graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Lager 3de graad"@nl ;
+    skos:related vak:frans,
+        vak:godsdienst-,
+        vak:ict,
+        vak:leren-leren,
+        vak:lichamelijke-opvoeding,
+        vak:mens-en-maatschappij,
+        vak:muzische-vorming,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:niet-confessionele-zedenleer-,
+        vak:sociale-vaardigheden,
+        vak:wetenschappen-en-techniek,
+        vak:wiskunde .
+
+ond:structuur a skos:ConceptScheme ;
+    rdfs:label "Meemoo lijst onderwijsstructuur"@nl ;
+    skos:hasTopConcept niveau:hoger-onderwijs,
+        niveau:kleuteronderwijs,
+        niveau:lager-onderwijs,
+        niveau:secundair-onderwijs,
+        niveau:volwassenenonderwijs .
+
+thema:beeldende-kunsten a skos:Concept ;
+    skos:definition "Schilderkunst, tekenkunst, film en fotografie, beeldhouwkunst, games, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Beeldende kunsten"@nl ;
+    skos:related vak:artistieke-creatie,
+        vak:artistieke-expressie,
+        vak:audiovisuele-vorming,
+        vak:beeld--en-mediacultuur,
+        vak:beeldende-kunsten,
+        vak:beeldende-vorming,
+        vak:esthetica,
+        vak:fotografie,
+        vak:kunstbeschouwing,
+        vak:muzische-vorming,
+        vak:plastische-opvoeding,
+        vak:restauratie,
+        vak:toegepaste-beeldende-vorming,
+        vak:vrije-beeldende-vorming,
+        vak:waarnemingstekenen ;
+    skos:topConceptOf ond:themas .
+
+thema:media-en-communicatie a skos:Concept ;
+    skos:definition "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media"@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Media en communicatie"@nl ;
+    skos:related vak:beeld--en-mediacultuur,
+        vak:communicatiewetenschappen,
+        vak:cultuurwetenschappen,
+        vak:maatschappelijke-vorming,
+        vak:muzische-vorming,
+        vak:nederlands,
+        vak:onthaal,
+        vak:printmedia,
+        vak:public-relations,
+        vak:publiciteitstekenen,
+        vak:sociale-vaardigheden,
+        vak:toegepaste-psychologie,
+        vak:veiligheidstechnieken,
+        vak:verkoop,
+        vak:zakelijke-communicatie ;
+    skos:topConceptOf ond:themas .
+
+thema:toegepaste-kunsten a skos:Concept ;
+    skos:definition "Mode, sierkunsten, architectuur, design, grafische beeldvorming, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Toegepaste kunsten"@nl ;
+    skos:related vak:architecturale-vorming,
+        vak:architectuurtekenen,
+        vak:artistieke-creatie,
+        vak:binnenhuiskunst,
+        vak:bouwkunst,
+        vak:decoratieve-technieken,
+        vak:diamant,
+        vak:glastechnieken,
+        vak:goud-en-juwelen,
+        vak:grafische-technieken,
+        vak:kunstbeschouwing,
+        vak:mode,
+        vak:muzikale-opvoeding,
+        vak:plastische-opvoeding,
+        vak:publiciteitstekenen,
+        vak:schilderen-en-decoratie,
+        vak:steen--en-marmerbewerking,
+        vak:textielproductie,
+        vak:textielverzorging ;
+    skos:topConceptOf ond:themas .
+
+vak:maatschappelijke-vorming a skos:Concept ;
+    skos:definition "lorem ipsum"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "maatschappelijke vorming"@nl ;
+    skos:related graad:secundair-1ste-graad,
+        graad:secundair-2de-graad,
+        graad:secundair-3de-graad,
+        thema:culturele-diversiteit,
+        thema:erfgoed,
+        thema:hedendaagse-tijd,
+        thema:identiteit,
+        thema:media-en-communicatie,
+        thema:mediawijsheid,
+        thema:middeleeuwen,
+        thema:moderne-tijd,
+        thema:normen-en-waarden,
+        thema:omgaan-met-geld,
+        thema:oudheid,
+        thema:participatie,
+        thema:politiek-en-overheid,
+        thema:prehistorie,
+        thema:recht,
+        thema:relaties-en-seksualiteit,
+        thema:rolpatronen-en-stereotypen,
+        thema:vroegmoderne-tijd ;
+    skos:topConceptOf ond:vak .
+
+graad:secundair-1ste-graad a skos:Concept ;
+    skos:broader niveau:secundair-onderwijs ;
+    skos:definition "Secundair 1ste graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Secundair 1ste graad"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:agrarische-technieken,
+        vak:artistieke-expressie,
+        vak:burgerschap,
+        vak:commerci%C3%ABle-technieken,
+        vak:eigen-cultuur-en-religie,
+        vak:elektriciteit,
+        vak:engels-,
+        vak:frans,
+        vak:geschiedenis,
+        vak:godsdienst-,
+        vak:grieks,
+        vak:latijn,
+        vak:lichamelijke-opvoeding,
+        vak:maatschappelijke-vorming,
+        vak:muzikale-opvoeding,
+        vak:natuurwetenschappen,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:niet-confessionele-zedenleer-,
+        vak:plastische-opvoeding,
+        vak:project-stem,
+        vak:schilderen-en-decoratie,
+        vak:techniek,
+        vak:technologische-opvoeding,
+        vak:textielproductie,
+        vak:toegepaste-informatica,
+        vak:topsport,
+        vak:verzorging,
+        vak:voeding,
+        vak:wiskunde,
+        vak:zeemanschap .
+
+vak:mens-en-maatschappij a skos:Concept ;
+    skos:definition "Het leergebied Mens & Maatschappij gaat over de mens, over groepen mensen en de wisselwerking tussen mens en omgeving. Leerlingen leren nadenken over het heden, het verleden en de toekomst"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "Mens en maatschappij"@nl ;
+    skos:related graad:lager-1ste-graad,
+        graad:lager-2de-graad,
+        graad:lager-3de-graad,
+        thema:armoede-en-welvaart,
+        thema:bevolking-en-ruimtelijke-ordening,
+        thema:culturele-diversiteit,
+        thema:erfgoed,
+        thema:filosofie,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:hedendaagse-tijd,
+        thema:het-heelal,
+        thema:identiteit,
+        thema:landschap-en-reli%C3%ABf,
+        thema:mediawijsheid,
+        thema:middeleeuwen,
+        thema:milieu-en-ecologie,
+        thema:moderne-tijd,
+        thema:normen-en-waarden,
+        thema:opvoeding-en-ontwikkeling,
+        thema:oudheid,
+        thema:participatie,
+        thema:politiek-en-overheid,
+        thema:prehistorie,
+        thema:psychologie,
+        thema:rampen-en-conflicten,
+        thema:recht,
+        thema:relaties-en-seksualiteit,
+        thema:rolpatronen-en-stereotypen,
+        thema:toerisme,
+        thema:verkeer-en-mobiliteit,
+        thema:voeding-en-horeca,
+        thema:vroegmoderne-tijd,
+        thema:weer-en-klimaat ;
+    skos:topConceptOf ond:vak .
+
+thema:podiumkunsten a skos:Concept ;
+    skos:definition "Dans, muziek, theater, ..."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Podiumkunsten"@nl ;
+    skos:related <https://data.meemoo.be/terms/ond/vak#%22instrument%3A-folk--en-wereldmuziek>,
+        <https://data.meemoo.be/terms/ond/vak#%22instrument%3A-jazz-pop-rock>,
+        <https://data.meemoo.be/terms/ond/vak#%22instrument%3A-klassiek>,
+        vak:algemene-muziekleer,
+        vak:algemene-verbale-vorming,
+        vak:artistieke-creatie,
+        vak:artistieke-expressie,
+        vak:atelier-drama,
+        vak:atelier-woord,
+        vak:creatief-musiceren,
+        vak:esthetica,
+        vak:groepsmusiceren%3A-folk--en-wereldmuziek,
+        vak:groepsmusiceren%3A-jazz-pop-rock,
+        vak:groepsmusiceren%3A-klassiek,
+        vak:groepsmusiceren%3A-musical,
+        vak:groepsmusiceren%3A-opera%2Fmuziektheater,
+        vak:hedendaagse-dans,
+        vak:instrument%3A-folk--en-wereldmuziek,
+        vak:instrument%3A-jazz-pop-rock,
+        vak:instrument%3A-klassiek,
+        vak:klassieke-dans,
+        vak:kunstbeschouwing,
+        vak:muziektheorie%3A-folk-en-wereldmuziek,
+        vak:muziektheorie%3A-jazz-pop-rock,
+        vak:muziektheorie%3A-klassiek,
+        vak:muzikale-opvoeding,
+        vak:muzische-vorming,
+        vak:podiumtechnieken,
+        vak:praktische-harmonie%3A-folk-en-wereldmuziek,
+        vak:praktische-harmonie%3A-jazz-pop-rock,
+        vak:praktische-harmonie%3A-klassiek,
+        vak:zang%3A-folk--en-wereldmuziek,
+        vak:zang%3A-jazz-pop-rock,
+        vak:zang%3A-klassiek,
+        vak:zang%3A-musical,
+        vak:zang%3A-opera%2Fmuziektheater ;
+    skos:topConceptOf ond:themas .
+
+thema:constructie-en-productie a skos:Concept ;
+    skos:definition "Constructie is de manier waarop een groter geheel uit onderdelen samengesteld wordt. Bijvoorbeeld de assemblage van een auto, het bouwen van een woning, meubels, .... Productie is de manier waarop objecten vanuit hun grondstoffen vervaardigd worden. Bijvoorbeeld het maken van glas, karton, houten planken, ... Maar denk hierbij ook aan industriële assemblage."@nl ;
+    skos:inScheme ond:themas ;
+    skos:prefLabel "Constructie en productie"@nl ;
+    skos:related vak:afwerking-bouw,
+        vak:autorijtechnieken,
+        vak:autotechnieken,
+        vak:bakkerij,
+        vak:besturing-bouwmachines,
+        vak:bouw,
+        vak:centrale-verwarming,
+        vak:dakwerken,
+        vak:decoratieve-technieken,
+        vak:diamant,
+        vak:elektriciteit,
+        vak:elektromechanica,
+        vak:elektronica,
+        vak:glastechnieken,
+        vak:goud-en-juwelen,
+        vak:hout,
+        vak:instrumentenbouw,
+        vak:koeltechnieken,
+        vak:koetswerk,
+        vak:kunststoffen,
+        vak:lassen-constructie,
+        vak:mechanica,
+        vak:mechanische-vormgeving,
+        vak:meubelmakerij,
+        vak:orthopedie,
+        vak:podiumtechnieken,
+        vak:printmedia,
+        vak:productie-industrie,
+        vak:project-stem,
+        vak:restauratie,
+        vak:ruwbouw,
+        vak:sanitair,
+        vak:scheepswerktuigkunde,
+        vak:schrijnwerkerij,
+        vak:steen--en-marmerbewerking,
+        vak:steigerbouw,
+        vak:techniek,
+        vak:technologische-opvoeding,
+        vak:uurwerkmaken,
+        vak:wetenschappen-en-techniek ;
+    skos:topConceptOf ond:themas .
+
+ond:themas a skos:ConceptScheme ;
+    rdfs:label "Meemoo lijst themas"@nl ;
+    skos:hasTopConcept thema:armoede-en-welvaart,
+        thema:bedrijfsbeheer,
+        thema:beeldende-kunsten,
+        thema:beroepen,
+        thema:bevolking-en-ruimtelijke-ordening,
+        thema:biologie,
+        thema:chemie,
+        thema:constructie-en-productie,
+        thema:culturele-diversiteit,
+        thema:digitale-vaardigheden-en-informatica,
+        thema:economie,
+        thema:erfgoed,
+        thema:fauna-en-flora-%28verwijderen--%3E-naar-milieu-en-ecologie%29,
+        thema:filosofie,
+        thema:fysica,
+        thema:gezondheid-en-gezondheidszorg,
+        thema:hedendaagse-tijd,
+        thema:het-heelal,
+        thema:identiteit,
+        thema:klassieke-talen,
+        thema:land--en-tuinbouw,
+        thema:landschap-en-reli%C3%ABf,
+        thema:leren-en-onderzoeken,
+        thema:lichamelijke-verzorging,
+        thema:literatuur,
+        thema:media-en-communicatie,
+        thema:mediawijsheid,
+        thema:middeleeuwen,
+        thema:milieu-en-ecologie,
+        thema:moderne-talen,
+        thema:moderne-tijd,
+        thema:nederlandse-taal,
+        thema:normen-en-waarden,
+        thema:omgaan-met-geld,
+        thema:opvoeding-en-ontwikkeling,
+        thema:oudheid,
+        thema:participatie,
+        thema:podiumkunsten,
+        thema:politiek-en-overheid,
+        thema:prehistorie,
+        thema:psychologie,
+        thema:rampen-en-conflicten,
+        thema:recht,
+        thema:relaties-en-seksualiteit,
+        thema:religie-en-geloof,
+        thema:rolpatronen-en-stereotypen,
+        thema:sport-en-spel,
+        thema:toegepaste-kunsten,
+        thema:toerisme,
+        thema:verkeer-en-mobiliteit,
+        thema:voeding-en-horeca,
+        thema:vroegmoderne-tijd,
+        thema:weer-en-klimaat,
+        thema:wiskunde .
+
+graad:secundair-2de-graad a skos:Concept ;
+    skos:broader niveau:secundair-onderwijs ;
+    skos:definition "Secundair 2de graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Secundair 2de graad"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:algemene-muziekleer,
+        vak:algemene-verbale-vorming,
+        vak:architecturale-vorming,
+        vak:architectuurtekenen,
+        vak:artistieke-creatie,
+        vak:artistieke-expressie,
+        vak:atelier-drama,
+        vak:atelier-woord,
+        vak:audiovisuele-vorming,
+        vak:bakkerij,
+        vak:bedrijfswetenschappen,
+        vak:beeldende-kunsten,
+        vak:beeldende-vorming,
+        vak:bewegingswetenschappen,
+        vak:biologie,
+        vak:boekhouding,
+        vak:bouw,
+        vak:bouwkunst,
+        vak:burgerschap,
+        vak:chemie,
+        vak:commerci%C3%ABle-technieken,
+        vak:communicatiewetenschappen,
+        vak:creatief-musiceren,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:decoratieve-technieken,
+        vak:diamant,
+        vak:dierenzorg,
+        vak:duits,
+        vak:economie-,
+        vak:eigen-cultuur-en-religie,
+        vak:elektriciteit,
+        vak:elektromechanica,
+        vak:elektronica,
+        vak:engels-,
+        vak:exploratie,
+        vak:fotografie,
+        vak:frans,
+        vak:fysica,
+        vak:gedragswetenschappen,
+        vak:geschiedenis,
+        vak:glastechnieken,
+        vak:godsdienst-,
+        vak:goud-en-juwelen,
+        vak:grafische-technieken,
+        vak:grieks,
+        vak:grime,
+        vak:groepsmusiceren%3A-folk--en-wereldmuziek,
+        vak:groepsmusiceren%3A-jazz-pop-rock,
+        vak:groepsmusiceren%3A-klassiek,
+        vak:groepsmusiceren%3A-musical,
+        vak:groepsmusiceren%3A-opera%2Fmuziektheater,
+        vak:haarverzorging,
+        vak:hebreeuws,
+        vak:hedendaagse-dans,
+        vak:hoefverzorging,
+        vak:hotel,
+        vak:hout,
+        vak:indirecte-zorg,
+        vak:informaticawetenschappen,
+        vak:instrument%3A-folk--en-wereldmuziek,
+        vak:instrument%3A-jazz-pop-rock,
+        vak:instrument%3A-klassiek,
+        vak:keukentechnieken,
+        vak:klassieke-dans,
+        vak:kunstbeschouwing,
+        vak:landbouw,
+        vak:latijn,
+        vak:lichamelijke-opvoeding,
+        vak:logistiek,
+        vak:maatschappelijke-vorming,
+        vak:mechanica,
+        vak:meubelmakerij,
+        vak:militaire-vorming,
+        vak:mode,
+        vak:muziektheorie%3A-folk-en-wereldmuziek,
+        vak:muziektheorie%3A-jazz-pop-rock,
+        vak:muziektheorie%3A-klassiek,
+        vak:muzikale-opvoeding,
+        vak:natuurwetenschappen,
+        vak:nederlands,
+        vak:niet-confessionele-zedenleer-,
+        vak:oud-hebreeuws,
+        vak:plastische-opvoeding,
+        vak:printmedia,
+        vak:publiciteitstekenen,
+        vak:restauranttechnieken,
+        vak:rijn--en-binnenvaart,
+        vak:scheepvaart,
+        vak:schilderen-en-decoratie,
+        vak:schoonheidsverzorging,
+        vak:schoonmaak,
+        vak:schrijnwerkerij,
+        vak:slagerij,
+        vak:sociologie,
+        vak:sport,
+        vak:steigerbouw,
+        vak:tandtechnieken,
+        vak:textielproductie,
+        vak:textielverzorging,
+        vak:toegepaste-biochemie,
+        vak:toegepaste-biologie,
+        vak:toegepaste-chemie,
+        vak:toegepaste-economie,
+        vak:toegepaste-fysica,
+        vak:toegepaste-informatica,
+        vak:toegepaste-natuurwetenschappen,
+        vak:toegepaste-psychologie,
+        vak:toerisme,
+        vak:tuinbouw,
+        vak:uurwerkmaken,
+        vak:verkoop,
+        vak:verzorging,
+        vak:voeding,
+        vak:wiskunde,
+        vak:zang%3A-folk--en-wereldmuziek,
+        vak:zang%3A-jazz-pop-rock,
+        vak:zang%3A-klassiek,
+        vak:zang%3A-musical,
+        vak:zang%3A-opera%2Fmuziektheater,
+        vak:zeemanschap .
+
+graad:secundair-3de-graad a skos:Concept ;
+    skos:broader niveau:secundair-onderwijs ;
+    skos:definition "Secundair 3de graad"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "Secundair 3de graad"@nl ;
+    skos:related vak:aardrijkskunde,
+        vak:administratie,
+        vak:afwerking-bouw,
+        vak:algemene-muziekleer,
+        vak:algemene-verbale-vorming,
+        vak:apotheek,
+        vak:architecturale-vorming,
+        vak:architectuurtekenen,
+        vak:artistieke-creatie,
+        vak:artistieke-expressie,
+        vak:atelier-drama,
+        vak:atelier-woord,
+        vak:audiovisuele-vorming,
+        vak:autorijtechnieken,
+        vak:autotechnieken,
+        vak:bakkerij,
+        vak:bedrijfswetenschappen,
+        vak:beeld--en-mediacultuur,
+        vak:beeldende-kunsten,
+        vak:beeldende-vorming,
+        vak:besturing-bouwmachines,
+        vak:bewegingswetenschappen,
+        vak:binnenhuiskunst,
+        vak:biochemie,
+        vak:biologie,
+        vak:boekhouding,
+        vak:bosbouw,
+        vak:bouw,
+        vak:bouwkunst,
+        vak:burgerschap,
+        vak:centrale-verwarming,
+        vak:chemie,
+        vak:communicatiewetenschappen,
+        vak:creatief-musiceren,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:dakwerken,
+        vak:decoratieve-technieken,
+        vak:diamant,
+        vak:dierenzorg,
+        vak:duits,
+        vak:ecologie,
+        vak:economie-,
+        vak:eigen-cultuur-en-religie,
+        vak:elektriciteit,
+        vak:elektromechanica,
+        vak:elektronica,
+        vak:engels-,
+        vak:esthetica,
+        vak:exploratie,
+        vak:filosofie,
+        vak:fotografie,
+        vak:frans,
+        vak:fysica,
+        vak:gedragswetenschappen,
+        vak:geschiedenis,
+        vak:glastechnieken,
+        vak:godsdienst-,
+        vak:goud-en-juwelen,
+        vak:grafische-technieken,
+        vak:grieks,
+        vak:grime,
+        vak:groendecoratie,
+        vak:groepsmusiceren%3A-folk--en-wereldmuziek,
+        vak:groepsmusiceren%3A-jazz-pop-rock,
+        vak:groepsmusiceren%3A-klassiek,
+        vak:groepsmusiceren%3A-musical,
+        vak:groepsmusiceren%3A-opera%2Fmuziektheater,
+        vak:haarverzorging,
+        vak:hebreeuws,
+        vak:hedendaagse-dans,
+        vak:hotel,
+        vak:hout,
+        vak:human-resources,
+        vak:indirecte-zorg,
+        vak:informaticawetenschappen,
+        vak:instrument%3A-folk--en-wereldmuziek,
+        vak:instrument%3A-jazz-pop-rock,
+        vak:instrument%3A-klassiek,
+        vak:instrumentenbouw,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:italiaans,
+        vak:keukentechnieken,
+        vak:klassieke-dans,
+        vak:koeltechnieken,
+        vak:koetswerk,
+        vak:kunstbeschouwing,
+        vak:kunststoffen,
+        vak:landbouw,
+        vak:lassen-constructie,
+        vak:latijn,
+        vak:lichamelijke-opvoeding,
+        vak:logistiek,
+        vak:maatschappelijke-vorming,
+        vak:mechanica,
+        vak:mechanische-vormgeving,
+        vak:meubelmakerij,
+        vak:militaire-vorming,
+        vak:mode,
+        vak:muziektheorie%3A-folk-en-wereldmuziek,
+        vak:muziektheorie%3A-jazz-pop-rock,
+        vak:muziektheorie%3A-klassiek,
+        vak:natuurbeheer,
+        vak:natuurwetenschappen,
+        vak:nautische-technieken,
+        vak:nederlands,
+        vak:niet-confessionele-zedenleer-,
+        vak:onthaal,
+        vak:optiek,
+        vak:opvoedkunde,
+        vak:orthopedie,
+        vak:oud-hebreeuws,
+        vak:pedagogiek,
+        vak:podiumtechnieken,
+        vak:praktische-harmonie%3A-folk-en-wereldmuziek,
+        vak:praktische-harmonie%3A-jazz-pop-rock,
+        vak:praktische-harmonie%3A-klassiek,
+        vak:printmedia,
+        vak:productie-industrie,
+        vak:psychologie,
+        vak:public-relations,
+        vak:publiciteitstekenen,
+        vak:recht,
+        vak:restauranttechnieken,
+        vak:restauratie,
+        vak:rijn--en-binnenvaart,
+        vak:russisch,
+        vak:ruwbouw,
+        vak:sanitair,
+        vak:scheepswerktuigkunde,
+        vak:scheepvaart,
+        vak:schilderen-en-decoratie,
+        vak:schoonheidsverzorging,
+        vak:schoonmaak,
+        vak:schrijnwerkerij,
+        vak:slagerij,
+        vak:sociologie,
+        vak:spaans,
+        vak:sport,
+        vak:steen--en-marmerbewerking,
+        vak:steigerbouw,
+        vak:tandtechnieken,
+        vak:textielproductie,
+        vak:textielverzorging,
+        vak:toegepaste-beeldende-vorming,
+        vak:toegepaste-biochemie,
+        vak:toegepaste-biologie,
+        vak:toegepaste-chemie,
+        vak:toegepaste-economie,
+        vak:toegepaste-fysica,
+        vak:toegepaste-informatica,
+        vak:toegepaste-natuurwetenschappen,
+        vak:toegepaste-psychologie,
+        vak:toerisme,
+        vak:tuinbouw,
+        vak:uurwerkmaken,
+        vak:veiligheidstechnieken,
+        vak:verkoop,
+        vak:verpleegkunde,
+        vak:verzorging,
+        vak:voeding,
+        vak:vrije-beeldende-vorming,
+        vak:waarnemingstekenen,
+        vak:wegenwerken,
+        vak:wiskunde,
+        vak:zakelijke-communicatie,
+        vak:zang%3A-folk--en-wereldmuziek,
+        vak:zang%3A-jazz-pop-rock,
+        vak:zang%3A-klassiek,
+        vak:zang%3A-musical,
+        vak:zang%3A-opera%2Fmuziektheater,
+        vak:zeemanschap .
+
+ond:vak a skos:ConceptScheme ;
+    rdfs:label "Meemoo lijst vakken"@nl ;
+    skos:hasTopConcept vak:aardrijkskunde,
+        vak:administratie,
+        vak:afwerking-bouw,
+        vak:agrarische-technieken,
+        vak:algemene-muziekleer,
+        vak:algemene-verbale-vorming,
+        vak:apotheek,
+        vak:architecturale-vorming,
+        vak:architectuurtekenen,
+        vak:artistieke-creatie,
+        vak:artistieke-expressie,
+        vak:atelier-drama,
+        vak:atelier-woord,
+        vak:audiovisuele-vorming,
+        vak:autorijtechnieken,
+        vak:autotechnieken,
+        vak:bakkerij,
+        vak:bedrijfswetenschappen,
+        vak:beeld--en-mediacultuur,
+        vak:beeldende-kunsten,
+        vak:beeldende-vorming,
+        vak:besturing-bouwmachines,
+        vak:bewegingswetenschappen,
+        vak:binnenhuiskunst,
+        vak:biochemie,
+        vak:biologie,
+        vak:boekhouding,
+        vak:bosbouw,
+        vak:bouw,
+        vak:bouwkunst,
+        vak:burgerschap,
+        vak:centrale-verwarming,
+        vak:chemie,
+        vak:commerci%C3%ABle-technieken,
+        vak:communicatiewetenschappen,
+        vak:creatief-musiceren,
+        vak:cultuurbeschouwing,
+        vak:cultuurwetenschappen,
+        vak:dakwerken,
+        vak:decoratieve-technieken,
+        vak:diamant,
+        vak:dierenzorg,
+        vak:duits,
+        vak:ecologie,
+        vak:economie-,
+        vak:eigen-cultuur-en-religie,
+        vak:elektriciteit,
+        vak:elektromechanica,
+        vak:elektronica,
+        vak:engels-,
+        vak:esthetica,
+        vak:exploratie,
+        vak:filosofie,
+        vak:fotografie,
+        vak:frans,
+        vak:fysica,
+        vak:gedragswetenschappen,
+        vak:geschiedenis,
+        vak:glastechnieken,
+        vak:godsdienst-,
+        vak:goud-en-juwelen,
+        vak:grafische-technieken,
+        vak:grieks,
+        vak:grime,
+        vak:groendecoratie,
+        vak:groepsmusiceren%3A-folk--en-wereldmuziek,
+        vak:groepsmusiceren%3A-jazz-pop-rock,
+        vak:groepsmusiceren%3A-klassiek,
+        vak:groepsmusiceren%3A-musical,
+        vak:groepsmusiceren%3A-opera%2Fmuziektheater,
+        vak:haarverzorging,
+        vak:hebreeuws,
+        vak:hedendaagse-dans,
+        vak:hoefverzorging,
+        vak:hotel,
+        vak:hout,
+        vak:human-resources,
+        vak:ict,
+        vak:indirecte-zorg,
+        vak:informaticawetenschappen,
+        vak:instrument%3A-folk--en-wereldmuziek,
+        vak:instrument%3A-jazz-pop-rock,
+        vak:instrument%3A-klassiek,
+        vak:instrumentenbouw,
+        vak:interlevensbeschouwelijke-dialoog,
+        vak:italiaans,
+        vak:keukentechnieken,
+        vak:klassieke-dans,
+        vak:koeltechnieken,
+        vak:koetswerk,
+        vak:kunstbeschouwing,
+        vak:kunststoffen,
+        vak:landbouw,
+        vak:lassen-constructie,
+        vak:latijn,
+        vak:leren-leren,
+        vak:lichamelijke-opvoeding,
+        vak:logistiek,
+        vak:maatschappelijke-vorming,
+        vak:mechanica,
+        vak:mechanische-vormgeving,
+        vak:mens-en-maatschappij,
+        vak:meubelmakerij,
+        vak:militaire-vorming,
+        vak:mode,
+        vak:muziektheorie%3A-folk-en-wereldmuziek,
+        vak:muziektheorie%3A-jazz-pop-rock,
+        vak:muziektheorie%3A-klassiek,
+        vak:muzikale-opvoeding,
+        vak:muzische-vorming,
+        vak:natuurbeheer,
+        vak:natuurwetenschappen,
+        vak:nautische-technieken,
+        vak:nederlands,
+        vak:nederlands-voor-nieuwkomers,
+        vak:niet-confessionele-zedenleer-,
+        vak:onthaal,
+        vak:optiek,
+        vak:opvoedkunde,
+        vak:orthopedie,
+        vak:oud-hebreeuws,
+        vak:pedagogiek,
+        vak:plastische-opvoeding,
+        vak:podiumtechnieken,
+        vak:praktische-harmonie%3A-folk-en-wereldmuziek,
+        vak:praktische-harmonie%3A-jazz-pop-rock,
+        vak:praktische-harmonie%3A-klassiek,
+        vak:printmedia,
+        vak:productie-industrie,
+        vak:project-algemene-vakken,
+        vak:project-stem,
+        vak:psychologie,
+        vak:public-relations,
+        vak:publiciteitstekenen,
+        vak:recht,
+        vak:restauranttechnieken,
+        vak:restauratie,
+        vak:rijn--en-binnenvaart,
+        vak:russisch,
+        vak:ruwbouw,
+        vak:sanitair,
+        vak:scheepswerktuigkunde,
+        vak:scheepvaart,
+        vak:schilderen-en-decoratie,
+        vak:schoonheidsverzorging,
+        vak:schoonmaak,
+        vak:schrijnwerkerij,
+        vak:slagerij,
+        vak:sociale-activiteit,
+        vak:sociale-vaardigheden,
+        vak:sociologie,
+        vak:spaans,
+        vak:sport,
+        vak:steen--en-marmerbewerking,
+        vak:steigerbouw,
+        vak:tandtechnieken,
+        vak:techniek,
+        vak:technologische-opvoeding,
+        vak:textielproductie,
+        vak:textielverzorging,
+        vak:toegepaste-beeldende-vorming,
+        vak:toegepaste-biochemie,
+        vak:toegepaste-biologie,
+        vak:toegepaste-chemie,
+        vak:toegepaste-economie,
+        vak:toegepaste-fysica,
+        vak:toegepaste-informatica,
+        vak:toegepaste-natuurwetenschappen,
+        vak:toegepaste-psychologie,
+        vak:toerisme,
+        vak:topsport,
+        vak:tuinbouw,
+        vak:uurwerkmaken,
+        vak:veiligheidstechnieken,
+        vak:verkoop,
+        vak:verpleegkunde,
+        vak:verzorging,
+        vak:voeding,
+        vak:vrije-beeldende-vorming,
+        vak:waarnemingstekenen,
+        vak:wegenwerken,
+        vak:wetenschappen-en-techniek,
+        vak:wiskunde,
+        vak:zakelijke-communicatie,
+        vak:zang%3A-folk--en-wereldmuziek,
+        vak:zang%3A-jazz-pop-rock,
+        vak:zang%3A-klassiek,
+        vak:zang%3A-musical,
+        vak:zang%3A-opera%2Fmuziektheater,
+        vak:zeemanschap .
+
