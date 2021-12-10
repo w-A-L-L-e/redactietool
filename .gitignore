@@ -5,4 +5,4 @@ __pycache__
 htmlcov
 *.pem
 *.key
-
+*generate_saml_certificate*
