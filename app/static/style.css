@@ -322,8 +322,9 @@ input[type=button].spring:hover {
 /*********************** END OF CSS ANIMATION EYE CANDY ***********************/
 
 .saml-login-page {
-  /* this is a temp image re-used from hetarchief. normally monday or tuesday the new one
-   * will be supplied */
+  /* this is a temp image re-used from hetarchief. 
+   * normally monday or tuesday the new one
+   * will be supplied DEV-1851 */
   background: url(https://onderwijs.hetarchief.be/images/login-bg.jpg) no-repeat center;
   background-size: cover;
   background-position: center;
