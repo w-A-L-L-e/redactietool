@@ -32,7 +32,7 @@ class Suggest:
         self.sparql.setCredentials(user, password)
         self.sparql.setReturnFormat(JSON)
 
-        query_dir = os.getcwd() + "/suggest/queries/"
+        query_dir = os.getcwd() + "/queries/"
         self.GET_LIST_QUERY = read_query(query_dir + "get_conceptscheme.sparql")
         self.GET_COLLECTION_QUERY = read_query(query_dir + "get_collection.sparql")
         self.GET_CHILDREN_QUERY = read_query(query_dir + "get_narrower.sparql")
@@ -119,6 +119,7 @@ class Suggest:
         themas = ", ".join('"' + str(t) + '"' for t in thema)
         graden = ", ".join('"' + str(g) + '"' for g in graad)
 
+        print("running qry=", self.SUGGEST_BY_LABELS_QUERY)
         for res in self.__exec_query(
             self.SUGGEST_BY_LABELS_QUERY, themas=themas, graden=graden
         ):
