@@ -6,3 +6,19 @@ Already added the necessary requirements.txt here so that it works on my local m
 the docker image before merging (we will als change some hardcoded test urls into env vars to make it ready for a qas release).
 
 
+```
+from suggest.Suggest import Suggest
+
+SPARQL_ENDPOINT = "http://example.org/query"
+USER = "user"
+PASSWORD = "password"
+
+suggest = Suggest(SPARQL_ENDPOINT, USER, PASSWORD)
+
+for r in suggest.suggest_by_label(['Recht'], ['Secundair 2de graad']):
+    print(r)
+
+for r in suggest.suggest(['https://data.meemoo.be/terms/ond/thema#nederlandse-taal'],['https://data.meemoo.be/terms/ond/graad#lager-1ste-graad']):
+    print(r)
+
+```
