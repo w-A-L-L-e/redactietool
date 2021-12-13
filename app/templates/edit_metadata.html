@@ -12,16 +12,36 @@ Metadata bewerken
 <div class="columns">
   <div class="column">
 
-    <h1 class="title is-pulled-left">{{title}} / PID: {{pid}}</h1>
+    <h1 class="title">{{title}}</h1>
+    <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
 
-    <div class="buttons is-pulled-right pt-2">
+    <!--
+      Unless someone can truly convince me this double button is really necessary
+      I'm keeping it hidden for now.
+      <div class="buttons is-pulled-right pt-2">
             <a class="button is-link mb-5"
                href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
               Bewerk ondertitels
             </a>
+      </div>
+    -->
+  </div> 
+</div>
+
+
+{% if data_saved_to_mam %}
+  <div class="columns" id="data_saved_alert_box">
+    <div class="column">
+      <div class="notification is-success">
+        <button class="delete" onclick="closeSavedAlert(); return false;"></button>
+        De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
+        <!--
+        Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
+        -->
+      </div>
     </div>
   </div>
-</div>
+{% endif %}
 
 <div class="columns">
   <div class="column">
@@ -33,10 +53,14 @@ Metadata bewerken
         token: '{{flowplayer_token}}'
       })
     </script>
+
+    <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
+      <ion-icon name="key-outline" class="pr-3"></ion-icon>
+      Keyframe Aanpassen
+    </a>
+
   </div>
 </div>
-
-
 
 <form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
 
@@ -92,12 +116,14 @@ Metadata bewerken
 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label">Datum </label>
+            <label class="label">Lokale CP ID</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="wdatum" class="input is-small" type="text" placeholder="MAPPING?" value="" readonly/>
+                <input name="testbeeld_pid" 
+                class="input is-small" type="text" 
+                placeholder="PID" value="{{dc_identifier_localid}}" readonly/>
               </div>
             </div>
           </div>
@@ -110,7 +136,7 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="uitzenddatum" class="input is-small" type="text" placeholder="prefilled but also editable?" value=""/>
+                <input name="uitzenddatum" class="input is-small" type="text" placeholder="Uitzenddatum" value="{{dcterms_issued}}"/>
               </div>
             </div>
           </div>
@@ -140,20 +166,9 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="ontsluitingstitel" class="input is-small" type="text" placeholder="Prefilled, but editable?">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Serie</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input name="serie" class="input is-small" type="text" placeholder="prefilled and editable?">
+                <input name="ontsluitingstitel" 
+                  class="input is-small" type="text" 
+                  placeholder="editable" value="{{ontsluitingstitel}}">
               </div>
             </div>
           </div>
@@ -166,79 +181,232 @@ Metadata bewerken
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="hoofdtitel" class="input is-small" type="text" placeholder="todo" readonly>
+                <input name="hoofdtitel" 
+                  class="input is-small" type="text" 
+                  placeholder="title" value="{{title}}" readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="titel_serie">
+          <div class="field-label is-normal">
+            <label class="label">Serie</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: serie"
+                value="{{titel_serie}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_episode">
+          <div class="field-label is-normal">
+            <label class="label">Episode</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: episode"
+                value="{{titel_episode}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_aflevering">
+          <div class="field-label is-normal">
+            <label class="label">Aflevering</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serie" class="input is-small" type="text" 
+                placeholder="Secundaire titel: aflevering"
+                value="{{titel_aflevering}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_alternatief">
           <div class="field-label is-normal">
             <label class="label">Alternatief</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="alternatief" class="input is-small" type="text" placeholder="" readonly>
+                <input name="alternatief" class="input is-small" type="text" 
+                placeholder="Secundaire titel: aflevering" 
+                value="{{titel_alternatief}}"
+                readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="titel_programma">
           <div class="field-label is-normal">
             <label class="label">Programma</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="programma" class="input is-small" type="text" placeholder="todo map this" readonly>
+                <input name="programma" class="input is-small" type="text" 
+                  placeholder="Secundaire titel: programma" 
+                  value="{{titel_programma}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="titel_serienummer">
+          <div class="field-label is-normal">
+            <label class="label">Serienummer</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="serienummer" class="input is-small" type="text" 
+                  placeholder="Secundaire titel: serienummer" 
+                  value="{{titel_serienummer}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_seizoen">
           <div class="field-label is-normal">
             <label class="label">Seizoen</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="seizoen" class="input is-small" type="text" placeholder="Mapping?" readonly>
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: seizoen" 
+                  value="{{titel_seizoen}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="titel_nummer">
+          <div class="field-label is-normal">
+            <label class="label">Nummer</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: seizoen nummer" 
+                  value="{{titel_seizoen_nr}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_archief">
+          <div class="field-label is-normal">
+            <label class="label">Archief</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: archief" 
+                  value="{{titel_archief}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_deelarchief">
+          <div class="field-label is-normal">
+            <label class="label">Deelarchief</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: deelarchief" 
+                  value="{{titel_deelarchief}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal" id="titel_reeks">
           <div class="field-label is-normal">
             <label class="label">Reeks</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="reeks" class="input is-small" type="text" placeholder="mapping?" readonly>
+                <input name="seizoen" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: reeks" 
+                  value="{{titel_reeks}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="titel_deelreeks">
           <div class="field-label is-normal">
-            <label class="label">Extra velden</label>
+            <label class="label">Deelreeks</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="bonus_fields" class="input is-small" type="text" placeholder="En de mapping?">
+                <input name="deelreeks" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: deelreeks" 
+                  value="{{titel_deelreeks}}"
+                  readonly>
               </div>
             </div>
           </div>
         </div>
-        -->
 
+        <div class="field is-horizontal" id="titel_registratie">
+          <div class="field-label is-normal">
+            <label class="label">Registratie</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input name="deelreeks" 
+                  class="input is-small" 
+                  type="text" 
+                  placeholder="Secundaire titel: registratie" 
+                  value="{{titel_registratie}}"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div> <!-- section wrapper div for hide/unhide -->
@@ -291,7 +459,7 @@ Metadata bewerken
       <div id="inhoud_section">
         <article class="panel">
            <p class="panel-heading">
-             Originele hoofdbeschrijving
+             Hoofdbeschrijving
            </p>
            <div class="panel-block">
              <p class="control">
@@ -308,7 +476,7 @@ Metadata bewerken
 
         <article class="panel">
           <p class="panel-heading">
-            Originele uitgebreide hoofdbeschrijving
+            Uitgebreide beschrijving
           </p>
           <div class="panel-block">
             <p class="control">
@@ -333,27 +501,26 @@ Metadata bewerken
                 class="textarea is-hover" 
                 placeholder="Ondertitles (read-only)" 
                 cols="45"
-                rows="5" readonly>{{wat_is_de_mapping}}</textarea>
+                rows="5" readonly>{{ondertitels}}</textarea>
             </p>
           </div>
         </article>
 
         <article class="panel">
           <p class="panel-heading">
-            Programma omschrijving
+            Programma beschrijving
           </p>
           <div class="panel-block">
             <p class="control">
-              <textarea name="programma_omschrijving"
-                id="programma_omschrijving"
+              <textarea name="programma_beschrijving"
+                id="programma_beschrijving"
                 class="textarea is-hover" 
                 placeholder="Programma omschrijving (read-only)" 
                 cols="45"
-                rows="5" readonly>{{wat_is_de_mapping}}</textarea>
+                rows="5" readonly>{{programma_beschrijving}}</textarea>
             </p>
           </div>
         </article>
-
 
         <article class="panel">
           <p class="panel-heading">
@@ -366,7 +533,7 @@ Metadata bewerken
                 class="textarea is-hover" 
                 placeholder="Cast (read-only)" 
                 cols="45"
-                rows="5" readonly>{{wat_is_de_mapping}}</textarea>
+                rows="5" readonly>{{cast}}</textarea>
             </p>
           </div>
         </article>
@@ -382,7 +549,7 @@ Metadata bewerken
                 class="textarea is-hover" 
                 placeholder="Transcriptie (read-only)" 
                 cols="45"
-                rows="5" readonly>{{wat_is_de_mapping}}</textarea>
+                rows="5" readonly>{{transcriptie}}</textarea>
             </p>
 
           </div>
@@ -398,9 +565,9 @@ Metadata bewerken
               <textarea name="avo_beschrijving"
                 id="avo_beschrijving"
                 class="textarea is-hover" 
-                placeholder="AVO beschrijving. Hier bewerken (richtext?)" 
+                placeholder="AVO beschrijving" 
                 cols="45"
-                rows="5"></textarea>
+                rows="10">{{avo_beschrijving}}</textarea>
             </p>
 
           </div>
@@ -414,7 +581,7 @@ Metadata bewerken
   <div class="columns">
     <div class="column">
       <h2 class="title is-clickable" onclick="sectionToggle('lom1_section')">
-        LOM 1
+        Leerobjectmetadata trap 1
         <div class="minimize-icon-wrapper" id="lom1_section_icon">
           <span class="icon-unfolded">
             <ion-icon name="chevron-down-circle-outline"></ion-icon>
@@ -493,16 +660,18 @@ Metadata bewerken
 
         <!-- TODO: clear onderwijsgraden als onderwijsniveau verandert? of een error message? -->
         <!-- TODO: re-populate als onderwijsniveaus verandert, met welke api call? -->
+        <!-- field is disabled tot dat onderwijsniveau is gekozen en api call response er is om
+          het veld in te vullen-->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Onderwijsgraden</label>
           </div>
           <div class="field-body">
-            <div class="select is-multiple">
+            <div class="select is-multiple is-loading" >
               <!-- TODO: multiple size="2" -->
               <select name="lom1_onderwijsgraden" id="lom1_onderwijsgraden">
-                <option value="value1">Api call, voor een re-populate van graden op basis van onderwijsniveaus?</option>
-                <option value="value2">Tweede graad</option>
+                <option value="value1">Api call met als parameter onderwijsnivea...</option>
+                <option value="value2">toon effectieve graden na response api call.</option>
               </select>
             </div>
           </div>
@@ -516,11 +685,16 @@ Metadata bewerken
           <div class="field-body">
             <div class="select">
               <select name="lom1_themas" id="lom1_themas">
-                <option value="value1">Thema's zijn gewoon lijsten van woorden waarom een modal met pills hiervoor?</option>
+                <option value="value1">Thema kan ook met cards, of inline multi-select...</option>
               </select>
-            </div>
+            </div> 
           </div>
         </div>
+
+        <div class="notification is-warning">
+       Verwijderen van een thema zou enkel een popup moeten tonen indien er vakken zijn geselecteerd die aan dit thema hangen (de 'ok' van die popup verwijdert de vakken, de 'annuleren' doet een undo van het verwijderen van dat thema). Een thema toevoegen of een verwijderen die geen related vakken heeft zou gewoon transparant moeten werken. Opmerking: en zolang je niet op 'Metadata opslaan' clicked kan je altijd nog de wijziging ongedaan maken door weg te navigeren en terug te komen (of refresh...).
+        </div>
+
       </div> <!-- lom1_section -->
     </div>
   </div>
@@ -531,7 +705,7 @@ Metadata bewerken
   <div class="columns">
     <div class="column">
       <h2 class="title is-clickable" onclick="sectionToggle('lom2_section')">
-        LOM 2
+        Leerobjectmetadata trap 2
         <div class="minimize-icon-wrapper" id="lom2_section_icon">
           <span class="icon-unfolded">
             <ion-icon name="chevron-down-circle-outline"></ion-icon>
@@ -544,7 +718,12 @@ Metadata bewerken
       <hr/>
 
       <div id="lom2_section">
-        <!-- waarom niet gewoon een multi-select hier? het is toch niet editeerbaar, waarom die 'X' op de wireframe? -->
+        <!-- waarom niet gewoon een multi-select hier? 
+          het is toch niet editeerbaar, waarom die 'X' op de wireframe? 
+
+          Je wilt gewoon een deel-lijstje van vakken uit alle mogelijke vakken selecteren
+          dat is een bestaande component en heet een multiselect...
+        -->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Vakken</label>
@@ -557,7 +736,7 @@ Metadata bewerken
               </select>
             </div>
           </div>
-        </div>
+        </div> 
       </div> <!-- lom2_section -->
 
     </div>
@@ -570,7 +749,7 @@ Metadata bewerken
   <div class="columns">
     <div class="column">
       <h2 class="title is-clickable" onclick="sectionToggle('lom3_section')">
-        LOM 3
+        Leerobjectmetadata trap 3
         <div class="minimize-icon-wrapper" id="lom3_section_icon">
           <span class="icon-unfolded">
             <ion-icon name="chevron-down-circle-outline"></ion-icon>
@@ -583,8 +762,16 @@ Metadata bewerken
       <hr/>
 
       <div id="lom3_section">
-        <!-- waarom niet gewoon een een searchable 
-          multi-select hier? en wat is de api call hiervoor, knowledge graph of elders? -->
+        <!-- 
+          Dus trefwoorden is een searchable dropdown die suggesties geeft als je typt.
+          Indien je een niet bestaande trefwoord kiest mag hier een popup komen met:
+
+          Ben je zeker dat je een nieuw trefwoord wilt toevoegen dat nog niet op
+          Het Archief voor Onderwijs staat?
+
+          JA / Annuleren -> en dus ja zal een call moeten maken om dit ergens op te slaan.
+          Annuleren moet gewoon de plus negeren en select weer leeg maken
+        -->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Trefwoorden</label>
@@ -592,10 +779,13 @@ Metadata bewerken
           <div class="field-body">
             <div class="select is-multiple">
               <select name="lom3_trefwoorden" id="lom3_trefwoorden">
-                <option value="value1">Mag dit niet gewoon een multi-select worden?</option>
-                <option value="value2">tweede trefwoord</option>
+                <option value="value1">TODO: Searchable select hier</option>
+                <option value="value2"></option>
               </select>
             </div>
+
+            <button onclick="addTrefwoord('trefwoorden_lijst', 'some_div'); return false;" 
+              class="button is-info ml-2">+</button>
           </div>
         </div>
 
@@ -609,6 +799,13 @@ Metadata bewerken
               </a>
           </div>
         </div>
+
+        <div class="notification is-warning">
+          Dit is searchable select dus je kan typen. Als je dan niet een bestaande trefwoord toevoegt
+          met de + dan krijg je een popup. Deze moet dan het nieuwe trefwoord opslaan met een api call (deze moet juist gegeven worden in een ticket). Je kan ook annuleren en dan cleared dat de select en moet je een ander bestaande trefwoord zoeken.
+          De link met trefwoorden contentpartners ontbreekt nog momenteel of komt hier een andere call voor?
+        </div>
+
       </div> <!-- lom3_section -->
     </div>
   </div>

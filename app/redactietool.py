@@ -32,22 +32,22 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 
 from app.config import flask_environment
-from app.authorization import (get_token, requires_authorization,
-                               verify_token, OAS_APPNAME)
-from app.mediahaven_api import MediahavenApi
-from app.ftp_uploader import FtpUploader
+from app.services.authorization import (get_token, requires_authorization,
+                                        verify_token, OAS_APPNAME)
+from app.services.mediahaven_api import MediahavenApi
+from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
     move_subtitle, get_property, not_deleted
 )
-from app.validation import (pid_error, upload_error, validate_input,
-                            validate_upload, validate_conversion)
+from app.services.validation import (pid_error, upload_error, validate_input,
+                                     validate_upload, validate_conversion)
 
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
-from flask_login import UserMixin  # , login_user, current_user  # , login_required
-
+from flask_login import LoginManager, login_required  # current_user
 from app.services.rmh_mapping import RmhMapping
+from app.services.user import User
 
 
 app = Flask(__name__)
@@ -67,10 +67,22 @@ app.config['SAML_PATH'] = os.path.join(
 
 
 # POC: user mixin/model for current_user method of flask login
-class User(UserMixin):
-    def __init__(self):
-        self.name = 'Walter Schreppers'
-        self.email = 'wstest@meemoo.be'
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+
+@login_manager.request_loader
+def load_user_from_request(request):
+    user = User()
+    token = request.form.get('token', None)
+    if not token:
+        token = request.args.get('token', None)
+
+    if token:
+        user.save_jwt_username(token)
+
+    return user
 
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
@@ -117,6 +129,7 @@ def login():
 
 @app.route('/search_media', methods=['GET'])
 @requires_authorization
+@login_required
 def search_media():
     token = request.args.get('token')
     validation_errors = request.args.get('validation_errors')
@@ -127,6 +140,7 @@ def search_media():
 
 @app.route('/search_media', methods=['POST'])
 @requires_authorization
+@login_required
 def post_media():
     token = request.form.get('token')
     pid = request.form.get('pid')
@@ -145,6 +159,7 @@ def post_media():
 
 @app.route('/upload', methods=['GET'])
 @requires_authorization
+@login_required
 def get_upload():
     logger.info('get_upload')
 
@@ -181,6 +196,7 @@ def get_upload():
 
 @app.route('/upload', methods=['POST'])
 @requires_authorization
+@login_required
 def post_upload():
     tp = {
         'token': request.form.get('token'),
@@ -223,6 +239,8 @@ def upload_folder():
     return os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
 
 
+# TODO: DOUBLE CHECK! once we have saml maybe add a requires_auth here also
+# it only returns a temp uploaded file so its not a major issue as is.
 @app.route('/subtitles/<filename>')
 def uploaded_subtitles(filename):
     return send_from_directory(upload_folder(), filename)
@@ -230,6 +248,7 @@ def uploaded_subtitles(filename):
 
 @app.route('/cancel_upload')
 @requires_authorization
+@login_required
 def cancel_upload():
     token = request.args.get('token')
     pid = request.args.get('pid')
@@ -247,6 +266,7 @@ def cancel_upload():
 
 @app.route('/send_to_mam', methods=['POST'])
 @requires_authorization
+@login_required
 def send_to_mam():
     tp = {
         'token': request.form.get('token'),
@@ -433,6 +453,8 @@ def saml_login():
 # TODO: secure this route or further check if it's actually needed
 # IMPORTANT DOUBLE CHECK THIS BEFORE A PRD RELEASE!!!
 @app.route('/attrs/')
+@requires_authorization
+@login_required
 def attrs():
     paint_logout = False
     attributes = False
@@ -446,6 +468,7 @@ def attrs():
                            attributes=attributes)
 
 
+# TODO check + secure once SAML is configured
 @app.route('/metadata/')
 def metadata():
     req = prepare_flask_request(request)
@@ -466,6 +489,7 @@ def metadata():
 # ================= NEW METADATA EDITING ROUTES ============
 @app.route('/edit_metadata', methods=['GET'])
 @requires_authorization
+@login_required
 def edit_metadata():
     logger.info('GET item_meta route')
 
@@ -478,6 +502,7 @@ def edit_metadata():
     if validation_error:
         return pid_error(token, pid, validation_error)
 
+    # TODO: refactor this part out into services
     mh_api = MediahavenApi()
     mam_data = mh_api.find_video(department, pid)
     if not mam_data:
@@ -494,15 +519,11 @@ def edit_metadata():
 
 @app.route('/edit_metadata', methods=['POST'])
 @requires_authorization
+@login_required
 def save_item_metadata():
-    data_mapping = RmhMapping()
-
-    # possibly also return a title + message here to show
-    # with our javascript flashAlertMessage method.
-    tp, json_data, errors = data_mapping.form_to_mh(request)
-    token = tp.get('token')
-    pid = tp.get('pid')
-    department = tp.get('department')
+    token = request.form.get('token')
+    pid = request.form.get('pid')
+    department = request.form.get('department')
 
     # TODO: refactor this part out into services
     mh_api = MediahavenApi()
@@ -510,26 +531,17 @@ def save_item_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
+    data_mapping = RmhMapping()
+    tp, json_data, errors = data_mapping.form_to_mh(request, mam_data)
+
     # TODO: change this to different template or
     # trigger the flashAlertMessage jscode here depending on errors
     # and possibly other values return from our RmhMapping.form_to_mh call
+
     return render_template(
         'edit_metadata.html',
-        token=token,
-        pid=pid,
-        department=department,
-        mam_data=json.dumps(tp.get('mam_data')),
-        video_url=tp.get('video_url'),
-        subitle_type=tp.get('subtitle_type'),
-        title=mam_data.get('title'),
-        description=mam_data.get('description'),
-        created=get_property(mam_data, 'CreationDate'),
-        archived=get_property(mam_data, 'created_on'),
-        original_cp=get_property(mam_data, 'Original_CP'),
-        #  for v2 mam_data['Internal']['PathToVideo']
-        # video_url=mam_data.get('videoPath'),
-        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
-        validation_errors=errors)
+        **tp
+    )
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
@@ -540,11 +552,15 @@ def liveness_check():
 
 @app.errorhandler(401)
 def unauthorized(e):
-    return "<h1>401</h1><p>Unauthorized</p>", 401
+    # return "<h1>401</h1><p>Unauthorized</p>", 401
+    return redirect(
+        url_for('.index', token=None)
+    )
 
 
 @app.errorhandler(404)
 def page_not_found(e):
+    # TODO: also a redirect but set some flash message here
     return "<h1>404</h1><p>Page not found</p>", 404
 
 

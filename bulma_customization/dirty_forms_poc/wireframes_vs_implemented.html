@@ -1,0 +1,103 @@
+<html>
+  <head>
+  <style>
+    .summary_table{
+      border-collapse: separate;
+      border-spacing: 0px;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid;
+    }
+
+  </style>
+  </head>
+  <body>
+
+  <h1> Overview of wireframes vs implemented 9/12/2021</h1>
+
+  <!-- just something to use in next meeting to have a nice overview/status report instead of some word doc-->
+  <table class="summary_table">
+    <tr class="title">
+      <td><h2>Wireframe</h2></td>
+      <td><h2>Implemented</h2></td>
+    </tr>
+
+    <tr><td><h2> Screen for SAML login due Friday 10/12/2021</h2></td>
+        <td>
+          <img src="images/login_screen.png" width="80%"> <br/> <br/>
+          <br/>
+          Remarks the entire form will have to be replaced with a public screen once we move to 
+          SAML only authentication. 
+          <img src="images/logout_dropdown.png" width="80%"> <br/><br/>
+    </td> </tr>
+
+
+    <tr><td><img src="images/pid_selectie_wireframe.png" width="80%"></td>
+        <td><img src="images/pid_selectie_implemented.png" width="80%"></td> </tr>
+
+    <tr><td><img src="images/metadata_form_part_1_wireframe.png" width="80%"></td>
+        <td><img src="images/metadata_form_part_1_implemented.png" width="80%">
+          <br/>
+        Remarks: Metadata opslaan is 'sticky' per request in ticket (not visible on wireframes).
+        </td> </tr>
+
+    <tr><td><img src="images/metadata_form_part_2_wireframe.png" width="80%"></td>
+        <td>
+          <img src="images/metadata_form_part_2_implemented.png" width="80%"/> <br/> <br/>
+          <img src="images/metadata_productie_editing.png" width="80%"/>
+          <br/>
+          Remarks: adding+removing already works. But needs some tweaks + a bugfix (for when you delete all items + we need to add some unique ids with some js code).
+        </td> 
+    </tr>
+
+
+    <tr><td><img src="images/metadata_inhoud_edit_deel1.png" width="80%"></td>
+        <td><img src="images/metadata_inhoud_edit_deel1_implemented.png" width="80%"></td> </tr>
+
+    <tr><td><img src="images/metadata_inhoud_edit_deel2.png" width="80%"></td>
+        <td><img src="images/metadata_inhoud_edit_deel2_implemented.png" width="80%">
+          <br/>
+          <a href="../richtext_poc/index.html">Proof of concept customized richtext editor</a>
+        </td> 
+        </tr>
+
+
+    <tr><td><img src="images/metadata_lom_delen_wireframe.png" width="80%">
+        <br/><br/>
+        <a href="thema_prototype.html">Proof of concept voor de wireframe thema selectie</a>
+        </td>
+        <td><img src="images/metadata_lom_delen_implemented.png" width="80%">
+        <br/>
+        <br/>
+        <a href="../index.html">Modern bulma alternative thema selectie</a>
+        </td> </tr>
+
+
+    <tr><td><img src="images/kies_ondertitels_wireframe.png" width="80%"></td>
+        <td><img src="images/kies_ondertitels_implemented.png" width="80%"></td> </tr>
+
+
+    <tr><td><img src="images/preview_ondertitels_wireframe.png" width="80%"></td>
+        <td><img src="images/preview_ondertitels_implemented.png" width="80%"></td> </tr>
+
+
+
+      <tr><td><h2>Wireframe missing ?</h2></td>
+        <td>
+          <img src="images/ondertitels_confirmation_screen.png" width="80%"></td> </tr>
+
+      <tr><td></td>
+        <td>
+          <h2>Not a hard 'business requirement', but everything is already responsive too ;)</h2>
+          <img src="images/metadata_edit_responsive1.png" width="80%"> <br/> <br/>
+          <img src="images/metadata_edit_responsive2.png" width="80%"> <br/> <br/>
+          <img src="images/metadata_edit_responsive3.png" width="80%"> <br/> <br/>
+          <img src="images/ondertitels_responsive.png" width="80%"> <br/>
+        </td> </tr>
+    </table>
+  </body>
+</html>
+

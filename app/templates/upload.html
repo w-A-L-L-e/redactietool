@@ -9,15 +9,17 @@ Ondertitelbestand
 
 {% block content %}
 
-<h1 class="title">{{title}}</h1>
+
+<div class="columns">
+  <div class="column">
+    <h1 class="title">{{title}}</h1>
+    <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
+  </div>
+</div>
 
 <div class="columns">
 
   <div class="column is-half">
-    <!-- TODO: also strip out video_title css -->
-    <!-- label>PID</label> <div class="pid-view"> {{pid}}</div> <div class="check"></div -->
-
-    <h2 class="subtitle"><b>PID: {{pid}} </b></h2>
     <div id="player_container"></div>
 
     <!-- we can re-introduce this if wanted... keeping it as comment now
@@ -41,9 +43,6 @@ Ondertitelbestand
     <form class="upload_form" action="/upload" method="POST" enctype="multipart/form-data">
       {% include 'upload_hidden_fields.html' %}
       
-      <!-- some extra vertical spacing -->
-      <br/>
-      <br/>
       <div class="field">
         <label class="label">Selecteer type ondertitelbestand</label>
         <div class="control">

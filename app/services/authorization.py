@@ -73,13 +73,18 @@ def verify_token(jwt_token):
                 OAS_JWT_SECRET.encode() + b'===').replace(
                 b'\x1a', b'')
 
-            # this not only checks signature but also if audience 'aud'
-            # contains avo-subtitle
+            # This not only checks signature but also if audience 'aud'
+            # contains avo-subtitle or more specifically what is
+            # configured in OAS_APPNAME.
+            # 'sub': 'user uuid', 'mail': 'some_test_email@meemoo.be',
+            # 'cn': 'Firstname Lastname', 'o': 'OR-organization-or-id',
+            # 'aud': [allowed apps]
             dt = jwt.decode(
                 jwt_token,
                 jwt_secret,
                 audience=[OAS_APPNAME],
                 algorithms=['HS256'])
+
             return True
 
     except jwt.exceptions.DecodeError as de:

@@ -1,3 +1,4 @@
+// ============================== App JavaScript ===============================
 // Author: Walter Schreppers
 //
 //  File: app/static/app.js
@@ -9,7 +10,6 @@
 //
 // future work: we might split this up in seperate js files and
 // have some minification done in our precompile assets makefile target.
-//
 
 
 // ============================== SUBTITLE FORMS ===============================
@@ -89,13 +89,13 @@ function confirmCancel(btn){
 
 
 // ============================ LOGIN/LOGOUT FORMS =============================
-// #logout_btn
 function logoutClicked(ref){
+  // #logout_btn
   ref.className += ' disabled';
 }
 
-// #new_upload_btn
 function newUploadClicked(ref){
+  // #new_upload_btn
   ref.className += ' disabled';
 }
 
@@ -128,7 +128,7 @@ function flashModalWarning(){
 }
 
 
-// =========================== METADATA EDIT FORM =============================
+// ============================ METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_input_id){
   var item_input = document.getElementById(item_input_id);
@@ -177,7 +177,6 @@ function collapseEmptyTextarea(area_id, uncollapsable=false){
   }
 }
 
-
 // Inhoud section hide unused/empty textarea's for current item
 function collapseEmptyTextareas(){
   // when passing 'true' we show a collapse/uncollapse icon and 
@@ -186,27 +185,102 @@ function collapseEmptyTextareas(){
   collapseEmptyTextarea("originele_hoofdbeschrijving");
   collapseEmptyTextarea("originele_uitgebreide_hoofdbeschrijving");
   collapseEmptyTextarea("ondertitels");
-  collapseEmptyTextarea("programma_omschrijving");
+  collapseEmptyTextarea("programma_beschrijving");
   collapseEmptyTextarea("cast");
   collapseEmptyTextarea("transcriptie");
 }
 
+
+function hideTitleInput(input_id){
+  var input_field = document.getElementById(input_id);
+  if( input_field ){
+    var input_box = input_field.getElementsByTagName("input")[0];
+    if( input_box && input_box.value.length == 0){
+      //console.log("hiding field", input_id);
+      input_field.style.display = "none";
+    }
+  }
+}
+
+function hideEmptyTitles(){
+  hideTitleInput("titel_serie");
+  hideTitleInput("titel_episode")
+  hideTitleInput("titel_aflevering");
+  hideTitleInput("titel_alternatief");
+  hideTitleInput("titel_programma");
+  hideTitleInput("titel_serienummer");
+  hideTitleInput("titel_seizoen");
+  hideTitleInput("titel_nummer");
+  hideTitleInput("titel_archief");
+  hideTitleInput("titel_deelarchief");
+  hideTitleInput("titel_reeks");
+  hideTitleInput("titel_deelreeks");
+  hideTitleInput("titel_registratie");
+}
+
+function showTitleInput(input_id){
+  var input_field = document.getElementById(input_id);
+  if( input_field ){
+    input_field.style.display = "flex";
+  }
+}
+
+function showEmptyTitles(){
+  showTitleInput("titel_serie");
+  showTitleInput("titel_episode")
+  showTitleInput("titel_aflevering");
+  showTitleInput("titel_alternatief");
+  showTitleInput("titel_programma");
+  showTitleInput("titel_serienummer");
+  showTitleInput("titel_seizoen");
+  showTitleInput("titel_nummer");
+  showTitleInput("titel_archief");
+  showTitleInput("titel_deelarchief");
+  showTitleInput("titel_reeks");
+  showTitleInput("titel_deelreeks");
+  showTitleInput("titel_registratie");
+}
+
+function closeSavedAlert(){
+  var alert_box = document.getElementById("data_saved_alert_box");
+  if(alert_box){
+    alert_box.style.display = "none";
+  }
+}
+
+function autoCloseSavedAlert(){
+  setTimeout(function(){
+    closeSavedAlert();
+  }, 4000); 
+}
+
+function clearButtonLoadingState(){
+  console.log("TODO: put all buttons back in original state");
+  // find all buttons and return to original state
+  // this is similar to hideEmptyTitles but instead we modify
+  // a class and/or replace the button.value
+}
+
+
+// ======================== FORMs onbeforeunload handlers ======================
+// this is found by googling around some, not sure yet if we'll take this route
 function addUnloadHooks(){
-  // some vanilla onbeforeunload for our custom alert box, this needs some further work and state:
+  // some vanilla onbeforeunload for our custom alert box, 
+  // this needs some further work and state:
   // when we add this listener we get the browser default popups.
+  //
   // window.addEventListener('beforeunload', function (e) {
   //   console.log("EVENT: beforeunload detected!");
   //   // Cancel the event
-  //   e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  //   // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  //   e.preventDefault(); 
   //   // Chrome requires returnValue to be set
   //   e.returnValue = '';
-
-  //         //possibly do something like this, not sure yet:
-  //         // setInterval(function(){
-  //         //    if modalCancelled return false;
-  //         //    if modalConfirmed return true;
-  //         // }, 800);
-
+  //     //possibly do something like this, not sure yet:
+  //     setInterval(function(){
+  //        if modalCancelled return false;
+  //        if modalConfirmed return true;
+  //     }, 800);
   //   // the absence of a returnValue property on the event will guarantee the browser unload happens
   //   delete e['returnValue'];
   // });
@@ -216,19 +290,21 @@ function addUnloadHooks(){
   // https://github.com/NightOwl888/jquery.dirtyforms.dialogs.bootstrap.dist. 
   // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
   // do something similar for bulma instead.
-  // That will however also introduce jquery into the mix, making our js dependencies around 86k larger.
+  // That will however also introduce jquery into the mix, 
+  // making our js dependencies around 86k larger.
 }
 
 
-
-
-// ====================================== DOCUMENT READY EVENT ========================================
-// document on-ready handler
-// handles burger menu and collapsing of
-// empty items in Inhoud section
+// =========================== DOCUMENT READY EVENT ============================
+// document on-ready handler, similar to bulma.io docs, adapted and customized
+// for our nees. We also added collapsing and hiding of inputs, textareas and 
+// notifications here.
+// We also handle burger menu open/close here.
 document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  const $navbarBurgers = Array.prototype.slice.call(
+    document.querySelectorAll('.navbar-burger'), 0
+  );
 
   // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
@@ -250,15 +326,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   collapseEmptyTextareas();
+  hideEmptyTitles();
+  autoCloseSavedAlert();
+  clearButtonLoadingState();
   
+  // For demo, show modal dialogs
+  // ============================
   // showNavigationWarning();
   // flashModalWarning();
   // showModalAlert("hello", "world");
 
+  // simple version of unload hook, we however have
+  // a more advanced dirtyforms proof of concept in bulma_customization
+  // to be determined if we actually want/need this later on.
   // beforeunload confirm/cancel example
   // addUnloadHooks();
 
-  // TODO: slim select for multi select component
+  // TODO: slim select : example of a multi-select component
   // new SlimSelect({
   //   select: '#multiple'
   // })

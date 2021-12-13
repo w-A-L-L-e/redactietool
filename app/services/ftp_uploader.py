@@ -3,7 +3,7 @@
 #
 #  @Author: Walter Schreppers
 #
-#  app/mediahaven_api.py
+#  app/ftp_uploader.py
 #
 #   FTP upload subtitle file and sidecar xml files.
 #   as temporary workaround to get this working until

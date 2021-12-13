@@ -48,7 +48,10 @@ def test_liveness_check(client):
 
 def test_search_media_security(client):
     res = client.get('/search_media')
-    assert res.status_code == 401  # unauthorized
+    # assert res.status_code == 401  # unauthorized
+
+    # with flask-login this auto redirects to login now with a 302
+    assert res.status_code == 302  # redirects to login
 
 
 def test_search_media(client):
@@ -369,7 +372,7 @@ def test_subtitle_ftp_upload(client, mocker):
         return ftp_mock
 
     mocker.patch(
-        'app.ftp_uploader.FtpUploader.ftp_client',
+        'app.services.ftp_uploader.FtpUploader.ftp_client',
         mock_ftp_client
     )
 

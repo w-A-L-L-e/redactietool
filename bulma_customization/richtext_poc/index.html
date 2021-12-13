@@ -1,0 +1,109 @@
+<html>
+
+  <head>
+
+    <!-- Include stylesheet -->
+    <link href="quill.snow.css" rel="stylesheet">
+
+    <!-- just a little hack to have dutch menus -->
+    <style>
+        .wrapper-later-with-bulma{
+          width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          height: 15em;
+        }
+
+        .ql-snow .ql-picker.ql-header .ql-picker-label::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item::before {
+          content: 'Normaal';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+          content: 'Titel h1';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+          content: 'Titel h2';
+        }
+        .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+        .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+          content: 'Titel h3';
+        }
+    </style>
+
+
+    <!-- Include the Quill library v1.3.6-->
+    <script src="quill.js"></script>
+  </head>
+  <body>
+
+
+    
+    <!-- Create the editor container -->
+    <div class="wrapper-later-with-bulma">
+      <h2>Het archief voor Onderwijs beschrijving</h2>
+
+      <div id="redactietool-richtext-editor">
+        <h1>Proof of concept richtext editor</h1>
+
+        <p> Samen met Miel bekeken of de output wel clean genoeg is. 
+        TODO: eerste probleem dat we al zien is wel dat we de paste events ook moeten gaan opvangen.
+        Dit om ervoor te zorgen dat ze enkel plain text kunnen pasten en niet iets met markdown uit een word document ofzo...</p>
+
+        <p>
+        Goede aan <a href="https://quilljs.com/docs/quickstart/">quill editor</a> is dat de 
+        output nog redelijk clean blijft. <b>Verder ook voor zekerheid en security moeten we dan server side (in backend) ook de html parsen en rejecten
+          als er tags in zitten die we niet willen opslaan in Mediahaven...</b>
+        </p>
+        <p>That's all folks!</p>
+
+      </div>
+
+      <br/>
+      Editor output: <br/>
+      <textarea id="onderwijs_beschrijving" rows="15" cols="70">
+      </textarea>
+    </div>
+
+<script>
+  var quill = new Quill('#redactietool-richtext-editor', {
+    modules: {
+      toolbar: [
+        [{ header: [2, false] }],
+        ['bold', 'italic', 'underline'],
+        ['link']
+        //['image', 'code-block'] //no images and no files!
+      ]
+    },
+    placeholder: 'Het archief voor Onderwijs beschrijving',
+    theme: 'snow'  // or 'bubble'
+  });
+
+  
+  quill.on('editor-change', function(eventName, ...args) {
+    //  if (eventName === 'text-change') {
+    //    // args[0] will be delta
+    //  } else if (eventName === 'selection-change') {
+    //    // args[0] will be old range
+    //  }
+    //  var plaintext = quill.getText();
+    //  var contents = quill.getContents();
+    //  console.log("TEXT=", plaintext);
+    //  console.log("CONTENT=", contents);
+
+    var editor_div = document.getElementById("redactietool-richtext-editor");
+    if(editor_div){
+      var html_content = editor_div.firstChild.innerHTML
+      console.log("\neditor content:\n", html_content);
+      var editor_form_target = document.getElementById("onderwijs_beschrijving");
+      if(editor_form_target){
+        editor_form_target.value = html_content;
+      }
+    }
+  });
+</script>
+
+  </body>
+</html>
+
