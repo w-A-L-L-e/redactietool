@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+  <!-- styling to be done with bulma soon... -->
+  <div class="center_page">
+    <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+    </h1>
+
+     <form action="/legacy_login" class="login_form box is-light" method="POST">
+        <!-- original implementation, will be deprecated soon -->
+        <div class="field">
+          <label class="label">E-mailadres</label>
+          <div class="control">
+            <input  name="username" 
+                    class="input is-hovered"
+                    autocomplete="username"
+                    placeholder="E-mailadres"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Wachtwoord</label>
+          <div class="control">
+            <input  name="password" 
+                    type="password"
+                    class="input is-hovered"
+                    autocomplete="current-password"
+                    placeholder="Wachtwoord"/>
+          </div>
+        </div>
+
+        {% include 'includes/form_errors.html' %}
+
+        {% if errors %}
+          <div class="alert alert-danger" role="alert">
+            <strong>Errors:</strong>
+            <ul class="list-unstyled">
+                {% for err in errors %}
+                  <li>{{err}}</li>
+                {% endfor %}
+            </ul>
+            {% if error_reason %}
+                <span>{{error_reason}}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="field is-pulled-right">
+          <div class="control">
+            <button 
+              type="submit"
+              class="button is-primary"
+              onclick="loginSubmit(this); return false;"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      
+        <br/><br/><br/>
+        <hr class="is-info"/>
+        <p>
+          De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
+          kunt gebruiken met 1 login/logout.
+        </p>
+        <a href="{{ url_for('.index')}}" 
+          class="button is-info saml">
+          SAML Login
+        </a>
+    </form>
+  </div>
+
+  <script>
+    // TODO: hide/unhide this in menu.html without js instead.
+    function hide_saml_auth(){
+      console.log("temporarely hide saml auth when on original login page.")
+      saml_header_block = document.getElementById('saml_auth_block');
+      saml_header_block.style.display='none'
+    }
+
+    hide_saml_auth();
+  </script>
+
+{% endblock %}
+   </body>
+</html> 
+
+

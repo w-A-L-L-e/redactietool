@@ -47,7 +47,7 @@ def test_token_signature_bad_decode():
 
 @pytest.mark.vcr
 def test_wrong_credentials(client):
-    res = client.post('/login', data=dict(
+    res = client.post('/legacy_login', data=dict(
         username='avo-syncrator',
         password='wrong_pass',
     ), follow_redirects=True)
@@ -57,7 +57,7 @@ def test_wrong_credentials(client):
 
 @pytest.mark.vcr
 def test_right_credentials(client):
-    res = client.post('/login', data=dict(
+    res = client.post('/legacy_login', data=dict(
         username='avo-syncrator',
         password='correct_pass',
     ), follow_redirects=True)

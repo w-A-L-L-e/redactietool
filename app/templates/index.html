@@ -9,92 +9,49 @@ Login
 
 {% block content %}
 
-  <!-- styling to be done with bulma soon... -->
-  <div class="center_page">
-    <h1 class="title">
-        Redactietool 
-        <span class="icon">
-          <ion-icon name="create-outline"></ion-icon>
-        </span>
-    </h1>
+{# TODO: refactor this later on, right now as POC its nice to test login/logout integrated in subloader... #}
+{% if not_auth_warn %}
+  <div class="alert alert-danger" role="alert">Not authenticated</div>
+{% endif %}
 
-     <form action="/login" class="login_form box is-light" method="POST">
-        <!-- original implementation, will be deprecated soon -->
-        <div class="field">
-          <label class="label">E-mailadres</label>
-          <div class="control">
-            <input  name="username" 
-                    class="input is-hovered"
-                    autocomplete="username"
-                    placeholder="E-mailadres"/>
-          </div>
-        </div>
+{% if success_slo %}
+  <div class="alert alert-success" role="alert">Successfully logged out</div>
+{% endif %}
 
-        <div class="field">
-          <label class="label">Wachtwoord</label>
-          <div class="control">
-            <input  name="password" 
-                    type="password"
-                    class="input is-hovered"
-                    autocomplete="current-password"
-                    placeholder="Wachtwoord"/>
-          </div>
-        </div>
+<!--
+DEBUG template params (not for release, just for extra security checking): <br/>
+<pre>
+{{ errors }}
+{{ error_reason }}
+{{ not_auth_warn }}
+{{ success_slo }}
+{{ attributes }}
+{{ paint_logout }}
+</pre>
+-->
 
-        {% include 'includes/form_errors.html' %}
+<div class="saml-login-page">
+  <div class="card">
+    <div class="card-content">
+      <div class="content">
 
-        {% if errors %}
-          <div class="alert alert-danger" role="alert">
-            <strong>Errors:</strong>
-            <ul class="list-unstyled">
-                {% for err in errors %}
-                  <li>{{err}}</li>
-                {% endfor %}
-            </ul>
-            {% if error_reason %}
-                <span>{{error_reason}}</span>
-            {% endif %}
-          </div>
-        {% endif %}
+        <h1 class="title">
+          Redactietool 
+          <span class="icon">
+            <ion-icon name="create-outline"></ion-icon>
+          </span>
+        </h1>
 
-        <div class="field is-pulled-right">
-          <div class="control">
-            <button 
-              type="submit"
-              class="button is-primary"
-              onclick="loginSubmit(this); return false;"
-            >
-              Login
-            </button>
-          </div>
-        </div>
-      
-        <br/><br/><br/>
-        <hr class="is-info"/>
         <p>
-          De toekomstige authenticatie is met SAML zodat je meerdere Meemoo websites
-          kunt gebruiken met 1 login/logout.
+           Login met je meemoo account door 
+           rechtsboven op de login knop te klikken.
         </p>
-        <a href="{{ url_for('.saml_login')}}" 
-          class="button is-info saml">
-          SAML Login
-        </a>
-    </form>
+       <a href="/legacy_login" class="button is-link is-light">Terug naar originele authenticatie </a>
+      </div>
+    </div>
   </div>
-
-  <script>
-    // TODO: hide/unhide this in menu.html without js instead.
-    function hide_saml_auth(){
-      console.log("temporarely hide saml auth when on original login page.")
-      saml_header_block = document.getElementById('saml_auth_block');
-      saml_header_block.style.display='none'
-    }
-
-    hide_saml_auth();
-  </script>
+</div>
 
 {% endblock %}
-   </body>
-</html> 
 
 
