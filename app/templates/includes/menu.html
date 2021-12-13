@@ -21,7 +21,7 @@
   <div id="navbarBasicExample" class="navbar-menu">
 
     <div class="navbar-start">
-      {% if token %}
+      {% if token or paint_logout %}
         <a class="navbar-item"
            href="/search_media?token={{token}}">
           Selecteer PID
@@ -30,7 +30,7 @@
     </div>
 
     <div class="navbar-end "> 
-      {% if pid and token %}
+      {% if (pid and token) or (pid and paint_logout) %}
         <a class="navbar-item"
           href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
           Metadata
@@ -41,6 +41,10 @@
           Ondertitels
         </a>
       {% endif %}
+      
+
+
+      <!-- legacy login -->
       {% if token %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
@@ -59,53 +63,33 @@
                </div>
              </div>
           </div>
-      {% else %}
-          <div class="navbar-item">
-            <div class="buttons">
-              <div class="login_logout" id="saml_auth_block">
-                {% if paint_logout %}
-                {% if attributes %}
-                  <table class="table table-striped">
-                    <thead>
-                      <th>Name</th><th>Values</th>
-                    </thead>
-                    <tbody>
-                      {% for attr in attributes %}
-                        <tr><td>{{ attr.0 }}</td>
-                        <td><ul class="list-unstyled">
-                          {% for val in attr.1 %}
-                            <li>{{ val }}</li>
-                          {% endfor %}
-                        </ul></td></tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                {% else %}
-                  <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+      {% endif %}
+
+
+      <!-- saml login -->
+      {% if paint_logout %}
+          <div class="navbar-item has-dropdown is-hoverable">
+             <a class="navbar-link">
+                {% if attributes and attributes['cn'] %}
+                  {{ attributes['cn'] | default('Voornaam Achternaam', true) }}
                 {% endif %}
+             </a>
+             <div class="navbar-dropdown is-right">
+               <a class="navbar-item button is-info ml-2 mr-2"
+                   href="/">
+                   Logout
+                 </a>
 
-                <a href="?slo" class="button is-primary">
-                  <strong>Logout</strong>
-                </a>
-
-              {% else %}
-                <a  href="?sso2" 
-                    class="button is-link is-light">
-                  <strong>Login (debug)</strong>
-                </a>
-
-                <a  href="?sso" 
-                    class="button is-info">
-                  Login
-                </a> 
-              {% endif %}
-              </div>
-
-            </div>
+               <hr class="navbar-divider mt-2">
+               <div class="navbar-item is-pulled-right">
+                 <ion-icon name="create-outline" class="mr-1"></ion-icon>
+                 Redactietool v0.9.2 beta
+               </div>
+             </div>
           </div>
       {% endif %}
+              
     </div>
-
   </div>
 </nav>
 
