@@ -23,9 +23,6 @@
 
   {% for maker in makers: %}
     <div class="field is-horizontal is-pulled-left" id="prd_maker_input">
-      <!--div class="field-label is-normal">
-        <label class="label">Maker</label>
-      </div-->
       <div class="field-body mr-5">
         <div class="select is-small">
           <select name="maker_attribute" id="maker_attrib_{{loop.index}}">
@@ -51,7 +48,6 @@
             {{ select_option('Regisseur', 'Regisseur', maker['attribute']) }}
             {{ select_option('Schrijver', 'Schrijver', maker['attribute']) }}
             {{ select_option('Opdrachtgever', 'Opdrachtgever', maker['attribute']) }}
-
           </select>
         </div>
 

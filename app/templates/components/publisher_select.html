@@ -11,28 +11,43 @@
   </div>
 </div>
 
-<div id="prd_publishers">
-  <div class="field is-horizontal is-pulled-left" id="prd_publisher_input">
-    <div class="field-label is-normal">
-      <label class="label">Publisher</label>
-    </div>
-    <div class="field-body">
-      <div class="select is-small">
-        <select name="publisher" id="publisher">
-          <option value="distributeur">Distributeur</a>
-          <option value="exposant">Exposant</a>
-          <option value="persagentschap">Persagentschap</a>
-          <option value="publisher">Publisher</a>
-        </select>
+{% macro select_option(label, value, attribute) %}
+  {% if value == attribute %}
+    <option value="{{value}}" selected>{{label}}</a>
+  {% else %}
+    <option value="{{value}}">{{label}}</a>
+  {% endif %}
+{% endmacro %}
+
+<div id="prd_publishers" class="pl-5 ml-5">
+
+  {% for publisher in publishers: %}
+    <div class="field is-horizontal is-pulled-left ml-5" id="prd_publisher_input">
+     
+      <div class="field-body mr-5">
+        <div class="select is-small">
+          <select name="publisher_attribute" id="publisher_attrib_{{loop.index}}">
+
+            {{ select_option('Distributeur', 'Distributeur', publisher['attribute']) }}
+            {{ select_option('Exposant', 'Exposant', publisher['attribute']) }}
+            {{ select_option('Persagentschap', 'Persagentschap', publisher['attribute']) }}
+            {{ select_option('Publisher', 'Publisher', publisher['attribute']) }}
+
+          </select>
+        </div>
+
+        <input name="bijdrager_custom" 
+               class="input is-small ml-2 narrow-input"
+               type="text" placeholder="" 
+               value="{{publisher['value']}}">
+
+        <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+
       </div>
-
-      <input name="bijdrager_custom" 
-      class="input is-small ml-2 narrow-input" type="text" placeholder="">
-      <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
-
     </div>
-  </div>
+  {% endfor %}
 </div>
 
 <div class="is-clearfix"></div>
+
 
