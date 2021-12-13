@@ -72,7 +72,6 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
-
 # ====================== LEGACY LOGIN RELATED ROUTES ==========================
 @login_manager.request_loader
 def load_user_from_request(request):
@@ -85,6 +84,7 @@ def load_user_from_request(request):
         user.save_jwt_username(token)
 
     return user
+
 
 @app.route('/legacy_login', methods=['GET'])
 def legacy_login():
@@ -125,6 +125,7 @@ def login():
 
     else:
         return render_template('legacy_login.html', validation_errors='Fout email of wachtwoord')
+
 
 # ========================== SAML Authentication ==============================
 def init_saml_auth(req):

@@ -154,7 +154,7 @@ class MediahavenApi:
         fragment_id = metadata['fragmentId']
         avo_beschrijving = get_property(metadata, 'dcterms_abstract')
         print("sending this to mediahaven now: ", avo_beschrijving)
-        return # TEMP TURN OFF
+        return  # TEMPORARY TURN REAL POST CALL OFF
 
         # update dcterms_abstract
         send_url = f"{self.API_SERVER}/resources/media/{fragment_id}/dcterms_abstract"
