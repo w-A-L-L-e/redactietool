@@ -94,6 +94,9 @@ class MediahavenApi:
             department, search=f"%2B(ExternalId:{pid})")
 
         nr_results = matched_videos.get('totalNrOfResults')
+        if not nr_results:
+            return None
+
         if nr_results == 1:
             return matched_videos.get('mediaDataList', [{}])[0]
         elif nr_results > 1:
