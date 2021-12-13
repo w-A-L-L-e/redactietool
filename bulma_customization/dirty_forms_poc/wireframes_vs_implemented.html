@@ -24,11 +24,13 @@
 
     img{
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.29);
+      width: 95%;
+      margin-bottom: 10px;
     }
 
   </style>
   </head>
-  <body>
+  <body id="main">
 
   <h1> Overview of wireframes vs implemented screens (13/12/2021)</h1>
 
@@ -46,36 +48,36 @@
         <a href="https://meemoo.atlassian.net/browse/DEV-1851"> DEV-1851 </a>
       </td>
       <td>
-          <img src="images/login_screen.png" width="80%"> <br/> <br/>
+          <img src="images/login_screen.png"> <br/> <br/>
           <br/>
           Remarks the entire form will have to be replaced with a public screen once we move to 
           SAML only authentication. 
-          <img src="images/logout_dropdown.png" width="80%"> <br/><br/>
+          <img src="images/logout_dropdown.png"> <br/><br/>
 
           <p>
-          <img src="images/saml_login_changes.png" width="80%"> <br/><br/>
+          <img src="images/saml_login_changes.png"> <br/><br/>
           Temporary placeholder image used + added suggestion to move login button
           out of header into the central dialog instead.
           </p>
     </td> </tr>
 
 
-    <tr><td><img src="images/pid_selectie_wireframe.png" width="80%"></td>
-        <td><img src="images/pid_selectie_implemented.png" width="80%"></td> </tr>
+    <tr><td><img src="images/pid_selectie_wireframe.png"></td>
+        <td><img src="images/pid_selectie_implemented.png"></td> </tr>
 
-    <tr><td><img src="images/metadata_form_part_1_wireframe.png" width="80%"></td>
-        <td><img src="images/metadata_form_part_1_implemented.png" width="80%">
+    <tr><td><img src="images/metadata_form_part_1_wireframe.png"></td>
+        <td><img src="images/metadata_form_part_1_implemented.png">
           <br/>
           <p>
         Remarks: Metadata opslaan is 'sticky' per request in ticket (not visible on wireframes).
           </p>
         </td> </tr>
 
-    <tr><td><img src="images/metadata_form_part_2_wireframe.png" width="80%"></td>
+    <tr><td><img src="images/metadata_form_part_2_wireframe.png"></td>
         <td>
-          <img src="images/metadata_form_part_2_implemented.png" width="80%"/> <br/> <br/>
-          <img src="images/metadata_productie_editing_page1.png" width="80%"/> <br/><br/>
-          <img src="images/metadata_productie_editing_page2.png" width="80%"/>
+          <img src="images/metadata_form_part_2_implemented.png"/> <br/> <br/>
+          <img src="images/metadata_productie_editing_page1.png"/> <br/><br/>
+          <img src="images/metadata_productie_editing_page2.png"/>
           <br/>
           <p>
           Remarks: adding+removing already works. But needs some tweaks + a bugfix (for when you delete all items + we need to add some unique ids with some js code).
@@ -85,53 +87,95 @@
     </tr>
 
 
-    <tr><td><img src="images/metadata_inhoud_edit_deel1.png" width="80%"></td>
-        <td><img src="images/metadata_inhoud_edit_deel1_implemented.png" width="80%"></td> </tr>
+    <tr><td><img src="images/metadata_inhoud_edit_deel1.png"></td>
+        <td><img src="images/metadata_inhoud_edit_deel1_implemented.png"></td> </tr>
 
-    <tr><td><img src="images/metadata_inhoud_edit_deel2.png" width="80%"></td>
-        <td><img src="images/metadata_inhoud_edit_deel2_implemented.png" width="80%">
+    <tr><td><img src="images/metadata_inhoud_edit_deel2.png"></td>
+        <td><img src="images/metadata_inhoud_edit_deel2_implemented.png">
           <br/>
           <a class="btn btn-link" href="../richtext_poc/index.html">Proof of concept customized richtext editor</a>
         </td> 
         </tr>
 
 
-    <tr><td><img src="images/metadata_lom_delen_wireframe.png" width="80%">
+    <tr><td><img src="images/metadata_lom_delen_wireframe.png">
         <br/><br/>
         <a href="thema_prototype.html">Proof of concept: thema selection as depicted in wireframes
         (shows some concerns and practical issues with this approach)</a>
         </td>
-        <td><img src="images/metadata_lom_delen_implemented.png" width="80%">
+        <td><img src="images/metadata_lom_delen_implemented.png">
         <br/>
         <br/>
         <a href="../index.html">Alternative bulma styled thema selector suggestion (work in progress)</a>
         </td> </tr>
 
 
-    <tr><td><img src="images/kies_ondertitels_wireframe.png" width="80%"></td>
-        <td><img src="images/kies_ondertitels_implemented.png" width="80%"></td> </tr>
+    <tr><td><img src="images/kies_ondertitels_wireframe.png"></td>
+        <td><img src="images/kies_ondertitels_implemented.png"></td> </tr>
 
 
-    <tr><td><img src="images/preview_ondertitels_wireframe.png" width="80%"></td>
-        <td><img src="images/preview_ondertitels_implemented.png" width="80%"></td> </tr>
+    <tr><td><img src="images/preview_ondertitels_wireframe.png"></td>
+        <td><img src="images/preview_ondertitels_implemented.png"></td> </tr>
 
 
 
       <tr><td><h2>Wireframe(s) missing?</h2></td>
         <td>
-          <img src="images/ondertitels_confirmation_screen.png" width="80%"></td> </tr>
+          <img src="images/ondertitels_confirmation_screen.png"></td> </tr>
 
       <tr><td></td>
         <td>
           <h2>Not a hard 'business requirement', but everything is already responsive too ;)</h2>
-          <img src="images/metadata_edit_responsive1.png" width="80%"> <br/> <br/>
-          <img src="images/metadata_edit_responsive2.png" width="80%"> <br/> <br/>
-          <img src="images/metadata_edit_responsive3.png" width="80%"> <br/> <br/>
-          <img src="images/ondertitels_responsive.png" width="80%"> <br/>
+          <img src="images/metadata_edit_responsive1.png"> <br/> <br/>
+          <img src="images/metadata_edit_responsive2.png"> <br/> <br/>
+          <img src="images/metadata_edit_responsive3.png"> <br/> <br/>
+          <img src="images/ondertitels_responsive.png"> <br/>
         </td> </tr>
     </table>
 
     <h2>That's all folks!</h2>
   </body>
+
+  <script type="text/javascript">
+    function minimizeImages(){
+      var page_images = document.getElementsByTagName("img");
+      for(var pi in page_images){
+        var other_img = page_images[pi];
+        if( other_img && other_img.style )
+          other_img.style.width = '95%';
+      }
+    }
+
+    function imageClicked(event){
+      var img = event.target || event.srcElement;
+      console.log("clicked image=", img);
+      var img_ypos = img.offsetHeight;
+
+      if( img.style.width == '1200px' ){
+        minimizeImages();
+        img.style.width = '95%';
+      }
+      else{
+        //minimizeImages();
+        img.style.width = '1200px';
+      }
+
+      //scroll image to top screen:
+      window.scrollTo((img_ypos - img.height).toString() + 'px');
+      console.log(img_ypos);
+    }
+
+    // vanilla alternative to $document.ready:
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("making images clickable...");
+      var page_images = document.getElementsByTagName("img");
+      for(var i in page_images){
+        var img = page_images[i];
+        img.onclick = () => {imageClicked(event);}
+      }
+
+
+    });
+  </script>
 </html>
 
