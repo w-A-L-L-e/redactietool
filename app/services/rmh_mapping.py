@@ -14,7 +14,7 @@ import json
 import os
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from app.services.subtitle_files import get_property, get_array_property
+from app.services.subtitle_files import get_property, get_array_property, get_md_array
 from app.services.mediahaven_api import MediahavenApi
 from markupsafe import escape
 
@@ -58,6 +58,9 @@ class RmhMapping:
             'department': department,
             'mam_data': json.dumps(mam_data),
             'original_cp': get_property(mam_data, 'Original_CP'),
+            'makers': get_md_array(mam_data, 'dc_creators'),
+            'bijdragers': get_md_array(mam_data, 'dc_creators'),
+            'publishers': get_md_array(mam_data, 'dc_contributors'),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'pid': pid,
             'title': mam_data.get('title'),
@@ -134,8 +137,8 @@ class RmhMapping:
         # single update field call which is not according to the docs). However we will
         # fix this tomorrow.
         mh_api = MediahavenApi()
-        mh_api = mh_api  # temp lint fix until tomorrow
-        # mh_api.update_metadata(department, mam_data)
+        # mh_api = mh_api  # temp lint fix until tomorrow
+        mh_api.update_metadata(department, mam_data)
 
         errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here

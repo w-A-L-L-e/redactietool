@@ -12,6 +12,7 @@
 #
 
 import os
+import json
 from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
@@ -148,10 +149,12 @@ class MediahavenApi:
         # 200 Ok: Record object
         # 400 Bad request: error result
         # 409 Conflict:
-        print("DEBUG: sending metadata for department=", department, " to mediahaven:", metadata)
+        print("DEBUG: send to mh department=", department, " metadata:")
+        print(json.dumps(metadata, indent=4))
         fragment_id = metadata['fragmentId']
         avo_beschrijving = get_property(metadata, 'dcterms_abstract')
         print("sending this to mediahaven now: ", avo_beschrijving)
+        return # TEMP TURN OFF
 
         # update dcterms_abstract
         send_url = f"{self.API_SERVER}/resources/media/{fragment_id}/dcterms_abstract"

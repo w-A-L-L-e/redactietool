@@ -121,6 +121,15 @@ def get_array_property(mam_data, attribute, array_attribute):
     return result
 
 
+def get_md_array(mam_data, attribute):
+    props = mam_data.get('mdProperties', [])
+    for prop in props:
+        if prop.get('attribute') == attribute:
+            return prop.get('value', [])
+
+    return []
+
+
 def save_sidecar_xml_v1(upload_folder, metadata, tp):
     TESTBEELD_PERM_ID = os.environ.get(
         'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')

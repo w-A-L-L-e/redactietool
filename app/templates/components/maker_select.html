@@ -11,43 +11,61 @@
   </div>
 </div>
 
-<div id="prd_makers">
-  <div class="field is-horizontal is-pulled-left" id="prd_maker_input">
-    <div class="field-label is-normal">
-      <label class="label">Maker</label>
-    </div>
-    <div class="field-body">
-      <div class="select is-small">
-        <select name="maker" id="meta_maker">
-          <option value="maker">Maker</a>
-          <option value="archiefvormer">Archiefvormer</a>
-          <option value="auteur">Auteur</a> 
-          <option value="acteur">Acteur</a> 
-          <option value="cineast">Cineast</a> 
-          <option value="componist">Componist</a> 
-          <option value="choreograaf">Choreograaf</a>
-          <option value="danser">Danser</a> 
-          <option value="documentairemaker">Documentairemaker</a>
-          <option value="fotograaf">Fotograaf</a> 
-          <option value="geïnterviewde">Geïnterviewde</a> 
-          <option value="interviewer">Interviewer</a> 
-          <option value="kunstenaar">Kunstenaar</a> 
-          <option value="muzikant">Muzikant</a> 
-          <option value="performer">Performer</a> 
-          <option value="producer">Producer</a> 
-          <option value="productiehuis">Productiehuis</a> 
-          <option value="regisseur">Regisseur</a> 
-          <option value="schrijver">Schrijver</a> 
-          <option value="opdrachtgever">Opdrachtgever</a>
-        </select>
-      </div>
+{% macro select_option(label, value, attribute) %}
+  {% if value == attribute %}
+    <option value="{{value}}" selected>{{label}}</a>
+  {% else %}
+    <option value="{{value}}">{{label}}</a>
+  {% endif %}
+{% endmacro %}
 
-      <input name="maker_custom" 
-      class="input is-small ml-2 narrow-input" type="text" placeholder="">
-      <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+<div id="prd_makers" class="pl-5 ml-5">
 
-    </div> <!-- field-body -->
-  </div> <!-- field -->
+  {% for maker in makers: %}
+    <div class="field is-horizontal is-pulled-left" id="prd_maker_input">
+      <!--div class="field-label is-normal">
+        <label class="label">Maker</label>
+      </div-->
+      <div class="field-body mr-5">
+        <div class="select is-small">
+          <select name="maker_attribute" id="maker_attrib_{{loop.index}}">
+
+            {{ select_option('Maker', 'Maker', maker['attribute']) }}
+            {{ select_option('Archiefvormer', 'Archiefvormer', maker['attribute']) }}
+            {{ select_option('Auteur', 'Auteur', maker['attribute']) }}
+            {{ select_option('Acteur', 'Acteur', maker['attribute']) }}
+            {{ select_option('Cineast', 'Cineast', maker['attribute']) }}
+            {{ select_option('Componist', 'Componist', maker['attribute']) }}
+            {{ select_option('Choreograaf', 'Choreograaf', maker['attribute']) }}
+            {{ select_option('Danser', 'Danser', maker['attribute']) }}
+            {{ select_option('Documentairemaker', 'Documentairemaker', maker['attribute']) }}
+            {{ select_option('Fotograaf', 'Fotograaf', maker['attribute']) }}
+            <!-- voorbeeld voor juiste value? -->
+            {{ select_option('Geïnterviewde', 'Geïnterviewde', maker['attribute']) }} 
+            {{ select_option('Interviewer', 'Interviewer', maker['attribute']) }}
+            {{ select_option('Kunstenaar', 'Kunstenaar', maker['attribute']) }}
+            {{ select_option('Muzikant', 'Muzikant', maker['attribute']) }}
+            {{ select_option('Performer', 'Performer', maker['attribute']) }}
+            {{ select_option('Producer', 'Producer', maker['attribute']) }}
+            {{ select_option('Productiehuis', 'Productiehuis', maker['attribute']) }}
+            {{ select_option('Regisseur', 'Regisseur', maker['attribute']) }}
+            {{ select_option('Schrijver', 'Schrijver', maker['attribute']) }}
+            {{ select_option('Opdrachtgever', 'Opdrachtgever', maker['attribute']) }}
+
+          </select>
+        </div>
+
+        <input name="maker_value" 
+               id="maker_val_{{loop.index}}"
+               class="input is-small ml-2 narrow-input" 
+               type="text" placeholder="" 
+               value="{{maker['value']}}">
+
+        <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+
+      </div> <!-- field-body -->
+    </div> <!-- field -->
+  {% endfor %}
 </div>
 
 <div class="is-clearfix"></div>
