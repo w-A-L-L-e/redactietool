@@ -27,6 +27,9 @@ import json
 from flask import (Flask, request, render_template, session, make_response,
                    redirect, url_for, send_from_directory)
 
+# only needed for saml debug session
+from flask import abort, jsonify
+
 from flask_api import status
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
@@ -159,14 +162,20 @@ def index():
     paint_logout = False
 
     if 'sso' in request.args:
-        return redirect(auth.login())
+        print("in SSO args=", request.args)
+        print("redirect url=", auth.login())
+        # return redirect(auth.login()) #disabled for debugging
+        print("DEBUG mode: for now redirecting to search_media now...")
+        return redirect(url_for('.search_media', token='saml_debug'))
         # If AuthNRequest ID need to be stored in order to later validate it, do instead
         # sso_built_url = auth.login()
         # request.session['AuthNRequestID'] = auth.get_last_request_id()
         # return redirect(sso_built_url)
     elif 'sso2' in request.args:
         return_to = '%sattrs/' % request.host_url
-        return redirect(auth.login(return_to))
+        print("in SSO2 return_to url=", return_to)
+        # return redirect(auth.login(return_to))
+        return redirect('/search_media?token=debug')
     elif 'slo' in request.args:
         name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
         if 'samlNameId' in session:
@@ -201,6 +210,7 @@ def index():
             if 'AuthNRequestID' in session:
                 del session['AuthNRequestID']
             session['samlUserdata'] = auth.get_attributes()
+            print('user data=', session['samlUserdata'])
             session['samlNameId'] = auth.get_nameid()
             session['samlNameIdFormat'] = auth.get_nameid_format()
             session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
@@ -267,6 +277,8 @@ def attrs():
 
 # TODO check + secure once SAML is configured
 @app.route('/metadata/')
+@requires_authorization
+@login_required
 def metadata():
     req = prepare_flask_request(request)
     auth = init_saml_auth(req)
@@ -285,9 +297,32 @@ def metadata():
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
-@requires_authorization
-@login_required
+# THIS IS TO DEBUG SAML ON QAS POD. NEVER DO THIS IN PRODUCTION!!!!
+# @requires_authorization
+# @login_required
 def search_media():
+    print("DEBUGGING SAML, auth is switched off in search_media temporarely!!!!")
+    # debug it baby
+    if 'samlUserdata' in session:
+        paint_logout = True
+        if len(session['samlUserdata']) > 0:
+            attributes = session['samlUserdata'].items()
+        print("attributes=", attributes)
+    else:
+        print("access denied! session is empty!!!")
+        print("session=", session)
+
+        # temp hack for saml debug
+        if request.args.get('token'):
+            validation_errors = request.args.get('validation_errors')
+            logger.info('search_media')
+            return render_template('search_media.html', **locals())
+
+        abort(401, jsonify(message='invalid saml session'))
+        # todo clear the session?
+        # return redirect('/')
+
+
     token = request.args.get('token')
     validation_errors = request.args.get('validation_errors')
     logger.info('search_media')

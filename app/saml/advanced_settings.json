@@ -16,19 +16,19 @@
     },
     "contactPerson": {
         "technical": {
-            "givenName": "technical_name",
-            "emailAddress": "technical@example.com"
+            "givenName": "Poppe",
+            "emailAddress": "technical@meemoo.be"
         },
         "support": {
-            "givenName": "support_name",
-            "emailAddress": "support@example.com"
+            "givenName": "Charlotte",
+            "emailAddress": "support@meemoo.be"
         }
     },
     "organization": {
         "en-US": {
             "name": "sp_test",
-            "displayname": "SP test",
-            "url": "http://sp.example.com"
+            "displayname": "meemoo",
+            "url": "https://meemoo.be/nl"
         }
     }
 }
