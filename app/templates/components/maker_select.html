@@ -37,7 +37,7 @@
             {{ select_option('Danser', 'Danser', '') }}
             {{ select_option('Documentairemaker', 'Documentairemaker', '') }}
             {{ select_option('Fotograaf', 'Fotograaf', '') }}
-            <!-- voorbeeld voor juiste value? 
+            <!-- TODO: add this back once MediahavenApi supports it
             {{ select_option('Geïnterviewde', 'Geïnterviewde', '') }} 
             -->
             {{ select_option('Interviewer', 'Interviewer', '') }}
@@ -80,8 +80,9 @@
             {{ select_option('Danser', 'Danser', maker['attribute']) }}
             {{ select_option('Documentairemaker', 'Documentairemaker', maker['attribute']) }}
             {{ select_option('Fotograaf', 'Fotograaf', maker['attribute']) }}
-            <!-- voorbeeld voor juiste value? -->
+            <!-- TODO: add this back once MediahavenApi supports it
             {{ select_option('Geïnterviewde', 'Geïnterviewde', maker['attribute']) }} 
+            -->
             {{ select_option('Interviewer', 'Interviewer', maker['attribute']) }}
             {{ select_option('Kunstenaar', 'Kunstenaar', maker['attribute']) }}
             {{ select_option('Muzikant', 'Muzikant', maker['attribute']) }}
