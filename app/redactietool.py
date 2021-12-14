@@ -297,9 +297,8 @@ def metadata():
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
-# THIS IS TO DEBUG SAML ON QAS POD. NEVER DO THIS IN PRODUCTION!!!!
-# @requires_authorization
-# @login_required
+@requires_authorization
+@login_required
 def search_media():
     print("DEBUGGING SAML, auth is switched off in search_media temporarely!!!!")
     # debug it baby
@@ -308,20 +307,19 @@ def search_media():
         if len(session['samlUserdata']) > 0:
             attributes = session['samlUserdata'].items()
         print("attributes=", attributes)
-    else:
-        print("access denied! session is empty!!!")
-        print("session=", session)
+    # else:
+    #     print("access denied! session is empty!!!")
+    #     print("session=", session)
 
-        # temp hack for saml debug
-        if request.args.get('token'):
-            validation_errors = request.args.get('validation_errors')
-            logger.info('search_media')
-            return render_template('search_media.html', **locals())
+    #     # temp hack for saml debug
+    #     if request.args.get('token'):
+    #         validation_errors = request.args.get('validation_errors')
+    #         logger.info('search_media')
+    #         return render_template('search_media.html', **locals())
 
-        abort(401, jsonify(message='invalid saml session'))
-        # todo clear the session?
-        # return redirect('/')
-
+    #     abort(401, jsonify(message='invalid saml session'))
+    #     # todo clear the session?
+    #     # return redirect('/')
 
     token = request.args.get('token')
     validation_errors = request.args.get('validation_errors')
