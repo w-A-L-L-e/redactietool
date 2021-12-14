@@ -354,3 +354,7 @@ input[type=button].spring:hover {
 #prd_bijdrager_input{
   display: none;
 }
+
+#prd_publisher_input{
+  display: none;
+}

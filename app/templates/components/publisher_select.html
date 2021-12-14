@@ -21,8 +21,32 @@
 
 <div id="prd_publishers" class="pl-5 ml-5">
 
+  <!-- TODO: refactor this hidden field laterz by using a partial -->
+  <div class="field is-horizontal is-pulled-left ml-5" id="prd_publisher_input">
+     
+    <div class="field-body mr-5">
+      <div class="select is-small">
+        <select name="publisher_attribute" id="publisher_attrib_">
+
+          {{ select_option('Distributeur', 'Distributeur', '') }}
+          {{ select_option('Exposant', 'Exposant', '') }}
+          {{ select_option('Persagentschap', 'Persagentschap', '') }}
+          {{ select_option('Publisher', 'Publisher', '') }}
+
+        </select>
+      </div>
+
+      <input name="bijdrager_custom" 
+             class="input is-small ml-2 narrow-input"
+             type="text" placeholder="" 
+             value="">
+
+      <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+    </div> <!-- field -->
+  </div> 
+
   {% for publisher in publishers: %}
-    <div class="field is-horizontal is-pulled-left ml-5" id="prd_publisher_input">
+    <div class="field is-horizontal is-pulled-left ml-5" id="prd_publisher_input_{{loop.index}}">
      
       <div class="field-body mr-5">
         <div class="select is-small">
@@ -36,7 +60,7 @@
           </select>
         </div>
 
-        <input name="bijdrager_custom" 
+        <input name="bijdrager_custom_{{loop.index}}" 
                class="input is-small ml-2 narrow-input"
                type="text" placeholder="" 
                value="{{publisher['value']}}">
@@ -44,7 +68,7 @@
         <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
 
       </div>
-    </div>
+    </div> <!-- field -->
   {% endfor %}
 </div>
 
