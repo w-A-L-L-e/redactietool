@@ -346,6 +346,11 @@ input[type=button].spring:hover {
   }
 }
 
+/* these hidden form parts are used to inject new controls in our components */
 #prd_maker_input {
+  display: none;
+}
+
+#prd_bijdrager_input{
   display: none;
 }

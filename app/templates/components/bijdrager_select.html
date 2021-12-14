@@ -21,8 +21,71 @@
 
 <div id="prd_bijdragers" class="ml-5 pl-5">
 
+  <!-- refactor into partial laterz -->
+  <div class="field is-horizontal is-pulled-left" id="prd_bijdrager_input">
+    <div class="field-body mr-5">
+      <div class="select is-small">
+        <select name="maker_attribute" id="bijdrager_attrib">
+
+            {{ select_option('Aanwezig', 'Aanwezig', '') }}
+            {{ select_option('Adviseur', 'Adviseur', '') }}
+            {{ select_option('Afwezig', 'Afwezig', '') }}
+            {{ select_option('Archivaris', 'Archivaris', '') }}
+            
+            {{ select_option('Arrangeur', 'Arrangeur', '') }}
+            {{ select_option('ArtistiekDirecteur', 'ArtistiekDirecteur', '') }}
+            {{ select_option('Assistent', 'Assistent', '') }}
+            {{ select_option('Auteur', 'Auteur', '') }}
+            {{ select_option('Belichting', 'Belichting', '') }}
+            {{ select_option('Cameraman', 'Cameraman', '') }}
+            {{ select_option('Co-producer', 'Co-producer', '') }}
+            {{ select_option('Commentator', 'Commentator', '') }}
+            {{ select_option('Componist', 'Componist', '') }}
+            {{ select_option('DecorOntwerper', 'DecorOntwerper', '') }}
+            {{ select_option('Digitaliseringspartner', 'Digitaliseringspartner', '') }}
+            {{ select_option('Dirigent', 'Dirigent', '') }}
+            {{ select_option('Dramaturg', 'Dramaturg', '') }}
+            {{ select_option('Fotografie', 'Fotografie', '') }}
+            {{ select_option('Geluid ', 'Geluid ', '') }}
+            {{ select_option('Geluidsman', 'Geluidsman', '') }}
+            {{ select_option('GrafischOntwerper', 'GrafischOntwerper', '') }}
+            {{ select_option('KostuumOntwerper', 'KostuumOntwerper', '') }}
+            {{ select_option('Kunstenaar', 'Kunstenaar', '') }}
+            {{ select_option('Make-up', 'Make-up', '') }}
+            {{ select_option('Muzikant', 'Muzikant', '') }}
+            {{ select_option('Nieuwsanker', 'Nieuwsanker', '') }}
+            {{ select_option('Omroeper', 'Omroeper', '') }}
+            {{ select_option('Onderzoeker', 'Onderzoeker', '') }}
+            {{ select_option('Post-productie', 'Post-productie', '') }}
+            {{ select_option('Producer', 'Producer', '') }}
+            {{ select_option('Reporter', 'Reporter', '') }}
+            {{ select_option('Scenarist', 'Scenarist', '') }}
+            {{ select_option('Soundtrack', 'Soundtrack', '') }}
+            {{ select_option('Sponsor', 'Sponsor', '') }}
+            {{ select_option('TechnischAdviseur', 'TechnischAdviseur', '') }}
+            {{ select_option('Uitvoerder', 'Uitvoerder', '') }}
+            {{ select_option('Verontschuldigd', 'Verontschuldigd', '') }}
+            {{ select_option('Vertaler', 'Vertaler', '') }}
+            {{ select_option('Verteller', 'Verteller', '') }}
+            {{ select_option('Voorzitter', 'Voorzitter', '') }}
+
+        </select>
+      </div>
+
+      <input name="bijdrager_custom_" 
+             id="bijdrager_val_"
+             class="input is-small ml-2 narrow-input" 
+             type="text" placeholder="" 
+             value="">
+
+      <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+    </div> <!-- field-body -->
+
+  </div> <!-- field -->
+
+
   {% for contributor in contributors: %}
-    <div class="field is-horizontal is-pulled-left mr-2" id="prd_bijdrager_input">
+  <div class="field is-horizontal is-pulled-left mr-2" id="prd_bijdrager_input_{{loop.index}}">
       
       <div class="field-body">
         <div class="select is-small">
@@ -73,6 +136,7 @@
         </div>
 
         <input name="bijdrager_custom_{{loop.index}}" 
+               id="bijdrager_val_{{loop.index}}"
           class="input is-small ml-2 narrow-input"
           type="text" placeholder=""
           value="{{contributor['value']}}">

@@ -135,6 +135,8 @@ function addPrdItem(item_list_id, item_input_id){
   var item_clone = item_input.cloneNode(true);
   item_clone.style.display = 'flex';
   var item_list = document.getElementById(item_list_id);
+  // todo: also fetch last id in the item_list (if not empty)
+  // and add 1 to it and put that onto item_clone as new id
   item_list.append(item_clone);
   return false;
 }
