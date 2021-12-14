@@ -133,6 +133,7 @@ function flashModalWarning(){
 function addPrdItem(item_list_id, item_input_id){
   var item_input = document.getElementById(item_input_id);
   var item_clone = item_input.cloneNode(true);
+  item_clone.style.display = 'flex';
   var item_list = document.getElementById(item_list_id);
   item_list.append(item_clone);
   return false;

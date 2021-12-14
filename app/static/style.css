@@ -346,3 +346,6 @@ input[type=button].spring:hover {
   }
 }
 
+#prd_maker_input {
+  display: none;
+}

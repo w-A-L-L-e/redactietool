@@ -21,8 +21,51 @@
 
 <div id="prd_makers" class="pl-5 ml-5">
 
-  {% for maker in makers: %}
+    <!-- refactor into partial laterz -->
     <div class="field is-horizontal is-pulled-left" id="prd_maker_input">
+      <div class="field-body mr-5">
+        <div class="select is-small">
+          <select name="maker_attribute" id="maker_attrib">
+
+            {{ select_option('Maker', 'Maker', '') }}
+            {{ select_option('Archiefvormer', 'Archiefvormer', '') }}
+            {{ select_option('Auteur', 'Auteur', '') }}
+            {{ select_option('Acteur', 'Acteur', '') }}
+            {{ select_option('Cineast', 'Cineast', '') }}
+            {{ select_option('Componist', 'Componist', '') }}
+            {{ select_option('Choreograaf', 'Choreograaf', '') }}
+            {{ select_option('Danser', 'Danser', '') }}
+            {{ select_option('Documentairemaker', 'Documentairemaker', '') }}
+            {{ select_option('Fotograaf', 'Fotograaf', '') }}
+            <!-- voorbeeld voor juiste value? 
+            {{ select_option('Geïnterviewde', 'Geïnterviewde', '') }} 
+            -->
+            {{ select_option('Interviewer', 'Interviewer', '') }}
+            {{ select_option('Kunstenaar', 'Kunstenaar', '') }}
+            {{ select_option('Muzikant', 'Muzikant', '') }}
+            {{ select_option('Performer', 'Performer', '') }}
+            {{ select_option('Producer', 'Producer', '') }}
+            {{ select_option('Productiehuis', 'Productiehuis', '') }}
+            {{ select_option('Regisseur', 'Regisseur', '') }}
+            {{ select_option('Schrijver', 'Schrijver', '') }}
+            {{ select_option('Opdrachtgever', 'Opdrachtgever', '') }}
+          </select>
+        </div>
+
+        <input name="maker_value" 
+               id="maker_val"
+               class="input is-small ml-2 narrow-input" 
+               type="text" placeholder="" 
+               value="">
+
+        <button class="button delete is-danger ml-2" onclick="deletePrdItem(this); return false;"></button>
+
+      </div> <!-- field-body -->
+    </div> <!-- field -->
+
+
+  {% for maker in makers: %}
+    <div class="field is-horizontal is-pulled-left" id="prd_maker_input_{{loop.index}}">
       <div class="field-body mr-5">
         <div class="select is-small">
           <select name="maker_attribute" id="maker_attrib_{{loop.index}}">
