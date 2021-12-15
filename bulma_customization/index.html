@@ -15,8 +15,12 @@
         height: 80px;
         overflow-y: scroll;
       }
+      #thema_widget{
+        display: none;
+      }
     </style>
   </head>
+
   <body>
 
     <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
@@ -102,11 +106,14 @@
         <span class="icon">
           <ion-icon name="create-outline"></ion-icon>
         </span>
+        <br/>
+        <a href="" class="button is-link" onclick="toggleThemas(); return false;">Kies themas</a>
       </h1>
 
 
-      <div class="container">
-        <h2 class="title">Thema cards component (work in progress): </h2>
+
+      <div class="container" id="thema_widget">
+        <h2 class="title">Kies themas: </h2>
 
         <div class="field has-addons">
           <div class="control">
@@ -446,6 +453,13 @@
 
   <script type="text/javascript">
 
+    function toggleThemas(){
+      var thema_widget  = document.getElementById("thema_widget");
+      thema_widget.style.display = "block";
+
+      //thema_widget.style.display = "none";
+      return false;
+    }
       
       // vanilla js for burger toggle
       document.addEventListener('DOMContentLoaded', () => {
