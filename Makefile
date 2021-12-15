@@ -91,3 +91,15 @@ precompile_assets:
 preview:
 	cd bulma_customization && ./preview_customization.sh
 
+.PHONY: status
+status:
+	open bulma_customization/dirty_forms_poc/wireframes_vs_implemented.html
+
+.PHONY: dirty_forms
+dirty_forms:
+	open bulma_customization/dirty_forms_poc/index.html
+
+.PHONY: richtext_demo
+richtext_demo:
+	open bulma_customization/richtext_poc/index.html
+
