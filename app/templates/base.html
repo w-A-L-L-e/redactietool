@@ -1,7 +1,12 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="nl">
   <head>
-    <title>Redactietool</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 
+      TODO: after we receive an image for login screen, request a favicon...
+      link rel="icon" href="<%= BASE_URL %>favicon.ico" -->
+
     <!-- bulma css framework -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/overrides.css') }}">
@@ -22,6 +27,8 @@
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/bundle.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/modal_dialog.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+    <title>Redactietool</title>
 </head>
 
 <body>
