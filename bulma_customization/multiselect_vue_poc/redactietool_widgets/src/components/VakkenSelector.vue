@@ -62,6 +62,8 @@
 
 <style>
   #vakken_json_value{
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     width: 80%;
     height: 100px;

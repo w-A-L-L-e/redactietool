@@ -15,7 +15,6 @@
     </multiselect>
     <textarea name="talen" v-model="json_value" id="talen_json_value"></textarea>
     <pre class="language-json" id="talen_value_preview"><code>{{ value  }}</code></pre>
-    <br/>
 </div>
 </template>
 
@@ -75,13 +74,15 @@
 <style>
   /* customize your styles */
   #talen_json_value{
+    /*display: none;*/
     display: flex;
     width: 80%;
     height: 100px;
-    /*display: none;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   #talen_value_preview{
-    display: none;
+    margin-bottom: 20px;
   }
 
 </style>

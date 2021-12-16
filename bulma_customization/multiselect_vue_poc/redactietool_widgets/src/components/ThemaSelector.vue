@@ -10,8 +10,6 @@
       :taggable="true" @tag="addThema" @input="updateValue">
     </multiselect>
     <textarea name="themas" v-model="json_value" id="thema_json_value"></textarea>
-    <pre class="language-json" id="talen_value_preview"><code>{{ value  }}</code></pre>
-    <br/>
 </div>
 </template>
 
@@ -67,5 +65,7 @@
     width: 80%;
     height: 100px;
     /*display: none;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 </style>
