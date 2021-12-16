@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Multi select talen voorbeeld</h1> 
+    <h1 class="title">Talen selector</h1> 
     <p>
       Further docs for styling other custom selectors here:
       <a href="https://vue-multiselect.js.org/#sub-tagging" target="_blank">Vue-multiselect docs</a>
@@ -11,9 +11,11 @@
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
-      :taggable="true" @tag="addTag">
+      :taggable="false" @input="updateValue">
     </multiselect>
-    <pre class="language-json"><code>{{ value  }}</code></pre>
+    <textarea name="talen" v-model="json_value" id="talen_json_value"></textarea>
+    <pre class="language-json" id="talen_value_preview"><code>{{ value  }}</code></pre>
+    <br/>
 </div>
 </template>
 
@@ -25,6 +27,9 @@
   // Setting taggable to 'true' allows adding new tags above!
   // TODO: for the languages we can set this to false again, but for themas we'll need this...
 
+  // example: initial languages to show on loading metadata item
+  var default_value = [{ name: 'Nederlands', code: 'nl' }, { name: 'Frans', code: 'fr' } ]  
+
   export default {
     name: 'TalenSelector',
     components: {
@@ -32,9 +37,8 @@
     },
     data () {
       return {
-        value: [
-          { name: 'Nederlands', code: 'nl' } // initial languages to show on loading metadata item
-        ],
+        value: default_value,
+        json_value: JSON.stringify(default_value),
         options: [ //other languages, searchable 
           { name: 'Nederlands', code: 'nl' },
           { name: 'Frans', code: 'fr' },
@@ -55,6 +59,10 @@
         }
         this.options.push(tag)
         this.value.push(tag)
+        this.json_value = JSON.stringify(this.value)
+      },
+      updateValue(value){
+        this.json_value = JSON.stringify(value)
       }
     }
   }
@@ -66,4 +74,14 @@
 
 <style>
   /* customize your styles */
+  #talen_json_value{
+    display: flex;
+    width: 80%;
+    height: 100px;
+    /*display: none;*/
+  }
+  #talen_value_preview{
+    display: none;
+  }
+
 </style>
