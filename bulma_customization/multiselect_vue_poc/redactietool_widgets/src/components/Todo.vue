@@ -1,7 +1,11 @@
 <template>
-  <div class="container">
-    <h3>Todo List with ajax to warm up my vue skills ;)</h3>
-    <table class="table">
+  <div class="container mt-5 pt-5">
+    <h1 class="title">Todo List</h1>
+    <p class="mb-5">
+    Example with axios to show how to make vue style ajax json calls
+    A similar approach we will be using soon to fetch our Thema's and Vakken using the
+    suggest library from Miel</p>
+    <table class="table is-bordered is-full-width">
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -19,6 +23,7 @@
     </table> 
   </div>
 </template>
+
 <script>
   import axios from 'axios'; //example of call to flask-app
 

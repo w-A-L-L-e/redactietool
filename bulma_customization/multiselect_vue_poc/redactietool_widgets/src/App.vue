@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
-    <Todo/>
+  <div class="container main pl-5 pr-5">
+    <div id="app">
+      <TalenSelector/>
+      <Todo/>
+    </div>
   </div>
 </template>
 
 <script>
 import Todo from './components/Todo.vue'
-//TODO: now start on multiselects here...
+import TalenSelector from './components/TalenSelector.vue'
 
 export default {
   name: 'App',
   components: {
-    Todo
+    Todo,
+    TalenSelector
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: -50px;
 }
 </style>

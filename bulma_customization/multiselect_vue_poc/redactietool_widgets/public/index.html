@@ -6,14 +6,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 
-    <!-- TODO: change this to bulma instead -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">i
+    <!-- 
+    Todo double check if we need this later on for our bundle.js etc.
+    https://cli.vuejs.org/guide/html-and-static-assets.html#preload
+    -->
+
+    <!-- use bulma instead TODO: bundle.js and model_dialog.js-->
+    <link rel="stylesheet" href="<%= BASE_URL%>mystyles.css">
+    <link rel="stylesheet" href="<%= BASE_URL%>overrides.css">
+
 
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> 
+        doesn't work properly without JavaScript enabled. Please enable it to continue.
+      </strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
