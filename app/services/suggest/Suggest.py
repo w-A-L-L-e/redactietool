@@ -1,7 +1,16 @@
 import os
+import re
 from typing import List
 
 from SPARQLWrapper import JSON, POST, SPARQLWrapper2
+
+URI_REGEX = (
+    "((http|https)://)(www.)?"
+    + "[a-zA-Z0-9@:%._\\+~#?&//=]"
+    + "{2,256}\\.[a-z]"
+    + "{2,6}\\b([-a-zA-Z0-9@:%"
+    + "._\\+~#?&//=]*)"
+)
 
 OND_NS = "https://data.meemoo.be/terms/ond/"
 
@@ -111,19 +120,20 @@ WHERE {{
 }}
 """
 
-GET_CONCEPT_BY_ID_QUERY = """
+GET_CONCEPT_BY_IDS_QUERY = """
 PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
-    BIND(URI('{concept}') AS ?id)
     ?id a skos:Concept;
     skos:prefLabel ?label.
 
     OPTIONAL {{
         ?id skos:definition ?definition .
     }}
+
+    FILTER (?id IN ({concept}))
 }}
 """
 
@@ -172,8 +182,31 @@ WHERE {{
 }}
 """
 
+# Function to validate URL
+# using regular expression
+def isValidURI(str):
+
+    # Compile the ReGex
+    p = re.compile(URI_REGEX)
+
+    # If the string is empty
+    # return false
+    if str == None:
+        return False
+
+    # Return if the string
+    # matched the ReGex
+    if re.search(p, str):
+        return True
+
+    return False
+
 
 def join_ids(ids):
+    for id in ids:
+        if not isValidURI(id):
+            raise ValueError("The id {} is not a valid URL.".format(id))
+
     return ", ".join("<" + str(id) + ">" for id in ids)
 
 
@@ -214,23 +247,34 @@ class Suggest:
     def get_list(self, scheme: str):
         """Get thesaurus concepts by scheme id."""
 
+        if not isValidURI(scheme):
+            raise ValueError("The id {} is not a valid URL.".format(scheme))
+
         for res in self.__exec_query(GET_LIST_QUERY, scheme=scheme):
             yield res
 
-    def get_concept(self, concept: str):
-        """Get thesaurus concept by id."""
+    def get_concept(self, concept: List[str]):
+        """Get thesaurus concept by ids."""
 
-        for res in self.__exec_query(GET_CONCEPT_BY_ID_QUERY, concept=concept):
+        concepts = join_ids(concept)
+
+        for res in self.__exec_query(GET_CONCEPT_BY_IDS_QUERY, concept=concepts):
             yield res
 
     def get_collection(self, collection: str):
         """Get a collection members by collection id."""
+
+        if not isValidURI(collection):
+            raise ValueError("The id {} is not a valid URI.".format(collection))
 
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res
 
     def get_children(self, concept: str):
         """Get the children of a concept."""
+
+        if not isValidURI(concept):
+            raise ValueError("The id {} is not a valid URI.".format(concept))
 
         for res in self.__exec_query(GET_CHILDREN_QUERY, concept=concept):
             yield res

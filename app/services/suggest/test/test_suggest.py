@@ -7,13 +7,14 @@ def test_instantiation():
 
 
 def test_get_concept(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
-        suggest.get_concept("https://data.meemoo.be/terms/ond/vak#nederlands")
+        suggest.get_concept(["https://data.meemoo.be/terms/ond/vak#nederlands"])
     )
     assert len(results) == 1
     assert results[0] == {
@@ -24,6 +25,7 @@ def test_get_concept(sparql_endpoint):
 
 
 def test_suggest_by_label(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -39,6 +41,7 @@ def test_suggest_by_label(sparql_endpoint):
 
 
 def test_suggest(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -59,6 +62,7 @@ def test_suggest(sparql_endpoint):
 
 
 def test_get_candidates(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -79,6 +83,7 @@ def test_get_candidates(sparql_endpoint):
 
 
 def test_get_graden(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -94,6 +99,7 @@ def test_get_graden(sparql_endpoint):
 
 
 def test_get_niveaus(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -109,6 +115,7 @@ def test_get_niveaus(sparql_endpoint):
 
 
 def test_get_themas(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -124,6 +131,7 @@ def test_get_themas(sparql_endpoint):
 
 
 def test_get_children(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
@@ -141,6 +149,7 @@ def test_get_children(sparql_endpoint):
 
 
 def test_get_related(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
         "https://my.rdfdb.com/repo/sparql", ["test/data/skos.ttl"]
     )
