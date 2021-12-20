@@ -577,6 +577,15 @@ def save_item_metadata():
         **tp
     )
 
+# debugging route to see vue components can submit nicely to flask
+@app.route('/edit_metadata_vue', methods=['POST'])
+def read_vue_component_values():
+    print("talen=", request.form.get('talen') )
+    print("themas=", request.form.get('themas') )
+    print("vakken=", request.form.get('vakken') )
+
+    return render_template('edit_metadata.html')
+
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
 @app.route("/health/live")

@@ -19,12 +19,45 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+
+  <div class="container main pl-5 pr-5">
+    <div class="columns mb-5 pb-5">
+      <div class="column">
+        <h1 class="title">Vue components for Metadata form</h1>
+      </div>
+    </div>
+
+
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> 
         doesn't work properly without JavaScript enabled. Please enable it to continue.
       </strong>
     </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    
+
+    <!-- inject this into our metadata form for the lom sections -->
+    <form class="metadata_form" 
+      action="http://localhost:8080/edit_metadata_vue" method="POST" enctype="multipart/form-data">
+
+      <br/> 
+      <!-- make sure we can mix and match legace + new vue components -->
+      <input class="button is-link is-pulled-right" type="submit" value="Metadata opslaan"/>
+      
+      <div id="pid">qs5d8ncx8c</div>
+
+      <div class="clearfix"></div>
+      <br/>
+
+      <div id="app"></div>
+      <!-- built files will be auto injected -->
+
+      <input name="maker_value" type="input" value="maker test"/>
+      <input name="token" type="input" value="debug_session_for_vue_components"/>
+      <input name="pid" type="input" value="qs5d8ncx8c"/>
+    </form>
+
+  </div>
+
+
   </body>
 </html>

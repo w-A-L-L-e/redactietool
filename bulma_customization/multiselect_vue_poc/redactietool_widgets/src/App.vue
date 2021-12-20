@@ -1,12 +1,10 @@
 <template>
-  <div class="container main pl-5 pr-5">
     <div id="app">
       <TalenSelector/>
       <ThemaSelector/>
       <VakkenSelector/>
       <Todo/>
     </div>
-  </div>
 </template>
 
 <script>
