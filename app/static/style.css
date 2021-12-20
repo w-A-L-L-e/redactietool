@@ -337,8 +337,8 @@ input[type=button].spring:hover {
 
 @media screen and (min-width: 1024px){
   .saml-login-page{
-    padding-left: 35%;
-    padding-right: 35%;
+    padding-left: 38%;
+    padding-right: 38%;
   }
 }
 
