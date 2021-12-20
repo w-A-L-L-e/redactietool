@@ -322,10 +322,7 @@ input[type=button].spring:hover {
 /*********************** END OF CSS ANIMATION EYE CANDY ***********************/
 
 .saml-login-page {
-  /* this is a temp image re-used from hetarchief. 
-   * normally monday or tuesday the new one
-   * will be supplied DEV-1851 */
-  background: url(https://onderwijs.hetarchief.be/images/login-bg.jpg) no-repeat center;
+  background: url('/static/images/saml_login_background.jpg') no-repeat center;
   background-size: cover;
   background-position: center;
   width: 140%;
@@ -338,11 +335,22 @@ input[type=button].spring:hover {
   padding-right: 20%;
 }
 
-
 @media screen and (min-width: 1024px){
   .saml-login-page{
     padding-left: 35%;
     padding-right: 35%;
+  }
+}
+
+@media screen and (min-width: 1310px){
+  .saml-login-page{
+    padding-left: 39%;
+    padding-right: 39%;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    margin-left: unset;
+    margin-right: unset;
   }
 }
 
