@@ -15,7 +15,8 @@ RUN chown -R appuser:appgroup /app
 # Install gcc and libc6-dev to be able to compile uWSGI
 RUN apt-get update && \
     apt-get install --no-install-recommends -y libxml2-dev libxmlsec1-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    /usr/local/bin/python -m pip install --upgrade pip 
 
 # We install all our Python dependencies. Add the extra index url because some
 # packages are in the meemoo repo.
