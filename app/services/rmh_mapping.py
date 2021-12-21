@@ -131,6 +131,9 @@ class RmhMapping:
             request.form.get('avo_beschrijving')
         )
 
+        # todo fetch + write these also in the xml sidecar:
+        print("DEBUG form data=", request.form)
+
         # maybe also serie, episode and aflevering editable (double check this tomorrow).
         # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
         # disable until we generate batch update xml sidecar (theres a bug in the
