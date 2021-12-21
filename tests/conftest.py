@@ -10,6 +10,9 @@
 import pytest
 from app.redactietool import app
 
+pytest_plugins = [
+    "sparql_endpoint_fixture.endpoint"
+]
 
 @pytest.fixture(scope='module')
 def client():
