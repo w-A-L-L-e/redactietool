@@ -1,6 +1,12 @@
 <template>
     <div id="app">
-      <TalenSelector/>
+      <LomSectionOne/>
+
+      <h1 class="title">Other custom selectors</h1> 
+      <p>
+        Further docs for styling other custom selectors here:
+        <a href="https://vue-multiselect.js.org/#sub-tagging" target="_blank">Vue-multiselect docs</a>
+      </p>
       <ThemaSelector/>
       <VakkenSelector/>
       <Todo/>
@@ -9,17 +15,17 @@
 
 <script>
 import Todo from './components/Todo.vue'
-import TalenSelector from './components/TalenSelector.vue'
 import ThemaSelector from './components/ThemaSelector.vue'
 import VakkenSelector from './components/VakkenSelector.vue'
+import LomSectionOne from './components/LomSectionOne.vue'
 
 export default {
   name: 'App',
   components: {
-    TalenSelector,
     ThemaSelector,
     VakkenSelector,
-    Todo
+    Todo,
+    LomSectionOne
   }
 }
 </script>

@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <h1 class="title">Talen selector</h1> 
-    <p>
-      Further docs for styling other custom selectors here:
-      <a href="https://vue-multiselect.js.org/#sub-tagging" target="_blank">Vue-multiselect docs</a>
-    </p>
+  <div> 
     <multiselect v-model="value" 
       tag-placeholder="Add this as new tag" 
       placeholder="Search or add a tag" 
@@ -79,8 +74,7 @@
 <style>
   /* customize your styles */
   #talen_json_value{
-    /*display: none;*/
-    display: flex;
+    display: none;
     width: 80%;
     height: 100px;
     margin-top: 20px;
