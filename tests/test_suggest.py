@@ -1,7 +1,5 @@
-from ..app.services.suggest import Suggest
+from app.services.suggest.Suggest import Suggest
 
-TEST_SKOS_DATA = "tests/fixture_data/skos.ttl"
-TEST_ENDPOINT_URL = "https://my.rdfdb.com/repo/sparql"
 
 def test_instantiation():
     suggest = Suggest("http://localhost/", "x", "y")
@@ -9,13 +7,14 @@ def test_instantiation():
 
 
 def test_get_concept(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
-        suggest.get_concept("https://data.meemoo.be/terms/ond/vak#nederlands")
+        suggest.get_concept(["https://data.meemoo.be/terms/ond/vak#nederlands"])
     )
     assert len(results) == 1
     assert results[0] == {
@@ -26,10 +25,11 @@ def test_get_concept(sparql_endpoint):
 
 
 def test_suggest_by_label(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.suggest_by_label(["Nederlandse taal"], ["Lager 1ste graad"]))
     assert len(results) == 1
@@ -41,10 +41,11 @@ def test_suggest_by_label(sparql_endpoint):
 
 
 def test_suggest(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.suggest(
@@ -61,10 +62,11 @@ def test_suggest(sparql_endpoint):
 
 
 def test_get_candidates(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.get_candidates(
@@ -81,10 +83,11 @@ def test_get_candidates(sparql_endpoint):
 
 
 def test_get_graden(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_graden())
     assert len(results) == 1
@@ -96,10 +99,11 @@ def test_get_graden(sparql_endpoint):
 
 
 def test_get_niveaus(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_niveaus())
     assert len(results) == 1
@@ -111,10 +115,11 @@ def test_get_niveaus(sparql_endpoint):
 
 
 def test_get_themas(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_themas())
     assert len(results) == 1
@@ -126,10 +131,11 @@ def test_get_themas(sparql_endpoint):
 
 
 def test_get_children(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.get_children("https://data.meemoo.be/terms/ond/niveau#lager-onderwijs")
@@ -143,10 +149,11 @@ def test_get_children(sparql_endpoint):
 
 
 def test_get_related(sparql_endpoint):
+    # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        TEST_ENDPOINT_URL, [TEST_SKOS_DATA]
+        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
     )
-    suggest = Suggest(TEST_ENDPOINT_URL, "x", "y")
+    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.get_related_vak(
