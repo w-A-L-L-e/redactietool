@@ -4,7 +4,7 @@ SHELL = /bin/bash
 .PHONY: build app test lint
 
 VERSION = latest
-APP_NAME = subloader
+APP_NAME = redactietool
 
 build:
 	docker build -t "${APP_NAME}:${VERSION}" .
