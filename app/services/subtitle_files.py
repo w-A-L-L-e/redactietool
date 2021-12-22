@@ -7,7 +7,7 @@
 #   description: methods to create temporary srt, vtt and xml files
 #   used for sending to mediahaven and streaming in the flowplayer preview.html
 #   get_property is easy helper method to iterate mdProperties inside
-#   returned data from find_video call.
+#   returned data from find_item_by_pid call.
 #
 
 import os

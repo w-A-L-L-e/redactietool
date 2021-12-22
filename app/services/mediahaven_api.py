@@ -6,7 +6,7 @@
 #  app/services/mediahaven_api.py
 #
 #   Make api calls to hetarchief/mediahaven
-#   find_video used to lookup video by pid and tenant
+#   find video and audio fragments used to lookup video by pid and tenant
 #   send_subtitles saves the srt file together with an xml sidecar
 #   delete_old_subtitle used to replace existing srt with new upload
 #
@@ -88,7 +88,7 @@ class MediahavenApi:
             }
         )
 
-    def find_video(self, department, pid):
+    def find_item_by_pid(self, department, pid):
         # per request Athina, we drop the department filtering here
         # self.list_objects(search=f"%2B(DepartmentName:{department})%2B(ExternalId:{pid})")
         matched_videos = self.list_objects(

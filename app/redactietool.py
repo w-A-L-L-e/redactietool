@@ -363,7 +363,7 @@ def get_upload():
         return pid_error(token, pid, validation_error)
 
     mh_api = MediahavenApi()
-    mam_data = mh_api.find_video(department, pid)
+    mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
@@ -538,7 +538,7 @@ def edit_metadata():
 
     # TODO: refactor this part out into services
     mh_api = MediahavenApi()
-    mam_data = mh_api.find_video(department, pid)
+    mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
@@ -561,7 +561,7 @@ def save_item_metadata():
 
     # TODO: refactor this part out into services
     mh_api = MediahavenApi()
-    mam_data = mh_api.find_video(department, pid)
+    mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
