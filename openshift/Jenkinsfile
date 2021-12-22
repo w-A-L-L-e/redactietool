@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Test code') {
             steps {
-                sh 'make -f ./openshift/Makefile test'
+                sh 'apt-get update && apt-get install -y  build-essential pkg-config && make -f ./openshift/Makefile test'
             }
         }
         stage('Build code') {
@@ -168,7 +168,7 @@ pipeline {
 }
 
 void getImageFromDockerfile() {
-    return 'python:3.7'
+    return 'python:3.9-slim'
 }
 void getBaseImageName() {
     return getImageFromDockerfile().split(':')[0]
