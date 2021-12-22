@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Test code') {
             steps {
-                sh 'make -f ./openshift/Makefile test'
+                sh 'apt-get update && apt-get install build-essential pkg-config && make -f ./openshift/Makefile test'
             }
         }
         stage('Build code') {
