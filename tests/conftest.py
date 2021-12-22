@@ -17,6 +17,7 @@ from app.redactietool import app
 #     "sparql_endpoint_fixture.endpoint"
 # ]
 
+
 @pytest.fixture(scope='module')
 def client():
     testing_client = app.test_client()

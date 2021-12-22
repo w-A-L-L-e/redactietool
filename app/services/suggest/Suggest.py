@@ -86,12 +86,12 @@ WHERE {{
     OPTIONAL {{
         ?id skos:definition ?definition .
     }}
-    
+
     ?thema skos:prefLabel ?thema_label.
     ?graad skos:prefLabel ?graad_label.
 
     FILTER (
-        STR(?thema_label) IN ({themas}) && 
+        STR(?thema_label) IN ({themas}) &&
         STR(?graad_label) IN ({graden}) )
 }}
 """
@@ -106,7 +106,7 @@ WHERE {{
     skos:prefLabel ?label;
     skos:inScheme ond:vak;
     skos:related ?thema, ?graad.
-    
+
     ?thema skos:inScheme ond:themas.
     ond:graad skos:member ?graad.
 
@@ -115,7 +115,7 @@ WHERE {{
     }}
 
     FILTER (
-        ?thema IN ({themas}) && 
+        ?thema IN ({themas}) &&
         ?graad IN ({graden}) )
 }}
 """
@@ -147,7 +147,7 @@ WHERE {{
     skos:prefLabel ?label;
     skos:inScheme ond:vak;
     skos:related ?thema, ?graad.
-    
+
     ?thema skos:inScheme ond:themas.
     ond:graad skos:member ?graad.
 
@@ -156,7 +156,7 @@ WHERE {{
     }}
 
     FILTER (
-        ?thema IN ({themas}) || 
+        ?thema IN ({themas}) ||
         ?graad IN ({graden}) )
 
 }}
@@ -167,7 +167,7 @@ PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
-WHERE {{  
+WHERE {{
     ?id a skos:Concept;
     skos:prefLabel ?label;
     skos:inScheme ond:vak;
@@ -177,10 +177,11 @@ WHERE {{
         ?id skos:definition ?definition .
     }}
 
-    FILTER (?concept IN ({concepts})) 
+    FILTER (?concept IN ({concepts}))
 
 }}
 """
+
 
 # Function to validate URL
 # using regular expression
@@ -191,7 +192,7 @@ def isValidURI(str):
 
     # If the string is empty
     # return false
-    if str == None:
+    if str is None:
         return False
 
     # Return if the string
@@ -265,7 +266,8 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError("The id {} is not a valid URI.".format(collection))
+            raise ValueError(
+                "The id {} is not a valid URI.".format(collection))
 
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res

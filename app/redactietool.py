@@ -28,7 +28,7 @@ from flask import (Flask, request, render_template, session, make_response,
                    redirect, url_for, send_from_directory)
 
 # only needed for saml debug session
-from flask import abort, jsonify
+# from flask import abort, jsonify
 
 from flask_api import status
 from viaa.configuration import ConfigParser
@@ -578,13 +578,12 @@ def save_item_metadata():
     )
 
 # debugging route to see vue components can submit nicely to flask
-@app.route('/edit_metadata_vue', methods=['POST'])
-def read_vue_component_values():
-    print("talen=", request.form.get('talen') )
-    print("themas=", request.form.get('themas') )
-    print("vakken=", request.form.get('vakken') )
-
-    return render_template('edit_metadata.html')
+# @app.route('/edit_metadata_vue', methods=['POST'])
+# def read_vue_component_values():
+#     print("talen=", request.form.get('talen'))
+#     print("themas=", request.form.get('themas'))
+#     print("vakken=", request.form.get('vakken'))
+#     return render_template('edit_metadata.html')
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================

@@ -28,7 +28,8 @@ class RmhMapping:
     def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
             if prop.get('attribute') == propkey:
-                print("saving ", propkey, "in mam_data with value=", escape(propvalue))
+                print("saving ", propkey,
+                      "in mam_data with value=", escape(propvalue))
                 prop['value'] = propvalue
                 return mam_data
 
@@ -49,7 +50,8 @@ class RmhMapping:
         transcriptie = get_property(mam_data, 'dc_description_transcriptie')
 
         keyframe_edit_url = '{}{}'.format(
-            os.environ.get('KEYFRAME_EDITING_LINK', 'https://set_in_secrets?id='),
+            os.environ.get('KEYFRAME_EDITING_LINK',
+                           'https://set_in_secrets?id='),
             mam_data['fragmentId']
         )
 
@@ -89,7 +91,8 @@ class RmhMapping:
             'dc_description_lang': dc_description_lang,  # orig uitgebr. beschr
             'created': get_property(mam_data, 'CreationDate'),
             'dcterms_issued': get_property(mam_data, 'dcterms_issued'),
-            'dcterms_created': get_property(mam_data, 'dcterms_created'),  # not used in form yet?
+            # not used in form yet?
+            'dcterms_created': get_property(mam_data, 'dcterms_created'),
             'archived': get_property(mam_data, 'created_on'),
             'keyframe_edit_url': keyframe_edit_url,
             # for v2 mam_data['Internal']['PathToVideo']
@@ -112,7 +115,8 @@ class RmhMapping:
         department = escape(escape(request.form.get('department')))
 
         # save some fields back into mam_data
-        print("\n ontsluitingstitel=", escape(request.form.get('ontsluitingstitel')))
+        print("\n ontsluitingstitel=", escape(
+            request.form.get('ontsluitingstitel')))
         mam_data = self.set_property(
             mam_data, 'dc_title',
             request.form.get('ontsluitingstitel')
