@@ -1,8 +1,9 @@
 <template>
     <div id="app">
       <LomSectionOne/>
+      <!-- here LomSectionTwo/> -->
+      <!-- here LomSectionThree/> -->
 
-      <ThemaSelector/>
       <VakkenSelector/>
 
       <p>
@@ -15,14 +16,12 @@
 
 <script>
 import Todo from './components/Todo.vue'
-import ThemaSelector from './components/ThemaSelector.vue'
 import VakkenSelector from './components/VakkenSelector.vue'
 import LomSectionOne from './components/LomSectionOne.vue'
 
 export default {
   name: 'App',
   components: {
-    ThemaSelector,
     VakkenSelector,
     Todo,
     LomSectionOne

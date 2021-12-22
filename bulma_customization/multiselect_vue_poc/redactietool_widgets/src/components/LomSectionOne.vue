@@ -1,7 +1,7 @@
 <template>
   <div class="lom1_section_wrapper">
 
-      <h2 class="title is-clickable">
+      <h2 class="title is-clickable" v-on:click="toggleCollapse">
         Leerobject metadata trap 1
         <div class="minimize-icon-wrapper" id="lom1_section_icon">
           <!-- TODO fix icons
@@ -18,7 +18,7 @@
       </h2>
       <hr>
 
-    <div id="lom1_section_block">
+    <div id="lom1_section_block" v-bind:class="{minimized: isMinimized}">
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Type</label>
@@ -87,12 +87,12 @@
 
 
       <!-- todo: this data comes with request using suggest lib from knowledgegraph:
-{'id': 'https://data.meemoo.be/terms/ond/graad#lager-1ste-graad', 'label': 'Lager 1ste graad', 'definition': 'Lager 1ste graad'}
-{'id': 'https://data.meemoo.be/terms/ond/graad#lager-2de-graad', 'label': 'Lager 2de graad', 'definition': 'Lager 2de graad'}
-{'id': 'https://data.meemoo.be/terms/ond/graad#lager-3de-graad', 'label': 'Lager 3de graad', 'definition': 'Lager 3de graad'}
-{'id': 'https://data.meemoo.be/terms/ond/graad#secundair-1ste-graad', 'label': 'Secundair 1ste graad', 'definition': 'Secundair 1ste graad'}
-{'id': 'https://data.meemoo.be/terms/ond/graad#secundair-2de-graad', 'label': 'Secundair 2de graad', 'definition': 'Secundair 2de graad'}
-{'id': 'https://data.meemoo.be/terms/ond/graad#secundair-3de-graad', 'label': 'Secundair 3de graad', 'definition': 'Secundair 3de graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-1ste-graad', 'label': 'Lager 1ste graad', 'definition': 'Lager 1ste graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-2de-graad', 'label': 'Lager 2de graad', 'definition': 'Lager 2de graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-3de-graad', 'label': 'Lager 3de graad', 'definition': 'Lager 3de graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-1ste-graad', 'label': 'Secundair 1ste graad', 'definition': 'Secundair 1ste graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-2de-graad', 'label': 'Secundair 2de graad', 'definition': 'Secundair 2de graad'}
+        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-3de-graad', 'label': 'Secundair 3de graad', 'definition': 'Secundair 3de graad'}
       -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -110,6 +110,18 @@
           </div>
         </div>
       </div>
+
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Thema</label>
+        </div>
+        <div class="field-body">
+          <ThemaSelector/>
+        </div>
+      </div>
+
+
     </div> <!-- lom1_section_block -->
 
   </div>
@@ -117,16 +129,23 @@
 
 <script>
   import TalenSelector from './TalenSelector.vue'
+  import ThemaSelector from './ThemaSelector.vue'
 
   export default {
     name: 'LomSectionOne',
     components: {
       TalenSelector,
+      ThemaSelector,
     },
     data () {
-      return {};
+      return {
+        isMinimized: false
+      }
     },
     methods: {
+      toggleCollapse: function(){
+        this.isMinimized = !this.isMinimized;
+      }
     }
   }
 </script>
@@ -141,6 +160,10 @@
   hr {
     border-bottom: 1px solid #363636;
     margin-top: -20px;
+  }
+
+  .minimized {
+    display: none;
   }
   
 </style>

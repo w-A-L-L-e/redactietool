@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="title">Thema selector</h1> 
     <multiselect v-model="value" 
       tag-placeholder="Add this as new tag" 
       placeholder="Search or add a tag" 
@@ -28,13 +27,21 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'Thema 1', code: 'thema1' },
-          { name: 'Thema 2', code: 'thema2' },
-          { name: 'Thema 3', code: 'thema3' },
-          { name: 'Thema 4', code: 'thema4' },
-          { name: 'Thema 5', code: 'thema5' },
-          { name: 'Thema 6', code: 'thema6' },
-          // TODO: get this with suggest library...
+          { 
+            name: 'Politiek en overheid', 
+            code: 'Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland' 
+          },
+          {
+            name: 'Mediawijsheid',
+            code: 'Mediawijsheid, beeldgeletterdheid, kritische zin' 
+          },
+          { 
+            name: 'Culturele diversiteit', 
+            code: 'Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ...' 
+          },
+          { name: 'Thema 4', code: 'Dit is de beschrijving voor thema 4' },
+          { name: 'Thema 5', code: 'Dit is de beschrijving voor thema 5' },
+          { name: 'Thema 6', code: 'Dit is de beschrijving voor thema 6' },
         ]
       }
     },
@@ -61,11 +68,11 @@
 
 <style>
   #thema_json_value{
-    display: flex;
+    /*display: flex;*/
     width: 80%;
     height: 100px;
-    /*display: none;*/
     margin-top: 20px;
     margin-bottom: 20px;
+    display: none;
   }
 </style>
