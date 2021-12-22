@@ -27,7 +27,7 @@
     data () {
       return {
         value: default_value,
-        json_value: JSON.stringify({default_value}),
+        json_value: JSON.stringify(default_value),
         options: [
           { name: 'Vak 1', code: 'vak1' },
           { name: 'Vak 2', code: 'vak2' },

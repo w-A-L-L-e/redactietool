@@ -17,17 +17,11 @@
 <script>
   import Multiselect from 'vue-multiselect'
 
-  // register globally
-  // Vue.component('multiselect', Multiselect)
-  // Setting taggable to 'true' allows adding new tags above!
-  // TODO: for the languages we can set this to false again, but for themas we'll need this...
-
   // example: initial languages to show on loading metadata item
   var default_value = [{ name: 'Nederlands', code: 'nl' }, { name: 'Frans', code: 'fr' } ]  
 
   var pid = document.getElementById("pid").innerText;
   console.log("vue component received pid=", pid );
-
 
   export default {
     name: 'TalenSelector',
