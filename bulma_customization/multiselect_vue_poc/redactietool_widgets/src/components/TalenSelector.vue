@@ -189,7 +189,7 @@
 
 <style>
   #talen_selector{
-    min-width: 20em;
+    min-width: 30em;
   }
 
   #talen_json_value{

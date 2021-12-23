@@ -1,22 +1,22 @@
 <template>
-  <div id="vakken_selector">
+  <div id="trefwoorden_selector">
     <multiselect v-model="value" 
-      tag-placeholder="Kies vakken" 
-      placeholder="Zoek of voeg een nieuw vak toe" 
+      tag-placeholder="Maak nieuw trefwoord aan" 
+      placeholder="Zoek of voeg een nieuw trefwoord toe" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="true" @tag="addVak" @input="updateValue">
     </multiselect>
-    <textarea name="vakken" v-model="json_value" id="vakken_json_value"></textarea>
+    <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 </div>
 </template>
 
 <script>
   import Multiselect from 'vue-multiselect'
 
-  //example of default value filled in voor vakken in metadata:
-  var default_value = [{ name: 'Vak 1', code: 'vak1' }]
+  //example of default value filled in voor trefwoorden in metadata:
+  var default_value = [{ name: 'Trefwoord 1', code: 'trefwoord1' }]
 
   export default {
     name: 'VakkenSelector',
@@ -28,15 +28,13 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'Vak 1', code: 'vak1' },
-          { name: 'Vak 2', code: 'vak2' },
-          { name: 'Vak 3', code: 'vak3' },
-          { name: 'Vak 4', code: 'vak4' },
-          { name: 'Vak 5', code: 'vak5' },
-          { name: 'Vak 6', code: 'vak6' },
-          // TODO: get this with suggest library + axios...
-          // or use the flask view/hidden field trick used for pid
-          // which is actually better&faster because it avoids an extra request
+          { name: 'Trefwoord 1', code: 'vak1' },
+          { name: 'Trefwoord 2', code: 'vak2' },
+          { name: 'Trefwoord 3', code: 'vak3' },
+          { name: 'Trefwoord 4', code: 'vak4' },
+          { name: 'Trefwoord 5', code: 'vak5' },
+          // TODO: populate this using a div in the flask view coming from 
+          // our suggest library (aka knowledge graph).
         ]
       }
     },
@@ -62,10 +60,10 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
-  #vakken_selector{
+  #trefwoorden_selector{
     min-width: 30em;
   }
-  #vakken_json_value{
+  #trefwoorden_json_value{
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;

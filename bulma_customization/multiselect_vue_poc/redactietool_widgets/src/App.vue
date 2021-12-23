@@ -1,10 +1,9 @@
 <template>
     <div id="app">
-      <LomSectionOne/>
-      <!-- here LomSectionTwo/> -->
-      <!-- here LomSectionThree/> -->
 
-      <VakkenSelector/>
+      <LomSectionOne/>
+      <LomSectionTwo/>
+      <LomSectionThree/>
 
       <p>
         Further docs for styling other custom selectors here:
@@ -16,15 +15,17 @@
 
 <script>
 import Todo from './components/Todo.vue'
-import VakkenSelector from './components/VakkenSelector.vue'
 import LomSectionOne from './components/LomSectionOne.vue'
+import LomSectionTwo from './components/LomSectionTwo.vue'
+import LomSectionThree from './components/LomSectionThree.vue'
 
 export default {
   name: 'App',
   components: {
-    VakkenSelector,
-    Todo,
-    LomSectionOne
+    LomSectionOne,
+    LomSectionTwo,
+    LomSectionThree,
+    Todo
   }
 }
 </script>
