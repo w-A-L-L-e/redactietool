@@ -1,14 +1,12 @@
 <template>
   <div id="talen_selector"> 
     <multiselect v-model="value" 
-      tag-placeholder="Add this as new tag" 
-      placeholder="Search or add a tag" 
+      placeholder="Kies taal" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
     </multiselect>
-    <!-- talen_json_value is propagated to the actual flask app soon... -->
     <textarea name="talen" v-model="json_value" id="talen_json_value"></textarea>
     <pre class="language-json" id="talen_value_preview"><code>{{ value  }}</code></pre>
 </div>
@@ -169,15 +167,6 @@
       }
     },
     methods: {
-      addTag (newTag) {
-        const tag = {
-          name: newTag,
-          code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        }
-        this.options.push(tag)
-        this.value.push(tag)
-        this.json_value = JSON.stringify(this.value)
-      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
       }
@@ -201,6 +190,7 @@
   }
 
   #talen_value_preview{
+    display: none;
     margin-bottom: 20px;
   }
 

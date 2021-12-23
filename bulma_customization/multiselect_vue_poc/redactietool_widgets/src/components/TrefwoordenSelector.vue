@@ -6,7 +6,7 @@
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
-      :taggable="true" @tag="addVak" @input="updateValue">
+      :taggable="true" @tag="addTrefwoord" @input="updateValue">
     </multiselect>
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 </div>
@@ -39,13 +39,13 @@
       }
     },
     methods: {
-      addVak(newVak) {
-        const vak = {
-          name: newVak,
-          code: newVak.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      addTrefwoord(nieuwTrefwoord) {
+        const tw = {
+          name: nieuwTrefwoord,
+          code: nieuwTrefwoord.substring(0, 2) + Math.floor((Math.random() * 10000000))
         }
-        this.options.push(vak)
-        this.value.push(vak)
+        this.options.push(tw)
+        this.value.push(tw)
         this.json_value = JSON.stringify(this.value)
       },
       updateValue(value){
