@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div id="talen_selector"> 
     <multiselect v-model="value" 
       tag-placeholder="Add this as new tag" 
       placeholder="Search or add a tag" 
@@ -185,12 +185,13 @@
   }
 </script>
 
-<!-- New step!
-     Add Multiselect CSS. Can be added as a static asset or inside a component. -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
-  /* customize your styles */
+  #talen_selector{
+    min-width: 20em;
+  }
+
   #talen_json_value{
     display: none;
     width: 80%;
@@ -198,6 +199,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
   #talen_value_preview{
     margin-bottom: 20px;
   }
