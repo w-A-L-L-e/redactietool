@@ -9,18 +9,7 @@
 
       <h2 class="title is-clickable" v-on:click="toggleCollapse">
         Leerobject metadata trap 3 
-        <div class="minimize-icon-wrapper" id="lom1_section_icon">
-          <!-- TODO fix icons
-          <span class="icon-unfolded">
-            <ion-icon name="chevron-down-circle-outline" 
-            role="img" class="md hydrated" aria-label="chevron down circle outline"></ion-icon>
-          </span>
-          <span class="icon-folded">
-            <ion-icon name="chevron-forward-circle-outline" 
-            role="img" class="md hydrated" aria-label="chevron forward circle outline"></ion-icon>
-          </span>
-          -->
-        </div>
+        <CollapseIcon v-bind:minimized="isMinimized"/>
       </h2>
       <hr>
 
@@ -35,6 +24,17 @@
         </div>
       </div>
 
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label"></label>
+        </div>
+        <div class="field-body">
+            <a target="_blank" href="http://link_trefwoorden_content_partners?">
+              Bekijk trefwoorden van Content Partners
+            </a>
+        </div>
+      </div>
+
     </div> <!-- lom2_section_block -->
 
   </div>
@@ -42,11 +42,13 @@
 
 <script>
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
+  import CollapseIcon from './CollapseIcon.vue'
 
   export default {
     name: 'LomSectionThree',
     components: {
       TrefwoordenSelector,
+      CollapseIcon
     },
     data () {
       return {

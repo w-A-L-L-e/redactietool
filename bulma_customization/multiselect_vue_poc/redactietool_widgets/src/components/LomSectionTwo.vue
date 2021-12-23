@@ -3,18 +3,7 @@
 
       <h2 class="title is-clickable" v-on:click="toggleCollapse">
         Leerobject metadata trap 2
-        <div class="minimize-icon-wrapper" id="lom1_section_icon">
-          <!-- TODO fix icons
-          <span class="icon-unfolded">
-            <ion-icon name="chevron-down-circle-outline" 
-            role="img" class="md hydrated" aria-label="chevron down circle outline"></ion-icon>
-          </span>
-          <span class="icon-folded">
-            <ion-icon name="chevron-forward-circle-outline" 
-            role="img" class="md hydrated" aria-label="chevron forward circle outline"></ion-icon>
-          </span>
-          -->
-        </div>
+        <CollapseIcon v-bind:minimized="isMinimized"/>
       </h2>
       <hr>
 
@@ -36,11 +25,13 @@
 
 <script>
   import VakkenSelector from './VakkenSelector.vue'
+  import CollapseIcon from './CollapseIcon.vue'
 
   export default {
     name: 'LomSectionTwo',
     components: {
       VakkenSelector,
+      CollapseIcon
     },
     data () {
       return {
@@ -69,5 +60,5 @@
 
   .minimized {
     display: none;
-  }
+  } 
 </style>
