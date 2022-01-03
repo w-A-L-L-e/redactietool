@@ -43,7 +43,7 @@ clean:
 .PHONY: lint
 lint:
 	@. python_env/bin/activate; \
-	flake8 --max-line-length=120 --exclude=.git,python_env,__pycache__
+	flake8 --max-line-length=120 --exclude=.git,python_env,__pycache__,bulma_customization
 
 
 .PHONY: format
