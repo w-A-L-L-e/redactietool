@@ -31,6 +31,7 @@
 from flask import Flask, render_template, request, send_from_directory
 import csv
 import json
+import urllib
 
 app = Flask(
     __name__,
@@ -57,15 +58,10 @@ def send_json_file():
     return send_from_directory('items', json_file)
 
 
-@app.route('/themas')
-def themas_json():
-    # themas als suggest lib ze goed teruggeeft gewoon 1 response opslaan en zo terug geven:
-    # return send_from_directory('themas', 'themas_suggest_format.json')
-
-    # use csv file from ticket DEV-1878
-    csvfile = open('themas/themas_grid_view.csv', 'r')
+def csv_to_suggest_response(csv_path, id_prefix, title_col=0, desc_col=1):
+    csvfile = open(csv_path, 'r')
     reader = csv.reader(csvfile)
-    themas = []
+    items_array = []
     rowcount = 0
     for row in reader:
         rowcount += 1
@@ -73,14 +69,30 @@ def themas_json():
             title = row[0]
             desc = row[1]
             title_to_id = title.lower().replace(" ", "-")
-            thema_id = 'https://data.meemoo.be/terms/ond/vak#{}'.format(
-                title_to_id)
-            thema = {
-                'id': thema_id,
+            item_id = '{}{}'.format(
+                id_prefix,
+                urllib.parse.quote(title_to_id)
+            )
+            item = {
+                'id': item_id,
                 'label': title,
                 'definition': desc
             }
-            themas.append(thema)
+            items_array.append(item)
+
+    return items_array
+
+
+@app.route('/themas')
+def themas_json():
+    # themas als suggest lib ze goed teruggeeft gewoon 1 response opslaan en zo terug geven:
+    # return send_from_directory('themas', 'themas_suggest_format.json')
+
+    # use csv file from ticket DEV-1878
+    themas = csv_to_suggest_response(
+        'themas/themas_grid_view.csv',
+        'https://data.meemoo.be/terms/ond/thema#'
+    )
     return json.dumps(themas)
 
 
@@ -90,24 +102,10 @@ def vakken_json():
     # return send_from_directory('vakken', 'vakkenlijst_suggest_format.json')
 
     # use csv file from ticket DEV-1878
-    csvfile = open('vakken/vakkenlijst_grid_view.csv', 'r')
-    reader = csv.reader(csvfile)
-    vakken = []
-    rowcount = 0
-    for row in reader:
-        rowcount += 1
-        if rowcount > 1:
-            title = row[0]
-            desc = row[1]
-            title_to_id = title.lower().replace(" ", "-")
-            vak_id = 'https://data.meemoo.be/terms/ond/thema#{}'.format(
-                title_to_id)
-            vak = {
-                'id': vak_id,
-                'label': title,
-                'definition': desc
-            }
-            vakken.append(vak)
+    vakken = csv_to_suggest_response(
+        'vakken/vakkenlijst_grid_view.csv',
+        'https://data.meemoo.be/terms/ond/vak#'
+    )
     return json.dumps(vakken)
 
 
