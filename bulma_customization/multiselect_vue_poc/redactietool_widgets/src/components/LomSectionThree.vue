@@ -1,18 +1,6 @@
 <template>
   <div class="lom3_section_wrapper">
 
-      <!-- now that I'm implementing this, why o why do we even need trap 1, 2, 3 and can't
-      it just be one 'Leerobject metadata section'  which contains all the elements
-      Type, beoogde eindgebruiker, tall, onderwijsniveaus, onderwijsgraden, themas, 
-      vakken and trefwoorden ???
-      -->
-
-      <h2 class="title is-clickable" v-on:click="toggleCollapse">
-        Leerobject metadata trap 3 
-        <CollapseIcon v-bind:minimized="isMinimized"/>
-      </h2>
-      <hr>
-
     <div id="lom3_section_block" v-bind:class="{minimized: isMinimized}">
       
       <div class="field is-horizontal">
@@ -42,13 +30,11 @@
 
 <script>
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
-  import CollapseIcon from './CollapseIcon.vue'
 
   export default {
     name: 'LomSectionThree',
     components: {
-      TrefwoordenSelector,
-      CollapseIcon
+      TrefwoordenSelector
     },
     data () {
       return {
@@ -66,7 +52,7 @@
 
 <style>
   .lom3_section_wrapper {
-    margin-top: 40px;
+    margin-top: -50px;
     margin-bottom: 70px;
   }
 

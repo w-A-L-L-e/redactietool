@@ -2,7 +2,7 @@
   <div class="lom1_section_wrapper">
 
       <h2 class="title is-clickable" v-on:click="toggleCollapse">
-        Leerobject metadata trap 1
+        Leerobject
         <CollapseIcon v-bind:minimized="isMinimized"/>
       </h2>
       <hr>

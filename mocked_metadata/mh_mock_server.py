@@ -51,7 +51,7 @@ def themas_json():
             desc = row[1]
             thema = {
                 'thema': title,
-                'beschrijving': desc
+                'omschrijving': desc
             }
             themas.append(thema)
 
@@ -59,8 +59,24 @@ def themas_json():
 
 @app.route('/vakken')
 def vakken_json():
-    data = open('themas/vakkenlijst_grid_view.csv', 'r').read()
-    print("vakken=", data)
+    csvfile = open('vakken/vakkenlijst_grid_view.csv', 'r')
+    reader = csv.reader(csvfile)
+    themas = []
+    rowcount = 0
+    for row in reader:
+        rowcount+=1
+        if rowcount>1:
+            title = row[0]
+            desc = row[1]
+            thema = {
+                'vak': title,
+                'omschrijving': desc
+            }
+            themas.append(thema)
+
+    return json.dumps(themas)
+
+
 
 
 

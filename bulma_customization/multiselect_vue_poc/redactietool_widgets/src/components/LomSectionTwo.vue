@@ -1,12 +1,6 @@
 <template>
   <div class="lom2_section_wrapper">
 
-      <h2 class="title is-clickable" v-on:click="toggleCollapse">
-        Leerobject metadata trap 2
-        <CollapseIcon v-bind:minimized="isMinimized"/>
-      </h2>
-      <hr>
-
     <div id="lom2_section_block" v-bind:class="{minimized: isMinimized}">
       
       <div class="field is-horizontal">
@@ -25,13 +19,11 @@
 
 <script>
   import VakkenSelector from './VakkenSelector.vue'
-  import CollapseIcon from './CollapseIcon.vue'
 
   export default {
     name: 'LomSectionTwo',
     components: {
-      VakkenSelector,
-      CollapseIcon
+      VakkenSelector
     },
     data () {
       return {
@@ -49,7 +41,7 @@
 
 <style>
   .lom2_section_wrapper {
-    margin-top: 40px;
+    margin-top: -50px;
     margin-bottom: 70px;
   }
 
