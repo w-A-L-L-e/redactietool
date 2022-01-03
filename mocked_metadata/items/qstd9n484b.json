@@ -1,0 +1,259 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 314,
+  "fragmentDurationFrames": 314,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:00:12.560",
+  "fragmentDurationTimeCode": "00:00:12.560",
+  "mediaObjectId": "110433eb04fa48b39539e29872302bf58d34ee99f4064eeeaca4586949cc1036",
+  "fragmentId": "110433eb04fa48b39539e29872302bf58d34ee99f4064eeeaca4586949cc1036899e28415c26408088ba4a5eb4fb3906",
+  "externalId": "qstd9n484b",
+  "title": "Pokljuka 1 day to go",
+  "description": "[All is set for the IBU World Championship 2021 to kick off in Pokljuka]?\nPokljuka, Slovenia, is ready to host its second biathlon World Championship (after 2001). Due to Slovenian strict COVID-19 health protocols, there will be no fans nor visitors allowed in the arena. \n?\n?Nevertheless, there are more than 300 athletes from 38 countries expected to compete for medals in 12 events taking place from 10/02 to 21/02.\n?\u2022\testablishing shoots of Pokljuka\n?\n?\u2022\tlast practice before tomorrow`s start\nOpnamelocatie: PokljukaBledSLOVENIAEUROPE",
+  "date": "2021:03:29 08:26:17",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/110433eb04fa48b39539e29872302bf58d34ee99f4064eeeaca4586949cc1036/keyframes/keyframes_1_1/keyframe1.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/110433eb04fa48b39539e29872302bf58d34ee99f4064eeeaca4586949cc1036/keyframes-thumb/keyframes_1_1/keyframe1.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/110433eb04fa48b39539e29872302bf58d34ee99f4064eeeaca4586949cc1036/browse.mp4",
+  "originalFileName": "qstd9n484b.mp4",
+  "width": 832,
+  "height": 468,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-09-15T09:43:19Z",
+  "archiveDate": "2021-03-29T06:26:19Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "s3",
+  "mdProperties": [
+    {
+      "value": [
+        {
+          "value": "Rechtenhouder: SIRTVS\nRechteninfo: EUROVISION rights: Embargo for the territories of FRANCE, ITALY, LITHUANIA AND POLAND, except for broadcasters which have acquired news access rights Access only for EUROVISION Members and EVS Sub-Licensees, for use solel",
+          "attribute": "Licentiehouder",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_rightsHolders",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "qs3t9d5q8f",
+          "attribute": "is_versie_van",
+          "dottedKey": null
+        },
+        {
+          "value": "qsv40jv847",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EBU SPORT",
+          "attribute": "Distributeur",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_publishers",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "AIM10094484",
+          "attribute": "MEDIA_ID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EVS",
+          "attribute": "serie",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_titles",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-rf5kf25",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "202102100911466010027131016005056B96DE60000005644B00000D0F001105.mxf",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "or-h41jm1d",
+      "attribute": "s3_bucket",
+      "dottedKey": null
+    },
+    {
+      "value": "s3-qas.viaa.be",
+      "attribute": "s3_domain",
+      "dottedKey": null
+    },
+    {
+      "value": "2021:03:29 08:26:17",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "nieuw",
+      "attribute": "vrt_status",
+      "dottedKey": null
+    },
+    {
+      "value": "video",
+      "attribute": "ie_type",
+      "dottedKey": null
+    },
+    {
+      "value": "video",
+      "attribute": "type_viaa",
+      "dottedKey": null
+    },
+    {
+      "value": "ie",
+      "attribute": "object_level",
+      "dottedKey": null
+    },
+    {
+      "value": "avo-exporter+or-h41jm1d",
+      "attribute": "s3_object_owner",
+      "dottedKey": null
+    },
+    {
+      "value": "s3",
+      "attribute": "sp_name",
+      "dottedKey": null
+    },
+    {
+      "value": "2021-02-09",
+      "attribute": "dcterms_created",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "qstd9n484b",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "archive_master",
+      "attribute": "object_use",
+      "dottedKey": null
+    },
+    {
+      "value": "sport",
+      "attribute": "dc_description_categorie",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "vrt_has_been_broadcasted",
+      "dottedKey": null
+    },
+    {
+      "value": "qsv40jv847.mp4",
+      "attribute": "s3_object_key",
+      "dottedKey": null
+    },
+    {
+      "value": "VRT",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "AIM10094484",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "2021-02-09",
+      "attribute": "dcterms_issued",
+      "dottedKey": null
+    },
+    {
+      "value": "SoundHandler",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "footage",
+      "attribute": "ebu_objectType",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+

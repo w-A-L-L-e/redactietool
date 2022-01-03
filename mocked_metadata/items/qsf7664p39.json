@@ -1,0 +1,161 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 1514,
+  "fragmentDurationFrames": 1514,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:01:00.560",
+  "fragmentDurationTimeCode": "00:01:00.560",
+  "mediaObjectId": "70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec",
+  "fragmentId": "70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec0b6f9cf611ed4ee1b4e346559a624f9b",
+  "externalId": "qsf7664p39",
+  "title": "QAS 20.1 ingest test - Fietsstraten in centrum Gent",
+  "description": "QAS 20.1 ingest test",
+  "date": "2019:05:28 09:34:30",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec/keyframes/70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec0b6f9cf611ed4ee1b4e346559a624f9b.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec/keyframes-thumb/70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec0b6f9cf611ed4ee1b4e346559a624f9b.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/70af6a77d62e42dfa2c87b037458400f5c1943debc864537b24c31a56c38bbec/browse.mp4",
+  "originalFileName": "qsf7664p39.mp4",
+  "width": 0,
+  "height": 0,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-12-23T15:17:17Z",
+  "archiveDate": "2020-06-19T10:56:45Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "borndigital",
+  "mdProperties": [
+    {
+      "value": [
+        {
+          "value": "qsvx05z57z",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "QAS_20.mp4",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": "QAS 20.1 ingest test - Fietsstraten in centrum Gent",
+      "attribute": "dc_title",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm06",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "QAS_20.mp4",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "QAS 20.1 ingest test",
+      "attribute": "dc_description",
+      "dottedKey": null
+    },
+    {
+      "value": "qsf7664p39",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "2019:05:28 09:34:30",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "AVS",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "08_H264",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "MP4 Sound Media Handler",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "borndigital",
+      "attribute": "sp_name",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+

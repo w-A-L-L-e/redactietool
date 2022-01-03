@@ -1,0 +1,739 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 1368,
+  "fragmentDurationFrames": 1368,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:00:54.720",
+  "fragmentDurationTimeCode": "00:00:54.720",
+  "mediaObjectId": "babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c",
+  "fragmentId": "babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550",
+  "externalId": "tennismatch",
+  "title": "ATP Swiss Indoors Day 3C",
+  "description": "Dit is het veld voor de originele hoofdbeschrijving.",
+  "date": "2019:10:23 00:00:00",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/keyframes/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/keyframes-thumb/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/browse.mp4",
+  "originalFileName": "tennismatch.mp4",
+  "width": 0,
+  "height": 0,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-12-22T16:11:56Z",
+  "archiveDate": "2019-10-25T08:26:32Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "dailies",
+  "mdProperties": [
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Secundair onderwijs",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_context",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "saai",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "sport",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "tennis",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_keywords",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "nl",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_languages",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "lichamelijke opvoeding - sport",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_classification",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Dit is een veld voor kunstenaar.",
+          "attribute": "Kunstenaar",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor opdrachtgever.",
+          "attribute": "Opdrachtgever",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor productiehuis.",
+          "attribute": "Productiehuis",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor performer.",
+          "attribute": "Performer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor choreograaf.",
+          "attribute": "Choreograaf",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor producer.",
+          "attribute": "Producer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor danser.",
+          "attribute": "Danser",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is nog een veld voor danser.",
+          "attribute": "Danser",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor fotograaf.",
+          "attribute": "Fotograaf",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor regisseur.",
+          "attribute": "Regisseur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor auteur.",
+          "attribute": "Auteur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor muzikant.",
+          "attribute": "Muzikant",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor acteur.",
+          "attribute": "Acteur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor schrijver.",
+          "attribute": "Schrijver",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor componist.",
+          "attribute": "Componist",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor interviewer.",
+          "attribute": "Interviewer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor maker.",
+          "attribute": "Maker",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor archiefvormer.",
+          "attribute": "Archiefvormer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor cineast.",
+          "attribute": "Cineast",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor documentairemaker.",
+          "attribute": "Documentairemaker",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_creators",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "ATP Swiss Indoors Day 3C.mp4",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        },
+        {
+          "value": "AIM10049123",
+          "attribute": "MEDIA_ID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Dit is het veld voor deelarchief.",
+          "attribute": "deelarchief",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor registratie.",
+          "attribute": "registratie",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor alternatief.",
+          "attribute": "alternatief",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor archief.",
+          "attribute": "archief",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor deelreeks.",
+          "attribute": "deelreeks",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor seizoennummer.",
+          "attribute": "seizoennummer",
+          "dottedKey": null
+        },
+        {
+          "value": "EVS",
+          "attribute": "serie",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor serienummer.",
+          "attribute": "serienummer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor episode.",
+          "attribute": "episode",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor programma.",
+          "attribute": "programma",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor reeks.",
+          "attribute": "reeks",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor seizoen.",
+          "attribute": "seizoen",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is het veld voor aflevering.",
+          "attribute": "aflevering",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_titles",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Video",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_learningresourcetype",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Rechtenhouder: CHSRF Rechteninfo: Swiss TV rights: For full EBU members only within EBU territory, maximum usage 3 minutes per day.",
+          "attribute": "Licentiehouder",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_rightsHolders",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "qsx34mmm4g",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EBU SPORT",
+          "attribute": "Publisher",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor distributeur.",
+          "attribute": "Distributeur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is nog een veld voor distributeur.",
+          "attribute": "Distributeur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor persagentschap.",
+          "attribute": "Persagentschap",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor exposant.",
+          "attribute": "Exposant",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_publishers",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Dit is een veld voor make-up.",
+          "attribute": "Make-up",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor auteur.",
+          "attribute": "Auteur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor verontschuldigd.",
+          "attribute": "Verontschuldigd",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor aanwezig.",
+          "attribute": "Aanwezig",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor arrangeur.",
+          "attribute": "Arrangeur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is nog een veld voor arrangeur.",
+          "attribute": "Arrangeur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor commentator.",
+          "attribute": "Commentator",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor geluid.",
+          "attribute": "Geluid",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor adviseur.",
+          "attribute": "Adviseur",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor voorzitter.",
+          "attribute": "Voorzitter",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor omroeper.",
+          "attribute": "Omroeper",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor onderzoeker.",
+          "attribute": "Onderzoeker",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor dirigent.",
+          "attribute": "Dirigent",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor post-productie.",
+          "attribute": "Post-productie",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor reporter.",
+          "attribute": "Reporter",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor geluidsman.",
+          "attribute": "Geluidsman",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor producer.",
+          "attribute": "Producer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor scenarist.",
+          "attribute": "Scenarist",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor cameraman.",
+          "attribute": "Cameraman",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor belichting.",
+          "attribute": "Belichting",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor grafisch ontwerper.",
+          "attribute": "GrafischOntwerper",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor nieuwsanker.",
+          "attribute": "Nieuwsanker",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor archivaris.",
+          "attribute": "Archivaris",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor sponsor.",
+          "attribute": "Sponsor",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor vertaler.",
+          "attribute": "Vertaler",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor verteller.",
+          "attribute": "Verteller",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor presenter.",
+          "attribute": "Presenter",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor bijdrager.",
+          "attribute": "Bijdrager",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor afwezig.",
+          "attribute": "Afwezig",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor uitvoerder.",
+          "attribute": "Uitvoerder",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor kunstenaar.",
+          "attribute": "Kunstenaar",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor muzikant.",
+          "attribute": "Muzikant",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor co-producer.",
+          "attribute": "Co-producer",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor fotografie.",
+          "attribute": "Fotografie",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor componist.",
+          "attribute": "Componist",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor soundtrack.",
+          "attribute": "Soundtrack",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor assistent.",
+          "attribute": "Assistent",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_contributors",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Secundair 1ste graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Secundair 2de graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Secundair 3de graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_typicalagerange",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Docent",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Student",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_intendedenduserrole",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-rf5kf25",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "ATP Swiss Indoors Day 3C.mp4",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "2019:10:23 00:00:00",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "nieuw",
+      "attribute": "vrt_status",
+      "dottedKey": null
+    },
+    {
+      "value": "video",
+      "attribute": "type_viaa",
+      "dottedKey": null
+    },
+    {
+      "value": "dailies",
+      "attribute": "sp_name",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de transcriptie.",
+      "attribute": "dc_description_transcriptie",
+      "dottedKey": null
+    },
+    {
+      "value": "2019-10-23",
+      "attribute": "dcterms_created",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de ontsluitingstitel.",
+      "attribute": "dc_title",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "tennismatch",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de ondertitels.",
+      "attribute": "dc_description_ondertitels",
+      "dottedKey": null
+    },
+    {
+      "value": "sport",
+      "attribute": "dc_description_categorie",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "vrt_has_been_broadcasted",
+      "dottedKey": null
+    },
+    {
+      "value": "VRT",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de cast.",
+      "attribute": "dc_description_cast",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de originele uitgebreide beschrijving.\n\n[Swiss Indoors round of 8]?\nATP Swiss Indoors Day 3:  A. de Minaur vs. T. Fritz : 6:3 / 6:3\n?\nOpnamelocatie: BaselBaselSWITZERLANDEUROPE",
+      "attribute": "dc_description_lang",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "AIM10049123",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "2019-10-23",
+      "attribute": "dcterms_issued",
+      "dottedKey": null
+    },
+    {
+      "value": "Dit is het veld voor de programma omschrijving.",
+      "attribute": "dc_description_programma",
+      "dottedKey": null
+    },
+    {
+      "value": "\u00a9 vrt",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "footage",
+      "attribute": "ebu_objectType",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+

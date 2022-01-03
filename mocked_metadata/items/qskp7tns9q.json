@@ -1,0 +1,213 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 1135,
+  "fragmentDurationFrames": 1135,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:00:45.400",
+  "fragmentDurationTimeCode": "00:00:45.400",
+  "mediaObjectId": "93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c58401",
+  "fragmentId": "93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c584018f4ee562ea8a400eb583ea4d23bc0ec1",
+  "externalId": "qskp7tns9q",
+  "title": "Eigen jeugdfilm \u2018Rampzalige Bril\u2019 \u2013 gedraaid in cinema Alcazar Balen (Met Robert Bergmans, Richard Vermeulen en vele jongeren)",
+  "description": "Main fragment for essence:\n    - filename: qsnz80mc72.mp4\n    - CP: testbeeld",
+  "date": "2021:06:17 09:36:31",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c58401/keyframes/93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c584018f4ee562ea8a400eb583ea4d23bc0ec1.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c58401/keyframes-thumb/93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c584018f4ee562ea8a400eb583ea4d23bc0ec1.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/93aeaf56c8ff4e56b97108fb2f399935fa20e7ff398f4f8c9b6aaa3c24c58401/browse.mp4",
+  "originalFileName": "qskp7tns9q.mp4",
+  "width": 0,
+  "height": 0,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-12-09T14:51:58Z",
+  "archiveDate": "2021-06-17T07:36:33Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "s3",
+  "mdProperties": [
+    {
+      "value": [
+        {
+          "value": "qsnz80mc72",
+          "attribute": "is_versie_van",
+          "dottedKey": null
+        },
+        {
+          "value": "qsnz80mc72",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "BAL_021.mov",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Richard Vermeulen",
+          "attribute": "Licentiehouder",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_rightsHolders",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Balen",
+          "attribute": "ruimte",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_coverages",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": "Eigen jeugdfilm \u2018Rampzalige Bril\u2019 \u2013 gedraaid in cinema Alcazar Balen (Met Robert Bergmans, Richard Vermeulen en vele jongeren)",
+      "attribute": "dc_title",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-1c1tf48",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "BAL_021.mov",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "qskp7tns9q",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "or-h41jm1d",
+      "attribute": "s3_bucket",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "archive_master",
+      "attribute": "object_use",
+      "dottedKey": null
+    },
+    {
+      "value": "s3-qas.viaa.be",
+      "attribute": "s3_domain",
+      "dottedKey": null
+    },
+    {
+      "value": "2021:06:17 09:36:31",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "Erfgoedcel Kerf",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "qsnz80mc72.mp4",
+      "attribute": "s3_object_key",
+      "dottedKey": null
+    },
+    {
+      "value": "n/a",
+      "attribute": "ie_type",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "BAL_021",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "SoundHandler",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "file",
+      "attribute": "object_level",
+      "dottedKey": null
+    },
+    {
+      "value": "avo-exporter+or-h41jm1d",
+      "attribute": "s3_object_owner",
+      "dottedKey": null
+    },
+    {
+      "value": "borndigital",
+      "attribute": "sp_name",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+

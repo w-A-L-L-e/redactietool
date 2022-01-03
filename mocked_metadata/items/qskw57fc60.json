@@ -1,0 +1,259 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 627,
+  "fragmentDurationFrames": 627,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:00:25.080",
+  "fragmentDurationTimeCode": "00:00:25.080",
+  "mediaObjectId": "2b883191514745718929c81c6f127b9a882460839ea744378588c47e56f6beb0",
+  "fragmentId": "2b883191514745718929c81c6f127b9a882460839ea744378588c47e56f6beb08df17017143246fca2d6eae39d89a153",
+  "externalId": "qskw57fc60",
+  "title": "World Athletics Indoor Tour",
+  "description": "[Tsegay breaks world indoor 1500m record in Lievin with 3:53.09]?\nOn an evening of stunning middle-distance performances at the Meeting Hauts-de-France Pas-de-Calais, Ethiopia's Gudaf Tsegay produced the highlight by taking two seconds off the world indoor 1500m record*, winning at the World Athletics Indoor Tour Gold meeting in 3:53.09.\n?\n?The world bronze medallist followed the swift early tempo as the pacemaker led the field through 400m in 58.97 and 800m in 2:05.94. With three laps to go, Tsegay had a four-second lead over double European indoor champion Laura Muir but she showed no signs of slowing down, passing through 1000m in 2:37.36.\n?\n?The clock read 2:52 with two laps to go and Tsegay maintained her pace with another lap just outside 30 seconds. She dug in for the final circuit and crossed the line in 3:53.09, taking more than two seconds off the world indoor record set by compatriot Genzebe Dibaba in Karlsruhe in 2014.\n?\n?Muir finished second in a British indoor record of 3:59.58 with team-mate Melissa Courtney-Bryant taking third in 4:04.79.\n?\n?\"I\u2019m very happy to set a world indoor record,\" said Tsegay. \"I have been training really hard and I set myself a target to break the world indoor record.\"\n?\n?Tsegay's record-breaking performance was book-ended by two other athletes who very nearly broke world records.\n?\n?Ethiopian steeplechase specialist Getnet Wale won the men's 3000m in 7:24.98, the second-fastest indoor performance in history, while USA's Grant Holloway won the men's 60m hurdles in 7.32, just 0.02 shy of the world indoor record.\n?\n?\n?\n?60m men: \n?\n?1 \tLamont Marcell JACOBS \tITA ITA \t6.54 \t\n?2 \tMichael RODGERS \tUSA USA \t6.60 \t\n?3 \tArthur CISS\u00c9 \tCIV CIV \t6.61 \n?\n?800m women: \n?\n?1 \tJemma REEKIE \tGBR GBR \t2:00.64 \t10\n?2 \tHabitam ALEMU \tETH ETH \t2:00.86 \t7\n?3 \tHedda HYNNE \tNOR NOR \t2:00.92 \t5 \n?\n?\n?800m men: \n?\n?1 \tElliot GILES \tGBR GBR \t1:45.49\n?2 \tCornelius TUWEI \tKEN KEN \t1:46.88\n?3 \tEliott CRESTAN \tBEL BEL \t1:46.93 \n?\n?Long Jump men: \n?\n?1 \tJuan Miguel ECHEVARR\u00cdA \tCUB CUB \t8.25 \t10\n?2 \tMiltiadis TENTOGLOU \tGRE GRE \t8.21 \t7\n?3 \tThobias MONTLER \tSWE SWE \t8.03 \t5 \n?\n?\n?\n?\n?https://meetinglievin.com/en/\n?https://www.worldathletics.org/competitions/world-athletics-indoor-tour\n?\n?The World Athletics Indoor Tour, formerly the IAAF World Indoor Tour, is an annual series of indoor track and field meetings, held since 2016. \n?- VS 800m final women \n?\n?- VS 60m final women \n?\n?- 800m final men \n?\n?- 60m final men \n?\n?- 1500m final men \n?\n?- 60m hurdles final women \n?\n?- Pole Vault women \n?\n?- 60m hurdles men \n?\n?- Pole Vault men\n?\nOpnamelocatie: LievinFRANCEEUROPE",
+  "date": "2021:03:26 10:35:50",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/2b883191514745718929c81c6f127b9a882460839ea744378588c47e56f6beb0/keyframes/keyframes_1_1/keyframe1.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/2b883191514745718929c81c6f127b9a882460839ea744378588c47e56f6beb0/keyframes-thumb/keyframes_1_1/keyframe1.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/2b883191514745718929c81c6f127b9a882460839ea744378588c47e56f6beb0/browse.mp4",
+  "originalFileName": "qskw57fc60.mp4",
+  "width": 832,
+  "height": 468,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-09-15T09:45:55Z",
+  "archiveDate": "2021-03-26T09:35:52Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "s3",
+  "mdProperties": [
+    {
+      "value": [
+        {
+          "value": "Rechtenhouder: ITINFI\nRechteninfo: Infront Sport Rights:\n\n?\n\n?\n\n?\n\n?Access for Eurovision members, maximum usage 3 minutes within 72 hours of end of each competition. Non-exclusive rights.\n\n?\n\n?\n\n?\n\n?\u2022 Broadcast Period: 48 hours from the end of each event",
+          "attribute": "Licentiehouder",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_rightsHolders",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "qsv97zmv0c",
+          "attribute": "is_versie_van",
+          "dottedKey": null
+        },
+        {
+          "value": "qst727bp51",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EBU SPORT",
+          "attribute": "Distributeur",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_publishers",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "AIM10094485",
+          "attribute": "MEDIA_ID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EVS",
+          "attribute": "serie",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_titles",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-rf5kf25",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "202102100912047010027131016005056B96DE60000005644B00000D0F001106.mxf",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "or-h41jm1d",
+      "attribute": "s3_bucket",
+      "dottedKey": null
+    },
+    {
+      "value": "s3-qas.viaa.be",
+      "attribute": "s3_domain",
+      "dottedKey": null
+    },
+    {
+      "value": "2021:03:26 10:35:50",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "nieuw",
+      "attribute": "vrt_status",
+      "dottedKey": null
+    },
+    {
+      "value": "video",
+      "attribute": "ie_type",
+      "dottedKey": null
+    },
+    {
+      "value": "video",
+      "attribute": "type_viaa",
+      "dottedKey": null
+    },
+    {
+      "value": "ie",
+      "attribute": "object_level",
+      "dottedKey": null
+    },
+    {
+      "value": "avo-exporter+or-h41jm1d",
+      "attribute": "s3_object_owner",
+      "dottedKey": null
+    },
+    {
+      "value": "s3",
+      "attribute": "sp_name",
+      "dottedKey": null
+    },
+    {
+      "value": "2021-02-09",
+      "attribute": "dcterms_created",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "qskw57fc60",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "archive_master",
+      "attribute": "object_use",
+      "dottedKey": null
+    },
+    {
+      "value": "sport",
+      "attribute": "dc_description_categorie",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "vrt_has_been_broadcasted",
+      "dottedKey": null
+    },
+    {
+      "value": "qst727bp51.mp4",
+      "attribute": "s3_object_key",
+      "dottedKey": null
+    },
+    {
+      "value": "VRT",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "AIM10094485",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "2021-02-09",
+      "attribute": "dcterms_issued",
+      "dottedKey": null
+    },
+    {
+      "value": "SoundHandler",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "footage",
+      "attribute": "ebu_objectType",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+
