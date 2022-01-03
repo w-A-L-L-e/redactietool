@@ -19,24 +19,25 @@
 #
 #   for the mocked server just change the export like so:
 #     export MEDIAHAVEN_API = http://localhost:5000
-#   
+#
 # TODO: also most likely make the suggest library use an env var to differentiate between QAS/PRD
-# then put this export here also as this microservice mocks both services.   
+# then put this export here also as this microservice mocks both services.
 #
 #   Running the mock/dev server just do following:
 #       cd mocked_metadata
 #       ./start_mock_api.sh
-#   
-from flask import Flask, render_template, request, send_from_directory
+#
 
-import sys
+from flask import Flask, render_template, request, send_from_directory
 import csv
 import json
 
-app = Flask(__name__,
-            static_url_path='', 
-            static_folder='items',
-            template_folder='templates')
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='items',
+    template_folder='templates'
+)
 
 
 @app.route('/resources/media')
@@ -48,11 +49,13 @@ def send_json_file():
     print("q=", search_qry)
     print("start_index=", start_index)
     print("nr results=", nr_of_results)
-    json_file = search_qry.split('ExternalId:')[1].split(')')[0].strip() + '.json'
+    json_file = search_qry.split('ExternalId:')[1].split(')')[
+        0].strip() + '.json'
     print("json_file to respond=", json_file)
 
-    # return send_from_directory('items', json_file, as_attachment=True) 
-    return send_from_directory('items', json_file) 
+    # return send_from_directory('items', json_file, as_attachment=True)
+    return send_from_directory('items', json_file)
+
 
 @app.route('/themas')
 def themas_json():
@@ -65,12 +68,13 @@ def themas_json():
     themas = []
     rowcount = 0
     for row in reader:
-        rowcount+=1
-        if rowcount>1:
+        rowcount += 1
+        if rowcount > 1:
             title = row[0]
             desc = row[1]
-            title_to_id = title.tolower().replace(" ", "-")
-            thema_id = 'https://data.meemoo.be/terms/ond/vak#{}'.format(title_to_id)
+            title_to_id = title.lower().replace(" ", "-")
+            thema_id = 'https://data.meemoo.be/terms/ond/vak#{}'.format(
+                title_to_id)
             thema = {
                 'id': thema_id,
                 'label': title,
@@ -85,18 +89,19 @@ def vakken_json():
     # vakken zodra de suggest library call volledig werkt, gewoon zo mocken:
     # return send_from_directory('vakken', 'vakkenlijst_suggest_format.json')
 
-    # use csv file from ticket DEV-1878 
+    # use csv file from ticket DEV-1878
     csvfile = open('vakken/vakkenlijst_grid_view.csv', 'r')
     reader = csv.reader(csvfile)
     vakken = []
     rowcount = 0
     for row in reader:
-        rowcount+=1
-        if rowcount>1:
+        rowcount += 1
+        if rowcount > 1:
             title = row[0]
             desc = row[1]
-            title_to_id = title.tolower().replace(" ", "-")
-            vak_id = 'https://data.meemoo.be/terms/ond/thema#{}'.format(title_to_id)
+            title_to_id = title.lower().replace(" ", "-")
+            vak_id = 'https://data.meemoo.be/terms/ond/thema#{}'.format(
+                title_to_id)
             vak = {
                 'id': vak_id,
                 'label': title,
@@ -110,6 +115,6 @@ def vakken_json():
 def api_docs():
     return render_template('api.html')
 
+
 if __name__ == '__main__':
     app.run()
-

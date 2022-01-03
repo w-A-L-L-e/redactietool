@@ -50,7 +50,8 @@ lint:
 format:
 	@. python_env/bin/activate; \
 	autopep8 --in-place -r app; \
-	autopep8 --in-place -r tests;
+	autopep8 --in-place -r tests; \
+	autopep8 --in-place -r mocked_metadata;
 
 .PHONY: test
 test:
