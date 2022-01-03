@@ -111,6 +111,25 @@
       </div>
 
 
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Vakken</label>
+        </div>
+        <div class="field-body">
+          <VakkenSelector/>
+        </div>
+      </div>
+
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Trefwoorden</label>
+        </div>
+        <div class="field-body">
+          <TrefwoordenSelector/>
+        </div>
+      </div>
+
     </div> <!-- lom1_section_block -->
 
   </div>
@@ -119,13 +138,17 @@
 <script>
   import TalenSelector from './TalenSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
+  import VakkenSelector from './VakkenSelector.vue'
+  import TrefwoordenSelector from './TrefwoordenSelector.vue'
   import CollapseIcon from './CollapseIcon.vue'
 
   export default {
-    name: 'LomSectionOne',
+    name: 'LomSection',
     components: {
       TalenSelector,
       ThemaSelector,
+      VakkenSelector,
+      TrefwoordenSelector,
       CollapseIcon
     },
     data () {

@@ -14,3 +14,10 @@
 #pid {
   display: none;
 }
+
+#save_button {
+  position: fixed;
+  bottom: 20px;
+  right: 15%;
+
+}

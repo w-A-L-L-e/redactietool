@@ -5,8 +5,12 @@
       role="img" class="md hydrated" aria-label="chevron down circle outline"></ion-icon>
     </span>
     <span v-bind:class="[minimized ? 'icon-unfolded' : 'icon-folded']">
-      <ion-icon name="chevron-forward-circle-outline" 
-      role="img" class="md hydrated" aria-label="chevron forward circle outline"></ion-icon>
+      <ion-icon 
+        name="chevron-forward-circle-outline" 
+        role="img" class="md hydrated" 
+        aria-label="chevron forward circle outline"
+      >
+      </ion-icon>
     </span>
   </div>
 </template>

@@ -1,3 +1,5 @@
+
+<!-- keeping this as example for future ref, we can do inhoud etc later on also this way... -->
 <template>
   <div class="lom2_section_wrapper">
 

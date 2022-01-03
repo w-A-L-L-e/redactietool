@@ -19,9 +19,6 @@
   // var default_value = [{ name: 'Nederlands', code: 'nl' }, { name: 'Frans', code: 'fr' } ]  
   var default_value = []  
 
-  var pid = document.getElementById("pid").innerText;
-  console.log("vue component received pid=", pid );
-
   export default {
     name: 'TalenSelector',
     components: {

@@ -8,7 +8,6 @@
     track-by="title" 
     :options="options" 
     :option-height="104" 
-    :custom-label="customLabel" 
     :show-labels="false"
     :multiple="true"
     :taggable="true" @tag="addThema" @input="updateValue"
