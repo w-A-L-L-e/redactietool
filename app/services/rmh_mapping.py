@@ -179,6 +179,7 @@ class RmhMapping:
         # https://github.com/viaacode/skos-scripts-redactietool
 
         # debug data for in logs:
-        print("DEBUG: mediahaven json_data:\n", mam_data)
+        print("DEBUG: mediahaven json_data:\n")
+        print(json.dumps(mam_data, indent=2))
 
         return self.form_params(token, pid, department, errors, mam_data)
