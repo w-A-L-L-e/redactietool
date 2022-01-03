@@ -1,0 +1,233 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 751,
+  "fragmentDurationFrames": 751,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:00:30.040",
+  "fragmentDurationTimeCode": "00:00:30.040",
+  "mediaObjectId": "b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46",
+  "fragmentId": "b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46ad4d5bdb0587488db0a4bafd87772fe2",
+  "externalId": "qst14tk502",
+  "title": "11de Oost-Vlaams Economisch Forum deel 1",
+  "description": "Fotomontage van het 11de Oost-Vlaams Economisch Forum op 22 juni 2010",
+  "date": "2021:10:07 15:41:51",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46/keyframes/b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46ad4d5bdb0587488db0a4bafd87772fe2.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46/keyframes-thumb/b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46ad4d5bdb0587488db0a4bafd87772fe2.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/b6b4040da11e44838c463f3ba7b83a0d17672f33294f4fdc88b23a6a95187d46/browse.mp4",
+  "originalFileName": "qst14tk502.mp4",
+  "width": 0,
+  "height": 0,
+  "keywords": [],
+  "type": "Video",
+  "authors": [],
+  "lastModifiedDate": "2021-12-08T10:03:06Z",
+  "archiveDate": "2021-10-07T13:41:52Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "s3",
+  "mdProperties": [
+    {
+      "value": [
+        {
+          "value": "qsg15t846m",
+          "attribute": "is_versie_van",
+          "dottedKey": null
+        },
+        {
+          "value": "qsg15t846m",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "AV0487.mkv",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        },
+        {
+          "value": "120",
+          "attribute": "archiefvormer_nummer",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Andr\u00e9 Denys",
+          "attribute": "Archiefvormer",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_creators",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "22/06/2010",
+          "attribute": "tijd",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_coverages",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-g44hq0v",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "AV0487.mkv",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "Fotomontage van het 11de Oost-Vlaams Economisch Forum op 22 juni 2010",
+      "attribute": "dc_description",
+      "dottedKey": null
+    },
+    {
+      "value": "or-h41jm1d",
+      "attribute": "s3_bucket",
+      "dottedKey": null
+    },
+    {
+      "value": "s3-qas.viaa.be",
+      "attribute": "s3_domain",
+      "dottedKey": null
+    },
+    {
+      "value": "2021:10:07 15:41:51",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "n/a",
+      "attribute": "ie_type",
+      "dottedKey": null
+    },
+    {
+      "value": "file",
+      "attribute": "object_level",
+      "dottedKey": null
+    },
+    {
+      "value": "avo-exporter+or-h41jm1d",
+      "attribute": "s3_object_owner",
+      "dottedKey": null
+    },
+    {
+      "value": "borndigital",
+      "attribute": "sp_name",
+      "dottedKey": null
+    },
+    {
+      "value": "2010-06-22",
+      "attribute": "dcterms_created",
+      "dottedKey": null
+    },
+    {
+      "value": "11de Oost-Vlaams Economisch Forum deel 1",
+      "attribute": "dc_title",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "qst14tk502",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "archive_master",
+      "attribute": "object_use",
+      "dottedKey": null
+    },
+    {
+      "value": "Liberas",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "qsg15t846m.mp4",
+      "attribute": "s3_object_key",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "AV0487",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "SoundHandler",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+
