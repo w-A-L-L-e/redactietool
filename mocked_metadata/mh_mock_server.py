@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, send_from_directory
 from flask import url_for
 
+import sys
+import csv
+import json
+
 app = Flask(__name__,
             static_url_path='', 
             static_folder='items',
@@ -32,6 +36,33 @@ def send_json_file():
 
     # return send_from_directory('items', json_file, as_attachment=True) 
     return send_from_directory('items', json_file) 
+
+@app.route('/themas')
+def themas_json():
+    
+    csvfile = open('themas/themas_grid_view.csv', 'r')
+    reader = csv.reader(csvfile)
+    themas = []
+    rowcount = 0
+    for row in reader:
+        rowcount+=1
+        if rowcount>1:
+            title = row[0]
+            desc = row[1]
+            thema = {
+                'thema': title,
+                'beschrijving': desc
+            }
+            themas.append(thema)
+
+    return json.dumps(themas)
+
+@app.route('/vakken')
+def vakken_json():
+    data = open('themas/vakkenlijst_grid_view.csv', 'r').read()
+    print("vakken=", data)
+
+
 
 @app.route('/')
 def home():
