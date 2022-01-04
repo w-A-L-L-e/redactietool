@@ -1,16 +1,17 @@
-@prefix graad: <https://data.meemoo.be/terms/ond/graad#> .
-@prefix niveau: <https://data.meemoo.be/terms/ond/niveau#> .
-@prefix ond: <https://data.meemoo.be/terms/ond/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix thema: <https://data.meemoo.be/terms/ond/thema#> .
-@prefix vak: <https://data.meemoo.be/terms/ond/vak#> .
+
+@prefix ond: <https://data.meemoo.be/term/onderwijs/> .
+@prefix graad: <https://data.meemoo.be/term/onderwijs/graad#> .
+@prefix niveau: <https://data.meemoo.be/term/onderwijs/niveau#> .
+@prefix thema: <https://data.meemoo.be/term/onderwijs/thema#> .
+@prefix vak: <https://data.meemoo.be/term/onderwijs/vak#> .
 
 ond:vak a skos:ConceptScheme;
-skos:hasTopConcept vak:nederlands.
+    skos:hasTopConcept vak:nederlands.
 
-ond:themas a skos:ConceptScheme;
-skos:hasTopConcept thema:nederlandse-taal.
+ond:thema a skos:ConceptScheme;
+    skos:hasTopConcept thema:nederlandse-taal.
 
 ond:structuur a skos:ConceptScheme.
 
@@ -30,7 +31,7 @@ vak:nederlands a skos:Concept ;
 
 thema:nederlandse-taal a skos:Concept ;
     skos:definition "Taalkunde, exclusief literatuur, voor de Nederlandse taal"@nl ;
-    skos:inScheme ond:themas ;
+    skos:inScheme ond:thema ;
     skos:prefLabel "Nederlandse taal"@nl ;
     skos:related vak:nederlands;
     skos:topConceptOf ond:themas .
