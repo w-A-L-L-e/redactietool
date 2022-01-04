@@ -1,0 +1,150 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 2300,
+  "fragmentDurationFrames": 2300,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:01:32.000",
+  "fragmentDurationTimeCode": "00:01:32.000",
+  "mediaObjectId": "368f8ce07fa64103bf9224348bbfb7c7a3ec86f36c5a486ca73ea4d16d13347b",
+  "fragmentId": "368f8ce07fa64103bf9224348bbfb7c7a3ec86f36c5a486ca73ea4d16d13347bc65873dda0e3486e9fea1ab6ebc295d6",
+  "externalId": "qswd3px267",
+  "title": "Essence: pid: qswd3px267",
+  "description": "Main fragment for essence:\n    - filename: qsk35mb543.mp3\n    - CP: testbeeld",
+  "date": "2022:01:04 16:02:59",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/368f8ce07fa64103bf9224348bbfb7c7a3ec86f36c5a486ca73ea4d16d13347b/keyframes/keyframes_1_1/keyframe1.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/368f8ce07fa64103bf9224348bbfb7c7a3ec86f36c5a486ca73ea4d16d13347b/keyframes-thumb/keyframes_1_1/keyframe1.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/368f8ce07fa64103bf9224348bbfb7c7a3ec86f36c5a486ca73ea4d16d13347b/browse.mp3",
+  "originalFileName": "qswd3px267.mp3",
+  "width": 320,
+  "height": 180,
+  "keywords": [],
+  "type": "Audio",
+  "authors": [],
+  "lastModifiedDate": "2022-01-04T15:03:34Z",
+  "archiveDate": "2022-01-04T15:03:00Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "s3",
+  "mdProperties": [
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": "qsk35mb543.mp3",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "qswd3px267",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "or-h41jm1d",
+      "attribute": "s3_bucket",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "archive_master",
+      "attribute": "object_use",
+      "dottedKey": null
+    },
+    {
+      "value": "s3-qas.viaa.be",
+      "attribute": "s3_domain",
+      "dottedKey": null
+    },
+    {
+      "value": "2022:01:04 16:02:59",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "qsk35mb543.mp3",
+      "attribute": "s3_object_key",
+      "dottedKey": null
+    },
+    {
+      "value": "n/a",
+      "attribute": "ie_type",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "\u00a9 testbeeld",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "0855378e64d4e71894a2cc6d8b8c1e62",
+      "attribute": "md5_viaa",
+      "dottedKey": null
+    },
+    {
+      "value": "file",
+      "attribute": "object_level",
+      "dottedKey": null
+    },
+    {
+      "value": "avo-exporter+or-h41jm1d",
+      "attribute": "s3_object_owner",
+      "dottedKey": null
+    },
+    {
+      "value": "s3",
+      "attribute": "sp_name",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+
+
