@@ -38,7 +38,7 @@ class User(UserMixin):
             self.name = dt.get('cn')
 
         except jwt.exceptions.DecodeError:
-            self.name = "Debug Login (dec error)"
+            self.name = "Developer Login"
         except jwt.exceptions.ExpiredSignatureError:
             self.name = "JWT Session Expired"
         except jwt.exceptions.InvalidAudienceError:
