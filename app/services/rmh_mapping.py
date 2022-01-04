@@ -64,6 +64,7 @@ class RmhMapping:
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
+            'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
             'title': mam_data.get('title'),
             'ontsluitingstitel': get_property(mam_data, 'dc_title'),
