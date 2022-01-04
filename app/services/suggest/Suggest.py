@@ -12,10 +12,9 @@ URI_REGEX = (
     + "._\\+~#?&//=]*)"
 )
 
-OND_NS = "https://data.meemoo.be/terms/ond/"
+OND_NS = "https://data.meemoo.be/term/onderwijs/"
 
 GET_LIST_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
@@ -34,7 +33,6 @@ WHERE {{
 """
 
 GET_COLLECTION_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
@@ -52,7 +50,6 @@ WHERE {{
 """
 
 GET_CHILDREN_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
@@ -70,18 +67,21 @@ WHERE {{
 """
 
 SUGGEST_BY_LABELS_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
+    BIND(URI('{thema_scheme}') AS ?thema_scheme)
+    BIND(URI('{graad_scheme}') AS ?graad_scheme)
+    BIND(URI('{vak_scheme}') AS ?vak_scheme)
+
     ?id a skos:Concept;
     skos:prefLabel ?label;
-    skos:inScheme ond:vak;
+    skos:inScheme ?vak_scheme;
     skos:related ?thema, ?graad.
 
-    ?thema skos:inScheme ond:themas.
-    ond:graad skos:member ?graad.
+    ?thema skos:inScheme ?thema_scheme.
+    ?graad_scheme skos:member ?graad.
 
     OPTIONAL {{
         ?id skos:definition ?definition .
@@ -97,18 +97,21 @@ WHERE {{
 """
 
 SUGGEST_BY_IDS_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
+    BIND(URI('{thema_scheme}') AS ?thema_scheme)
+    BIND(URI('{graad_scheme}') AS ?graad_scheme)
+    BIND(URI('{vak_scheme}') AS ?vak_scheme)
+
     ?id a skos:Concept;
     skos:prefLabel ?label;
-    skos:inScheme ond:vak;
+    skos:inScheme ?vak_scheme;
     skos:related ?thema, ?graad.
 
-    ?thema skos:inScheme ond:themas.
-    ond:graad skos:member ?graad.
+    ?thema skos:inScheme ?thema_scheme.
+    ?graad_scheme skos:member ?graad.
 
     OPTIONAL {{
         ?id skos:definition ?definition .
@@ -121,7 +124,6 @@ WHERE {{
 """
 
 GET_CONCEPT_BY_IDS_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
@@ -138,18 +140,22 @@ WHERE {{
 """
 
 GET_CANDIDATES_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
+PREFIX ond: <{ns}>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
+    BIND(URI('{thema_scheme}') AS ?thema_scheme)
+    BIND(URI('{graad_scheme}') AS ?graad_scheme)
+    BIND(URI('{vak_scheme}') AS ?vak_scheme)
+
     ?id a skos:Concept;
     skos:prefLabel ?label;
-    skos:inScheme ond:vak;
+    skos:inScheme ?vak_scheme;
     skos:related ?thema, ?graad.
 
-    ?thema skos:inScheme ond:themas.
-    ond:graad skos:member ?graad.
+    ?thema skos:inScheme ?thema_scheme.
+    ?graad_scheme skos:member ?graad.
 
     OPTIONAL {{
         ?id skos:definition ?definition .
@@ -163,14 +169,15 @@ WHERE {{
 """
 
 GET_RELATED_VAK_QUERY = """
-PREFIX ond: <https://data.meemoo.be/terms/ond/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
+    BIND(URI('{vak_scheme}') AS ?vak_scheme)
+
     ?id a skos:Concept;
     skos:prefLabel ?label;
-    skos:inScheme ond:vak;
+    skos:inScheme ?vak_scheme;
     skos:related ?concept.
 
     OPTIONAL {{
@@ -266,8 +273,7 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError(
-                "The id {} is not a valid URI.".format(collection))
+            raise ValueError("The id {} is not a valid URI.".format(collection))
 
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res
@@ -290,7 +296,7 @@ class Suggest:
     def get_themas(self):
         """Get list 'themas'."""
 
-        for res in self.get_list(OND_NS + "themas"):
+        for res in self.get_list(OND_NS + "thema"):
             yield res
 
     def get_graden(self):
@@ -312,7 +318,12 @@ class Suggest:
         graden = join_ids(graad)
 
         for res in self.__exec_query(
-            SUGGEST_BY_IDS_QUERY, themas=themas, graden=graden
+            SUGGEST_BY_IDS_QUERY,
+            thema_scheme=OND_NS + "thema",
+            vak_scheme=OND_NS + "vak",
+            graad_scheme=OND_NS + "graad",
+            themas=themas,
+            graden=graden,
         ):
             yield res
 
@@ -324,7 +335,12 @@ class Suggest:
 
         print("running qry=", SUGGEST_BY_LABELS_QUERY)
         for res in self.__exec_query(
-            SUGGEST_BY_LABELS_QUERY, themas=themas, graden=graden
+            SUGGEST_BY_LABELS_QUERY,
+            thema_scheme=OND_NS + "thema",
+            vak_scheme=OND_NS + "vak",
+            graad_scheme=OND_NS + "graad",
+            themas=themas,
+            graden=graden,
         ):
             yield res
 
@@ -335,7 +351,12 @@ class Suggest:
         graden = join_ids(graad)
 
         for res in self.__exec_query(
-            GET_CANDIDATES_QUERY, themas=themas, graden=graden
+            GET_CANDIDATES_QUERY,
+            thema_scheme=OND_NS + "thema",
+            vak_scheme=OND_NS + "vak",
+            graad_scheme=OND_NS + "graad",
+            themas=themas,
+            graden=graden,
         ):
             yield res
 
@@ -344,5 +365,7 @@ class Suggest:
 
         concepts = join_ids(concept)
 
-        for res in self.__exec_query(GET_RELATED_VAK_QUERY, concepts=concepts):
+        for res in self.__exec_query(
+            GET_RELATED_VAK_QUERY, vak_scheme=OND_NS + "vak", concepts=concepts
+        ):
             yield res
