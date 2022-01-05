@@ -206,7 +206,6 @@ function hideTitleInput(input_id){
 }
 
 function hideEmptyTitles(){
-  hideTitleInput("titel_serie");
   hideTitleInput("titel_episode")
   hideTitleInput("titel_aflevering");
   hideTitleInput("titel_alternatief");
@@ -229,7 +228,6 @@ function showTitleInput(input_id){
 }
 
 function showEmptyTitles(){
-  showTitleInput("titel_serie");
   showTitleInput("titel_episode")
   showTitleInput("titel_aflevering");
   showTitleInput("titel_alternatief");
