@@ -366,3 +366,29 @@ input[type=button].spring:hover {
 #prd_publisher_input{
   display: none;
 }
+
+/* make subtitles in algemene metadata more compact */
+h3.subtitle{
+  color: #363636;
+  font-weight: bold;
+  margin-bottom: 7px !important;
+} 
+
+#algemeen_title {
+  margin-top: -26px;
+}
+
+@media screen and (min-width: 768px){
+  h3.subtitle{
+    margin-top: -34px;
+  }
+
+  #algemeen_title {
+    margin-top: -34px;
+  }
+}
+
+.prd-del-btn {
+  margin-top: 4px !important;
+  margin-left: 5px !important;
+}
