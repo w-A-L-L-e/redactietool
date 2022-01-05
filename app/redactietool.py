@@ -374,6 +374,7 @@ def get_upload():
         department=department,
         mam_data=json.dumps(mam_data),
         title=mam_data.get('title'),
+        keyframe=mam_data.get('previewImagePath'),
         description=mam_data.get('description'),
         created=get_property(mam_data, 'CreationDate'),
         archived=get_property(mam_data, 'created_on'),
@@ -416,6 +417,7 @@ def post_upload():
     video_data = json.loads(tp['mam_data'])
     tp['title'] = video_data.get('title')
     tp['description'] = video_data.get('description')
+    tp['keyframe'] = video_data.get('previewImagePath')
     tp['created'] = get_property(video_data, 'CreationDate')
     tp['archived'] = get_property(video_data, 'created_on')
     tp['original_cp'] = get_property(video_data, 'Original_CP')
