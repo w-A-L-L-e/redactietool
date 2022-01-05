@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <!-- 
       TODO: after we receive an image for login screen, request a favicon...
       link rel="icon" href="<%= BASE_URL %>favicon.ico" -->
@@ -16,7 +18,7 @@
 
     <!-- flowplayer styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='flowplayer.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     <script type="text/javascript" src="{{ url_for('static', filename='flowplayer.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='subtitles.min.js') }}"></script>
@@ -27,6 +29,15 @@
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/bundle.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/modal_dialog.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+    <!-- todo make script tag dynamic based on file in static/vue dir -->
+    <link href="{{ url_for('static', filename='vue/css/app.a0114f2a.css') }}" rel="preload" as="style">
+    <link href="{{ url_for('static', filename='vue/css/chunk-vendors.ac5b10c9.css') }}" rel="preload" as="style">
+    <link href="{{ url_for('static', filename='vue/js/app.214cee11.js') }}" rel="preload" as="script">
+    <link href="{{ url_for('static', filename='vue/js/chunk-vendors.fd3d1052.js') }}" rel="preload" as="script">
+    
+    <link href="{{ url_for('static', filename='vue/css/chunk-vendors.ac5b10c9.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vue/css/app.a0114f2a.css') }}" rel="stylesheet">
 
     <title>Redactietool</title>
 </head>
@@ -47,5 +58,15 @@
     </div> 
 
     {% include 'includes/modal_dialog.html' %}
+
+    <!-- todo make script tag dynamic based on file in static/vue dir -->
+    <script 
+      type="text/javascript" 
+      src="{{ url_for('static', filename='vue/js/chunk-vendors.fd3d1052.js') }}">
+    </script>
+    <script 
+      type="text/javascript"
+      src="{{ url_for('static', filename='vue/js/app.214cee11.js') }}">
+    </script>
 </body>
 </html>
