@@ -48,6 +48,8 @@ Metadata bewerken
     <div id="player_container"></div>
 
     <script>
+      // future solution, when testbeeld image server allows this
+      // poster: '{{keyframe}}'+'?nocache='+Date.now()
       flowplayer('#player_container', {
         src: '{{video_url}}',
         token: '{{flowplayer_token}}',
@@ -60,7 +62,13 @@ Metadata bewerken
       Keyframe Aanpassen
     </a>
 
-    
+    <button class="button is-info mt-5" 
+      onclick="console.log('hard refresh images...');window.location.reload(true); return false;" >
+      <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
+      Refresh Keyframe
+    </a>
+
+
 
   </div>
 </div>
