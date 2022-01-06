@@ -88,6 +88,7 @@ debug:
 precompile_assets:
 	git rev-parse --short HEAD > app/templates/includes/git_short_sha.html
 	cd frontend && ./deploy_to_flask.sh
+	git add app/static/vue
 
 
 .PHONY: preview
