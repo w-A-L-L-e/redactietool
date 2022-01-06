@@ -392,3 +392,8 @@ h3.subtitle{
   margin-top: 4px !important;
   margin-left: 5px !important;
 }
+
+/* temp hack/workaround */
+#keyframe_image {
+  display:none;
+}

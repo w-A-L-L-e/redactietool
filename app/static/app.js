@@ -295,6 +295,30 @@ function addUnloadHooks(){
   // making our js dependencies around 86k larger.
 }
 
+function refreshKeyframeImage(img_id){
+  // this is a temporary dirty hack/workarond
+  var img = document.getElementById(img_id);
+  if(img){
+    console.log('hard refresh keyframe poster image...');
+
+    var newImage = new Image();
+    newImage.src = img.src;
+    img.src = img.src+'breaker';
+
+    setTimeout(function(){
+      img.src = img.src; // trick browser into reload
+      window.location.reload(true)
+    },500);
+
+    // preload next image with cache breaker
+    // newImage.src = img.src+"?nocache=" + new Date().getTime();
+    // -> this does not work, a workaround is passing the image through
+    // a custom route in flask (backend reloads image and does a passthrough)
+    // with some headers etc.
+    // -> however charlotte is asking Herwig if we can't just fix it on the viaa server
+    // of testbeeld instead...
+  }
+}
 
 // =========================== DOCUMENT READY EVENT ============================
 // document on-ready handler, similar to bulma.io docs, adapted and customized

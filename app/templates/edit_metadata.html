@@ -55,6 +55,7 @@ Metadata bewerken
         poster: '{{keyframe}}'
       })
     </script>
+    
 
     {% if item_type != 'Audio' %}
       <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
@@ -62,8 +63,9 @@ Metadata bewerken
         Keyframe Aanpassen
       </a>
 
+      <img src="{{keyframe}}" id="keyframe_image" width="100px"/>
       <button class="button is-info mt-5" 
-        onclick="console.log('hard refresh images...');window.location.reload(true); return false;" >
+        onclick="refreshKeyframeImage('keyframe_image'); return false;" >
         <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
         Refresh Keyframe
       </a>
