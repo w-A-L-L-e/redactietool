@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- 
-      TODO: after we receive an image for login screen, request a favicon...
-      link rel="icon" href="<%= BASE_URL %>favicon.ico" -->
+      link rel="icon" href="<%= BASE_URL %>favicon.ico" 
+    -->
 
     <!-- bulma css framework -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.css') }}">
@@ -30,22 +30,14 @@
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/modal_dialog.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 
-    <!-- todo make script tag dynamic based on file in static/vue dir -->
-    <link href="{{ url_for('static', filename='vue/css/app.a0114f2a.css') }}" rel="preload" as="style">
-    <link href="{{ url_for('static', filename='vue/css/chunk-vendors.ac5b10c9.css') }}" rel="preload" as="style">
-    <link href="{{ url_for('static', filename='vue/js/app.214cee11.js') }}" rel="preload" as="script">
-    <link href="{{ url_for('static', filename='vue/js/chunk-vendors.fd3d1052.js') }}" rel="preload" as="script">
-    
-    <link href="{{ url_for('static', filename='vue/css/chunk-vendors.ac5b10c9.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vue/css/app.a0114f2a.css') }}" rel="stylesheet">
+    {% include 'includes/base_vue_header.html' %}
 
     <title>Redactietool</title>
-</head>
+  </head>
 
-<body>
+  <body>
     {% include 'includes/menu.html' %}
     
-
     <div class="container main pl-3 pr-3">
       <header>
         {% block header %}{% endblock %}
@@ -59,14 +51,7 @@
 
     {% include 'includes/modal_dialog.html' %}
 
-    <!-- todo make script tag dynamic based on file in static/vue dir -->
-    <script 
-      type="text/javascript" 
-      src="{{ url_for('static', filename='vue/js/chunk-vendors.fd3d1052.js') }}">
-    </script>
-    <script 
-      type="text/javascript"
-      src="{{ url_for('static', filename='vue/js/app.214cee11.js') }}">
-    </script>
-</body>
+    {% include 'includes/base_vue_body.html' %} 
+  </body>
+
 </html>

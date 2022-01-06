@@ -59,7 +59,7 @@
                <hr class="navbar-divider mt-2">
                <div class="navbar-item is-pulled-right">
                  <ion-icon name="create-outline" class="mr-1"></ion-icon>
-                 Redactietool v0.9.2 beta
+                 {% include 'includes/version.html' %}
                </div>
              </div>
           </div>
@@ -67,7 +67,7 @@
 
 
       <!-- saml login -->
-      {% if paint_logout %}
+      {% if paint_logout and not token %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
                 {% if attributes and attributes['cn'] %}

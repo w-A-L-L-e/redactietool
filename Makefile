@@ -19,7 +19,7 @@ help:
 	@echo "  dockerrun             run docker image and serve web application in docker"
 	@echo "                        (normally only needed if there are deploy issues)"
 	@echo "  preview               Preview changed assets before copying into flask"
-	@echo "  precompile_assets     re-compile bulma core.css, overrides.css and "
+	@echo "  precompile_assets     re-compile vue components and inject into flask"
 	@echo "                        place into flask application assets folder"
 	@echo ""
 
@@ -43,7 +43,7 @@ clean:
 .PHONY: lint
 lint:
 	@. python_env/bin/activate; \
-	flake8 --max-line-length=120 --exclude=.git,python_env,__pycache__,bulma_customization
+	flake8 --max-line-length=120 --exclude=.git,python_env,__pycache__,frontend
 
 
 .PHONY: format
@@ -86,21 +86,23 @@ debug:
 
 .PHONY: precompile_assets 
 precompile_assets:
-	cd bulma_customization && ./push_to_flask.sh
+	git rev-parse --short HEAD > app/templates/includes/git_short_sha.html
+	cd frontend && ./deploy_to_flask.sh
+
 
 .PHONY: preview
 preview:
-	cd bulma_customization && ./preview_customization.sh
+	cd frontend && ./preview_customization.sh
 
 .PHONY: status
 status:
-	open bulma_customization/dirty_forms_poc/wireframes_vs_implemented.html
+	open frontend/dirty_forms_poc/wireframes_vs_implemented.html
 
 .PHONY: dirty_forms
 dirty_forms:
-	open bulma_customization/dirty_forms_poc/index.html
+	open frontend/dirty_forms_poc/index.html
 
 .PHONY: richtext_demo
 richtext_demo:
-	open bulma_customization/richtext_poc/index.html
+	open frontend/richtext_poc/index.html
 
