@@ -15,8 +15,19 @@
 <script>
   import Multiselect from 'vue-multiselect'
 
-  //example of default value filled in voor trefwoorden in metadata:
-  var default_value = [{ name: 'Trefwoord 1', code: 'trefwoord1' }]
+  var default_value = [];
+  var keyword_div = document.getElementById("keywords");
+  if(keyword_div){
+    var keywords = JSON.parse(keyword_div.innerText);
+    for(var k in keywords){
+      var keyword = keywords[k]
+      var val = {
+        'name': keyword['value'],
+        'code': keyword['value']
+      }
+      default_value.push(val);
+    }
+  }
 
   export default {
     name: 'VakkenSelector',
@@ -28,11 +39,11 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'Trefwoord 1', code: 'vak1' },
-          { name: 'Trefwoord 2', code: 'vak2' },
-          { name: 'Trefwoord 3', code: 'vak3' },
-          { name: 'Trefwoord 4', code: 'vak4' },
-          { name: 'Trefwoord 5', code: 'vak5' },
+          { name: 'reportage', code: 'reportage' },
+          { name: 'Silent Movie', code: 'Silent Movie' },
+          { name: 'Belgium', code: 'Belgium' },
+          { name: 'France', code: 'France' },
+          { name: 'Spain', code: 'Spain' },
           // TODO: populate this using a div in the flask view coming from 
           // our suggest library (aka knowledge graph).
         ]

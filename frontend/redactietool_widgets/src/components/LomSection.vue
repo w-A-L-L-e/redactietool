@@ -154,8 +154,11 @@
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
   import CollapseIcon from './CollapseIcon.vue'
 
-  var pid = document.getElementById("pid").innerText;
-  console.log("vue component received pid=", pid );
+  var pid_div = document.getElementById("pid");
+  if(pid_div){
+    var pid = pid_div.innerText;
+    console.log("LomSection for pid=", pid );
+  }
 
   export default {
     name: 'LomSection',
@@ -183,8 +186,8 @@
 
 <style>
   .lom1_section_wrapper {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 60px;
+    margin-bottom: 30px;
   }
 
   hr {

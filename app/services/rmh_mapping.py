@@ -63,6 +63,7 @@ class RmhMapping:
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
+            'keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
