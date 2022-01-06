@@ -35,6 +35,10 @@
 
     <!-- Include the Quill library v1.3.6-->
     <script src="quill.js"></script>
+
+    <!-- in case we want markup instead -->
+    <script src="turndown.js"></script>
+
   </head>
   <body>
 
@@ -47,15 +51,14 @@
       <div id="redactietool-richtext-editor">
         <h1>Proof of concept richtext editor</h1>
 
-        <p> Samen met Miel bekeken of de output wel clean genoeg is. 
-        TODO: eerste probleem dat we al zien is wel dat we de paste events ook moeten gaan opvangen.
-        Dit om ervoor te zorgen dat ze enkel plain text kunnen pasten en niet iets met markdown uit een word document ofzo...</p>
+        <p>Eerste paragraaf</p>
 
         <p>
-        Goede aan <a href="https://quilljs.com/docs/quickstart/">quill editor</a> is dat de 
-        output nog redelijk clean blijft. <b>Verder ook voor zekerheid en security moeten we dan server side (in backend) ook de html parsen en rejecten
-          als er tags in zitten die we niet willen opslaan in Mediahaven...</b>
+          De <a href="https://quilljs.com/docs/quickstart/">quill editor</a> geeft vrij propere output.
         </p>
+        <p>En met turndown npm library kunnen we ook opteren om er toch markdown van te maken (maar nog niet zeker of de reverse operatie daarmee werkt...)
+        maar als poc kunnen we dus ook dat tonen...</p>
+
         <p>That's all folks!</p>
 
       </div>
@@ -64,9 +67,59 @@
       Editor output: <br/>
       <textarea id="onderwijs_beschrijving" rows="15" cols="70">
       </textarea>
+
+      <br/><br/>
+      Editor markdown output: <br/>
+      <textarea id="onderwijs_markdown" rows="15" cols="70">
+      </textarea>
+
+
+
+      <p>
+      So hooray we're done and can plug this straight into our metadata edit form. ... Euhm no, far from it.
+      This is dangerous as hell. Not convinced? Read this and then you realize the implications of putting this into our metadata:
+
+      <br/>
+      <br/>
+      Check out this puppy:
+      <a href="https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)">XSS vulnerability in markdown</a>
+      <br/>
+      And this one too: <a href="https://www.codeproject.com/Articles/134024/HTML-and-JavaScript-Injection">javascript injection dangers</a>
+      </p>
+      <p>
+      The same applies to html content and our mileage may vary on what we can allow/do here to mitigate it.
+      Most likely a select few of whitelisted html tags and fully parsing + sanitizing on the backend is a must here...
+      Just doing a simple regexp filter of &lt; and &gt; is something to consider but even that can be circumvented if not careful:<br/>
+      </p>
+      <p>
+      So yes, doing this has a lot of implications and I've seen countless sites that just wing it, add the feature and later realize the can of worms they've just opened:<br/>
+      <a href="https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html">XSS attack vectors</a>
+      </p>
+
     </div>
 
 <script>
+  function richtext_changed(){
+    var editor_div = document.getElementById("redactietool-richtext-editor");
+    if(editor_div){
+      var html_content = editor_div.firstChild.innerHTML
+      console.log("\neditor content:\n", html_content);
+      
+      var editor_form_target = document.getElementById("onderwijs_beschrijving");
+      if(editor_form_target){
+        editor_form_target.value = html_content;
+      }
+
+      var markdown_target = document.getElementById("onderwijs_markdown");
+      if(markdown_target){
+        var markdown = turndownService.turndown(html_content);
+        markdown_target.value = markdown;
+      }
+    }
+  }
+
+
+  var turndownService = new TurndownService();
   var quill = new Quill('#redactietool-richtext-editor', {
     modules: {
       toolbar: [
@@ -92,16 +145,13 @@
     //  console.log("TEXT=", plaintext);
     //  console.log("CONTENT=", contents);
 
-    var editor_div = document.getElementById("redactietool-richtext-editor");
-    if(editor_div){
-      var html_content = editor_div.firstChild.innerHTML
-      console.log("\neditor content:\n", html_content);
-      var editor_form_target = document.getElementById("onderwijs_beschrijving");
-      if(editor_form_target){
-        editor_form_target.value = html_content;
-      }
-    }
+    richtext_changed(); 
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+      richtext_changed();
+  });
+
 </script>
 
   </body>
