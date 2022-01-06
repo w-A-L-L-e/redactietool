@@ -97,6 +97,7 @@ class RmhMapping:
             'archived': get_property(mam_data, 'created_on'),
             'keyframe_edit_url': keyframe_edit_url,
             # for v2 mam_data['Internal']['PathToVideo']
+            'item_type': mam_data.get('type'),
             'video_url': mam_data.get('videoPath'),
             'flowplayer_token': os.environ.get(
                 'FLOWPLAYER_TOKEN', 'set_in_secrets'

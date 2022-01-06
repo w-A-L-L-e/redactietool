@@ -56,16 +56,18 @@ Metadata bewerken
       })
     </script>
 
-    <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
-      <ion-icon name="key-outline" class="pr-3"></ion-icon>
-      Keyframe Aanpassen
-    </a>
+    {% if item_type != 'Audio' %}
+      <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
+        <ion-icon name="key-outline" class="pr-3"></ion-icon>
+        Keyframe Aanpassen
+      </a>
 
-    <button class="button is-info mt-5" 
-      onclick="console.log('hard refresh images...');window.location.reload(true); return false;" >
-      <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
-      Refresh Keyframe
-    </a>
+      <button class="button is-info mt-5" 
+        onclick="console.log('hard refresh images...');window.location.reload(true); return false;" >
+        <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
+        Refresh Keyframe
+      </a>
+    {% endif %}
 
   </div>
 </div>
