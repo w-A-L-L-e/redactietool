@@ -184,7 +184,7 @@
 <style>
   .lom1_section_wrapper {
     margin-top: 40px;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
   }
 
   hr {
