@@ -45,7 +45,7 @@
 
 
       <!-- legacy login -->
-      {% if token %}
+      {% if token and not paint_logout %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
                 {{ current_user.name | default('Voornaam Achternaam', true) }}
@@ -76,14 +76,14 @@
              </a>
              <div class="navbar-dropdown is-right">
                <a class="navbar-item button is-info ml-2 mr-2"
-                   href="/">
+                   href="/?slo">
                    Logout
                  </a>
 
                <hr class="navbar-divider mt-2">
                <div class="navbar-item is-pulled-right">
                  <ion-icon name="create-outline" class="mr-1"></ion-icon>
-                 Redactietool v0.9.5 beta
+                 {% include 'includes/version.html' %}
                </div>
              </div>
           </div>

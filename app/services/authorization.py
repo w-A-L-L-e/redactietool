@@ -14,7 +14,7 @@ import jwt
 import base64
 
 from functools import wraps
-from flask import request, abort, jsonify
+from flask import request, abort, jsonify, session
 from flask import current_app
 
 
@@ -110,7 +110,8 @@ def requires_authorization(f):
             jwt_token = request.form.get('token')
 
         if not jwt_token or not verify_token(jwt_token):
-            abort(401, jsonify(message='invalid jwt token'))
+            if not session.get('samlUserData') or not session.get('samlUserData').get('cn'):
+                abort(401, jsonify(message='invalid jwt token'))
 
         return f(*args, **kwargs)
     return decorated

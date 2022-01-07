@@ -91,19 +91,15 @@ def load_user_from_request(request):
 
 @app.route('/legacy_login', methods=['GET'])
 def legacy_login():
-    logger.info(
-        "configuration = ", dictionary={
-            'environment': flask_environment()
-        })
+    # logger.info(
+    #     "configuration = ", dictionary={
+    #         'environment': flask_environment()
+    #     })
     return render_template('legacy_login.html')
 
 
 @app.route('/legacy_login', methods=['POST'])
 def login():
-    # TODO: soon use this with saml
-    # user = User()
-    # login_user(user) # todo import login_manager here and wire up with SAML
-
     if app.config['DEBUG'] is True and not app.config['TESTING']:
         print('DISABLE login check FOR CSS RESTYLE')
         return redirect(
@@ -163,14 +159,12 @@ def index():
 
     if 'sso' in request.args:
         print("in SSO args=", request.args)
-        print("redirect url=", auth.login())
-        # return redirect(auth.login()) #disabled for debugging
-        print("DEBUG mode: for now redirecting to search_media now...")
-        return redirect(url_for('.search_media', token='saml_debug'))
-        # If AuthNRequest ID need to be stored in order to later validate it, do instead
-        # sso_built_url = auth.login()
-        # request.session['AuthNRequestID'] = auth.get_last_request_id()
-        # return redirect(sso_built_url)
+        # return redirect(url_for('.search_media'))
+        # If AuthNRequest ID need to be stored in
+        # order to later validate it, do instead
+        sso_built_url = auth.login()
+        session['AuthNRequestID'] = auth.get_last_request_id()
+        return redirect(sso_built_url)
     elif 'sso2' in request.args:
         return_to = '%sattrs/' % request.host_url
         print("in SSO2 return_to url=", return_to)
@@ -211,6 +205,8 @@ def index():
                 del session['AuthNRequestID']
             session['samlUserdata'] = auth.get_attributes()
             print('user data=', session['samlUserdata'])
+            session['saml_user_name'] = auth.get_attributes()['cn']
+            print('user name=', session['saml_user_name'])
             session['samlNameId'] = auth.get_nameid()
             session['samlNameIdFormat'] = auth.get_nameid_format()
             session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
@@ -220,7 +216,12 @@ def index():
             if 'RelayState' in request.form and self_url != request.form['RelayState']:
                 # To avoid 'Open Redirect' attacks, before execute the redirection confirm
                 # the value of the request.form['RelayState'] is a trusted URL.
-                return redirect(auth.redirect_to(request.form['RelayState']))
+                return redirect(
+                    auth.redirect_to(
+                        # request.form['RelayState']
+                        '/search_media'
+                    )
+                )
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif 'sls' in request.args:

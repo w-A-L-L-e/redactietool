@@ -21,12 +21,18 @@ Login
 <!--
 DEBUG template params (not for release, just for extra security checking): <br/>
 <pre>
-{{ errors }}
-{{ error_reason }}
-{{ not_auth_warn }}
-{{ success_slo }}
-{{ attributes }}
-{{ paint_logout }}
+errors: {{ errors }}
+error_reason: {{ error_reason }}
+not_authenticated: {{ not_auth_warn }}
+success_slo: {{ success_slo }}
+saml attributes: {{ attributes }}
+paint_logout: {{ paint_logout }}
+{% if session['samlUserdata'] %}
+username: {{ session['samlUserdata']['cn'] }}
+{% else %}
+NOT LOGGED IN OR EMPTY SESSION!
+{% endif %}
+
 </pre>
 -->
 

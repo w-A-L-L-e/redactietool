@@ -272,7 +272,8 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError("The id {} is not a valid URI.".format(collection))
+            raise ValueError(
+                "The id {} is not a valid URI.".format(collection))
 
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res
