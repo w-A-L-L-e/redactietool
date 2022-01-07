@@ -19,16 +19,8 @@ Login
 {% endif %}
 
 <!--
-DEBUG template params (not for release, just for extra security checking): <br/>
-<pre>
-errors: {{ errors }}
-error_reason: {{ error_reason }}
-not_authenticated: {{ not_auth_warn }}
-success_slo: {{ success_slo }}
-saml attributes: {{ attributes }}
-paint_logout: {{ paint_logout }}
 {% if session['samlUserdata'] %}
-username: {{ session['samlUserdata']['cn'] }}
+username: {{ session['samlUserdata']['cn'][0] }}
 {% else %}
 NOT LOGGED IN OR EMPTY SESSION!
 {% endif %}
