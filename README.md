@@ -247,24 +247,15 @@ cacheable modules 79 bytes (javascript) 169 KiB (css/mini-extract)
 webpack 5.64.1 compiled successfully in 1236 ms
 updating flask core css and overrides...
 all done.
+```
 
 
 ### Developing on the Vue.js components/widgets for the metadata form
 
-To easily work on the frontend there's now a new makefile command
-
+To easily work on the frontend there's now a new makefile command:
 
 ```
 $ make vue_develop
- DONE  Compiled successfully in 2033ms                                         12:13:56 PM
-
-
-  App running at:
-  - Local:   http://localhost:8081/
-  - Network: http://10.10.3.252:8081/
-
-  Note that the development build is not optimized.
-  To create a production build, run npm run build.
 ```
 
 Then you just open a browser to port http://localhost:8081 and whenever you edit something in
@@ -277,18 +268,18 @@ makefile command:
 ```
 $ make precompile_assets
 
- DONE  Compiled successfully in 2790ms                                                                                                                                    12:15:27 PM
+ DONE  Compiled successfully in 2790ms
 
-  File                                   Size                                                                 Gzipped
+  File                                   Size                Gzipped
 
-  dist/js/chunk-vendors.fd3d1052.js      138.53 KiB                                                           46.88 KiB
-  dist/js/app.e883cd90.js                18.34 KiB                                                            4.84 KiB
-  dist/modal_dialog.js                   2.06 KiB                                                             0.67 KiB
-  dist/bundle.js                         0.34 KiB                                                             0.24 KiB
-  dist/mystyles.css                      188.28 KiB                                                           25.40 KiB
-  dist/css/chunk-vendors.ac5b10c9.css    7.29 KiB                                                             1.71 KiB
-  dist/css/app.a5090ff4.css              1.23 KiB                                                             0.45 KiB
-  dist/overrides.css                     0.22 KiB                                                             0.16 KiB
+  dist/js/chunk-vendors.fd3d1052.js      138.53 KiB          46.88 KiB
+  dist/js/app.e883cd90.js                18.34 KiB           4.84 KiB
+  dist/modal_dialog.js                   2.06 KiB            0.67 KiB
+  dist/bundle.js                         0.34 KiB            0.24 KiB
+  dist/mystyles.css                      188.28 KiB          25.40 KiB
+  dist/css/chunk-vendors.ac5b10c9.css    7.29 KiB            1.71 KiB
+  dist/css/app.a5090ff4.css              1.23 KiB            0.45 KiB
+  dist/overrides.css                     0.22 KiB            0.16 KiB
 
   Images and other types of assets omitted.
 
