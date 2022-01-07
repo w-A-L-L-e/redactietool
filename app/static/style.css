@@ -227,13 +227,6 @@ hr {
   display: none;
 }
 
-@media screen and (min-width: 768px) {
-  .label-two-lines {
-    margin-top: -10px;
-    margin-bottom: -5px;
-  }
-}
-
 /* make it more visible what controls are readonly */
 .input[readonly], .textarea[readonly] {
     box-shadow: none;

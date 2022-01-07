@@ -68,9 +68,7 @@
             desc: 'Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ...',
             id: 'culturele_div'
           },
-          { title: 'Thema 4', desc: 'Dit is de beschrijving voor thema 4', id: 'thema4' },
-          { title: 'Thema 5', desc: 'Dit is de beschrijving voor thema 5', id: 'thema5'  },
-          { title: 'Thema 6', desc: 'Dit is de beschrijving voor thema 6', id: 'thema6'  },
+          
         ]
       }
     },

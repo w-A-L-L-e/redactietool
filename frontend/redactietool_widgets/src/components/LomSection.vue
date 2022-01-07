@@ -28,23 +28,7 @@
           <label class="label label-two-lines">Beoogde eindgebruiker</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_beoogde_eindgebruiker" id="lom1_beoogde_eindgebruiker">
-              <option value="Docent">Docent</option>
-              <option value="Student">Student</option>
-              <option value="Directie">Directie</option>
-              <option value="ICT-coördinator">ICT-coördinator</option>
-              <option value="Systeembeheerder">Systeembeheerder</option>
-              <option value="Preventieadviseur">Preventieadviseur</option>
-              <option value="GOK">GOK / Zorgcoördinator</option>
-              <option value="Pedagogisch begeleider">Pedagogisch begeleider</option>
-              <option value="Inspectielid">Inspectielid</option>
-              <option value="Administratief personeel">Administratief personeel</option>
-              <option value="Met pensioen">Met pensioen</option>
-              <option value="Ouder">Ouder</option>
-              <option value="Ander">Ander</option>
-            </select>
-          </div>
+          <EindgebruikerSelector/>
         </div>
       </div>
 
@@ -148,6 +132,7 @@
 </template>
 
 <script>
+  import EindgebruikerSelector from './EindgebruikerSelector.vue'
   import TalenSelector from './TalenSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
   import VakkenSelector from './VakkenSelector.vue'
@@ -163,6 +148,7 @@
   export default {
     name: 'LomSection',
     components: {
+      EindgebruikerSelector,
       TalenSelector,
       ThemaSelector,
       VakkenSelector,
@@ -188,6 +174,9 @@
   .lom1_section_wrapper {
     margin-top: 60px;
     margin-bottom: 30px;
+  }
+  .label-two-lines {
+    line-height: 17px;
   }
 
   hr {

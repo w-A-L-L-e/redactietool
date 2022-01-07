@@ -16,7 +16,8 @@
   import Multiselect from 'vue-multiselect'
 
   //example of default value filled in voor vakken in metadata:
-  var default_value = [{ name: 'Vak 1', code: 'vak1' }]
+  // var default_value = [{ name: 'Vak 1', code: 'vak1' }]
+  var default_value = [];
 
   export default {
     name: 'VakkenSelector',
