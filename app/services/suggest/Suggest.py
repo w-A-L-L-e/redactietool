@@ -52,10 +52,10 @@ WHERE {{
 GET_CHILDREN_QUERY = """
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT DISTINCT ?id ?label ?definition
+SELECT DISTINCT ?id ?label ?definition ?parent
 WHERE {{
-    BIND(URI('{concept}') AS ?concept)
-    ?concept skos:narrower ?id.
+    ?parent skos:narrower ?id.
+    FILTER (?parent IN ({concept}))
 
     ?id a skos:Concept;
     skos:prefLabel ?label.
@@ -278,13 +278,12 @@ class Suggest:
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res
 
-    def get_children(self, concept: str):
-        """Get the children of a concept."""
+    def get_children(self, concept: List[str]):
+        """Get the children of a list of concept ids."""
 
-        if not isValidURI(concept):
-            raise ValueError("The id {} is not a valid URI.".format(concept))
+        concepts = join_ids(concept)
 
-        for res in self.__exec_query(GET_CHILDREN_QUERY, concept=concept):
+        for res in self.__exec_query(GET_CHILDREN_QUERY, concept=concepts):
             yield res
 
     def get_vakken(self):
