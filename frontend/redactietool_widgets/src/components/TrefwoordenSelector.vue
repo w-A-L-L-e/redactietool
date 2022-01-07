@@ -16,19 +16,6 @@
   import Multiselect from 'vue-multiselect'
 
   var default_value = [];
-  var keyword_div = document.getElementById("keywords");
-  if(keyword_div){
-    var keywords = JSON.parse(keyword_div.innerText);
-    for(var k in keywords){
-      var keyword = keywords[k]
-      var val = {
-        'name': keyword['value'],
-        'code': keyword['value']
-      }
-      default_value.push(val);
-    }
-  }
-
   export default {
     name: 'VakkenSelector',
     components: {
@@ -44,16 +31,35 @@
           { name: 'Belgium', code: 'Belgium' },
           { name: 'France', code: 'France' },
           { name: 'Spain', code: 'Spain' },
-          // TODO: populate this using a div in the flask view coming from 
-          // our suggest library (aka knowledge graph).
+          // TODO: populate this using a div in jinja or axios call
+          // coming from the suggest library (aka knowledge graph).
         ]
       }
     },
+    created(){
+      var keyword_div = document.getElementById("keywords");
+      if(keyword_div){
+        var keywords = JSON.parse(keyword_div.innerText);
+        for(var k in keywords){
+          var keyword = keywords[k]
+          default_value.push(
+            {
+              'name': keyword['value'],
+              'code': keyword['value']
+            }
+          );
+        }
+      }
+      this.json_value = JSON.stringify(default_value);
+    },
     methods: {
-      addTrefwoord(nieuwTrefwoord) {
+      addTrefwoord(new_keyword) {
+        // instead this should call some suggest lib or other
+        // api to create a new keyword (and show a modal with ok/cancel)
+        console.log("addTrefwoord nieuw woord=", new_keyword);
         const tw = {
-          name: nieuwTrefwoord,
-          code: nieuwTrefwoord.substring(0, 2) + Math.floor((Math.random() * 10000000))
+          name: new_keyword,
+          code: new_keyword.substring(0, 2) + Math.floor((Math.random() * 10000000))
         }
         this.options.push(tw)
         this.value.push(tw)

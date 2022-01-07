@@ -18,9 +18,11 @@ help:
 	@echo "  debug                 start server in debugging mode for auto restarting after code changes etc."
 	@echo "  dockerrun             run docker image and serve web application in docker"
 	@echo "                        (normally only needed if there are deploy issues)"
-	@echo "  preview               Preview changed assets before copying into flask"
-	@echo "  precompile_assets     re-compile vue components and inject into flask"
-	@echo "                        place into flask application assets folder"
+	@echo "  preview_bulma         Preview changed bulma styling before copying into flask"
+	@echo "  precompile_bulma      re-compile bulma with custom styling and injecet into flask app/static folder"
+	@echo "  vue_develop           Start Vue.js frontend server for developing Vue components"
+	@echo "  precompile_assets     re-compile vue components for release and inject into flask app/static folder"
+	@echo "                        "
 	@echo ""
 
 
@@ -84,17 +86,24 @@ debug:
 	@. python_env/bin/activate; \
 	python debug.py
 
+.PHONY: preview_bulma
+preview_bulma:
+	cd frontend/bulma_styling && ./preview_customization.sh
+
+.PHONY: precompile_bulma
+precompile_bulma:
+	cd frontend/bulma_styling && ./push_to_flask.sh
+
+.PHONY: vue_develop
+vue_develop:
+	cd frontend && ./start_vue_development.sh
+
 .PHONY: precompile_assets 
 precompile_assets:
-	git rev-parse --short HEAD > app/templates/includes/git_short_sha.html
 	cd frontend && ./deploy_to_flask.sh
 	git add app/static/vue
 
-
-.PHONY: preview
-preview:
-	cd frontend && ./preview_customization.sh
-
+# these will either be deprecated or integrated in our app soon
 .PHONY: status
 status:
 	open frontend/dirty_forms_poc/wireframes_vs_implemented.html

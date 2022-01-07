@@ -32,6 +32,7 @@ see all available commands:
 
 ```
 $ make
+
 Available make commands:
 
   install               install packages and prepare environment
@@ -44,9 +45,11 @@ Available make commands:
   debug                 start server in debugging mode for auto restarting after code changes etc.
   dockerrun             run docker image and serve web application in docker
                         (normally only needed if there are deploy issues)
-  preview               Preview changed assets before copying into flask
-  precompile_assets     re-compile bulma core.css, overrides.css and 
-                        place into flask application assets folder
+  preview_bulma         Preview changed bulma styling before copying into flask
+  precompile_bulma      re-compile bulma with custom styling and injecet into flask app/static folder
+  vue_develop           Start Vue.js frontend server for developing Vue components
+  precompile_assets     re-compile vue components for release and inject into flask app/static folder
+
 ```
 
 1. Start by running make install which installs the pip packages and sets up the environment.
@@ -223,11 +226,10 @@ This recompiles the bulma sass files with your customized variables and then pla
 flask application static assets folder:
 
 ```
-$ make precompile_assets
-cd bulma_customization && ./push_to_flask.sh
-re-compiling bulma components
+$ make precompile_bulma
+re-compiling bulma components...
 
-> bulma_latest_version@0.9.3 build /Users/wschrep/FreelanceWork/VIAA/redactietool/bulma_customization
+> bulma_latest_version@0.9.3 build frontend/bulma_styling 
 > webpack --mode production
 
 asset css/mystyles.css 169 KiB [compared for emit] (name: main)
@@ -245,17 +247,63 @@ cacheable modules 79 bytes (javascript) 169 KiB (css/mini-extract)
 webpack 5.64.1 compiled successfully in 1236 ms
 updating flask core css and overrides...
 all done.
+
+
+### Developing on the Vue.js components/widgets for the metadata form
+
+To easily work on the frontend there's now a new makefile command
+
+
+```
+$ make vue_develop
+ DONE  Compiled successfully in 2033ms                                         12:13:56 PM
+
+
+  App running at:
+  - Local:   http://localhost:8081/
+  - Network: http://10.10.3.252:8081/
+
+  Note that the development build is not optimized.
+  To create a production build, run npm run build.
 ```
 
-### Verification of bearer token
+Then you just open a browser to port http://localhost:8081 and whenever you edit something in
+frontend/redactietool_widgets/src folder this will auto reload and show your changes.
 
-In order to verify bearer token the secret key is shared. This is base64 encode hs256 jwt key. We share the key as environment variable OAS_JWT_SECRET
-and it is stored here for qas: https://do-prd-okp-m0.do.viaa.be:8443/console/project/public-api/browse/secrets/avo-oas-qas-develop-config
-and here for prd: https://do-prd-okp-m0.do.viaa.be:8443/console/project/public-api/browse/secrets/avo-oas-prd-master-config.
+Once you are satisfied with the updates you can push it to flask and it will automatically appear inside the metadata
+edit form. For making a new build of the vue components and auto inject into the flask jinja templates you use the following
+makefile command:
 
-The k value for the respective environment is stored in OAS_JWT_SECRET and the syncrator-api decodes + verifies the jwt signature from OAS in the verify_token method in app/authorization.py we also verify the audience == 'syncrator' this is the 'aud' in the jwt token. When signature verification is enabled this verifies also the audience and throws an exception if it does not match (which is caught and results in a 401 access denied). Without the OAS_JWT_SECRET a fallback mode decodes the jwt token and checks the 'aud' value but this is unsecure and therefore a warning message will be printed to setup the secret properly.
+```
+$ make precompile_assets
 
-However this above bearer and oas_jwt will soon become deprecated as we will fully switch to SAML authentication once this is up and running on the QAS instance of the 'Ondertitel en redactie tool'
+ DONE  Compiled successfully in 2790ms                                                                                                                                    12:15:27 PM
+
+  File                                   Size                                                                 Gzipped
+
+  dist/js/chunk-vendors.fd3d1052.js      138.53 KiB                                                           46.88 KiB
+  dist/js/app.e883cd90.js                18.34 KiB                                                            4.84 KiB
+  dist/modal_dialog.js                   2.06 KiB                                                             0.67 KiB
+  dist/bundle.js                         0.34 KiB                                                             0.24 KiB
+  dist/mystyles.css                      188.28 KiB                                                           25.40 KiB
+  dist/css/chunk-vendors.ac5b10c9.css    7.29 KiB                                                             1.71 KiB
+  dist/css/app.a5090ff4.css              1.23 KiB                                                             0.45 KiB
+  dist/overrides.css                     0.22 KiB                                                             0.16 KiB
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+
+Updating vue includes in flask app...done.
+```
+
+The benefit here is it auto generates a unique and minified app.xyz.js file so the users see the new vue application when visiting the site without the need to shift-reload and also we update the version (git tag) in the dropdown menu so we can see what version is deployed on the openshift server.
+
+
+### SAML authentication
+
+Work in progress (the older OAS_JWT_SECRET and token will be deprecated soon...).
 
 
 ### Dislaimer regarding pytest pyvcr recordings.
