@@ -45,7 +45,7 @@
 
 
       <!-- legacy login -->
-      {% if token and not paint_logout %}
+      {% if token and not paint_logout and not session.get('samlUserdata')%}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
                 {{ current_user.name | default('Voornaam Achternaam', true) }}
@@ -67,12 +67,10 @@
 
 
       <!-- saml login -->
-      {% if paint_logout and not token %}
+      {% if session.get('samlUserdata') %}
           <div class="navbar-item has-dropdown is-hoverable">
              <a class="navbar-link">
-                {% if attributes and attributes['cn'] %}
-                  {{ attributes['cn'] | default('Voornaam Achternaam', true) }}
-                {% endif %}
+               session.get('samlUserdata').get('cn')
              </a>
              <div class="navbar-dropdown is-right">
                <a class="navbar-item button is-info ml-2 mr-2"
