@@ -1,7 +1,7 @@
 <template>
   <div id="eindgebruikers_selector"> 
     <multiselect v-model="value" 
-      placeholder="Kies eindgebruiker rollen" 
+      placeholder="Kies eindgebruikers" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 

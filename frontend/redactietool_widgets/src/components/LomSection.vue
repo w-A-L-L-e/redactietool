@@ -46,41 +46,16 @@
           <label class="label">Onderwijsniveaus</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
-              <option value="Kleuteronderwijs">Kleuteronderwijs</option>
-              <option value="Lager onderwijs">Lager onderwijs</option>
-              <option value="Secundair onderwijs">Secundair onderwijs</option>
-              <option value="Volwassenenonderwijs">Volwassenenonderwijs</option>
-              <option value="Hoger onderwijs">Hoger onderwijs</option>
-            </select>
-          </div>
+          <OnderwijsniveausSelector/> 
         </div>
       </div>
-
-
-      <!-- todo: this data comes with request using suggest lib from knowledgegraph:
-        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-1ste-graad', 'label': 'Lager 1ste graad', 'definition': 'Lager 1ste graad'}
-        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-2de-graad', 'label': 'Lager 2de graad', 'definition': 'Lager 2de graad'}
-        {'id': 'https://data.meemoo.be/terms/ond/graad#lager-3de-graad', 'label': 'Lager 3de graad', 'definition': 'Lager 3de graad'}
-        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-1ste-graad', 'label': 'Secundair 1ste graad', 'definition': 'Secundair 1ste graad'}
-        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-2de-graad', 'label': 'Secundair 2de graad', 'definition': 'Secundair 2de graad'}
-        {'id': 'https://data.meemoo.be/terms/ond/graad#secundair-3de-graad', 'label': 'Secundair 3de graad', 'definition': 'Secundair 3de graad'}
-      -->
+ 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Onderwijsgraden</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_onderwijsniveaus" id="lom1_onderwijsniveaus">
-              <option value="Kleuteronderwijs">Lager 1ste graad</option>
-              <option value="Lager onderwijs">Lager 2de graad</option>
-              <option value="Secundair onderwijs">Lager 3de graad</option>
-              <option value="Volwassenenonderwijs">Secundair 1ste graad</option>
-              <option value="Hoger onderwijs">Secundair 3de graad</option>
-            </select>
-          </div>
+          <OnderwijsgradenSelector/> 
         </div>
       </div>
 
@@ -134,6 +109,8 @@
 <script>
   import EindgebruikerSelector from './EindgebruikerSelector.vue'
   import TalenSelector from './TalenSelector.vue'
+  import OnderwijsniveausSelector from './OnderwijsniveausSelector.vue'
+  import OnderwijsgradenSelector from './OnderwijsgradenSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
   import VakkenSelector from './VakkenSelector.vue'
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
@@ -150,6 +127,8 @@
     components: {
       EindgebruikerSelector,
       TalenSelector,
+      OnderwijsniveausSelector,
+      OnderwijsgradenSelector,
       ThemaSelector,
       VakkenSelector,
       TrefwoordenSelector,
