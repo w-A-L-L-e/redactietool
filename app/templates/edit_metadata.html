@@ -16,8 +16,6 @@ Metadata bewerken
     <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
 
     <!--
-      Unless someone can truly convince me this double button is really necessary
-      I'm keeping it hidden for now.
       <div class="buttons is-pulled-right pt-2">
             <a class="button is-link mb-5"
                href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
@@ -40,41 +38,42 @@ Metadata bewerken
       </div>
     </div>
   </div>
+{% else %}
+  {% include 'includes/form_errors.html' %}
 {% endif %}
 
-<div class="columns">
-  <div class="column">
-    <div id="player_container"></div>
-
-    <script>
-      // future solution, when testbeeld image server allows this
-      flowplayer('#player_container', {
-        src: '{{video_url}}',
-        token: '{{flowplayer_token}}',
-        poster: '{{keyframe}}?nocache='+Date.now()
-      })
-    </script>
-    
-
-    {% if item_type != 'Audio' %}
-      <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
-        <ion-icon name="key-outline" class="pr-3"></ion-icon>
-        Keyframe Aanpassen
-      </a>
-
-      <!--img src="{{keyframe}}" id="keyframe_image" width="100px"/>
-      <button class="button is-info mt-5" 
-        onclick="refreshKeyframeImage('keyframe_image'); return false;" >
-        <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
-        Refresh Keyframe
-      </a>
-      -->
-    {% endif %}
-
-  </div>
-</div>
-
 <form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
+  <div class="columns">
+    <div class="column">
+      <div id="player_container"></div>
+
+      <script>
+        // future solution, when testbeeld image server allows this
+        flowplayer('#player_container', {
+          src: '{{video_url}}',
+          token: '{{flowplayer_token}}',
+          poster: '{{keyframe}}?nocache='+Date.now()
+        })
+      </script>
+      
+
+      {% if item_type != 'Audio' %}
+        <a class="button is-info mt-5" href="{{keyframe_edit_url}}" target="_blank">
+          <ion-icon name="key-outline" class="pr-3"></ion-icon>
+          Keyframe Aanpassen
+        </a>
+
+        <!--img src="{{keyframe}}" id="keyframe_image" width="100px"/>
+        <button class="button is-info mt-5" 
+          onclick="refreshKeyframeImage('keyframe_image'); return false;" >
+          <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
+          Refresh Keyframe
+        </a>
+        -->
+      {% endif %}
+
+    </div>
+  </div>
 
   {% include 'upload_hidden_fields.html' %}
   {% include 'components/algemene_section.html' %}
@@ -100,16 +99,20 @@ Metadata bewerken
     </div>
   </div>
 
+  <!--
   <div class="columns">
     <div class="column">
       <div class="buttons sticky-submit-button pt-2">
-        {% include 'includes/form_errors.html' %}
         <button type="submit" class="button is-primary spring">
           Metadata opslaan
         </button>
       </div>
     </div>
   </div>
+  -->
+  <button type="submit" class="button is-primary spring sticky-submit-button">
+    Metadata opslaan
+  </button>
 
 </form> <!-- end of metadata edit form -->
 <br/><br/><br/><br/>
