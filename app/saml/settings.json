@@ -3,13 +3,13 @@
     "strict": true,
     "debug": true,
     "sp": {
-        "entityId": "http://redactietool-dev/sp",
+        "entityId": "http://redactietool/sp",
         "assertionConsumerService": {
-            "url": "http://localhost:8080/?acs",
+            "url": "https://redactietool-qas-media-dist.private.cloud.meemoo.be/?acs",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
         },
         "singleLogoutService": {
-            "url": "http://localhost:8080/?sls",
+            "url": "https://redactietool-qas-media-dist.private.cloud.meemoo.be/?sls",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
         "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
