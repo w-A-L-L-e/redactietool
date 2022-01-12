@@ -21,20 +21,11 @@ Ondertitels valideren
 
   <div class="column is-half">
     <div id="player_container"></div>
-    <!-- We can re-add this back later if wanted
-      <table class="video_details">
-      <tr><td colspan="2">{{description}}</td></tr>
-      <tr><td>Created</td><td>{{created}}</td></tr>
-      <tr><td>Archived</td><td>{{archived}}</td></tr>
-      <tr><td>Original CP</td><td>{{original_cp}}</td></tr>
-    </table>
-    -->
-
     <script>
       flowplayer('#player_container', {
         token: '{{flowplayer_token}}',
         src: '{{video_url}}',
-        poster: '{{keyframe}}',
+        poster: '{{keyframe}}?nocache='+Date.now(),
         subtitles:{ 
           tracks:[
             { 
