@@ -25,10 +25,10 @@ class User(UserMixin):
         self.email = 'wstest@meemoo.be'
 
     def save_saml_username(self, saml_attribs):
-        #attributes= 
-        # dict_items([('apps', [..., 'mediahaven']), 
-        # ('cn', ['First name last name']), ('entryUUID', ['user uuid']), 
-        # ('givenName', ['Walter']), ('mail', ['some@testmail.com']), ('o', ['OR-some-org here']), 
+        # attributes=
+        # dict_items([('apps', [..., 'mediahaven']),
+        # ('cn', ['First name last name']), ('entryUUID', ['user uuid']),
+        # ('givenName', ['Walter']), ('mail', ['some@testmail.com']), ('o', ['OR-some-org here']),
         # ('oNickname', ['meemoo']), ('role', ['Meemoo']), ('sector', ['Cultuur']), ('sn', ['Lastname'])])
         # session.get('samlUserdata').get('cn')[0]
         self.name = saml_attribs.get('cn')[0]

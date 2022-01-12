@@ -255,6 +255,20 @@ function autoCloseSavedAlert(){
   }, 4000); 
 }
 
+function closeAlert(){
+  var alert_box = document.getElementById("alert_box");
+  if(alert_box){
+    alert_box.style.display = "none";
+  }
+}
+
+function autoCloseAlert(){
+  setTimeout(function(){
+    closeAlert();
+  }, 4000); 
+}
+
+
 function clearButtonLoadingState(){
   console.log("TODO: put all buttons back in original state");
   // find all buttons and return to original state
@@ -353,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
   collapseEmptyTextareas();
   hideEmptyTitles();
   autoCloseSavedAlert();
+  autoCloseAlert();
   clearButtonLoadingState();
   
   // For demo, show modal dialogs

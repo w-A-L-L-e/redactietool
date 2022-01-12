@@ -81,7 +81,7 @@ def load_user_from_request(request):
     user = User()
     if 'samlUserdata' in session:
         if len(session['samlUserdata']) > 0:
-            user.save_saml_username( session.get('samlUserdata') )
+            user.save_saml_username(session.get('samlUserdata'))
     else:
         token = request.form.get('token', None)
         if not token:
@@ -158,18 +158,11 @@ def index():
     paint_logout = False
 
     if 'sso' in request.args:
-        # print("in SSO args=", request.args)
-        # return redirect(url_for('.search_media'))
         # If AuthNRequest ID need to be stored in
         # order to later validate it, do instead
         sso_built_url = auth.login()
         session['AuthNRequestID'] = auth.get_last_request_id()
         return redirect(sso_built_url)
-    # elif 'sso2' in request.args:
-    #     return_to = '%sattrs/' % request.host_url
-    #     print("in SSO2 return_to url=", return_to)
-    #     # return redirect(auth.login(return_to))
-    #     return redirect('/search_media?token=debug')
     elif 'slo' in request.args:
         name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
         if 'samlNameId' in session:
@@ -218,19 +211,23 @@ def index():
                         request.form['RelayState']
                     )
                 )
-                #return redirect('/search_media?token=saml')
-            else:
-                print("MISSING RELAY, BUT LOGIN OK")
-                return redirect('/search_media')
-
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif 'sls' in request.args:
         request_id = None
         if 'LogoutRequestID' in session:
-            request_id = session['LogoutRequestID']
+            request_id = session.get(
+                'LogoutRequestID', 'empty_logout_request_id')
 
         def dscb(): return session.clear()
+
+        # HOTFIX so that the POST_DATA is put in GET_DATA and we properly
+        # respond to the sls request from our idp
+        req['get_data'] = req['post_data']
+
+        # re-init auth with hotfixed request object
+        auth = init_saml_auth(req)
+
         url = auth.process_slo(request_id=request_id, delete_session_cb=dscb)
         errors = auth.get_errors()
         if len(errors) == 0:
@@ -283,18 +280,12 @@ def metadata():
 @login_required
 def search_media():
     if 'samlUserdata' in session:
-        # paint_logout = True
         if len(session['samlUserdata']) > 0:
             attributes = session['samlUserdata'].items()
         print("attributes=", attributes)
-        token='saml'
+        token = 'saml'
     else:
         token = request.args.get('token')
-    
-    # else:
-    #     abort(401, jsonify(message='invalid saml session'))
-    #     # todo clear the session?
-    #     # return redirect('/')
 
     validation_errors = request.args.get('validation_errors')
     logger.info('search_media')
@@ -544,9 +535,8 @@ def save_item_metadata():
     data_mapping = RmhMapping()
     tp, json_data, errors = data_mapping.form_to_mh(request, mam_data)
 
-    # TODO: change this to different template or
-    # trigger the flashAlertMessage jscode here depending on errors
-    # and possibly other values return from our RmhMapping.form_to_mh call
+    # TODO: validations on length etc add here???
+    # errors can be passed in **tp !
 
     return render_template(
         'edit_metadata.html',

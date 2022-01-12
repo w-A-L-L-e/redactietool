@@ -9,26 +9,29 @@ Login
 
 {% block content %}
 
-{# TODO: refactor this later on, right now as POC its nice to test login/logout integrated in subloader... #}
-{% if not_auth_warn %}
-  <div class="alert alert-danger" role="alert">Not authenticated</div>
-{% endif %}
 
-{% if success_slo %}
-  <div class="alert alert-success" role="alert">Successfully logged out</div>
-{% endif %}
-
-<!--
-{% if session['samlUserdata'] %}
-username: {{ session['samlUserdata']['cn'][0] }}
-{% else %}
-NOT LOGGED IN OR EMPTY SESSION!
-{% endif %}
-
-</pre>
--->
 
 <div class="saml-login-page">
+
+  {% if success_slo %}
+    <div class="column" id="alert_box">
+      <div class="notification is-success">
+        <button class="delete" onclick="closeAlert(); return false;"></button>
+        Je bent uitgelogged. <br/>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not_auth_warn %}
+    <div class="column" id="alert_box">
+      <div class="notification is-danger">
+        <button class="delete" onclick="closeAlert(); return false;"></button>
+        Authenticatie mislukt <br/>
+      </div>
+    </div>
+  {% endif %}
+
+
   <div class="card" id="saml_login_box">
     <div class="card-content">
       <div class="content">
@@ -39,6 +42,7 @@ NOT LOGGED IN OR EMPTY SESSION!
             <ion-icon name="create-outline"></ion-icon>
           </span>
         </h1>
+
 
         <p>
            Log in om gebruik te maken van de Redactietool.
