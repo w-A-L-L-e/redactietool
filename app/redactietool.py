@@ -79,22 +79,22 @@ login_manager.login_view = 'login'
 @login_manager.request_loader
 def load_user_from_request(request):
     user = User()
-    token = request.form.get('token', None)
-    if not token:
-        token = request.args.get('token', None)
+    if 'samlUserdata' in session:
+        if len(session['samlUserdata']) > 0:
+            user.save_saml_username( session.get('samlUserdata') )
+    else:
+        token = request.form.get('token', None)
+        if not token:
+            token = request.args.get('token', None)
 
-    if token:
-        user.save_jwt_username(token)
+        if token:
+            user.save_jwt_username(token)
 
     return user
 
 
 @app.route('/legacy_login', methods=['GET'])
 def legacy_login():
-    # logger.info(
-    #     "configuration = ", dictionary={
-    #         'environment': flask_environment()
-    #     })
     return render_template('legacy_login.html')
 
 
@@ -158,18 +158,18 @@ def index():
     paint_logout = False
 
     if 'sso' in request.args:
-        print("in SSO args=", request.args)
+        # print("in SSO args=", request.args)
         # return redirect(url_for('.search_media'))
         # If AuthNRequest ID need to be stored in
         # order to later validate it, do instead
         sso_built_url = auth.login()
         session['AuthNRequestID'] = auth.get_last_request_id()
         return redirect(sso_built_url)
-    elif 'sso2' in request.args:
-        return_to = '%sattrs/' % request.host_url
-        print("in SSO2 return_to url=", return_to)
-        # return redirect(auth.login(return_to))
-        return redirect('/search_media?token=debug')
+    # elif 'sso2' in request.args:
+    #     return_to = '%sattrs/' % request.host_url
+    #     print("in SSO2 return_to url=", return_to)
+    #     # return redirect(auth.login(return_to))
+    #     return redirect('/search_media?token=debug')
     elif 'slo' in request.args:
         name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
         if 'samlNameId' in session:
@@ -204,9 +204,6 @@ def index():
             if 'AuthNRequestID' in session:
                 del session['AuthNRequestID']
             session['samlUserdata'] = auth.get_attributes()
-            print('user data=', session['samlUserdata'])
-            session['saml_user_name'] = auth.get_attributes()['cn']
-            print('user name=', session['saml_user_name'])
             session['samlNameId'] = auth.get_nameid()
             session['samlNameIdFormat'] = auth.get_nameid_format()
             session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
@@ -218,10 +215,14 @@ def index():
                 # the value of the request.form['RelayState'] is a trusted URL.
                 return redirect(
                     auth.redirect_to(
-                        # request.form['RelayState']
-                        '/search_media'
+                        request.form['RelayState']
                     )
                 )
+                #return redirect('/search_media?token=saml')
+            else:
+                print("MISSING RELAY, BUT LOGIN OK")
+                return redirect('/search_media')
+
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif 'sls' in request.args:
@@ -243,37 +244,17 @@ def index():
             error_reason = auth.get_last_error_reason()
 
     if 'samlUserdata' in session:
-        paint_logout = True
-        if len(session['samlUserdata']) > 0:
-            attributes = session['samlUserdata'].items()
-
-    return render_template(
-        'index.html',
-        errors=errors,
-        error_reason=error_reason,
-        not_auth_warn=not_auth_warn,
-        success_slo=success_slo,
-        attributes=attributes,
-        paint_logout=paint_logout,
-    )
-
-
-# TODO: secure this route or further check if it's actually needed
-# IMPORTANT DOUBLE CHECK THIS BEFORE A PRD RELEASE!!!
-@app.route('/attrs/')
-@requires_authorization
-@login_required
-def attrs():
-    paint_logout = False
-    attributes = False
-
-    if 'samlUserdata' in session:
-        paint_logout = True
-        if len(session['samlUserdata']) > 0:
-            attributes = session['samlUserdata'].items()
-
-    return render_template('attrs.html', paint_logout=paint_logout,
-                           attributes=attributes)
+        return redirect('/search_media')
+    else:
+        return render_template(
+            'index.html',
+            errors=errors,
+            error_reason=error_reason,
+            not_auth_warn=not_auth_warn,
+            success_slo=success_slo,
+            attributes=attributes,
+            paint_logout=paint_logout,
+        )
 
 
 # TODO check + secure once SAML is configured
@@ -301,28 +282,20 @@ def metadata():
 @requires_authorization
 @login_required
 def search_media():
-    print("DEBUGGING SAML, auth is switched off in search_media temporarely!!!!")
-    # debug it baby
     if 'samlUserdata' in session:
-        paint_logout = True
+        # paint_logout = True
         if len(session['samlUserdata']) > 0:
             attributes = session['samlUserdata'].items()
         print("attributes=", attributes)
+        token='saml'
+    else:
+        token = request.args.get('token')
+    
     # else:
-    #     print("access denied! session is empty!!!")
-    #     print("session=", session)
-
-    #     # temp hack for saml debug
-    #     if request.args.get('token'):
-    #         validation_errors = request.args.get('validation_errors')
-    #         logger.info('search_media')
-    #         return render_template('search_media.html', **locals())
-
     #     abort(401, jsonify(message='invalid saml session'))
     #     # todo clear the session?
     #     # return redirect('/')
 
-    token = request.args.get('token')
     validation_errors = request.args.get('validation_errors')
     logger.info('search_media')
 

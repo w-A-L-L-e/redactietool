@@ -24,7 +24,15 @@ class User(UserMixin):
         self.name = 'Debug Login'
         self.email = 'wstest@meemoo.be'
 
-    # TODO: once we switch to true SAML this is the only method that needs a changin
+    def save_saml_username(self, saml_attribs):
+        #attributes= 
+        # dict_items([('apps', [..., 'mediahaven']), 
+        # ('cn', ['First name last name']), ('entryUUID', ['user uuid']), 
+        # ('givenName', ['Walter']), ('mail', ['some@testmail.com']), ('o', ['OR-some-org here']), 
+        # ('oNickname', ['meemoo']), ('role', ['Meemoo']), ('sector', ['Cultuur']), ('sn', ['Lastname'])])
+        # session.get('samlUserdata').get('cn')[0]
+        self.name = saml_attribs.get('cn')[0]
+
     def save_jwt_username(self, token):
         try:
             dt = jwt.decode(

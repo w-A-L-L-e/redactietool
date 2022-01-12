@@ -50,6 +50,10 @@ def verify_token(jwt_token):
             print('IN DEBUG MODE, DISABLE AUTH DURING CSS RE-STYLING')
             return True
 
+        # in case of SAML authenticated, we don't verify our jwt ourselves
+        if 'samlUserdata' in session:
+            return True
+
         # we only validate signature if OAS_JWT_SECRET is supplied
         if skip_signature_check():
             print(
@@ -76,9 +80,6 @@ def verify_token(jwt_token):
             # This not only checks signature but also if audience 'aud'
             # contains avo-subtitle or more specifically what is
             # configured in OAS_APPNAME.
-            # 'sub': 'user uuid', 'mail': 'some_test_email@meemoo.be',
-            # 'cn': 'Firstname Lastname', 'o': 'OR-organization-or-id',
-            # 'aud': [allowed apps]
             dt = jwt.decode(
                 jwt_token,
                 jwt_secret,
@@ -110,7 +111,8 @@ def requires_authorization(f):
             jwt_token = request.form.get('token')
 
         if not jwt_token or not verify_token(jwt_token):
-            if not session.get('samlUserData') or not session.get('samlUserData').get('cn'):
+            if not session.get('samlUserdata'):
+                print("NO SESSION , RETURNING 401 error!")
                 abort(401, jsonify(message='invalid jwt token'))
 
         return f(*args, **kwargs)
