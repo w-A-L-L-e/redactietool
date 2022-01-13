@@ -231,16 +231,23 @@ def test_cancel_upload(client):
     assert 'PID niet gevonden in testbeeld' in res.data.decode()
 
 
+# extra security added (we neow block if saml session cookie not present)
 @pytest.mark.vcr
 def test_subtitle_videoplayer_route(client):
     res = client.get('/subtitles/qsxs5jbm5c.vtt')
-    assert res.status_code == 200
+    assert res.status_code == 302
 
-
-@pytest.mark.vcr
-def test_subtitle_videoplayer_route_unknownfile(client):
-    res = client.get('/subtitles/someinvalidpath.vtt')
-    assert res.status_code == 404
+# TOOD: also add back case where 200 reply works
+# @pytest.mark.vcr
+# def test_subtitle_videoplayer_route(client):
+#     res = client.get('/subtitles/qsxs5jbm5c.vtt')
+#     assert res.status_code == 200
+#
+#
+# @pytest.mark.vcr
+# def test_subtitle_videoplayer_route_unknownfile(client):
+#     res = client.get('/subtitles/someinvalidpath.vtt')
+#     assert res.status_code == 404
 
 
 @pytest.mark.vcr

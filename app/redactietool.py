@@ -24,7 +24,7 @@
 import os
 import json
 
-from flask import (Flask, request, render_template, session, make_response,
+from flask import (Flask, request, render_template, session,  # make_response,
                    redirect, url_for, send_from_directory)
 
 # only needed for saml debug session
@@ -36,7 +36,7 @@ from viaa.observability import logging
 
 from app.config import flask_environment
 from app.services.authorization import (get_token, requires_authorization,
-                                        verify_token, OAS_APPNAME)
+                                        verify_token, check_saml_session, OAS_APPNAME)
 from app.services.mediahaven_api import MediahavenApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
@@ -63,26 +63,34 @@ app.config.from_object(flask_environment())
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # TODO: replace these with some ENV vars soon:
+
+# session cookie/saml key TODO: put this in env var!
 app.config['SECRET_KEY'] = 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
 app.config['SAML_PATH'] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'saml'
 )
 
+# optional:
+# right now session expires only when browser is closed
+# app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(hours=9)
+# with this we need to set :
+# sesson.permanent = True
 
-# POC: user mixin/model for current_user method of flask login
+
+# mixin/model for current_user method of flask login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
-# ====================== LEGACY LOGIN RELATED ROUTES ==========================
 @login_manager.request_loader
 def load_user_from_request(request):
     user = User()
-    if 'samlUserdata' in session:
-        if len(session['samlUserdata']) > 0:
-            user.save_saml_username(session.get('samlUserdata'))
+    if check_saml_session():
+        user.save_saml_username(session.get('samlUserdata'))
     else:
+        # and throw away invalid or timed out session
+        session.clear()
         token = request.form.get('token', None)
         if not token:
             token = request.args.get('token', None)
@@ -93,6 +101,7 @@ def load_user_from_request(request):
     return user
 
 
+# ====================== LEGACY LOGIN RELATED ROUTES ==========================
 @app.route('/legacy_login', methods=['GET'])
 def legacy_login():
     return render_template('legacy_login.html')
@@ -101,7 +110,7 @@ def legacy_login():
 @app.route('/legacy_login', methods=['POST'])
 def login():
     if app.config['DEBUG'] is True and not app.config['TESTING']:
-        print('DISABLE login check FOR CSS RESTYLE')
+        print('DISABLE login checks for development/debug mode')
         return redirect(
             url_for('.search_media', token='debug_authorization_disabled')
         )
@@ -139,9 +148,6 @@ def prepare_flask_request(request):
         'http_host': request.host,
         'script_name': request.path,
         'get_data': request.args.copy(),
-        # Uncomment if using ADFS as IdP,
-        # https://github.com/onelogin/python-saml/pull/144
-        # 'lowercase_urlencoding': True,
         'post_data': request.form.copy()
     }
 
@@ -155,7 +161,7 @@ def index():
     not_auth_warn = False
     success_slo = False
     attributes = False
-    paint_logout = False
+    legact_login_enabled = app.config['DEBUG'] is True and not app.config['TESTING']
 
     if 'sso' in request.args:
         # If AuthNRequest ID need to be stored in
@@ -240,7 +246,7 @@ def index():
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
 
-    if 'samlUserdata' in session:
+    if check_saml_session():
         return redirect('/search_media')
     else:
         return render_template(
@@ -250,28 +256,28 @@ def index():
             not_auth_warn=not_auth_warn,
             success_slo=success_slo,
             attributes=attributes,
-            paint_logout=paint_logout,
+            legact_login_enabled=legact_login_enabled,
         )
 
 
-# TODO check + secure once SAML is configured
-@app.route('/metadata/')
-@requires_authorization
-@login_required
-def metadata():
-    req = prepare_flask_request(request)
-    auth = init_saml_auth(req)
-    settings = auth.get_settings()
-    metadata = settings.get_sp_metadata()
-    errors = settings.validate_metadata(metadata)
-
-    # make_response is needed here to set correct header and response code
-    if len(errors) == 0:
-        resp = make_response(metadata, 200)
-        resp.headers['Content-Type'] = 'text/xml'
-    else:
-        resp = make_response(', '.join(errors), 500)
-    return resp
+# This route is only usefull for development...
+# @app.route('/metadata/')
+# @requires_authorization
+# @login_required
+# def metadata():
+#     req = prepare_flask_request(request)
+#     auth = init_saml_auth(req)
+#     settings = auth.get_settings()
+#     metadata = settings.get_sp_metadata()
+#     errors = settings.validate_metadata(metadata)
+#
+#     # make_response is needed here to set correct header and response code
+#     if len(errors) == 0:
+#         resp = make_response(metadata, 200)
+#         resp.headers['Content-Type'] = 'text/xml'
+#     else:
+#         resp = make_response(', '.join(errors), 500)
+#     return resp
 
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
@@ -396,9 +402,9 @@ def upload_folder():
     return os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
 
 
-# TODO: DOUBLE CHECK! once we have saml maybe add a requires_auth here also
-# it only returns a temp uploaded file so its not a major issue as is.
 @app.route('/subtitles/<filename>')
+@requires_authorization
+@login_required
 def uploaded_subtitles(filename):
     return send_from_directory(upload_folder(), filename)
 

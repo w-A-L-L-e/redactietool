@@ -9,55 +9,58 @@ Login
 
 {% block content %}
 
+  <div class="saml-login-page">
 
-
-<div class="saml-login-page">
-
-  {% if success_slo %}
-    <div class="column" id="alert_box">
-      <div class="notification is-success">
-        <button class="delete" onclick="closeAlert(); return false;"></button>
-        Je bent uitgelogged. <br/>
-      </div>
-    </div>
-  {% endif %}
-
-  {% if not_auth_warn %}
-    <div class="column" id="alert_box">
-      <div class="notification is-danger">
-        <button class="delete" onclick="closeAlert(); return false;"></button>
-        Authenticatie mislukt <br/>
-      </div>
-    </div>
-  {% endif %}
-
-
-  <div class="card" id="saml_login_box">
-    <div class="card-content">
-      <div class="content">
-
-        <h1 class="title">
-          Redactietool 
-          <span class="icon">
-            <ion-icon name="create-outline"></ion-icon>
-          </span>
-        </h1>
-
-
-        <p>
-           Log in om gebruik te maken van de Redactietool.
-        </p>
-        
-        <div class="buttons">
-          <a href="/legacy_login" class="button is-link is-light">Terug naar originele authenticatie </a>
-
-          <a href="?sso" class="button is-primary">Login</a>
+    {% if success_slo %}
+      <div class="column" id="alert_box">
+        <div class="notification is-success">
+          <button class="delete" onclick="closeAlert(); return false;"></button>
+          Je bent uitgelogged. <br/>
         </div>
+      </div>
+    {% endif %}
 
+    {% if not_auth_warn %}
+      <div class="column" id="alert_box">
+        <div class="notification is-danger">
+          <button class="delete" onclick="closeAlert(); return false;"></button>
+          Authenticatie mislukt <br/>
+        </div>
+      </div>
+    {% endif %}
+
+
+    <div class="card" id="saml_login_box">
+      <div class="card-content">
+        <div class="content">
+
+          <h1 class="title">
+            Redactietool 
+            <span class="icon">
+              <ion-icon name="create-outline"></ion-icon>
+            </span>
+          </h1>
+
+          <p>
+             Log in om gebruik te maken van de Redactietool.
+          </p>
+          
+          <div class="buttons is-pulled-right">
+            {% if legact_login_enabled %}
+              <a href="/legacy_login" class="button is-link is-light">
+                Terug naar originele authenticatie 
+              </a>
+            {% endif %}
+
+            <a href="?sso" class="button is-primary">Login</a>
+          </div>
+          <div class="clearfix"></div><br/><br/>
+
+        </div>
       </div>
     </div>
+
   </div>
-</div>
 
 {% endblock %}
 

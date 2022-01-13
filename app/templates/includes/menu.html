@@ -21,17 +21,16 @@
   <div id="navbarBasicExample" class="navbar-menu">
 
     <div class="navbar-start">
-      {% if token or paint_logout %}
-        <a class="navbar-item {{'is-active' if not pid}}"
+      {% if token or session.get('samlUserdata') %}
+        <a class="navbar-item {{'is-active' if url_for(request.endpoint) == '/search_media'}}"
            href="/search_media?token={{token}}">
           Selecteer PID
         </a>
-
       {% endif %}
     </div>
 
     <div class="navbar-end "> 
-      {% if (pid and token) or (pid and paint_logout) %}
+      {% if (pid and token) or (pid and session.get('samlUserdata')) %}
         
         <!-- This is requested in some jira ticket, but imho it only makes navigation more confusing than necessary
         {% if url_for(request.endpoint) == '/upload'%}
@@ -61,35 +60,34 @@
       {% endif %}
       
 
-
       <!-- legacy login -->
       {% if token or session.get('samlUserdata')%}
-          <div class="navbar-item has-dropdown is-hoverable">
-             <a class="navbar-link">
-                {{ current_user.name | default('Voornaam Achternaam', true) }}
-             </a>
-             <div class="navbar-dropdown is-right">
+        <div class="navbar-item has-dropdown is-hoverable">
+           <a class="navbar-link">
+              {{ current_user.name | default('Voornaam Achternaam', true) }}
+           </a>
+           <div class="navbar-dropdown is-right">
 
 
-              {% if session.get('samlUserdata') %}
-                <a class="navbar-item button is-info ml-2 mr-2"
-                   href="/?slo">
-                   Logout
-                </a> 
-              {% else %}
-                <a class="navbar-item button is-info ml-2 mr-2"
-                   href="/">
-                   Logout
-                </a>
-              {% endif%}
+            {% if session.get('samlUserdata') %}
+              <a class="navbar-item button is-info ml-2 mr-2"
+                 href="/?slo">
+                 Logout
+              </a> 
+            {% else %}
+              <a class="navbar-item button is-info ml-2 mr-2"
+                 href="/">
+                 Logout
+              </a>
+            {% endif%}
 
-               <hr class="navbar-divider mt-2">
-               <div class="navbar-item is-pulled-right">
-                 <ion-icon name="create-outline" class="mr-1"></ion-icon>
-                 {% include 'includes/version.html' %}
-               </div>
+             <hr class="navbar-divider mt-2">
+             <div class="navbar-item is-pulled-right">
+               <ion-icon name="create-outline" class="mr-1"></ion-icon>
+               {% include 'includes/version.html' %}
              </div>
-          </div>
+           </div>
+        </div>
       {% endif %}
 
     </div>

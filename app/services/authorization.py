@@ -46,12 +46,13 @@ def skip_signature_check():
 
 def verify_token(jwt_token):
     try:
-        if current_app.config['DEBUG'] is True and not current_app.config['TESTING']:
-            print('IN DEBUG MODE, DISABLE AUTH DURING CSS RE-STYLING')
-            return True
-
         # in case of SAML authenticated, we don't verify our jwt ourselves
         if 'samlUserdata' in session:
+            print("in verify token, userdata=", session.get('samlUserdata'))
+            return True
+
+        if current_app.config['DEBUG'] is True and not current_app.config['TESTING']:
+            print('IN DEBUG MODE, DISABLE AUTH DURING CSS RE-STYLING')
             return True
 
         # we only validate signature if OAS_JWT_SECRET is supplied
@@ -99,10 +100,27 @@ def verify_token(jwt_token):
         abort(401, jsonify(message='invalid audience in jwt token'))
 
 
+def check_saml_session():
+    if 'samlUserdata' in session:
+        user_data = session.get('samlUserdata')
+        if OAS_APPNAME in user_data['apps']:
+            return True
+
+    return False
+
 # decorator verifies token authenticity
+
+
 def requires_authorization(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        if 'samlUserdata' in session:
+            if check_saml_session():
+                return f(*args, **kwargs)
+            else:
+                abort(401, 'Access denied to app {}'.format(OAS_APPNAME))
+
+        print("No saml session, falling back to jwt token...")
         # token either on request.args for GET
         jwt_token = request.args.get('token')
 
@@ -111,9 +129,8 @@ def requires_authorization(f):
             jwt_token = request.form.get('token')
 
         if not jwt_token or not verify_token(jwt_token):
-            if not session.get('samlUserdata'):
-                print("NO SESSION , RETURNING 401 error!")
-                abort(401, jsonify(message='invalid jwt token'))
+            abort(401, jsonify(message='invalid jwt token'))
 
         return f(*args, **kwargs)
+
     return decorated
