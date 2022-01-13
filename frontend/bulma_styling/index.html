@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meemoo Redactietool</title>
+    <link rel="stylesheet" href="dist/css/mystyles.css">
+    <link rel="stylesheet" href="src/overrides.css">
+    <script src="src/modal_dialog.js"></script>
+    <script src="dist/js/bundle.js"></script>
+
+    <style>
+      .card-content .content {
+        height: 80px;
+        overflow-y: scroll;
+      }
+      #thema_widget{
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
+    <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="/">
+          <img src="http://localhost:8080/static/avo-logo-i.svg" width="150" class="mr-4">
+
+          <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+          Redactietool
+        </a>
+
+        <!-- add class is-active to turn into a cross -->
+        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+
+          <a class="navbar-item">
+            PID
+          </a>
+          <a class="navbar-item">
+            Preview
+          </a>
+          <a class="navbar-item">
+            Metadata
+          </a>
+
+          <a class="navbar-item" href="subtitles_sent.html">
+            Ondertitels
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/pid">
+                PID
+              </a>
+              <a class="navbar-item" href="/meta">
+                Metadata
+              </a>
+              <a class="navbar-item" href="subtitles_sent.html">
+                Ondertitels
+              </a>
+
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+                Redactietool v0.1 alpha
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+ 
+    <!-- main container -->
+    <div class="container main">
+      <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+        <br/>
+        <a href="" class="button is-link" onclick="toggleThemas(); return false;">Kies themas</a>
+      </h1>
+
+
+
+      <div class="container" id="thema_widget">
+        <h2 class="title">Kies themas: </h2>
+
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" placeholder="Zoek thema">
+          </div>
+          <div class="control">
+            <a class="button is-info">
+              Zoek
+            </a>
+          </div>
+        </div>
+
+        <!-- thema selector proof of concept -->
+        <div class="columns mt-2" >
+          <div class="column"  style="height: 200px; overflow-y: scroll">
+
+        <div class="tile is-ancestor">
+
+          <div class="tile is-vertical is-3 is-parent mr-2">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Politiek en overheid
+                </p>
+                <!-- button class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button-->
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Verwijder thema</a>
+              </footer>
+            </div>
+          </div>
+
+
+          <div class="tile is-vertical is-3 is-parent mr-2">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Mediawijsheid 
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Mediawijsheid, beeldgeletterdheid, kritische zin
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Verwijder thema</a>
+              </footer>
+            </div>
+          </div>
+
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Culturele diversiteit
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ...
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Verwijder thema</a>
+              </footer>
+            </div>
+          </div>
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Thema 4
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Beschrijving voor thema 4
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Verwijder thema</a>
+              </footer>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tile is-ancestor">
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Thema 5
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Beschrijving voor thema 5
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Verwijder thema</a>
+              </footer>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+
+
+
+
+      <br/><br/>
+      <br/><br/>
+
+
+      <!-- sandbox to test out new components here... -->
+
+      <h2 class="title">
+        Some common bulma components for Redactietool:
+      </h2>
+ 
+      <div class="buttons">
+        <button id="modal_btn" class="button is-primary is-large modal-button mt-5"> 
+          Open warning/alert example.
+        </button>
+      </div>
+
+
+      <div class="container is-widescreen mb-5">
+        <div class="notification is-primary">
+          This container is <strong>fullwidth</strong> <em>until</em> the <code>$widescreen</code> breakpoint.
+        </div>
+      </div>
+
+
+
+
+      <h2 class="title">Form elements</h2>
+        <div class="field">
+
+          <div class="control mb-2">
+            <input class="input" type="text" placeholder="Video title">
+          </div>
+          <div class="control mb-2">
+            <input class="input" type="text" placeholder="Video release date">
+          </div>
+          <div class="control mb-2">
+            <textarea class="textarea" placeholder="Hello world"></textarea>
+          </div>
+          
+          <div class="control mb-2">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="foobar">
+                Foo
+              </label>
+              <label class="radio">
+                <input type="radio" name="foobar" checked>
+                Bar
+              </label>
+            </div>
+          </div>
+
+          <div class="control mb-2">
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                  </span>
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control mb-2">
+            <label class="checkbox">
+              <input type="checkbox">
+              I agree to the <a href="#">terms and conditions</a>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="field">
+          <p class="control">
+            <span class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>Easy as</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <p>
+        Multi-select component is not finished yet. 
+        But look <a target="_blank" href="https://www.npmjs.com/package/slim-select">here</a> for how it can look in the near future:
+        </p>
+        <div class="field">
+          <p class="control">
+              <!-- Options -->
+              <select id="multiple" multiple>
+                <option value="value 1">Value 1</option>
+                <option value="value 2">Value 2</option>
+                <option value="value 3">Value 3</option>
+              </select>
+
+              <!-- Optgroups -->
+              <select id="multiple-optgroups" multiple>
+                <optgroup label="Label 1">
+                  <option value="value 1">Value 1</option>
+                  <option value="value 2">Value 2</option>
+                  <option value="value 3">Value 3</option>
+                </optgroup>
+                <optgroup label="Label 2">
+                  <option value="value 21">Value 1</option>
+                  <option value="value 22">Value 2</option>
+                  <option value="value 23">Value 3</option>
+                </optgroup>
+              </select>
+          </p>
+        </div>
+
+        <div class="buttons">
+          <a class="button is-primary">Primary button</a>
+          <a class="button is-link">Link button</a>
+        </div>
+
+
+        <blockquote>
+          <p>
+            Mogelijk deze multi-select voor knowledge graph calls...
+          </p>
+          <p>
+          https://codepen.io/i_cant_rap/pen/qNdXyj
+          </p>
+        </blockquote>
+
+
+        <br/>
+        <p>
+          Een progress bar indien een call langer zou duren:
+          <progress class="progress is-info" value="45" max="100">45%</progress>
+          <progress class="progress is-large is-info" max="100">60%</progress>
+        </p>
+
+        Notification voorbeeld:
+        <div class="notification is-info">
+          <button class="delete"></button>
+          Primar lorem ipsum dolor sit amet, consectetur
+          adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
+        </div>
+      </div>
+
+
+
+      <!-- modal dialog proof of concept -->
+      <div class="container">
+        <div class="modal" id='modal_dlg'>
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Modal dialog title</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <!-- Content ... -->
+              <p>
+                Modal dialog content 
+              </p>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Ok</button>
+              <button class="button">Annuleren</button>
+            </footer>
+          </div>
+        </div>
+
+      
+
+        <p class="mt-5">
+          Alternate delete button
+        </p>
+        <p>
+          <button class="delete"></button>
+        </p>
+      </div>
+
+
+
+
+
+
+
+
+      <!-- random lorem ipsum to test scrolling and fixed header -->
+      <div class="container">
+        <h3 class="title mt-5">Lorem Ipsum Test</h1>
+        
+        <p>
+        Wat dummy content om scrollbar/fixed header en menus te testen...
+        </p>
+
+      </div> <!-- content with lorem ipsum dummy text and example modal popup -->
+
+
+    <!-- open source ionicons for our icons (should we need them)-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+
+  <script type="text/javascript">
+
+    function toggleThemas(){
+      var thema_widget  = document.getElementById("thema_widget");
+      thema_widget.style.display = "block";
+
+      //thema_widget.style.display = "none";
+      return false;
+    }
+      
+      // vanilla js for burger toggle
+      document.addEventListener('DOMContentLoaded', () => {
+
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
+
+     // Wire up modal dialog events so that the buttons work
+     // look in dev console to see output of events, easy to add some further
+     // logic here later on...
+      var modal_btn = document.getElementById('modal_btn');
+      modal_btn.addEventListener('click', () => {
+        showModalAlert(
+          "Waarschuwing",
+          "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+        ); 
+      });
+
+      // events to close the modal dialog
+      var modal_close_btn = getModalCloseBtn();
+      modal_close_btn.addEventListener('click', () => {
+        modalCloseClicked();
+      });
+
+      var modal_save_btn = getModalSaveBtn();
+      modal_save_btn.addEventListener('click', () => {
+        modalSaveClicked();
+      });
+
+
+      var modal_cancel_btn = getModalCancelBtn();
+      modal_cancel_btn.addEventListener('click', () => {
+        modalCancelClicked();
+      });
+
+
+      //TODO: slim select for multi select component
+      //new SlimSelect({
+      //  select: '#multiple'
+      //})
+
+    });
+
+    // jquery or react versions can be done too
+    // here's a jquery example:
+    // $(document).ready(function() {
+    // 
+    //   // Check for click events on the navbar burger icon
+    //   $(".navbar-burger").click(function() {
+    // 
+    //       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    //       $(".navbar-burger").toggleClass("is-active");
+    //       $(".navbar-menu").toggleClass("is-active");
+    // 
+    //   });
+    // });
+
+  </script>
+
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meemoo Redactietool</title>
+    <link rel="stylesheet" href="dist/css/mystyles.css">
+    <link rel="stylesheet" href="src/overrides.css">
+    <script src="src/modal_dialog.js"></script>
+    <script src="dist/js/bundle.js"></script>
+  </head>
+  <body>
+
+    <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
+    <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="/">
+          <img src="http://localhost:8080/static/avo-logo-i.svg" width="150" class="mr-4">
+
+          <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+          Redactietool
+        </a>
+
+        <!-- add class is-active to turn into a cross -->
+        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+
+          <a class="navbar-item">
+            PID
+          </a>
+          <a class="navbar-item">
+            Preview
+          </a>
+          <a class="navbar-item">
+            Metadata
+          </a>
+
+          <a class="navbar-item" href="subtitles_sent.html">
+            Ondertitels
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/pid">
+                PID
+              </a>
+              <a class="navbar-item" href="/meta">
+                Metadata
+              </a>
+              <a class="navbar-item" href="subtitles_sent.html">
+                Ondertitels
+              </a>
+
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <ion-icon name="create-outline" class="mr-1 mb-1"></ion-icon>
+                Redactietool v0.1 alpha
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+ 
+    <!-- main container -->
+    <div class="container main">
+
+      <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+      </h1>
+
+
+      <div class="container">
+        <h2 class="title">Thema cards component (work in progress): </h2>
+
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" placeholder="Zoek thema">
+          </div>
+          <div class="control">
+            <a class="button is-info">
+              Zoek
+            </a>
+          </div>
+        </div>
+
+        <!-- thema selector proof of concept -->
+        <div class="columns mt-2" >
+          <div class="column"  style="height: 200px; overflow-y: scroll">
+
+        <div class="tile is-ancestor">
+
+          <div class="tile is-vertical is-3 is-parent mr-2">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Politiek en overheid
+                </p>
+                <!-- button class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button-->
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Selecteer</a>
+              </footer>
+            </div>
+          </div>
+
+
+          <div class="tile is-vertical is-3 is-parent mr-2">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Mediawijsheid 
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Mediawijsheid, beeldgeletterdheid, kritische zin
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Selecteer</a>
+              </footer>
+            </div>
+          </div>
+
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Culturele diversiteit
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ...
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Selecteer</a>
+              </footer>
+            </div>
+          </div>
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Thema 4
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Beschrijving voor thema 4
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Selecteer</a>
+              </footer>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tile is-ancestor">
+
+          <div class="tile is-vertical is-3 mr-2 is-parent">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Thema 5
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Beschrijving voor thema 5
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Selecteer</a>
+              </footer>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+
+
+    <!-- nice searchable select -->
+
+
+
+    <div class="box">
+
+      <select id="seachable-select" style="display: none;">
+        <option data-display="Select">Nothing</option>
+        <option value="1">Some option</option>
+        <option value="2">Another option</option>
+        <option value="3" disabled="">A disabled option</option>
+        <option value="4">Potato</option>
+      </select>
+
+      <div class="nice-select open" tabindex="0">
+      
+        <span class="current">Some option</span>
+        <div class="nice-select-dropdown">
+          <div class="nice-select-search-box">
+            <input type="text" class="nice-select-search" placeholder="Search...">
+          </div>
+          <ul class="list"><li data-value="Nothing" class="option null" style="">Nothing</li><li data-value="1" class="option null selected focus">Some option</li><li data-value="2" class="option null" style="">Another option</li><li data-value="3" class="option null disabled" style="">A disabled option</li><li data-value="4" class="option null" style="">Potato</li></ul>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+      <!-- modal dialog proof of concept -->
+      <div class="container">
+        <div class="modal" id='modal_dlg'>
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Modal dialog title</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <!-- Content ... -->
+              <p>
+                Modal dialog content 
+              </p>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Ok</button>
+              <button class="button">Annuleren</button>
+            </footer>
+          </div>
+        </div>
+
+      
+
+        <p class="mt-5">
+          Alternate delete button
+        </p>
+        <p>
+          <button class="delete"></button>
+        </p>
+      </div>
+
+    </div> <!-- main container -->
+
+
+
+
+
+    <!-- open source ionicons for our icons (should we need them)-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+
+  <script type="text/javascript">
+
+      
+    // vanilla js for burger toggle
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
+
+     // Wire up modal dialog events so that the buttons work
+     // look in dev console to see output of events, easy to add some further
+     // logic here later on...
+      var modal_btn = document.getElementById('modal_btn');
+      modal_btn.addEventListener('click', () => {
+        showModalAlert(
+          "Waarschuwing",
+          "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+        ); 
+      });
+
+      // events to close the modal dialog
+      var modal_close_btn = getModalCloseBtn();
+      modal_close_btn.addEventListener('click', () => {
+        modalCloseClicked();
+      });
+
+      var modal_save_btn = getModalSaveBtn();
+      modal_save_btn.addEventListener('click', () => {
+        modalSaveClicked();
+      });
+
+
+      var modal_cancel_btn = getModalCancelBtn();
+      modal_cancel_btn.addEventListener('click', () => {
+        modalCancelClicked();
+      });
+
+
+      //TODO: slim select for multi select component
+      //new SlimSelect({
+      //  select: '#multiple'
+      //})
+
+
+      //vanilla js searchable select
+      var options = {searchable: true};
+      NiceSelect.bind(document.getElementById("seachable-select"), options);
+
+
+    });
+
+    // jquery or react versions can be done too
+    // here's a jquery example:
+    // $(document).ready(function() {
+    // 
+    //   // Check for click events on the navbar burger icon
+    //   $(".navbar-burger").click(function() {
+    // 
+    //       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    //       $(".navbar-burger").toggleClass("is-active");
+    //       $(".navbar-menu").toggleClass("is-active");
+    // 
+    //   });
+    // });
+
+  </script>
+
+</html>
