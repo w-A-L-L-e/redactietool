@@ -3,8 +3,8 @@
     <multiselect v-model="value" 
       tag-placeholder="Kies vakken" 
       placeholder="Zoek of voeg een nieuw vak toe" 
-      label="name" 
-      track-by="code" 
+      label="definition" 
+      track-by="id" 
       :options="options" :multiple="true" 
       :taggable="true" @tag="addVak" @input="updateValue">
     </multiselect>
@@ -12,8 +12,10 @@
 </div>
 </template>
 
+ 
 <script>
   import Multiselect from 'vue-multiselect'
+  import axios from 'axios';
 
   //example of default value filled in voor vakken in metadata:
   // var default_value = [{ name: 'Vak 1', code: 'vak1' }]
@@ -29,23 +31,37 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'Vak 1', code: 'vak1' },
-          { name: 'Vak 2', code: 'vak2' },
-          { name: 'Vak 3', code: 'vak3' },
-          { name: 'Vak 4', code: 'vak4' },
-          { name: 'Vak 5', code: 'vak5' },
-          { name: 'Vak 6', code: 'vak6' },
-          // TODO: get this with suggest library + axios...
-          // or use the flask view/hidden field trick used for pid
-          // which is actually better&faster because it avoids an extra request
+          { 
+            id: "loading", 
+            label: "loading...", 
+            definition: "Knowledge graph data is loading..."
+          },
         ]
       }
     },
+    created: function() { 
+      // smart way to use mocked data during development
+      // after deploy in flask this uses a different url on deployed pod
+      var redactie_api_url = 'http://localhost:5000';
+      var redactie_api_div = document.getElementById('redactie_api_url');
+      if( redactie_api_div ){
+        redactie_api_url = redactie_api_div.innerText;
+      }
+      axios
+        .get(redactie_api_url+'/vakken')
+        .then(res => {
+          this.options = res.data;
+        })
+    },
     methods: {
       addVak(newVak) {
+        var newVakDefinition = newVak; //TODO: also allow adding definition 
+        // TODO: ID needs to be computed somehow, or returned from an add call!
+
         const vak = {
-          name: newVak,
-          code: newVak.substring(0, 2) + Math.floor((Math.random() * 10000000))
+          label: newVak,
+          definition: newVakDefinition,
+          id: newVak.substring(0, 2) + Math.floor((Math.random() * 10000000))
         }
         this.options.push(vak)
         this.value.push(vak)

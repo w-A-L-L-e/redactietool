@@ -393,11 +393,6 @@ h3.subtitle{
   margin-left: 5px !important;
 }
 
-/* temp hack/workaround */
-#keyframe_image {
-  display:none;
-}
-
 #saml_login_box {
   max-width: 410px;
   margin-left: auto;
@@ -408,4 +403,12 @@ h3.subtitle{
   max-width: 410px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.edit-metadata-title {
+  margin-bottom: -20px !important;
+}
+
+.hidden {
+  display:none;
 }

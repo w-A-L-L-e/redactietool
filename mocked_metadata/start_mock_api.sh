@@ -5,4 +5,4 @@ echo "Make sure you have following export changed to use the local server instea
 echo " export MEDIAHAVEN_API = http://localhost:5000 "
 
 
-python mh_mock_server.py
+python suggest_cors_server.py

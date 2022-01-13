@@ -9,121 +9,124 @@ Metadata bewerken
 
 {% block content %}
 
-<div class="columns" style="margin-bottom:-20px;">
-  <div class="column">
-
-    <h1 class="title">{{title}}</h1>
-    <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
- 
-  </div> 
-</div>
-
-{% if data_saved_to_mam %}
-  <div class="columns" id="data_saved_alert_box">
+  <div class="columns edit-metadata-title">
     <div class="column">
-      <div class="notification is-success">
-        <button class="delete" onclick="closeSavedAlert(); return false;"></button>
-        De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
-        <!--
-        Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
-        -->
+  
+      <h1 class="title">{{title}}</h1>
+      <h2 class="subtitle pu mb-0 ml-1"><b>PID: {{pid}}</b></h2>
+   
+    </div> 
+  </div>
+  
+  {% if data_saved_to_mam %}
+    <div class="columns" id="data_saved_alert_box">
+      <div class="column">
+        <div class="notification is-success">
+          <button class="delete" onclick="closeSavedAlert(); return false;"></button>
+          De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
+          <!--
+          Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
+          -->
+        </div>
       </div>
     </div>
-  </div>
-{% else %}
-  {% include 'includes/form_errors.html' %}
-{% endif %}
-
-<form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
-  <div class="columns">
-    <div class="column">
-      <div id="player_container"></div>
-
-      <script>
-        flowplayer('#player_container', {
-          src: '{{video_url}}',
-          token: '{{flowplayer_token}}',
-          poster: '{{keyframe}}?nocache='+Date.now()
-        })
-      </script>
-      
-
-      {% if item_type != 'Audio' %}
-        <a class="button is-info mt-3" href="{{keyframe_edit_url}}" target="_blank">
-          <ion-icon name="key-outline" class="pr-3"></ion-icon>
-          Keyframe Aanpassen
-        </a>
-
-        <!--
-        <a class="button is-info mt-3"
-           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-          Bewerk ondertitels
-        </a>
-        -->
-
-        <!--
-        <button class="button is-info mt-3" 
-          onclick="refreshKeyframeImage(); return false;" >
-          <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
-          Refresh Keyframe
-        </a>
-        -->
-
-      {% endif %}
-
-    </div>
-  </div>
-
-  {% include 'includes/hidden_fields.html' %}
-  {% include 'metadata/components/algemene_section.html' %}
-  {% include 'metadata/components/productie_section.html' %}
-  {% include 'metadata/components/inhoud_section.html' %}
-
-  <!-- ======================== Leerobject section ========================== -->
-  <!-- flask data injection here -->
-  <div id="pid" style="display:none;">{{pid}}</div>
-  <div id="item_keywords" style="display:none;">{{item_keywords}}</div>
-  <!-- todo all searchable existing keywords here or an api call for it to fetch! -->
-
-  <!-- these are to inject all possible select values -->
-  <div id="get_onderwijsniveaus">{{get_onderwijsniveaus}}</div>
-  <div id="get_onderwijsgraden">{{get_onderwijsgraden}}</div>
-  <div id="get_themas">{{get_themas}}</div>
-  <div id="get_vakken">{{get_vakken}}</div>
-
-  <!-- todo item_onderwijsniveaus, vakken, themas like item_keywords above! -->
-
-
-  <div id="app"></div>
-
-  <div class="columns">
-    <div class="column">
-      <h2 class="title">Publicatiestatus</h2>
-      <hr/>
-      <label class="checkbox">
-        <input type="checkbox" name="publicatiestatus"/>
-        Dit item mag gepubliceerd worden op 
-        <a target="blank" href="https://onderwijs.hetarchief.be">Het Archief voor Onderwijs.</a>
-      </label>
-    </div>
-  </div>
-
-  <!--
-  <div class="columns">
-    <div class="column">
-      <div class="buttons sticky-submit-button pt-2">
-        <button type="submit" class="button is-primary spring">
-          Metadata opslaan
-        </button>
+  {% else %}
+    {% include 'includes/form_errors.html' %}
+  {% endif %}
+  
+  <form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
+    <div class="columns">
+      <div class="column">
+        <div id="player_container"></div>
+  
+        <script>
+          flowplayer('#player_container', {
+            src: '{{video_url}}',
+            token: '{{flowplayer_token}}',
+            poster: '{{keyframe}}?nocache='+Date.now()
+          })
+        </script>
+        
+  
+        {% if item_type != 'Audio' %}
+          <a class="button is-info mt-3" href="{{keyframe_edit_url}}" target="_blank">
+            <ion-icon name="key-outline" class="pr-3"></ion-icon>
+            Keyframe Aanpassen
+          </a>
+  
+          <!--
+          <a class="button is-info mt-3"
+             href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+            Bewerk ondertitels
+          </a>
+          -->
+  
+          <!--
+          <button class="button is-info mt-3" 
+            onclick="refreshKeyframeImage(); return false;" >
+            <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
+            Refresh Keyframe
+          </a>
+          -->
+  
+        {% endif %}
+  
       </div>
     </div>
-  </div>
-  -->
-  <button type="submit" class="button is-primary spring sticky-submit-button">
-    Metadata opslaan
-  </button>
-
-</form> <!-- end of metadata edit form -->
-<br/><br/><br/><br/>
+  
+    {% include 'includes/hidden_fields.html' %}
+    {% include 'metadata/components/algemene_section.html' %}
+    {% include 'metadata/components/productie_section.html' %}
+    {% include 'metadata/components/inhoud_section.html' %}
+  
+    <!-- ======================== Leerobject section ========================== -->
+    <!-- flask data injection here -->
+    <div class="hidden" id="redactie_api_url">deployed_server_url</div>
+    <div class="hidden" id="pid">{{pid}}</div>
+    <div class="hidden" id="item_keywords">{{item_keywords}}</div>
+   
+    <!-- 
+      TODO: item_onderwijsniveaus, vakken, themas like item_keywords above
+    but this requires mediahaven data + mapping see tickets 
+    jira https://meemoo.atlassian.net/browse/OPS-1231
+    -->
+  
+    <div id="app"></div>
+  
+    <!-- publicatiestatus logic is to be properly specified in ticket how this will work, 
+      both how it is returned from mediahaven and what it implies when the checkbox is checked -->
+  
+    <div class="columns">
+      <div class="column">
+        <h2 class="title">Publicatiestatus</h2>
+        <hr/>
+        <label class="checkbox">
+          <input type="checkbox" name="publicatiestatus"/>
+          Dit item mag gepubliceerd worden op 
+          <a target="blank" href="https://onderwijs.hetarchief.be">Het Archief voor Onderwijs.</a>
+        </label>
+      </div>
+    </div>
+  
+    <button type="submit" class="button is-primary spring sticky-submit-button">
+      Metadata opslaan
+    </button>
+  
+  </form> <!-- end of metadata edit form -->
+  <br/><br/><br/><br/>
+  
+  <script type="text/javascript">
+    // Keep this here. It needs to be injected even before the
+    // dom ready event so that vue components
+    // can pick it up to do the correct axios calls
+    function setRedactieApiUrl(){
+      var api_url_div = document.getElementById('redactie_api_url');
+      if(api_url_div){
+        api_url_div.innerText = window.location.protocol+'//'+window.location.host;
+      }
+    }
+  
+    setRedactieApiUrl();
+  </script>
 
 {% endblock %}

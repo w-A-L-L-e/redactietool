@@ -39,19 +39,23 @@ class SuggestApi:
         themas = []
         for r in self.suggest.get_themas():
             themas.append(r)
-
         return json.dumps(themas)
 
     def get_vakken(self):
         vakken = []
-        for r in suggest.get_vakken():
+        for r in self.suggest.get_vakken():
             vakken.append(r)
-
         return json.dumps(vakken)
 
     def get_onderwijsniveaus(self):
-        return "[]"
+        res = []
+        for r in self.suggest.get_niveaus():
+            res.append(r)
+        return json.dumps(res)
 
     def get_onderwijsgraden(self):
-        return "[]"
+        res = []
+        for r in self.suggest.get_graden():
+            res.append(r)
+        return json.dumps(res)
 

@@ -284,6 +284,7 @@ function refreshKeyframeImage(img_id){
 // and notifications on the metadata edit form
 // Handle any other resetting of state on pageload if necessary
 document.addEventListener('DOMContentLoaded', () => {
+
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(
     document.querySelectorAll('.navbar-burger'), 0

@@ -4,3 +4,4 @@ pytest-cov==2.8.1
 autopep8==1.5.2
 pytest-recording>=0.7.0
 flake8>=3.8.4
+flask-cors==3.0.10

@@ -4,8 +4,8 @@
   <multiselect v-model="value" 
     tag-placeholder="Voeg nieuw thema toe" 
     placeholder="Zoek thema" 
-    label="title" 
-    track-by="title" 
+    label="label" 
+    track-by="id" 
     :options="options" 
     :option-height="104" 
     :show-labels="false"
@@ -17,10 +17,10 @@
       slot-scope="props">
         <span class="option__desc">
           <span class="option__title">
-            {{ props.option.title }}
+            {{ props.option.label}}
           </span>
           <span class="option_small">
-            {{props.option.desc}}
+            {{props.option.definition}}
           </span>
         </span>
     </template>
@@ -28,8 +28,8 @@
       slot="option" 
       slot-scope="props">
         <div class="option__desc">
-          <span class="option__title">{{ props.option.title }}</span>
-          <span class="option__small">{{ props.option.desc }}</span>
+          <span class="option__title">{{ props.option.label}}</span>
+          <span class="option__small">{{ props.option.definition}}</span>
         </div>
     </template>
   </multiselect>
@@ -40,6 +40,7 @@
 
 <script>
   import Multiselect from 'vue-multiselect'
+  import axios from 'axios';
 
   var default_value = []; 
 
@@ -54,29 +55,32 @@
         json_value: JSON.stringify(default_value),
         options: [
           { 
-            title: 'Politiek en overheid', 
-            desc: 'Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland',
-            id: 'mediawijsheid'
+            id: "loading", 
+            label: "loading...", 
+            definition: "Knowledge graph data is loading..."
           },
-          {
-            title: 'Mediawijsheid',
-            desc: 'Mediawijsheid, beeldgeletterdheid, kritische zin',
-            id: 'mediawijsheid'
-          },
-          { 
-            title: 'Culturele diversiteit', 
-            desc: 'Cultuurbeschouwing. Alles over de verscheidenheid aan culturen en culturele uitingen binnen een samenleving en het proces van wereldwijde culturele integratie (globalisering). Hier gaat het dan meer om symbolen, rituelen, ...',
-            id: 'culturele_div'
-          },
-          
         ]
       }
+    },
+    created: function() { 
+      // smart way to use mocked data during development
+      // after deploy in flask this uses a different url on deployed pod
+      var redactie_api_url = 'http://localhost:5000';
+      var redactie_api_div = document.getElementById('redactie_api_url');
+      if( redactie_api_div ){
+        redactie_api_url = redactie_api_div.innerText;
+      }
+      axios
+        .get(redactie_api_url+'/themas')
+        .then(res => {
+          this.options = res.data;
+        })
     },
     methods: {
       addThema(newThema) {
         const thema = {
-          title: newThema,
-          desc: 'beschrijving voor nieuwe thema?',
+          label: newThema,
+          definition: 'beschrijving voor nieuwe thema?',
           id: newThema.substring(0, 2) + Math.floor((Math.random() * 10000000))
         }
         this.options.push(thema)

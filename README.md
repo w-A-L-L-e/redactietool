@@ -48,6 +48,7 @@ Available make commands:
   preview_bulma         Preview changed bulma styling before copying into flask
   precompile_bulma      re-compile bulma with custom styling and injecet into flask app/static folder
   vue_develop           Start Vue.js frontend server for developing Vue components
+  vue_develop_api       Start mocking server to supply suggest json content with CORS for calling during vue_develop cycle
   precompile_assets     re-compile vue components for release and inject into flask app/static folder
 
 ```

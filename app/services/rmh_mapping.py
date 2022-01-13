@@ -16,7 +16,6 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property, get_md_array
 from app.services.mediahaven_api import MediahavenApi
-from app.services.suggest_api import SuggestApi
 from markupsafe import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
@@ -24,7 +23,7 @@ logger = logging.get_logger(__name__, config=ConfigParser())
 
 class RmhMapping:
     def __init__(self):
-        self.suggest_api = SuggestApi()
+        print("RmhMapping initialised...")
 
     def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
@@ -64,11 +63,11 @@ class RmhMapping:
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
+            'item_onderwijsniveaus': [],
+            'item_onderwijsgraden': [],
+            'item_themas': [],
+            'item_vakken': [],
             'item_keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
-            'get_onderwijsniveaus': self.suggest_api.get_onderwijsniveaus(),
-            'get_onderwijsgraden': self.suggest_api.get_onderwijsgraden(),
-            'get_themas': self.suggest_api.get_themas(),
-            'get_vakken': self.suggest_api.get_vakken(),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,

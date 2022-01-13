@@ -38,6 +38,7 @@ from app.config import flask_environment
 from app.services.authorization import (get_token, requires_authorization,
                                         verify_token, check_saml_session, OAS_APPNAME)
 from app.services.mediahaven_api import MediahavenApi
+from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
@@ -545,6 +546,38 @@ def save_item_metadata():
         'metadata/edit.html',
         **tp
     )
+
+
+@app.route('/onderwijsniveaus', methods=['GET'])
+@requires_authorization
+@login_required
+def get_onderwijsniveaus():
+    suggest_api = SuggestApi()
+    return suggest_api.get_onderwijsniveaus()
+
+
+@app.route('/onderwijsgraden', methods=['GET'])
+@requires_authorization
+@login_required
+def get_onderwijsgraden():
+    suggest_api = SuggestApi()
+    return suggest_api.get_onderwijsgraden()
+
+
+@app.route('/themas', methods=['GET'])
+@requires_authorization
+@login_required
+def get_themas():
+    suggest_api = SuggestApi()
+    return suggest_api.get_themas()
+
+
+@app.route('/vakken', methods=['GET'])
+@requires_authorization
+@login_required
+def get_vakken():
+    suggest_api = SuggestApi()
+    return suggest_api.get_vakken()
 
 # debugging route to see vue components can submit nicely to flask
 # @app.route('/edit_metadata_vue', methods=['POST'])

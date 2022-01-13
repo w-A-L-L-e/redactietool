@@ -21,6 +21,7 @@ help:
 	@echo "  preview_bulma         Preview changed bulma styling before copying into flask"
 	@echo "  precompile_bulma      re-compile bulma with custom styling and injecet into flask app/static folder"
 	@echo "  vue_develop           Start Vue.js frontend server for developing Vue components"
+	@echo "  vue_develop_api       Start mocking server to supply suggest json content with CORS for calling during vue_develop cycle"
 	@echo "  precompile_assets     re-compile vue components for release and inject into flask app/static folder"
 	@echo "                        "
 	@echo ""
@@ -97,6 +98,10 @@ precompile_bulma:
 .PHONY: vue_develop
 vue_develop:
 	cd frontend && ./start_vue_development.sh
+
+.PHONY: vue_develop_api
+vue_develop_api:
+	cd mocked_metadata && ./start_mock_api.sh
 
 .PHONY: precompile_assets 
 precompile_assets:
