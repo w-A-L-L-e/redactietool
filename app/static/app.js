@@ -99,6 +99,11 @@ function newUploadClicked(ref){
   ref.className += ' disabled';
 }
 
+function clearButtonLoadingState(){
+  // TODO: put all buttons back in original state 
+  // this is similar to hideEmptyTitles but instead we modify
+  // a class and/or replace the button.value back
+}
 
 // ============================= MODAL DIALOG ==================================
 function showNavigationWarning(){
@@ -193,7 +198,6 @@ function collapseEmptyTextareas(){
   collapseEmptyTextarea("transcriptie");
 }
 
-
 function hideTitleInput(input_id){
   var input_field = document.getElementById(input_id);
   if( input_field ){
@@ -268,77 +272,17 @@ function autoCloseAlert(){
   }, 4000); 
 }
 
-
-function clearButtonLoadingState(){
-  console.log("TODO: put all buttons back in original state");
-  // find all buttons and return to original state
-  // this is similar to hideEmptyTitles but instead we modify
-  // a class and/or replace the button.value
-}
-
-
-// ======================== FORMs onbeforeunload handlers ======================
-// this is found by googling around some, not sure yet if we'll take this route
-function addUnloadHooks(){
-  // some vanilla onbeforeunload for our custom alert box, 
-  // this needs some further work and state:
-  // when we add this listener we get the browser default popups.
-  //
-  // window.addEventListener('beforeunload', function (e) {
-  //   console.log("EVENT: beforeunload detected!");
-  //   // Cancel the event
-  //   // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-  //   e.preventDefault(); 
-  //   // Chrome requires returnValue to be set
-  //   e.returnValue = '';
-  //     //possibly do something like this, not sure yet:
-  //     setInterval(function(){
-  //        if modalCancelled return false;
-  //        if modalConfirmed return true;
-  //     }, 800);
-  //   // the absence of a returnValue property on the event will guarantee the browser unload happens
-  //   delete e['returnValue'];
-  // });
-  //
-  // Found an interesting jquery/bootstrap based module that matches more what is described
-  // in ticket DEV-1794:
-  // https://github.com/NightOwl888/jquery.dirtyforms.dialogs.bootstrap.dist. 
-  // -> I need to test this out first and refactor or rewrite some of the modal_dialog.js code to 
-  // do something similar for bulma instead.
-  // That will however also introduce jquery into the mix, 
-  // making our js dependencies around 86k larger.
-}
-
 function refreshKeyframeImage(img_id){
-  // this is a temporary dirty hack/workarond
-  var img = document.getElementById(img_id);
-  if(img){
-    console.log('hard refresh keyframe poster image...');
-
-    var newImage = new Image();
-    newImage.src = img.src;
-    img.src = img.src+'breaker';
-
-    setTimeout(function(){
-      img.src = img.src; // trick browser into reload
-      window.location.reload(true)
-    },500);
-
-    // preload next image with cache breaker
-    // newImage.src = img.src+"?nocache=" + new Date().getTime();
-    // -> this does not work, a workaround is passing the image through
-    // a custom route in flask (backend reloads image and does a passthrough)
-    // with some headers etc.
-    // -> however charlotte is asking Herwig if we can't just fix it on the viaa server
-    // of testbeeld instead...
-  }
+  console.log("can be added later if mediahaven changes the previewImageUrl on keyframe change...");
+  // we need to reload the background image url by finding flowplayer's id and then going down
+  // in dom and update background tag.
 }
 
 // =========================== DOCUMENT READY EVENT ============================
-// document on-ready handler, similar to bulma.io docs, adapted and customized
-// for our nees. We also added collapsing and hiding of inputs, textareas and 
-// notifications here.
-// We also handle burger menu open/close here.
+// Handle burger menu open/close on all pages.
+// Handle collapsing and hiding of inputs, textareas 
+// and notifications on the metadata edit form
+// Handle any other resetting of state on pageload if necessary
 document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(
@@ -375,16 +319,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // showNavigationWarning();
   // flashModalWarning();
   // showModalAlert("hello", "world");
-
-  // simple version of unload hook, we however have
-  // a more advanced dirtyforms proof of concept in bulma_customization
-  // to be determined if we actually want/need this later on.
-  // beforeunload confirm/cancel example
-  // addUnloadHooks();
-
-  // TODO: slim select : example of a multi-select component
-  // new SlimSelect({
-  //   select: '#multiple'
-  // })
 });
 

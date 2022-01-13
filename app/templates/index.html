@@ -48,7 +48,7 @@ Login
           <div class="buttons is-pulled-right">
             {% if legact_login_enabled %}
               <a href="/legacy_login" class="button is-link is-light">
-                Terug naar originele authenticatie 
+                Development authenticatie
               </a>
             {% endif %}
 
@@ -61,6 +61,15 @@ Login
     </div>
 
   </div>
+
+  <script>
+    function hideAlerts(){
+      console.log("Auto hide alerts...");
+    }
+
+    hideAlerts();
+  </script>
+
 
 {% endblock %}
 
