@@ -288,7 +288,6 @@ def search_media():
     if 'samlUserdata' in session:
         if len(session['samlUserdata']) > 0:
             attributes = session['samlUserdata'].items()
-        print("attributes=", attributes)
         token = 'saml'
     else:
         token = request.args.get('token')
