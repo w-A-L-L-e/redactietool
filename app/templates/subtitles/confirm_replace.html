@@ -18,7 +18,7 @@ Ondertitels valideren
     </p>
 
     <form class="confirm_form" action="/send_to_mam" method="POST" enctype="multipart/form-data">
-      {% include 'confirm_fields.html'%}
+      {% include 'subtitles/confirm_fields.html'%}
       <input type="hidden" name="replace_existing" value="confirm"/>
       <input 
         id="confirm_submit"
@@ -30,7 +30,7 @@ Ondertitels valideren
     </form>
 
     <form class="confirm_form" action="/send_to_mam" method="POST" enctype="multipart/form-data">
-      {% include 'confirm_fields.html'%}
+      {% include 'subtitles/confirm_fields.html'%}
       <input type="hidden" name="replace_existing" value="cancel"/>
       <input 
         id="confirm_cancel"

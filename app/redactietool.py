@@ -338,7 +338,7 @@ def get_upload():
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
     return render_template(
-        'upload.html',
+        'subtitles/upload.html',
         token=token,
         pid=pid,
         department=department,
@@ -379,7 +379,7 @@ def post_upload():
     if conversion_error:
         return upload_error(tp, conversion_error)
 
-    logger.info('preview', data={
+    logger.info('subtitles/preview', data={
         'pid': tp['pid'],
         'file': tp['subtitle_file']
     })
@@ -394,7 +394,7 @@ def post_upload():
     tp['flowplayer_token'] = os.environ.get(
         'FLOWPLAYER_TOKEN', 'set_in_secrets')
 
-    return render_template('preview.html', **tp)
+    return render_template('subtitles/preview.html', **tp)
 
 
 def upload_folder():
@@ -473,7 +473,7 @@ def send_to_mam():
                 or
                 (mh_response.get('status') == 400)
             ):  # duplicate error can give 409 or 400, show dialog
-                return render_template('confirm_replace.html', **tp)
+                return render_template('subtitles/confirm_replace.html', **tp)
         else:
             # upload subtitle and xml sidecar with ftp instead
             ftp_uploader = FtpUploader()
@@ -483,13 +483,13 @@ def send_to_mam():
 
         # cleanup temp files and show final page with mh request results
         delete_files(upload_folder(), tp)
-        return render_template('subtitles_sent.html', **tp)
+        return render_template('subtitles/sent.html', **tp)
     else:
         # user refreshed page (tempfiles already deleted),
         # or user chose 'cancel' above. in both cases show
         # subtitles already sent
         tp['upload_cancelled'] = True
-        return render_template('subtitles_sent.html', **tp)
+        return render_template('subtitles/sent.html', **tp)
 
 
 # ====================== Redactietool metadata ROUTES =========================
@@ -508,7 +508,6 @@ def edit_metadata():
     if validation_error:
         return pid_error(token, pid, validation_error)
 
-    # TODO: refactor this part out into services
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
@@ -518,7 +517,7 @@ def edit_metadata():
     td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
 
     return render_template(
-        'edit_metadata.html',
+        'metadata/edit.html',
         **td
     )
 
@@ -531,7 +530,6 @@ def save_item_metadata():
     pid = request.form.get('pid')
     department = request.form.get('department')
 
-    # TODO: refactor this part out into services
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
@@ -544,7 +542,7 @@ def save_item_metadata():
     # errors can be passed in **tp !
 
     return render_template(
-        'edit_metadata.html',
+        'metadata/edit.html',
         **tp
     )
 
