@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  @Author: Walter Schreppers
+#
+#  app/services/suggest_api.py
+#
+#   Use suggest library to get suggestions for themas, vakken given 
+#   onderwijsniveaus and onderwijsgraden.
+#   This wraps the calls and returns json to be used in metadata edit form
+#   We also allow fetching of onderwijsgraden and niveaus to dynamically populate
+#   the Vue components. Furthermore we will add some endpoints to do ajax calls from
+#   vue that return data here (again in json format).
+#
+#   ENV vars: SPARQL_ENDPOINT, SPARQL_USER and SPARQL_PASS
+#
+
+import os
+import json
+from viaa.configuration import ConfigParser
+from viaa.observability import logging
+from app.services.suggest.Suggest import Suggest
+
+
+class SuggestApi:
+
+    SPARQL_ENDPOINT = os.environ.get('SPARQL_ENDPOINT', 'http://sparql_test_endpoint')
+    USER = os.environ.get('SPARQL_USER', "test")
+    PASSWORD = os.environ.get('SPARQL_PASS',"test")
+
+    def __init__(self):
+        self.suggest = Suggest(
+            self.SPARQL_ENDPOINT, 
+            self.USER, 
+            self.PASSWORD
+        )
+
+    def get_themas(self):
+        themas = []
+        for r in self.suggest.get_themas():
+            themas.append(r)
+
+        return json.dumps(themas)
+
+    def get_vakken(self):
+        vakken = []
+        for r in suggest.get_vakken():
+            vakken.append(r)
+
+        return json.dumps(vakken)
+
+    def get_onderwijsniveaus(self):
+        return "[]"
+
+    def get_onderwijsgraden(self):
+        return "[]"
+

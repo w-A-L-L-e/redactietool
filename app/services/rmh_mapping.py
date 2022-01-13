@@ -16,6 +16,7 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property, get_md_array
 from app.services.mediahaven_api import MediahavenApi
+from app.services.suggest_api import SuggestApi
 from markupsafe import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
@@ -23,7 +24,7 @@ logger = logging.get_logger(__name__, config=ConfigParser())
 
 class RmhMapping:
     def __init__(self):
-        print("RmhMapping initialized")
+        self.suggest_api = SuggestApi()
 
     def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
@@ -63,7 +64,11 @@ class RmhMapping:
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
-            'keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
+            'item_keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
+            'get_onderwijsniveaus': self.suggest_api.get_onderwijsniveaus(),
+            'get_onderwijsgraden': self.suggest_api.get_onderwijsgraden(),
+            'get_themas': self.suggest_api.get_themas(),
+            'get_vakken': self.suggest_api.get_vakken(),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
@@ -83,8 +88,6 @@ class RmhMapping:
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
             'description': mam_data.get('description'),
-            # deze is zelfde waarde, stond fout in wireframes Koen
-            # 'beschrijving_meemoo_redactie': get_property(mam_data, 'dcterms_abstract'),
             'avo_beschrijving': get_property(mam_data, 'dcterms_abstract'),
             'ondertitels': ondertitels,
             'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
@@ -142,12 +145,8 @@ class RmhMapping:
         print("DEBUG form data=", request.form)
 
         # maybe also serie, episode and aflevering editable (double check this tomorrow).
-        # TODO:  make mediahaven PUT CALL HERE with adjusted mam_data
-        # disable until we generate batch update xml sidecar (theres a bug in the
-        # single update field call which is not according to the docs). However we will
-        # fix this tomorrow.
+        # TODO:  mediahaven sidecar is necessary (put call does not work mh bug vs docs!
         mh_api = MediahavenApi()
-        # mh_api = mh_api  # temp lint fix until tomorrow
         mh_api.update_metadata(department, mam_data)
 
         errors = None  # for now always none, hoever mh can give errors
@@ -169,18 +168,15 @@ class RmhMapping:
     # for the post call we don't need it as the id's will be directly pushed to mediahaven api
     # but this is something for later as Caroline needs to extend MAM structure
     # to have support for these:
-    # more details in jira ticket https://meemoo.atlassian.net/browse/DEV-1821
+    # more details in jira tickets
+    #  https://meemoo.atlassian.net/browse/DEV-1821
+    #  https://meemoo.atlassian.net/browse/OPS-1231
     def mh_to_form(self, token, pid, department, errors, mam_data):
         """
         convert json metadata from MediahavenApi back into a
         python hash for populating the view
         """
-        # TODO: also don't forget to make calls here using the suggest library from Miel.
-        # we will be getting back id's from mediahaven and in order to populate
-        # the dropdowns in form we will need some extra calls in order to fetch
-        # the actual label and description:
-        # https://github.com/viaacode/skos-scripts-redactietool
-
+        
         # debug data for in logs:
         print("DEBUG: mediahaven json_data:\n")
         print(json.dumps(mam_data, indent=2))
