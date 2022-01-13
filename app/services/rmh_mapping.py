@@ -175,7 +175,7 @@ class RmhMapping:
         convert json metadata from MediahavenApi back into a
         python hash for populating the view
         """
-        
+
         # debug data for in logs:
         print("DEBUG: mediahaven json_data:\n")
         print(json.dumps(mam_data, indent=2))
