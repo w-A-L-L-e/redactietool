@@ -55,33 +55,53 @@
           this.options = res.data;
 
           // set selected options for this specific item
+          // do fallback, in case only old string values are present
           var value_div = document.getElementById("item_onderwijsgraden");
           if(value_div){
-            var values = JSON.parse(value_div.innerText);
-            for(var k in values){
-              var definition = values[k]['value'];
-              
-              //get id corresponding to def
-              var item_id = "";
-              var item_label = "";
-              for( var i in this.options ){
-                var item = this.options[i];
-                if( item['definition'] == definition ){
-                  item_id = item['id'];
-                  item_label = item['label'];
+            var onderwijsgraden = JSON.parse(value_div.innerText);
+          }
+
+          var item = {};
+          var option_item = {};
+
+          if( onderwijsgraden['show_legacy'] ){
+            console.log("legacy fallback voor onderwijsniveaus (lom_typicalagerange)...");
+            var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
+            if(value_div_legacy){
+              var values = JSON.parse(value_div_legacy.innerText);
+              for(var k in values){
+                item['definition'] = values[k]['value'];
+                
+                //get id corresponding to def
+                for( var i in this.options ){
+                  option_item = this.options[i];
+                  if( item['definition'] == option_item['definition'] ){
+                    item['id'] = option_item['id'];
+                    item['label'] = option_item['label']
+                    break;
+                  }
+                }
+                default_value.push( item );
+              }
+            }
+          }
+          else{
+            console.log("loading new onderwijsgraden from (lom_onderwijsgraad)...");
+            for(var o in onderwijsgraden){
+              item['id'] = onderwijsgraden[o]['value'];
+              //get label and definition
+              for(var j in this.options ){
+                option_item = this.options[j];
+                if( item['id'] == option_item['id'] ){
+                  item['label'] = option_item['label'];
+                  item['definition'] = option_item['definition'];
                   break;
                 }
               }
-              default_value.push(
-                {
-                  'id': item_id,
-                  'label': item_label,
-                  'definition': definition
-                }
-              );
+              default_value.push(item);
             }
           }
-          this.json_value = JSON.stringify(default_value);
+
         });
     },
     methods: {

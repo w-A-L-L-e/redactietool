@@ -121,13 +121,16 @@ def get_array_property(mam_data, attribute, array_attribute):
     return result
 
 
-def get_md_array(mam_data, attribute):
+def get_md_array(mam_data, attribute, legacy_fallback=False):
     props = mam_data.get('mdProperties', [])
     for prop in props:
         if prop.get('attribute') == attribute:
             return prop.get('value', [])
 
-    return []
+    if legacy_fallback:
+        return {'show_legacy': True}
+    else:
+        return []
 
 
 def save_sidecar_xml_v1(upload_folder, metadata, tp):

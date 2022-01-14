@@ -67,8 +67,22 @@ class RmhMapping:
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
             'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
-            'item_onderwijsniveaus': json.dumps(get_md_array(mam_data, 'lom_context')),
-            'item_onderwijsgraden': json.dumps(get_md_array(mam_data, 'lom_typicalagerange')),
+            'item_onderwijsniveaus': json.dumps(
+                get_md_array(
+                    mam_data, 
+                    'lom_onderwijsniveau',
+                    legacy_fallback=True
+                )
+            ),
+            'item_onderwijsniveaus_legacy': json.dumps(get_md_array(mam_data, 'lom_context')),
+            'item_onderwijsgraden': json.dumps(
+                get_md_array(
+                    mam_data, 
+                    'lom_onderwijsgraad',
+                    legacy_fallback=True
+                )
+            ),
+            'item_onderwijsgraden_legacy': json.dumps(get_md_array(mam_data, 'lom_typicalagerange')),
             'item_keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),

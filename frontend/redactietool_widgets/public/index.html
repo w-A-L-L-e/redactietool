@@ -50,21 +50,39 @@
       <div id="item_type" style="display:none;">Audio</div>
       <div id="item_languages" style="display:none">[{"value": "fr", "attribute": "multiselect", "dottedKey": null}, {"value": "nl", "attribute": "multiselect", "dottedKey": null}]</div>
 
-      <div id="item_keywords" style="display:none;">
-[{"value": "reportage", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Silent Movie", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Belgium", "attribute": "Trefwoord", "dottedKey": null},{"value": "BURGER", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONFLICT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONVENTIE VAN GENEVE", "attribute": "Trefwoord", "dottedKey": null}, {"value": "INTERNATIONAAL STRAFGERECHTSHOF", "attribute": "Trefwoord", "dottedKey": null}, {"value": "MENSENRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOG", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOGSMISDAAD", "attribute": "Trefwoord", "dottedKey": null}, {"value": "SCHENDING", "attribute": "Trefwoord", "dottedKey": null}, {"value": "STRAFRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "VAN DEN WIJNGAERT CHRIS", "attribute": "Trefwoord", "dottedKey": null}]
+     
+      <div id="item_eindgebruikers" style="display:none;">
+        [{"value": "Docent", "attribute": "multiselect", "dottedKey": null}, {"value": "Student", "attribute": "multiselect", "dottedKey": null}]
       </div>
-      <div id="item_eindgebruikers" style="display:none;">[{"value": "Docent", "attribute": "multiselect", "dottedKey": null}, {"value": "Student", "attribute": "multiselect", "dottedKey": null}]
-</div>
-      <div id="item_onderwijsgraden">[{"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 3de graad", "attribute": "multiselect", "dottedKey": null}]</div>
-
-
-      item_themas:<div class="" id="item_themas">[]</div>
-      item_vakken:<div class="" id="item_vakken">[]</div>
+     
+      niveaus:
       <div id="item_onderwijsniveaus">
+        [{"value": "https://data.meemoo.be/term/onderwijs/niveau/hoger-onderwijs", "attribute": "multiselect", "dottedKey": null}]
+      </div>
+
+      niveaus legacy:
+      <div id="item_onderwijsniveaus_legacy">
         [{"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}]
       </div>
 
 
+      graden: 
+      <div id="item_onderwijsgraden">{"show_legacy": true}</div>
+
+      graden legacy:
+      <div id="item_onderwijsgraden_legacy">
+        [{"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 3de graad", "attribute": "multiselect", "dottedKey": null}]
+      </div>
+
+
+      <div id="item_themas" style="display:none;">[]</div>
+      <div id="item_vakken" style="display:none;">[]</div>
+
+      <div id="item_keywords" style="display:none;">
+        [{"value": "reportage", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Silent Movie", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Belgium", "attribute": "Trefwoord", "dottedKey": null},{"value": "BURGER", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONFLICT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONVENTIE VAN GENEVE", "attribute": "Trefwoord", "dottedKey": null}, {"value": "INTERNATIONAAL STRAFGERECHTSHOF", "attribute": "Trefwoord", "dottedKey": null}, {"value": "MENSENRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOG", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOGSMISDAAD", "attribute": "Trefwoord", "dottedKey": null}, {"value": "SCHENDING", "attribute": "Trefwoord", "dottedKey": null}, {"value": "STRAFRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "VAN DEN WIJNGAERT CHRIS", "attribute": "Trefwoord", "dottedKey": null}]
+      </div>
+
+      
       REDACTIE_API_URL:
       <span id="redactie_api_url">http://localhost:5000</span>
 
