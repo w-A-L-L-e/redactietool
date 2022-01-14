@@ -1,0 +1,435 @@
+{
+  "offsetFrames": 0,
+  "fragmentStartFrames": 0,
+  "fragmentEndFrames": 7230,
+  "fragmentDurationFrames": 7230,
+  "offsetTimeCode": "00:00:00.000",
+  "fragmentStartTimeCode": "00:00:00.000",
+  "fragmentEndTimeCode": "00:04:49.200",
+  "fragmentDurationTimeCode": "00:04:49.200",
+  "mediaObjectId": "dd0025d344e74ca4947d60b509031e8b12cde4e6953c46008ef710ba0ab4c0ac",
+  "fragmentId": "dd0025d344e74ca4947d60b509031e8b12cde4e6953c46008ef710ba0ab4c0acd74888830de943b9bf986e6be9578c07",
+  "externalId": "974e1a33f35c474f841ec18fdb3efa93d6abf9a1029f44d9aaa9275f643576d0b2d2cdbc4e5745c89a46a443422995aa",
+  "title": "60 JAAR CONVENTIE VAN GENEVE",
+  "description": "De conventie van Gen\u00e8ve bestaat vandaag 60 jaar. Deze conventie, die ondertekend is door alle landen van de wereld, moet bescherming bieden aan mensen in gewapend conflict.  Bij de ondertekening was Prins Frederik de Merode voorzitter van het Rode Kruis in Belgi\u00eb (klankinlas).Chris Van den Wyngaert legde in maart dit jaar nog de eed af als rechter bij het internationaal strafhof in Den Haag en daar is die conventie een belangrijk instrument. De conventie van Gen\u00e8ve geeft een maatstaf. De belangrijkste regels uit de conventie zijn: geen burgers aanvallen tijdens een oorlog en krijgsgevangenen moeten met respect behandeld worden. Het recht kan slechts in beperkte mate kwalijke gebeurtenissen tegenhouden, dat geldt ook voor de conventie van Gen\u00e8ve. Maar men kan nu oorlogsmisdaden berechten aan de hand van het oorlogsrecht.    Ge\u00efnterviewde: VAN DEN WIJNGAERT CHRIS",
+  "date": "2009:08:12 00:00:00",
+  "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/dd0025d344e74ca4947d60b509031e8b12cde4e6953c46008ef710ba0ab4c0ac/keyframes/keyframes_1_1/keyframe1.jpg",
+  "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/dd0025d344e74ca4947d60b509031e8b12cde4e6953c46008ef710ba0ab4c0ac/keyframes-thumb/keyframes_1_1/keyframe1.jpg",
+  "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/dd0025d344e74ca4947d60b509031e8b12cde4e6953c46008ef710ba0ab4c0ac/browse.mp3",
+  "originalFileName": "974e1a33f35c474f841ec18fdb3efa93d6abf9a1029f44d9aaa9275f643576d0b2d2cdbc4e5745c89a46a443422995aa.mp4",
+  "width": 320,
+  "height": 180,
+  "keywords": [],
+  "type": "Audio",
+  "authors": [],
+  "lastModifiedDate": "2021-09-15T10:00:51Z",
+  "archiveDate": "2018-09-19T14:05:48Z",
+  "exportable": true,
+  "editable": true,
+  "deletable": true,
+  "isPublic": false,
+  "ingestSpaceId": "",
+  "isInIngestSpace": false,
+  "status": "FINISHED",
+  "browseStatus": "completed",
+  "originalStatus": "completed",
+  "archiveStatus": "on_disk",
+  "workflow": "dailies",
+  "mdProperties": [
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "fr",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "nl",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_languages",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Secundair onderwijs",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_context",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Secundair 2de graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Secundair 3de graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_typicalagerange",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "Christiane van den Wijngaert",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "conventie van Gen\u00e8ve",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "Internationaal Strafhof",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "justitie",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "mensenrechten",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "oorlog",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_keywords",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "magazine",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_types",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "b193f470-a6be-4917-be68-d41152282ff4",
+          "attribute": "BriefingID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "Algemeen_Briefing_ID",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "De ochtend",
+          "attribute": "serie",
+          "dottedKey": null
+        },
+        {
+          "value": "DE OCHTEND",
+          "attribute": "programma",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_titles",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Audio",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_learningresourcetype",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Docent",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Student",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_intendedenduserrole",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "gedrags- en cultuurwetenschappen",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "PAV - MAVO - GASV - ASPV",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "recht",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_classification",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "BURGER",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "CONFLICT",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "CONVENTIE VAN GENEVE",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "INTERNATIONAAL STRAFGERECHTSHOF",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "MENSENRECHT",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "OORLOG",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "OORLOGSMISDAAD",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "SCHENDING",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "STRAFRECHT",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "VAN DEN WIJNGAERT CHRIS",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "VEILIGHEID",
+          "attribute": "Trefwoord",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_subjects",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "6688g9j88c",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "60 JAAR CONVENTIE VAN GENEVE_00000000-00044905.WAV",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        },
+        {
+          "value": "1210090812720583521",
+          "attribute": "historicalCarrier",
+          "dottedKey": null
+        },
+        {
+          "value": "ARD 1210090812720583521",
+          "attribute": "historicalCarrier",
+          "dottedKey": null
+        },
+        {
+          "value": "AIM01108263",
+          "attribute": "MEDIA_ID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-rf5kf25",
+      "attribute": "Original_CP_ID",
+      "dottedKey": null
+    },
+    {
+      "value": "60 JAAR CONVENTIE VAN GENEVE_00000000-00044905.WAV",
+      "attribute": "dc_source",
+      "dottedKey": null
+    },
+    {
+      "value": "2009:08:12 00:00:00",
+      "attribute": "CreationDate",
+      "dottedKey": null
+    },
+    {
+      "value": "dailies",
+      "attribute": "sp_name",
+      "dottedKey": null
+    },
+    {
+      "value": "2009-08-12T00:00:00",
+      "attribute": "dcterms_created",
+      "dottedKey": null
+    },
+    {
+      "value": "De ochtend: Chris van den Wijngaert over de conventie van Gen\u00e8ve",
+      "attribute": "dc_title",
+      "dottedKey": null
+    },
+    {
+      "value": "true",
+      "attribute": "NeedsPublicationDateMigration",
+      "dottedKey": null
+    },
+    {
+      "value": "zc7rn43s84",
+      "attribute": "PID",
+      "dottedKey": null
+    },
+    {
+      "value": "testbeeld",
+      "attribute": "CP",
+      "dottedKey": null
+    },
+    {
+      "value": "VRT",
+      "attribute": "Original_CP",
+      "dottedKey": null
+    },
+    {
+      "value": "De conventie van Gen\u00e8ve bestaat vandaag 60 jaar. Deze conventie, die ondertekend is door alle landen van de wereld, moet bescherming bieden aan mensen in gewapend conflict.  Bij de ondertekening was Prins Frederik de Merode voorzitter van het Rode Kruis in Belgi\u00eb (klankinlas).Chris Van den Wyngaert legde in maart dit jaar nog de eed af als rechter bij het internationaal strafhof in Den Haag en daar is die conventie een belangrijk instrument. De conventie van Gen\u00e8ve geeft een maatstaf. De belangrijkste regels uit de conventie zijn: geen burgers aanvallen tijdens een oorlog en krijgsgevangenen moeten met respect behandeld worden. Het recht kan slechts in beperkte mate kwalijke gebeurtenissen tegenhouden, dat geldt ook voor de conventie van Gen\u00e8ve. Maar men kan nu oorlogsmisdaden berechten aan de hand van het oorlogsrecht.    Ge\u00efnterviewde: VAN DEN WIJNGAERT CHRIS",
+      "attribute": "dc_description_lang",
+      "dottedKey": null
+    },
+    {
+      "value": "WAV-PCM",
+      "attribute": "dc_format",
+      "dottedKey": null
+    },
+    {
+      "value": "OR-h41jm1d",
+      "attribute": "CP_id",
+      "dottedKey": null
+    },
+    {
+      "value": "AIM01108263",
+      "attribute": "dc_identifier_localid",
+      "dottedKey": null
+    },
+    {
+      "value": "2009-08-12",
+      "attribute": "dcterms_issued",
+      "dottedKey": null
+    },
+    {
+      "value": "\u00a9 vrt",
+      "attribute": "RightsOwner",
+      "dottedKey": null
+    },
+    {
+      "value": "item",
+      "attribute": "ebu_objectType",
+      "dottedKey": null
+    },
+    {
+      "value": "De conventie van Gen\u00e8ve bestaat zestig jaar. Deze conventie, die ondertekend is door alle landen van de wereld, moet bescherming bieden aan mensen in gewapend conflict. Bij de ondertekening was prins Frederik de Merode, voorzitter van het Rode Kruis, in Belgi\u00eb aanwezig.\n\nChris van den Wijngaert legde in maart 2009 nog de eed af als rechter bij het Internationaal Strafhof in Den Haag en daar is die conventie een belangrijk instrument. Van den Wijngaert geeft uitleg via een telefonisch interview.\n\nDe belangrijkste regels uit de conventie zijn: geen burgers aanvallen tijdens een oorlog en krijgsgevangenen met respect behandelen. Het recht kan slechts in beperkte mate kwalijke gebeurtenissen tegenhouden, dat geldt ook voor de conventie van Gen\u00e8ve. Maar men kan nu oorlogsmisdaden berechten aan de hand van het oorlogsrecht.",
+      "attribute": "dcterms_abstract",
+      "dottedKey": null
+    }
+  ],
+  "relations": {}
+}
+
+

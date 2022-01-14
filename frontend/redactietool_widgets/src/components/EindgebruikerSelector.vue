@@ -46,6 +46,23 @@
         ]
       }
     },
+    created(){
+      var value_div = document.getElementById("item_eindgebruikers");
+      if(value_div){
+        var values = JSON.parse(value_div.innerText);
+        for(var k in values){
+          var preset_value = values[k]
+          default_value.push(
+            {
+              'name': preset_value['value'],
+              'code': preset_value['value']
+            }
+          );
+        }
+      }
+      this.json_value = JSON.stringify(default_value);
+    },
+
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
