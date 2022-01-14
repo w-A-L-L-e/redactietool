@@ -4,9 +4,11 @@
       placeholder="Selecteer onderwijsgraden" 
       label="label" 
       track-by="id" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
-
+      :options="options"
+      :multiple="true" 
+      :taggable="false" 
+      :searchable="false"
+      @input="updateValue">
        
       <template slot="noResult">Onderwijsgraad niet gevonden</template>
 

@@ -4,10 +4,10 @@
       placeholder="Kies media type" 
       label="name" 
       track-by="code" 
-      :options="options" :multiple="false" 
+      :options="options"
+      :multiple="false" 
       :taggable="false" 
       :searchable="false"
-      :allow-empty="false"
       :show-labels="false"
       @input="updateValue">
 
@@ -22,7 +22,7 @@
 <script>
   import Multiselect from 'vue-multiselect'
 
-  var default_value = {};
+  var default_value = null;
 
   export default {
     name: 'TypeSelector',
@@ -43,10 +43,13 @@
       var item_type_div = document.getElementById("item_type");
       if(item_type_div){
         var item_type = item_type_div.innerText;
-        default_value = [{name: item_type, code: item_type}]
+        if(item_type){
+          default_value = [{name: item_type, code: item_type}]
+          this.json_value = JSON.stringify(default_value);
+          this.value = default_value;
+        }
       }
-      this.json_value = JSON.stringify(default_value);
-      this.value = default_value;
+      
     },
 
     methods: {

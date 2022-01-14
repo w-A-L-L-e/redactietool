@@ -4,8 +4,11 @@
       placeholder="Kies eindgebruikers" 
       label="name" 
       track-by="code" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
+      :options="options"
+      :multiple="true"
+      :searchable="false"
+      :taggable="false"
+      @input="updateValue">
 
       <template slot="noResult">Beoogde eindgebruiker niet gevonden</template>
 

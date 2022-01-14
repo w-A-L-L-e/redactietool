@@ -4,8 +4,11 @@
       placeholder="Selecteer onderwijsniveaus" 
       label="label" 
       track-by="id" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
+      :options="options"
+      :multiple="true" 
+      :searchable="false"
+      :taggable="false"
+      @input="updateValue">
 
       <template slot="noResult">Onderwijsniveau niet gevonden</template>
 

@@ -1,11 +1,13 @@
 <template>
   <div id="talen_selector"> 
     <multiselect v-model="value" 
-      placeholder="Kies taal" 
+      placeholder="Zoek taal" 
       label="name" 
       track-by="code" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
+      :options="options"
+      :multiple="true" 
+      :taggable="false"
+      @input="updateValue">
 
       <template slot="noResult">Taal niet gevonden</template>
 
