@@ -167,6 +167,32 @@
         ]
       }
     },
+    created(){
+      var languages_div = document.getElementById("item_languages");
+      if(languages_div){
+        var languages = JSON.parse(languages_div.innerText);
+        for(var l in languages){
+          var language_code = languages[l]['value'];
+          var language_name = "todo";
+
+          // lookup language name
+          for( var o in this.options){
+            var entry = this.options[o];
+            if( entry['code'] == language_code ){
+              language_name = entry['name'];
+              break;
+            }
+          }
+          default_value.push(
+            {
+              'name': language_name, 
+              'code': language_code 
+            }
+          );
+        }
+      }
+      this.json_value = JSON.stringify(default_value);
+    },
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
