@@ -62,7 +62,6 @@
       }
       this.json_value = JSON.stringify(default_value);
     },
-
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)

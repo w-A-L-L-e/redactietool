@@ -33,7 +33,7 @@
         json_value: JSON.stringify(default_value),
         options: [
           { 
-            id: "", 
+            id: "loading...", 
             label: "Onderwijsgraden inladen...", 
             definition: "Onderwijsgraden inladen..."
           },
@@ -51,8 +51,38 @@
       axios
         .get(redactie_api_url+'/onderwijsgraden')
         .then(res => {
+          // populate all possible options
           this.options = res.data;
-        })
+
+          // set selected options for this specific item
+          var value_div = document.getElementById("item_onderwijsgraden");
+          if(value_div){
+            var values = JSON.parse(value_div.innerText);
+            for(var k in values){
+              var definition = values[k]['value'];
+              
+              //get id corresponding to def
+              var item_id = "";
+              var item_label = "";
+              for( var i in this.options ){
+                var item = this.options[i];
+                if( item['definition'] == definition ){
+                  item_id = item['id'];
+                  item_label = item['label'];
+                  break;
+                }
+              }
+              default_value.push(
+                {
+                  'id': item_id,
+                  'label': item_label,
+                  'definition': definition
+                }
+              );
+            }
+          }
+          this.json_value = JSON.stringify(default_value);
+        });
     },
     methods: {
       updateValue(value){

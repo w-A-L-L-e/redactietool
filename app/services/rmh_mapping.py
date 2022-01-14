@@ -70,6 +70,7 @@ class RmhMapping:
             'item_keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
             'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
+            'item_onderwijsgraden': json.dumps(get_md_array(mam_data, 'lom_typicalagerange')),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
