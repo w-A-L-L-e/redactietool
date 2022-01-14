@@ -17,7 +17,7 @@
 
   var default_value = [];
   export default {
-    name: 'VakkenSelector',
+    name: 'TrefwoordenSelector',
     components: {
       Multiselect 
     },
@@ -37,7 +37,7 @@
       }
     },
     created(){
-      var keyword_div = document.getElementById("keywords");
+      var keyword_div = document.getElementById("item_keywords");
       if(keyword_div){
         var keywords = JSON.parse(keyword_div.innerText);
         for(var k in keywords){

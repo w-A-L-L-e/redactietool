@@ -6,6 +6,9 @@
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
+
+      <template slot="noResult">Taal niet gevonden</template>
+
     </multiselect>
     <textarea name="talen" v-model="json_value" id="talen_json_value"></textarea>
     <pre class="language-json" id="talen_value_preview"><code>{{ value  }}</code></pre>

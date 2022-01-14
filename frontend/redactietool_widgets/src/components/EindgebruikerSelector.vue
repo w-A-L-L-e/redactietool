@@ -6,6 +6,9 @@
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
+
+      <template slot="noResult">Beoogde eindgebruiker niet gevonden</template>
+
     </multiselect>
     <textarea name="lom1_beoogde_eindgebruiker" v-model="json_value" id="eindgebruikers_json_value"></textarea>
   </div>

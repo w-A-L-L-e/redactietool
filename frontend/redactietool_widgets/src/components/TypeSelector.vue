@@ -1,0 +1,90 @@
+<template>
+  <div id="talen_selector"> 
+    <multiselect v-model="value" 
+      placeholder="Kies media type" 
+      label="name" 
+      track-by="code" 
+      :options="options" :multiple="false" 
+      :taggable="false" 
+      :searchable="false"
+      :allow-empty="false"
+      :show-labels="false"
+      @input="updateValue">
+
+      <template slot="noResult">Media type niet gevonden</template>
+
+    </multiselect>
+    <textarea name="item_type" v-model="json_value" id="type_json_value"></textarea>
+    <pre class="language-json" id="type_value_preview"><code>{{ value  }}</code></pre>
+</div>
+</template>
+
+<script>
+  import Multiselect from 'vue-multiselect'
+
+  var default_value = {};
+
+  export default {
+    name: 'TypeSelector',
+    components: {
+      Multiselect 
+    },
+    data () {
+      return {
+        value: default_value,
+        json_value: JSON.stringify(default_value),
+        options: [
+          { name: 'Video', code: 'Video' },
+          { name: 'Audio', code: 'Audio' },
+        ]
+      }
+    },
+    created(){
+      var item_type_div = document.getElementById("item_type");
+      if(item_type_div){
+        var item_type = item_type_div.innerText;
+        default_value = [{name: item_type, code: item_type}]
+      }
+      this.json_value = JSON.stringify(default_value);
+      this.value = default_value;
+    },
+
+    methods: {
+      updateValue(value){
+        this.json_value = JSON.stringify(value)
+      }
+    }
+  }
+</script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style>
+  .multiselect__option--selected.multiselect__option--highlight {
+    /*
+    original value:
+    background: #ff6a6a;
+    color: #fff;
+    */
+    background: #ddd;
+    color: #222;
+  }
+
+  #talen_selector{
+    min-width: 30em;
+  }
+
+  #type_json_value{
+    display: none;
+    width: 80%;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #type_value_preview{
+    margin-bottom: 20px;
+    display: none;
+  }
+
+</style>

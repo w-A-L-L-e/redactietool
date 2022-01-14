@@ -10,8 +10,11 @@
     :option-height="104" 
     :show-labels="false"
     :multiple="true"
-    :taggable="true" @tag="addThema" @input="updateValue"
+    :taggable="false" @input="updateValue"
   >
+
+    <template slot="noResult">Thema niet gevonden</template>
+
     <template 
       slot="singleLabel" 
       slot-scope="props">
@@ -24,6 +27,7 @@
           </span>
         </span>
     </template>
+
     <template 
       slot="option" 
       slot-scope="props">
@@ -32,7 +36,9 @@
           <span class="option__small">{{ props.option.definition}}</span>
         </div>
     </template>
+
   </multiselect>
+
   <textarea name="themas" v-model="json_value" id="thema_json_value"></textarea>
 
 </div>
@@ -77,16 +83,6 @@
         })
     },
     methods: {
-      addThema(newThema) {
-        const thema = {
-          label: newThema,
-          definition: 'beschrijving voor nieuwe thema?',
-          id: newThema.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        }
-        this.options.push(thema)
-        this.value.push(thema)
-        this.json_value = JSON.stringify(this.value)
-      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
       }

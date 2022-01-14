@@ -2,11 +2,14 @@
   <div id="vakken_selector">
     <multiselect v-model="value" 
       tag-placeholder="Kies vakken" 
-      placeholder="Zoek of voeg een nieuw vak toe" 
+      placeholder="Zoek vak" 
       label="definition" 
       track-by="id" 
       :options="options" :multiple="true" 
-      :taggable="true" @tag="addVak" @input="updateValue">
+      :taggable="false" @input="updateValue">
+
+      <template slot="noResult">Vak niet gevonden</template>
+
     </multiselect>
     <textarea name="vakken" v-model="json_value" id="vakken_json_value"></textarea>
 </div>
@@ -54,19 +57,6 @@
         })
     },
     methods: {
-      addVak(newVak) {
-        var newVakDefinition = newVak; //TODO: also allow adding definition 
-        // TODO: ID needs to be computed somehow, or returned from an add call!
-
-        const vak = {
-          label: newVak,
-          definition: newVakDefinition,
-          id: newVak.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        }
-        this.options.push(vak)
-        this.value.push(vak)
-        this.json_value = JSON.stringify(this.value)
-      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
       }

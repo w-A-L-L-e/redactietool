@@ -6,6 +6,10 @@
       track-by="id" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
+
+       
+      <template slot="noResult">Onderwijsgraad niet gevonden</template>
+
     </multiselect>
     <textarea name="lom1_onderwijsgraden" v-model="json_value" id="onderwijsgraden_json_value"></textarea>
   </div>

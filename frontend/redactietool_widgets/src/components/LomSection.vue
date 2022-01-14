@@ -13,15 +13,9 @@
           <label class="label">Type</label>
         </div>
         <div class="field-body">
-          <div class="select">
-            <select name="lom1_type" id="lom1_type">
-              <option value="video">Video</option>
-              <option value="audio">Audio</option>
-            </select>
-          </div>
+          <TypeSelector/>
         </div>
       </div>
-
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -107,6 +101,7 @@
 </template>
 
 <script>
+  import TypeSelector from './TypeSelector.vue'
   import EindgebruikerSelector from './EindgebruikerSelector.vue'
   import TalenSelector from './TalenSelector.vue'
   import OnderwijsniveausSelector from './OnderwijsniveausSelector.vue'
@@ -125,6 +120,7 @@
   export default {
     name: 'LomSection',
     components: {
+      TypeSelector,
       EindgebruikerSelector,
       TalenSelector,
       OnderwijsniveausSelector,
