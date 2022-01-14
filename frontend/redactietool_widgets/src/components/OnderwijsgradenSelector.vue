@@ -2,8 +2,8 @@
   <div id="onderwijsgraden_selector"> 
     <multiselect v-model="value" 
       placeholder="Selecteer onderwijsgraden" 
-      label="name" 
-      track-by="code" 
+      label="label" 
+      track-by="id" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
     </multiselect>
@@ -13,8 +13,9 @@
 
 <script>
   import Multiselect from 'vue-multiselect'
+  import axios from 'axios';
 
-  // todo: load in this from mam or jinja view and what is the mapping?
+  // todo: mapping in mediahaven voor onderwijsgraden?
   var default_value = []  
 
   export default {
@@ -27,17 +28,27 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-            // TODO: request + transform knowledge graph format:
-            // {'id': 'https://data.meemoo.be/terms/ond/graad#lager-1ste-graad', 'label': 'Lager 1ste graad', 'definition': 'Lager 1ste graad'}
-
-          { name: "Lager 1ste graad", code: "https://data.meemoo.be/terms/ond/graad#lager-1ste-graad" },
-          { name: "Lager 2de graad", code: "https://data.meemoo.be/terms/ond/graad#lager-2de-graad" },
-          { name: "Lager 3de graad", code: "https://data.meemoo.be/terms/ond/graad#lager-3de-graad" },
-          { name: "Secundair 1ste graad", code: "https://data.meemoo.be/terms/ond/graad#secundair-1ste-graad" },
-          { name: "Secundair 2de graad", code: "https://data.meemoo.be/terms/ond/graad#secundair-2de-graad" },
-          { name: "Secundair 3de graad", code: "https://data.meemoo.be/terms/ond/graad#secundair-3de-graad" },
+          { 
+            id: "", 
+            label: "Onderwijsgraden inladen...", 
+            definition: "Onderwijsgraden inladen..."
+          },
         ]
       }
+    },
+    created: function() { 
+      // smart way to use mocked data during development
+      // after deploy in flask this uses a different url on deployed pod
+      var redactie_api_url = 'http://localhost:5000';
+      var redactie_api_div = document.getElementById('redactie_api_url');
+      if( redactie_api_div ){
+        redactie_api_url = redactie_api_div.innerText;
+      }
+      axios
+        .get(redactie_api_url+'/onderwijsgraden')
+        .then(res => {
+          this.options = res.data;
+        })
     },
     methods: {
       updateValue(value){

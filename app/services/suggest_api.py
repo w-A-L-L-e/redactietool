@@ -36,18 +36,6 @@ class SuggestApi:
             self.PASSWORD
         )
 
-    def get_themas(self):
-        themas = []
-        for r in self.suggest.get_themas():
-            themas.append(r)
-        return json.dumps(themas)
-
-    def get_vakken(self):
-        vakken = []
-        for r in self.suggest.get_vakken():
-            vakken.append(r)
-        return json.dumps(vakken)
-
     def get_onderwijsniveaus(self):
         res = []
         for r in self.suggest.get_niveaus():
@@ -59,3 +47,15 @@ class SuggestApi:
         for r in self.suggest.get_graden():
             res.append(r)
         return json.dumps(res)
+
+    def get_themas(self):
+        themas = []
+        for r in self.suggest.get_themas():
+            themas.append(r)
+        return json.dumps(themas)
+
+    def get_vakken(self):
+        vakken = []
+        for r in self.suggest.get_vakken():
+            vakken.append(r)
+        return json.dumps(vakken)

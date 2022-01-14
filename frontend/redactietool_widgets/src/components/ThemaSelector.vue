@@ -55,9 +55,9 @@
         json_value: JSON.stringify(default_value),
         options: [
           { 
-            id: "loading", 
-            label: "loading...", 
-            definition: "Knowledge graph data is loading..."
+            id: "", 
+            label: "Themas inladen...", 
+            definition: "Themas inladen..."
           },
         ]
       }
