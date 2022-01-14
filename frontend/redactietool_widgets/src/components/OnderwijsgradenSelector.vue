@@ -59,46 +59,45 @@
           var value_div = document.getElementById("item_onderwijsgraden");
           if(value_div){
             var onderwijsgraden = JSON.parse(value_div.innerText);
-          }
+            var item = {};
+            var option_item = {};
 
-          var item = {};
-          var option_item = {};
-
-          if( onderwijsgraden['show_legacy'] ){
-            console.log("legacy fallback voor onderwijsniveaus (lom_typicalagerange)...");
-            var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
-            if(value_div_legacy){
-              var values = JSON.parse(value_div_legacy.innerText);
-              for(var k in values){
-                item['definition'] = values[k]['value'];
-                
-                //get id corresponding to def
-                for( var i in this.options ){
-                  option_item = this.options[i];
-                  if( item['definition'] == option_item['definition'] ){
-                    item['id'] = option_item['id'];
-                    item['label'] = option_item['label']
+            if(value_div && onderwijsgraden['show_legacy'] ){
+              console.log("legacy fallback voor onderwijsniveaus (lom_typicalagerange)...");
+              var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
+              if(value_div_legacy){
+                var values = JSON.parse(value_div_legacy.innerText);
+                for(var k in values){
+                  item['definition'] = values[k]['value'];
+                  
+                  //get id corresponding to def
+                  for( var i in this.options ){
+                    option_item = this.options[i];
+                    if( item['definition'] == option_item['definition'] ){
+                      item['id'] = option_item['id'];
+                      item['label'] = option_item['label']
+                      break;
+                    }
+                  }
+                  default_value.push( item );
+                }
+              }
+            }
+            else{
+              console.log("loading new onderwijsgraden from (lom_onderwijsgraad)...");
+              for(var o in onderwijsgraden){
+                item['id'] = onderwijsgraden[o]['value'];
+                //get label and definition
+                for(var j in this.options ){
+                  option_item = this.options[j];
+                  if( item['id'] == option_item['id'] ){
+                    item['label'] = option_item['label'];
+                    item['definition'] = option_item['definition'];
                     break;
                   }
                 }
-                default_value.push( item );
+                default_value.push(item);
               }
-            }
-          }
-          else{
-            console.log("loading new onderwijsgraden from (lom_onderwijsgraad)...");
-            for(var o in onderwijsgraden){
-              item['id'] = onderwijsgraden[o]['value'];
-              //get label and definition
-              for(var j in this.options ){
-                option_item = this.options[j];
-                if( item['id'] == option_item['id'] ){
-                  item['label'] = option_item['label'];
-                  item['definition'] = option_item['definition'];
-                  break;
-                }
-              }
-              default_value.push(item);
             }
           }
 
