@@ -31,7 +31,18 @@
           { name: 'Belgium', code: 'Belgium' },
           { name: 'France', code: 'France' },
           { name: 'Spain', code: 'Spain' },
-          // TODO: populate this using a div in jinja or axios call
+          { name: "BURGER", code: 'BURGER' }, 
+          { name: "CONFLICT", code: 'CONFLICT' }, 
+          { name: "CONVENTIE VAN GENEVE", code: 'CONVENTIE VAN GENEVE' }, 
+          { name: "INTERNATIONAAL STRAFGERECHTSHOF", code: 'INTERNATIONAAL STRAFGERECHTSHOF' }, 
+          { name: "MENSENRECHT", code: 'MENSENRECHT' }, 
+          { name: "OORLOG", code: 'OORLOG' }, 
+          { name: "OORLOGSMISDAAD", code: 'OORLOGSMISDAAD' }, 
+          { name: "SCHENDING", code: 'SCHENDING' }, 
+          { name: "STRAFRECHT", code: 'STRAFRECHT' }, 
+          { name: "VAN DEN WIJNGAERT CHRIS", code: 'VAN DEN WIJNGAERT CHRIS' }, 
+          { name: "VEILIGHEID", code: 'VEILIGHEID' }
+          // TODO: populate this using a div in jinja or axios call !!!
           // coming from the suggest library (aka knowledge graph).
         ]
       }
