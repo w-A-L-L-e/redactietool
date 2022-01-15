@@ -76,6 +76,9 @@
       if( redactie_api_div ){
         redactie_api_url = redactie_api_div.innerText;
       }
+      else{
+        return;
+      }
       axios
         .get(redactie_api_url+'/themas')
         .then(res => {

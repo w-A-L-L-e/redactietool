@@ -50,6 +50,9 @@
       if( redactie_api_div ){
         redactie_api_url = redactie_api_div.innerText;
       }
+      else{
+        return; // do not load on other redactietool pages
+      }
       axios
         .get(redactie_api_url+'/onderwijsgraden')
         .then(res => {
