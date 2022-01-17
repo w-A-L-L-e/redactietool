@@ -38,7 +38,6 @@
     </template>
 
   </multiselect>
-
   <textarea name="themas" v-model="json_value" id="thema_json_value"></textarea>
 
 </div>

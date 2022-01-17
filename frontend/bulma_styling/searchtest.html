@@ -1,0 +1,76 @@
+<html>
+
+  <body>
+      <h2>Thema cards</h2>
+      <input id="search" placeholder="search cards" onchange="filterCards(this);"/>
+      <div id="cards">some text here</div>
+
+  </body>
+
+
+<script type="text/javascript">
+
+  function filterCards(input){
+    var sf = input.value.toUpperCase();
+    var card_div = document.getElementById('cards');
+    var cards = [];
+
+    for(i=0;i<55; i++){
+
+      var card = {
+        'title': 'Thema '+i.toString(),
+        'description': 'Een beschrijving '+i.toString()
+      }
+
+      var title = card['title'].toUpperCase();
+      var desc = card['description'].toUpperCase();
+
+
+      if(( title.indexOf(sf)>= 0 )||( ( desc.indexOf(sf)>= 0 ) )){
+        cards.push(card);
+      }
+    }
+
+
+    var lines="";
+    for(index in cards){
+      var c = cards[index];
+      var line=c['title']+'<br/>'+c['description']+'<br/>'; 
+      lines+=line;
+    }
+    document.getElementById('cards').innerHTML = lines;
+
+    if(cards.length==0){
+      document.getElementById('cards').innerHTML = 'Niets gevonden';
+    }
+  }
+
+  function main(){
+          var cards = [];
+          for(i=0;i<55; i++){
+            var card = {
+              'title': 'Thema '+i.toString(),
+              'description': 'Een beschrijving '+i.toString()
+            }
+            cards.push(card);
+          }
+
+          var card_div = document.getElementById('cards');
+
+          var lines = "";
+          var line = "";
+          for(index in cards){
+            var c = cards[index];
+            line=c['title']+'<br/>'+c['description']+'<br/>'; 
+            lines+=line;
+          }
+
+          card_div.innerHTML = lines;
+    }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    main();
+  });
+</script>
+</html>
+
