@@ -173,7 +173,8 @@
     position: relative;
     display: inline-block;
     margin-right: 10px;
-    padding: 4px 10px 4px 10px;
+    padding: 1px 8px 1px 8px;
+    margin-bottom: 5px;
     cursor: pointer;
   }
   .keywords-folded{
