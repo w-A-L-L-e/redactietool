@@ -11,8 +11,8 @@
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
     <div class="cp_keywords_button">
-      <a class="button is-link is-small" v-on:click="toggleKeywordCollapse">
-        Bekijk trefwoorden van Content Partners
+      <a class="" v-on:click="toggleKeywordCollapse">
+        {{cp_keyword_label}}
       </a>
       <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
         Keyword werd al toegevoegd
@@ -74,7 +74,8 @@
         ],
         cp_keywords: [],
         show_cp_keywords: false,
-        show_already_added_warning: false
+        show_already_added_warning: false,
+        cp_keyword_label: "Bekijk trefwoorden van Content Partners"
       }
     },
     created(){
@@ -125,6 +126,12 @@
       },
       toggleKeywordCollapse: function(){
         this.show_cp_keywords= !this.show_cp_keywords;
+        if(this.show_cp_keywords){
+          this.cp_keyword_label = "Verberg trefwoorden van Content Partners";
+        }
+        else{
+          this.cp_keyword_label = "Bekijk trefwoorden van Content Partners";
+        }
       },
       addCpKeyword: function(kw){
         var already_added = false;

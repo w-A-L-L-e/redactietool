@@ -284,10 +284,6 @@
     margin-left: 0px;
   }
   
-  .vakken-suggesties h3 {
-    margin-bottom: 5px !important;
-  }
-
   .vak-warning-pill{
     border-radius: 5px;
     background: #ff6a6a;
@@ -302,8 +298,10 @@
   }
   
   .vakken-title{
-    margin-left: -10px;
-    padding-bottom: 10px;
+    margin-left: -10px !important;
+    padding-bottom: 10px !important;
+    margin-top: 0px !important;
+    margin-bottom: 5px !important;
     color: #222;
   }
 
