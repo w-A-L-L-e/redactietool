@@ -25,7 +25,7 @@
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
-      <h3 class="subtitle">Suggesties voor vakken</h3>
+      <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
       <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
         <div class="column is-one-quarter" v-for="vak in row" :key="vak.id">
           <div class="tile is-ancestor">
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <h3 class="subtitle">Overige vakken</h3>
+      <h3 class="subtitle vakken-title">Overige vakken</h3>
       <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
         <div class="column is-one-quarter" v-for="ovak in row2" :key="ovak.id">
           <div class="tile is-ancestor">
@@ -269,7 +269,7 @@
     margin-bottom: 10px;
   }
   .vakken-suggesties {
-    height: 370px;
+    height: 410px;
     overflow-y: scroll;
     overflow-x: hidden;
     border: 1px solid #e8e8e8;
@@ -300,9 +300,17 @@
     width: 15em;
     margin-top: 10px;
   }
+  
+  .vakken-title{
+    margin-left: -10px;
+    padding-bottom: 10px;
+    color: #222;
+  }
+
   .show{
     display: block;
   }
+  
   .hide{
     display: hidden;
   }
