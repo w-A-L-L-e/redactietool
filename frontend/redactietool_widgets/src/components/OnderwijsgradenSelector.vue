@@ -64,16 +64,17 @@
           var value_div = document.getElementById("item_onderwijsgraden");
           if(value_div){
             var onderwijsgraden = JSON.parse(value_div.innerText);
-            var item = {};
             var option_item = {};
 
             if(value_div && onderwijsgraden['show_legacy'] ){
-              console.log("legacy fallback voor onderwijsniveaus (lom_typicalagerange)...");
+              console.log("legacy fallback voor onderwijsgraden (lom_typicalagerange)...");
               var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
               if(value_div_legacy){
                 var values = JSON.parse(value_div_legacy.innerText);
+                var item = {};
                 for(var k in values){
-                  item['definition'] = values[k]['value'];
+                  var definition = values[k]['value'];
+                  item['definition'] = definition;
                   
                   //get id corresponding to def
                   for( var i in this.options ){
@@ -81,10 +82,14 @@
                     if( item['definition'] == option_item['definition'] ){
                       item['id'] = option_item['id'];
                       item['label'] = option_item['label']
+                      default_value.push( {
+                        id: item['id'],
+                        label: item['label'],
+                        definition: item['definition']
+                      });
                       break;
                     }
                   }
-                  default_value.push( item );
                 }
               }
             }
@@ -98,12 +103,19 @@
                   if( item['id'] == option_item['id'] ){
                     item['label'] = option_item['label'];
                     item['definition'] = option_item['definition'];
+
+                    default_value.push({
+                      'id': item['id'],
+                      'label': item['label'],
+                      'definition': item['definition']
+                    });
                     break;
                   }
                 }
-                default_value.push(item);
+
               }
             }
+            this.$root.$emit('graden_changed', default_value);
           }
 
         });
@@ -111,6 +123,7 @@
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit('graden_changed', value);
       }
     }
   }

@@ -83,10 +83,14 @@
                     if( item['definition'] == option_item['definition'] ){
                       item['id'] = option_item['id'];
                       item['label'] = option_item['label']
+                      default_value.push({
+                        'id': item['id'],
+                        'label': item['label'],
+                        'definition': item['definition']
+                      });
                       break;
                     }
                   }
-                  default_value.push( item );
                 }
               }
             }
@@ -100,10 +104,14 @@
                   if( item['id'] == option_item['id'] ){
                     item['label'] = option_item['label'];
                     item['definition'] = option_item['definition'];
+                    default_value.push({
+                      'id': item['id'],
+                      'label': item['label'],
+                      'definition': item['definition']
+                    });
                     break;
                   }
                 }
-                default_value.push(item);
               }
             }
           }

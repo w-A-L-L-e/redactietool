@@ -579,6 +579,19 @@ def get_vakken():
     suggest_api = SuggestApi()
     return suggest_api.get_vakken()
 
+
+@app.route('/vakken_suggest', methods=['POST'])
+@requires_authorization
+@login_required
+def get_vakken_suggesties():
+    json_data = request.json
+    print("json_data=", json_data)
+    suggest_api = SuggestApi()
+    result = suggest_api.get_vakken_suggesties(
+        json_data['graden'], json_data['themas'])
+    return result
+
+
 # debugging route to see vue components can submit nicely to flask
 # @app.route('/edit_metadata_vue', methods=['POST'])
 # def read_vue_component_values():

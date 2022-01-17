@@ -88,6 +88,18 @@ def csv_to_suggest_response(csv_path, id_prefix, title_col=0, desc_col=1):
     return items_array
 
 
+@app.route('/onderwijsniveaus')
+@cross_origin()
+def onderwijsniveaus_json():
+    return send_from_directory('suggest', 'onderwijsniveaus.json')
+
+
+@app.route('/onderwijsgraden')
+@cross_origin()
+def onderwijsgraden_json():
+    return send_from_directory('suggest', 'onderwijsgraden.json')
+
+
 @app.route('/themas')
 @cross_origin()
 def themas_json():
@@ -116,16 +128,14 @@ def vakken_json():
     return json.dumps(vakken)
 
 
-@app.route('/onderwijsniveaus')
+@app.route('/vakken_suggest', methods=['POST'])
 @cross_origin()
-def onderwijsniveaus_json():
-    return send_from_directory('suggest', 'onderwijsniveaus.json')
-
-
-@app.route('/onderwijsgraden')
-@cross_origin()
-def onderwijsgraden_json():
-    return send_from_directory('suggest', 'onderwijsgraden.json')
+def get_vakken_suggesties():
+    json_data = json.loads(request.data)
+    print("graden=", json_data['graden'])
+    print("themas=", json_data['themas'])
+    result = []  # mock empty return
+    return json.dumps(result)
 
 
 @app.route('/')

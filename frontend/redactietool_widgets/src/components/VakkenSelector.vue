@@ -115,6 +115,7 @@
     components: {
       Multiselect 
     },
+    props: {},
     data () {
       return {
         value: default_value,
@@ -146,9 +147,23 @@
               definition: "Overige vakken definitions inladen..."
             }
           ]
-        ]
-
+        ],
+        graden: [],
+        themas: []
       }
+    },
+    mounted: function() {
+        
+      this.$root.$on('graden_changed', data => {
+        console.log('graden changed data=', data);
+        this.graden = data;
+      });
+
+      this.$root.$on('themas_changed', data => {
+        console.log('themas changed data=',data);
+        this.themas = data;
+      });
+
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -192,15 +207,19 @@
           return;
         }
 
-        // todo make post call here with some params
+        var post_data = {
+          'graden': this.graden,
+          'themas': this.themas
+        }
+
         axios
-          .get(redactie_api_url+'/vakken')
+          .post(redactie_api_url+'/vakken_suggest', post_data)
           .then(res => {
             this.vakken_suggesties = [];
             var row = [];
             var suggest_map = {};
             for( var vak_index in res.data){
-              if(vak_index>5) break; //simulate suggestions by only taking first 6
+              //if(vak_index>5) break; //simulate suggestions by only taking first 6
               var vak = res.data[vak_index];
               suggest_map[vak.id] = vak; 
               row.push(vak);

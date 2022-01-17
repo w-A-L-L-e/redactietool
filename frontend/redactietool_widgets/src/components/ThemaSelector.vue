@@ -133,10 +133,15 @@
             }
           }
         })
+
+      // todo fetch currently set themas here (look at Onderwijsgraden for example)
+      // then also emit the currently set themas so our vakken selector can pass it to suggest:
+      // this.$root.$emit('themas_changed', this.value);
     },
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit('themas_changed', value);
       },
       toggleThemas(){
         this.show_thema_cards = !this.show_thema_cards;
