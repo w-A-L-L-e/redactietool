@@ -38,6 +38,45 @@
     </template>
 
   </multiselect>
+
+  <a class="button is-link is-small toon-themas-button" 
+      v-on:click="toggleThemas" 
+    >
+      {{show_themas_label}}
+  </a>
+  <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+    Thema werd al toegevoegd
+  </div>
+
+  <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
+      <!--h3 class="subtitle">Suggesties voor vakken</h3-->
+      <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
+        <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
+          <div class="tile is-ancestor">
+            <div class="tile is-vertical mr-2 mt-2" >
+              <div class="card" >
+                <header class="card-header">
+                  <p class="card-header-title">
+                    {{thema.label}}
+                  </p>
+                </header>
+                <div class="card-content">
+                    {{thema.definition}} 
+                </div>
+                <footer class="card-footer">
+                  <a v-on:click="addThema(thema)" 
+                  class="card-footer-item">Selecteer</a>
+                </footer>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+
+
   <textarea name="themas" v-model="json_value" id="thema_json_value"></textarea>
 
 </div>
@@ -64,7 +103,11 @@
             label: "Themas inladen...", 
             definition: "Themas inladen..."
           },
-        ]
+        ],
+        thema_cards: [],
+        show_thema_cards: false,
+        show_already_added_warning: false,
+        show_themas_label: 'Toon themas'
       }
     },
     created: function() { 
@@ -81,12 +124,71 @@
       axios
         .get(redactie_api_url+'/themas')
         .then(res => {
-          this.options = res.data;
+          this.options = [];
+          //only add non-empty labels
+          for(var o in res.data){
+            var thema = res.data[o];
+            if(thema.label.length>1){
+              this.options.push(thema);
+            }
+          }
         })
     },
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
+      },
+      toggleThemas(){
+        this.show_thema_cards = !this.show_thema_cards;
+        if( this.show_thema_cards ){
+          this.show_themas_label = "Verberg themas";
+        }
+        else{
+          this.show_themas_label = "Toon themas";
+          this.thema_cards = [];
+        }
+
+        this.thema_cards = [];
+        var row = [];
+        for( var thema_index in this.options){
+          row.push(this.options[thema_index]);
+          if(row.length==4){
+            this.thema_cards.push(row);
+            row=[];
+          }
+        }
+        if(row.length>0){
+          this.thema_cards.push(row);
+        }
+
+      },
+      addThema: function(thema){
+        var already_added = false;
+
+        for(var o in this.value){
+          var okw = this.value[o];
+          if(okw.id == thema.id){
+            already_added = true;
+            break;
+          } 
+        }
+
+        if(!already_added){
+          const new_thema = {
+            id: thema.id,
+            label: thema.label,
+            definition: thema.definition
+          };
+          this.options.push(new_thema);
+          this.value.push(new_thema);
+          this.json_value = JSON.stringify(this.value);
+        }
+        else{
+          this.show_already_added_warning = true;
+          setTimeout(()=>{
+            this.show_already_added_warning = false;
+          }, 3000);
+        }
       }
     }
   }
@@ -140,4 +242,66 @@
     white-space: normal;
     border-bottom: 1px solid #eee;
   }
+  .toon-themas-button {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .thema-cards {
+    height: 20em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid #e8e8e8;
+    padding: 5px;
+    border-radius: 5px;
+    width: 45em;
+    padding-left: 12px;
+    padding-right: 15px;
+  }
+  .tile {
+    margin-right: -30px;
+    margin-left: 0px;
+  }
+  .card-header-title {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    padding: 4px 15px;
+    min-height: 50px;
+    text-transform: capitalize;
+  }
+  .card-content {
+    overflow-wrap: anywhere;
+    font-size: 12px;
+    padding: 4px 10px;
+    min-height: 80px;
+  }
+  
+  .show{
+    display: block;
+  }
+  .hide{
+    display: hidden;
+  }
+
+  .thema-warning-pill{
+    border-radius: 5px;
+    background: #ff6a6a;
+    color: #eee;
+    display: inline-block;
+    float: right;
+    text-overflow: ellipsis;
+    padding: 2px 8px 2px 13px;
+    margin-bottom: 5px;
+    width: 15em;
+    margin-top: 10px;
+  }
+  .hide{
+    display: none;
+  }
+  .show{
+    display: block;
+  }
+
+
 </style>

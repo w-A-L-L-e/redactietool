@@ -11,7 +11,7 @@
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
     <div class="cp_keywords_button">
-      <a class="" v-on:click="toggleKeywordCollapse">
+      <a class="button is-link is-small" v-on:click="toggleKeywordCollapse">
         Bekijk trefwoorden van Content Partners
       </a>
       <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
@@ -153,7 +153,6 @@
           }, 3000);
         }
       }
-
     }
   }
 </script>

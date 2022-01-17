@@ -4,7 +4,7 @@
       id="vakken_multiselect"
       tag-placeholder="Kies vakken" 
       placeholder="Zoek vak" 
-      label="definition" 
+      label="label" 
       track-by="id" 
       :options="options" :multiple="true" 
       :taggable="false" @input="updateValue">
@@ -149,8 +149,33 @@
           })
 
       },
-      addVakSuggestie(vak){
-        console.log("todo add vak suggestie vak=", vak);
+      addVakSuggestie: function(vak){
+        var already_added = false;
+
+        for(var o in this.value){
+          var okw = this.value[o];
+          if(okw.id == vak.id){
+            already_added = true;
+            break;
+          } 
+        }
+
+        if(!already_added){
+          const new_vak = {
+            id: vak.id,
+            label: vak.label,
+            definition: vak.definition
+          };
+          this.options.push(new_vak);
+          this.value.push(new_vak);
+          this.json_value = JSON.stringify(this.value);
+        }
+        else{
+          this.show_already_added_warning = true;
+          setTimeout(()=>{
+            this.show_already_added_warning = false;
+          }, 3000);
+        }
       }
     }
   }
@@ -172,8 +197,6 @@
     height: 100px;
     display: none;
   }
-  #vakken_multiselect{
-  }
   .vakken-suggest-button{
     display: inline-block;
     margin-top: 10px;
@@ -190,7 +213,7 @@
     padding-left: 12px;
     padding-right: 15px;
   }
-  .tile{
+  .tile {
     margin-right: -30px;
     margin-left: 0px;
   }
