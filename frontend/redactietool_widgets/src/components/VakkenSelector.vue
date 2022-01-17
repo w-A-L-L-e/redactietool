@@ -11,6 +11,28 @@
 
       <template slot="noResult">Vak niet gevonden</template>
 
+      <template 
+        slot="singleLabel" 
+        slot-scope="props">
+          <span class="option__desc">
+            <span class="option__title">
+              {{ props.option.label}}
+            </span>
+            <span class="option_small">
+              {{props.option.definition}}
+            </span>
+          </span>
+      </template>
+
+      <template 
+        slot="option" 
+        slot-scope="props">
+          <div class="option__desc">
+            <span class="option__title">{{ props.option.label}}</span>
+            <span class="option__small">{{ props.option.definition}}</span>
+          </div>
+      </template>
+
     </multiselect>
 
     <a class="button is-link is-small vakken-suggest-button" 
@@ -304,7 +326,22 @@
     margin-bottom: 5px !important;
     color: #222;
   }
+  .multiselect__element{
+    max-width: 50em;
+  }
 
+  .multiselect__content{
+    max-width: 50em;
+  }
+
+  .option__title{
+    overflow-wrap: anywhere;
+    max-width: 50em;
+  }
+  .option__small {
+    overflow-wrap: anywhere;
+    max-width: 50em;
+  }
   .show{
     display: block;
   }
