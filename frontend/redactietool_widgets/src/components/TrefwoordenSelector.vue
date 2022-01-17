@@ -14,9 +14,12 @@
       <a class="" v-on:click="toggleKeywordCollapse">
         Bekijk trefwoorden van Content Partners
       </a>
+      <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+        Keyword werd al toegevoegd
+      </div>
     </div>
-    <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'keywords-unfolded' : 'keywords-folded']">
 
+    <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
       <div 
         class="keyword-pill" 
         v-for="keyword in cp_keywords" 
@@ -71,6 +74,7 @@
         ],
         cp_keywords: [],
         show_cp_keywords: false,
+        show_already_added_warning: false
       }
     },
     created(){
@@ -142,6 +146,12 @@
           this.value.push(tw);
           this.json_value = JSON.stringify(this.value);
         }
+        else{
+          this.show_already_added_warning = true;
+          setTimeout(()=>{
+            this.show_already_added_warning = false;
+          }, 3000);
+        }
       }
 
     }
@@ -180,10 +190,21 @@
     margin-bottom: 5px;
     cursor: pointer;
   }
-  .keywords-folded{
+  .warning-pill{
+    border-radius: 5px;
+    background: #ff6a6a;
+    color: #eee;
+    display: inline-block;
+    float: right;
+    text-overflow: ellipsis;
+    padding: 2px 8px 2px 13px;
+    margin-bottom: 5px;
+    width: 15em;
+  }
+  .hide{
     display: none;
   }
-  .keywords-unfolded{
+  .show{
     display: block;
   }
 </style>
