@@ -83,18 +83,6 @@
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label"></label>
-        </div>
-        <div class="field-body">
-            <a target="_blank" href="http://link_trefwoorden_content_partners?">
-              Bekijk trefwoorden van Content Partners
-            </a>
-        </div>
-      </div>
-
-
     </div> <!-- lom1_section_block -->
 
   </div>

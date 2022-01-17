@@ -9,6 +9,24 @@
       :taggable="true" @tag="addTrefwoord" @input="updateValue">
     </multiselect>
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
+
+    <div class="cp_keywords_button">
+      <a class="" v-on:click="toggleKeywordCollapse">
+        Bekijk trefwoorden van Content Partners
+      </a>
+    </div>
+    <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'keywords-unfolded' : 'keywords-folded']">
+
+      <div 
+        class="keyword-pill" 
+        v-for="keyword in cp_keywords" 
+        :key="keyword.code"
+        v-on:click="addCpKeyword(keyword)"
+        >
+        {{keyword.name}}
+      </div>
+    </div>
+
 </div>
 </template>
 
@@ -21,6 +39,7 @@
     components: {
       Multiselect 
     },
+    props: {},
     data () {
       return {
         value: default_value,
@@ -41,10 +60,17 @@
           { name: "SCHENDING", code: 'SCHENDING' }, 
           { name: "STRAFRECHT", code: 'STRAFRECHT' }, 
           { name: "VAN DEN WIJNGAERT CHRIS", code: 'VAN DEN WIJNGAERT CHRIS' }, 
-          { name: "VEILIGHEID", code: 'VEILIGHEID' }
-          // TODO: populate this using a div in jinja or axios call !!!
-          // coming from the suggest library (aka knowledge graph).
-        ]
+          { name: "VEILIGHEID", code: 'VEILIGHEID' },
+          { name: "Christiane van den Wijngaert", code: "Christiane van den Wijngaert"},
+          { name: "conventie van Gen\u00e8ve", code: "conventie van Gen\u00e8ve"},
+          { name: "Internationaal Strafhof", code: "Internationaal Strafhof"},
+          { name: "justitie", code: "justitie"},
+          { name: "mensenrechten", code: "mensenrechten"},
+          { name: "oorlog", code: "oorlog"} 
+          // should be coming from the suggest library (aka knowledge graph).
+        ],
+        cp_keywords: [],
+        show_cp_keywords: false,
       }
     },
     created(){
@@ -60,8 +86,22 @@
             }
           );
         }
+        this.json_value = JSON.stringify(default_value);
       }
-      this.json_value = JSON.stringify(default_value);
+
+      var keywords_cp_div = document.getElementById("item_keywords_cp");
+      if( keywords_cp_div ){
+        var keywords_cp = JSON.parse(keywords_cp_div.innerText);
+        for(var cpk in keywords){
+          var cp_keyword = keywords_cp[cpk]
+          this.cp_keywords.push(
+            {
+              'name': cp_keyword['value'],
+              'code': cp_keyword['value']
+            }
+          );
+        }
+      }
     },
     methods: {
       addTrefwoord(new_keyword) {
@@ -78,7 +118,29 @@
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)
+      },
+      toggleKeywordCollapse: function(){
+        this.show_cp_keywords= !this.show_cp_keywords;
+      },
+      addCpKeyword: function(kw){
+        var already_added = false;
+        for( var o in this.options ){
+          if(o.code == kw.code){
+            already_added = true;
+          } 
+        }
+
+        if(!already_added){
+          const tw = {
+            name: kw.name,
+            code: kw.code
+          };
+          this.options.push(tw);
+          this.value.push(tw);
+          this.json_value = JSON.stringify(this.value);
+        }
       }
+
     }
   }
 </script>
@@ -98,5 +160,26 @@
     width: 80%;
     height: 100px;
     display: none;
+  }
+  .cp_keywords_button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .keyword-pill{
+    border-radius: 5px;
+    background: #41b883;
+    color: #fff;
+    text-overflow: ellipsis;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 4px 10px 4px 10px;
+    cursor: pointer;
+  }
+  .keywords-folded{
+    display: none;
+  }
+  .keywords-unfolded{
+    display: block;
   }
 </style>
