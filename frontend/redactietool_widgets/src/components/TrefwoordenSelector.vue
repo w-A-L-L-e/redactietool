@@ -124,9 +124,12 @@
       },
       addCpKeyword: function(kw){
         var already_added = false;
-        for( var o in this.options ){
-          if(o.code == kw.code){
+
+        for( var o in this.value){
+          var okw = this.value[o];
+          if(okw.code == kw.code){
             already_added = true;
+            break;
           } 
         }
 
