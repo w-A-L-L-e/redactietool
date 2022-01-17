@@ -70,7 +70,7 @@ class RmhMapping:
             'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
             'item_onderwijsniveaus': json.dumps(
                 get_md_array(
-                    mam_data, 
+                    mam_data,
                     'lom_onderwijsniveau',
                     legacy_fallback=True
                 )
@@ -78,7 +78,7 @@ class RmhMapping:
             'item_onderwijsniveaus_legacy': json.dumps(get_md_array(mam_data, 'lom_context')),
             'item_onderwijsgraden': json.dumps(
                 get_md_array(
-                    mam_data, 
+                    mam_data,
                     'lom_onderwijsgraad',
                     legacy_fallback=True
                 )

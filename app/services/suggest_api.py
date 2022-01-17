@@ -67,4 +67,3 @@ class SuggestApi:
         for r in self.suggest.suggest(themas, graden):
             vakken.append(r)
         return json.dumps(vakken)
-
