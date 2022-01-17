@@ -63,6 +63,7 @@ class RmhMapping:
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
+            'item_type': mam_data.get('type'),
             'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
@@ -83,7 +84,8 @@ class RmhMapping:
                 )
             ),
             'item_onderwijsgraden_legacy': json.dumps(get_md_array(mam_data, 'lom_typicalagerange')),
-            'item_keywords': json.dumps(get_md_array(mam_data, 'dc_subjects')),
+            'item_keywords_cp': json.dumps(get_md_array(mam_data, 'dc_subjects')),
+            'item_keywords': json.dumps(get_md_array(mam_data, 'lom_keywords')),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
@@ -116,7 +118,6 @@ class RmhMapping:
             'archived': get_property(mam_data, 'created_on'),
             'keyframe_edit_url': keyframe_edit_url,
             # for v2 mam_data['Internal']['PathToVideo']
-            'item_type': mam_data.get('type'),
             'video_url': mam_data.get('videoPath'),
             'flowplayer_token': os.environ.get(
                 'FLOWPLAYER_TOKEN', 'set_in_secrets'
