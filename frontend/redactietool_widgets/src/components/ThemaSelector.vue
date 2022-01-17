@@ -243,14 +243,20 @@
     border-bottom: 1px solid #eee;
   }
   .toon-themas-button {
-    display: inline-block;
+    /*position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    float: left;
+    z-index: 100;
+    */
     margin-top: 10px;
     margin-bottom: 15px;
   }
 
   .thema-cards {
-    height: 20em;
+    height: 370px;
     overflow-y: scroll;
+    /* overflow-y: hidden;*/
     overflow-x: hidden;
     border: 1px solid #e8e8e8;
     padding: 5px;
@@ -263,18 +269,21 @@
     margin-right: -30px;
     margin-left: 0px;
   }
+  
   .card-header-title {
+    height: 50px;
+    overflow-y: scroll;
     overflow-wrap: anywhere;
     font-size: 14px;
     padding: 4px 15px;
-    min-height: 50px;
     text-transform: capitalize;
   }
   .card-content {
     overflow-wrap: anywhere;
     font-size: 12px;
     padding: 4px 10px;
-    min-height: 80px;
+    height: 80px;
+    overflow-y: scroll;
   }
   
   .show{

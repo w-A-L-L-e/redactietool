@@ -18,9 +18,15 @@
     >
       {{suggestie_btn_label}}
     </a>
+
+    <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+    Vak werd al toegevoegd
+  </div>
+
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
-      <!--h3 class="subtitle">Suggesties voor vakken</h3-->
-      <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="index">
+
+      <h3 class="subtitle">Suggesties voor vakken</h3>
+      <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
         <div class="column is-one-quarter" v-for="vak in row" :key="vak.id">
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
@@ -40,7 +46,30 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
+      <h3 class="subtitle">Overige vakken</h3>
+      <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
+        <div class="column is-one-quarter" v-for="ovak in row2" :key="ovak.id">
+          <div class="tile is-ancestor">
+            <div class="tile is-vertical mr-2 mt-2" >
+              <div class="card" >
+                <header class="card-header">
+                  <p class="card-header-title">
+                    {{ovak.label}}
+                  </p>
+                </header>
+                <div class="card-content">
+                    {{ovak.definition}} 
+                </div>
+                <footer class="card-footer">
+                  <a v-on:click="addVakSuggestie(ovak)" 
+                  class="card-footer-item">Selecteer</a>
+                </footer>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -76,16 +105,27 @@
           },
         ],
         show_vakken_suggesties: false,
+        show_already_added_warning: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
         vakken_suggesties:[
           [
             {
-              id: "1",
+              id: "2",
               label: "Suggesties vakken inladen...",
               definition: "Suggesties vakken definitions inladen..."
             }
           ]
+        ],
+        overige_vakken:[
+          [
+            {
+              id: "3",
+              label: "Overige vakken inladen...",
+              definition: "Overige vakken definitions inladen..."
+            }
+          ]
         ]
+
       }
     },
     created: function() { 
@@ -136,8 +176,12 @@
           .then(res => {
             this.vakken_suggesties = [];
             var row = [];
+            var suggest_map = {};
             for( var vak_index in res.data){
-              row.push(res.data[vak_index]);
+              if(vak_index>5) break; //simulate suggestions by only taking first 6
+              var vak = res.data[vak_index];
+              suggest_map[vak.id] = vak; 
+              row.push(vak);
               if(row.length==4){
                 this.vakken_suggesties.push(row);
                 row=[];
@@ -146,6 +190,28 @@
             if(row.length>0){
               this.vakken_suggesties.push(row);
             }
+            
+            console.log("suggest_map=", suggest_map);
+
+            //nu fetch van alle overige vakken, zijn alle vakken - de suggestions
+            axios
+              .get(redactie_api_url+'/vakken')
+              .then(res2 => {
+                this.overige_vakken = [];
+                var row2 = [];
+                for( var vak_index in res2.data){
+                  var ovak = res2.data[vak_index];
+                  if(suggest_map[ovak.id] == undefined) row2.push(ovak);
+
+                  if(row2.length>=4){
+                    this.overige_vakken.push(row2);
+                    row2=[];
+                  }
+                }
+                if(row2.length>0){
+                  this.overige_vakken.push(row2);
+                }
+              })
           })
 
       },
@@ -203,7 +269,7 @@
     margin-bottom: 10px;
   }
   .vakken-suggesties {
-    height: 20em;
+    height: 370px;
     overflow-y: scroll;
     overflow-x: hidden;
     border: 1px solid #e8e8e8;
@@ -217,21 +283,22 @@
     margin-right: -30px;
     margin-left: 0px;
   }
-  .card-header-title {
-    overflow-wrap: anywhere;
-    font-size: 14px;
-    padding: 4px 15px;
-    min-height: 50px;
-    text-transform: capitalize;
-  }
-  .card-content {
-    overflow-wrap: anywhere;
-    font-size: 12px;
-    padding: 4px 10px;
-    min-height: 80px;
-  }
+  
   .vakken-suggesties h3 {
     margin-bottom: 5px !important;
+  }
+
+  .vak-warning-pill{
+    border-radius: 5px;
+    background: #ff6a6a;
+    color: #eee;
+    display: inline-block;
+    float: right;
+    text-overflow: ellipsis;
+    padding: 2px 8px 2px 13px;
+    margin-bottom: 5px;
+    width: 15em;
+    margin-top: 10px;
   }
   .show{
     display: block;
