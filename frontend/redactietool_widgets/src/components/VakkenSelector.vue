@@ -48,6 +48,11 @@
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
       <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
+
+      <div v-if="!vakken_suggesties.length" class="notification is-info is-light">
+        Geen suggesties gevonden. Probeer andere themas of onderwijsgraden te selecteren.
+      </div>
+
       <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
         <div class="column is-one-quarter" v-for="vak in row" :key="vak.id">
           <div class="tile is-ancestor">
@@ -130,38 +135,23 @@
         show_vakken_suggesties: false,
         show_already_added_warning: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
-        vakken_suggesties:[
-          [
-            {
-              id: "2",
-              label: "Suggesties vakken inladen...",
-              definition: "Suggesties vakken definitions inladen..."
-            }
-          ]
-        ],
-        overige_vakken:[
-          [
-            {
-              id: "3",
-              label: "Overige vakken inladen...",
-              definition: "Overige vakken definitions inladen..."
-            }
-          ]
-        ],
+        vakken_suggesties:[],
+        overige_vakken:[],
         graden: [],
         themas: []
       }
     },
     mounted: function() {
-        
       this.$root.$on('graden_changed', data => {
         console.log('graden changed data=', data);
         this.graden = data;
+        this.updateSuggestions();
       });
 
       this.$root.$on('themas_changed', data => {
         console.log('themas changed data=',data);
         this.themas = data;
+        this.updateSuggestions();
       });
 
     },
@@ -195,16 +185,28 @@
         }
         return false;
       },
-      toggleSuggesties(){
-        this.show_vakken_suggesties = !this.show_vakken_suggesties;
-        if( this.show_vakken_suggesties ){
-          this.suggestie_btn_label = "Verberg suggesties voor vakken";
-          console.log("make axios call here...")
-        }
-        else{
-          this.suggestie_btn_label = "Toon suggesties voor vakken";
-        }
+      updateOverigeVakken(redactie_api_url, suggest_map){
+        //nu fetch van alle overige vakken, zijn alle vakken - de suggestions
+        axios
+          .get(redactie_api_url+'/vakken')
+          .then(res2 => {
+            this.overige_vakken = [];
+            var row2 = [];
+            for( var vak_index in res2.data){
+              var ovak = res2.data[vak_index];
+              if(suggest_map[ovak.id] == undefined) row2.push(ovak);
 
+              if(row2.length>=4){
+                this.overige_vakken.push(row2);
+                row2=[];
+              }
+            }
+            if(row2.length>0){
+              this.overige_vakken.push(row2);
+            }
+          })
+      },
+      updateSuggestions(){
         var redactie_api_url = 'http://localhost:5000';
         var redactie_api_div = document.getElementById('redactie_api_url');
         if( redactie_api_div ){
@@ -214,9 +216,20 @@
           return;
         }
 
+        if(!this.show_vakken_suggesties){
+          console.log("Vakken suggestions is closed, not loading...");
+          return;
+        }
+
         var post_data = {
           'graden': this.graden,
           'themas': this.themas
+        }
+
+        if(post_data['graden'].length==0 || post_data['themas'].length==0 ){
+          this.vakken_suggesties = []; //clear suggestions
+          this.updateOverigeVakken(redactie_api_url, {});
+          return;
         }
 
         axios
@@ -240,28 +253,20 @@
             }
             
             console.log("suggest_map=", suggest_map);
-
-            //nu fetch van alle overige vakken, zijn alle vakken - de suggestions
-            axios
-              .get(redactie_api_url+'/vakken')
-              .then(res2 => {
-                this.overige_vakken = [];
-                var row2 = [];
-                for( var vak_index in res2.data){
-                  var ovak = res2.data[vak_index];
-                  if(suggest_map[ovak.id] == undefined) row2.push(ovak);
-
-                  if(row2.length>=4){
-                    this.overige_vakken.push(row2);
-                    row2=[];
-                  }
-                }
-                if(row2.length>0){
-                  this.overige_vakken.push(row2);
-                }
-              })
+            this.updateOverigeVakken(redactie_api_url, suggest_map);
           })
-
+      },
+      toggleSuggesties(){
+        this.show_vakken_suggesties = !this.show_vakken_suggesties;
+        if( this.show_vakken_suggesties ){
+          this.suggestie_btn_label = "Verberg suggesties voor vakken";
+          console.log("make axios call here...")
+        }
+        else{
+          this.suggestie_btn_label = "Toon suggesties voor vakken";
+        }
+        
+        this.updateSuggestions();
       },
       addVakSuggestie: function(vak){
         var already_added = false;
