@@ -194,7 +194,11 @@
             var row2 = [];
             for( var vak_index in res2.data){
               var ovak = res2.data[vak_index];
-              if(suggest_map[ovak.id] == undefined) row2.push(ovak);
+              if(suggest_map[ovak.id] == undefined){ 
+                // row2.push(ovak);
+                // fix duplicate entries 
+                row2.push(Object.assign({}, ovak));
+              }
 
               if(row2.length>=4){
                 this.overige_vakken.push(row2);
@@ -242,7 +246,7 @@
               //if(vak_index>5) break; //simulate suggestions by only taking first 6
               var vak = res.data[vak_index];
               suggest_map[vak.id] = vak; 
-              row.push(vak);
+              row.push(Object.assign({}, vak));
               if(row.length==4){
                 this.vakken_suggesties.push(row);
                 row=[];

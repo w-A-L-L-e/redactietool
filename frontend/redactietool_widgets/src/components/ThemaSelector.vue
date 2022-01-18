@@ -178,15 +178,15 @@
           var thema_definition = thema.definition.toLowerCase();
 
           if(thema_label.includes(search_lower) || thema_definition.includes(search_lower)){
-            row.push(thema);
+            row.push(Object.assign({}, thema));
           }
           if(row.length==4){
-            this.thema_cards.push(row);
+            this.thema_cards.push(JSON.parse(JSON.stringify(row)));
             row=[];
           }
         }
         if(row.length>0){
-          this.thema_cards.push(row);
+          this.thema_cards.push(JSON.parse(JSON.stringify(row)));
         }
         this.thema_prev_search = this.thema_search;
         this.thema_search = ""; //clear for next search
