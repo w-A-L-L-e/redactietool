@@ -20,6 +20,11 @@
     </div>
 
     <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
+
+      <div v-if="!cp_keywords.length" class="notification is-info is-light">
+        Voor dit item zijn er geen Content Partner trefwoorden.
+      </div>
+
       <div 
         class="keyword-pill" 
         v-for="keyword in cp_keywords" 
