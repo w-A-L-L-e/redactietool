@@ -53,7 +53,7 @@
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
               <div class="card" >
-                <header class="card-header">
+                <header class="card-header" v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']">
                   <p class="card-header-title">
                     {{vak.label}}
                   </p>
@@ -77,7 +77,7 @@
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
               <div class="card" >
-                <header class="card-header">
+                <header class="card-header" v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']">
                   <p class="card-header-title">
                     {{ovak.label}}
                   </p>
@@ -187,6 +187,13 @@
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
+      },
+      vakIsSelected(vak){
+        for( var i in this.value ){
+          var selected_vak = this.value[i];
+          if(vak.id == selected_vak.id) return true;
+        }
+        return false;
       },
       toggleSuggesties(){
         this.show_vakken_suggesties = !this.show_vakken_suggesties;
@@ -361,6 +368,24 @@
     overflow-wrap: anywhere;
     max-width: 50em;
   }
+
+  header.vak-selected{
+    background: #41b883;
+  }
+  header.vak-selected .card-header-title{
+    color: #fff;
+  }
+  .card-footer-item{
+    padding: 0.2em;
+    background-color: #3e8ed0;
+    color: #fff;
+  }
+  .card-footer-item:hover{
+    padding: 0.2em;
+    background-color: #3488be;
+    color: #fff;
+  }
+
   .show{
     display: block;
   }
