@@ -77,7 +77,7 @@
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
               <div class="card" >
-                <header class="card-header">
+                <header class="card-header" v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']">
                   <p class="card-header-title">
                     {{thema.label}}
                   </p>
@@ -187,6 +187,13 @@
         this.thema_search = ""; //clear for next search
         event.preventDefault();
       },
+      themaIsSelected(thema){
+        for( var i in this.value ){
+          var selected_thema = this.value[i];
+          if(thema.id == selected_thema.id) return true;
+        }
+        return false;
+      },
       toggleThemas(){
         this.show_thema_cards = !this.show_thema_cards;
         if( this.show_thema_cards ){
@@ -212,6 +219,7 @@
 
       },
       addThema: function(thema){
+        console.log("addThema thema=", thema);
         var already_added = false;
 
         for(var o in this.value){
@@ -231,6 +239,7 @@
           this.options.push(new_thema);
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
+          this.$root.$emit('themas_changed', this.value);
         }
         else{
           this.show_already_added_warning = true;
@@ -361,6 +370,23 @@
     margin-top: 10px;
     margin-right: 10px;
   }
+  header.thema-selected{
+    background: #41b883;
+  }
+  header.thema-selected .card-header-title{
+    color: #fff;
+  }
+  .card-footer-item{
+    padding: 0.2em;
+    background-color: #3e8ed0;
+    color: #fff;
+  }
+  .card-footer-item:hover{
+    padding: 0.2em;
+    background-color: #3488be;
+    color: #fff;
+  }
+
   .hide{
     display: none;
   }
