@@ -102,7 +102,7 @@
       var keywords_cp_div = document.getElementById("item_keywords_cp");
       if( keywords_cp_div ){
         var keywords_cp = JSON.parse(keywords_cp_div.innerText);
-        for(var cpk in keywords){
+        for(var cpk in keywords_cp){
           var cp_keyword = keywords_cp[cpk]
           this.cp_keywords.push(
             {

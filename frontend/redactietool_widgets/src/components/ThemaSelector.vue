@@ -172,7 +172,12 @@
         var row = [];
         for( var thema_index in this.options){
           var thema = this.options[thema_index];
-          if(thema.label.includes(this.thema_search) || thema.definition.includes(this.thema_search)){
+          // make searching case insensitive
+          var search_lower = this.thema_search.toLowerCase();
+          var thema_label = thema.label.toLowerCase();
+          var thema_definition = thema.definition.toLowerCase();
+
+          if(thema_label.includes(search_lower) || thema_definition.includes(search_lower)){
             row.push(thema);
           }
           if(row.length==4){
