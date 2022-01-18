@@ -44,12 +44,34 @@
     >
       {{show_themas_label}}
   </a>
+  
+  <div class="thema-search" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input is-small" 
+          type="text"
+          placeholder="Zoek thema"
+          v-on:keydown.enter="zoekThemas($event)"
+          v-model="thema_search">
+      </div>
+      <div class="control">
+        <a class="button is-info is-small" v-on:click="zoekThemas($event)">
+          Zoek
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
     Thema werd al toegevoegd
   </div>
 
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
-      <!--h3 class="subtitle">Suggesties voor vakken</h3-->
+
+      <div v-if="!thema_cards.length" class="notification is-info is-light">
+        Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
+      </div>
+
       <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
         <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
           <div class="tile is-ancestor">
@@ -107,7 +129,9 @@
         thema_cards: [],
         show_thema_cards: false,
         show_already_added_warning: false,
-        show_themas_label: 'Toon themas'
+        show_themas_label: "Toon themas",
+        thema_search: "",
+        thema_prev_search: ""
       }
     },
     created: function() { 
@@ -142,6 +166,26 @@
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('themas_changed', value);
+      },
+      zoekThemas(event){
+        this.thema_cards = [];
+        var row = [];
+        for( var thema_index in this.options){
+          var thema = this.options[thema_index];
+          if(thema.label.includes(this.thema_search) || thema.definition.includes(this.thema_search)){
+            row.push(thema);
+          }
+          if(row.length==4){
+            this.thema_cards.push(row);
+            row=[];
+          }
+        }
+        if(row.length>0){
+          this.thema_cards.push(row);
+        }
+        this.thema_prev_search = this.thema_search;
+        this.thema_search = ""; //clear for next search
+        event.preventDefault();
       },
       toggleThemas(){
         this.show_thema_cards = !this.show_thema_cards;
@@ -298,6 +342,12 @@
     display: hidden;
   }
 
+  .thema-search {
+    float: right;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
   .thema-warning-pill{
     border-radius: 5px;
     background: #ff6a6a;
@@ -309,6 +359,7 @@
     margin-bottom: 5px;
     width: 15em;
     margin-top: 10px;
+    margin-right: 10px;
   }
   .hide{
     display: none;
