@@ -241,7 +241,7 @@
             label: thema.label,
             definition: thema.definition
           };
-          this.options.push(new_thema);
+          //this.options.push(new_thema);
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
           this.$root.$emit('themas_changed', this.value);

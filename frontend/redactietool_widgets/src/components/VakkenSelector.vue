@@ -289,7 +289,7 @@
             label: vak.label,
             definition: vak.definition
           };
-          this.options.push(new_vak);
+          //this.options.push(new_vak);
           this.value.push(new_vak);
           this.json_value = JSON.stringify(this.value);
         }
