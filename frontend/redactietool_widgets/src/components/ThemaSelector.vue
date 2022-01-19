@@ -21,7 +21,7 @@
 
     <template slot="noResult">Thema niet gevonden</template>
 
-    <template 
+    <!--template 
       slot="singleLabel" 
       slot-scope="props">
         <span class="option__desc">
@@ -41,7 +41,7 @@
           <span class="option__title">{{ props.option.label}}</span>
           <span class="option__small">{{ props.option.definition}}</span>
         </div>
-    </template>
+    </template-->
 
   </multiselect>
 
@@ -174,7 +174,7 @@
         show_themas_label: "Toon themas",
         thema_search: "",
         thema_prev_search: "",
-        show_definitions: true,
+        show_definitions: false,
         // show_definitions_options: [
         //   { text: "Toon beschrijvingen", value: true },
         //   { text: "Verberg beschrijvingen", value: false}
@@ -344,6 +344,7 @@
     display: none;
   }
 
+  /*
   .option__title{
     display: block;
     text-decoration: none;
@@ -356,7 +357,6 @@
     cursor: pointer;
     white-space: nowrap;
   }
-
   .option__small{
     display: block;
   }
@@ -376,6 +376,8 @@
     white-space: normal;
     border-bottom: 1px solid #eee;
   }
+  */
+
   .toon-themas-button {
     margin-bottom: 10px;
   }

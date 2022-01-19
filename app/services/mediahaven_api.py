@@ -12,11 +12,14 @@
 #
 
 import os
-import json
+# import json
 from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from app.services.subtitle_files import get_property  # , get_array_property
+from app.services.subtitle_files import get_property, sidecar_root  # get_array_property,
+
+from lxml import etree
+
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -144,40 +147,84 @@ class MediahavenApi:
     # Also with API v2 will be easier to make this call using json directly
     # but requires different authentication (this is something for a future release to consider).
     # we know however v1 is still staying around until 2023.
-    def update_metadata(self, department, metadata):
-        # responses to handle:
-        # 200 Ok: Record object
-        # 400 Bad request: error result
-        # 409 Conflict:
-        print("DEBUG: send to mh department=", department, " metadata:")
-        print(json.dumps(metadata, indent=4))
-        fragment_id = metadata['fragmentId']
-        avo_beschrijving = get_property(metadata, 'dcterms_abstract')
-        print("sending this to mediahaven now: ", avo_beschrijving)
-        return  # TEMPORARY TURN REAL POST CALL OFF
 
-        # update dcterms_abstract
-        send_url = f"{self.API_SERVER}/resources/media/{fragment_id}/dcterms_abstract"
+    def metadata_sidecar(self, metadata, tp):
+        TESTBEELD_PERM_ID = os.environ.get(
+            'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
+        ONDERWIJS_PERM_ID = os.environ.get(
+            'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+        ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
 
-        # for now we skip these, but will do this later when we switch to bach update.
-        metadata_fields = {
+        cp_id = get_property(metadata, 'CP_id')
+        cp = get_property(metadata, 'CP')
+        # xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
+
+        root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
+
+        rights = etree.SubElement(
+            root, '{%s}RightsManagement' % MHS_NS)
+        perms = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
+        etree.SubElement(perms, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
+        etree.SubElement(perms, '{%s}Export' % MH_NS).text = TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Export' % MH_NS).text = ADMIN_PERM_ID
+
+        mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
+
+        # WARNING: is_verwant_aan is broken, see ticket dev-1900 in jira
+        # relations = etree.SubElement(mdprops, "dc_relations")
+        # etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
+
+        etree.SubElement(mdprops, "CP_id").text = cp_id
+        # mediahaven computes external_id for us.
+        # etree.SubElement(mdprops, "external_id").text = xml_pid
+        etree.SubElement(mdprops, "PID").text = tp['pid']
+        etree.SubElement(mdprops, "CP").text = cp
+        etree.SubElement(mdprops, "sp_name").text = 'borndigital'
+
+        # set ontsluitingstitel, uizenddatum, avo_beschrijving
+        etree.SubElement(mdprops, "dc_title").text = get_property(
+            metadata, 'dc_title')
+        etree.SubElement(mdprops, "dcterms_issued").text = get_property(
+            metadata, 'dcterms_issued')
+        etree.SubElement(mdprops, "dcterms_abstract").text = get_property(
+            metadata, 'dcterms_abstract')
+
+        # WARNING: titel_serie (is still broken unfortunately) zie bug/ticket dev-1900.
+        # dc_titles = etree.SubElement(mdprops, "dc_titles")
+        # etree.SubElement(dc_titles, "serie").text = get_array_property(metadata, 'dc_titles', 'serie')
+
+        xml_data = etree.tostring(
+            root, pretty_print=True, encoding="UTF-8", xml_declaration=True
+        ).decode()
+
+        return xml_data
+
+    def update_metadata(self, department, metadata, tp):
+        xml_sidecar = self.metadata_sidecar(metadata, tp)
+        print('>>>> tp=', tp, "sidecar=", xml_sidecar)
+        send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
+        print('\n >>> send_url=', send_url)
+
+        file_fields = {
+            # 'file': (tp['srt_file'], open(srt_path, 'rb')),
+            'metadata': ('metadata.xml', xml_sidecar),
+            # 'externalId': ('', f"{tp['mam_data']['externalId']}_{tp['subtitle_type']}"),
+            'externalId': ('', f"{metadata['externalId']}"),
             'departmentId': ('', self.DEPARTMENT_ID),
-            # 'fragmentId': ('', f"{metadata['fragmentId']}"),
-            'dcterms_abstract': ('', avo_beschrijving),
             'autoPublish': ('', 'true')
         }
 
-        # if we also want these to update with 1 call
-        # we need to switch into xml batch updating instead.
-        # this is also a post request but instead we supply an xml string with changed values.
-        # dc_title
-        # dcterms_issued
+        # logger.info("posting subtitles to mam", data=file_fields)
         response = self.session.post(
             url=send_url,
-            auth=(self.api_user(department), self.API_PASSWORD),
-            files=metadata_fields,
+            auth=(self.api_user(tp['department']), self.API_PASSWORD),
+            files=file_fields,
         )
-        # return response.json()
+
         return response.status_code
 
     # below two methods are extra helpers only used by maintenance scripts

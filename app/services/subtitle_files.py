@@ -13,6 +13,10 @@
 import os
 import webvtt
 
+# import requests
+# from io import StringIO
+
+
 from werkzeug.utils import secure_filename
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
@@ -60,6 +64,30 @@ def save_subtitles(upload_folder, pid, uploaded_file):
         logger.info(f"Parse error in srt {we}")
 
     return None, None
+
+
+# issue here is we can't get it to work with in-memory files.
+# for uploading this was ok, but here we need a parser that works without
+# creating file objects preferably
+# made ticket for this as this is going to be harder than expected to do without storing a tempfile to
+# convert due to the python vtt lib expecting a file descriptor available:
+#  DEV-1902
+def srt_to_vtt(srt_url):
+    # payload = requests.get(srt_url).text
+    # buffer = StringIO(payload)
+    # output = StringIO()
+    # output = webvtt.from_srt(buffer)
+    web_vtt_string = "converted srt"
+
+    # from rasterio.io import MemoryFile
+    # with MemoryFile() as memfile:
+    #     memfile.write(payload)
+    #     with memfile.open() as srt_input:
+    #         webvtt.from_srt(srt_input)
+    #         webvtt.save(output, format='vtt')
+    #         web_vtt_string = output.getvalue()
+    # output.close()
+    return web_vtt_string
 
 
 def not_deleted(upload_folder, f):
@@ -133,54 +161,57 @@ def get_md_array(mam_data, attribute, legacy_fallback=False):
         return []
 
 
-def save_sidecar_xml_v1(upload_folder, metadata, tp):
-    TESTBEELD_PERM_ID = os.environ.get(
-        'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
-    ONDERWIJS_PERM_ID = os.environ.get(
-        'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
-    ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
+# todo refactore below methods into seperate module as we use it
+# both in subtitles and mediahaven_api now...
 
-    cp_id = get_property(metadata, 'CP_id')
-    cp = get_property(metadata, 'CP')
-    xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
-
-    root = etree.Element("MediaHAVEN_external_metadata")
-    etree.SubElement(root, "title").text = tp['srt_file']
-
-    description = f"Subtitles for item {tp['pid']}"
-    etree.SubElement(root, "description").text = description
-
-    # rights = etree.SubElement(root, 'RightsManagement')  # of Structural?
-    rights = etree.SubElement(root, 'Structural')
-    permissions = etree.SubElement(rights, 'Permissions')
-    etree.SubElement(permissions, 'Read').text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, 'Read').text = ONDERWIJS_PERM_ID
-    etree.SubElement(permissions, 'Read').text = ADMIN_PERM_ID
-    etree.SubElement(permissions, 'Write').text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, 'Write').text = ADMIN_PERM_ID
-    etree.SubElement(permissions, 'Export').text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, 'Export').text = ADMIN_PERM_ID
-
-    mdprops = etree.SubElement(root, "MDProperties")
-    etree.SubElement(mdprops, "sp_name").text = 'borndigital'
-    etree.SubElement(mdprops, "CP").text = cp
-    etree.SubElement(mdprops, "CP_id").text = cp_id
-    etree.SubElement(mdprops, "PID").text = xml_pid
-    etree.SubElement(mdprops, "external_id").text = tp['pid']
-    relations = etree.SubElement(mdprops, "dc_relations")
-    etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
-
-    xml_data = etree.tostring(
-        root, pretty_print=True, encoding="UTF-8", xml_declaration=True
-    ).decode()
-
-    # now write data to correct filename
-    xml_filename = f"{xml_pid}.xml"
-    sf = open(os.path.join(upload_folder, xml_filename), 'w')
-    sf.write(xml_data)
-    sf.close()
-
-    return xml_filename, xml_data
+# def save_sidecar_xml_v1(upload_folder, metadata, tp):
+#     TESTBEELD_PERM_ID = os.environ.get(
+#         'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
+#     ONDERWIJS_PERM_ID = os.environ.get(
+#         'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+#     ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
+#
+#     cp_id = get_property(metadata, 'CP_id')
+#     cp = get_property(metadata, 'CP')
+#     xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
+#
+#     root = etree.Element("MediaHAVEN_external_metadata")
+#     etree.SubElement(root, "title").text = tp['srt_file']
+#
+#     description = f"Subtitles for item {tp['pid']}"
+#     etree.SubElement(root, "description").text = description
+#
+#     # rights = etree.SubElement(root, 'RightsManagement')  # of Structural?
+#     rights = etree.SubElement(root, 'Structural')
+#     permissions = etree.SubElement(rights, 'Permissions')
+#     etree.SubElement(permissions, 'Read').text = TESTBEELD_PERM_ID
+#     etree.SubElement(permissions, 'Read').text = ONDERWIJS_PERM_ID
+#     etree.SubElement(permissions, 'Read').text = ADMIN_PERM_ID
+#     etree.SubElement(permissions, 'Write').text = TESTBEELD_PERM_ID
+#     etree.SubElement(permissions, 'Write').text = ADMIN_PERM_ID
+#     etree.SubElement(permissions, 'Export').text = TESTBEELD_PERM_ID
+#     etree.SubElement(permissions, 'Export').text = ADMIN_PERM_ID
+#
+#     mdprops = etree.SubElement(root, "MDProperties")
+#     etree.SubElement(mdprops, "sp_name").text = 'borndigital'
+#     etree.SubElement(mdprops, "CP").text = cp
+#     etree.SubElement(mdprops, "CP_id").text = cp_id
+#     etree.SubElement(mdprops, "PID").text = xml_pid
+#     etree.SubElement(mdprops, "external_id").text = tp['pid']
+#     relations = etree.SubElement(mdprops, "dc_relations")
+#     etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
+#
+#     xml_data = etree.tostring(
+#         root, pretty_print=True, encoding="UTF-8", xml_declaration=True
+#     ).decode()
+#
+#     # now write data to correct filename
+#     xml_filename = f"{xml_pid}.xml"
+#     sf = open(os.path.join(upload_folder, xml_filename), 'w')
+#     sf.write(xml_data)
+#     sf.close()
+#
+#     return xml_filename, xml_data
 
 
 def sidecar_root():

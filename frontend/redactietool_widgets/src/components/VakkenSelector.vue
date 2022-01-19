@@ -18,6 +18,8 @@
 
       <template slot="noResult">Vak niet gevonden</template>
 
+      <!--
+      disable custom styling for demo, per request Ineke
       <template 
         slot="singleLabel" 
         slot-scope="props">
@@ -39,6 +41,7 @@
             <span class="option__small">{{ props.option.definition}}</span>
           </div>
       </template>
+      -->
 
     </multiselect>
 
@@ -351,6 +354,16 @@
         event.preventDefault();
         console.log("TODO search this", this.vakken_search);
       }
+    },
+    filters: {
+      truncate: function (text, length, suffix) {
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
     }
   }
 </script>
@@ -411,6 +424,8 @@
     margin-bottom: 5px !important;
     color: #222;
   }
+
+  /* use for custom template
   .multiselect__element{
     max-width: 50em;
   }
@@ -426,7 +441,7 @@
   .option__small {
     overflow-wrap: anywhere;
     max-width: 50em;
-  }
+  }*/
 
   .card{
     cursor: pointer;

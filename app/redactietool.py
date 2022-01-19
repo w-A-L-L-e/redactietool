@@ -42,7 +42,7 @@ from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
-    move_subtitle, get_property, not_deleted
+    move_subtitle, get_property, not_deleted, srt_to_vtt
 )
 from app.services.validation import (pid_error, upload_error, validate_input,
                                      validate_upload, validate_conversion)
@@ -539,9 +539,6 @@ def save_item_metadata():
     data_mapping = RmhMapping()
     tp, json_data, errors = data_mapping.form_to_mh(request, mam_data)
 
-    # TODO: validations on length etc add here???
-    # errors can be passed in **tp !
-
     return render_template(
         'metadata/edit.html',
         **tp
@@ -591,6 +588,15 @@ def get_vakken_suggesties():
         json_data['graden'], json_data['themas'])
     return result
 
+
+@app.route('/item_subtitles', methods=['GET'])
+@requires_authorization
+@login_required
+def get_subtitles():
+    # see this on how to construct a proper link
+    # https://meemoo.atlassian.net/browse/DEV-1872?focusedCommentId=25119
+    srt_url = 'https://archief-media.meemoo.be/viaa/MOB/TESTBEELD/...35b8.srt'
+    return srt_to_vtt(srt_url)
 
 # debugging route to see vue components can submit nicely to flask
 # @app.route('/edit_metadata_vue', methods=['POST'])

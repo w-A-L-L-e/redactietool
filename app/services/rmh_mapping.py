@@ -28,8 +28,8 @@ class RmhMapping:
     def set_property(self, mam_data, propkey, propvalue):
         for prop in mam_data['mdProperties']:
             if prop.get('attribute') == propkey:
-                print("saving ", propkey,
-                      "in mam_data with value=", escape(propvalue))
+                # print("saving ", propkey,
+                #      "in mam_data with value=", escape(propvalue))
                 prop['value'] = propvalue
                 return mam_data
 
@@ -41,6 +41,27 @@ class RmhMapping:
             'dottedKey': None
         })
 
+        return mam_data
+
+    def set_array_property(self, mam_data, attribute, array_attribute, propvalue):
+        # still bug here
+        print(">>>>>>>>> SET ARRAY PROP VALUE ==", propvalue)
+        props = mam_data.get('mdProperties', [])
+        for prop in props:
+            if prop.get('attribute') == attribute:
+                array_values = prop.get('value', '')
+                for att in array_values:
+                    if att.get('attribute') == array_attribute:
+                        att['value'] = propvalue
+                        return mam_data
+
+        # # in case it's new array prop (bail out for now):
+        print("ERROR / TODO in set_array_proparte: this should not happen!!! returning mam_data as is!!!")
+
+        # array_item = mam_data['mdProperties']['attribute']['value'].append(
+        #    'value': propvalue,
+        #    'attribute': array_attribute
+        # )
         return mam_data
 
     def form_params(self, token, pid, department, errors, mam_data):
@@ -157,23 +178,25 @@ class RmhMapping:
             request.form.get('avo_beschrijving')
         )
 
-        # todo fetch + write these also in the xml sidecar:
-        print("DEBUG form data=", request.form)
+        mam_data = self.set_array_property(
+            mam_data, 'dc_titles',
+            'serie', request.form.get('serie')
+        )
 
-        # maybe also serie, episode and aflevering editable (double check this tomorrow).
-        # TODO:  mediahaven sidecar is necessary (put call does not work mh bug vs docs!
+        # print("DEBUG form data=", request.form)
         mh_api = MediahavenApi()
-        mh_api.update_metadata(department, mam_data)
 
-        errors = None  # for now always none, hoever mh can give errors
         # also validation errors can be added here
+        errors = None  # for now always none, hoever mh can give errors
+        tp = self.form_params(token, pid, department, errors, mam_data)
+        result = mh_api.update_metadata(department, mam_data, tp)
+
+        print("save result=", result)
 
         # we can even do another GET call here too if we want to validate the
         # changes have propagated this is even described in the mh documenation
         # as the call is async so we can check a modified timestamp and
         # wait until it changes...
-
-        tp = self.form_params(token, pid, department, errors, mam_data)
 
         # if no errors from mediahaven put call signal a sucess notification:
         tp['data_saved_to_mam'] = True

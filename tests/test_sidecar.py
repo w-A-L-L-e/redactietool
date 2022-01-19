@@ -6,9 +6,9 @@
 #
 
 import pytest
-from app.services.subtitle_files import save_sidecar_xml_v1
+# from app.services.subtitle_files import save_sidecar_xml_v1
 from app.services.subtitle_files import save_sidecar_xml
-from .fixtures import sub_params, sub_meta, sidecar_v1_output, sidecar_v2_output
+from .fixtures import sub_params, sub_meta, sidecar_v2_output  # , sidecar_v1_output
 
 pytestmark = [pytest.mark.vcr(ignore_localhost=True)]
 
@@ -22,11 +22,11 @@ def vcr_config():
         "filter_headers": ["authorization"]
     }
 
-
-def test_sidecar_v1():
-    xml_filename, xml_data = save_sidecar_xml_v1(
-        "./tests/test_subs", sub_meta(), sub_params())
-    assert xml_data == sidecar_v1_output()
+# this is now deprecated
+# def test_sidecar_v1():
+#     xml_filename, xml_data = save_sidecar_xml_v1(
+#         "./tests/test_subs", sub_meta(), sub_params())
+#     assert xml_data == sidecar_v1_output()
 
 
 def test_sidecar_v2():
