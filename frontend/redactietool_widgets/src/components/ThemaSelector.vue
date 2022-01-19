@@ -1,9 +1,15 @@
 <template>
   <div id="thema_selector">
 
+  <a class="button is-link is-small toon-themas-button" 
+      v-on:click="toggleThemas" 
+    >
+      {{show_themas_label}}
+  </a>
+
   <multiselect v-model="value" 
     tag-placeholder="Voeg nieuw thema toe" 
-    placeholder="Zoek thema" 
+    placeholder="Selecteer thema" 
     label="label" 
     track-by="id" 
     :options="options" 
@@ -39,38 +45,45 @@
 
   </multiselect>
 
-  <a class="button is-link is-small toon-themas-button" 
-      v-on:click="toggleThemas" 
-    >
-      {{show_themas_label}}
-  </a>
-  
- 
+   
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
-
-    <!-- modal is actually doable here, and if we keep other dialogs inline
-    we can avoid the modal-in-modal problem. Also we need to duplicate the selected themas
-    here so that the overview of already selected themas is fixed in the header together with searching
-    we'll see what time we have left after getting our xml sidecar stuff sorted...
-    -->
 
     <div class="modal is-active" id='modal_dlg'>
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Themas</p>
+          <p class="modal-card-title">Selecteer themas</p>
+
+          <!-- div class="select thema-show-def-selector">
+            <select v-model="show_definitions">
+              <option 
+                v-for="(option, index) in show_definitions_options" 
+                v-bind:value="option.value" 
+                :key="index">
+              {{option.text}}
+              </option>
+            </select>
+          </div-->
+          
+          <label class="checkbox thema-show-def-selector">
+            <input
+              type="checkbox"
+              v-model="show_definitions"
+            >
+            Toon beschrijvingen
+          </label>
 
           <div class="thema-search">
             <div class="field has-addons">
               <div class="control">
-                <input class="input is-small" 
+                <input class="input" 
                   type="text"
                   placeholder="Zoek thema"
                   v-on:keydown.enter="zoekThemas($event)"
                   v-model="thema_search">
               </div>
               <div class="control">
-                <a class="button is-info is-small" v-on:click="zoekThemas($event)">
+                <a class="button is-info" v-on:click="zoekThemas($event)">
                   Zoek
                 </a>
               </div>
@@ -82,8 +95,6 @@
         </header>
         <section class="modal-card-body">
 
-          
-
           <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
             Thema werd al toegevoegd
           </div>
@@ -93,7 +104,7 @@
             </div>
 
             <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
-              <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
+              <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
                 <div class="tile is-ancestor">
                   <div class="tile is-vertical mr-2 mt-2" >
                     <div class="card" 
@@ -105,7 +116,7 @@
                           {{thema.label}}
                         </p>
                       </header>
-                      <div class="card-content">
+                      <div class="card-content" v-if="show_definitions">
                           {{thema.definition}} 
                       </div>
                     </div>
@@ -117,7 +128,7 @@
 
         </section>
         <footer class="modal-card-foot">
-          <a class="button is-success close-themas-button" 
+          <a class="button is-link close-themas-button" 
             v-on:click="toggleThemas($event)">
               Themas sluiten
           </a>
@@ -162,7 +173,12 @@
         show_already_added_warning: false,
         show_themas_label: "Toon themas",
         thema_search: "",
-        thema_prev_search: ""
+        thema_prev_search: "",
+        show_definitions: true,
+        // show_definitions_options: [
+        //   { text: "Toon beschrijvingen", value: true },
+        //   { text: "Verberg beschrijvingen", value: false}
+        // ]
       }
     },
     created: function() { 
@@ -211,7 +227,7 @@
           if(thema_label.includes(search_lower) || thema_definition.includes(search_lower)){
             row.push(Object.assign({}, thema));
           }
-          if(row.length==4){
+          if(row.length==5){
             this.thema_cards.push(JSON.parse(JSON.stringify(row)));
             row=[];
           }
@@ -245,7 +261,7 @@
         var row = [];
         for( var thema_index in this.options){
           row.push(this.options[thema_index]);
-          if(row.length==4){
+          if(row.length==5){
             this.thema_cards.push(row);
             row=[];
           }
@@ -361,14 +377,7 @@
     border-bottom: 1px solid #eee;
   }
   .toon-themas-button {
-    /*position: -webkit-sticky;
-    position: sticky;
-    top: 20px;
-    float: left;
-    z-index: 100;
-    */
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .close-themas-button{
@@ -416,6 +425,12 @@
     display: hidden;
   }
 
+  .thema-show-def-selector {
+    float: right;
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 20px;
+  }
   .thema-search {
     float: right;
     display: inline-block;
@@ -472,6 +487,10 @@
       max-height: calc(100vh - 40px);
       width: calc(100vw - 50px);
     }
+  }
+  .modal-card-head, .modal-card-foot{
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
  
 

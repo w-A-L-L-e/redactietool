@@ -1,9 +1,16 @@
 <template>
   <div id="vakken_selector">
+
+    <a class="button is-link is-small vakken-suggest-button" 
+      v-on:click="toggleSuggesties" 
+    >
+      {{suggestie_btn_label}}
+    </a>
+
     <multiselect v-model="value" 
       id="vakken_multiselect"
       tag-placeholder="Kies vakken" 
-      placeholder="Zoek vak" 
+      placeholder="Selecteer vak" 
       label="label" 
       track-by="id" 
       :options="options" :multiple="true" 
@@ -35,11 +42,6 @@
 
     </multiselect>
 
-    <a class="button is-link is-small vakken-suggest-button" 
-      v-on:click="toggleSuggesties" 
-    >
-      {{suggestie_btn_label}}
-    </a>
 
     <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
     Vak werd al toegevoegd
@@ -47,66 +49,97 @@
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
-      <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
+      <div class="modal is-active" id='modal_dlg'>
+        <div class="modal-background"></div>
+        <div class="modal-card">
 
-      <div v-if="!vakken_suggesties.length" class="notification is-info is-light">
-        Geen suggesties gevonden. Probeer andere themas of onderwijsgraden te selecteren.
-      </div>
+          <header class="modal-card-head">
+            <p class="modal-card-title">Selecteer vakken</p>
 
-      <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
-        <div class="column is-one-quarter" v-for="vak in row" :key="vak.id">
-          <div class="tile is-ancestor">
-            <div class="tile is-vertical mr-2 mt-2" >
-              <div class="card" 
-                v-on:click="toggleVakSelect(vak)"
-                v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']"
-                >
-                <header class="card-header">
-                  <p class="card-header-title">
-                    {{vak.label}}
-                  </p>
-                </header>
-                <div class="card-content">
-                    {{vak.definition}} 
+            <div class="vak-search">
+              <div class="field has-addons">
+                <div class="control">
+                  <input class="input" 
+                    type="text"
+                    placeholder="Zoek vak"
+                    v-on:keydown.enter="zoekVakken($event)"
+                    v-model="vakken_search">
                 </div>
-                <!--footer class="card-footer">
-                  <a v-on:click="toggleVakSelect(vak)" 
-                  class="card-footer-item">Selecteer</a>
-                </footer-->
+                <div class="control">
+                  <a class="button is-info" v-on:click="zoekVakken($event)">
+                    Zoek
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+
+          </header>
+
+          <section class="modal-card-body">
+
+            <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
+
+            <div v-if="!vakken_suggesties.length" class="notification is-info is-light">
+              Geen suggesties gevonden. Probeer andere themas of onderwijsgraden te selecteren.
+            </div>
+
+            <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
+              <div class="column is-one-fifth" v-for="vak in row" :key="vak.id">
+                <div class="tile is-ancestor">
+                  <div class="tile is-vertical mr-2 mt-2" >
+                    <div class="card" 
+                      v-on:click="toggleVakSelect(vak)"
+                      v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']"
+                      >
+                      <header class="card-header">
+                        <p class="card-header-title">
+                          {{vak.label}}
+                        </p>
+                      </header>
+                      <div class="card-content">
+                          {{vak.definition}} 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="subtitle vakken-title">Overige vakken</h3>
+            <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
+              <div class="column is-one-fifth" v-for="ovak in row2" :key="ovak.id">
+                <div class="tile is-ancestor">
+                  <div class="tile is-vertical mr-2 mt-2" >
+                    <div class="card" 
+                      v-on:click="toggleVakSelect(ovak)"
+                      v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
+                    >
+                      <header class="card-header">
+                        <p class="card-header-title">
+                          {{ovak.label}}
+                        </p>
+                      </header>
+                      <div class="card-content">
+                          {{ovak.definition}} 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+          <footer class="modal-card-foot">
+            <a class="button is-link close-themas-button" 
+              v-on:click="toggleSuggesties($event)">
+                Vakken sluiten
+            </a>
+            <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
+          </footer>
         </div>
       </div>
 
-      <h3 class="subtitle vakken-title">Overige vakken</h3>
-      <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
-        <div class="column is-one-quarter" v-for="ovak in row2" :key="ovak.id">
-          <div class="tile is-ancestor">
-            <div class="tile is-vertical mr-2 mt-2" >
-              <div class="card" 
-                v-on:click="toggleVakSelect(ovak)"
-                v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
-              >
-                <header class="card-header">
-                  <p class="card-header-title">
-                    {{ovak.label}}
-                  </p>
-                </header>
-                <div class="card-content">
-                    {{ovak.definition}} 
-                </div>
-                <!--footer class="card-footer">
-                  <a v-on:click="toggleVakSelect(ovak)" 
-                  class="card-footer-item">Selecteer</a>
-                </footer-->
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-
-    </div>
 
     <textarea name="vakken" v-model="json_value" id="vakken_json_value"></textarea>
 </div>
@@ -144,7 +177,10 @@
         vakken_suggesties:[],
         overige_vakken:[],
         graden: [],
-        themas: []
+        themas: [],
+        vakken_search: "",
+        vakken_prev_search: "",
+        show_definitions: true,
       }
     },
     mounted: function() {
@@ -206,7 +242,7 @@
                 row2.push(Object.assign({}, ovak));
               }
 
-              if(row2.length>=4){
+              if(row2.length>=5){
                 this.overige_vakken.push(row2);
                 row2=[];
               }
@@ -253,7 +289,7 @@
               var vak = res.data[vak_index];
               suggest_map[vak.id] = vak; 
               row.push(Object.assign({}, vak));
-              if(row.length==4){
+              if(row.length>=5){
                 this.vakken_suggesties.push(row);
                 row=[];
               }
@@ -266,11 +302,11 @@
             this.updateOverigeVakken(redactie_api_url, suggest_map);
           })
       },
-      toggleSuggesties(){
+      toggleSuggesties(event){
+        event.preventDefault;
         this.show_vakken_suggesties = !this.show_vakken_suggesties;
         if( this.show_vakken_suggesties ){
           this.suggestie_btn_label = "Verberg suggesties voor vakken";
-          console.log("make axios call here...")
         }
         else{
           this.suggestie_btn_label = "Toon suggesties voor vakken";
@@ -301,6 +337,10 @@
           this.value.push(new_vak);
           this.json_value = JSON.stringify(this.value);
         }
+      },
+      zoekVakken(event){
+        event.preventDefault();
+        console.log("TODO search this", this.vakken_search);
       }
     }
   }
@@ -324,7 +364,6 @@
   }
   .vakken-suggest-button{
     display: inline-block;
-    margin-top: 10px;
     margin-bottom: 10px;
   }
   .vakken-suggesties {
@@ -397,19 +436,6 @@
   .vak-selected .card-content {
     border: 1px solid #9cafbd;
   }
-
-   /*
-  .card-footer-item{
-    padding: 0.2em;
-    background-color: #3e8ed0;
-    color: #fff;
-  }
-  .card-footer-item:hover{
-    padding: 0.2em;
-    background-color: #3488be;
-    color: #fff;
-  }*/
-
 
   .show{
     display: block;
