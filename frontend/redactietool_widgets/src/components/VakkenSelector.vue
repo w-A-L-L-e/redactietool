@@ -43,7 +43,7 @@
     </multiselect>
 
 
-    <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+  <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
     Vak werd al toegevoegd
   </div>
 
@@ -55,6 +55,15 @@
 
           <header class="modal-card-head">
             <p class="modal-card-title">Selecteer vakken</p>
+
+
+            <label class="checkbox thema-show-def-selector">
+              <input
+                type="checkbox"
+                v-model="show_definitions"
+              >
+                Toon beschrijvingen
+            </label>
 
             <div class="vak-search">
               <div class="field has-addons">
@@ -96,7 +105,7 @@
                           {{vak.label}}
                         </p>
                       </header>
-                      <div class="card-content">
+                      <div class="card-content" v-if="show_definitions">
                           {{vak.definition}} 
                       </div>
                     </div>
@@ -119,7 +128,7 @@
                           {{ovak.label}}
                         </p>
                       </header>
-                      <div class="card-content">
+                      <div class="card-content" v-if="show_definitions">
                           {{ovak.definition}} 
                       </div>
                     </div>
@@ -180,7 +189,7 @@
         themas: [],
         vakken_search: "",
         vakken_prev_search: "",
-        show_definitions: true,
+        show_definitions: false,
       }
     },
     mounted: function() {
