@@ -158,14 +158,11 @@ class RmhMapping:
         department = escape(escape(request.form.get('department')))
 
         # save some fields back into mam_data
-        print("\n ontsluitingstitel=", escape(
-            request.form.get('ontsluitingstitel')))
         mam_data = self.set_property(
             mam_data, 'dc_title',
             request.form.get('ontsluitingstitel')
         )
 
-        print("uitzenddatum=", escape(request.form.get('uitzenddatum')))
         mam_data = self.set_property(
             mam_data, 'dcterms_issued',
             request.form.get('uitzenddatum')
@@ -182,6 +179,31 @@ class RmhMapping:
             mam_data, 'dc_titles',
             'serie', request.form.get('serie')
         )
+
+        changed_item_type = json.loads(request.form.get('item_type'))
+        if type(changed_item_type) == list:
+            item_type = changed_item_type[0]['code']
+        else:
+            item_type = changed_item_type['code']
+        mam_data['type'] = item_type
+
+        # TODO:
+        # https://meemoo.atlassian.net/browse/OPS-1231
+        # form field name = lom1_onderwijsniveaus -> lom_onderwijsniveau
+        # form field name = lom1_onderwijsgraden -> lom_onderwijsgraad (as array of ids)
+        # form field name = themas -> lom_thema
+        # form field name = vakken -> lom_vak
+        # form field name = trefwoorden -> lom_keywords
+
+        # ex: 'item_keywords': json.dumps(get_md_array(mam_data, 'lom_keywords')),
+
+        # dan is er nog lom_legacy 'boolean field' wat hiermee????
+        # vermoeden: dit op false zetten zodra echte vakken+themas in lom_thema en lom_vak zitten.
+        # staat dit dan ook by default op true??? Alsook detectie kunnen we nu al door te zien
+        # dat de nieuwe velden lom_thema of lom_vak aanwezig is in de mh response.
+
+        # open vraag voor de checkbox beneden!!!
+        # form field name = publicatiestatus -> lom_publicatie ????
 
         # print("DEBUG form data=", request.form)
         mh_api = MediahavenApi()

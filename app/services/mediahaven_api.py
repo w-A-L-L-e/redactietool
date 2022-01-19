@@ -197,6 +197,9 @@ class MediahavenApi:
         # dc_titles = etree.SubElement(mdprops, "dc_titles")
         # etree.SubElement(dc_titles, "serie").text = get_array_property(metadata, 'dc_titles', 'serie')
 
+        # WARNING: this also does not save correctly now!
+        # etree.SubElement(root, 'type').text = metadata.get('type') # default to video
+
         xml_data = etree.tostring(
             root, pretty_print=True, encoding="UTF-8", xml_declaration=True
         ).decode()

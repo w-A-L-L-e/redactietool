@@ -14,7 +14,7 @@
 
     </multiselect>
     
-    <textarea name="lom1_beoogde_eindgebruiker" v-model="json_value" id="onderwijsniveaus_json_value"></textarea>
+    <textarea name="lom1_onderwijsniveaus" v-model="json_value" id="onderwijsniveaus_json_value"></textarea>
   </div>
 </template>
 

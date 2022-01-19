@@ -71,7 +71,7 @@ def save_subtitles(upload_folder, pid, uploaded_file):
 # creating file objects preferably
 # made ticket for this as this is going to be harder than expected to do without storing a tempfile to
 # convert due to the python vtt lib expecting a file descriptor available:
-#  DEV-1902
+#  DEV-1902 and https://meemoo.atlassian.net/browse/DEV-1872
 def srt_to_vtt(srt_url):
     # payload = requests.get(srt_url).text
     # buffer = StringIO(payload)
