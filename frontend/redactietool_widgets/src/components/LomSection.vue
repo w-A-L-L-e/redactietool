@@ -150,4 +150,34 @@
   .minimized {
     display: none;
   }
+
+  /* change colors for multiselect pills and highlights to match redactietool colors */
+  .multiselect__tag{
+    background: #3e8ed0;
+  }
+
+  .multiselect__tag-icon:hover {
+    background: #3488ce;
+  }
+  
+  .multiselect__option--highlight {
+    background-color: #eff5fb;
+    color: #296fa8;
+  }
+  .multiselect__option--highlight:after{
+    background: #3e8ed0;
+  }
+  
+  .multiselect__option--selected.multiselect__option--highlight{
+    background-color: #eff5fb;
+  }
+
+  .multiselect__option .multiselect__option--highlight .multiselect__option--selected{
+    color: #222; 
+  }
+
+  .multiselect__option--selected.multiselect__option--highlight{
+    color: #222; 
+  }
+  
 </style>

@@ -63,16 +63,7 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
-  .multiselect__option--selected.multiselect__option--highlight {
-    /*
-    original value:
-    background: #ff6a6a;
-    color: #fff;
-    */
-    background: #ddd;
-    color: #222;
-  }
-
+  
   #talen_selector{
     min-width: 30em;
   }

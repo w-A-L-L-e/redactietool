@@ -68,34 +68,56 @@
 
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
 
-      <div v-if="!thema_cards.length" class="notification is-info is-light">
-        Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
-      </div>
+    <!-- modal is actually doable here, and if we keep other dialogs inline
+    we can avoid the modal-in-modal problem. Also we need to duplicate the selected themas
+    here so that the overview of already selected themas is fixed in the header together with searching
+    we'll see what time we have left after getting our xml sidecar stuff sorted...
 
-      <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
-        <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
-          <div class="tile is-ancestor">
-            <div class="tile is-vertical mr-2 mt-2" >
-              <div class="card" >
-                <header class="card-header" v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']">
-                  <p class="card-header-title">
-                    {{thema.label}}
-                  </p>
-                </header>
-                <div class="card-content">
-                    {{thema.definition}} 
-                </div>
-                <footer class="card-footer">
-                  <a v-on:click="addThema(thema)" 
-                  class="card-footer-item">Selecteer</a>
-                </footer>
+    <div class="modal is-active" id='modal_dlg'>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Themas</p>
+          <button class="delete" aria-label="close" onClick="modalCloseClicked();" ></button>
+        </header>
+        <section class="modal-card-body">
+           <p> CONTENT HERE</p> 
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" onClick="modalSaveClicked();">Ok</button>
+          <button class="button" onClick="modalCancelClicked();">Annuleren</button>
+        </footer>
+      </div>
+    </div>
+    -->
+
+    <div v-if="!thema_cards.length" class="notification is-info is-light">
+      Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
+    </div>
+
+    <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
+      <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
+        <div class="tile is-ancestor">
+          <div class="tile is-vertical mr-2 mt-2" >
+            <div class="card" 
+              v-on:click="toggleThemaSelect(thema)"
+              v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
+              >
+              <header class="card-header">
+                <p class="card-header-title">
+                  {{thema.label}}
+                </p>
+              </header>
+              <div class="card-content">
+                  {{thema.definition}} 
               </div>
             </div>
           </div>
-
         </div>
-      </div>
 
+      </div>
+    </div>
+      
   </div>
 
 
@@ -223,36 +245,60 @@
         }
 
       },
-      addThema: function(thema){
-        console.log("addThema thema=", thema);
-        var already_added = false;
+      toggleThemaSelect: function(thema){
+        var unselect = false;
 
         for(var o in this.value){
           var okw = this.value[o];
           if(okw.id == thema.id){
-            already_added = true;
+            unselect = true;
+            this.value.splice(o,1); // remove selection
+            this.json_value = JSON.stringify(this.value);
             break;
           } 
         }
 
-        if(!already_added){
+        if(!unselect){
           const new_thema = {
             id: thema.id,
             label: thema.label,
             definition: thema.definition
           };
-          //this.options.push(new_thema);
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
-          this.$root.$emit('themas_changed', this.value);
-        }
-        else{
-          this.show_already_added_warning = true;
-          setTimeout(()=>{
-            this.show_already_added_warning = false;
-          }, 3000);
         }
       }
+
+      //addThema: function(thema){
+      //  console.log("addThema thema=", thema);
+      //  var already_added = false;
+
+      //  for(var o in this.value){
+      //    var okw = this.value[o];
+      //    if(okw.id == thema.id){
+      //      already_added = true;
+      //      break;
+      //    } 
+      //  }
+
+      //  if(!already_added){
+      //    const new_thema = {
+      //      id: thema.id,
+      //      label: thema.label,
+      //      definition: thema.definition
+      //    };
+      //    this.options.push(new_thema);
+      //    this.value.push(new_thema);
+      //    this.json_value = JSON.stringify(this.value);
+      //    this.$root.$emit('themas_changed', this.value);
+      //  }
+      //  else{
+      //    this.show_already_added_warning = true;
+      //    setTimeout(()=>{
+      //      this.show_already_added_warning = false;
+      //    }, 3000);
+      //  }
+      //}
     }
   }
 </script>
@@ -375,23 +421,22 @@
     margin-top: 10px;
     margin-right: 10px;
   }
-  header.thema-selected{
-    background: #41b883;
+ 
+  header.card-header{
+    background-color: #edeff2;
+    color: #2b414f;
   }
-  header.thema-selected .card-header-title{
+  .thema-selected header.card-header{
+    background: #3e8ed0;
+  }
+  .thema-selected .card-header-title{
     color: #fff;
   }
-  .card-footer-item{
-    padding: 0.2em;
-    background-color: #3e8ed0;
-    color: #fff;
-  }
-  .card-footer-item:hover{
-    padding: 0.2em;
-    background-color: #3488be;
-    color: #fff;
+  .thema-selected .card-content {
+    border: 1px solid #9cafbd;
   }
 
+    
   .hide{
     display: none;
   }

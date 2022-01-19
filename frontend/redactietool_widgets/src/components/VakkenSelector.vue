@@ -57,8 +57,11 @@
         <div class="column is-one-quarter" v-for="vak in row" :key="vak.id">
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
-              <div class="card" >
-                <header class="card-header" v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']">
+              <div class="card" 
+                v-on:click="toggleVakSelect(vak)"
+                v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']"
+                >
+                <header class="card-header">
                   <p class="card-header-title">
                     {{vak.label}}
                   </p>
@@ -66,10 +69,10 @@
                 <div class="card-content">
                     {{vak.definition}} 
                 </div>
-                <footer class="card-footer">
-                  <a v-on:click="addVakSuggestie(vak)" 
+                <!--footer class="card-footer">
+                  <a v-on:click="toggleVakSelect(vak)" 
                   class="card-footer-item">Selecteer</a>
-                </footer>
+                </footer-->
               </div>
             </div>
           </div>
@@ -81,8 +84,11 @@
         <div class="column is-one-quarter" v-for="ovak in row2" :key="ovak.id">
           <div class="tile is-ancestor">
             <div class="tile is-vertical mr-2 mt-2" >
-              <div class="card" >
-                <header class="card-header" v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']">
+              <div class="card" 
+                v-on:click="toggleVakSelect(ovak)"
+                v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
+              >
+                <header class="card-header">
                   <p class="card-header-title">
                     {{ovak.label}}
                   </p>
@@ -90,10 +96,10 @@
                 <div class="card-content">
                     {{ovak.definition}} 
                 </div>
-                <footer class="card-footer">
-                  <a v-on:click="addVakSuggestie(ovak)" 
+                <!--footer class="card-footer">
+                  <a v-on:click="toggleVakSelect(ovak)" 
                   class="card-footer-item">Selecteer</a>
-                </footer>
+                </footer-->
               </div>
             </div>
           </div>
@@ -272,32 +278,28 @@
         
         this.updateSuggestions();
       },
-      addVakSuggestie: function(vak){
-        var already_added = false;
+      toggleVakSelect: function(vak){
+        var unselect = false;
 
         for(var o in this.value){
           var okw = this.value[o];
           if(okw.id == vak.id){
-            already_added = true;
+            unselect = true;
+            this.value.splice(o,1); // remove selection
+            this.json_value = JSON.stringify(this.value);
             break;
           } 
         }
 
-        if(!already_added){
+        if(!unselect){
           const new_vak = {
             id: vak.id,
             label: vak.label,
             definition: vak.definition
           };
-          //this.options.push(new_vak);
+          // this.options.push(new_vak); //only needed for entirely new vak (create)
           this.value.push(new_vak);
           this.json_value = JSON.stringify(this.value);
-        }
-        else{
-          this.show_already_added_warning = true;
-          setTimeout(()=>{
-            this.show_already_added_warning = false;
-          }, 3000);
         }
       }
     }
@@ -378,12 +380,22 @@
     max-width: 50em;
   }
 
-  header.vak-selected{
-    background: #41b883;
+
+  header.card-header{
+    background-color: #edeff2;
+    color: #2b414f;
   }
-  header.vak-selected .card-header-title{
+  .vak-selected header.card-header{
+    background: #3e8ed0;
+  }
+  .vak-selected .card-header-title{
     color: #fff;
   }
+  .vak-selected .card-content {
+    border: 1px solid #9cafbd;
+  }
+
+   /*
   .card-footer-item{
     padding: 0.2em;
     background-color: #3e8ed0;
@@ -393,7 +405,8 @@
     padding: 0.2em;
     background-color: #3488be;
     color: #fff;
-  }
+  }*/
+
 
   .show{
     display: block;

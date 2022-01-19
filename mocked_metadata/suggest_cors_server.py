@@ -134,8 +134,7 @@ def get_vakken_suggesties():
     json_data = json.loads(request.data)
     print("graden=", json_data['graden'])
     print("themas=", json_data['themas'])
-    result = []  # mock empty return
-    return json.dumps(result)
+    return send_from_directory('vakken', 'suggested_vakken.json')
 
 
 @app.route('/')

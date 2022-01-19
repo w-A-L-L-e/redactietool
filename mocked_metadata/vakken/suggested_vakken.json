@@ -1,0 +1,32 @@
+[
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/commerci%C3%ABle-technieken",
+      "label":"commerci\u00eble technieken",
+      "definition":"Verkoopstechnieken, verkoop, boekhouden, winkel houden"
+   },
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/boekhouding",
+      "label":"boekhouding",
+      "definition":"Boekhouding, financi\u00ebn, bedrijfsadministratie"
+   },
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/logistiek",
+      "label":"logistiek",
+      "definition":"Ontvangen, sorteren, opslaan, verpakken en verzenden van verschillende soorten goederen, magazijntechnieken"
+   },
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/bedrijfswetenschappen",
+      "label":"bedrijfswetenschappen",
+      "definition":"Economie, consumentenzaken, goederenmarkt, kapitaalmarkt, organisatie van bedrijven, handelsmarkten"
+   },
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/economie-",
+      "label":"economie",
+      "definition":"Conjunctuur, inflatie, beurzen, belastingen, (internationale) handel, embargo's, omzet, ondernemen, innoveren"
+   },
+   {
+      "id":"https://data.meemoo.be/term/onderwijs/vak/toegepaste-economie",
+      "label":"toegepaste economie",
+      "definition":"Praktijkvoorbeelden van economie"
+   }
+]

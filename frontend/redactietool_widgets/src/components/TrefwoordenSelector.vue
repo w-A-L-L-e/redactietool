@@ -191,8 +191,10 @@
   }
   .keyword-pill{
     border-radius: 5px;
-    background: #41b883;
-    color: #fff;
+    /*background: #41b883;*/
+    border: 1px solid #9cafbd;
+    background-color: #edeff2;
+    color: #2b414f;
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
