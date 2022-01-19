@@ -380,6 +380,9 @@
     max-width: 50em;
   }
 
+  .card{
+    cursor: pointer;
+  }
 
   header.card-header{
     background-color: #edeff2;
