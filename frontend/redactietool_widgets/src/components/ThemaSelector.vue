@@ -436,6 +436,10 @@
     margin-right: 10px;
   }
  
+  .card{
+    cursor: pointer;
+  }
+
   header.card-header{
     background-color: #edeff2;
     color: #2b414f;
