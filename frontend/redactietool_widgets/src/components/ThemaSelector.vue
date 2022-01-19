@@ -45,79 +45,88 @@
       {{show_themas_label}}
   </a>
   
-  <div class="thema-search" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
-    <div class="field has-addons">
-      <div class="control">
-        <input class="input is-small" 
-          type="text"
-          placeholder="Zoek thema"
-          v-on:keydown.enter="zoekThemas($event)"
-          v-model="thema_search">
-      </div>
-      <div class="control">
-        <a class="button is-info is-small" v-on:click="zoekThemas($event)">
-          Zoek
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-    Thema werd al toegevoegd
-  </div>
-
+ 
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
 
     <!-- modal is actually doable here, and if we keep other dialogs inline
     we can avoid the modal-in-modal problem. Also we need to duplicate the selected themas
     here so that the overview of already selected themas is fixed in the header together with searching
     we'll see what time we have left after getting our xml sidecar stuff sorted...
+    -->
 
     <div class="modal is-active" id='modal_dlg'>
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">Themas</p>
-          <button class="delete" aria-label="close" onClick="modalCloseClicked();" ></button>
-        </header>
-        <section class="modal-card-body">
-           <p> CONTENT HERE</p> 
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" onClick="modalSaveClicked();">Ok</button>
-          <button class="button" onClick="modalCancelClicked();">Annuleren</button>
-        </footer>
-      </div>
-    </div>
-    -->
 
-    <div v-if="!thema_cards.length" class="notification is-info is-light">
-      Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
-    </div>
-
-    <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
-      <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
-        <div class="tile is-ancestor">
-          <div class="tile is-vertical mr-2 mt-2" >
-            <div class="card" 
-              v-on:click="toggleThemaSelect(thema)"
-              v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
-              >
-              <header class="card-header">
-                <p class="card-header-title">
-                  {{thema.label}}
-                </p>
-              </header>
-              <div class="card-content">
-                  {{thema.definition}} 
+          <div class="thema-search">
+            <div class="field has-addons">
+              <div class="control">
+                <input class="input is-small" 
+                  type="text"
+                  placeholder="Zoek thema"
+                  v-on:keydown.enter="zoekThemas($event)"
+                  v-model="thema_search">
+              </div>
+              <div class="control">
+                <a class="button is-info is-small" v-on:click="zoekThemas($event)">
+                  Zoek
+                </a>
               </div>
             </div>
           </div>
-        </div>
 
+          <!-- button class="delete" aria-label="close" v-on:click="toggleThemas" ></button-->
+
+        </header>
+        <section class="modal-card-body">
+
+          
+
+          <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+            Thema werd al toegevoegd
+          </div>
+
+           <div v-if="!thema_cards.length" class="notification is-info is-light">
+              Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
+            </div>
+
+            <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
+              <div class="column is-one-quarter" v-for="thema in row" :key="thema.id">
+                <div class="tile is-ancestor">
+                  <div class="tile is-vertical mr-2 mt-2" >
+                    <div class="card" 
+                      v-on:click="toggleThemaSelect(thema)"
+                      v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
+                      >
+                      <header class="card-header">
+                        <p class="card-header-title">
+                          {{thema.label}}
+                        </p>
+                      </header>
+                      <div class="card-content">
+                          {{thema.definition}} 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+        </section>
+        <footer class="modal-card-foot">
+          <a class="button is-success close-themas-button" 
+            v-on:click="toggleThemas($event)">
+              Themas sluiten
+          </a>
+          <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
+        </footer>
       </div>
     </div>
-      
+
+       
   </div>
 
 
@@ -221,7 +230,8 @@
         }
         return false;
       },
-      toggleThemas(){
+      toggleThemas(event){
+        event.preventDefault;
         this.show_thema_cards = !this.show_thema_cards;
         if( this.show_thema_cards ){
           this.show_themas_label = "Verberg themas";
@@ -243,7 +253,6 @@
         if(row.length>0){
           this.thema_cards.push(row);
         }
-
       },
       toggleThemaSelect: function(thema){
         var unselect = false;
@@ -362,6 +371,11 @@
     margin-bottom: 15px;
   }
 
+  .close-themas-button{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .thema-cards {
     height: 370px;
     overflow-y: scroll;
@@ -370,7 +384,7 @@
     border: 1px solid #e8e8e8;
     padding: 5px;
     border-radius: 5px;
-    width: 45em;
+    width: 55em;
     padding-left: 12px;
     padding-right: 15px;
   }
@@ -391,7 +405,7 @@
     overflow-wrap: anywhere;
     font-size: 12px;
     padding: 4px 10px;
-    height: 80px;
+    height: 120px;
     overflow-y: scroll;
   }
   
@@ -444,5 +458,17 @@
     display: block;
   }
 
+  .modal-content {
+    width: 900px;
+  }
+
+  @media screen and (min-width: 769px){
+    .modal-content, .modal-card {
+      margin: 0 auto;
+      max-height: calc(100vh - 40px);
+      width: calc(100vw - 50px);
+    }
+  }
+ 
 
 </style>
