@@ -290,8 +290,6 @@ class RmhMapping:
 
         # TODO:
         # https://meemoo.atlassian.net/browse/OPS-1231
-        # form field name = lom1_onderwijsniveaus -> lom_onderwijsniveau
-        # form field name = lom1_onderwijsgraden -> lom_onderwijsgraad (as array of ids)
 
         # dan is er nog lom_legacy 'boolean field'
         # vermoeden: dit op false zetten zodra echte vakken+themas in lom_thema en lom_vak zitten.
