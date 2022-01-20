@@ -322,12 +322,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  collapseSection('productie_section');
   collapseEmptyTextareas();
   hideEmptyTitles();
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
-  collapseSection('productie_section');
   
   // For demo, show modal dialogs
   // ============================

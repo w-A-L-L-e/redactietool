@@ -209,6 +209,12 @@ class MediahavenApi:
         for kw in get_property(metadata, 'lom_languages'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
+        # eindgebruiker is multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_intendedenduserrole")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_intendedenduserrole'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
         # themas are multiselect
         lom_languages = etree.SubElement(mdprops, "lom_thema")
         lom_languages.set('strategy', 'OVERWRITE')

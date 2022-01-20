@@ -242,6 +242,12 @@ class RmhMapping:
             request.form.get('talen'),
         )
 
+        # multiselect item_eindgebruikers -> lom_intendedenduserrole
+        mam_data = self.set_json_array_property(
+            mam_data, 'lom_intendedenduserrole', 'code',
+            request.form.get('lom1_beoogde_eindgebruiker'),
+        )
+
         # multiselect themas -> lom_thema
         mam_data = self.set_json_array_property(
             mam_data, 'lom_thema', 'id',
@@ -274,10 +280,8 @@ class RmhMapping:
         # https://meemoo.atlassian.net/browse/OPS-1231
         # form field name = lom1_onderwijsniveaus -> lom_onderwijsniveau
         # form field name = lom1_onderwijsgraden -> lom_onderwijsgraad (as array of ids)
-        # form field name = themas -> lom_thema
-        # form field name = vakken -> lom_vak
 
-        # dan is er nog lom_legacy 'boolean field' wat hiermee????
+        # dan is er nog lom_legacy 'boolean field' 
         # vermoeden: dit op false zetten zodra echte vakken+themas in lom_thema en lom_vak zitten.
 
         # open vraag voor de checkbox beneden!!!
