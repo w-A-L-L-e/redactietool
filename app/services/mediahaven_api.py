@@ -16,7 +16,7 @@ import os
 from requests import Session
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from app.services.subtitle_files import get_property, sidecar_root  # get_array_property,
+from app.services.subtitle_files import get_property, sidecar_root, get_array_property
 
 from lxml import etree
 
@@ -139,14 +139,10 @@ class MediahavenApi:
 
         return response.json()
 
-    # This is far from finished. but as poc we truly propagate the dcterms_abstract to MH now ;)
-    # problems:
-    #   1 this is async so the get takes a while before showing true updated data
-    #   2 we will in the end be moving to xml for batch field update with 1 call for multiple fields
-    #
-    # Also with API v2 will be easier to make this call using json directly
-    # but requires different authentication (this is something for a future release to consider).
-    # we know however v1 is still staying around until 2023.
+    # With API v2 will this will be easier to make this call using json directly
+    # but that requires refactoring authentication to mediahaven (also for the existing subloader
+    # calls).
+    # For now we stick with what works and use an xml sidecar which should be fine at least until 2023.
 
     def metadata_sidecar(self, metadata, tp):
         TESTBEELD_PERM_ID = os.environ.get(
@@ -193,9 +189,10 @@ class MediahavenApi:
         etree.SubElement(mdprops, "dcterms_abstract").text = get_property(
             metadata, 'dcterms_abstract')
 
-        # WARNING: titel_serie (is still broken unfortunately) zie bug/ticket dev-1900.
-        # dc_titles = etree.SubElement(mdprops, "dc_titles")
-        # etree.SubElement(dc_titles, "serie").text = get_array_property(metadata, 'dc_titles', 'serie')
+        dc_titles = etree.SubElement(mdprops, "dc_titles")
+        dc_titles.set('strategy', 'OVERWRITE')
+        etree.SubElement(dc_titles, "serie").text = get_array_property(
+            metadata, 'dc_titles', 'serie')
 
         # WARNING: this also does not save correctly now!
         # etree.SubElement(root, 'type').text = metadata.get('type') # default to video

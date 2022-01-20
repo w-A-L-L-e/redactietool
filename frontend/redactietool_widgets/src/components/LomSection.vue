@@ -153,7 +153,9 @@
 
   /* change colors for multiselect pills and highlights to match redactietool colors */
   .multiselect__tag{
-    background: #3e8ed0;
+    /* background: #3e8ed0; dark blue like buttons */
+    background-color: #eff5fb;
+    color: #296fa8;
   }
 
   .multiselect__tag-icon:hover {

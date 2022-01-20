@@ -44,24 +44,50 @@ class RmhMapping:
         return mam_data
 
     def set_array_property(self, mam_data, attribute, array_attribute, propvalue):
-        # still bug here
-        print(">>>>>>>>> SET ARRAY PROP VALUE ==", propvalue)
         props = mam_data.get('mdProperties', [])
+        array_attrib_exists = False
+        array_prop = None
         for prop in props:
             if prop.get('attribute') == attribute:
+                array_prop = prop
                 array_values = prop.get('value', '')
                 for att in array_values:
                     if att.get('attribute') == array_attribute:
+                        array_attrib_exists = True
                         att['value'] = propvalue
                         return mam_data
 
-        # # in case it's new array prop (bail out for now):
-        print("ERROR / TODO in set_array_proparte: this should not happen!!! returning mam_data as is!!!")
+        if not array_prop:
+            array_val = [{
+                'value': propvalue,
+                'attribute': array_attribute,
+                'dottedKey': None
+            }]
+            array_prop = {
+                'attribute': attribute,
+                'dottedKey': None,
+                'value': array_val
+            }
+            mam_data['mdProperties'].append(array_prop)
+            return mam_data
 
-        # array_item = mam_data['mdProperties']['attribute']['value'].append(
-        #    'value': propvalue,
-        #    'attribute': array_attribute
-        # )
+        if array_prop and not array_attrib_exists:
+            array_prop['value'].append({
+                'value': propvalue,
+                'attribute': array_attribute,
+                'dottedKey': None
+            })
+            return mam_data
+
+        # in case it's new array prop (bail out for now):
+        print(
+            "ERROR in set_array_property: {}/{} with value {} not saved!".format(
+                attribute,
+                array_attribute,
+                propvalue
+            )
+        )
+
         return mam_data
 
     def form_params(self, token, pid, department, errors, mam_data):
@@ -179,6 +205,7 @@ class RmhMapping:
             mam_data, 'dc_titles',
             'serie', request.form.get('serie')
         )
+        print("TITLES/SERIE==", request.form.get('serie'))
 
         changed_item_type = json.loads(request.form.get('item_type'))
         if type(changed_item_type) == list:

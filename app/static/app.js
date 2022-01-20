@@ -154,10 +154,11 @@ function deletePrdItem(del_btn){
 
 function sectionToggle(section_div_id){
   var form_section = document.getElementById(section_div_id);
-
+  if(!form_section) return;
   var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
   var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
   var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
+
 
   if(form_section.style.display == 'none'){
     // form_section.style.display="flex"
@@ -170,6 +171,18 @@ function sectionToggle(section_div_id){
     unfolded_icon.style.display="none";
     folded_icon.style.display="block";
   }
+}
+
+function collapseSection(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(!form_section) return;
+  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
+  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
+
+  form_section.style.display="none";
+  unfolded_icon.style.display="none";
+  folded_icon.style.display="block";
 }
 
 function collapseEmptyTextarea(area_id, uncollapsable=false){
@@ -314,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
+  collapseSection('productie_section');
   
   // For demo, show modal dialogs
   // ============================
