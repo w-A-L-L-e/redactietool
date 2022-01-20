@@ -96,18 +96,15 @@
             else{
               console.log("loading new onderwijsgraden from (lom_onderwijsgraad)...");
               for(var o in onderwijsgraden){
-                item['id'] = onderwijsgraden[o]['value'];
+                var item_id = onderwijsgraden[o]['value'];
                 //get label and definition
                 for(var j in this.options ){
                   option_item = this.options[j];
-                  if( item['id'] == option_item['id'] ){
-                    item['label'] = option_item['label'];
-                    item['definition'] = option_item['definition'];
-
+                  if( item_id == option_item['id'] ){
                     default_value.push({
-                      'id': item['id'],
-                      'label': item['label'],
-                      'definition': item['definition']
+                      'id': item_id,
+                      'label': option_item['label'],
+                      'definition': option_item['definition']
                     });
                     break;
                   }
@@ -115,6 +112,8 @@
 
               }
             }
+
+            this.json_value = JSON.stringify(default_value)
             this.$root.$emit('graden_changed', default_value);
           }
 

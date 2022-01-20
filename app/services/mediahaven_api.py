@@ -197,11 +197,11 @@ class MediahavenApi:
         # WARNING: this also does not save correctly now!
         # etree.SubElement(root, 'type').text = metadata.get('type') # default to video
 
-        # keywords are 'Sleutelwoord'
-        lom_keywords = etree.SubElement(mdprops, "lom_keywords")
-        lom_keywords.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_keywords'):
-            etree.SubElement(lom_keywords, kw['attribute']).text = kw['value']
+        # eindgebruiker is multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_intendedenduserrole")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_intendedenduserrole'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
         # talen are multiselect
         lom_languages = etree.SubElement(mdprops, "lom_languages")
@@ -209,10 +209,16 @@ class MediahavenApi:
         for kw in get_property(metadata, 'lom_languages'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
-        # eindgebruiker is multiselect
-        lom_languages = etree.SubElement(mdprops, "lom_intendedenduserrole")
+        # lom_onderwijsniveau are multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_onderwijsniveau")
         lom_languages.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_intendedenduserrole'):
+        for kw in get_property(metadata, 'lom_onderwijsniveau'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
+        # lom_graad are multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_onderwijsgraad")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_onderwijsgraad'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
         # themas are multiselect
@@ -226,6 +232,12 @@ class MediahavenApi:
         lom_languages.set('strategy', 'OVERWRITE')
         for kw in get_property(metadata, 'lom_vak'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
+        # trefwoorden / keywords are 'Sleutelwoord'
+        lom_keywords = etree.SubElement(mdprops, "lom_keywords")
+        lom_keywords.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_keywords'):
+            etree.SubElement(lom_keywords, kw['attribute']).text = kw['value']
 
         xml_data = etree.tostring(
             root, pretty_print=True, encoding="UTF-8", xml_declaration=True

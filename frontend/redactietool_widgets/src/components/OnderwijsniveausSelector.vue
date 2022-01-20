@@ -114,8 +114,9 @@
                 }
               }
             }
-          }
 
+            this.json_value = JSON.stringify(default_value)
+          }
         });
     },
 
