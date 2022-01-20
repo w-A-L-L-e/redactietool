@@ -197,6 +197,30 @@ class MediahavenApi:
         # WARNING: this also does not save correctly now!
         # etree.SubElement(root, 'type').text = metadata.get('type') # default to video
 
+        # keywords are 'Sleutelwoord'
+        lom_keywords = etree.SubElement(mdprops, "lom_keywords")
+        lom_keywords.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_keywords'):
+            etree.SubElement(lom_keywords, kw['attribute']).text = kw['value']
+
+        # talen are multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_languages")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_languages'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
+        # themas are multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_thema")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_thema'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
+        # vakken are multiselect
+        lom_languages = etree.SubElement(mdprops, "lom_vak")
+        lom_languages.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_vak'):
+            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+
         xml_data = etree.tostring(
             root, pretty_print=True, encoding="UTF-8", xml_declaration=True
         ).decode()
