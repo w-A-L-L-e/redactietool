@@ -281,7 +281,7 @@ class RmhMapping:
         # form field name = lom1_onderwijsniveaus -> lom_onderwijsniveau
         # form field name = lom1_onderwijsgraden -> lom_onderwijsgraad (as array of ids)
 
-        # dan is er nog lom_legacy 'boolean field' 
+        # dan is er nog lom_legacy 'boolean field'
         # vermoeden: dit op false zetten zodra echte vakken+themas in lom_thema en lom_vak zitten.
 
         # open vraag voor de checkbox beneden!!!
