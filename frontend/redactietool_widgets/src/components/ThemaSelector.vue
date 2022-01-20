@@ -203,6 +203,7 @@
               this.options.push(thema);
             }
           }
+          this.loadSavedThemas();
         })
 
       // todo fetch currently set themas here (look at Onderwijsgraden for example)
@@ -210,6 +211,37 @@
       // this.$root.$emit('themas_changed', this.value);
     },
     methods: {
+      loadSavedThemas(){
+        var themas_div = document.getElementById("item_themas");
+        if(themas_div){
+          var themas = JSON.parse(themas_div.innerText);
+          for(var l in themas){
+            var thema_id = themas[l]['value'];
+            var thema_label = '';
+            var thema_def = '';
+
+            // lookup language name
+            for( var o in this.options){
+              var entry = this.options[o];
+              if( entry['id'] == thema_id ){
+                thema_label = entry['label'];
+                thema_def = entry['definition'];
+                break;
+              }
+            }
+            if( thema_label.length>0 ){
+              default_value.push(
+                {
+                  'id': thema_id, 
+                  'label': thema_label, 
+                  'definition': thema_def
+                }
+              );
+            }
+          }
+        }
+        this.json_value = JSON.stringify(default_value);
+      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('themas_changed', value);

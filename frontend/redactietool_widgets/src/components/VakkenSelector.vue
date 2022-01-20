@@ -19,7 +19,7 @@
       <template slot="noResult">Vak niet gevonden</template>
 
       <!--
-      disable custom styling for demo, per request Ineke
+      disable custom styling 
       <template 
         slot="singleLabel" 
         slot-scope="props">
@@ -226,9 +226,41 @@
         .get(redactie_api_url+'/vakken')
         .then(res => {
           this.options = res.data;
+          this.loadSavedVakken();
         })
     },
     methods: {
+      loadSavedVakken(){
+        var vakken_div = document.getElementById("item_vakken");
+        if(vakken_div){
+          var vakken = JSON.parse(vakken_div.innerText);
+          for(var l in vakken){
+            var vak_id = vakken[l]['value'];
+            var vak_label = '';
+            var vak_def = '';
+
+            // lookup language name
+            for( var o in this.options){
+              var entry = this.options[o];
+              if( entry['id'] == vak_id ){
+                vak_label = entry['label'];
+                vak_def = entry['definition'];
+                break;
+              }
+            }
+            if( vak_label.length>0 ){
+              default_value.push(
+                {
+                  'id': vak_id, 
+                  'label': vak_label, 
+                  'definition': vak_def
+                }
+              );
+            }
+          }
+        }
+        this.json_value = JSON.stringify(default_value);
+      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
       },
