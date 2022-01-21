@@ -264,13 +264,17 @@ class RmhMapping:
         mam_data = self.set_json_array_property(
             mam_data, 'lom_thema', 'id',
             request.form.get('themas'),
+            'Thema'
         )
 
         # multiselect vakken -> lom_vak
         mam_data = self.set_json_array_property(
             mam_data, 'lom_vak', 'id',
             request.form.get('vakken'),
+            'Vak'
         )
+
+        # TODO: lom_legacy 'boolean field' -> save as 'false' if vakken or themas contain entries
 
         # Sleutelwoord(en) trefwoorden -> lom_keywords
         mam_data = self.set_json_array_property(
@@ -288,23 +292,32 @@ class RmhMapping:
             item_type = changed_item_type['code']
         mam_data['type'] = item_type
 
-        # TODO:
-        # https://meemoo.atlassian.net/browse/OPS-1231
 
-        # dan is er nog lom_legacy 'boolean field'
-        # vermoeden: dit op false zetten zodra echte vakken+themas in lom_thema en lom_vak zitten.
+        # TODO: productie velden: dc_creators, dc_contributors and dc_publishers
+        # 'makers': get_md_array(mam_data, 'dc_creators'),
+        # 'contributors': get_md_array(mam_data, 'dc_contributors'),
+        # 'publishers': get_md_array(mam_data, 'dc_publishers'),
+        
+        # makers = get_md_array(mam_data, 'dc_creators')
+        # first fix issue in frontend, the attribute needs to be numbered here like we do for value
+        # so we can match up the dropdown with correct input and re-populate the arrays here based on
+        
+        # our fields in request.form:
+        #  for f in request.form:
+        #     print("field=", f)
 
-        # open vraag voor de checkbox beneden!!!
+
+
+        # Wat met publiatiestatus checkbo here? :
         # form field name = publicatiestatus -> lom_publicatie ????
 
-        # print("DEBUG form data=", request.form)
-        mh_api = MediahavenApi()
 
         # also validation errors can be added here
         errors = None  # for now always none, hoever mh can give errors
         tp = self.form_params(token, pid, department, errors, mam_data)
-        result = mh_api.update_metadata(department, mam_data, tp)
 
+        mh_api = MediahavenApi()
+        result = mh_api.update_metadata(department, mam_data, tp)
         print("save result=", result)
 
         # we can even do another GET call here too if we want to validate the
@@ -312,8 +325,9 @@ class RmhMapping:
         # as the call is async so we can check a modified timestamp and
         # wait until it changes...
 
-        # if no errors from mediahaven put call signal a sucess notification:
+        # if no errors from mediahaven and no validation errors signal a sucess notification:
         tp['data_saved_to_mam'] = True
+        # else set this to False + set errors (can be used to show dialog in case of errors)
 
         # return our params that are now saved in MH (or return responded errors)
         return tp, json.dumps(tp), errors

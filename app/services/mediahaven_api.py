@@ -247,9 +247,8 @@ class MediahavenApi:
 
     def update_metadata(self, department, metadata, tp):
         xml_sidecar = self.metadata_sidecar(metadata, tp)
-        print('>>>> tp=', tp, "sidecar=", xml_sidecar)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
-        print('\n >>> send_url=', send_url)
+        print("\nSubmitting sidecar url=", send_url, "\nsidecar:\n", xml_sidecar)
 
         file_fields = {
             # 'file': (tp['srt_file'], open(srt_path, 'rb')),
