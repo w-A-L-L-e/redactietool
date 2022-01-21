@@ -12,8 +12,6 @@ URI_REGEX = (
     + "._\\+~#?&//=]*)"
 )
 
-OND_NS = "https://data.meemoo.be/term/onderwijs/"
-
 GET_LIST_QUERY = """
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
@@ -235,6 +233,8 @@ def read_query(file_path):
 class Suggest:
     """A simple api for vocbench data"""
 
+    OND_NS = "https://data.meemoo.be/term/onderwijs/"
+
     def __init__(self, endpoint: str, user: str, password: str):
         self.sparql = SPARQLWrapper2(endpoint)
         self.sparql.setMethod(POST)
@@ -289,25 +289,25 @@ class Suggest:
     def get_vakken(self):
         """Get list 'vakken'."""
 
-        for res in self.get_list(OND_NS + "vak"):
+        for res in self.get_list(f"{self.OND_NS}vak"):
             yield res
 
     def get_themas(self):
         """Get list 'themas'."""
 
-        for res in self.get_list(OND_NS + "thema"):
+        for res in self.get_list(f"{self.OND_NS}thema"):
             yield res
 
     def get_graden(self):
         """Get list 'onderwijsgraden'."""
 
-        for res in self.get_collection(OND_NS + "graad"):
+        for res in self.get_collection(f"{self.OND_NS}graad"):
             yield res
 
     def get_niveaus(self):
         """Get list 'onderwijsniveaus'."""
 
-        for res in self.get_collection(OND_NS + "niveau"):
+        for res in self.get_collection(f"{self.OND_NS}niveau"):
             yield res
 
     def suggest(self, thema: List[str], graad: List[str]):
@@ -318,9 +318,9 @@ class Suggest:
 
         for res in self.__exec_query(
             SUGGEST_BY_IDS_QUERY,
-            thema_scheme=OND_NS + "thema",
-            vak_scheme=OND_NS + "vak",
-            graad_scheme=OND_NS + "graad",
+            thema_scheme= f"{self.OND_NS}thema",
+            vak_scheme= f"{self.OND_NS}vak",
+            graad_scheme= f"{self.OND_NS}graad",
             themas=themas,
             graden=graden,
         ):
@@ -335,9 +335,9 @@ class Suggest:
         print("running qry=", SUGGEST_BY_LABELS_QUERY)
         for res in self.__exec_query(
             SUGGEST_BY_LABELS_QUERY,
-            thema_scheme=OND_NS + "thema",
-            vak_scheme=OND_NS + "vak",
-            graad_scheme=OND_NS + "graad",
+            thema_scheme=f"{self.OND_NS}thema",
+            vak_scheme=f"{self.OND_NS}vak",
+            graad_scheme=f"{self.OND_NS}graad",
             themas=themas,
             graden=graden,
         ):
@@ -351,9 +351,9 @@ class Suggest:
 
         for res in self.__exec_query(
             GET_CANDIDATES_QUERY,
-            thema_scheme=OND_NS + "thema",
-            vak_scheme=OND_NS + "vak",
-            graad_scheme=OND_NS + "graad",
+            thema_scheme=f"{self.OND_NS}thema",
+            vak_scheme=f"{self.OND_NS}vak",
+            graad_scheme=f"{self.OND_NS}graad",
             themas=themas,
             graden=graden,
         ):
@@ -365,6 +365,6 @@ class Suggest:
         concepts = join_ids(concept)
 
         for res in self.__exec_query(
-            GET_RELATED_VAK_QUERY, vak_scheme=OND_NS + "vak", concepts=concepts
+            GET_RELATED_VAK_QUERY, vak_scheme=f"{self.OND_NS}vak", concepts=concepts
         ):
             yield res

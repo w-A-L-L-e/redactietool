@@ -1,10 +1,10 @@
-@prefix graad: <https://data.meemoo.be/term/onderwijs/graad#> .
-@prefix niveau: <https://data.meemoo.be/term/onderwijs/niveau#> .
+@prefix graad: <https://data.meemoo.be/term/onderwijs/graad/> .
+@prefix niveau: <https://data.meemoo.be/term/onderwijs/niveau/> .
 @prefix ond: <https://data.meemoo.be/term/onderwijs/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix thema: <https://data.meemoo.be/term/onderwijs/thema#> .
-@prefix vak: <https://data.meemoo.be/term/onderwijs/vak#> .
+@prefix thema: <https://data.meemoo.be/term/onderwijs/thema/> .
+@prefix vak: <https://data.meemoo.be/term/onderwijs/vak/> .
 
 ond:vak a skos:ConceptScheme;
 skos:hasTopConcept vak:nederlands.
