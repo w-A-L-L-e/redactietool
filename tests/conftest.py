@@ -13,9 +13,9 @@ from app.redactietool import app
 # issue this package does not install on our jenkens (nor in my docker)
 # it does work locally:
 # sparql-endpoint-fixture>=0.5.0
-# pytest_plugins = [
-#     "sparql_endpoint_fixture.endpoint"
-# ]
+pytest_plugins = [
+    "sparql_endpoint_fixture.endpoint"
+]
 
 
 @pytest.fixture(scope='module')
