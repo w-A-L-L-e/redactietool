@@ -531,6 +531,8 @@ def save_item_metadata():
     pid = request.form.get('pid')
     department = request.form.get('department')
 
+    print("item pid=", pid)
+
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:

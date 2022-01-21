@@ -200,6 +200,21 @@ class RmhMapping:
             'validation_errors': errors
         }
 
+
+    def get_productie_field(self, request_form, field_name, field):
+        if f'{field_name}_attribute_' in field:
+            fid = field.replace(f'{field_name}_attribute_','')
+            select_val = request_form.get(f'{field_name}_attribute_{fid}')
+            input_val = request_form.get(f'{field_name}_value_{fid}')
+            # print("fid=", fid, " select_val=", select_val, " input_val=", input_val)
+
+            return {
+                'value': input_val,
+                'attribute': select_val,
+                'dottedKey': None
+            }
+
+
     def form_to_mh(self, request, mam_data):
         """
         convert form metadata hash into json data
@@ -293,24 +308,30 @@ class RmhMapping:
         mam_data['type'] = item_type
 
 
-        # TODO: productie velden: dc_creators, dc_contributors and dc_publishers
-        # 'makers': get_md_array(mam_data, 'dc_creators'),
-        # 'contributors': get_md_array(mam_data, 'dc_contributors'),
-        # 'publishers': get_md_array(mam_data, 'dc_publishers'),
+        dc_creators = []
+        dc_contributors = []
+        dc_publishers = []
         
-        # makers = get_md_array(mam_data, 'dc_creators')
-        # first fix issue in frontend, the attribute needs to be numbered here like we do for value
-        # so we can match up the dropdown with correct input and re-populate the arrays here based on
-        
-        # fields in request.form:
-        #  for f in request.form:
-        #     print("field=", f)
+        for f in request.form:
+            creator = self.get_productie_field(request.form, 'prd_maker', f)
+            if creator:
+                dc_creators.append(creator)
 
+            contributor = self.get_productie_field(request.form, 'prd_bijdrager', f)
+            if contributor:
+                dc_contributors.append(contributor)
 
+            publisher = self.get_productie_field(request.form, 'prd_publisher', f)
+            if publisher:
+                dc_publishers.append(publisher)
 
-        # Wat met publiatiestatus checkbo here? :
-        # form field name = publicatiestatus -> lom_publicatie ????
+        mam_data = self.set_property(mam_data, 'dc_creators', dc_creators)
+        mam_data = self.set_property(mam_data, 'dc_contributors', dc_contributors)
+        mam_data = self.set_property(mam_data, 'dc_publishers', dc_publishers)
 
+        # TODO: request.form.get('publicatiestatus') -> lom_publicatie  ?
+        # vragen wat de logica of gevolgen hiervan zijn en of hier logic bij moet komen aan
+        # Bart of ...
 
         # also validation errors can be added here
         errors = None  # for now always none, hoever mh can give errors

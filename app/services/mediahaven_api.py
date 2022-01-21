@@ -181,20 +181,51 @@ class MediahavenApi:
         etree.SubElement(mdprops, "CP").text = cp
         etree.SubElement(mdprops, "sp_name").text = 'borndigital'
 
-        # set ontsluitingstitel, uizenddatum, avo_beschrijving
+        # Alemene fields:
+        # ===============
+        # ontsluitingstitel
         etree.SubElement(mdprops, "dc_title").text = get_property(
             metadata, 'dc_title')
+        
+        # uizenddatum
         etree.SubElement(mdprops, "dcterms_issued").text = get_property(
             metadata, 'dcterms_issued')
-        etree.SubElement(mdprops, "dcterms_abstract").text = get_property(
-            metadata, 'dcterms_abstract')
 
+        # serie
         dc_titles = etree.SubElement(mdprops, "dc_titles")
         dc_titles.set('strategy', 'OVERWRITE')
         etree.SubElement(dc_titles, "serie").text = get_array_property(
             metadata, 'dc_titles', 'serie')
 
-        # WARNING: this also does not save correctly now!
+        # Inhoud fields: 
+        # ==============
+        # avo_beschrijving
+        etree.SubElement(mdprops, "dcterms_abstract").text = get_property(
+            metadata, 'dcterms_abstract')
+
+        # Productie fields:
+        # =================
+        # dc_creators
+        dc_creators = etree.SubElement(mdprops, "dc_creators")
+        dc_creators.set('strategy', 'OVERWRITE')
+        for entry in get_property(metadata, 'dc_creators'):
+            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+
+        # dc_contributors
+        dc_creators = etree.SubElement(mdprops, "dc_contributors")
+        dc_creators.set('strategy', 'OVERWRITE')
+        for entry in get_property(metadata, 'dc_contributors'):
+            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+
+        # dc_publishers
+        dc_creators = etree.SubElement(mdprops, "dc_publishers")
+        dc_creators.set('strategy', 'OVERWRITE')
+        for entry in get_property(metadata, 'dc_publishers'):
+            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+
+        # Leerobject fields:
+        # ==================
+        # type (Audio/Video is not changeable by api call!)
         # etree.SubElement(root, 'type').text = metadata.get('type') # default to video
 
         # eindgebruiker is multiselect
@@ -249,17 +280,15 @@ class MediahavenApi:
         xml_sidecar = self.metadata_sidecar(metadata, tp)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
         print("\nSubmitting sidecar url=", send_url, "\nsidecar:\n", xml_sidecar)
+        # logger.info("posting subtitles to mam", data=file_fields)
 
         file_fields = {
-            # 'file': (tp['srt_file'], open(srt_path, 'rb')),
             'metadata': ('metadata.xml', xml_sidecar),
-            # 'externalId': ('', f"{tp['mam_data']['externalId']}_{tp['subtitle_type']}"),
             'externalId': ('', f"{metadata['externalId']}"),
             'departmentId': ('', self.DEPARTMENT_ID),
             'autoPublish': ('', 'true')
         }
 
-        # logger.info("posting subtitles to mam", data=file_fields)
         response = self.session.post(
             url=send_url,
             auth=(self.api_user(tp['department']), self.API_PASSWORD),
