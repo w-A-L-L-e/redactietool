@@ -16,7 +16,7 @@
     </mh:Permissions>
   </mhs:RightsManagement>
   <mhs:Dynamic>
-    <dc_relations>
+    <dc_relations strategy="OVERWRITE">
       <is_verwant_aan>qsf7664p39</is_verwant_aan>
     </dc_relations>
     <CP_id>OR-h41jm1d</CP_id>
