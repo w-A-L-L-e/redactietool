@@ -16,8 +16,8 @@ help:
 	@echo "  coverage              run tests and generate coverage report"
 	@echo "  server                start uvicorn development server and serve application locally"
 	@echo "  debug                 start server in debugging mode for auto restarting after code changes etc."
-	@echo "  dockerrun             run docker image and serve web application in docker"
-	@echo "                        (normally only needed if there are deploy issues)"
+	@echo "  dockerrun             build docker image and serve web application in docker"
+	@echo "  dockertest            build docker image and run tests"
 	@echo "  preview_bulma         Preview changed bulma styling before copying into flask"
 	@echo "  precompile_bulma      re-compile bulma with custom styling and injecet into flask app/static folder"
 	@echo "  vue_develop           Start Vue.js frontend server for developing Vue components"
@@ -66,6 +66,9 @@ test:
 dockerrun:
 	make -f Makefile-docker build && make -f Makefile-docker app
 
+.PHONY: dockertest
+dockertest:
+	make -f Makefile-docker build && make -f Makefile-docker test
 
 .PHONY: coverage
 coverage:
