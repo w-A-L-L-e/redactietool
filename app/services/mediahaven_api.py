@@ -186,7 +186,7 @@ class MediahavenApi:
         # ontsluitingstitel
         etree.SubElement(mdprops, "dc_title").text = get_property(
             metadata, 'dc_title')
-        
+
         # uizenddatum
         etree.SubElement(mdprops, "dcterms_issued").text = get_property(
             metadata, 'dcterms_issued')
@@ -197,7 +197,7 @@ class MediahavenApi:
         etree.SubElement(dc_titles, "serie").text = get_array_property(
             metadata, 'dc_titles', 'serie')
 
-        # Inhoud fields: 
+        # Inhoud fields:
         # ==============
         # avo_beschrijving
         etree.SubElement(mdprops, "dcterms_abstract").text = get_property(
@@ -209,19 +209,22 @@ class MediahavenApi:
         dc_creators = etree.SubElement(mdprops, "dc_creators")
         dc_creators.set('strategy', 'OVERWRITE')
         for entry in get_property(metadata, 'dc_creators'):
-            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+            etree.SubElement(
+                dc_creators, entry['attribute']).text = entry['value']
 
         # dc_contributors
         dc_creators = etree.SubElement(mdprops, "dc_contributors")
         dc_creators.set('strategy', 'OVERWRITE')
         for entry in get_property(metadata, 'dc_contributors'):
-            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+            etree.SubElement(
+                dc_creators, entry['attribute']).text = entry['value']
 
         # dc_publishers
         dc_creators = etree.SubElement(mdprops, "dc_publishers")
         dc_creators.set('strategy', 'OVERWRITE')
         for entry in get_property(metadata, 'dc_publishers'):
-            etree.SubElement(dc_creators, entry['attribute']).text = entry['value']
+            etree.SubElement(
+                dc_creators, entry['attribute']).text = entry['value']
 
         # Leerobject fields:
         # ==================
@@ -279,7 +282,8 @@ class MediahavenApi:
     def update_metadata(self, department, metadata, tp):
         xml_sidecar = self.metadata_sidecar(metadata, tp)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
-        print("\nSubmitting sidecar url=", send_url, "\nsidecar:\n", xml_sidecar)
+        print("\nSubmitting sidecar url=",
+              send_url, "\nsidecar:\n", xml_sidecar)
         # logger.info("posting subtitles to mam", data=file_fields)
 
         file_fields = {

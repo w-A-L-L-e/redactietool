@@ -200,10 +200,9 @@ class RmhMapping:
             'validation_errors': errors
         }
 
-
     def get_productie_field(self, request_form, field_name, field):
         if f'{field_name}_attribute_' in field:
-            fid = field.replace(f'{field_name}_attribute_','')
+            fid = field.replace(f'{field_name}_attribute_', '')
             select_val = request_form.get(f'{field_name}_attribute_{fid}')
             input_val = request_form.get(f'{field_name}_value_{fid}')
             # print("fid=", fid, " select_val=", select_val, " input_val=", input_val)
@@ -213,7 +212,6 @@ class RmhMapping:
                 'attribute': select_val,
                 'dottedKey': None
             }
-
 
     def form_to_mh(self, request, mam_data):
         """
@@ -307,26 +305,28 @@ class RmhMapping:
             item_type = changed_item_type['code']
         mam_data['type'] = item_type
 
-
         dc_creators = []
         dc_contributors = []
         dc_publishers = []
-        
+
         for f in request.form:
             creator = self.get_productie_field(request.form, 'prd_maker', f)
             if creator:
                 dc_creators.append(creator)
 
-            contributor = self.get_productie_field(request.form, 'prd_bijdrager', f)
+            contributor = self.get_productie_field(
+                request.form, 'prd_bijdrager', f)
             if contributor:
                 dc_contributors.append(contributor)
 
-            publisher = self.get_productie_field(request.form, 'prd_publisher', f)
+            publisher = self.get_productie_field(
+                request.form, 'prd_publisher', f)
             if publisher:
                 dc_publishers.append(publisher)
 
         mam_data = self.set_property(mam_data, 'dc_creators', dc_creators)
-        mam_data = self.set_property(mam_data, 'dc_contributors', dc_contributors)
+        mam_data = self.set_property(
+            mam_data, 'dc_contributors', dc_contributors)
         mam_data = self.set_property(mam_data, 'dc_publishers', dc_publishers)
 
         # TODO: request.form.get('publicatiestatus') -> lom_publicatie  ?
