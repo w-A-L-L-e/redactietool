@@ -28,6 +28,7 @@ WHERE {{
         ?id skos:definition ?definition .
     }}
 }}
+ORDER BY ASC(?label)
 """
 
 GET_COLLECTION_QUERY = """
@@ -45,6 +46,7 @@ WHERE {{
         ?id skos:definition ?definition .
     }}
 }}
+ORDER BY ASC(?label)
 """
 
 GET_CHILDREN_QUERY = """
@@ -62,6 +64,7 @@ WHERE {{
         ?id skos:definition ?definition .
     }}
 }}
+ORDER BY ASC(?label)
 """
 
 SUGGEST_BY_LABELS_QUERY = """
@@ -92,6 +95,7 @@ WHERE {{
         STR(?thema_label) IN ({themas}) &&
         STR(?graad_label) IN ({graden}) )
 }}
+ORDER BY ASC(?label)
 """
 
 SUGGEST_BY_IDS_QUERY = """
@@ -119,6 +123,7 @@ WHERE {{
         ?thema IN ({themas}) &&
         ?graad IN ({graden}) )
 }}
+ORDER BY ASC(?label)
 """
 
 GET_CONCEPT_BY_IDS_QUERY = """
@@ -135,6 +140,7 @@ WHERE {{
 
     FILTER (?id IN ({concept}))
 }}
+ORDER BY ASC(?label)
 """
 
 GET_CANDIDATES_QUERY = """
@@ -163,6 +169,7 @@ WHERE {{
         ?graad IN ({graden}) )
 
 }}
+ORDER BY ASC(?label)
 """
 
 GET_RELATED_VAK_QUERY = """
@@ -184,6 +191,7 @@ WHERE {{
     FILTER (?concept IN ({concepts}))
 
 }}
+ORDER BY ASC(?label)
 """
 
 
@@ -272,8 +280,7 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError(
-                "The id {} is not a valid URI.".format(collection))
+            raise ValueError("The id {} is not a valid URI.".format(collection))
 
         for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
             yield res
@@ -318,9 +325,9 @@ class Suggest:
 
         for res in self.__exec_query(
             SUGGEST_BY_IDS_QUERY,
-            thema_scheme= f"{self.OND_NS}thema",
-            vak_scheme= f"{self.OND_NS}vak",
-            graad_scheme= f"{self.OND_NS}graad",
+            thema_scheme=f"{self.OND_NS}thema",
+            vak_scheme=f"{self.OND_NS}vak",
+            graad_scheme=f"{self.OND_NS}graad",
             themas=themas,
             graden=graden,
         ):

@@ -13,17 +13,15 @@ def test_instantiation():
 def test_get_concept(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(
-        suggest.get_concept([f"{suggest.OND_NS}/vak/nederlands"])
-    )
+    results = list(suggest.get_concept([f"{suggest.OND_NS}vak/nederlands"]))
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
-        "id": f"{suggest.OND_NS}/vak/nederlands",
+        "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
     }
 
@@ -31,7 +29,7 @@ def test_get_concept(sparql_endpoint):
 def test_suggest_by_label(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
@@ -39,7 +37,7 @@ def test_suggest_by_label(sparql_endpoint):
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
-        "id": f"{suggest.OND_NS}/vak/nederlands",
+        "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
     }
 
@@ -47,20 +45,20 @@ def test_suggest_by_label(sparql_endpoint):
 def test_suggest(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.suggest(
-            [f"{suggest.OND_NS}/thema/nederlandse-taal"],
-            [f"{suggest.OND_NS}/graad/lager-1ste-graad"],
+            [f"{suggest.OND_NS}thema/nederlandse-taal"],
+            [f"{suggest.OND_NS}graad/lager-1ste-graad"],
         )
     )
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
-        "id": f"{suggest.OND_NS}/vak/nederlands",
+        "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
     }
 
@@ -68,20 +66,20 @@ def test_suggest(sparql_endpoint):
 def test_get_candidates(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(
         suggest.get_candidates(
-            [f"{suggest.OND_NS}/thema/nederlandse-taal"],
-            [f"{suggest.OND_NS}/graad/lager-1ste-graad"],
+            [f"{suggest.OND_NS}thema/nederlandse-taal"],
+            [f"{suggest.OND_NS}graad/lager-1ste-graad"],
         )
     )
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
-        "id": f"{suggest.OND_NS}/vak/nederlands",
+        "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
     }
 
@@ -89,7 +87,7 @@ def test_get_candidates(sparql_endpoint):
 def test_get_graden(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
@@ -97,7 +95,7 @@ def test_get_graden(sparql_endpoint):
     assert len(results) == 1
     assert results[0] == {
         "definition": "Lager 1ste graad",
-        "id": f"{suggest.OND_NS}/graad/lager-1ste-graad",
+        "id": f"{suggest.OND_NS}graad/lager-1ste-graad",
         "label": "Lager 1ste graad",
     }
 
@@ -105,7 +103,7 @@ def test_get_graden(sparql_endpoint):
 def test_get_niveaus(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
@@ -113,7 +111,7 @@ def test_get_niveaus(sparql_endpoint):
     assert len(results) == 1
     assert results[0] == {
         "definition": "Lager onderwijs",
-        "id": f"{suggest.OND_NS}/niveau/lager-onderwijs",
+        "id": f"{suggest.OND_NS}niveau/lager-onderwijs",
         "label": "Lager onderwijs",
     }
 
@@ -121,7 +119,7 @@ def test_get_niveaus(sparql_endpoint):
 def test_get_themas(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
@@ -129,7 +127,7 @@ def test_get_themas(sparql_endpoint):
     assert len(results) == 1
     assert results[0] == {
         "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
-        "id": f"{suggest.OND_NS}/thema/nederlandse-taal",
+        "id": f"{suggest.OND_NS}thema/nederlandse-taal",
         "label": "Nederlandse taal",
     }
 
@@ -137,17 +135,15 @@ def test_get_themas(sparql_endpoint):
 def test_get_children(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(
-        suggest.get_children(f"{suggest.OND_NS}/niveau/lager-onderwijs")
-    )
+    results = list(suggest.get_children([f"{suggest.OND_NS}niveau/lager-onderwijs"]))
     assert len(results) == 1
     assert results[0] == {
         "definition": "Lager 1ste graad",
-        "id": f"{suggest.OND_NS}/graad/lager-1ste-graad",
+        "id": f"{suggest.OND_NS}graad/lager-1ste-graad",
         "label": "Lager 1ste graad",
     }
 
@@ -155,18 +151,14 @@ def test_get_children(sparql_endpoint):
 def test_get_related(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/data/skos.ttl"]
+        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(
-        suggest.get_related_vak(
-            [f"{suggest.OND_NS}/graad/lager-1ste-graad"]
-        )
-    )
+    results = list(suggest.get_related_vak([f"{suggest.OND_NS}graad/lager-1ste-graad"]))
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
-        "id": f"{suggest.OND_NS}/vak/nederlands",
+        "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
     }
