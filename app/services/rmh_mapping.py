@@ -302,7 +302,7 @@ class RmhMapping:
         # first fix issue in frontend, the attribute needs to be numbered here like we do for value
         # so we can match up the dropdown with correct input and re-populate the arrays here based on
         
-        # our fields in request.form:
+        # fields in request.form:
         #  for f in request.form:
         #     print("field=", f)
 

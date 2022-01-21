@@ -25,7 +25,7 @@
     <div class="field is-horizontal is-pulled-left" id="prd_maker_input">
       <div class="field-body mr-5">
         <div class="select is-small">
-          <select name="maker_attribute" id="maker_attrib">
+          <select name="maker_attribute" id="maker_attribute">
 
             {{ select_option('Maker', 'Maker', '') }}
             {{ select_option('Archiefvormer', 'Archiefvormer', '') }}
@@ -53,7 +53,7 @@
         </div>
 
         <input name="maker_value" 
-               id="maker_val"
+               id="maker_value"
                class="input is-small ml-2 narrow-input" 
                type="text" placeholder="" 
                value="">
@@ -70,7 +70,10 @@
     <div class="field is-horizontal is-pulled-left" id="prd_maker_input_{{loop.index}}">
       <div class="field-body mr-5">
         <div class="select is-small">
-          <select name="maker_attribute" id="maker_attrib_{{loop.index}}">
+          <select 
+            name="maker_attribute_{{loop.index}}" 
+            id="maker_attribute_{{loop.index}}"
+          >
 
             {{ select_option('Maker', 'Maker', maker['attribute']) }}
             {{ select_option('Archiefvormer', 'Archiefvormer', maker['attribute']) }}
@@ -98,7 +101,7 @@
         </div>
 
         <input name="maker_value_{{loop.index}}" 
-               id="maker_val_{{loop.index}}"
+               id="maker_value_{{loop.index}}"
                class="input is-small ml-2 narrow-input" 
                type="text" placeholder="" 
                value="{{maker['value']}}">

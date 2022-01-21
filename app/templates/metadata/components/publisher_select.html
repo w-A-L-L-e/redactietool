@@ -26,7 +26,7 @@
      
     <div class="field-body mr-5">
       <div class="select is-small">
-        <select name="publisher_attribute" id="publisher_attrib_">
+        <select name="publisher_attribute" id="publisher_attrib">
 
           {{ select_option('Distributeur', 'Distributeur', '') }}
           {{ select_option('Exposant', 'Exposant', '') }}
@@ -52,7 +52,10 @@
      
       <div class="field-body mr-5">
         <div class="select is-small">
-          <select name="publisher_attribute" id="publisher_attrib_{{loop.index}}">
+          <select 
+            name="publisher_attribute_{{loop.index}}" 
+            id="publisher_attrib_{{loop.index}}"
+          >
 
             {{ select_option('Distributeur', 'Distributeur', publisher['attribute']) }}
             {{ select_option('Exposant', 'Exposant', publisher['attribute']) }}
