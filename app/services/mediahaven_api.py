@@ -151,10 +151,7 @@ class MediahavenApi:
             'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
         ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
 
-        cp_id = get_property(metadata, 'CP_id')
-        cp = get_property(metadata, 'CP')
         root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
-
         rights = etree.SubElement(
             root, '{%s}RightsManagement' % MHS_NS)
         perms = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
@@ -173,6 +170,8 @@ class MediahavenApi:
         # relations.set('strategy', 'OVERWRITE')
         # etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
 
+        # cp_id = get_property(metadata, 'CP_id')
+        # cp = get_property(metadata, 'CP')
         # etree.SubElement(mdprops, "CP_id").text = cp_id
         # etree.SubElement(mdprops, "PID").text = tp['pid']
         # etree.SubElement(mdprops, "CP").text = cp
