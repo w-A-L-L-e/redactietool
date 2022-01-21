@@ -153,8 +153,6 @@ class MediahavenApi:
 
         cp_id = get_property(metadata, 'CP_id')
         cp = get_property(metadata, 'CP')
-        # xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
-
         root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
 
         rights = etree.SubElement(
@@ -172,14 +170,13 @@ class MediahavenApi:
 
         # WARNING: is_verwant_aan is broken, see ticket dev-1900 in jira
         # relations = etree.SubElement(mdprops, "dc_relations")
+        # relations.set('strategy', 'OVERWRITE')
         # etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
 
-        etree.SubElement(mdprops, "CP_id").text = cp_id
-        # mediahaven computes external_id for us.
-        # etree.SubElement(mdprops, "external_id").text = xml_pid
-        etree.SubElement(mdprops, "PID").text = tp['pid']
-        etree.SubElement(mdprops, "CP").text = cp
-        etree.SubElement(mdprops, "sp_name").text = 'borndigital'
+        # etree.SubElement(mdprops, "CP_id").text = cp_id
+        # etree.SubElement(mdprops, "PID").text = tp['pid']
+        # etree.SubElement(mdprops, "CP").text = cp
+        # etree.SubElement(mdprops, "sp_name").text = 'borndigital'
 
         # Alemene fields:
         # ===============
