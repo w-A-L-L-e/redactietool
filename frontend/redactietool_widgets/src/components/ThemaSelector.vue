@@ -241,6 +241,7 @@
           }
         }
         this.json_value = JSON.stringify(default_value);
+        this.$root.$emit('themas_changed', default_value);
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)

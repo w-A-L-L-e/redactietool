@@ -197,13 +197,13 @@
     },
     mounted: function() {
       this.$root.$on('graden_changed', data => {
-        console.log('graden changed data=', data);
+        console.log('graden changed event');
         this.graden = data;
         this.updateSuggestions();
       });
 
       this.$root.$on('themas_changed', data => {
-        console.log('themas changed data=',data);
+        console.log('themas_changed event');
         this.themas = data;
         this.updateSuggestions();
       });
@@ -307,7 +307,6 @@
         }
 
         if(!this.show_vakken_suggesties){
-          console.log("Vakken suggestions is closed, not loading...");
           return;
         }
 
@@ -342,7 +341,6 @@
               this.vakken_suggesties.push(row);
             }
             
-            console.log("suggest_map=", suggest_map);
             this.updateOverigeVakken(redactie_api_url, suggest_map);
           })
       },
