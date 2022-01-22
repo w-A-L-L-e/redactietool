@@ -411,3 +411,7 @@ h3.subtitle{
 .hidden {
   display:none;
 }
+
+#production_section{
+  display: none;
+}

@@ -12,7 +12,7 @@
 // have some minification done in our precompile assets makefile target.
 
 
-// ============================== SUBTITLE FORMS ===============================
+// ============================ LOGIN/LOGOUT FORMS =============================
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
@@ -26,15 +26,63 @@ function loginSubmit(btn){
   btn.classList.add('is-loading')
 }
 
+function logoutClicked(ref){
+  // #logout_btn
+  ref.className += ' disabled';
+}
+
+function newUploadClicked(ref){
+  // #new_upload_btn
+  ref.className += ' disabled';
+}
+
+function clearButtonLoadingState(){
+  // TODO: put all buttons back in original state 
+  // this is similar to hideEmptyTitles but instead we modify
+  // a class and/or replace the button.value back
+}
+
+
+// ============================= MODAL DIALOG ==================================
+function showNavigationWarning(){
+  //v1
+  //showModalAlert(
+  //    "Waarschuwing",
+  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+  //);
+
+  //v2.1
+  showModalAlert(
+      "Ben je zeker dat je deze pagina wilt verlaten?",
+      "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
+  );
+
+}
+
+function flashModalWarning(){
+  showModalAlert(
+      "Sync is misgelopen",
+      "Deze alert gaat na 3 seconden automatisch dicht..."
+  );
+
+  setTimeout(function(){
+    closeModalAlert();
+  }, 3000);
+}
+
+
+// ============================== SUBTITLE FORMS ===============================
 function pidSubmitForSubtitles(btn){
   hf = document.getElementById('redirect_subtitles');
   hf.value = 'yes';
+  window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
 }
 
 function pidSubmitForMetadata(btn){
   hf = document.getElementById('redirect_subtitles');
   hf.value = 'no';
+  window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
 }
 
@@ -88,51 +136,6 @@ function confirmCancel(btn){
 }
 
 
-// ============================ LOGIN/LOGOUT FORMS =============================
-function logoutClicked(ref){
-  // #logout_btn
-  ref.className += ' disabled';
-}
-
-function newUploadClicked(ref){
-  // #new_upload_btn
-  ref.className += ' disabled';
-}
-
-function clearButtonLoadingState(){
-  // TODO: put all buttons back in original state 
-  // this is similar to hideEmptyTitles but instead we modify
-  // a class and/or replace the button.value back
-}
-
-// ============================= MODAL DIALOG ==================================
-function showNavigationWarning(){
-  //v1
-  //showModalAlert(
-  //    "Waarschuwing",
-  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
-  //);
-
-  //v2.1
-  showModalAlert(
-      "Ben je zeker dat je deze pagina wilt verlaten?",
-      "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
-  );
-
-}
-
-function flashModalWarning(){
-  showModalAlert(
-      "Sync is misgelopen",
-      "Deze alert gaat na 3 seconden automatisch dicht..."
-  );
-
-  setTimeout(function(){
-    closeModalAlert();
-  }, 3000);
-}
-
-
 // ============================ METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_fields_id){
@@ -176,28 +179,7 @@ function deletePrdItem(del_btn){
   return false;
 }
 
-function sectionToggle(section_div_id){
-  var form_section = document.getElementById(section_div_id);
-  if(!form_section) return;
-  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
-  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
-  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
-
-
-  if(form_section.style.display == 'none'){
-    // form_section.style.display="flex"
-    form_section.style.display="block";
-    unfolded_icon.style.display="block";
-    folded_icon.style.display="none";
-  }
-  else{
-    form_section.style.display="none";
-    unfolded_icon.style.display="none";
-    folded_icon.style.display="block";
-  }
-}
-
-function collapseSection(section_div_id){
+function closeSection(section_div_id){
   var form_section = document.getElementById(section_div_id);
   if(!form_section) return;
   var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
@@ -207,6 +189,47 @@ function collapseSection(section_div_id){
   form_section.style.display="none";
   unfolded_icon.style.display="none";
   folded_icon.style.display="block";
+}
+
+function openSection(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(!form_section) return;
+  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
+  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
+
+  form_section.style.display="block";
+  unfolded_icon.style.display="block";
+  folded_icon.style.display="none";
+}
+
+function sectionToggle(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(!form_section) return;
+ 
+  if(form_section.style.display == 'none'){
+    if(section_div_id=="productie_section"){
+      window.localStorage.setItem("productie_section_opened", "true");
+    }
+    openSection(section_div_id);
+  }
+  else{
+    if(section_div_id=="productie_section"){
+      window.localStorage.removeItem("productie_section_opened");
+    }
+
+    closeSection(section_div_id);
+  }
+}
+
+function updateProductionSection(){
+  // use localstorage to keep state of opened production section
+  if(window.localStorage.getItem("productie_section_opened") == "true"){
+    openSection("productio_section");
+  }
+  else{
+    closeSection("productie_section");
+  }
 }
 
 function collapseEmptyTextarea(area_id, uncollapsable=false){
@@ -315,6 +338,17 @@ function refreshKeyframeImage(img_id){
   // in dom and update background tag.
 }
 
+function injectApiUrl(url_div_id){
+  var api_url_div = document.getElementById('redactie_api_url');
+  if(api_url_div){
+    api_url_div.innerText = window.location.protocol+'//'+window.location.host;
+  }
+  else{
+    console.log("Warning could not inject api url into div=", url_div_id);
+  }
+}
+
+
 // =========================== DOCUMENT READY EVENT ============================
 // Handle burger menu open/close on all pages.
 // Handle collapsing and hiding of inputs, textareas 
@@ -346,12 +380,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  collapseSection('productie_section');
   collapseEmptyTextareas();
   hideEmptyTitles();
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
+  updateProductionSection();
   
   // For demo, show modal dialogs
   // ============================

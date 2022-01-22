@@ -136,10 +136,7 @@ Metadata bewerken
     // dom ready event so that vue components
     // can pick it up to do the correct axios calls
     function setRedactieApiUrl(){
-      var api_url_div = document.getElementById('redactie_api_url');
-      if(api_url_div){
-        api_url_div.innerText = window.location.protocol+'//'+window.location.host;
-      }
+      injectApiUrl("redactie_api_url"); 
     }
   
     setRedactieApiUrl();
