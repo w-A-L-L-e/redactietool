@@ -307,7 +307,7 @@ class RmhMapping:
             request.form.get('trefwoorden'),
             'Sleutelwoord'
         )
- 
+
         dc_creators = []
         dc_contributors = []
         dc_publishers = []
