@@ -24,9 +24,6 @@ Metadata bewerken
         <div class="notification is-success">
           <button class="delete" onclick="closeSavedAlert(); return false;"></button>
           De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
-          <!--
-          Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
-          -->
         </div>
       </div>
     </div>
@@ -65,22 +62,6 @@ Metadata bewerken
             <ion-icon name="key-outline" class="pr-3"></ion-icon>
             Keyframe Aanpassen
           </a>
-  
-          <!--
-          <a class="button is-info mt-3"
-             href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-            Bewerk ondertitels
-          </a>
-          -->
-  
-          <!--
-          <button class="button is-info mt-3" 
-            onclick="refreshKeyframeImage(); return false;" >
-            <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
-            Refresh Keyframe
-          </a>
-          -->
-  
         {% endif %}
   
       </div>
@@ -92,7 +73,6 @@ Metadata bewerken
     {% include 'metadata/components/inhoud_section.html' %}
   
     <!-- ======================== Leerobject section ========================== -->
-    <!-- flask data injection here -->
     <div class="hidden" id="redactie_api_url">deployed_server_url</div>
     <div class="hidden" id="pid">{{pid}}</div>
     <div class="hidden" id="item_type">{{item_type}}</div>
@@ -128,13 +108,12 @@ Metadata bewerken
       Metadata opslaan
     </button>
   
-  </form> <!-- end of metadata edit form -->
-  <br/><br/><br/><br/>
+  </form>
+
+  <div class="form-footer-spacing"></div>
   
   <script type="text/javascript">
-    // Keep this here. It needs to be injected even before the
-    // dom ready event so that vue components
-    // can pick it up to do the correct axios calls
+    // inject api url before dom ready for the vue component axios requests
     function setRedactieApiUrl(){
       injectApiUrl("redactie_api_url"); 
     }

@@ -31,23 +31,6 @@
 
     <div class="navbar-end "> 
       {% if (pid and token) or (pid and session.get('samlUserdata')) %}
-        
-        <!-- This is requested in some jira ticket, but imho it only makes navigation more confusing than necessary
-        {% if url_for(request.endpoint) == '/upload'%}
-        <a class="navbar-item"
-          href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
-          Metadata
-        </a>
-        {% endif %}
-
-        {% if url_for(request.endpoint) == '/edit_metadata'%}
-        <a class="navbar-item"
-           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-          Ondertitels
-        </a>
-        {% endif %}
-        -->
-      
         <a class="navbar-item {{'is-active' if url_for(request.endpoint) == '/edit_metadata'}}"
           href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
           Metadata
