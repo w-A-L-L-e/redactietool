@@ -9,20 +9,20 @@
   "fragmentDurationTimeCode": "00:00:54.720",
   "mediaObjectId": "babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c",
   "fragmentId": "babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550",
-  "externalId": "tennismatch",
+  "externalId": "qs5d8ncx8c",
   "title": "ATP Swiss Indoors Day 3C",
   "description": "Dit is het veld voor de originele hoofdbeschrijving.",
   "date": "2019:10:23 00:00:00",
   "previewImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/keyframes/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550.jpg",
   "thumbnailImagePath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/keyframes-thumb/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1ce13b348a791c40a593110e1ee4266550.jpg",
   "videoPath": "https://archief-media-qas.viaa.be/viaa/TESTBEELD/babc1f04f7094092a3189877a3d257feb60c344813264e8e9c45cd502997bb1c/browse.mp4",
-  "originalFileName": "tennismatch.mp4",
+  "originalFileName": "qs5d8ncx8c.mp4",
   "width": 0,
   "height": 0,
   "keywords": [],
   "type": "Video",
   "authors": [],
-  "lastModifiedDate": "2021-12-22T16:11:56Z",
+  "lastModifiedDate": "2022-01-24T15:17:30Z",
   "archiveDate": "2019-10-25T08:26:32Z",
   "exportable": true,
   "editable": true,
@@ -40,6 +40,38 @@
       "subKey": "multiselect",
       "value": [
         {
+          "value": "VIAA-ONDERWIJS",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-ONDERZOEK",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-CONTENT",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-INTRA_CP-METADATA-ALL",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_rights_licenses",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
           "value": "Secundair onderwijs",
           "attribute": "multiselect",
           "dottedKey": null
@@ -49,24 +81,47 @@
       "dottedKey": null
     },
     {
+      "subKey": "multiselect",
       "value": [
         {
-          "value": "saai",
-          "attribute": "Sleutelwoord",
+          "value": "Secundair 1ste graad",
+          "attribute": "multiselect",
           "dottedKey": null
         },
         {
-          "value": "sport",
-          "attribute": "Sleutelwoord",
+          "value": "Secundair 2de graad",
+          "attribute": "multiselect",
           "dottedKey": null
         },
         {
-          "value": "tennis",
-          "attribute": "Sleutelwoord",
+          "value": "Secundair 3de graad",
+          "attribute": "multiselect",
           "dottedKey": null
         }
       ],
-      "attribute": "lom_keywords",
+      "attribute": "lom_typicalagerange",
+      "dottedKey": null
+    },
+    {
+      "subKey": "multiselect",
+      "value": [
+        {
+          "value": "Docent",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Student",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "Systeembeheerder",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_intendedenduserrole",
       "dottedKey": null
     },
     {
@@ -76,21 +131,35 @@
           "value": "nl",
           "attribute": "multiselect",
           "dottedKey": null
+        },
+        {
+          "value": "fr",
+          "attribute": "multiselect",
+          "dottedKey": null
         }
       ],
       "attribute": "lom_languages",
       "dottedKey": null
     },
     {
-      "subKey": "multiselect",
       "value": [
         {
-          "value": "lichamelijke opvoeding - sport",
-          "attribute": "multiselect",
+          "value": "sport",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "tennis",
+          "attribute": "Sleutelwoord",
+          "dottedKey": null
+        },
+        {
+          "value": "Zwitserland",
+          "attribute": "Sleutelwoord",
           "dottedKey": null
         }
       ],
-      "attribute": "lom_classification",
+      "attribute": "lom_keywords",
       "dottedKey": null
     },
     {
@@ -181,6 +250,11 @@
           "dottedKey": null
         },
         {
+          "value": "test walter",
+          "attribute": "Maker",
+          "dottedKey": null
+        },
+        {
           "value": "Dit is een veld voor archiefvormer.",
           "attribute": "Archiefvormer",
           "dottedKey": null
@@ -202,128 +276,12 @@
     {
       "value": [
         {
-          "value": "ATP Swiss Indoors Day 3C.mp4",
-          "attribute": "Bestandsnaam",
-          "dottedKey": null
-        },
-        {
-          "value": "AIM10049123",
-          "attribute": "MEDIA_ID",
-          "dottedKey": null
-        }
-      ],
-      "attribute": "dc_identifier_localids",
-      "dottedKey": null
-    },
-    {
-      "value": [
-        {
-          "value": "Dit is het veld voor deelarchief.",
-          "attribute": "deelarchief",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor registratie.",
-          "attribute": "registratie",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor alternatief.",
-          "attribute": "alternatief",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor archief.",
-          "attribute": "archief",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor deelreeks.",
-          "attribute": "deelreeks",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor seizoennummer.",
-          "attribute": "seizoennummer",
-          "dottedKey": null
-        },
-        {
-          "value": "EVS",
-          "attribute": "serie",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor serienummer.",
-          "attribute": "serienummer",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor episode.",
-          "attribute": "episode",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor programma.",
-          "attribute": "programma",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor reeks.",
-          "attribute": "reeks",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor seizoen.",
-          "attribute": "seizoen",
-          "dottedKey": null
-        },
-        {
-          "value": "Dit is het veld voor aflevering.",
-          "attribute": "aflevering",
-          "dottedKey": null
-        }
-      ],
-      "attribute": "dc_titles",
-      "dottedKey": null
-    },
-    {
-      "subKey": "multiselect",
-      "value": [
-        {
-          "value": "Video",
-          "attribute": "multiselect",
-          "dottedKey": null
-        }
-      ],
-      "attribute": "lom_learningresourcetype",
-      "dottedKey": null
-    },
-    {
-      "value": [
-        {
-          "value": "Rechtenhouder: CHSRF Rechteninfo: Swiss TV rights: For full EBU members only within EBU territory, maximum usage 3 minutes per day.",
-          "attribute": "Licentiehouder",
-          "dottedKey": null
-        }
-      ],
-      "attribute": "dc_rights_rightsHolders",
-      "dottedKey": null
-    },
-    {
-      "value": [
-        {
-          "value": "qsx34mmm4g",
-          "attribute": "is_verwant_aan",
-          "dottedKey": null
-        }
-      ],
-      "attribute": "dc_relations",
-      "dottedKey": null
-    },
-    {
-      "value": [
-        {
           "value": "EBU SPORT",
+          "attribute": "Publisher",
+          "dottedKey": null
+        },
+        {
+          "value": "Walter test 2",
           "attribute": "Publisher",
           "dottedKey": null
         },
@@ -370,6 +328,11 @@
         },
         {
           "value": "Dit is een veld voor aanwezig.",
+          "attribute": "Aanwezig",
+          "dottedKey": null
+        },
+        {
+          "value": "Dit is een veld voor presenter.",
           "attribute": "Aanwezig",
           "dottedKey": null
         },
@@ -484,12 +447,17 @@
           "dottedKey": null
         },
         {
-          "value": "Dit is een veld voor presenter.",
+          "value": "Dit is een veld voor presenter voor Walter.",
           "attribute": "Presenter",
           "dottedKey": null
         },
         {
           "value": "Dit is een veld voor bijdrager.",
+          "attribute": "Bijdrager",
+          "dottedKey": null
+        },
+        {
+          "value": "Test walter",
           "attribute": "Bijdrager",
           "dottedKey": null
         },
@@ -546,71 +514,73 @@
       "subKey": "multiselect",
       "value": [
         {
-          "value": "VIAA-ONDERWIJS",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "VIAA-ONDERZOEK",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "VIAA-INTRA_CP-CONTENT",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "VIAA-INTRA_CP-METADATA-ALL",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "VIAA-PUBLIEK-METADATA-LTD",
+          "value": "Video",
           "attribute": "multiselect",
           "dottedKey": null
         }
       ],
-      "attribute": "dc_rights_licenses",
+      "attribute": "lom_learningresourcetype",
       "dottedKey": null
     },
     {
       "subKey": "multiselect",
       "value": [
         {
-          "value": "Secundair 1ste graad",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "Secundair 2de graad",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "Secundair 3de graad",
+          "value": "lichamelijke opvoeding - sport",
           "attribute": "multiselect",
           "dottedKey": null
         }
       ],
-      "attribute": "lom_typicalagerange",
+      "attribute": "lom_classification",
       "dottedKey": null
     },
     {
-      "subKey": "multiselect",
       "value": [
         {
-          "value": "Docent",
-          "attribute": "multiselect",
-          "dottedKey": null
-        },
-        {
-          "value": "Student",
-          "attribute": "multiselect",
+          "value": "Rechtenhouder: CHSRF Rechteninfo: Swiss TV rights: For full EBU members only within EBU territory, maximum usage 3 minutes per day.",
+          "attribute": "Licentiehouder",
           "dottedKey": null
         }
       ],
-      "attribute": "lom_intendedenduserrole",
+      "attribute": "dc_rights_rightsHolders",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "ATP Swiss Indoors Day 3C.mp4",
+          "attribute": "Bestandsnaam",
+          "dottedKey": null
+        },
+        {
+          "value": "AIM10049123",
+          "attribute": "MEDIA_ID",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_identifier_localids",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "qsx34mmm4g",
+          "attribute": "is_verwant_aan",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_relations",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "EVS",
+          "attribute": "serie",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "dc_titles",
       "dottedKey": null
     },
     {
@@ -634,12 +604,49 @@
       "dottedKey": null
     },
     {
+      "value": [
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/vak/afwerking-bouw",
+          "attribute": "Vak",
+          "dottedKey": null
+        },
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/vak/agrarische-technieken",
+          "attribute": "Vak",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_vak",
+      "dottedKey": null
+    },
+    {
       "value": "video",
       "attribute": "type_viaa",
       "dottedKey": null
     },
     {
-      "value": "dailies",
+      "value": [
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/graad/secundair-1ste-graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/graad/secundair-2de-graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        },
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/graad/lager-3de-graad",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_onderwijsgraad",
+      "dottedKey": null
+    },
+    {
+      "value": "borndigital",
       "attribute": "sp_name",
       "dottedKey": null
     },
@@ -664,7 +671,7 @@
       "dottedKey": null
     },
     {
-      "value": "tennismatch",
+      "value": "qs5d8ncx8c",
       "attribute": "PID",
       "dottedKey": null
     },
@@ -729,8 +736,40 @@
       "dottedKey": null
     },
     {
+      "value": [
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/niveau/secundair-onderwijs",
+          "attribute": "multiselect",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_onderwijsniveau",
+      "dottedKey": null
+    },
+    {
       "value": "footage",
       "attribute": "ebu_objectType",
+      "dottedKey": null
+    },
+    {
+      "value": "Tennismatch edit test 4\r\n\r\nEffectief een edit",
+      "attribute": "dcterms_abstract",
+      "dottedKey": null
+    },
+    {
+      "value": [
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/thema/podiumkunsten",
+          "attribute": "Thema",
+          "dottedKey": null
+        },
+        {
+          "value": "https://data.meemoo.be/term/onderwijs/thema/constructie-en-productie",
+          "attribute": "Thema",
+          "dottedKey": null
+        }
+      ],
+      "attribute": "lom_thema",
       "dottedKey": null
     }
   ],

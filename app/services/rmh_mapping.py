@@ -44,6 +44,7 @@ class RmhMapping:
     def set_json_array_property(self, mam_data, propkey, jkey, jvalue, prop_name="multiselect"):
         values = json.loads(jvalue)
         array_values = []
+        print("values=",values)
         for v in values:
             array_values.append({
                 'value': v[jkey],
@@ -130,10 +131,10 @@ class RmhMapping:
             mam_data['fragmentId']
         )
 
-        item_type = get_property(mam_data, 'lom_learningresourcetype')
-        print("lom_learningresourcetype = ", item_type)
-        if not item_type:
-            item_type = mam_data.get('type')
+        item_type = mam_data.get('type')
+        item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
+        if item_type_lom and len(item_type_lom)>0:
+            item_type = item_type_lom[0]['value']
 
         return {
             'token': token,
@@ -255,11 +256,9 @@ class RmhMapping:
         )
 
         # single select item_type -> lom_learningresourcetype
-        item_type = request.form.get('item_type')
-        learning_type_val = json.loads(item_type)['code']
-        mam_data = self.set_property(
-            mam_data, 'lom_learningresourcetype',
-            learning_type_val
+        mam_data = self.set_json_array_property(
+            mam_data, 'lom_learningresourcetype', 'code',
+            request.form.get('lom_type'),
         )
 
         # multiselect talen -> lom_languages
@@ -309,14 +308,11 @@ class RmhMapping:
             'Sleutelwoord'
         )
 
-        # item_type heeft nog een issue (check vrijdag met rudolf of bart -> is omdat
-        # het een level boven de mdprops zit)
-        changed_item_type = json.loads(request.form.get('item_type'))
-        if type(changed_item_type) == list:
-            item_type = changed_item_type[0]['code']
+        if request.form.get('lom_type'):
+            lom_type_value = json.loads(request.form.get('lom_type'))
+            item_type = lom_type_value[0]['code']
         else:
-            item_type = changed_item_type['code']
-        mam_data['type'] = item_type
+            item_type = mam_data['type']
 
         dc_creators = []
         dc_contributors = []

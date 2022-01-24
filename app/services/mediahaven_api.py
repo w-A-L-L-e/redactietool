@@ -224,9 +224,11 @@ class MediahavenApi:
 
         # Leerobject fields:
         # ==================
-        # item_type -> lom_learningresourcetype
-        etree.SubElement(mdprops, "lom_learningresourcetype").text = get_property(
-            metadata, 'lom_learningresourcetype')
+        # lom_type -> lom_learningresourcetype
+        lom_type = etree.SubElement(mdprops, "lom_learningresourcetype")
+        lom_type.set('strategy', 'OVERWRITE')
+        for kw in get_property(metadata, 'lom_learningresourcetype'):
+            etree.SubElement(lom_type, kw['attribute']).text = kw['value']
 
         # eindgebruiker is multiselect
         lom_languages = etree.SubElement(mdprops, "lom_intendedenduserrole")

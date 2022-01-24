@@ -1,5 +1,5 @@
 <template>
-  <div id="talen_selector"> 
+  <div id="lom_type_selector"> 
     <multiselect v-model="value" 
       placeholder="Kies media type" 
       label="name" 
@@ -14,15 +14,14 @@
       <template slot="noResult">Media type niet gevonden</template>
 
     </multiselect>
-    <textarea name="item_type" v-model="json_value" id="type_json_value"></textarea>
-    <pre class="language-json" id="type_value_preview"><code>{{ value  }}</code></pre>
+    <textarea name="lom_type" v-model="json_value" id="lom_type_json_value"></textarea>
 </div>
 </template>
 
 <script>
   import Multiselect from 'vue-multiselect'
 
-  var default_value = { name: 'Video', code: 'Video' };
+  var default_value = [{ name: 'Video', code: 'Video' }];
 
   export default {
     name: 'TypeSelector',
@@ -44,7 +43,7 @@
       if(item_type_div){
         var item_type = item_type_div.innerText;
         if(item_type){
-          default_value = {name: item_type, code: item_type};
+          default_value = [{name: item_type, code: item_type}];
           this.value = default_value;
         }
 
@@ -55,7 +54,7 @@
 
     methods: {
       updateValue(value){
-        this.json_value = JSON.stringify(value)
+        this.json_value = JSON.stringify([value])
       }
     }
   }
@@ -65,21 +64,16 @@
 
 <style>
   
-  #talen_selector{
+  #lom_type_selector{
     min-width: 30em;
   }
 
-  #type_json_value{
+  #lom_type_json_value{
     display: none;
     width: 80%;
     height: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
-  }
-
-  #type_value_preview{
-    margin-bottom: 20px;
-    display: none;
   }
 
 </style>
