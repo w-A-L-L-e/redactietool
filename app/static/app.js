@@ -154,13 +154,15 @@ function addPrdItem(item_list_id, item_fields_id){
   // add unique ids to _input_ and _value_ fields in cloned element
   var new_id = 1;
   var item_inputs = item_list.getElementsByTagName("input");
-  var last_id = item_inputs[item_inputs.length-1].id
-  if(last_id.includes("_value_")){
-    new_id = parseInt(last_id.replace(item_fields_id+'_value_', ''))+1
+  if(item_inputs.length){
+    var last_id = item_inputs[item_inputs.length-1].id
+    if(last_id.includes("_value_")){
+      new_id = parseInt(last_id.replace(item_fields_id+'_value_', ''))+1
+    }
   }
 
   var fields_clone = item_fields.cloneNode(true);
-  fields_clone.style.display = 'flex';
+  //fields_clone.style.display = 'flex';
   fields_clone.id = fields_clone.id+"_"+new_id;
   fields_clone.getElementsByTagName("select")[0].name = item_fields_id+"_attribute_"+new_id
   fields_clone.getElementsByTagName("select")[0].id = item_fields_id+"_attribute_"+new_id

@@ -353,7 +353,36 @@ input[type=button].spring:hover {
   }
 }
 
-/* these hidden form parts are used to inject new controls in our components */
+/* metadata select productie component styling */
+.prd-subtitle {
+  width: 6em;
+  display: inline-block;
+}
+.prd-widget {
+  margin-left: 15px;
+  min-width: 380px; 
+  width: 47%; 
+  float: left;
+}
+.prd-widget-list .prd-widget:nth-child(2n){
+  margin-left: 30px;
+}
+.full-width {
+  width: 100%;
+}
+
+@media screen and (max-width: 888px){
+  .prd-widget{
+    margin-left: 15px;
+    width: 100%;
+    float: none;
+    padding-right: 15px;
+  }
+  .prd-widget-list .prd-widget:nth-child(2n){
+    margin-left: 15px;
+  }
+}
+
 #prd_maker{
   display: none;
 }
@@ -378,7 +407,7 @@ h3.subtitle{
 }
 
 @media screen and (min-width: 768px){
-  h3.subtitle{
+  #algemeen_title_right{
     margin-top: -34px;
   }
 

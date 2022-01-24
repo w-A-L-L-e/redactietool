@@ -1,114 +1,98 @@
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <label class="label">
-      Maker(s)
-      <button onclick="addPrdItem('prd_makers', 'prd_maker'); return false;" 
-        class="button is-info is-small pu">+
-      </button>
-    </label>
+
+<div class="mt-5">
+  <h3 class="prd-subtitle subtitle">Maker(s)</h3>
+  <button onclick="addPrdItem('prd_makers', 'prd_maker'); return false;" 
+    class="button is-info is-small pu mb-2">+
+  </button>
+</div>
+
+{% from 'metadata/components/select_option.html' import select_option %}
+
+<div class="field has-addons prd-widget" id="prd_maker">
+  <div class="control mr-2">
+    <span class="select is-small">
+      <select name="prd_maker_attribute" id="prd_maker_attribute">
+        {{- select_option('Maker', 'Maker', '') }}
+        {{- select_option('Archiefvormer', 'Archiefvormer', '') }}
+        {{- select_option('Auteur', 'Auteur', '') }}
+        {{- select_option('Acteur', 'Acteur', '') }}
+        {{- select_option('Cineast', 'Cineast', '') }}
+        {{- select_option('Componist', 'Componist', '') }}
+        {{- select_option('Choreograaf', 'Choreograaf', '') }}
+        {{- select_option('Danser', 'Danser', '') }}
+        {{- select_option('Documentairemaker', 'Documentairemaker', '') }}
+        {{- select_option('Fotograaf', 'Fotograaf', '') }}
+        <!-- TODO: add this back once MediahavenApi supports it
+        {{ select_option('Geïnterviewde', 'Geïnterviewde', '') }} 
+        -->
+        {{- select_option('Interviewer', 'Interviewer', '') }}
+        {{- select_option('Kunstenaar', 'Kunstenaar', '') }}
+        {{- select_option('Muzikant', 'Muzikant', '') }}
+        {{- select_option('Performer', 'Performer', '') }}
+        {{- select_option('Producer', 'Producer', '') }}
+        {{- select_option('Productiehuis', 'Productiehuis', '') }}
+        {{- select_option('Regisseur', 'Regisseur', '') }}
+        {{- select_option('Schrijver', 'Schrijver', '') }}
+        {{- select_option('Opdrachtgever', 'Opdrachtgever', '') }}
+      </select>
+    </span>
   </div>
-  <div class="field-body">
+  <div class="control mr-2 full-width">
+    <input name="prd_maker_value" 
+           id="prd_maker_value"
+           class="input is-small" 
+           type="text" placeholder="" 
+           value="">
+  </div>
+  <div class="control mr-1">
+    <a class="is-small button is-danger" onclick="deletePrdItem(this); return false;">
+      x 
+    </a>
   </div>
 </div>
 
-{% macro select_option(label, value, attribute) %}
-  {% if value == attribute %}
-    <option value="{{value}}" selected>{{label}}</a>
-  {% else %}
-    <option value="{{value}}">{{label}}</a>
-  {% endif %}
-{% endmacro %}
 
-<div id="prd_makers" class="pl-5 ml-5">
-
-    <!-- refactor into partial laterz -->
-    <div class="field is-horizontal is-pulled-left" id="prd_maker">
-      <div class="field-body mr-5">
-        <div class="select is-small">
-          <select name="prd_maker_attribute" id="prd_maker_attribute">
-
-            {{ select_option('Maker', 'Maker', '') }}
-            {{ select_option('Archiefvormer', 'Archiefvormer', '') }}
-            {{ select_option('Auteur', 'Auteur', '') }}
-            {{ select_option('Acteur', 'Acteur', '') }}
-            {{ select_option('Cineast', 'Cineast', '') }}
-            {{ select_option('Componist', 'Componist', '') }}
-            {{ select_option('Choreograaf', 'Choreograaf', '') }}
-            {{ select_option('Danser', 'Danser', '') }}
-            {{ select_option('Documentairemaker', 'Documentairemaker', '') }}
-            {{ select_option('Fotograaf', 'Fotograaf', '') }}
-            <!-- TODO: add this back once MediahavenApi supports it
-            {{ select_option('Geïnterviewde', 'Geïnterviewde', '') }} 
-            -->
-            {{ select_option('Interviewer', 'Interviewer', '') }}
-            {{ select_option('Kunstenaar', 'Kunstenaar', '') }}
-            {{ select_option('Muzikant', 'Muzikant', '') }}
-            {{ select_option('Performer', 'Performer', '') }}
-            {{ select_option('Producer', 'Producer', '') }}
-            {{ select_option('Productiehuis', 'Productiehuis', '') }}
-            {{ select_option('Regisseur', 'Regisseur', '') }}
-            {{ select_option('Schrijver', 'Schrijver', '') }}
-            {{ select_option('Opdrachtgever', 'Opdrachtgever', '') }}
-          </select>
-        </div>
-
-        <input name="prd_maker_value" 
-               id="prd_maker_value"
-               class="input is-small ml-2 narrow-input" 
-               type="text" placeholder="" 
-               value="">
-
-        <button class="button delete is-danger prd-del-btn" 
-          onclick="deletePrdItem(this); return false;">
-        </button>
-
-      </div> <!-- field-body -->
-    </div> <!-- field -->
-
-
+<div id="prd_makers" class="prd-widget-list">
   {% for maker in makers: %}
-    <div class="field is-horizontal is-pulled-left" id="prd_maker_{{loop.index}}">
-      <div class="field-body mr-5">
-        <div class="select is-small">
-          <select name="prd_maker_attribute_{{loop.index}}" id="prd_maker_attribute_{{loop.index}}">
-
-            {{ select_option('Maker', 'Maker', maker['attribute']) }}
-            {{ select_option('Archiefvormer', 'Archiefvormer', maker['attribute']) }}
-            {{ select_option('Auteur', 'Auteur', maker['attribute']) }}
-            {{ select_option('Acteur', 'Acteur', maker['attribute']) }}
-            {{ select_option('Cineast', 'Cineast', maker['attribute']) }}
-            {{ select_option('Componist', 'Componist', maker['attribute']) }}
-            {{ select_option('Choreograaf', 'Choreograaf', maker['attribute']) }}
-            {{ select_option('Danser', 'Danser', maker['attribute']) }}
-            {{ select_option('Documentairemaker', 'Documentairemaker', maker['attribute']) }}
-            {{ select_option('Fotograaf', 'Fotograaf', maker['attribute']) }}
-            <!-- TODO: add this back once MediahavenApi supports it
-            {{ select_option('Geïnterviewde', 'Geïnterviewde', maker['attribute']) }} 
-            -->
-            {{ select_option('Interviewer', 'Interviewer', maker['attribute']) }}
-            {{ select_option('Kunstenaar', 'Kunstenaar', maker['attribute']) }}
-            {{ select_option('Muzikant', 'Muzikant', maker['attribute']) }}
-            {{ select_option('Performer', 'Performer', maker['attribute']) }}
-            {{ select_option('Producer', 'Producer', maker['attribute']) }}
-            {{ select_option('Productiehuis', 'Productiehuis', maker['attribute']) }}
-            {{ select_option('Regisseur', 'Regisseur', maker['attribute']) }}
-            {{ select_option('Schrijver', 'Schrijver', maker['attribute']) }}
-            {{ select_option('Opdrachtgever', 'Opdrachtgever', maker['attribute']) }}
-          </select>
-        </div>
-
-        <input name="prd_maker_value_{{loop.index}}" 
-               id="prd_maker_value_{{loop.index}}"
-               class="input is-small ml-2 narrow-input" 
-               type="text" placeholder="" 
-               value="{{maker['value']}}">
-
-        <button class="button delete is-danger prd-del-btn" 
-          onclick="deletePrdItem(this); return false;">
-        </button>
-
-      </div> <!-- field-body -->
-    </div> <!-- field -->
+  <div class="field has-addons prd-widget" id="prd_maker_{{loop.index}}">
+    <div class="control mr-2">
+      <span class="select is-small">
+        <select name="prd_maker_attribute_{{loop.index}}" id="prd_maker_attribute_{{loop.index}}">
+          {{- select_option('Maker', 'Maker', maker['attribute']) }}
+          {{- select_option('Archiefvormer', 'Archiefvormer', maker['attribute']) }}
+          {{- select_option('Auteur', 'Auteur', maker['attribute']) }}
+          {{- select_option('Acteur', 'Acteur', maker['attribute']) }}
+          {{- select_option('Cineast', 'Cineast', maker['attribute']) }}
+          {{- select_option('Componist', 'Componist', maker['attribute']) }}
+          {{- select_option('Choreograaf', 'Choreograaf', maker['attribute']) }}
+          {{- select_option('Danser', 'Danser', maker['attribute']) }}
+          {{- select_option('Documentairemaker', 'Documentairemaker', maker['attribute']) }}
+          {{- select_option('Fotograaf', 'Fotograaf', maker['attribute']) }}
+          {{- select_option('Interviewer', 'Interviewer', maker['attribute']) }}
+          {{- select_option('Kunstenaar', 'Kunstenaar', maker['attribute']) }}
+          {{- select_option('Muzikant', 'Muzikant', maker['attribute']) }}
+          {{- select_option('Performer', 'Performer', maker['attribute']) }}
+          {{- select_option('Producer', 'Producer', maker['attribute']) }}
+          {{- select_option('Productiehuis', 'Productiehuis', maker['attribute']) }}
+          {{- select_option('Regisseur', 'Regisseur', maker['attribute']) }}
+          {{- select_option('Schrijver', 'Schrijver', maker['attribute']) }}
+          {{- select_option('Opdrachtgever', 'Opdrachtgever', maker['attribute']) }}
+        </select>
+      </span>
+    </div>
+    <div class="control mr-2 full-width">
+      <input name="prd_maker_value_{{loop.index}}" 
+             id="prd_maker_value_{{loop.index}}"
+             class="input is-small mr-1" 
+             type="text" placeholder="" 
+             value="{{maker['value']}}">
+    </div>
+    <div class="control mr-1">
+      <a class="is-small button is-danger" onclick="deletePrdItem(this); return false;">
+        x 
+      </a>
+    </div>
+  </div>
   {% endfor %}
 </div>
 

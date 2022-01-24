@@ -1,0 +1,9 @@
+{%- macro select_option(label, value, attribute) %}
+  {%- if value == attribute %}
+            <option value="{{value}}" selected>{{label}}</a>
+  {%- else %}
+            <option value="{{value}}">{{label}}</a>
+  {%- endif %}
+{%- endmacro %}
+
+
