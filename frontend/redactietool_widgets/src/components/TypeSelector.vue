@@ -22,7 +22,7 @@
 <script>
   import Multiselect from 'vue-multiselect'
 
-  var default_value = null;
+  var default_value = { name: 'Video', code: 'Video' };
 
   export default {
     name: 'TypeSelector',
@@ -44,10 +44,11 @@
       if(item_type_div){
         var item_type = item_type_div.innerText;
         if(item_type){
-          default_value = [{name: item_type, code: item_type}]
-          this.json_value = JSON.stringify(default_value);
+          default_value = {name: item_type, code: item_type};
           this.value = default_value;
         }
+
+        this.json_value = JSON.stringify(default_value);
       }
       
     },

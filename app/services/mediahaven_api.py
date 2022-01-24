@@ -224,8 +224,9 @@ class MediahavenApi:
 
         # Leerobject fields:
         # ==================
-        # type (Audio/Video is not changeable by api call!)
-        # etree.SubElement(root, 'type').text = metadata.get('type') # default to video
+        # item_type -> lom_learningresourcetype
+        etree.SubElement(mdprops, "lom_learningresourcetype").text = get_property(
+            metadata, 'lom_learningresourcetype')
 
         # eindgebruiker is multiselect
         lom_languages = etree.SubElement(mdprops, "lom_intendedenduserrole")

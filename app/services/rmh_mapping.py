@@ -130,6 +130,11 @@ class RmhMapping:
             mam_data['fragmentId']
         )
 
+        item_type = get_property(mam_data, 'lom_learningresourcetype')
+        print("lom_learningresourcetype = ", item_type)
+        if not item_type:
+            item_type = mam_data.get('type')
+
         return {
             'token': token,
             'department': department,
@@ -138,7 +143,7 @@ class RmhMapping:
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
-            'item_type': mam_data.get('type'),
+            'item_type': item_type,
             'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
@@ -247,6 +252,14 @@ class RmhMapping:
         mam_data = self.set_array_property(
             mam_data, 'dc_titles',
             'serie', request.form.get('serie')
+        )
+
+        # single select item_type -> lom_learningresourcetype
+        item_type = request.form.get('item_type')
+        learning_type_val = json.loads(item_type)['code']
+        mam_data = self.set_property(
+            mam_data, 'lom_learningresourcetype',
+            learning_type_val
         )
 
         # multiselect talen -> lom_languages
