@@ -44,7 +44,7 @@ class RmhMapping:
     def set_json_array_property(self, mam_data, propkey, jkey, jvalue, prop_name="multiselect"):
         values = json.loads(jvalue)
         array_values = []
-        print("values=",values)
+        print("values=", values)
         for v in values:
             array_values.append({
                 'value': v[jkey],
@@ -133,7 +133,7 @@ class RmhMapping:
 
         item_type = mam_data.get('type')
         item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
-        if item_type_lom and len(item_type_lom)>0:
+        if item_type_lom and len(item_type_lom) > 0:
             item_type = item_type_lom[0]['value']
 
         return {
@@ -307,13 +307,7 @@ class RmhMapping:
             request.form.get('trefwoorden'),
             'Sleutelwoord'
         )
-
-        if request.form.get('lom_type'):
-            lom_type_value = json.loads(request.form.get('lom_type'))
-            item_type = lom_type_value[0]['code']
-        else:
-            item_type = mam_data['type']
-
+ 
         dc_creators = []
         dc_contributors = []
         dc_publishers = []
