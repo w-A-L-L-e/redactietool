@@ -31,33 +31,29 @@ Login
 
 
     <div class="card" id="saml_login_box">
-      <div class="card-content">
-        <div class="content">
+      <h1 class="title">
+        Redactietool 
+        <span class="icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+      </h1>
 
-          <h1 class="title">
-            Redactietool 
-            <span class="icon">
-              <ion-icon name="create-outline"></ion-icon>
-            </span>
-          </h1>
+      <p>
+         Log in om gebruik te maken van de Redactietool.
+      </p>
+      <br/>
+      
+      <div class="buttons is-pulled-right">
+        {% if legact_login_enabled %}
+          <a href="/legacy_login" class="button is-link is-light">
+            Development authenticatie
+          </a>
+        {% endif %}
 
-          <p>
-             Log in om gebruik te maken van de Redactietool.
-          </p>
-          
-          <div class="buttons is-pulled-right">
-            {% if legact_login_enabled %}
-              <a href="/legacy_login" class="button is-link is-light">
-                Development authenticatie
-              </a>
-            {% endif %}
-
-            <a href="?sso" class="button is-primary">Login</a>
-          </div>
-          <div class="clearfix"></div><br/><br/>
-
-        </div>
+        <a href="?sso" class="button is-primary">Login</a>
       </div>
+      <div class="clearfix"></div><br/><br/>
+
     </div>
 
   </div>
