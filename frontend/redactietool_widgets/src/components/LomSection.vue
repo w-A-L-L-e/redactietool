@@ -72,6 +72,8 @@
           <VakkenSelector/>
         </div>
       </div>
+      
+      <LegacyVakken/>
 
 
       <div class="field is-horizontal">
@@ -96,6 +98,7 @@
   import OnderwijsgradenSelector from './OnderwijsgradenSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
   import VakkenSelector from './VakkenSelector.vue'
+  import LegacyVakken from './LegacyVakken.vue'
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
   import CollapseIcon from './CollapseIcon.vue'
 
@@ -115,6 +118,7 @@
       OnderwijsgradenSelector,
       ThemaSelector,
       VakkenSelector,
+      LegacyVakken,
       TrefwoordenSelector,
       CollapseIcon
     },

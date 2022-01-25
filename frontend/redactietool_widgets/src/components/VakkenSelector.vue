@@ -46,10 +46,6 @@
     </multiselect>
 
 
-  <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-    Vak werd al toegevoegd
-  </div>
-
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
       <div class="modal is-active" id='modal_dlg'>
@@ -184,7 +180,6 @@
           },
         ],
         show_vakken_suggesties: false,
-        show_already_added_warning: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
         vakken_suggesties:[],
         overige_vakken:[],
