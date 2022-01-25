@@ -44,7 +44,6 @@ class RmhMapping:
     def set_json_array_property(self, mam_data, propkey, jkey, jvalue, prop_name="multiselect"):
         values = json.loads(jvalue)
         array_values = []
-        print("values=", values)
         for v in values:
             array_values.append({
                 'value': v[jkey],
@@ -147,7 +146,7 @@ class RmhMapping:
             'item_type': item_type,
             'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
-            # 'item_vakken_legacy': json.dumps(get_md_array(mam_data, '???')),
+            'item_vakken_legacy': json.dumps(get_md_array(mam_data, 'lom_classification')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
             'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
             'item_onderwijsniveaus': json.dumps(
@@ -221,22 +220,25 @@ class RmhMapping:
             }
 
     def update_legacy_flag(self, request, mam_data):
-        # legacy veld voor vakken?
-        # op te slaan lom_legacy veld structuur?
-
-        # als ik goed lees na optimalisatie is momenteel legacy vakken eigenlijk niet nodig
-        # voor deze check ??
-
-        # TODO: lom_legacy 'boolean field' -> save as 'false' if
-        # new fields vakken or themas contain entries
+        # als ik goed lees na optimalisatie is momenteel
+        # legacy vakken ( lom_classification )
+        # niet nodig voor deze check zie DEV-1881
 
         # default waarde
-        # lom_legacy = true
+        lom_legacy = "true"
 
-        # indien nieuwe velden onderwijsniveaus en vakken
-        # ingevuld zijn lom_legacy->false
+        themas = get_md_array(mam_data, 'lom_thema')
+        vakken = get_md_array(mam_data, 'lom_vak')
 
-        # save lom_legacy in mam_data (wat is structuur hier?)
+        if(themas and vakken and len(themas) > 0 and len(vakken) > 0):
+            lom_legacy = "false"
+
+        mam_data = self.set_property(
+            mam_data, 'lom_legacy',
+            lom_legacy
+        )
+
+        # structuur voor boolean field lom_legacy?
 
         return mam_data
 
