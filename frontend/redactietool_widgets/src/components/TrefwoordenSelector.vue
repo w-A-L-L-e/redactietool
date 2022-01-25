@@ -10,28 +10,32 @@
     </multiselect>
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
-    <div class="cp_keywords_button">
-      <a class="" v-on:click="toggleKeywordCollapse">
-        {{cp_keyword_label}}
-      </a>
-      <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-        Keyword werd al toegevoegd
-      </div>
-    </div>
-
-    <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
-
-      <div v-if="!cp_keywords.length" class="notification is-info is-light">
-        Voor dit item zijn er geen Content Partner trefwoorden.
+    <div v-if="cp_keywords.length">
+      <div class="cp_keywords_button">
+        <a class="" v-on:click="toggleKeywordCollapse">
+          {{cp_keyword_label}}
+        </a>
+        <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+          Keyword werd al toegevoegd
+        </div>
       </div>
 
-      <div 
-        class="keyword-pill" 
-        v-for="keyword in cp_keywords" 
-        :key="keyword.code"
-        v-on:click="addCpKeyword(keyword)"
-        >
-        {{keyword.name}}
+      <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
+
+        <div v-if="!cp_keywords.length" class="notification is-info is-light">
+          Voor dit item zijn er geen Content Partner trefwoorden.
+        </div>
+
+        <!-- 
+          v-on:click="addCpKeyword(keyword)"
+        -->
+        <div 
+          class="keyword-pill" 
+          v-for="keyword in cp_keywords" 
+          :key="keyword.code"
+          >
+          {{keyword.name}}
+        </div>
       </div>
     </div>
 
@@ -78,9 +82,9 @@
           // should be coming from the suggest library (aka knowledge graph).
         ],
         cp_keywords: [],
-        show_cp_keywords: false,
+        show_cp_keywords: true,
         show_already_added_warning: false,
-        cp_keyword_label: "Bekijk trefwoorden van Content Partners"
+        cp_keyword_label: "Verberg trefwoorden van Content Partners"
       }
     },
     created(){
@@ -191,7 +195,6 @@
   }
   .keyword-pill{
     border-radius: 5px;
-    /*background: #41b883;*/
     border: 1px solid #9cafbd;
     background-color: #edeff2;
     color: #2b414f;
@@ -201,7 +204,7 @@
     margin-right: 10px;
     padding: 1px 8px 1px 8px;
     margin-bottom: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
   .warning-pill{
     border-radius: 5px;
