@@ -147,7 +147,7 @@ class RmhMapping:
             'item_type': item_type,
             'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
-            # 'item_vakken_legacy': json.dumps(get_md_array(mam_data, '???')),
+            'item_vakken_legacy': json.dumps(get_md_array(mam_data, 'lom_classification')),
             'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
             'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
             'item_onderwijsniveaus': json.dumps(
@@ -224,19 +224,26 @@ class RmhMapping:
         # legacy veld voor vakken?
         # op te slaan lom_legacy veld structuur?
 
-        # als ik goed lees na optimalisatie is momenteel legacy vakken eigenlijk niet nodig
-        # voor deze check ??
-
-        # TODO: lom_legacy 'boolean field' -> save as 'false' if
-        # new fields vakken or themas contain entries
+        # als ik goed lees na optimalisatie is momenteel
+        # legacy vakken  -> lom_classification
+        # niet nodig voor deze check (bepalend is enkel dat
+        # themas+vakken ingevuld en men clicked op save.
+        # (of er al dan niet legacy vakken en legacy onderwijsgraden
+        # zijn is hier niet bepalend zie DEV-1881
 
         # default waarde
-        # lom_legacy = true
+        lom_legacy = true
 
-        # indien nieuwe velden onderwijsniveaus en vakken
-        # ingevuld zijn lom_legacy->false
+        themas = get_md_array(mam_data, 'lom_thema')
+        vakken = get_md_array(mam_data, 'lom_vak')
 
-        # save lom_legacy in mam_data (wat is structuur hier?)
+        if(themas and vakken):
+            print("lom themas=", lom_themas, "lom_vakken=", lom_vakken)
+            lom_legacy = false
+
+        print("TODO: save lom_legacy value=", lom_legacy)
+
+        # structuur voor boolean field lom_legacy?
 
         return mam_data
 
