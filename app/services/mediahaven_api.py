@@ -266,6 +266,10 @@ class MediahavenApi:
         for kw in get_property(metadata, 'lom_vak'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
+        # lom_legacy "false" indien vakken + themas ingevuld (logic in rmh_mapping.py)
+        etree.SubElement(mdprops, "lom_legacy").text = get_property(
+            metadata, 'lom_legacy')
+
         # trefwoorden / keywords are 'Sleutelwoord'
         lom_keywords = etree.SubElement(mdprops, "lom_keywords")
         lom_keywords.set('strategy', 'OVERWRITE')

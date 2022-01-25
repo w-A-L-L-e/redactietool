@@ -44,7 +44,6 @@ class RmhMapping:
     def set_json_array_property(self, mam_data, propkey, jkey, jvalue, prop_name="multiselect"):
         values = json.loads(jvalue)
         array_values = []
-        print("values=", values)
         for v in values:
             array_values.append({
                 'value': v[jkey],
@@ -221,27 +220,23 @@ class RmhMapping:
             }
 
     def update_legacy_flag(self, request, mam_data):
-        # legacy veld voor vakken?
-        # op te slaan lom_legacy veld structuur?
-
         # als ik goed lees na optimalisatie is momenteel
-        # legacy vakken  -> lom_classification
-        # niet nodig voor deze check (bepalend is enkel dat
-        # themas+vakken ingevuld en men clicked op save.
-        # (of er al dan niet legacy vakken en legacy onderwijsgraden
-        # zijn is hier niet bepalend zie DEV-1881
+        # legacy vakken ( lom_classification )
+        # niet nodig voor deze check zie DEV-1881
 
         # default waarde
-        lom_legacy = true
+        lom_legacy = "true"
 
         themas = get_md_array(mam_data, 'lom_thema')
         vakken = get_md_array(mam_data, 'lom_vak')
 
-        if(themas and vakken):
-            print("lom themas=", lom_themas, "lom_vakken=", lom_vakken)
-            lom_legacy = false
+        if(themas and vakken and len(themas) > 0 and len(vakken) > 0):
+            lom_legacy = "false"
 
-        print("TODO: save lom_legacy value=", lom_legacy)
+        mam_data = self.set_property(
+            mam_data, 'lom_legacy',
+            lom_legacy
+        )
 
         # structuur voor boolean field lom_legacy?
 
