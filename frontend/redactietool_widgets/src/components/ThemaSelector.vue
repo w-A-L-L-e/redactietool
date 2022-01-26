@@ -91,42 +91,58 @@
           </div>
 
           <!-- button class="delete" aria-label="close" v-on:click="toggleThemas" ></button-->
-
         </header>
-        <section class="modal-card-body">
 
-          <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+        <section class="modal-card-body">
+          <div class="thema-warning-pill"
+                v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
             Thema werd al toegevoegd
           </div>
 
-           <div v-if="!thema_cards.length" class="notification is-info is-light">
-              Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
-            </div>
+          <div v-if="!thema_cards.length" class="notification is-info is-light">
+            Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
+          </div>
 
-            <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
-              <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
-                <div class="tile is-ancestor">
-                  <div class="tile is-vertical mr-2 mt-2" >
-                    <div class="card" 
-                      v-on:click="toggleThemaSelect(thema)"
-                      v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
-                      >
-                      <header class="card-header">
-                        <p class="card-header-title">
-                          {{thema.label}}
-                        </p>
-                      </header>
-                      <div class="card-content" v-if="show_definitions">
-                          {{thema.definition}} 
-                      </div>
+          <!-- div v-if="!show_definitions" class="tooltip-top-spacer">
+          <br/><br/>
+          </div -->
+
+          <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
+            <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
+              <div class="tile is-ancestor">
+                <div class="tile is-vertical mr-2 mt-2" >
+                  <div class="card" 
+                    v-on:click="toggleThemaSelect(thema)"
+                    v-on:mouseover="changeToprowTooltip($event)"
+                    v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
+                    >
+
+                    <header class="card-header">
+                      <p v-if="show_definitions" 
+                        class="card-header-title">
+                        {{thema.label | truncate(45, '...')}}
+                      </p>
+
+                      <p v-if="!show_definitions" 
+                        class="card-header-title is-primary
+                        has-tooltip-arrow has-tooltip-multiline" 
+                        :data-tooltip="thema.definition">
+                        {{thema.label | truncate(45, '...')}}
+                      </p>
+                    </header>
+
+                    <div class="card-content" v-if="show_definitions">
+                        {{thema.definition}} 
                     </div>
+
                   </div>
                 </div>
-
               </div>
-            </div>
 
+            </div>
+          </div>
         </section>
+
         <footer class="modal-card-foot">
           <a class="button is-link close-themas-button" 
             v-on:click="toggleThemas($event)">
@@ -325,6 +341,20 @@
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
         }
+      },
+      changeToprowTooltip(event){
+        // attempt to make top row tooltip show on bottom
+        // console.log(event);
+        var pos = event.clientY; //pageY doesnt work right
+        // console.log(pos);
+
+        if(pos<200){
+          event.target.classList.add('has-tooltip-bottom')
+        }
+        else{
+          event.target.classList.remove('has-tooltip-bottom')
+        }
+        return true;
       }
 
       //addThema: function(thema){
@@ -357,7 +387,18 @@
       //    }, 3000);
       //  }
       //}
+    },
+    filters: {
+      truncate: function (text, length, suffix) {
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
     }
+
   }
 </script>
 
@@ -528,5 +569,12 @@
     padding-bottom: 5px;
   }
  
+  /* attempt to make tooltip visible on top line 
+  overflow: visible on parent element may help as well
+
+  [data-tooltip]:not(.is-loading), [data-tooltip]:not(.is-disabled), [data-tooltip]:not([disabled] {
+    position: absolute;
+  }
+  */
 
 </style>

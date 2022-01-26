@@ -98,10 +98,18 @@
                     <div class="card" 
                       v-on:click="toggleVakSelect(vak)"
                       v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']"
+                      v-on:mouseover="changeToprowTooltip($event)"
                       >
                       <header class="card-header">
-                        <p class="card-header-title">
-                          {{vak.label}}
+                        <p v-if="show_definitions" 
+                          class="card-header-title">
+                          {{vak.label | truncate(45, '...')}}
+                        </p>
+
+                        <p v-if="!show_definitions" 
+                          class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
+                          :data-tooltip="vak.definition">
+                          {{vak.label | truncate(45, '...')}}
                         </p>
                       </header>
                       <div class="card-content" v-if="show_definitions">
@@ -121,10 +129,18 @@
                     <div class="card" 
                       v-on:click="toggleVakSelect(ovak)"
                       v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
+                      v-on:mouseover="changeToprowTooltip($event)"
                     >
                       <header class="card-header">
-                        <p class="card-header-title">
-                          {{ovak.label}}
+                        <p v-if="show_definitions" 
+                          class="card-header-title">
+                          {{ovak.label | truncate(45, '...')}}
+                        </p>
+
+                        <p v-if="!show_definitions" 
+                          class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
+                          :data-tooltip="ovak.definition">
+                          {{ovak.label | truncate(45, '...')}}
                         </p>
                       </header>
                       <div class="card-content" v-if="show_definitions">
@@ -378,6 +394,20 @@
       zoekVakken(event){
         event.preventDefault();
         console.log("TODO search this", this.vakken_search);
+      },
+      changeToprowTooltip(event){
+        // attempt to make top row tooltip show on bottom
+        // console.log(event);
+        var pos = event.clientY; //pageY doesnt work right
+        // console.log(pos);
+
+        if(pos<200){
+          event.target.classList.add('has-tooltip-bottom')
+        }
+        else{
+          event.target.classList.remove('has-tooltip-bottom')
+        }
+        return true;
       }
     },
     filters: {

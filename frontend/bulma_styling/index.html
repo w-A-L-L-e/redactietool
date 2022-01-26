@@ -7,6 +7,7 @@
     <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
     <link rel="stylesheet" href="src/overrides.css">
+    <link rel="stylesheet" href="node_modules/@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css">
     <script src="src/modal_dialog.js"></script>
     <script src="dist/js/bundle.js"></script>
 
@@ -36,11 +37,9 @@
           float: none;
           padding-right: 15px;
         }
-        .prd-widget:nth-child(2){
+        .prd-widget:nth-child(2n){
           margin-left: 15px;
         }
-      
-
       }
 
     </style>
@@ -366,6 +365,7 @@
       <div class="clearfix"></div> <br/>
 
 
+      <button class="button is-primary has-tooltip-arrow" data-tooltip="Tooltip Text">Tooltip test button</button>
 
       <a href="" class="button is-link" onclick="toggleThemas(); return false;">Kies themas</a>
       <div class="container" id="thema_widget">

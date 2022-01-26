@@ -261,25 +261,6 @@ def index():
         )
 
 
-# This route is only usefull for development...
-# @app.route('/metadata/')
-# @requires_authorization
-# @login_required
-# def metadata():
-#     req = prepare_flask_request(request)
-#     auth = init_saml_auth(req)
-#     settings = auth.get_settings()
-#     metadata = settings.get_sp_metadata()
-#     errors = settings.validate_metadata(metadata)
-#
-#     # make_response is needed here to set correct header and response code
-#     if len(errors) == 0:
-#         resp = make_response(metadata, 200)
-#         resp.headers['Content-Type'] = 'text/xml'
-#     else:
-#         resp = make_response(', '.join(errors), 500)
-#     return resp
-
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
@@ -599,15 +580,6 @@ def get_subtitles():
     # https://meemoo.atlassian.net/browse/DEV-1872?focusedCommentId=25119
     srt_url = 'https://archief-media.meemoo.be/viaa/MOB/TESTBEELD/...35b8.srt'
     return srt_to_vtt(srt_url)
-
-# debugging route to see vue components can submit nicely to flask
-# @app.route('/edit_metadata_vue', methods=['POST'])
-# def read_vue_component_values():
-#     print("talen=", request.form.get('talen'))
-#     print("themas=", request.form.get('themas'))
-#     print("vakken=", request.form.get('vakken'))
-#     print("trefwoorden=", request.form.get('trefwoorden'))
-#     return render_template('edit_metadata.html')
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================

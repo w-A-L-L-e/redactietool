@@ -12,6 +12,7 @@
     <!-- bulma css framework -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/core.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/overrides.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/bulma-tooltip.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <!-- flowplayer styling -->
@@ -30,7 +31,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='bulma/modal_dialog.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 
-    <!-- vue components -->
+    <!-- vue components and minified bulma -->
     {% include 'includes/base_vue_header.html' %}
 
     <title>Redactietool</title>
