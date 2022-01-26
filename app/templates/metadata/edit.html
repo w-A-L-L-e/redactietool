@@ -98,7 +98,15 @@ Metadata bewerken
         <h2 class="title">Publicatiestatus</h2>
         <hr/>
         <label class="checkbox">
-          <input type="checkbox" name="publicatiestatus"/>
+          {% if publish_item %}
+            <input type="checkbox"
+                   name="publicatiestatus_checked" 
+                     id="publicatiestatus_checked" checked/>
+          {% else %}
+            <input type="checkbox"
+                   name="publicatiestatus_checked"
+                     id="publicatiestatus_checked"/>
+          {% endif %}
           Dit item mag gepubliceerd worden op 
           <a target="blank" href="https://onderwijs.hetarchief.be">Het Archief voor Onderwijs.</a>
         </label>

@@ -261,7 +261,6 @@ def index():
         )
 
 
-
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
 @requires_authorization
@@ -479,12 +478,12 @@ def send_to_mam():
 @requires_authorization
 @login_required
 def edit_metadata():
-    logger.info('GET item_meta route')
-
     token = request.args.get('token')
     pid = request.args.get('pid').strip()
     department = request.args.get('department')
     errors = request.args.get('validation_errors')
+
+    logger.info(f'GET item_metadata pid={pid}')
 
     validation_error = validate_input(pid, department)
     if validation_error:
@@ -497,6 +496,9 @@ def edit_metadata():
 
     data_mapping = RmhMapping()
     td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
+
+    # extra request necessary in order to fetch rightsmanagement/permissions
+    td['publish_item'] = mh_api.get_publicatiestatus(department, pid)
 
     return render_template(
         'metadata/edit.html',

@@ -139,6 +139,7 @@ class RmhMapping:
             'token': token,
             'department': department,
             'mam_data': json.dumps(mam_data),
+            'publish_item': False,
             'original_cp': get_property(mam_data, 'Original_CP'),
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
@@ -355,13 +356,14 @@ class RmhMapping:
             mam_data, 'dc_contributors', dc_contributors)
         mam_data = self.set_property(mam_data, 'dc_publishers', dc_publishers)
 
-        # TODO: request.form.get('publicatiestatus') -> lom_publicatie  ?
-        # vragen wat de logica of gevolgen hiervan zijn en of hier logic bij moet komen aan
-        # Bart of ...
-
         # also validation errors can be added here
         errors = None  # for now always none, hoever mh can give errors
         tp = self.form_params(token, pid, department, errors, mam_data)
+
+        if request.form.get('publicatiestatus_checked'):
+            tp['publish_item'] = True
+        else:
+            tp['publish_item'] = False
 
         mh_api = MediahavenApi()
         result = mh_api.update_metadata(department, mam_data, tp)

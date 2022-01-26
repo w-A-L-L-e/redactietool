@@ -48,14 +48,14 @@ class MediahavenApi:
         return f"{self.API_USER_PREFIX}{department}"
 
     # generic get request to mediahaven api
-    def get_proxy(self, department, api_route):
+    def get_proxy(self, department, api_route, enable_v2_header=False):
         get_url = f"{self.API_SERVER}{api_route}"
         headers = {
             'Content-Type': 'application/json',
-            # TODO: currently this breaks calls, re-enable later
-            # for better compatibility with v2:
-            # 'Accept': 'application/vnd.mediahaven.v2+json'
         }
+
+        if enable_v2_header:
+            headers['Accept'] = 'application/vnd.mediahaven.v2+json'
 
         response = self.session.get(
             url=get_url,
@@ -65,10 +65,11 @@ class MediahavenApi:
 
         return response.json()
 
-    def list_objects(self, department, search='', offset=0, limit=25):
+    def list_objects(self, department, search='', enable_v2_header=False, offset=0, limit=25):
         return self.get_proxy(
             department,
-            f"/resources/media?q={search}&startIndex={offset}&nrOfResults={limit}"
+            f"/resources/media?q={search}&startIndex={offset}&nrOfResults={limit}",
+            enable_v2_header=enable_v2_header
         )
 
     def find_by(self, department, object_key, value):
@@ -95,7 +96,9 @@ class MediahavenApi:
         # per request Athina, we drop the department filtering here
         # self.list_objects(search=f"%2B(DepartmentName:{department})%2B(ExternalId:{pid})")
         matched_videos = self.list_objects(
-            department, search=f"%2B(ExternalId:{pid})")
+            department,
+            search=f"%2B(ExternalId:{pid})",
+        )
 
         nr_results = matched_videos.get('totalNrOfResults')
         if not nr_results:
@@ -139,11 +142,39 @@ class MediahavenApi:
 
         return response.json()
 
+    # only possible with v2 header this can replace find_item_by_pid
+    # but will require the refactoring given in ticket DEV-1918
+    def get_publicatiestatus(self, department, pid):
+        matched_videos = self.list_objects(
+            department,
+            search=f"%2B(ExternalId:{pid})",
+            enable_v2_header=True
+        )
+
+        nr_results = matched_videos.get('TotalNrOfResults')
+        if not nr_results:
+            return False
+
+        if nr_results == 1:
+            item_v2 = matched_videos.get('MediaDataList', [{}])[0]
+        elif nr_results > 1:
+            # future todo, iterate them and pick a certain one to return?
+            item_v2 = matched_videos.get('MediaDataList', [{}])[1]
+        else:
+            return False
+
+        # data = item_v2.get('Dynamic')
+        permissions = item_v2.get('RightsManagement').get('Permissions').get('Read')
+
+        ONDERWIJS_PERM_ID = os.environ.get(
+            'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+
+        return ONDERWIJS_PERM_ID in permissions
+
     # With API v2 will this will be easier to make this call using json directly
     # but that requires refactoring authentication to mediahaven (also for the existing subloader
     # calls).
     # For now we stick with what works and use an xml sidecar which should be fine at least until 2023.
-
     def metadata_sidecar(self, metadata, tp):
         TESTBEELD_PERM_ID = os.environ.get(
             'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
@@ -156,7 +187,14 @@ class MediahavenApi:
             root, '{%s}RightsManagement' % MHS_NS)
         perms = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
+
+        if tp.get('publish_item'):
+            etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
+            print(
+                "publicatiestatus is TRUE, added read permission =",
+                ONDERWIJS_PERM_ID
+            )
+
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
