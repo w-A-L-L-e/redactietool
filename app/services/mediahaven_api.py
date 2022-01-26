@@ -183,10 +183,15 @@ class MediahavenApi:
         ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
 
         root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
-        rights = etree.SubElement(
-            root, '{%s}RightsManagement' % MHS_NS)
+        rights = etree.SubElement(root, '{%s}RightsManagement' % MHS_NS)
+
         perms = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
+        perms.set('strategy', 'OVERWRITE')
+
+        # now set our permissions and exclude the ONDERWIJS_PERM_ID
+        # when publish_item is not set
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
 
         if tp.get('publish_item'):
             etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
@@ -195,7 +200,6 @@ class MediahavenApi:
                 ONDERWIJS_PERM_ID
             )
 
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
         etree.SubElement(perms, '{%s}Export' % MH_NS).text = TESTBEELD_PERM_ID
