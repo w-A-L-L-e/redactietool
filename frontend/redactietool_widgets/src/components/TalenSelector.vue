@@ -6,6 +6,8 @@
       track-by="code" 
       :options="options"
       :multiple="true" 
+      :show-labels="false"
+      :hide-selected="true"
       :taggable="false"
       @input="updateValue">
 

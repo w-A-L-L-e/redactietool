@@ -8,6 +8,7 @@
       :multiple="false" 
       :taggable="false" 
       :searchable="false"
+      :allow-empty="false"
       :show-labels="false"
       @input="updateValue">
 

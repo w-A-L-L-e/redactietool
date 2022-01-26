@@ -2,6 +2,11 @@
   <div id="trefwoorden_selector">
     <multiselect v-model="value" 
       tag-placeholder="Maak nieuw trefwoord aan" 
+      select-label="Selecteer trefwoord"
+      deselect-label="Verwijder trefwoord"
+      selected-label=""
+      :show-labels="false"
+      :hide-selected="true"
       placeholder="Zoek of voeg een nieuw trefwoord toe" 
       label="name" 
       track-by="code" 

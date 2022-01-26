@@ -7,14 +7,21 @@
       {{suggestie_btn_label}}
     </a>
 
+    <!-- possibly add this if needed
+      open-direction="top"
+    -->
     <multiselect v-model="value" 
-      id="vakken_multiselect"
-      tag-placeholder="Kies vakken" 
-      placeholder="Selecteer vak" 
+      tag-placeholder="Selecteer vakken" 
+      placeholder="Selecteer vakken" 
       label="label" 
       track-by="id" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
+      :options="options" 
+      :option-height="104" 
+      :show-labels="false"
+      :hide-selected="true"
+      :multiple="true"
+      :taggable="false" @input="updateValue"
+      >
 
       <template slot="noResult">Vak niet gevonden</template>
 
@@ -85,13 +92,11 @@
 
           <section class="modal-card-body">
 
-            <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
+            <h3 v-if="suggesties_filtered.length" class="subtitle vakken-title">
+              Suggesties
+            </h3>
 
-            <div v-if="!vakken_suggesties.length" class="notification is-info is-light">
-              Geen suggesties gevonden. Probeer andere themas of onderwijsgraden te selecteren.
-            </div>
-
-            <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
+            <div class="columns"  v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
               <div class="column is-one-fifth" v-for="vak in row" :key="vak.id">
                 <div class="tile is-ancestor">
                   <div class="tile is-vertical mr-2 mt-2" >
@@ -121,30 +126,44 @@
               </div>
             </div>
 
-            <h3 class="subtitle vakken-title">Overige vakken</h3>
-            <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
-              <div class="column is-one-fifth" v-for="ovak in row2" :key="ovak.id">
-                <div class="tile is-ancestor">
-                  <div class="tile is-vertical mr-2 mt-2" >
-                    <div class="card" 
-                      v-on:click="toggleVakSelect(ovak)"
-                      v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
-                      v-on:mouseover="changeToprowTooltip($event)"
-                    >
-                      <header class="card-header">
-                        <p v-if="show_definitions" 
-                          class="card-header-title">
-                          {{ovak.label | truncate(45, '...')}}
-                        </p>
+            
+            <h3 v-if="suggesties_filtered.length" class="subtitle vakken-title">Overige vakken</h3>
 
-                        <p v-if="!show_definitions" 
-                          class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
-                          :data-tooltip="ovak.definition">
-                          {{ovak.label | truncate(45, '...')}}
-                        </p>
-                      </header>
-                      <div class="card-content" v-if="show_definitions">
-                          {{ovak.definition}} 
+            <div v-if="hogerOfVolwassenOnderwijs()">
+              <div class="notification is-info is-light">
+              Aan de opgegeven onderwijsniveaus zijn geen vakken gelinkt, wil je toch een vak toevoegen op dit item, selecteer dan kleuter, lager of secundair onderwijs.
+              </div>
+            </div>
+
+            <h3 v-if="!suggesties_filtered.length && !hogerOfVolwassenOnderwijs()" class="subtitle vakken-title">
+              Geen suggesties beschikbaar, volgende vakken zijn mogelijk.
+            </h3>
+
+            <div v-if="!hogerOfVolwassenOnderwijs()">
+              <div class="columns"  v-for="(row2, index2) in overige_filtered" :key="'sug'+index2">
+                <div class="column is-one-fifth" v-for="ovak in row2" :key="ovak.id">
+                  <div class="tile is-ancestor">
+                    <div class="tile is-vertical mr-2 mt-2" >
+                      <div class="card" 
+                        v-on:click="toggleVakSelect(ovak)"
+                        v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
+                        v-on:mouseover="changeToprowTooltip($event)"
+                      >
+                        <header class="card-header">
+                          <p v-if="show_definitions" 
+                            class="card-header-title">
+                            {{ovak.label | truncate(45, '...')}}
+                          </p>
+
+                          <p v-if="!show_definitions" 
+                            class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
+                            :data-tooltip="ovak.definition">
+                            {{ovak.label | truncate(45, '...')}}
+                          </p>
+                        </header>
+                        <div class="card-content" v-if="show_definitions">
+                            {{ovak.definition}} 
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -197,8 +216,11 @@
         ],
         show_vakken_suggesties: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
-        vakken_suggesties:[],
-        overige_vakken:[],
+        vakken_suggesties: [],
+        suggesties_filtered: [],
+        overige_vakken: [],
+        overige_filtered: [],
+        niveaus: [],
         graden: [],
         themas: [],
         vakken_search: "",
@@ -219,6 +241,12 @@
         this.updateSuggestions();
       });
 
+      this.$root.$on('niveaus_changed', data => {
+        console.log('niveaus_changed event');
+        this.niveaus = data;
+        this.updateSuggestions();
+      });
+
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -236,7 +264,15 @@
       axios
         .get(redactie_api_url+'/vakken')
         .then(res => {
-          this.options = res.data;
+          // this.options = res.data;
+          for(var i in res.data){
+            var vak = res.data[i];
+            this.options.push({
+              'id': vak.id,
+              'label': this.truncateLabel(vak.label),
+              'definition': vak.definition
+            })
+          }
           this.loadSavedVakken();
         })
     },
@@ -282,30 +318,28 @@
         }
         return false;
       },
-      updateOverigeVakken(redactie_api_url, suggest_map){
-        //nu fetch van alle overige vakken, zijn alle vakken - de suggestions
-        axios
-          .get(redactie_api_url+'/vakken')
-          .then(res2 => {
-            this.overige_vakken = [];
-            var row2 = [];
-            for( var vak_index in res2.data){
-              var ovak = res2.data[vak_index];
-              if(suggest_map[ovak.id] == undefined){ 
-                // row2.push(ovak);
-                // fix duplicate entries 
-                row2.push(Object.assign({}, ovak));
-              }
+      updateOverigeVakken(suggest_map){
+        this.overige_vakken = [];
+        var row2 = [];
 
-              if(row2.length>=5){
-                this.overige_vakken.push(row2);
-                row2=[];
-              }
-            }
-            if(row2.length>0){
-              this.overige_vakken.push(row2);
-            }
-          })
+        for(var vak_index in this.options ){
+          var ovak = this.options[vak_index];
+          if(suggest_map[ovak.id] == undefined){ 
+            // row2.push(ovak);
+            // fix duplicate entries 
+            row2.push(Object.assign({}, ovak));
+          }
+
+          if(row2.length>=5){
+            this.overige_vakken.push(row2);
+            row2=[];
+          }
+        }
+        if(row2.length>0){
+          this.overige_vakken.push(row2);
+        }
+
+        this.overige_filtered = JSON.parse(JSON.stringify(this.overige_vakken)); 
       },
       updateSuggestions(){
         var redactie_api_url = 'http://localhost:5000';
@@ -318,6 +352,7 @@
         }
 
         if(!this.show_vakken_suggesties){
+          console.log("modal vakken not shown, skipping suggestion call.");
           return;
         }
 
@@ -326,12 +361,19 @@
           'themas': this.themas
         }
 
-        if(post_data['graden'].length==0 || post_data['themas'].length==0 ){
+        if(
+            post_data['graden'].length==0 || 
+            post_data['themas'].length==0 ||
+            this.hogerOfVolwassenOnderwijs()
+          ){
+          console.log("no graden or themas, or hoger/volwassenonderwijs, clearing suggestions");
           this.vakken_suggesties = []; //clear suggestions
-          this.updateOverigeVakken(redactie_api_url, {});
+          this.suggesties_filtered = [];
+          this.updateOverigeVakken({});
           return;
         }
 
+        console.log("fetching new suggestions now...");
         axios
           .post(redactie_api_url+'/vakken_suggest', post_data)
           .then(res => {
@@ -339,8 +381,8 @@
             var row = [];
             var suggest_map = {};
             for( var vak_index in res.data){
-              //if(vak_index>5) break; //simulate suggestions by only taking first 6
               var vak = res.data[vak_index];
+              vak.label = this.truncateLabel(vak.label);
               suggest_map[vak.id] = vak; 
               row.push(Object.assign({}, vak));
               if(row.length>=5){
@@ -351,8 +393,8 @@
             if(row.length>0){
               this.vakken_suggesties.push(row);
             }
-            
-            this.updateOverigeVakken(redactie_api_url, suggest_map);
+            this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
+            this.updateOverigeVakken(suggest_map);
           })
       },
       toggleSuggesties(event){
@@ -391,9 +433,41 @@
           this.json_value = JSON.stringify(this.value);
         }
       },
+      zoek(search_str, src_rows){
+        var result = [];
+        var row = [];
+        for( var ri in src_rows ){
+          var src_row = src_rows[ri];
+          for( var index in src_row){
+            var vak = src_row[index];
+            // make searching case insensitive
+            var search_lower = search_str.toLowerCase();
+            var label = vak.label.toLowerCase();
+            var definition = vak.definition.toLowerCase();
+
+            if(label.includes(search_lower) || definition.includes(search_lower)){
+              row.push(Object.assign({}, vak));
+            }
+            if(row.length>=5){
+              result.push(JSON.parse(JSON.stringify(row)));
+              row=[];
+            }
+          }
+          
+        }
+
+        if(row.length>0){
+          result.push(JSON.parse(JSON.stringify(row)));
+        }
+        return result;
+      },
       zoekVakken(event){
+        this.suggesties_filtered = this.zoek(this.vakken_search, this.vakken_suggesties);
+        this.overige_filtered = this.zoek(this.vakken_search, this.overige_vakken);
+
+        this.vakken_prev_search = this.vakken_search;
+        this.vakken_search = ""; //clear for next search
         event.preventDefault();
-        console.log("TODO search this", this.vakken_search);
       },
       changeToprowTooltip(event){
         // attempt to make top row tooltip show on bottom
@@ -408,6 +482,27 @@
           event.target.classList.remove('has-tooltip-bottom')
         }
         return true;
+      },
+      truncateLabel(text) {
+        var length=45;
+        var suffix='...';
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
+      hogerOfVolwassenOnderwijs(){
+        for(var i in this.niveaus){
+          var niv = this.niveaus[i];
+          if(niv.id.includes('kleuter')) return false;
+          if(niv.id.includes('lager')) return false;
+          if(niv.id.includes('secundair')) return false;
+        }
+
+        // enkel hoger, volwassen of geen niveaus geselecteerd
+        return true;
       }
     },
     filters: {
@@ -418,7 +513,7 @@
         else{
           return text;
         }
-      },
+      }
     }
   }
 </script>

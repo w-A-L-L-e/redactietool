@@ -15,6 +15,7 @@
     :options="options" 
     :option-height="104" 
     :show-labels="false"
+    :hide-selected="true"
     :multiple="true"
     :taggable="false" @input="updateValue"
   >
@@ -216,15 +217,15 @@
           for(var o in res.data){
             var thema = res.data[o];
             if(thema.label.length>1){
-              this.options.push(thema);
+              this.options.push({
+                'id': thema.id,
+                'label': this.truncateLabel(thema.label),
+                'definition': thema.definition
+              });
             }
           }
           this.loadSavedThemas();
         })
-
-      // todo fetch currently set themas here (look at Onderwijsgraden for example)
-      // then also emit the currently set themas so our vakken selector can pass it to suggest:
-      // this.$root.$emit('themas_changed', this.value);
     },
     methods: {
       loadSavedThemas(){
@@ -355,8 +356,17 @@
           event.target.classList.remove('has-tooltip-bottom')
         }
         return true;
-      }
-
+      },
+      truncateLabel: function (text) {
+        var length=45;
+        var suffix='...';
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
       //addThema: function(thema){
       //  console.log("addThema thema=", thema);
       //  var already_added = false;

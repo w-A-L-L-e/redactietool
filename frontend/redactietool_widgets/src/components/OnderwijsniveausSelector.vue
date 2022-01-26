@@ -6,6 +6,8 @@
       track-by="id" 
       :options="options"
       :multiple="true" 
+      :show-labels="false"
+      :hide-selected="true"
       :searchable="false"
       :taggable="false"
       @input="updateValue">
@@ -116,6 +118,7 @@
             }
 
             this.json_value = JSON.stringify(default_value)
+            this.$root.$emit('niveaus_changed', default_value);
           }
         });
     },
@@ -123,6 +126,7 @@
     methods: {
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit('niveaus_changed', value);
       }
     }
   }
