@@ -53,7 +53,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Selecteer themas</p>
+          <p class="modal-card-title">Themas</p>
 
           <!-- div class="select thema-show-def-selector">
             <select v-model="show_definitions">
@@ -65,13 +65,25 @@
               </option>
             </select>
           </div-->
+
+          <label class="checkbox thema-show-def-selector">
+            <input
+              type="checkbox"
+              v-model="show_tooltips"
+              v-on:click="toggleTooltips()"
+            >
+            Tooltips
+          </label>
+
+
           
           <label class="checkbox thema-show-def-selector">
             <input
               type="checkbox"
               v-model="show_definitions"
+              v-on:click="toggleBeschrijvingen()"
             >
-            Toon beschrijvingen
+            Beschrijvingen
           </label>
 
           <div class="thema-search">
@@ -119,16 +131,16 @@
                     >
 
                     <header class="card-header">
-                      <p v-if="show_definitions" 
+                      <p v-if="show_definitions || !show_tooltips" 
                         class="card-header-title">
-                        {{thema.label | truncate(45, '...')}}
+                        {{thema.label}}
                       </p>
 
-                      <p v-if="!show_definitions" 
+                      <p v-if="show_tooltips" 
                         class="card-header-title is-primary
                         has-tooltip-arrow has-tooltip-multiline" 
                         :data-tooltip="thema.definition">
-                        {{thema.label | truncate(45, '...')}}
+                        {{thema.label}}
                       </p>
                     </header>
 
@@ -147,7 +159,7 @@
         <footer class="modal-card-foot">
           <a class="button is-link close-themas-button" 
             v-on:click="toggleThemas($event)">
-              Themas sluiten
+              Sluiten
           </a>
           <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
         </footer>
@@ -192,6 +204,7 @@
         thema_search: "",
         thema_prev_search: "",
         show_definitions: false,
+        show_tooltips: false
         // show_definitions_options: [
         //   { text: "Toon beschrijvingen", value: true },
         //   { text: "Verberg beschrijvingen", value: false}
@@ -366,6 +379,12 @@
         else{
           return text;
         }
+      },
+      toggleTooltips(){
+        this.show_definitions = false;
+      },
+      toggleBeschrijvingen(){
+        this.show_tooltips = false;
       },
       //addThema: function(thema){
       //  console.log("addThema thema=", thema);

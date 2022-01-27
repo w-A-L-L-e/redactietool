@@ -60,15 +60,24 @@
         <div class="modal-card">
 
           <header class="modal-card-head">
-            <p class="modal-card-title">Selecteer vakken</p>
+            <p class="modal-card-title">Vakken</p>
 
+            <label class="checkbox thema-show-def-selector">
+              <input
+                type="checkbox"
+                v-model="show_tooltips"
+                v-on:click="toggleTooltips()"
+              >
+                Tooltips
+            </label>
 
             <label class="checkbox thema-show-def-selector">
               <input
                 type="checkbox"
                 v-model="show_definitions"
+                v-on:click="toggleBeschrijvingen()"
               >
-                Toon beschrijvingen
+                Beschrijvingen
             </label>
 
             <div class="vak-search">
@@ -106,16 +115,17 @@
                       v-on:mouseover="changeToprowTooltip($event)"
                       >
                       <header class="card-header">
-                        <p v-if="show_definitions" 
+                        <p v-if="show_definitions || !show_tooltips" 
                           class="card-header-title">
-                          {{vak.label | truncate(45, '...')}}
+                          {{vak.label}}
                         </p>
 
-                        <p v-if="!show_definitions" 
+                        <p v-if="show_tooltips" 
                           class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
                           :data-tooltip="vak.definition">
-                          {{vak.label | truncate(45, '...')}}
+                          {{vak.label}}
                         </p>
+
                       </header>
                       <div class="card-content" v-if="show_definitions">
                           {{vak.definition}} 
@@ -150,15 +160,15 @@
                         v-on:mouseover="changeToprowTooltip($event)"
                       >
                         <header class="card-header">
-                          <p v-if="show_definitions" 
+                          <p v-if="show_definitions || !show_tooltips" 
                             class="card-header-title">
-                            {{ovak.label | truncate(45, '...')}}
+                            {{ovak.label}}
                           </p>
 
-                          <p v-if="!show_definitions" 
+                          <p v-if="show_tooltips" 
                             class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
                             :data-tooltip="ovak.definition">
-                            {{ovak.label | truncate(45, '...')}}
+                            {{ovak.label}}
                           </p>
                         </header>
                         <div class="card-content" v-if="show_definitions">
@@ -175,7 +185,7 @@
           <footer class="modal-card-foot">
             <a class="button is-link close-themas-button" 
               v-on:click="toggleSuggesties($event)">
-                Vakken sluiten
+                Sluiten
             </a>
             <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
           </footer>
@@ -226,6 +236,7 @@
         vakken_search: "",
         vakken_prev_search: "",
         show_definitions: false,
+        show_tooltips: false
       }
     },
     mounted: function() {
@@ -256,15 +267,14 @@
       if( redactie_api_div ){
         redactie_api_url = redactie_api_div.innerText;
       }
-      else{
+      else{ // only load if redactie_api_url div is present
         return;
       }
 
-      // only load if redactie_api_url div is present
       axios
         .get(redactie_api_url+'/vakken')
         .then(res => {
-          // this.options = res.data;
+          this.options = [];
           for(var i in res.data){
             var vak = res.data[i];
             this.options.push({
@@ -503,6 +513,12 @@
 
         // enkel hoger, volwassen of geen niveaus geselecteerd
         return true;
+      },
+      toggleTooltips(){
+        this.show_definitions = false;
+      },
+      toggleBeschrijvingen(){
+        this.show_tooltips = false;
       }
     },
     filters: {
