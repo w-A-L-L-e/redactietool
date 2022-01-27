@@ -8,8 +8,6 @@
 #   Do mapping between redactietool form and mh target data for saving changes.
 #   Similarly load json data from MediahavenApi and populate form back.
 #
-# from requests import Session
-
 import json
 import os
 from viaa.configuration import ConfigParser
@@ -134,7 +132,10 @@ class RmhMapping:
 
         # href tags are a little different, we only allow specific _blank tags:
         safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
-        safe_content = safe_content.replace('&#34; target=&#34;_blank&#34;&gt;', '" target="_blank">')
+        safe_content = safe_content.replace(
+            '&#34; target=&#34;_blank&#34;&gt;',
+            '" target="_blank">'
+        )
         safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
 
         # allow regular < and > to still work
@@ -396,32 +397,22 @@ class RmhMapping:
         result = mh_api.update_metadata(department, mam_data, tp)
         print("save result=", result)
 
-        # we can even do another GET call here too if we want to validate the
-        # changes have propagated this is even described in the mh documenation
-        # as the call is async so we can check a modified timestamp and
-        # wait until it changes...
+        # we can even do another GET call here to validate the changed modified timestamp
 
-        # if no errors from mediahaven and no validation errors signal a sucess notification:
+        # signal no errors from mediahaven
+        # and no validation errors:
         tp['data_saved_to_mam'] = True
-        # else set this to False + set errors (can be used to show dialog in case of errors)
+        # else set this to False and set errors for a modal dialog here
 
-        # return our params that are now saved in MH (or return responded errors)
         return tp, json.dumps(tp), errors
 
-    # for the post call we don't need it as the id's will be directly pushed to mediahaven api
-    # but this is something for later as Caroline needs to extend MAM structure
-    # to have support for these:
-    # more details in jira tickets
-    #  https://meemoo.atlassian.net/browse/DEV-1821
-    #  https://meemoo.atlassian.net/browse/OPS-1231
     def mh_to_form(self, token, pid, department, errors, mam_data):
         """
         convert json metadata from MediahavenApi back into a
-        python hash for populating the view
+        python hash for populating the view and do the mapping from mh names to
+        wanted names in metadata/edit.html
         """
-
-        # debug data for in logs:
-        #print("DEBUG: mediahaven json_data:\n")
-        #print(json.dumps(mam_data, indent=2))
+        # print("DEBUG: mediahaven json_data:\n")
+        # print(json.dumps(mam_data, indent=2))
 
         return self.form_params(token, pid, department, errors, mam_data)

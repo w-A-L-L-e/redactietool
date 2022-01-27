@@ -164,7 +164,8 @@ class MediahavenApi:
             return False
 
         # data = item_v2.get('Dynamic')
-        permissions = item_v2.get('RightsManagement').get('Permissions').get('Read')
+        permissions = item_v2.get('RightsManagement').get(
+            'Permissions').get('Read')
 
         ONDERWIJS_PERM_ID = os.environ.get(
             'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
@@ -194,7 +195,8 @@ class MediahavenApi:
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
 
         if tp.get('publish_item'):
-            etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
+            etree.SubElement(perms, '{%s}Read' %
+                             MH_NS).text = ONDERWIJS_PERM_ID
             print(
                 "publicatiestatus is TRUE, added read permission =",
                 ONDERWIJS_PERM_ID
