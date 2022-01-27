@@ -131,6 +131,16 @@ class RmhMapping:
         safe_content = self.unescape_tag(safe_content, 'strong')
         safe_content = self.unescape_tag(safe_content, 'em')
         safe_content = self.unescape_tag(safe_content, 'u')
+
+        # href tags are a little different, we only allow specific _blank tags:
+        safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
+        safe_content = safe_content.replace('&#34; target=&#34;_blank&#34;&gt;', '" target="_blank">')
+        safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
+
+        # allow regular < and > to still work
+        safe_content = safe_content.replace("&amp;lt;", "<")
+        safe_content = safe_content.replace("&amp;gt;", ">")
+
         return safe_content
 
     def form_params(self, token, pid, department, errors, mam_data):
