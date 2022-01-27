@@ -145,9 +145,15 @@
               </div>
             </div>
 
-            <h3 v-if="!suggesties_filtered.length && !hogerOfVolwassenOnderwijs()" class="subtitle vakken-title">
+            <h3 v-if="overige_vakken.length && !suggesties_filtered.length && !hogerOfVolwassenOnderwijs()" 
+                class="subtitle vakken-title">
               Geen suggesties beschikbaar, volgende vakken zijn mogelijk.
             </h3>
+
+            <div v-if="loading">
+              <progress class="progress is-large is-info" max="100">60%</progress>
+            </div>
+
 
             <div v-if="!hogerOfVolwassenOnderwijs()">
               <div class="columns"  v-for="(row2, index2) in overige_filtered" :key="'sug'+index2">
@@ -217,13 +223,7 @@
       return {
         value: default_value,
         json_value: JSON.stringify(default_value),
-        options: [
-          { 
-            id: "1", 
-            label: "Vakken inladen...", 
-            definition: "Vakken inladen..."
-          },
-        ],
+        options: [],
         show_vakken_suggesties: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
         vakken_suggesties: [],
@@ -236,7 +236,8 @@
         vakken_search: "",
         vakken_prev_search: "",
         show_definitions: false,
-        show_tooltips: false
+        show_tooltips: false,
+        loading: false
       }
     },
     mounted: function() {
@@ -271,6 +272,7 @@
         return;
       }
 
+      this.loading = true;
       axios
         .get(redactie_api_url+'/vakken')
         .then(res => {
@@ -283,6 +285,7 @@
               'definition': vak.definition
             })
           }
+          this.loading = false;
           this.loadSavedVakken();
         })
     },
@@ -384,6 +387,7 @@
         }
 
         console.log("fetching new suggestions now...");
+        this.loading = true;
         axios
           .post(redactie_api_url+'/vakken_suggest', post_data)
           .then(res => {
@@ -403,6 +407,7 @@
             if(row.length>0){
               this.vakken_suggesties.push(row);
             }
+            this.loading = false;
             this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
             this.updateOverigeVakken(suggest_map);
           })
