@@ -118,6 +118,21 @@ class RmhMapping:
 
         return mam_data
 
+    def unescape_tag(self, content, tag):
+        content = content.replace(f'&lt;{tag}&gt;', f'<{tag}>')
+        content = content.replace(f'&lt;/{tag}&gt;', f'</{tag}>')
+        return content
+
+    def secure_unescape(self, html_content):
+        safe_content = str(escape(html_content))
+        safe_content = self.unescape_tag(safe_content, 'p')
+        safe_content = self.unescape_tag(safe_content, 'h2')
+        safe_content = self.unescape_tag(safe_content, 'br')
+        safe_content = self.unescape_tag(safe_content, 'strong')
+        safe_content = self.unescape_tag(safe_content, 'em')
+        safe_content = self.unescape_tag(safe_content, 'u')
+        return safe_content
+
     def form_params(self, token, pid, department, errors, mam_data):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
@@ -187,7 +202,9 @@ class RmhMapping:
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
             'description': mam_data.get('description'),
-            'avo_beschrijving': get_property(mam_data, 'dcterms_abstract'),
+            'avo_beschrijving': self.secure_unescape(
+                get_property(mam_data, 'dcterms_abstract')
+            ),
             'ondertitels': ondertitels,
             'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
             'cast': cast,
@@ -394,7 +411,7 @@ class RmhMapping:
         """
 
         # debug data for in logs:
-        print("DEBUG: mediahaven json_data:\n")
-        print(json.dumps(mam_data, indent=2))
+        #print("DEBUG: mediahaven json_data:\n")
+        #print(json.dumps(mam_data, indent=2))
 
         return self.form_params(token, pid, department, errors, mam_data)
