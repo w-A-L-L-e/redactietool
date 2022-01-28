@@ -54,12 +54,14 @@
 
     <div class="inline-suggesties" v-if="showInlineSuggesties()">
       <div class="inline-suggesties-title">Suggesties</div>
-      <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
-        <div v-for="vak in row" :key="vak.id"  
-              class="inline-suggestie-pill"
-              v-bind:class="[vakIsSelected(vak) ? 'inline-suggestie-selected' : '']"
-              v-on:click="toggleVakSelect(vak)">
-          {{vak.label}}
+      <div class="inline-suggesties-list">
+        <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
+          <div v-for="vak in row" :key="vak.id"  
+                class="inline-suggestie-pill"
+                v-bind:class="[vakIsSelected(vak) ? 'inline-suggestie-selected' : '']"
+                v-on:click="toggleVakSelect(vak)">
+            {{vak.label}}
+          </div>
         </div>
       </div>
     </div>
@@ -659,6 +661,12 @@
   .inline-suggesties{
     margin-top: 10px;
   }
+
+  .inline-suggesties-list{
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+
   .inline-suggesties-title{
     font-weight: bold;
     margin-bottom: 5px;
