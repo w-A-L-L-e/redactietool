@@ -83,6 +83,7 @@ def test_get_candidates(sparql_endpoint):
         "label": "Nederlands",
     }
     assert results[1] == {
+        # pylint: disable=line-too-long
         "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie",
         "id": f"{suggest.OND_NS}vak/burgerschap",
         "label": "burgerschap",
@@ -173,6 +174,7 @@ def test_get_related(sparql_endpoint):
         "label": "Nederlands",
     }
     assert results[1] == {
+        # pylint: disable=line-too-long
         "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie",
         "id": f"{suggest.OND_NS}vak/burgerschap",
         "label": "burgerschap",
