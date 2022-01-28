@@ -328,12 +328,14 @@ class RmhMapping:
         mam_data = self.set_json_array_property(
             mam_data, 'lom_onderwijsniveau', 'id',
             request.form.get('lom1_onderwijsniveaus'),
+            'Onderwijsniveau'
         )
 
         # multiselect item_onderwijsgraden of item_onderwijsgraden_legacy -> lom_onderwijsgraad
         mam_data = self.set_json_array_property(
             mam_data, 'lom_onderwijsgraad', 'id',
             request.form.get('lom1_onderwijsgraden'),
+            'Onderwijsgraad'
         )
 
         # multiselect themas -> lom_thema
