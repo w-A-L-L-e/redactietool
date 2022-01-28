@@ -220,18 +220,6 @@ class MediahavenApi:
 
         mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
 
-        # WARNING: is_verwant_aan is broken, see ticket dev-1900 in jira
-        # relations = etree.SubElement(mdprops, "dc_relations")
-        # relations.set('strategy', 'OVERWRITE')
-        # etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
-
-        # cp_id = get_property(metadata, 'CP_id')
-        # cp = get_property(metadata, 'CP')
-        # etree.SubElement(mdprops, "CP_id").text = cp_id
-        # etree.SubElement(mdprops, "PID").text = tp['pid']
-        # etree.SubElement(mdprops, "CP").text = cp
-        # etree.SubElement(mdprops, "sp_name").text = 'borndigital'
-
         # Alemene fields:
         # ===============
         # ontsluitingstitel

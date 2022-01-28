@@ -3,10 +3,11 @@
 
     <div class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">Vakken (legacy)</label>
+        <label class="label"></label>
       </div>
       <div class="field-body">
         <div class="legacy-vakken-list">
+          <div class="legacy-title">Legacy vakken</div>
           <div 
             class="legacy-vak-pill" 
             v-for="vak, index in legacy_vakken" 
@@ -69,12 +70,26 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
+  #legacy_vakken{
+    margin-top: -14px;
+  }
+  .legacy-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #363636;
+  }
+  .inline-suggesties{
+    margin-left: 5px;
+    margin-top: 5px;
+  }
   .legacy-vakken-list {
     min-height: 40px;
     min-width: 478px;
-    background: #fff;
+    /*
     border-radius: 5px;
     border: 1px solid #e8e8e8;
+    background: #fff;
+    */
     padding: 5px;
     padding-top: 7px;
     margin-bottom: 10px;
@@ -91,6 +106,7 @@
     margin-right: 10px;
     padding: 1px 8px 1px 8px;
     margin-bottom: 5px;
-    cursor: pointer;
+    /*cursor: pointer;*/
   }
+  
 </style>
