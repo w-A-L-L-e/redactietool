@@ -52,6 +52,17 @@
 
     </multiselect>
 
+    <div class="inline-suggesties" v-if="showInlineSuggesties()">
+      <div class="inline-suggesties-title">Suggesties</div>
+      <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
+        <div v-for="vak in row" :key="vak.id"  
+              class="inline-suggestie-pill"
+              v-bind:class="[vakIsSelected(vak) ? 'inline-suggestie-selected' : '']"
+              v-on:click="toggleVakSelect(vak)">
+          {{vak.label}}
+        </div>
+      </div>
+    </div>
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
@@ -153,7 +164,6 @@
             <div v-if="loading">
               <progress class="progress is-large is-info" max="100">60%</progress>
             </div>
-
 
             <div v-if="!hogerOfVolwassenOnderwijs()">
               <div class="columns"  v-for="(row2, index2) in overige_filtered" :key="'sug'+index2">
@@ -364,10 +374,10 @@
           return;
         }
 
-        if(!this.show_vakken_suggesties){
-          console.log("modal vakken not shown, skipping suggestion call.");
-          return;
-        }
+        //if(!this.show_vakken_suggesties){
+        //  console.log("modal vakken not shown, skipping suggestion call.");
+        //  return;
+        //}
 
         var post_data = {
           'graden': this.graden,
@@ -524,7 +534,13 @@
       },
       toggleBeschrijvingen(){
         this.show_tooltips = false;
+      },
+      showInlineSuggesties(){
+        if( !this.suggesties_filtered.length ) return false;
+        //algernate if we hide suggests: also return false if all suggestions are selected
+        return true;
       }
+
     },
     filters: {
       truncate: function (text, length, suffix) {
@@ -639,4 +655,33 @@
   .hide{
     display: hidden;
   }
+
+  .inline-suggesties{
+    margin-top: 10px;
+  }
+  .inline-suggesties-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #363636;
+  }
+  .inline-suggestie-pill {
+    border-radius: 5px;
+    border: 1px solid #9cafbd;
+    background-color: #eff5fb;
+    color: #296fa8;
+    text-overflow: ellipsis;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 1px 8px 1px 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .inline-suggestie-selected{
+    /* background-color: #3e8ed0; */
+    background-color: #93b6d3;
+    border: 1px solid #9cafbd;
+    color: #fff;
+  }
+
 </style>
