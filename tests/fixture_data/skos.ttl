@@ -1,10 +1,10 @@
-@prefix graad: <https://data.meemoo.be/term/onderwijs/graad/> .
-@prefix niveau: <https://data.meemoo.be/term/onderwijs/niveau/> .
-@prefix ond: <https://data.meemoo.be/term/onderwijs/> .
+@prefix graad: <https://data.hetarchief.be/term/onderwijs/graad/> .
+@prefix niveau: <https://data.hetarchief.be/term/onderwijs/niveau/> .
+@prefix ond: <https://data.hetarchief.be/term/onderwijs/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix thema: <https://data.meemoo.be/term/onderwijs/thema/> .
-@prefix vak: <https://data.meemoo.be/term/onderwijs/vak/> .
+@prefix thema: <https://data.hetarchief.be/term/onderwijs/thema/> .
+@prefix vak: <https://data.hetarchief.be/term/onderwijs/vak/> .
 
 ond:vak a skos:ConceptScheme;
 skos:hasTopConcept vak:nederlands.
@@ -21,6 +21,14 @@ ond:graad a skos:Collection ;
 ond:niveau a skos:Collection ;
     rdfs:label "Onderwijsniveaus"@nl ;
     skos:member niveau:lager-onderwijs .
+
+ond:vak-volgorde a skos:OrderedCollection ;
+    rdfs:label "Vakken"@nl ;
+    skos:memberList ( vak:nederlands ).
+
+ond:thema-volgorde a skos:OrderedCollection ;
+    rdfs:label "Thema's"@nl ;
+    skos:memberList ( thema:nederlandse-taal ).
 
 vak:nederlands a skos:Concept ;
     skos:definition "lorem ipsum"@nl ;
