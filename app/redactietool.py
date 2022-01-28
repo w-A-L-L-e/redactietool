@@ -495,14 +495,14 @@ def edit_metadata():
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
     data_mapping = RmhMapping()
-    td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
+    template_vars = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
 
     # extra request necessary in order to fetch rightsmanagement/permissions
-    td['publish_item'] = mh_api.get_publicatiestatus(department, pid)
+    template_vars['publish_item'] = mh_api.get_publicatiestatus(department, pid)
 
     return render_template(
         'metadata/edit.html',
-        **td
+        **template_vars
     )
 
 
@@ -522,11 +522,11 @@ def save_item_metadata():
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
     data_mapping = RmhMapping()
-    tp, json_data, errors = data_mapping.form_to_mh(request, mam_data)
+    template_vars = data_mapping.form_to_mh(request, mam_data)
 
     return render_template(
         'metadata/edit.html',
-        **tp
+        **template_vars
     )
 
 

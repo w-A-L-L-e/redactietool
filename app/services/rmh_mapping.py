@@ -139,8 +139,8 @@ class RmhMapping:
         safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
 
         # allow regular < and > to still work
-        safe_content = safe_content.replace("&amp;lt;", "<")
-        safe_content = safe_content.replace("&amp;gt;", ">")
+        safe_content = safe_content.replace("&amp;lt;", "&lt;")
+        safe_content = safe_content.replace("&amp;gt;", "&gt;")
 
         return safe_content
 
@@ -394,17 +394,18 @@ class RmhMapping:
             tp['publish_item'] = False
 
         mh_api = MediahavenApi()
-        result = mh_api.update_metadata(department, mam_data, tp)
-        print("save result=", result)
+        response = mh_api.update_metadata(department, mam_data, tp)
 
         # we can even do another GET call here to validate the changed modified timestamp
+        if response.status_code >= 200 and response.status_code < 300:
+            print("Mediahaven save ok, status code=", response.status_code)
+            tp['mh_synced'] = True
+        else:
+            tp['mh_synced'] = False
+            tp['mh_errors'] = [response.json()['message']]
+            print("Mediahaven ERRORS= ", response.json())
 
-        # signal no errors from mediahaven
-        # and no validation errors:
-        tp['data_saved_to_mam'] = True
-        # else set this to False and set errors for a modal dialog here
-
-        return tp, json.dumps(tp), errors
+        return tp
 
     def mh_to_form(self, token, pid, department, errors, mam_data):
         """

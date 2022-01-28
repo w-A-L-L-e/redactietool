@@ -346,7 +346,7 @@ class MediahavenApi:
             files=file_fields,
         )
 
-        return response.status_code
+        return response
 
     # below two methods are extra helpers only used by maintenance scripts
     def get_object(self, object_id, department='testbeeld'):

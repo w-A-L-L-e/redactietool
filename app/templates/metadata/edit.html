@@ -18,7 +18,7 @@ Metadata bewerken
     </div> 
   </div>
   
-  {% if data_saved_to_mam %}
+  {% if mh_synced %}
     <div class="columns" id="data_saved_alert_box">
       <div class="column">
         <div class="notification is-success">
@@ -28,7 +28,24 @@ Metadata bewerken
       </div>
     </div>
   {% else %}
-    {% include 'includes/form_errors.html' %}
+
+    {% if mh_errors %}
+    <div class="columns" id="data_saved_errors">
+      <div class="column content">
+        <div class="notification is-warning">
+          <button class="delete" onclick="closeSavedAlert('data_saved_errors'); return false;"></button>
+          De metadata voor item <b>{{pid}}</b> kon niet opgeslagen worden bij Mediahaven. <br/>
+          Foutmeldingen:  <br/>
+          <ul>
+            {% for error in mh_errors: %}
+            <li> {{ error }} </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif%}
+
   {% endif %}
   
   <form class="metadata_form" action="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}" method="POST" enctype="multipart/form-data">
