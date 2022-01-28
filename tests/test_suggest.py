@@ -76,11 +76,16 @@ def test_get_candidates(sparql_endpoint):
             [f"{suggest.OND_NS}graad/lager-1ste-graad"],
         )
     )
-    assert len(results) == 1
+    assert len(results) == 2
     assert results[0] == {
         "definition": "lorem ipsum",
         "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
+    }
+    assert results[1] == {
+        "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie",
+        "id": f"{suggest.OND_NS}vak/burgerschap",
+        "label": "burgerschap",
     }
 
 
@@ -124,11 +129,16 @@ def test_get_themas(sparql_endpoint):
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_themas())
-    assert len(results) == 1
+    assert len(results) == 2
     assert results[0] == {
         "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
         "id": f"{suggest.OND_NS}thema/nederlandse-taal",
         "label": "Nederlandse taal",
+    }
+    assert results[1] == {
+        "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
+        "id": f"{suggest.OND_NS}thema/recht",
+        "label": "Recht",
     }
 
 
@@ -156,9 +166,14 @@ def test_get_related(sparql_endpoint):
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_related_vak([f"{suggest.OND_NS}graad/lager-1ste-graad"]))
-    assert len(results) == 1
+    assert len(results) == 2
     assert results[0] == {
         "definition": "lorem ipsum",
         "id": f"{suggest.OND_NS}vak/nederlands",
         "label": "Nederlands",
+    }
+    assert results[1] == {
+        "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie",
+        "id": f"{suggest.OND_NS}vak/burgerschap",
+        "label": "burgerschap",
     }
