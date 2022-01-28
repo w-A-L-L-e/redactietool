@@ -144,7 +144,7 @@ class RmhMapping:
 
         return safe_content
 
-    def form_params(self, token, pid, department, errors, mam_data):
+    def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
         cast = get_property(mam_data, 'dc_description_cast')
@@ -240,7 +240,6 @@ class RmhMapping:
             fid = field.replace(f'{field_name}_attribute_', '')
             select_val = request_form.get(f'{field_name}_attribute_{fid}')
             input_val = request_form.get(f'{field_name}_value_{fid}')
-            # print("fid=", fid, " select_val=", select_val, " input_val=", input_val)
 
             return {
                 'value': input_val,
@@ -384,9 +383,7 @@ class RmhMapping:
             mam_data, 'dc_contributors', dc_contributors)
         mam_data = self.set_property(mam_data, 'dc_publishers', dc_publishers)
 
-        # also validation errors can be added here
-        errors = None  # for now always none, hoever mh can give errors
-        tp = self.form_params(token, pid, department, errors, mam_data)
+        tp = self.form_params(token, pid, department, mam_data)
 
         if request.form.get('publicatiestatus_checked'):
             tp['publish_item'] = True
@@ -407,7 +404,7 @@ class RmhMapping:
 
         return tp
 
-    def mh_to_form(self, token, pid, department, errors, mam_data):
+    def mh_to_form(self, token, pid, department, mam_data, validation_errors):
         """
         convert json metadata from MediahavenApi back into a
         python hash for populating the view and do the mapping from mh names to
@@ -416,4 +413,4 @@ class RmhMapping:
         # print("DEBUG: mediahaven json_data:\n")
         # print(json.dumps(mam_data, indent=2))
 
-        return self.form_params(token, pid, department, errors, mam_data)
+        return self.form_params(token, pid, department, mam_data, validation_errors)

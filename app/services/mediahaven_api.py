@@ -172,6 +172,17 @@ class MediahavenApi:
 
         return ONDERWIJS_PERM_ID in permissions
 
+    def save_array_field(self, metadata, fieldname, mdprops, field_attrib="multiselect"):
+        array_values = get_property(metadata, fieldname)
+        array_elem = etree.SubElement(mdprops, fieldname)
+        array_elem.set('strategy', 'OVERWRITE')
+        if array_values and len(array_values) > 0:
+            for kw in array_values:
+                etree.SubElement(
+                    array_elem, kw['attribute']).text = kw['value']
+        else:
+            etree.SubElement(array_elem, field_attrib).text = ''
+
     # With API v2 will this will be easier to make this call using json directly
     # but that requires refactoring authentication to mediahaven (also for the existing subloader
     # calls).
@@ -268,7 +279,7 @@ class MediahavenApi:
 
         # Leerobject fields:
         # ==================
-        # lom_type -> lom_learningresourcetype
+        # lom_type -> lom_learningresourcetype (Audio/Video)
         lom_type = etree.SubElement(mdprops, "lom_learningresourcetype")
         lom_type.set('strategy', 'OVERWRITE')
         for kw in get_property(metadata, 'lom_learningresourcetype'):
@@ -286,39 +297,25 @@ class MediahavenApi:
         for kw in get_property(metadata, 'lom_languages'):
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
-        # lom_onderwijsniveau are multiselect
-        lom_languages = etree.SubElement(mdprops, "lom_onderwijsniveau")
-        lom_languages.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_onderwijsniveau'):
-            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+        # lom_onderwijsniveau is like keywords (onderwijsniveau)
+        self.save_array_field(metadata, "lom_onderwijsniveau", mdprops)
 
-        # lom_graad are multiselect
-        lom_languages = etree.SubElement(mdprops, "lom_onderwijsgraad")
-        lom_languages.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_onderwijsgraad'):
-            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+        # lom_onderwijsgraad is like keywords
+        self.save_array_field(metadata, "lom_onderwijsgraad", mdprops)
 
-        # themas are multiselect
-        lom_languages = etree.SubElement(mdprops, "lom_thema")
-        lom_languages.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_thema'):
-            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+        # themas are like keywords (in future might be multiselect)
+        self.save_array_field(metadata, "lom_thema", mdprops, "Thema")
 
-        # vakken are multiselect
-        lom_languages = etree.SubElement(mdprops, "lom_vak")
-        lom_languages.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_vak'):
-            etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
+        # vakken are multiselect but like keywords
+        self.save_array_field(metadata, "lom_vak", mdprops, "Vak")
 
         # lom_legacy "false" indien vakken + themas ingevuld (logic in rmh_mapping.py)
         etree.SubElement(mdprops, "lom_legacy").text = get_property(
             metadata, 'lom_legacy')
 
         # trefwoorden / keywords are 'Sleutelwoord'
-        lom_keywords = etree.SubElement(mdprops, "lom_keywords")
-        lom_keywords.set('strategy', 'OVERWRITE')
-        for kw in get_property(metadata, 'lom_keywords'):
-            etree.SubElement(lom_keywords, kw['attribute']).text = kw['value']
+        self.save_array_field(metadata, "lom_keywords",
+                              mdprops, "Sleutelwoord")
 
         xml_data = etree.tostring(
             root, pretty_print=True, encoding="UTF-8", xml_declaration=True

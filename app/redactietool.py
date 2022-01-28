@@ -495,10 +495,12 @@ def edit_metadata():
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
     data_mapping = RmhMapping()
-    template_vars = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
+    template_vars = data_mapping.mh_to_form(
+        token, pid, department, mam_data, errors)
 
     # extra request necessary in order to fetch rightsmanagement/permissions
-    template_vars['publish_item'] = mh_api.get_publicatiestatus(department, pid)
+    template_vars['publish_item'] = mh_api.get_publicatiestatus(
+        department, pid)
 
     return render_template(
         'metadata/edit.html',
