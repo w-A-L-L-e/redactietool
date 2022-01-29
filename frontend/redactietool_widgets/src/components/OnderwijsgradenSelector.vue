@@ -4,7 +4,7 @@
       placeholder="Selecteer onderwijsgraden" 
       label="label" 
       track-by="id" 
-      :options="options"
+      :options="graden_filtered"
       :multiple="true" 
       :show-labels="false"
       :hide-selected="true"
@@ -13,6 +13,9 @@
       @input="updateValue">
        
       <template slot="noResult">Onderwijsgraad niet gevonden</template>
+      <template slot="noOptions">
+        Selecteer secundair of lager in onderwijsniveaus
+      </template>
 
     </multiselect>
     <textarea name="lom1_onderwijsgraden" v-model="json_value" id="onderwijsgraden_json_value"></textarea>
@@ -41,8 +44,16 @@
             label: "Onderwijsgraden inladen...", 
             definition: "Onderwijsgraden inladen..."
           },
-        ]
+        ],
+        niveaus: [],
+        graden_filtered: []
       }
+    },
+    mounted: function() {
+      this.$root.$on('niveaus_changed', data => {
+        this.niveaus = data;
+        this.filterGraden();
+      });
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -125,6 +136,30 @@
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('graden_changed', value);
+      },
+      filterGraden(){
+        // check niveau and only show related graden
+        // TODO: ask miel for a call to do this without hardcoding
+        // We need the parent id on niveaus or something...
+        var showLager = false;
+        var showSecundair = false;
+        for(var n in this.niveaus){
+          var niv = this.niveaus[n];
+          if(niv.label.includes("Secundair")) showSecundair = true;
+          if(niv.label.includes("Lager")) showLager = true;
+        }
+
+        this.graden_filtered = [];
+        for(var i in this.options){
+          var graad = this.options[i];
+          if(
+              (showSecundair && graad.label.includes("Secundair")) ||
+              (showLager && graad.label.includes("Lager"))
+            ){
+
+            this.graden_filtered.push(graad);
+          }
+        }
       }
     }
   }
