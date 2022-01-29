@@ -45,7 +45,6 @@
       var legacy_vakken_div = document.getElementById("item_vakken_legacy");
       if(legacy_vakken_div){
         var legacy_vakken_values = JSON.parse(legacy_vakken_div.innerText);
-        console.log("legacy vakken=", legacy_vakken_values);
         this.legacy_vakken = legacy_vakken_values
       }
     },

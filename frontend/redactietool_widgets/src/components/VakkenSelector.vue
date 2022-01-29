@@ -253,24 +253,23 @@
       }
     },
     mounted: function() {
+      this.$root.$on('niveaus_changed', data => {
+        // console.log('niveaus_changed event');
+        this.niveaus = data;
+        this.updateSuggestions();
+      });
+
       this.$root.$on('graden_changed', data => {
-        console.log('graden changed event');
+        // console.log('graden changed event');
         this.graden = data;
         this.updateSuggestions();
       });
 
       this.$root.$on('themas_changed', data => {
-        console.log('themas_changed event');
+        // console.log('themas_changed event');
         this.themas = data;
         this.updateSuggestions();
       });
-
-      this.$root.$on('niveaus_changed', data => {
-        console.log('niveaus_changed event');
-        this.niveaus = data;
-        this.updateSuggestions();
-      });
-
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -391,14 +390,12 @@
             post_data['themas'].length==0 ||
             this.hogerOfVolwassenOnderwijs()
           ){
-          console.log("no graden or themas, or hoger/volwassenonderwijs, clearing suggestions");
           this.vakken_suggesties = []; //clear suggestions
           this.suggesties_filtered = [];
           this.updateOverigeVakken({});
           return;
         }
 
-        console.log("fetching new suggestions now...");
         this.loading = true;
         axios
           .post(redactie_api_url+'/vakken_suggest', post_data)
