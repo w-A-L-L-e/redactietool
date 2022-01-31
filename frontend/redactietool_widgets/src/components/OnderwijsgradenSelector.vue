@@ -125,8 +125,8 @@
 
               }
             }
-
-            this.json_value = JSON.stringify(default_value)
+            this.filterGraden();
+            this.json_value = JSON.stringify(default_value);
             this.$root.$emit('graden_changed', default_value);
           }
 
