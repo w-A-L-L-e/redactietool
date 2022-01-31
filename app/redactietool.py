@@ -42,7 +42,7 @@ from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
-    move_subtitle, get_property, not_deleted, srt_to_vtt
+    move_subtitle, get_property, not_deleted, get_vtt_subtitles
 )
 from app.services.validation import (pid_error, upload_error, validate_input,
                                      validate_upload, validate_conversion)
@@ -63,10 +63,12 @@ app.config.from_object(flask_environment())
 # disables caching of srt and other files
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-# TODO: replace these with some ENV vars soon:
+# session cookie secret key
+app.config['SECRET_KEY'] = os.environ.get(
+    'SECRET_KEY', 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
+)
 
-# session cookie/saml key TODO: put this in env var!
-app.config['SECRET_KEY'] = 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
+# TODO: put this in env var!
 app.config['SAML_PATH'] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'saml'
 )
@@ -428,16 +430,13 @@ def send_to_mam():
         'transfer_method': request.form.get('transfer_method')
     }
 
-    # TODO: refactor out code duplication
-    # problem: vtt is already deleted here after sending with ftp
-    # will be fixed once we do subs on metadata page where we have
-    # on the fly srt to vtt conversion
     video_data = json.loads(tp['mam_data'])
     tp['title'] = video_data.get('title')
     tp['keyframe'] = video_data.get('previewImagePath')
     tp['flowplayer_token'] = os.environ.get(
         'FLOWPLAYER_TOKEN', 'set_in_secrets')
-    # print("tp=", tp)
+    tp['media_object_id'] = video_data.get('mediaObjectId', '')
+    tp['cp'] = str(get_property(video_data, 'CP')).upper()
 
     if tp['replace_existing'] == 'cancel':
         # abort and remove temporary files
@@ -474,6 +473,8 @@ def send_to_mam():
             ftp_response = ftp_uploader.upload_subtitles(
                 upload_folder(), metadata, tp)
             tp['mh_response'] = json.dumps(ftp_response)
+            if 'ftp_error' in ftp_response:
+                tp['mh_error'] = True
 
         # cleanup temp files and show final page with mh request results
         delete_files(upload_folder(), tp)
@@ -529,8 +530,6 @@ def save_item_metadata():
     pid = request.form.get('pid')
     department = request.form.get('department')
 
-    print("item pid=", pid)
-
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
@@ -582,21 +581,29 @@ def get_vakken():
 @login_required
 def get_vakken_suggesties():
     json_data = request.json
-    print("json_data=", json_data)
     suggest_api = SuggestApi()
     result = suggest_api.get_vakken_suggesties(
         json_data['graden'], json_data['themas'])
     return result
 
 
-@app.route('/item_subtitles', methods=['GET'])
+@app.route('/item_subtitles/<string:cp>/<string:object_id>', methods=['GET'])
 @requires_authorization
 @login_required
-def get_subtitles():
-    # see this on how to construct a proper link
-    # https://meemoo.atlassian.net/browse/DEV-1872?focusedCommentId=25119
-    srt_url = 'https://archief-media.meemoo.be/viaa/MOB/TESTBEELD/...35b8.srt'
-    return srt_to_vtt(srt_url)
+def get_subtitles(cp, object_id):
+    srt_url = get_srt_link(cp, object_id)
+    return get_vtt_subtitles(srt_url)
+
+
+@app.route('/item_srt_link/<string:cp>/<string:object_id>', methods=['GET'])
+@requires_authorization
+@login_required
+def get_srt_link(cp, object_id):
+    OBJECT_STORE_URL = 'https://archief-media-qas.viaa.be/viaa/MOB'
+    srt_url = f"{OBJECT_STORE_URL}/{cp}/{object_id}/{object_id}.srt"
+    print("SRT LINK DEBUG: cp=", cp, "object_id=",
+          object_id, "srt_url=", srt_url)
+    return srt_url
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================

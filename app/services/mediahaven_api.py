@@ -286,10 +286,12 @@ class MediahavenApi:
             etree.SubElement(lom_languages, kw['attribute']).text = kw['value']
 
         # lom_onderwijsniveau is like keywords (onderwijsniveau)
-        self.save_array_field(metadata, "lom_onderwijsniveau", mdprops, "Onderwijsniveau")
+        self.save_array_field(
+            metadata, "lom_onderwijsniveau", mdprops, "Onderwijsniveau")
 
         # lom_onderwijsgraad is like keywords
-        self.save_array_field(metadata, "lom_onderwijsgraad", mdprops, "Onderwijsgraad")
+        self.save_array_field(
+            metadata, "lom_onderwijsgraad", mdprops, "Onderwijsgraad")
 
         # themas are like keywords (in future might be multiselect)
         self.save_array_field(metadata, "lom_thema", mdprops, "Thema")

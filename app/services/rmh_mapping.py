@@ -167,6 +167,8 @@ class RmhMapping:
             'mam_data': json.dumps(mam_data),
             'publish_item': False,
             'original_cp': get_property(mam_data, 'Original_CP'),
+            'media_object_id': mam_data.get('mediaObjectId', ''),
+            'cp': str(get_property(mam_data, 'CP')).upper(),
             'makers': get_md_array(mam_data, 'dc_creators'),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
@@ -293,7 +295,6 @@ class RmhMapping:
         )
 
         # deze nog eventjes un-escaped
-        print("avo_beschrijving=", request.form.get('avo_beschrijving'))
         mam_data = self.set_property(
             mam_data, 'dcterms_abstract',
             request.form.get('avo_beschrijving')
@@ -412,7 +413,8 @@ class RmhMapping:
         python hash for populating the view and do the mapping from mh names to
         wanted names in metadata/edit.html
         """
-        # print("DEBUG: mediahaven json_data:\n")
-        # print(json.dumps(mam_data, indent=2))
+
+        print("DEBUG: mediahaven json_data:\n")
+        print(json.dumps(mam_data, indent=2))
 
         return self.form_params(token, pid, department, mam_data, validation_errors)

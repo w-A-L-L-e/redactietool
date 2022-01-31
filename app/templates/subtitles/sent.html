@@ -29,7 +29,7 @@ Redactietool - Ondertitelbestand
         subtitles:{ 
           tracks:[
             { 
-              src: "/subtitles/{{vtt_file}}",
+              src: "/item_subtitles/{{cp}}/{{media_object_id}}",
               label: "Nederlands",
               id: "Nederlands-nl",
               default: true,
@@ -46,7 +46,11 @@ Redactietool - Ondertitelbestand
     {% if upload_cancelled %}
       <h2 class="subtitle sent-status">Bestaande ondertitels werden behouden</h2>
     {% else %}
-      <h2 class="subtitle sent-status">Ondertitels en sidecar zijn verstuurd</h2>
+      {% if mh_error %}
+        <h2 class="subtitle sent-status">Er liep iets verkeerd bij het uploaden van je ondertitels.</h2>
+      {% else %}
+        <h2 class="subtitle sent-status">Ondertitels en sidecar zijn verstuurd.</h2>
+      {% endif %}
     {% endif%}
 
     <h3 class="subtitle is-clickable collapsable" onclick="sectionToggle('upload_info_section')">
@@ -67,8 +71,9 @@ Redactietool - Ondertitelbestand
       <table class="table is-fullwidth subtitle-upload-results">
         <tr><td><b>PID:</b></td><td><b>{{pid}}</b></td></tr>
         <tr><td><b>Ondertitel type:</b></td><td>{{subtitle_type}}</td></tr>
-        <tr><td><b>Ondertitelbestand:</b></td><td>{{srt_file}}</td></tr>
-
+        <tr><td><b>Ondertitelbestand:</b></td>
+          <td><a href="/item_srt_link/{{cp}}/{{media_object_id}}" target="_blank">{{srt_file}}</td>
+        </tr>
         {% if not upload_cancelled %}
           <tr><td><b>Sidecar xml file:</b></td><td>{{xml_file}}</td></tr>
           <tr>
