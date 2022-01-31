@@ -69,7 +69,13 @@
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input name="uitzenddatum" class="input is-small" type="text" placeholder="Uitzenddatum" value="{{dcterms_issued}}"/>
+                <input  name="uitzenddatum" id="uitzenddatum" 
+                        class="input is-small" type="text" 
+                        placeholder="Uitzenddatum" 
+                        value="{{dcterms_issued}}"
+                        oninput="checkDateInput('uitzenddatum')"
+                />
+                <p id="uitzenddatum_error" class="help is-danger hidden">Opgelet: foute datumnotatie</p>
               </div>
             </div>
           </div>
@@ -83,7 +89,13 @@
             <div class="field">
               <div class="control">
                 <!--input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{created}}" readonly/ -->
-                <input name="creatiedatum" class="input is-small" type="text" placeholder="creatie datum" value="{{dcterms_created}}" readonly/>
+                <input  name="creatiedatum" id="creatiedatum"
+                        class="input is-small" type="text"
+                        placeholder="creatie datum"
+                        value="{{dcterms_created}}"
+                        readonly
+                />
+                <p id="creatiedatum_error" class="help is-danger hidden">Opgelet: foute datumnotatie</p>
               </div>
             </div>
           </div>
