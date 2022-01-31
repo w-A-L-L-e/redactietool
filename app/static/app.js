@@ -350,6 +350,27 @@ function injectApiUrl(url_div_id){
   }
 }
 
+function checkPageSaved(){
+  //window.addEventListener('beforeunload', function (e) {
+  //  // Cancel the event as stated by the standard.
+  //  e.preventDefault();
+  //  // Chrome requires returnValue to be set.
+  //  e.returnValue = '';
+
+
+    // event.preventDefault();
+    // return event.returnValue = "Ben je zeker?";
+  //  console.log("HIER EEN CUSTOM DIALOG!!!")
+  //});
+
+  window.onbeforeunload = (event) => {
+    console.log("HIER EEN CUSTOM DIALOG!!!")
+    if (false) {
+      return "";
+    }
+  };
+}
+
 
 // =========================== DOCUMENT READY EVENT ============================
 // Handle burger menu open/close on all pages.
