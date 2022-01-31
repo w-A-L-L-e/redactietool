@@ -429,17 +429,15 @@ def send_to_mam():
     }
 
     # TODO: refactor out code duplication
+    # problem: vtt is already deleted here after sending with ftp
+    # will be fixed once we do subs on metadata page where we have
+    # on the fly srt to vtt conversion
     video_data = json.loads(tp['mam_data'])
     tp['title'] = video_data.get('title')
     tp['keyframe'] = video_data.get('previewImagePath')
-    # tp['description'] = video_data.get('description')
-    # tp['created'] = get_property(video_data, 'CreationDate')
-    # tp['archived'] = get_property(video_data, 'created_on')
-    # tp['original_cp'] = get_property(video_data, 'Original_CP')
     tp['flowplayer_token'] = os.environ.get(
         'FLOWPLAYER_TOKEN', 'set_in_secrets')
-    
-    print("tp=", tp)
+    # print("tp=", tp)
 
     if tp['replace_existing'] == 'cancel':
         # abort and remove temporary files

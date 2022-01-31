@@ -436,10 +436,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   collapseEmptyTextareas();
   hideEmptyTitles();
+  updateProductionSection();
+  closeSection("upload_info_section");
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
-  updateProductionSection();
   checkDateInputs();
   
   // For demo, show modal dialogs

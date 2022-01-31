@@ -495,8 +495,24 @@ table.subtitle-upload-results {
 
 table.subtitle-upload-results td {
   border: none;
+  padding: 2px;
 }
 
 table.subtitle-upload-results tr {
   border: none;
+}
+
+h2.sent-status{
+  color: #363636;
+  font-weight: bold;
+}
+
+h3.collapsable{
+  margin-top: 10px;
+  margin-bottom: 24px !important;
+}
+
+#upload_info_section {
+  margin-bottom: 20px;
+  display: none;
 }
