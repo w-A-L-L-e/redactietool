@@ -13,7 +13,7 @@
 import os
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from ftplib import FTP, error_perm
+from ftplib import FTP, error_perm, error_temp
 import socket
 
 logger = logging.get_logger(__name__, config=ConfigParser())
@@ -62,6 +62,10 @@ class FtpUploader:
                 'srt_ftp_response': srt_result,
                 'xml_ftp_response': xml_result
             }
+
+        except error_temp as msg:
+            print(f"FTP error: {msg}", flush=True)
+            return {'ftp_error': str(msg)}
 
         except error_perm as msg:
             print(f"FTP error: {msg}", flush=True)

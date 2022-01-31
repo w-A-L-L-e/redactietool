@@ -411,10 +411,12 @@ def cancel_upload():
 @requires_authorization
 @login_required
 def send_to_mam():
+
     tp = {
         'token': request.form.get('token'),
         'pid': request.form.get('pid'),
         'department': request.form.get('department'),
+        'video_url': request.form.get('video_url'),
         'subtitle_type': request.form.get('subtitle_type'),
         'srt_file': request.form.get('subtitle_file'),
         'vtt_file': request.form.get('vtt_file'),
@@ -425,6 +427,19 @@ def send_to_mam():
         'replace_existing': request.form.get('replace_existing'),
         'transfer_method': request.form.get('transfer_method')
     }
+
+    # TODO: refactor out code duplication
+    video_data = json.loads(tp['mam_data'])
+    tp['title'] = video_data.get('title')
+    tp['keyframe'] = video_data.get('previewImagePath')
+    # tp['description'] = video_data.get('description')
+    # tp['created'] = get_property(video_data, 'CreationDate')
+    # tp['archived'] = get_property(video_data, 'created_on')
+    # tp['original_cp'] = get_property(video_data, 'Original_CP')
+    tp['flowplayer_token'] = os.environ.get(
+        'FLOWPLAYER_TOKEN', 'set_in_secrets')
+    
+    print("tp=", tp)
 
     if tp['replace_existing'] == 'cancel':
         # abort and remove temporary files

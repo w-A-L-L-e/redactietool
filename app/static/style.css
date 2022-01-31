@@ -489,3 +489,14 @@ h3.subtitle{
 }
 */
 
+table.subtitle-upload-results {
+  background: transparent;
+}
+
+table.subtitle-upload-results td {
+  border: none;
+}
+
+table.subtitle-upload-results tr {
+  border: none;
+}
