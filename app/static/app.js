@@ -350,7 +350,38 @@ function injectApiUrl(url_div_id){
   }
 }
 
+function isValidDate(dateString) {
+  var reg_ex = /^\d{4}-\d{2}-\d{2}$/;
+  if(!dateString.match(reg_ex)) return false;  // Invalid format
+  var d = new Date(dateString);
+  var ts = d.getTime();
+  if(!ts && ts !== 0) return false; // NaN, invalid timestamp
+  return d.toISOString().substr(0,10) === dateString;
+}
+
+function checkDateInput(date_id){
+  var date_div = document.getElementById(date_id)
+  if(!date_div) return;
+
+  var valid = isValidDate(date_div.value);
+  var error_div = document.getElementById(date_id+"_error");
+  if(!valid){ //show error
+    date_div.classList.add("is-danger");
+    if(error_div) error_div.classList.remove("hidden");
+  }
+  else{
+    date_div.classList.remove("is-danger");
+    if(error_div) error_div.classList.add("hidden");
+  }
+}
+
+function checkDateInputs(){
+  checkDateInput("creatiedatum");
+  checkDateInput("uitzenddatum");
+}
+
 function checkPageSaved(){
+  // vanilla pagesave check test, still issues with this:
   //window.addEventListener('beforeunload', function (e) {
   //  // Cancel the event as stated by the standard.
   //  e.preventDefault();
@@ -409,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
   autoCloseAlert();
   clearButtonLoadingState();
   updateProductionSection();
+  checkDateInputs();
   
   // For demo, show modal dialogs
   // ============================
