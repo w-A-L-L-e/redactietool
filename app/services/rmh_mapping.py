@@ -189,15 +189,13 @@ class RmhMapping:
 
     def markdown_to_html(self, markdown_content):
         markdown_text = self.cleanup_markdown(markdown_content)
-        print("markdown text=\n", markdown_text)
-
         html_content = markdown2.markdown(markdown_text)
         html_content = html_content.replace("\n\n","<br>")
         html_content = html_content.replace("\n","")
         return self.secure_unescape(html_content)
 
     def cleanup_markdown(self, markdown_text):
-        return markdown_text.replace("&#13;\n","\n\n")
+        return markdown_text.replace("&#13;\n","\n").replace("\r","")
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
