@@ -381,11 +381,6 @@
           return;
         }
 
-        //if(!this.show_vakken_suggesties){
-        //  console.log("modal vakken not shown, skipping suggestion call.");
-        //  return;
-        //}
-
         var post_data = {
           'graden': this.graden,
           'themas': this.themas
@@ -401,6 +396,7 @@
           this.updateOverigeVakken({});
           return;
         }
+        console.log("updating suggestions...");
 
         this.loading = true;
         axios
