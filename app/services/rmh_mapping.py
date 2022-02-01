@@ -10,6 +10,7 @@
 #
 import json
 import os
+import markdown2
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property, get_md_array
@@ -161,10 +162,20 @@ class RmhMapping:
         safe_content = self.unescape_tag(safe_content, 'ul')
         safe_content = self.unescape_tag(safe_content, 'li')
 
-        # href tags are a little different, we only allow specific _blank tags:
+
+        # sanitize a href tags and add target = _blank
+        safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
+
+        # href tag escaping in case of html edit mode:
+        # safe_content = safe_content.replace(
+        #     '&#34; target=&#34;_blank&#34;&gt;',
+        #     '" target="_blank">'
+        # )
+
+        # href tags in markdown mode:
         safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
         safe_content = safe_content.replace(
-            '&#34; target=&#34;_blank&#34;&gt;',
+            '#34;&gt;',
             '" target="_blank">'
         )
         safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
@@ -172,8 +183,21 @@ class RmhMapping:
         # allow regular < and > to still work
         safe_content = safe_content.replace("&amp;lt;", "&lt;")
         safe_content = safe_content.replace("&amp;gt;", "&gt;")
+        safe_content = safe_content.replace("&lt;br&gt;","<br>")
 
         return safe_content
+
+    def markdown_to_html(self, markdown_content):
+        markdown_text = self.cleanup_markdown(markdown_content)
+        print("markdown text=\n", markdown_text)
+
+        html_content = markdown2.markdown(markdown_text)
+        html_content = html_content.replace("\n\n","<br>")
+        html_content = html_content.replace("\n","")
+        return self.secure_unescape(html_content)
+
+    def cleanup_markdown(self, markdown_text):
+        return markdown_text.replace("&#13;\n","\n\n")
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
@@ -251,7 +275,7 @@ class RmhMapping:
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
             'description': mam_data.get('description'),
-            'avo_beschrijving': self.secure_unescape(
+            'avo_beschrijving': self.markdown_to_html(
                 get_property(mam_data, 'dcterms_abstract')
             ),
             'ondertitels': ondertitels,
@@ -333,7 +357,7 @@ class RmhMapping:
         # deze nog eventjes un-escaped
         mam_data = self.set_property(
             mam_data, 'dcterms_abstract',
-            request.form.get('avo_beschrijving')
+            self.cleanup_markdown( request.form.get('avo_beschrijving') )
         )
 
         # array value serie in subsection dc_titles

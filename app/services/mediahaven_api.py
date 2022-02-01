@@ -166,11 +166,14 @@ class MediahavenApi:
         else:
             return False
 
+        # import json
         # print(
-        #     "item_v2 organisation name =",
+        #     "orgname=",
         #     item_v2.get('Administrative').get('OrganisationName')
         # )
         # data = item_v2.get('Dynamic')
+        # print(json.dumps(item_v2, indent=2))
+
         permissions = item_v2.get('RightsManagement').get(
             'Permissions').get('Read')
 
@@ -313,8 +316,8 @@ class MediahavenApi:
     def update_metadata(self, department, metadata, tp):
         xml_sidecar = self.metadata_sidecar(metadata, tp)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
-        # print("\nSubmitting sidecar url=",
-        # send_url, "\nsidecar:\n", xml_sidecar)
+        print("\nSubmitting sidecar url=",
+            send_url, "\nsidecar:\n", xml_sidecar)
         logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
 
         file_fields = {

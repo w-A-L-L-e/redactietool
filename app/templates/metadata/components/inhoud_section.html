@@ -143,22 +143,40 @@
     var editor_div = document.getElementById("redactietool-richtext-editor");
     if(editor_div){
       var html_content = editor_div.firstChild.innerHTML
-      var editor_form_target = document.getElementById("avo_beschrijving");
-      if(editor_form_target){
-        editor_form_target.value = html_content;
+
+      // for html output
+      // var editor_form_target = document.getElementById("avo_beschrijving");
+      // if(editor_form_target){
+      //   editor_form_target.value = html_content;
+      // }
+
+      // for markdown output
+      var markdown_target = document.getElementById("avo_beschrijving");
+      if(markdown_target){
+        var markdown = turndownService.turndown(html_content);
+        markdown_target.value = markdown;
       }
     }
   }
 
+  var turndownService = new TurndownService();
+  // turndownService.addRule('strikethrough', {
+  //   filter: ['del', 's', 'strike'],
+  //   replacement: function (content) {
+  //     return '~' + content + '~'
+  //   }
+  // })
   var quill = new Quill('#redactietool-richtext-editor', {
     modules: {
       toolbar: [
         [{ header: [2, false] }],
-        ['bold', 'italic', 'underline'],
+        // ['bold', 'italic', 'underline'],
+        ['bold', 'italic'], // markdown has no underline
         ['link']
       ]
     },
-    formats: ['header', 'bold', 'italic', 'underline', 'link', 'list'],
+    // formats: ['header', 'bold', 'italic', 'underline', 'link', 'list'], //markdown has no undrline
+    formats: ['header', 'bold', 'italic', 'link', 'list'],
     bounds: '#richtext_bounds',
     placeholder: 'AVO beschrijving',
     theme: 'snow'
