@@ -167,10 +167,10 @@ class MediahavenApi:
         permissions = item_v2.get('RightsManagement').get(
             'Permissions').get('Read')
 
-        ONDERWIJS_PERM_ID = os.environ.get(
-            'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+        OAI_PERM_ID = os.environ.get(
+            'OAI_PERM_ID', 'config_oai_uuid')
 
-        return ONDERWIJS_PERM_ID in permissions
+        return OAI_PERM_ID in permissions
 
     def save_array_field(self, metadata, fieldname, mdprops, field_attrib="multiselect"):
         array_values = get_property(metadata, fieldname)
@@ -193,6 +193,7 @@ class MediahavenApi:
         ONDERWIJS_PERM_ID = os.environ.get(
             'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
         ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
+        OAI_PERM_ID = os.environ.get('OAI_PERM_ID', 'config_oai_uuid')
 
         root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
         rights = etree.SubElement(root, '{%s}RightsManagement' % MHS_NS)
@@ -204,13 +205,13 @@ class MediahavenApi:
         # when publish_item is not set
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
 
         if tp.get('publish_item'):
-            etree.SubElement(perms, '{%s}Read' %
-                             MH_NS).text = ONDERWIJS_PERM_ID
+            etree.SubElement(perms, '{%s}Read' % MH_NS).text = OAI_PERM_ID
             print(
                 "publicatiestatus is TRUE, added read permission =",
-                ONDERWIJS_PERM_ID
+                OAI_PERM_ID
             )
 
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
