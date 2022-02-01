@@ -68,6 +68,11 @@ app.config['SECRET_KEY'] = os.environ.get(
     'SECRET_KEY', 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
 )
 
+# subtitles object store url
+app.config['OBJECT_STORE_URL'] = os.environ.get(
+    'OBJECT_STORE_URL', 'https://archief-media-qas.viaa.be/viaa/MOB'
+)
+
 # TODO: put this in env var!
 app.config['SAML_PATH'] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'saml'
@@ -599,8 +604,8 @@ def get_subtitles(cp, object_id):
 @requires_authorization
 @login_required
 def get_srt_link(cp, object_id):
-    OBJECT_STORE_URL = 'https://archief-media-qas.viaa.be/viaa/MOB'
-    srt_url = f"{OBJECT_STORE_URL}/{cp}/{object_id}/{object_id}.srt"
+    object_store_url = app.config.get('OBJECT_STORE_URL')
+    srt_url = f"{object_store_url}/{cp}/{object_id}/{object_id}.srt"
     print("SRT LINK DEBUG: cp=", cp, "object_id=",
           object_id, "srt_url=", srt_url)
     return srt_url

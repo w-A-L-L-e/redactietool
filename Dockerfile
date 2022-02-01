@@ -34,10 +34,27 @@ ENV PATH=/home/appuser/.local/bin:$PATH
 
 #USER appuser
 
-ENV OAS_JWT_SECRET ''
-ENV OAS_SERVER 'https://oas-qas.viaa.be'
+# ENV OAS_JWT_SECRET ''
+# ENV OAS_SERVER 'https://oas-qas.viaa.be'
 ENV OAS_APPNAME 'mediahaven'
 ENV FLOWPLAYER_TOKEN 'set_in_secrets'
+ENV SECRET_KEY 'set_in_secrets_for_meemoo_saml_cookie'
+ENV OBJECT_STORE_URL 'https://archief-media-qas.viaa.be/viaa/MOB'
+ENV MEDIAHAVEN_API 'https://archief-qas.viaa.be/mediahaven-rest-api'
+ENV FTP_SERVER 'ftp.viaa.be'
+ENV FTP_DIR '/'
+ENV TESTBEELD_PERM_ID 'uuid_here'
+ENV ONDERWIJS_PERM_ID 'uuid2_here'
+ENV ADMIN_PERM_ID 'uuid3_here'
+ENV FTP_USER 'user'
+ENV FTP_PASS 'pass'
+ENV MEDIAHAVEN_USER 'user'
+ENV MEDIAHAVEN_PASS 'pass'
+ENV KEYFRAME_EDITING_LINK 'https://archief-qas.viaa.be/player?id='
+ENV SPARQL_ENDPOINT = 'https://sparql_api_url'
+ENV SPARQL_USER = 'user'
+ENV SPARQL_PASS = 'pass'
+ENV FLASK_ENV=production
 
 
 # This command will be run when starting the container. It is the same one that

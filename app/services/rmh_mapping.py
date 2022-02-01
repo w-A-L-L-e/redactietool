@@ -130,6 +130,11 @@ class RmhMapping:
         safe_content = self.unescape_tag(safe_content, 'em')
         safe_content = self.unescape_tag(safe_content, 'u')
 
+        # editor also supports lists
+        safe_content = self.unescape_tag(safe_content, 'ol')
+        safe_content = self.unescape_tag(safe_content, 'ul')
+        safe_content = self.unescape_tag(safe_content, 'li')
+
         # href tags are a little different, we only allow specific _blank tags:
         safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
         safe_content = safe_content.replace(
