@@ -316,8 +316,11 @@
           this.show_themas_label = "Verberg themas";
         }
         else{
+          // upon closing thema modal we emit the changed selections
           this.show_themas_label = "Toon themas";
           this.thema_cards = [];
+          this.$root.$emit('themas_changed', this.value);
+          return;
         }
 
         this.thema_cards = [];
@@ -354,7 +357,8 @@
           };
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
-          this.$root.$emit('themas_changed', this.value);
+          // this works but hammers the suggest lib on each card selection
+          // this.$root.$emit('themas_changed', this.value);
         }
       },
       changeToprowTooltip(event){

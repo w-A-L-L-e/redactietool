@@ -317,9 +317,9 @@ class MediahavenApi:
     def update_metadata(self, department, metadata, tp):
         xml_sidecar = self.metadata_sidecar(metadata, tp)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
-        print("\nSubmitting sidecar url=",
-              send_url, "\nsidecar:\n", xml_sidecar)
-        # logger.info("posting subtitles to mam", data=file_fields)
+        # print("\nSubmitting sidecar url=",
+        # send_url, "\nsidecar:\n", xml_sidecar)
+        logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
 
         file_fields = {
             'metadata': ('metadata.xml', xml_sidecar),

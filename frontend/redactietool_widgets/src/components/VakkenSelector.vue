@@ -396,7 +396,6 @@
           this.updateOverigeVakken({});
           return;
         }
-        console.log("updating suggestions...");
 
         this.loading = true;
         axios
