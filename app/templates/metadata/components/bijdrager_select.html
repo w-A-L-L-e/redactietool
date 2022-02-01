@@ -11,48 +11,9 @@
   <div class="control mr-2">
     <span class="select is-small">
       <select name="prd_maker_attribute" id="prd_bijdrager_attribute">
-        {{- select_option('Aanwezig', 'Aanwezig', '') }}
-        {{- select_option('Adviseur', 'Adviseur', '') }}
-        {{- select_option('Afwezig', 'Afwezig', '') }}
-        {{- select_option('Archivaris', 'Archivaris', '') }}
-        {{- select_option('Arrangeur', 'Arrangeur', '') }}
-        {{- select_option('ArtistiekDirecteur', 'ArtistiekDirecteur', '') }}
-        {{- select_option('Assistent', 'Assistent', '') }}
-        {{- select_option('Auteur', 'Auteur', '') }}
-        {{- select_option('Belichting', 'Belichting', '') }}
-        {{- select_option('Bijdrager', 'Bijdrager', '') }}
-        {{- select_option('Cameraman', 'Cameraman', '') }}
-        {{- select_option('Co-producer', 'Co-producer', '') }}
-        {{- select_option('Commentator', 'Commentator', '') }}
-        {{- select_option('Componist', 'Componist', '') }}
-        {{- select_option('DecorOntwerper', 'DecorOntwerper', '') }}
-        {{- select_option('Digitaliseringspartner', 'Digitaliseringspartner', '') }}
-        {{- select_option('Dirigent', 'Dirigent', '') }}
-        {{- select_option('Dramaturg', 'Dramaturg', '') }}
-        {{- select_option('Fotografie', 'Fotografie', '') }}
-        {{- select_option('Geluid', 'Geluid', '') }}
-        {{- select_option('Geluidsman', 'Geluidsman', '') }}
-        {{- select_option('GrafischOntwerper', 'GrafischOntwerper', '') }}
-        {{- select_option('KostuumOntwerper', 'KostuumOntwerper', '') }}
-        {{- select_option('Kunstenaar', 'Kunstenaar', '') }}
-        {{- select_option('Make-up', 'Make-up', '') }}
-        {{- select_option('Muzikant', 'Muzikant', '') }}
-        {{- select_option('Nieuwsanker', 'Nieuwsanker', '') }}
-        {{- select_option('Omroeper', 'Omroeper', '') }}
-        {{- select_option('Onderzoeker', 'Onderzoeker', '') }}
-        {{- select_option('Post-productie', 'Post-productie', '') }}
-        {{- select_option('Producer', 'Producer', '') }}
-        {{- select_option('Presenter', 'Presenter', '') }}
-        {{- select_option('Reporter', 'Reporter', '') }}
-        {{- select_option('Scenarist', 'Scenarist', '') }}
-        {{- select_option('Soundtrack', 'Soundtrack', '') }}
-        {{- select_option('Sponsor', 'Sponsor', '') }}
-        {{- select_option('TechnischAdviseur', 'TechnischAdviseur', '') }}
-        {{- select_option('Uitvoerder', 'Uitvoerder', '') }}
-        {{- select_option('Verontschuldigd', 'Verontschuldigd', '') }}
-        {{- select_option('Vertaler', 'Vertaler', '') }}
-        {{- select_option('Verteller', 'Verteller', '') }}
-        {{- select_option('Voorzitter', 'Voorzitter', '') }}
+      {% for option_val in contributor_options %}
+        {{- select_option(option_val, option_val, '') }}
+      {% endfor %}
       </select>
     </span>
   </div>
@@ -77,48 +38,13 @@
     <div class="control mr-2">
       <span class="select is-small">
         <select name="prd_bijdrager_attribute_{{loop.index}}" id="prd_bijdrager_attribute_{{loop.index}}">
-          {{- select_option('Aanwezig', 'Aanwezig', contributor['attribute']) }}
-          {{- select_option('Adviseur', 'Adviseur', contributor['attribute']) }}
-          {{- select_option('Afwezig', 'Afwezig', contributor['attribute']) }}
-          {{- select_option('Archivaris', 'Archivaris', contributor['attribute']) }}
-          {{- select_option('Arrangeur', 'Arrangeur', contributor['attribute']) }}
-          {{- select_option('ArtistiekDirecteur', 'ArtistiekDirecteur', contributor['attribute']) }}
-          {{- select_option('Assistent', 'Assistent', contributor['attribute']) }}
-          {{- select_option('Auteur', 'Auteur', contributor['attribute']) }}
-          {{- select_option('Belichting', 'Belichting', contributor['attribute']) }}
-          {{- select_option('Bijdrager', 'Bijdrager', contributor['attribute']) }}
-          {{- select_option('Cameraman', 'Cameraman', contributor['attribute']) }}
-          {{- select_option('Co-producer', 'Co-producer', contributor['attribute']) }}
-          {{- select_option('Commentator', 'Commentator', contributor['attribute']) }}
-          {{- select_option('Componist', 'Componist', contributor['attribute']) }}
-          {{- select_option('DecorOntwerper', 'DecorOntwerper', contributor['attribute']) }}
-          {{- select_option('Digitaliseringspartner', 'Digitaliseringspartner', contributor['attribute']) }}
-          {{- select_option('Dirigent', 'Dirigent', contributor['attribute']) }}
-          {{- select_option('Dramaturg', 'Dramaturg', contributor['attribute']) }}
-          {{- select_option('Fotografie', 'Fotografie', contributor['attribute']) }}
-          {{- select_option('Geluid', 'Geluid', contributor['attribute']) }}
-          {{- select_option('Geluidsman', 'Geluidsman', contributor['attribute']) }}
-          {{- select_option('GrafischOntwerper', 'GrafischOntwerper', contributor['attribute']) }}
-          {{- select_option('KostuumOntwerper', 'KostuumOntwerper', contributor['attribute']) }}
-          {{- select_option('Kunstenaar', 'Kunstenaar', contributor['attribute']) }}
-          {{- select_option('Make-up', 'Make-up', contributor['attribute']) }}
-          {{- select_option('Muzikant', 'Muzikant', contributor['attribute']) }}
-          {{- select_option('Nieuwsanker', 'Nieuwsanker', contributor['attribute']) }}
-          {{- select_option('Omroeper', 'Omroeper', contributor['attribute']) }}
-          {{- select_option('Onderzoeker', 'Onderzoeker', contributor['attribute']) }}
-          {{- select_option('Post-productie', 'Post-productie', contributor['attribute']) }}
-          {{- select_option('Producer', 'Producer', contributor['attribute']) }}
-          {{- select_option('Presenter', 'Presenter', contributor['attribute']) }}
-          {{- select_option('Reporter', 'Reporter', contributor['attribute']) }}
-          {{- select_option('Scenarist', 'Scenarist', contributor['attribute']) }}
-          {{- select_option('Soundtrack', 'Soundtrack', contributor['attribute']) }}
-          {{- select_option('Sponsor', 'Sponsor', contributor['attribute']) }}
-          {{- select_option('TechnischAdviseur', 'TechnischAdviseur', contributor['attribute']) }}
-          {{- select_option('Uitvoerder', 'Uitvoerder', contributor['attribute']) }}
-          {{- select_option('Verontschuldigd', 'Verontschuldigd', contributor['attribute']) }}
-          {{- select_option('Vertaler', 'Vertaler', contributor['attribute']) }}
-          {{- select_option('Verteller', 'Verteller', contributor['attribute']) }}
-          {{- select_option('Voorzitter', 'Voorzitter', contributor['attribute']) }}
+        {% for option_val in contributor_options %}
+          {{- select_option(option_val, option_val, contributor['attribute']) }}
+        {% endfor %}
+
+        {% if contributor['attribute'] not in contributor_options %}
+          <option value="{{contributor['attribute']}}" selected>{{contributor['attribute']}}</a>
+        {% endif %} 
         </select>
       </span>
     </div>

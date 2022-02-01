@@ -12,28 +12,9 @@
   <div class="control mr-2">
     <span class="select is-small">
       <select name="prd_maker_attribute" id="prd_maker_attribute">
-        {{- select_option('Maker', 'Maker', '') }}
-        {{- select_option('Archiefvormer', 'Archiefvormer', '') }}
-        {{- select_option('Auteur', 'Auteur', '') }}
-        {{- select_option('Acteur', 'Acteur', '') }}
-        {{- select_option('Cineast', 'Cineast', '') }}
-        {{- select_option('Componist', 'Componist', '') }}
-        {{- select_option('Choreograaf', 'Choreograaf', '') }}
-        {{- select_option('Danser', 'Danser', '') }}
-        {{- select_option('Documentairemaker', 'Documentairemaker', '') }}
-        {{- select_option('Fotograaf', 'Fotograaf', '') }}
-        <!-- TODO: add this back once MediahavenApi supports it
-        {{ select_option('Geïnterviewde', 'Geïnterviewde', '') }} 
-        -->
-        {{- select_option('Interviewer', 'Interviewer', '') }}
-        {{- select_option('Kunstenaar', 'Kunstenaar', '') }}
-        {{- select_option('Muzikant', 'Muzikant', '') }}
-        {{- select_option('Performer', 'Performer', '') }}
-        {{- select_option('Producer', 'Producer', '') }}
-        {{- select_option('Productiehuis', 'Productiehuis', '') }}
-        {{- select_option('Regisseur', 'Regisseur', '') }}
-        {{- select_option('Schrijver', 'Schrijver', '') }}
-        {{- select_option('Opdrachtgever', 'Opdrachtgever', '') }}
+      {% for option_val in maker_options %}
+        {{- select_option(option_val, option_val, '') }}
+      {% endfor %}
       </select>
     </span>
   </div>
@@ -58,25 +39,13 @@
     <div class="control mr-2">
       <span class="select is-small">
         <select name="prd_maker_attribute_{{loop.index}}" id="prd_maker_attribute_{{loop.index}}">
-          {{- select_option('Maker', 'Maker', maker['attribute']) }}
-          {{- select_option('Archiefvormer', 'Archiefvormer', maker['attribute']) }}
-          {{- select_option('Auteur', 'Auteur', maker['attribute']) }}
-          {{- select_option('Acteur', 'Acteur', maker['attribute']) }}
-          {{- select_option('Cineast', 'Cineast', maker['attribute']) }}
-          {{- select_option('Componist', 'Componist', maker['attribute']) }}
-          {{- select_option('Choreograaf', 'Choreograaf', maker['attribute']) }}
-          {{- select_option('Danser', 'Danser', maker['attribute']) }}
-          {{- select_option('Documentairemaker', 'Documentairemaker', maker['attribute']) }}
-          {{- select_option('Fotograaf', 'Fotograaf', maker['attribute']) }}
-          {{- select_option('Interviewer', 'Interviewer', maker['attribute']) }}
-          {{- select_option('Kunstenaar', 'Kunstenaar', maker['attribute']) }}
-          {{- select_option('Muzikant', 'Muzikant', maker['attribute']) }}
-          {{- select_option('Performer', 'Performer', maker['attribute']) }}
-          {{- select_option('Producer', 'Producer', maker['attribute']) }}
-          {{- select_option('Productiehuis', 'Productiehuis', maker['attribute']) }}
-          {{- select_option('Regisseur', 'Regisseur', maker['attribute']) }}
-          {{- select_option('Schrijver', 'Schrijver', maker['attribute']) }}
-          {{- select_option('Opdrachtgever', 'Opdrachtgever', maker['attribute']) }}
+        {% for option_val in maker_options %}
+          {{- select_option(option_val, option_val, maker['attribute']) }}
+        {% endfor %}
+
+        {% if maker['attribute'] not in maker_options %}
+          <option value="{{maker['attribute']}}" selected>{{maker['attribute']}}</a>
+        {% endif %}
         </select>
       </span>
     </div>

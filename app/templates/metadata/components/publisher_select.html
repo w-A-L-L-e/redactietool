@@ -10,11 +10,10 @@
 <div class="field has-addons prd-widget" id="prd_publisher">
   <div class="control mr-2">
     <span class="select is-small">
-      <select name="prd_publisher_attribute" id="prd_publisher_attribute">
-        {{- select_option('Distributeur', 'Distributeur', '') }}
-        {{- select_option('Exposant', 'Exposant', '') }}
-        {{- select_option('Persagentschap', 'Persagentschap', '') }}
-        {{- select_option('Publisher', 'Publisher', '') }}
+      <select name="prd_publisher_attribute" id="prd_publisher_attribute"> 
+      {% for option_val in publisher_options %}
+        {{- select_option(option_val, option_val, '') }}
+      {% endfor %}
       </select>
     </span>
   </div>
@@ -41,10 +40,14 @@
         <select 
           name="prd_publisher_attribute_{{loop.index}}" 
           id="prd_publisher_attribute_{{loop.index}}">
-          {{- select_option('Distributeur', 'Distributeur', publisher['attribute']) }}
-          {{- select_option('Exposant', 'Exposant', publisher['attribute']) }}
-          {{- select_option('Persagentschap', 'Persagentschap', publisher['attribute']) }}
-          {{- select_option('Publisher', 'Publisher', publisher['attribute']) }}
+        {% for option_val in publisher_options %}
+          {{- select_option(option_val, option_val, publisher['attribute']) }}
+        {% endfor %}
+
+        {% if publisher['attribute'] not in publisher_options %}
+          <option value="{{publisher['attribute']}}" selected>{{publisher['attribute']}}</a>
+        {% endif %}
+
         </select>
       </span>
     </div>

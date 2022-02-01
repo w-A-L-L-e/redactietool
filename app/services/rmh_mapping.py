@@ -149,6 +149,37 @@ class RmhMapping:
 
         return safe_content
 
+    def maker_options(self):
+        return [
+            'Maker', 'Archiefvormer', 'Auteur', 'Acteur',
+            'Cineast', 'Componist', 'Choreograaf', 'Danser',
+            'Documentairemaker', 'Fotograaf', 'Interviewer',
+            'Kunstenaar', 'Muzikant', 'Performer', 'Producer',
+            'Productiehuis', 'Regisseur', 'Schrijver',
+            'Opdrachtgever',
+        ]
+
+    def contributor_options(self):
+        return [
+            'Aanwezig', 'Adviseur', 'Afwezig', 'Archivaris',
+            'Arrangeur', 'ArtistiekDirecteur', 'Assistent',
+            'Auteur', 'Belichting', 'Bijdrager', 'Cameraman',
+            'Co-producer', 'Commentator', 'Componist', 'DecorOntwerper',
+            'Digitaliseringspartner', 'Dirigent', 'Dramaturg',
+            'Fotografie', 'Geluid', 'Geluidsman', 'GrafischOntwerper',
+            'KostuumOntwerper', 'Kunstenaar', 'Make-up', 'Muzikant',
+            'Nieuwsanker', 'Omroeper', 'Onderzoeker', 'Post-productie',
+            'Producer', 'Presenter', 'Reporter', 'Scenarist',
+            'Soundtrack', 'Sponsor', 'TechnischAdviseur', 'Uitvoerder',
+            'Verontschuldigd', 'Vertaler', 'Verteller', 'Voorzitter'
+        ]
+
+    def publisher_options(self):
+        return [
+            'Distributeur', 'Exposant',
+            'Persagentschap', 'Publisher'
+        ]
+
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
@@ -175,8 +206,11 @@ class RmhMapping:
             'media_object_id': mam_data.get('mediaObjectId', ''),
             'cp': str(get_property(mam_data, 'CP')).upper(),
             'makers': get_md_array(mam_data, 'dc_creators'),
+            'maker_options': self.maker_options(),
             'contributors': get_md_array(mam_data, 'dc_contributors'),
+            'contributor_options': self.contributor_options(),
             'publishers': get_md_array(mam_data, 'dc_publishers'),
+            'publisher_options': self.publisher_options(),
             'item_type': item_type,
             'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
             'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
