@@ -162,7 +162,6 @@ class RmhMapping:
         safe_content = self.unescape_tag(safe_content, 'ul')
         safe_content = self.unescape_tag(safe_content, 'li')
 
-
         # sanitize a href tags and add target = _blank
         safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
 
@@ -183,19 +182,19 @@ class RmhMapping:
         # allow regular < and > to still work
         safe_content = safe_content.replace("&amp;lt;", "&lt;")
         safe_content = safe_content.replace("&amp;gt;", "&gt;")
-        safe_content = safe_content.replace("&lt;br&gt;","<br>")
+        safe_content = safe_content.replace("&lt;br&gt;", "<br>")
 
         return safe_content
 
     def markdown_to_html(self, markdown_content):
         markdown_text = self.cleanup_markdown(markdown_content)
         html_content = markdown2.markdown(markdown_text)
-        html_content = html_content.replace("\n\n","<br>")
-        html_content = html_content.replace("\n","")
+        html_content = html_content.replace("\n\n", "<br>")
+        html_content = html_content.replace("\n", "")
         return self.secure_unescape(html_content)
 
     def cleanup_markdown(self, markdown_text):
-        return markdown_text.replace("&#13;\n","\n").replace("\r","")
+        return markdown_text.replace("&#13;\n", "\n").replace("\r", "")
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
@@ -355,7 +354,7 @@ class RmhMapping:
         # deze nog eventjes un-escaped
         mam_data = self.set_property(
             mam_data, 'dcterms_abstract',
-            self.cleanup_markdown( request.form.get('avo_beschrijving') )
+            self.cleanup_markdown(request.form.get('avo_beschrijving'))
         )
 
         # array value serie in subsection dc_titles

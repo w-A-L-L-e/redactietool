@@ -37,8 +37,10 @@ class MediahavenApi:
         'DEPARTMENT_ID',
         'dd111b7a-efd0-44e3-8816-0905572421da'
     )
-    TESTBEELD_PERM_ID = os.environ.get('TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
-    ONDERWIJS_PERM_ID = os.environ.get('ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+    TESTBEELD_PERM_ID = os.environ.get(
+        'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
+    ONDERWIJS_PERM_ID = os.environ.get(
+        'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
     ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
 
     def __init__(self, session=None):
@@ -203,19 +205,23 @@ class MediahavenApi:
 
         # now set our permissions and exclude the ONDERWIJS_PERM_ID
         # when publish_item is not set
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Read' %
+                         MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.ADMIN_PERM_ID
 
         if tp.get('publish_item'):
-            etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.ONDERWIJS_PERM_ID
+            etree.SubElement(perms, '{%s}Read' %
+                             MH_NS).text = self.ONDERWIJS_PERM_ID
             print(
                 "publicatiestatus is TRUE, added read permission =",
                 self.ONDERWIJS_PERM_ID
             )
 
-        etree.SubElement(perms, '{%s}Write' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Write' %
+                         MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Write' % MH_NS).text = self.ADMIN_PERM_ID
-        etree.SubElement(perms, '{%s}Export' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Export' %
+                         MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Export' % MH_NS).text = self.ADMIN_PERM_ID
 
         mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
@@ -316,7 +322,7 @@ class MediahavenApi:
     def update_metadata(self, department, metadata, tp):
         xml_sidecar = self.metadata_sidecar(metadata, tp)
         send_url = f"{self.API_SERVER}/resources/media/{metadata['fragmentId']}"
-        #print("\nSubmitting sidecar url=",
+        # print("\nSubmitting sidecar url=",
         #    send_url, "\nsidecar:\n", xml_sidecar)
         logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
 
