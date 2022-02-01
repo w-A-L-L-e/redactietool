@@ -175,7 +175,7 @@ class RmhMapping:
         # href tags in markdown mode:
         safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
         safe_content = safe_content.replace(
-            '#34;&gt;',
+            '&#34;&gt;',
             '" target="_blank">'
         )
         safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
