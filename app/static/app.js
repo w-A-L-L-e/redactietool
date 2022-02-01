@@ -376,31 +376,35 @@ function checkDateInput(date_id){
 }
 
 function checkDateInputs(){
-  checkDateInput("creatiedatum");
+  // checkDateInput("creatiedatum"); // per request disable checks here
   checkDateInput("uitzenddatum");
 }
 
-function checkPageSaved(){
-  // vanilla pagesave check test, still issues with this:
-  //window.addEventListener('beforeunload', function (e) {
-  //  // Cancel the event as stated by the standard.
-  //  e.preventDefault();
-  //  // Chrome requires returnValue to be set.
-  //  e.returnValue = '';
 
-
-    // event.preventDefault();
-    // return event.returnValue = "Ben je zeker?";
-  //  console.log("HIER EEN CUSTOM DIALOG!!!")
-  //});
-
-  window.onbeforeunload = (event) => {
-    console.log("HIER EEN CUSTOM DIALOG!!!")
-    if (false) {
-      return "";
-    }
-  };
-}
+//function checkPageSaved(){
+//  // vanilla pagesave check test, still issues with this:
+//  //window.addEventListener('beforeunload', function (e) {
+//  //  // Cancel the event as stated by the standard.
+//  //  e.preventDefault();
+//  //  // Chrome requires returnValue to be set.
+//  //  e.returnValue = '';
+//
+//
+//  showNavigationWarning();
+//  flashModalWarning();
+//  showModalAlert("hello", "world");
+//  // event.preventDefault();
+//  // return event.returnValue = "Ben je zeker?";
+//  //  console.log("HIER EEN CUSTOM DIALOG!!!")
+//  //});
+//
+//  window.onbeforeunload = (event) => {
+//    console.log("HIER EEN CUSTOM DIALOG!!!")
+//    if (false) {
+//      return "";
+//    }
+//  };
+//}
 
 
 // =========================== DOCUMENT READY EVENT ============================
@@ -441,12 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
-  checkDateInputs();
-  
-  // For demo, show modal dialogs
-  // ============================
-  // showNavigationWarning();
-  // flashModalWarning();
-  // showModalAlert("hello", "world");
+  checkDateInputs(); 
 });
 
