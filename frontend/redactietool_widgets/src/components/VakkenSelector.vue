@@ -26,7 +26,7 @@
       <template slot="noResult">Vak niet gevonden</template>
 
       <!--
-      disable custom styling 
+      custom template styling 
       <template 
         slot="singleLabel" 
         slot-scope="props">
@@ -54,7 +54,12 @@
 
     <div class="inline-suggesties" v-if="showInlineSuggesties()">
       <div class="inline-suggesties-title">Suggesties</div>
-      <div class="inline-suggesties-list">
+
+      <div v-if="loading">
+        <button class="button is-loading">Loading</button>
+      </div>
+
+      <div v-if="!loading" class="inline-suggesties-list">
         <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
           <div v-for="vak in row" :key="vak.id"  
                 class="inline-suggestie-pill"
@@ -163,8 +168,9 @@
               Geen suggesties beschikbaar, volgende vakken zijn mogelijk.
             </h3>
 
-            <div v-if="loading">
-              <progress class="progress is-large is-info" max="100">60%</progress>
+            <div v-if="loading" class="modal-loader">
+              <!--progress class="progress is-large is-info" max="100">60%</progress-->
+              <button class="button is-loading">Loading</button>
             </div>
 
             <div v-if="!hogerOfVolwassenOnderwijs()">
@@ -683,10 +689,14 @@
     cursor: pointer;
   }
   .inline-suggestie-selected{
-    /* background-color: #3e8ed0; */
     background-color: #93b6d3;
     border: 1px solid #9cafbd;
     color: #fff;
   }
 
+  .modal-loader {
+    text-align: center;
+    height: 54px;
+    margin-top: -52px;
+  }
 </style>
