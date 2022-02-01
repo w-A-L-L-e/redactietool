@@ -199,6 +199,8 @@ class RmhMapping:
             'publish_item': False,
             'original_cp': get_property(mam_data, 'Original_CP'),
             'media_object_id': mam_data.get('mediaObjectId', ''),
+            # TODO: dit moet beter Administrative/OrganisationName worden
+            # maar dat is enkel ook op v2 beschikbaar (zie mediahaven_api)
             'cp': str(get_property(mam_data, 'CP')).upper(),
             'makers': get_md_array(mam_data, 'dc_creators'),
             'maker_options': self.MAKER_OPTIONS,

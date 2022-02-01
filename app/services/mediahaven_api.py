@@ -37,6 +37,9 @@ class MediahavenApi:
         'DEPARTMENT_ID',
         'dd111b7a-efd0-44e3-8816-0905572421da'
     )
+    TESTBEELD_PERM_ID = os.environ.get('TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
+    ONDERWIJS_PERM_ID = os.environ.get('ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
+    ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
 
     def __init__(self, session=None):
         if session is None:
@@ -163,14 +166,15 @@ class MediahavenApi:
         else:
             return False
 
+        # print(
+        #     "item_v2 organisation name =",
+        #     item_v2.get('Administrative').get('OrganisationName')
+        # )
         # data = item_v2.get('Dynamic')
         permissions = item_v2.get('RightsManagement').get(
             'Permissions').get('Read')
 
-        OAI_PERM_ID = os.environ.get(
-            'OAI_PERM_ID', 'config_oai_uuid')
-
-        return OAI_PERM_ID in permissions
+        return self.ONDERWIJS_PERM_ID in permissions
 
     def save_array_field(self, metadata, fieldname, mdprops, field_attrib="multiselect"):
         array_values = get_property(metadata, fieldname)
@@ -188,13 +192,6 @@ class MediahavenApi:
     # calls).
     # For now we stick with what works and use an xml sidecar which should be fine at least until 2023.
     def metadata_sidecar(self, metadata, tp):
-        TESTBEELD_PERM_ID = os.environ.get(
-            'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
-        ONDERWIJS_PERM_ID = os.environ.get(
-            'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
-        ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
-        OAI_PERM_ID = os.environ.get('OAI_PERM_ID', 'config_oai_uuid')
-
         root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
         rights = etree.SubElement(root, '{%s}RightsManagement' % MHS_NS)
 
@@ -203,21 +200,20 @@ class MediahavenApi:
 
         # now set our permissions and exclude the ONDERWIJS_PERM_ID
         # when publish_item is not set
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
-        etree.SubElement(perms, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.ADMIN_PERM_ID
 
         if tp.get('publish_item'):
-            etree.SubElement(perms, '{%s}Read' % MH_NS).text = OAI_PERM_ID
+            etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.ONDERWIJS_PERM_ID
             print(
                 "publicatiestatus is TRUE, added read permission =",
-                OAI_PERM_ID
+                self.ONDERWIJS_PERM_ID
             )
 
-        etree.SubElement(perms, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
-        etree.SubElement(perms, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
-        etree.SubElement(perms, '{%s}Export' % MH_NS).text = TESTBEELD_PERM_ID
-        etree.SubElement(perms, '{%s}Export' % MH_NS).text = ADMIN_PERM_ID
+        etree.SubElement(perms, '{%s}Write' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Write' % MH_NS).text = self.ADMIN_PERM_ID
+        etree.SubElement(perms, '{%s}Export' % MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(perms, '{%s}Export' % MH_NS).text = self.ADMIN_PERM_ID
 
         mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
 
