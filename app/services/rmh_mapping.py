@@ -195,7 +195,6 @@ class RmhMapping:
 
     def cleanup_markdown(self, markdown_text):
         markdown_text = markdown_text.replace("&#13;\n", "").replace("\r", "")
-        #markdown_text = markdown_text.replace("\n\n \n\n","\n\n")
         return markdown_text
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
@@ -273,7 +272,7 @@ class RmhMapping:
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
             'description': mam_data.get('description'),
-            'avo_beschrijving': avo_beschrijving, 
+            'avo_beschrijving': avo_beschrijving,
             'ondertitels': ondertitels,
             'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
             'cast': cast,
