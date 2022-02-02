@@ -194,7 +194,9 @@ class RmhMapping:
         return self.secure_unescape(html_content)
 
     def cleanup_markdown(self, markdown_text):
-        return markdown_text.replace("&#13;\n", "\n").replace("\r", "")
+        markdown_text = markdown_text.replace("&#13;\n", "").replace("\r", "")
+        #markdown_text = markdown_text.replace("\n\n \n\n","\n\n")
+        return markdown_text
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
@@ -212,6 +214,9 @@ class RmhMapping:
         item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
         if item_type_lom and len(item_type_lom) > 0:
             item_type = item_type_lom[0]['value']
+
+        dcterms_abstract = get_property(mam_data, 'dcterms_abstract')
+        avo_beschrijving = self.markdown_to_html(dcterms_abstract)
 
         return {
             'token': token,
@@ -268,9 +273,7 @@ class RmhMapping:
             'titel_deelreeks': get_array_property(mam_data, 'dc_titles', 'deelreeks'),
             'titel_registratie': get_array_property(mam_data, 'dc_titles', 'registratie'),
             'description': mam_data.get('description'),
-            'avo_beschrijving': self.markdown_to_html(
-                get_property(mam_data, 'dcterms_abstract')
-            ),
+            'avo_beschrijving': avo_beschrijving, 
             'ondertitels': ondertitels,
             'programma_beschrijving': get_property(mam_data, 'dc_description_programma'),
             'cast': cast,

@@ -154,18 +154,13 @@
       var markdown_target = document.getElementById("avo_beschrijving");
       if(markdown_target){
         var markdown = turndownService.turndown(html_content);
-        markdown_target.value = markdown;
+        // remove extra whitespace from markdown
+        markdown_target.value = markdown.split("\n\n  \n\n").join("\n\n");
       }
     }
   }
 
   var turndownService = new TurndownService();
-  // turndownService.addRule('strikethrough', {
-  //   filter: ['del', 's', 'strike'],
-  //   replacement: function (content) {
-  //     return '~' + content + '~'
-  //   }
-  // })
   var quill = new Quill('#redactietool-richtext-editor', {
     modules: {
       toolbar: [
@@ -182,12 +177,12 @@
     theme: 'snow'
   });
 
-  quill.on('editor-change', function(eventName, ...args) {
-    richtext_changed(); 
-  });
-
+ 
   document.addEventListener('DOMContentLoaded', () => {
-      richtext_changed();
+   richtext_changed();
+   quill.on('editor-change', function(eventName, ...args) {
+      richtext_changed(); 
+    });
   });
 
 </script>
