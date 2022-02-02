@@ -259,21 +259,27 @@
       }
     },
     mounted: function() {
+      this.$root.$on('themas_changed', data => {
+        // console.log('themas_changed event');
+        this.themas = data;
+        this.updateSuggestions();
+      });
+
+      this.$root.$on('onderwijs_changed', data => {
+        this.niveaus = data['niveaus'];
+        this.graden = data['graden']
+        this.updateSuggestions();
+      });
+
+      // these are only emitted in case of comboEnabled=false 
+      // aka with the 2 seperate selectors
       this.$root.$on('niveaus_changed', data => {
-        // console.log('niveaus_changed event');
         this.niveaus = data;
         this.updateSuggestions();
       });
 
       this.$root.$on('graden_changed', data => {
-        // console.log('graden changed event');
         this.graden = data;
-        this.updateSuggestions();
-      });
-
-      this.$root.$on('themas_changed', data => {
-        // console.log('themas_changed event');
-        this.themas = data;
         this.updateSuggestions();
       });
     },

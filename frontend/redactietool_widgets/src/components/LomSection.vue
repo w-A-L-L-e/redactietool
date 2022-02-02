@@ -35,24 +35,7 @@
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsniveaus</label>
-        </div>
-        <div class="field-body">
-          <OnderwijsniveausSelector/> 
-        </div>
-      </div>
- 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsgraden</label>
-        </div>
-        <div class="field-body">
-          <OnderwijsgradenSelector/> 
-        </div>
-      </div>
-
+      <OnderwijsSelector v-bind:comboEdit="onderwijsCombo"/>
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -94,8 +77,7 @@
   import TypeSelector from './TypeSelector.vue'
   import EindgebruikerSelector from './EindgebruikerSelector.vue'
   import TalenSelector from './TalenSelector.vue'
-  import OnderwijsniveausSelector from './OnderwijsniveausSelector.vue'
-  import OnderwijsgradenSelector from './OnderwijsgradenSelector.vue'
+  import OnderwijsSelector from './OnderwijsSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
   import VakkenSelector from './VakkenSelector.vue'
   import LegacyVakken from './LegacyVakken.vue'
@@ -114,8 +96,7 @@
       TypeSelector,
       EindgebruikerSelector,
       TalenSelector,
-      OnderwijsniveausSelector,
-      OnderwijsgradenSelector,
+      OnderwijsSelector,
       ThemaSelector,
       VakkenSelector,
       LegacyVakken,
@@ -125,6 +106,7 @@
     data () {
       return {
         isMinimized: false,
+        onderwijsCombo: true,
         pid: pid
       }
     },

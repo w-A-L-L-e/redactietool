@@ -1,38 +1,65 @@
 <template>
-  <div id="onderwijsgraden_selector"> 
-    <multiselect v-model="value" 
-      placeholder="Selecteer onderwijsgraden" 
-      label="label" 
-      track-by="id" 
-      :options="graden_filtered"
-      :multiple="true" 
-      :show-labels="false"
-      :hide-selected="true"
-      :taggable="false" 
-      :searchable="false"
-      @input="updateValue">
-       
-      <template slot="noResult">Onderwijsgraad niet gevonden</template>
-      <template slot="noOptions">
-        Selecteer secundair of lager in onderwijsniveaus
-      </template>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label" v-if="!comboEdit">Onderwijsgraden</label>
+      <label class="label" v-if="comboEdit"></label>
+    </div>
+    <div class="field-body">
+      <div id="onderwijsgraden_selector"> 
 
-    </multiselect>
-    <textarea name="lom1_onderwijsgraden" v-model="json_value" id="onderwijsgraden_json_value"></textarea>
+        <span v-if="!comboEdit">
+          <multiselect v-model="value" 
+            placeholder="Selecteer onderwijsgraden" 
+            label="label" 
+            track-by="id" 
+            :options="graden_filtered"
+            :multiple="true" 
+            :show-labels="false"
+            :hide-selected="true"
+            :taggable="false" 
+            :searchable="false"
+            @input="updateValue">
+             
+            <template slot="noResult">Onderwijsgraad niet gevonden</template>
+            <template slot="noOptions">
+              Selecteer secundair of lager in onderwijsniveaus
+            </template>
+          </multiselect>
+        </span>
+
+        <div v-if="comboEdit && value.length" class="inline-graden-wrapper">
+          <div class="graden-inline-title">Onderwijsgraden</div>
+          <div class="inline-graden-list">
+            <div 
+              class="graden-pill" 
+              v-for="graad in value" 
+              :key="graad.id"
+              >
+              {{graad.label}}
+            </div>
+          </div>
+        </div>
+
+        <textarea name="lom1_onderwijsgraden" v-model="json_value" id="onderwijsgraden_json_value"></textarea>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
   import Multiselect from 'vue-multiselect'
   import axios from 'axios';
 
-  // todo: mapping in mediahaven voor onderwijsgraden?
   var default_value = []  
 
   export default {
     name: 'OnderwijsgradenSelector',
     components: {
       Multiselect 
+    },
+    props: {
+      comboEdit: Boolean
     },
     data () {
       return {
@@ -54,6 +81,12 @@
         this.niveaus = data;
         this.filterGraden();
       });
+
+      this.$root.$on('onderwijs_changed', data => {
+        this.niveaus = data['niveaus'];
+        this.value = data['graden']
+        this.json_value = JSON.stringify(this.value);
+      });
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -71,14 +104,17 @@
         .then(res => {
           // populate all possible options
           this.options = res.data;
+          this.$root.$emit('graden_options_loaded', this.options);
 
           // set selected options for this specific item
-          // do fallback, in case only old string values are present
+          this.value = [];
+
           var value_div = document.getElementById("item_onderwijsgraden");
           if(value_div){
             var onderwijsgraden = JSON.parse(value_div.innerText);
             var option_item = {};
 
+            // do fallback, in case only old string values are present
             if(value_div && onderwijsgraden['show_legacy'] ){
               console.log("legacy fallback voor onderwijsgraden (lom_typicalagerange)...");
               var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
@@ -95,7 +131,7 @@
                     if( item['definition'] == option_item['definition'] ){
                       item['id'] = option_item['id'];
                       item['label'] = option_item['label']
-                      default_value.push( {
+                      this.value.push( {
                         id: item['id'],
                         label: item['label'],
                         definition: item['definition']
@@ -114,7 +150,7 @@
                 for(var j in this.options ){
                   option_item = this.options[j];
                   if( item_id == option_item['id'] ){
-                    default_value.push({
+                    this.value.push({
                       'id': item_id,
                       'label': option_item['label'],
                       'definition': option_item['definition']
@@ -126,8 +162,8 @@
               }
             }
             this.filterGraden();
-            this.json_value = JSON.stringify(default_value);
-            this.$root.$emit('graden_changed', default_value);
+            this.json_value = JSON.stringify(this.value);
+            this.$root.$emit('graden_changed', this.value);
           }
 
         });
@@ -179,4 +215,37 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
+  .graden-inline-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #363636;
+  }
+
+  .inline-graden-list{
+    /*
+    max-height: 150px;
+    overflow-y: scroll;
+    */
+  }
+
+  .graden-pill{
+    border-radius: 5px;
+    border: 1px solid #9cafbd;
+    background-color: #edeff2;
+    color: #2b414f;
+    text-overflow: ellipsis;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 1px 8px 1px 8px;
+    margin-bottom: 5px;
+    /* cursor: pointer; */
+  }
+
+  .inline-graden-wrapper{
+    margin-top: -18px;
+    margin-bottom: 30px;
+  }
+
 </style>
