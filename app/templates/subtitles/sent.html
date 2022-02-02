@@ -29,7 +29,7 @@ Redactietool - Ondertitelbestand
         subtitles:{ 
           tracks:[
             { 
-              src: "/item_subtitles/{{cp}}/{{media_object_id}}",
+              src: "/item_subtitles/{{department}}/{{pid}}",
               label: "Nederlands",
               id: "Nederlands-nl",
               default: true,
@@ -69,11 +69,9 @@ Redactietool - Ondertitelbestand
 
     <div id="upload_info_section">
       <table class="table is-fullwidth subtitle-upload-results">
-        <tr><td><b>PID:</b></td><td><b>{{pid}}</b></td></tr>
-        <tr><td><b>Ondertitel type:</b></td><td>{{subtitle_type}}</td></tr>
-        <tr><td><b>Ondertitelbestand:</b></td>
-          <td><a href="/item_srt_link/{{cp}}/{{media_object_id}}" target="_blank">{{srt_file}}</td>
-        </tr>
+        <tr> <td><b>PID:</b></td>               <td><b>{{pid}}</b></td> </tr>
+        <tr> <td><b>Ondertitel type:</b></td>   <td>{{subtitle_type}}</td> </tr>
+        <tr> <td><b>Ondertitelbestand:</b></td> <td>{{srt_file}}</td> </tr>
         {% if not upload_cancelled %}
           <tr><td><b>Sidecar xml file:</b></td><td>{{xml_file}}</td></tr>
           <tr>

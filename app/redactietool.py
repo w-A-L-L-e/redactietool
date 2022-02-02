@@ -417,7 +417,7 @@ def cancel_upload():
 @app.route('/send_to_mam', methods=['POST'])
 @requires_authorization
 @login_required
-def send_to_mam():
+def send_subtitles_to_mam():
 
     tp = {
         'token': request.form.get('token'),
@@ -440,8 +440,6 @@ def send_to_mam():
     tp['keyframe'] = video_data.get('previewImagePath')
     tp['flowplayer_token'] = os.environ.get(
         'FLOWPLAYER_TOKEN', 'set_in_secrets')
-    tp['media_object_id'] = video_data.get('mediaObjectId', '')
-    tp['cp'] = str(get_property(video_data, 'CP')).upper()
 
     if tp['replace_existing'] == 'cancel':
         # abort and remove temporary files
@@ -592,23 +590,24 @@ def get_vakken_suggesties():
     return result
 
 
-@app.route('/item_subtitles/<string:cp>/<string:object_id>', methods=['GET'])
+@app.route('/item_subtitles/<string:department>/<string:pid>', methods=['GET'])
 @requires_authorization
 @login_required
-def get_subtitles(cp, object_id):
-    srt_url = get_srt_link(cp, object_id)
-    return get_vtt_subtitles(srt_url)
+def get_subtitles(department, pid):
+    mh_api = MediahavenApi()
+    sub_response = mh_api.get_default_subtitle(department, pid)
 
+    if not sub_response:
+        return ""
 
-@app.route('/item_srt_link/<string:cp>/<string:object_id>', methods=['GET'])
-@requires_authorization
-@login_required
-def get_srt_link(cp, object_id):
     object_store_url = app.config.get('OBJECT_STORE_URL')
-    srt_url = f"{object_store_url}/{cp}/{object_id}/{object_id}.srt"
-    print("SRT LINK DEBUG: cp=", cp, "object_id=",
-          object_id, "srt_url=", srt_url)
-    return srt_url
+    object_id = sub_response.get('Internal').get('MediaObjectId', '')
+    org_name = sub_response.get('Administrative').get(
+        'OrganisationName').upper()
+    srt_url = f"{object_store_url}/{org_name}/{object_id}/{object_id}.srt"
+    print("SRT LINK:", srt_url)
+
+    return get_vtt_subtitles(srt_url)
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================

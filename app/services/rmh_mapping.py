@@ -219,10 +219,6 @@ class RmhMapping:
             'mam_data': json.dumps(mam_data),
             'publish_item': False,
             'original_cp': get_property(mam_data, 'Original_CP'),
-            'media_object_id': mam_data.get('mediaObjectId', ''),
-            # TODO: dit moet beter Administrative/OrganisationName worden
-            # maar dat is enkel ook op v2 beschikbaar (zie mediahaven_api)
-            'cp': str(get_property(mam_data, 'CP')).upper(),
             'makers': get_md_array(mam_data, 'dc_creators'),
             'maker_options': self.MAKER_OPTIONS,
             'contributors': get_md_array(mam_data, 'dc_contributors'),
@@ -307,11 +303,10 @@ class RmhMapping:
             }
 
     def update_legacy_flag(self, request, mam_data):
-        # als ik goed lees na optimalisatie is momenteel
+        # na optimalisatie is momenteel
         # legacy vakken ( lom_classification )
         # niet nodig voor deze check zie DEV-1881
-
-        # default waarde
+        # default waarde voor lom_legacy
         lom_legacy = "true"
 
         themas = get_md_array(mam_data, 'lom_thema')
@@ -324,8 +319,6 @@ class RmhMapping:
             mam_data, 'lom_legacy',
             lom_legacy
         )
-
-        # structuur voor boolean field lom_legacy?
 
         return mam_data
 

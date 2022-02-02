@@ -168,18 +168,46 @@ class MediahavenApi:
         else:
             return False
 
-        # import json
-        # print(
-        #     "orgname=",
-        #     item_v2.get('Administrative').get('OrganisationName')
-        # )
         # data = item_v2.get('Dynamic')
+        # TODO: Later we can use this data to refactor the v1 calls in MetaMapping
+        # and SubMapping
         # print(json.dumps(item_v2, indent=2))
 
         permissions = item_v2.get('RightsManagement').get(
             'Permissions').get('Read')
 
         return self.ONDERWIJS_PERM_ID in permissions
+
+    def get_subtitles(self, department, pid):
+        matched_subs = self.list_objects(
+            department,
+            search=f"+(dc_relationsis_verwant_aan:{pid})",
+            enable_v2_header=True
+        )
+        nr_results = matched_subs.get('TotalNrOfResults')
+        if not nr_results:
+            return []
+
+        return matched_subs.get('MediaDataList', [])
+
+    def get_default_subtitle(self, department, pid):
+        matched_subs = self.list_objects(
+            department,
+            search=f"+(dc_relationsis_verwant_aan:{pid})",
+            enable_v2_header=True
+        )
+
+        nr_results = matched_subs.get('TotalNrOfResults')
+        if not nr_results:
+            return False
+
+        if nr_results == 1:
+            return matched_subs.get('MediaDataList', [{}])[0]
+        elif nr_results > 1:
+            # future todo, iterate them and pick a certain one to return?
+            return matched_subs.get('MediaDataList', [{}])[1]
+        else:
+            return False
 
     def save_array_field(self, metadata, fieldname, mdprops, field_attrib="multiselect"):
         array_values = get_property(metadata, fieldname)
