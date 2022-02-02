@@ -106,7 +106,7 @@
     data () {
       return {
         isMinimized: false,
-        onderwijsCombo: true,
+        onderwijsCombo: true, //set to false 2 seperate multi-selects for graden and niveaus
         pid: pid
       }
     },

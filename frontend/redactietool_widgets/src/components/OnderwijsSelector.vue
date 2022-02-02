@@ -1,7 +1,7 @@
 <template>
-  <div id="onderwijs_selector">
+  <div id="onderwijs_selector" v-bind:class="[(!comboEdit || value.length) ? '' : 'onderwijs-pull-up']">
 
-    <div v-if="comboEdit" class="field is-horizontal">
+    <div  v-if="comboEdit" class="field is-horizontal">
       <div class="field-label is-normal">
         <label class="label">Onderwijs</label>
       </div>
@@ -229,7 +229,7 @@
 
 <style>
   #onderwijs_selector{
-    margin-bottom: -22px;
+    margin-bottom: 10px;
   }
 
   #onderwijs_selector_dropdown{
@@ -242,5 +242,8 @@
     height: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  .onderwijs-pull-up{
+    margin-bottom: -24px !important;
   }
 </style>

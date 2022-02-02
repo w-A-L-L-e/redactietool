@@ -5,7 +5,7 @@
       <label class="label" v-if="comboEdit"></label>
     </div>
     <div class="field-body">
-      <div id="onderwijsniveaus_selector"> 
+      <div id="onderwijsniveaus_selector" class=""> 
         <span v-if="!comboEdit">
           <multiselect v-model="value" 
             placeholder="Selecteer onderwijsniveaus" 
@@ -210,7 +210,7 @@
 
   .inline-niveau-wrapper {
     margin-top: -8px;
-    margin-bottom: 12px;
+    margin-bottom: -18px;
   }
 
 </style>
