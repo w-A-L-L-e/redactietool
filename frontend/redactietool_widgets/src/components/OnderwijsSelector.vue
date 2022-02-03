@@ -183,7 +183,6 @@
         // add secundair or lager niveau in case used=true
         if( lager_used ){
           changed_niveaus.push( this.lager_niveau );
-          console.log("lager=", this.lager_niveau);
         }
         if( secundair_used ){
           changed_niveaus.push( this.secundair_niveau );
@@ -194,7 +193,6 @@
           'graden': changed_graden
         }
 
-        console.log("onderwijs_changed data=", data);
         this.$root.$emit('onderwijs_changed', data);
       },
       readValues(){
