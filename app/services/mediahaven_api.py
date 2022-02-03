@@ -172,9 +172,12 @@ class MediahavenApi:
         # TODO: Later we can use this data to refactor the v1 calls in MetaMapping
         # and SubMapping
         # print(json.dumps(item_v2, indent=2))
+        # import json
 
         permissions = item_v2.get('RightsManagement').get(
             'Permissions').get('Read')
+
+        print("permissions=", permissions )
 
         return self.ONDERWIJS_PERM_ID in permissions
 
