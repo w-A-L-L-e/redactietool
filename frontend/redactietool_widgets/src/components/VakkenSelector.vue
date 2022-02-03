@@ -455,7 +455,6 @@
           if(okw.id == vak.id){
             unselect = true;
             this.value.splice(o,1); // remove selection
-            this.json_value = JSON.stringify(this.value);
             break;
           } 
         }
@@ -468,8 +467,10 @@
           };
           // this.options.push(new_vak); //only needed for entirely new vak (create)
           this.value.push(new_vak);
-          this.json_value = JSON.stringify(this.value);
         }
+        
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('vakken_changed', this.value);
       },
       zoek(search_str, src_rows){
         var result = [];
