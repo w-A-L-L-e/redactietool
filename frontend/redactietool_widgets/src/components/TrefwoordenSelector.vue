@@ -7,11 +7,15 @@
       selected-label=""
       :show-labels="false"
       :hide-selected="true"
-      placeholder="Zoek of voeg een nieuw trefwoord toe" 
+      placeholder="Voeg nieuw trefwoord toe" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="true" @tag="addTrefwoord" @input="updateValue">
+
+      <template slot="noOptions">
+        &nbsp;
+      </template>
     </multiselect>
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
@@ -62,29 +66,9 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'reportage', code: 'reportage' },
-          { name: 'Silent Movie', code: 'Silent Movie' },
-          { name: 'Belgium', code: 'Belgium' },
-          { name: 'France', code: 'France' },
-          { name: 'Spain', code: 'Spain' },
-          { name: "BURGER", code: 'BURGER' }, 
-          { name: "CONFLICT", code: 'CONFLICT' }, 
-          { name: "CONVENTIE VAN GENEVE", code: 'CONVENTIE VAN GENEVE' }, 
-          { name: "INTERNATIONAAL STRAFGERECHTSHOF", code: 'INTERNATIONAAL STRAFGERECHTSHOF' }, 
-          { name: "MENSENRECHT", code: 'MENSENRECHT' }, 
-          { name: "OORLOG", code: 'OORLOG' }, 
-          { name: "OORLOGSMISDAAD", code: 'OORLOGSMISDAAD' }, 
-          { name: "SCHENDING", code: 'SCHENDING' }, 
-          { name: "STRAFRECHT", code: 'STRAFRECHT' }, 
-          { name: "VAN DEN WIJNGAERT CHRIS", code: 'VAN DEN WIJNGAERT CHRIS' }, 
-          { name: "VEILIGHEID", code: 'VEILIGHEID' },
-          { name: "Christiane van den Wijngaert", code: "Christiane van den Wijngaert"},
-          { name: "conventie van Gen\u00e8ve", code: "conventie van Gen\u00e8ve"},
-          { name: "Internationaal Strafhof", code: "Internationaal Strafhof"},
-          { name: "justitie", code: "justitie"},
-          { name: "mensenrechten", code: "mensenrechten"},
-          { name: "oorlog", code: "oorlog"} 
-          // should be coming from the suggest library (aka knowledge graph).
+          // { name: 'reportage', code: 'reportage' },
+          // should be coming from the suggest library or eleastic search in next
+          // release
         ],
         cp_keywords: [],
         show_cp_keywords: true,
@@ -96,21 +80,23 @@
       var keyword_div = document.getElementById("item_keywords");
       if(keyword_div){
         var keywords = JSON.parse(keyword_div.innerText);
+        this.value = [];
         for(var k in keywords){
           var keyword = keywords[k]
-          default_value.push(
+          this.value.push(
             {
               'name': keyword['value'],
               'code': keyword['value']
             }
           );
         }
-        this.json_value = JSON.stringify(default_value);
+        this.json_value = JSON.stringify(this.value);
       }
 
       var keywords_cp_div = document.getElementById("item_keywords_cp");
       if( keywords_cp_div ){
         var keywords_cp = JSON.parse(keywords_cp_div.innerText);
+        this.cp_keywords = [];
         for(var cpk in keywords_cp){
           var cp_keyword = keywords_cp[cpk]
           this.cp_keywords.push(

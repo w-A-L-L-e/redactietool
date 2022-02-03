@@ -17,6 +17,7 @@
     :show-labels="false"
     :hide-selected="true"
     :multiple="true"
+    :loading="loading"
     :taggable="false" @input="updateValue"
   >
 
@@ -204,7 +205,8 @@
         thema_search: "",
         thema_prev_search: "",
         show_definitions: false,
-        show_tooltips: false
+        show_tooltips: false,
+        loading: true
         // show_definitions_options: [
         //   { text: "Toon beschrijvingen", value: true },
         //   { text: "Verberg beschrijvingen", value: false}
@@ -245,6 +247,7 @@
         var themas_div = document.getElementById("item_themas");
         if(themas_div){
           var themas = JSON.parse(themas_div.innerText);
+          this.value = [];
           for(var l in themas){
             var thema_id = themas[l]['value'];
             var thema_label = '';
@@ -260,7 +263,7 @@
               }
             }
             if( thema_label.length>0 ){
-              default_value.push(
+              this.value.push(
                 {
                   'id': thema_id, 
                   'label': thema_label, 
@@ -270,8 +273,9 @@
             }
           }
         }
-        this.json_value = JSON.stringify(default_value);
-        this.$root.$emit('themas_changed', default_value);
+        this.loading = false;
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('themas_changed', this.value);
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)

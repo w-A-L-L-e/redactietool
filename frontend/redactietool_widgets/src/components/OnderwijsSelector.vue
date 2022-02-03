@@ -18,7 +18,8 @@
             :hide-selected="true"
             :searchable="false"
             :taggable="false"
-            @input="updateValue">
+            :loading="loading"
+            @input="updateValue" @remove="removeValue">
 
             <template slot="noResult">niet gevonden</template>
             <template slot="noOptions">loading...</template>
@@ -28,6 +29,22 @@
           <textarea name="lom_onderwijs_combo" v-model="json_value" id="onderwijs_json_value"></textarea>
         </div>
 
+      </div>
+    </div>
+
+    <div v-if="show_vakken_warning">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label"></label>
+        </div>
+        <div class="field-body">
+          <div class="notification is-warning vakken-warning">
+             <button class="delete" v-on:click="closeVakkenWarning($event)"></button>
+              Opgelet: indien je deze waarde verwijdert, 
+              zijn mogelijks een aantal vakken niet meer relevant
+          </div>
+          <br/>
+        </div>
       </div>
     </div>
    
@@ -70,7 +87,10 @@
         niveau_options: [],
         graden_options: [],
         secundair_niveau: {},
-        lager_niveau: {}
+        lager_niveau: {},
+        loading: true,
+        show_vakken_warning: false,
+        vakken_selected: false
       }
     },
     mounted: function() {
@@ -85,17 +105,23 @@
       });
 
       this.$root.$on('niveau_options_loaded', data => {
-        // console.log('COMBO: niveaus_changed event');
         this.niveau_options = data;
         this.readOptions();
       });
 
       this.$root.$on('graden_options_loaded', data => {
-        // console.log('graden changed event');
         this.graden_options = data;
         this.readOptions();
       });
 
+      this.$root.$on('vakken_changed', data => {
+        if(data.length) {
+          this.vakken_selected = true;
+        }
+        else{
+          this.vakken_selected = false;
+        }
+      });
 
     },
     created: function() { 
@@ -106,6 +132,15 @@
     },
 
     methods: {
+      removeValue(){
+        if(this.vakken_selected){
+          this.show_vakken_warning = true;
+        }
+      },
+      closeVakkenWarning(ev){
+        ev.preventDefault();
+        this.show_vakken_warning = false;
+      },
       updateValue(values){
         //strictly this is not necessary but it's nice for debugging later:
         this.json_value = JSON.stringify(values)
@@ -163,7 +198,6 @@
         this.$root.$emit('onderwijs_changed', data);
       },
       readValues(){
-        // console.log("readValues: niveaus=",this.niveaus, "graden=", this.graden);
         this.value = [];
 
         for(var n in this.niveaus){
@@ -187,10 +221,8 @@
             'type': 'graad'
           })
         }
-
       },
       readOptions(){
-        // console.log("readOptions: niveaus=", this.niveau_options, "graden=", this.graden_options);
         this.options = [];
 
         for(var n in this.niveau_options){
@@ -220,6 +252,8 @@
             'type': 'graad'
           })
         }
+
+        this.loading = false;
       }
     }
   }
@@ -245,5 +279,11 @@
   }
   .onderwijs-pull-up{
     margin-bottom: -24px !important;
+  }
+  .vakken-warning{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    margin-bottom: 15px !important;
   }
 </style>

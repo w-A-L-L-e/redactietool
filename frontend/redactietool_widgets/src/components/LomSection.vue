@@ -167,5 +167,8 @@
   .multiselect__option--selected.multiselect__option--highlight{
     color: #222; 
   }
+  .multiselect__spinner:after, .multiselect__spinner:before {
+    border-top-color: #3e8ed0;
+  }
   
 </style>

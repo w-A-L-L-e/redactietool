@@ -48,7 +48,6 @@
   import Multiselect from 'vue-multiselect'
   import axios from 'axios';
 
-  // todo: load in this from mam or jinja view and what is the mapping?
   var default_value = []  
 
   export default {

@@ -18,7 +18,8 @@
             :hide-selected="true"
             :taggable="false" 
             :searchable="false"
-            @input="updateValue">
+            :loading="loading"
+            @input="updateValue" @remove="removeGraad">
              
             <template slot="noResult">Onderwijsgraad niet gevonden</template>
             <template slot="noOptions">
@@ -73,7 +74,8 @@
           },
         ],
         niveaus: [],
-        graden_filtered: []
+        graden_filtered: [],
+        loading: false
       }
     },
     mounted: function() {
@@ -99,6 +101,7 @@
       else{
         return; // do not load on other redactietool pages
       }
+      this.loading = true;
       axios
         .get(redactie_api_url+'/onderwijsgraden')
         .then(res => {
@@ -165,10 +168,16 @@
             this.json_value = JSON.stringify(this.value);
             this.$root.$emit('graden_changed', this.value);
           }
+          this.loading = false;
 
         });
     },
     methods: {
+      removeGraad(graad){
+        // todo give this warning if vakken are selected: 
+        // “Opgelet: indien je deze waarde verwijdert, zijn mogelijks een aantal vakken niet meer relevant
+        console.log("removed graad, check vakken values and give warning here=", graad);
+      },
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('graden_changed', value);

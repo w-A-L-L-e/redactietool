@@ -44,11 +44,9 @@
       if(item_type_div){
         var item_type = item_type_div.innerText;
         if(item_type){
-          default_value = [{name: item_type, code: item_type}];
-          this.value = default_value;
+          this.value = [{name: item_type, code: item_type}];
         }
-
-        this.json_value = JSON.stringify(default_value);
+        this.json_value = JSON.stringify(this.value);
       }
       
     },

@@ -20,6 +20,7 @@
       :show-labels="false"
       :hide-selected="true"
       :multiple="true"
+      :loading="vakken_loading"
       :taggable="false" @input="updateValue"
       >
 
@@ -255,7 +256,8 @@
         vakken_prev_search: "",
         show_definitions: false,
         show_tooltips: false,
-        loading: false
+        loading: false,
+        vakken_loading: true
       }
     },
     mounted: function() {
@@ -309,6 +311,7 @@
             })
           }
           this.loading = false;
+          this.vakken_loading = false;
           this.loadSavedVakken();
         })
     },
@@ -317,6 +320,7 @@
         var vakken_div = document.getElementById("item_vakken");
         if(vakken_div){
           var vakken = JSON.parse(vakken_div.innerText);
+          this.value = [];
           for(var l in vakken){
             var vak_id = vakken[l]['value'];
             var vak_label = '';
@@ -332,7 +336,7 @@
               }
             }
             if( vak_label.length>0 ){
-              default_value.push(
+              this.value.push(
                 {
                   'id': vak_id, 
                   'label': vak_label, 
@@ -342,10 +346,12 @@
             }
           }
         }
-        this.json_value = JSON.stringify(default_value);
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('vakken_changed', this.value);
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit('vakken_changed', value);
       },
       vakIsSelected(vak){
         for( var i in this.value ){
@@ -436,6 +442,7 @@
         }
         else{
           this.suggestie_btn_label = "Toon suggesties voor vakken";
+          this.$root.$emit('vakken_changed', this.value);
         }
         
         this.updateSuggestions();
@@ -504,7 +511,6 @@
         // attempt to make top row tooltip show on bottom
         // console.log(event);
         var pos = event.clientY; //pageY doesnt work right
-        // console.log(pos);
 
         if(pos<200){
           event.target.classList.add('has-tooltip-bottom')
