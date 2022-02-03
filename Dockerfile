@@ -34,8 +34,7 @@ ENV PATH=/home/appuser/.local/bin:$PATH
 
 #USER appuser
 
-# ENV OAS_JWT_SECRET ''
-# ENV OAS_SERVER 'https://oas-qas.viaa.be'
+ENV SAML_ENV 'saml/localhost'
 ENV OAS_APPNAME 'mediahaven'
 ENV FLOWPLAYER_TOKEN 'set_in_secrets'
 ENV SECRET_KEY 'set_in_secrets_for_meemoo_saml_cookie'

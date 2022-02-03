@@ -73,9 +73,9 @@ app.config['OBJECT_STORE_URL'] = os.environ.get(
     'OBJECT_STORE_URL', 'https://archief-media-qas.viaa.be/viaa/MOB'
 )
 
-# TODO: put this in env var!
 app.config['SAML_PATH'] = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'saml'
+    os.path.dirname(os.path.abspath(__file__)),
+    os.environ.get('SAML_ENV', 'saml/localhost')
 )
 
 # optional:

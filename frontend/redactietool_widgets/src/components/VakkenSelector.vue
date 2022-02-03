@@ -63,11 +63,12 @@
       <div v-if="!loading" class="inline-suggesties-list">
         <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
           <div v-for="vak in row" :key="vak.id"  
-                class="inline-suggestie-pill"
+                class="inline-suggestie-pill is-pulled-left"
                 v-bind:class="[vakIsSelected(vak) ? 'inline-suggestie-selected' : '']"
                 v-on:click="toggleVakSelect(vak)">
             {{vak.label}}
           </div>
+          <div class="is-clearfix"></div>
         </div>
       </div>
     </div>
@@ -691,8 +692,8 @@
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
     cursor: pointer;
   }

@@ -39,12 +39,13 @@
           v-on:click="addCpKeyword(keyword)"
         -->
         <div 
-          class="keyword-pill" 
+          class="keyword-pill is-pulled-left" 
           v-for="keyword in cp_keywords" 
           :key="keyword.code"
           >
           {{keyword.name}}
         </div>
+        <div class="is-clearfix"></div>
       </div>
     </div>
 
@@ -192,17 +193,15 @@
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
-    /* cursor: pointer; */
   }
   .warning-pill{
     border-radius: 5px;
     background: #ff6a6a;
     color: #eee;
     display: inline-block;
-    float: right;
     text-overflow: ellipsis;
     padding: 2px 8px 2px 13px;
     margin-bottom: 5px;

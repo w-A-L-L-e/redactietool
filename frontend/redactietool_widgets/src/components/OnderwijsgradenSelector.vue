@@ -32,12 +32,13 @@
           <div class="graden-inline-title">Onderwijsgraden</div>
           <div class="inline-graden-list">
             <div 
-              class="graden-pill" 
+              class="graden-pill is-pulled-left" 
               v-for="graad in value" 
               :key="graad.id"
               >
               {{graad.label}}
             </div>
+            <div class="is-clearfix"></div>
           </div>
         </div>
 
@@ -246,14 +247,13 @@
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
-    /* cursor: pointer; */
   }
 
   .inline-graden-wrapper{
-    margin-top: 10px;
+    margin-top: -8px;
   }
 
 </style>

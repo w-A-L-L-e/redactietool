@@ -28,15 +28,16 @@
           <div class="niveau-inline-title">Onderwijsniveaus</div>
           <div class="inline-niveau-list">
             <div 
-              class="niveau-pill" 
+              class="niveau-pill is-pulled-left" 
               v-for="niveau in value" 
               :key="niveau.id"
               >
               {{niveau.label}}
             </div>
+            <div class="is-clearfix"></div> 
           </div>
         </div>
-        
+
         <textarea name="lom1_onderwijsniveaus" v-model="json_value" id="onderwijsniveaus_json_value"></textarea>
       </div>
     </div>
@@ -201,15 +202,14 @@
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
-    /* cursor: pointer; */
   }
 
   .inline-niveau-wrapper {
     margin-top: -8px;
-    margin-bottom: -18px;
+    margin-bottom: 0px;
   }
 
 </style>

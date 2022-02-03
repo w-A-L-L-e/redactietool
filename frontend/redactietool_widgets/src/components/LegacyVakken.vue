@@ -9,12 +9,13 @@
         <div class="legacy-vakken-list">
           <div class="legacy-title">Legacy vakken</div>
           <div 
-            class="legacy-vak-pill" 
+            class="legacy-vak-pill is-pulled-left" 
             v-for="vak, index in legacy_vakken" 
             :key="index"
             >
             {{vak.value}}
           </div>
+          <div class="is-clearfix"></div>
         </div>
       </div>
     </div>
@@ -64,8 +65,6 @@
   }
 </script>
 
-<!-- New step!
-     Add Multiselect CSS. Can be added as a static asset or inside a component. -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
@@ -84,28 +83,21 @@
   .legacy-vakken-list {
     min-height: 40px;
     min-width: 478px;
-    /*
-    border-radius: 5px;
-    border: 1px solid #e8e8e8;
-    background: #fff;
-    */
     padding: 5px;
     padding-top: 7px;
     margin-bottom: 10px;
   }
   .legacy-vak-pill {
     border-radius: 5px;
-    /*background: #41b883;*/
     border: 1px solid #9cafbd;
     background-color: #edeff2;
     color: #2b414f;
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
-    /*cursor: pointer;*/
   }
   
 </style>
