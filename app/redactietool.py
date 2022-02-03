@@ -615,19 +615,20 @@ def get_subtitles(department, pid):
 def liveness_check():
     return "OK", status.HTTP_200_OK
 
+@app.route('/404')
+def not_found_errorpage():
+    return render_template('404.html'), 404 
 
 @app.errorhandler(401)
 def unauthorized(e):
     # return "<h1>401</h1><p>Unauthorized</p>", 401
-    return redirect(
-        url_for('.index', token=None)
-    )
+    return redirect(url_for('.index', token=None) )
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # TODO: also a redirect but set some flash message here
-    return "<h1>404</h1><p>Page not found</p>", 404
+    # return "<h1>404</h1><p>Page not found</p>", 404
+    return redirect( url_for('.not_found_errorpage') )
 
 
 # =============== Main application startup without debug mode ================
