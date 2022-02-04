@@ -15,7 +15,7 @@
         "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
     },
     "idp": {
-        "entityId": "http://idp-qas.viaa.be/idp",
+        "entityId": "http://idp.viaa.be/idp",
         "singleSignOnService": {
             "url": "https://idp.viaa.be/saml2/idp/SSOService.php",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
