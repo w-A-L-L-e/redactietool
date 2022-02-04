@@ -53,6 +53,29 @@ WHERE {{
 GROUP BY ?id ?label ?definition
 """
 
+GET_SORTED_COLLECTION_QUERY = """
+PREFIX : <https://stackoverflow.com/q/17523804/1281433/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?id ?label ?definition (count(?mid)-1 as ?position) 
+WHERE {{ 
+  BIND(URI('{collection}') AS ?collection)
+  ?collection skos:memberList/rdf:rest* ?mid . 
+  ?mid rdf:rest* ?node .
+  ?node rdf:first ?id .
+
+  ?id a skos:Concept;
+    skos:prefLabel ?label.
+
+    OPTIONAL {{
+        ?id skos:definition ?definition .
+    }}
+}}
+GROUP BY ?node ?id ?label ?definition
+ORDER BY ?position
+"""
+
 GET_CHILDREN_QUERY = """
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
@@ -245,7 +268,7 @@ def read_query(file_path):
 class Suggest:
     """A simple api for vocbench data"""
 
-    OND_NS = "https://data.meemoo.be/term/onderwijs/"
+    OND_NS = "https://data.hetarchief.be/term/onderwijs/"
 
     def __init__(self, endpoint: str, user: str, password: str):
         self.sparql = SPARQLWrapper2(endpoint)
@@ -280,13 +303,17 @@ class Suggest:
         for res in self.__exec_query(GET_CONCEPT_BY_IDS_QUERY, concept=concepts):
             yield res
 
-    def get_collection(self, collection: str):
+    def get_collection(self, collection: str, sorted: bool = False):
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
             raise ValueError("The id {} is not a valid URI.".format(collection))
 
-        for res in self.__exec_query(GET_COLLECTION_QUERY, collection=collection):
+        query = GET_COLLECTION_QUERY
+        if sorted:
+            query = GET_SORTED_COLLECTION_QUERY
+
+        for res in self.__exec_query(query, collection=collection):
             yield res
 
     def get_children(self, concept: List[str]):
@@ -300,13 +327,13 @@ class Suggest:
     def get_vakken(self):
         """Get list 'vakken'."""
 
-        for res in self.get_list(f"{self.OND_NS}vak"):
+        for res in self.get_collection(f"{self.OND_NS}vak-volgorde", True):
             yield res
 
     def get_themas(self):
         """Get list 'themas'."""
 
-        for res in self.get_list(f"{self.OND_NS}thema"):
+        for res in self.get_collection(f"{self.OND_NS}thema-volgorde", True):
             yield res
 
     def get_graden(self):

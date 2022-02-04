@@ -1,10 +1,10 @@
-@prefix graad: <https://data.meemoo.be/term/onderwijs/graad/> .
-@prefix niveau: <https://data.meemoo.be/term/onderwijs/niveau/> .
-@prefix ond: <https://data.meemoo.be/term/onderwijs/> .
+@prefix graad: <https://data.hetarchief.be/term/onderwijs/graad/> .
+@prefix niveau: <https://data.hetarchief.be/term/onderwijs/niveau/> .
+@prefix ond: <https://data.hetarchief.be/term/onderwijs/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix thema: <https://data.meemoo.be/term/onderwijs/thema/> .
-@prefix vak: <https://data.meemoo.be/term/onderwijs/vak/> .
+@prefix thema: <https://data.hetarchief.be/term/onderwijs/thema/> .
+@prefix vak: <https://data.hetarchief.be/term/onderwijs/vak/> .
 
 ond:vak a skos:ConceptScheme;
 skos:hasTopConcept vak:nederlands.
@@ -22,18 +22,40 @@ ond:niveau a skos:Collection ;
     rdfs:label "Onderwijsniveaus"@nl ;
     skos:member niveau:lager-onderwijs .
 
+ond:vak-volgorde a skos:OrderedCollection ;
+    rdfs:label "Vakken"@nl ;
+    skos:memberList ( vak:nederlands vak:burgerschap ).
+
+ond:thema-volgorde a skos:OrderedCollection ;
+    rdfs:label "Thema's"@nl ;
+    skos:memberList ( thema:nederlandse-taal thema:recht ).
+
 vak:nederlands a skos:Concept ;
     skos:definition "lorem ipsum"@nl ;
     skos:inScheme ond:vak ;
     skos:prefLabel "Nederlands"@nl ;
     skos:related graad:lager-1ste-graad, thema:nederlandse-taal.
 
+vak:burgerschap a skos:Concept ;
+    skos:definition "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie"@nl ;
+    skos:inScheme ond:vak ;
+    skos:prefLabel "burgerschap"@nl ;
+    skos:related graad:lager-1ste-graad, thema:recht ;
+    skos:topConceptOf ond:vak .
+
 thema:nederlandse-taal a skos:Concept ;
     skos:definition "Taalkunde, exclusief literatuur, voor de Nederlandse taal"@nl ;
     skos:inScheme ond:thema ;
     skos:prefLabel "Nederlandse taal"@nl ;
     skos:related vak:nederlands;
-    skos:topConceptOf ond:themas .
+    skos:topConceptOf ond:thema .
+
+thema:recht a skos:Concept;
+    skos:prefLabel "Recht"@nl;
+    skos:definition "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ..."@nl;
+    skos:topConceptOf ond:thema;
+    skos:inScheme ond:thema;
+    skos:related vak:burgerschap.
 
 graad:lager-1ste-graad a skos:Concept ;
     skos:broader niveau:lager-onderwijs ;
