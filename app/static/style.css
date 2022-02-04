@@ -181,7 +181,21 @@ input[type=submit]:disabled.cancel{
   }
 }
 
-/********************* START OF CSS ANIMATION EYE CANDY ***********************/
+.file-pill{
+  border-radius: 5px;
+  border: 1px solid #9cafbd;
+  background-color: #edeff2;
+  color: #2b414f;
+  text-overflow: ellipsis;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0px 8px 0px 8px;
+  margin-bottom: 5px;
+}
+
+
+/*************************** CSS ANIMATION EYE CANDY **************************/
 /* inspiration https://code-boxx.com/ 
  * wiggle the validation error line so that it gets the users attention
  */

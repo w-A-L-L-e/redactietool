@@ -325,12 +325,19 @@ def get_upload():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
+    # subtitle files already uploaded:
+    all_subs = mh_api.get_subtitles(department, pid)
+    subfiles = []
+    for sub in all_subs:
+        subfiles.append(sub.get('Descriptive').get('OriginalFilename'))
+
     return render_template(
         'subtitles/upload.html',
         token=token,
         pid=pid,
         department=department,
         mam_data=json.dumps(mam_data),
+        subtitle_files=subfiles,
         title=mam_data.get('title'),
         keyframe=mam_data.get('previewImagePath'),
         description=mam_data.get('description'),
@@ -602,12 +609,12 @@ def get_vakken_suggesties():
     return result
 
 
-@app.route('/item_subtitles/<string:department>/<string:pid>', methods=['GET'])
+@app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
 @requires_authorization
 @login_required
-def get_subtitles(department, pid):
+def get_subtitle_by_type(department, pid, subtype):
     mh_api = MediahavenApi()
-    sub_response = mh_api.get_default_subtitle(department, pid)
+    sub_response = mh_api.get_subtitle(department, pid, subtype)
 
     if not sub_response:
         return ""

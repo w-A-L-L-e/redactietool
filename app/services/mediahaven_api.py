@@ -185,9 +185,9 @@ class MediahavenApi:
         if not nr_results:
             return []
 
-        return matched_subs.get('MediaDataList', [])
+        return matched_subs.get('MediaDataList', [{}])
 
-    def get_default_subtitle(self, department, pid):
+    def get_subtitle(self, department, pid, subtype):
         matched_subs = self.list_objects(
             department,
             search=f"+(dc_relationsis_verwant_aan:{pid})",
@@ -201,8 +201,10 @@ class MediahavenApi:
         if nr_results == 1:
             return matched_subs.get('MediaDataList', [{}])[0]
         elif nr_results > 1:
-            # future todo, iterate them and pick a certain one to return?
-            return matched_subs.get('MediaDataList', [{}])[1]
+            all_subs = matched_subs.get('MediaDataList', [{}])
+            for sub in all_subs:
+                if subtype in sub.get('Descriptive').get('OriginalFilename'):
+                    return sub
         else:
             return False
 

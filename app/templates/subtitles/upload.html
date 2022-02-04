@@ -25,15 +25,39 @@ Ondertitelbestand
       flowplayer('#player_container', {
         src: '{{video_url}}',
         token: '{{flowplayer_token}}',
-        poster: '{{keyframe}}?nocache='+Date.now()
+        poster: '{{keyframe}}?nocache='+Date.now(),
+        subtitles:{ 
+          tracks:[
+            { 
+              src: "/item_subtitles/{{department}}/{{pid}}/closed",
+              label: "Nederlands",
+              id: "Nederlands-nl",
+              default: true,
+              crossorigin: "anonymous" 
+            }
+          ]
+        }
       })
     </script>
+
+    <div class="field">
+        <label class="label">Bestaande ondertitel bestanden</label>
+        <div class="control">
+            {% for subfile in subtitle_files %}
+              <div class="file-pill is-pulled-left">
+                {{subfile}}
+              </div>
+            {% endfor %}
+            <div class="is-clearfix"></div>
+        </div>
+      </div>
+
   </div>
 
   <div class="column is-half">
     <form class="upload_form" action="/upload" method="POST" enctype="multipart/form-data">
       {% include 'includes/hidden_fields.html' %}
-      
+
       <div class="field">
         <label class="label">Selecteer type ondertitelbestand</label>
         <div class="control">
@@ -81,5 +105,6 @@ Ondertitelbestand
   </div>
 
 </div>
+
 
 {% endblock %}
