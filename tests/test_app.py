@@ -319,6 +319,22 @@ def test_send_to_mam_cancel_works(client):
     assert 'Bestaande ondertitels werden behouden' in res.data.decode()
 
 
+@pytest.mark.vcr
+def test_edit_metadata(client):
+        res = client.get(f"/search_media?token={jwt_token()}")
+
+    res = client.get(
+        "/edit_metadata?token=saml&pid=qs5d8ncx8c&department=testbeeld"), 
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    # assert 'Geen ondertitels bestand' in res.data.decode()
+    assert res.data.decode() == ''
+
+
+
+
 def test_random_404(client, setup):
     resp = client.delete('/somepage')
     assert resp.status_code == 404
