@@ -50,7 +50,7 @@ from app.services.validation import (pid_error, upload_error, validate_input,
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from flask_login import LoginManager, login_required  # current_user
-from app.services.rmh_mapping import RmhMapping
+from app.services.meta_mapping import MetaMapping
 from app.services.user import User
 
 
@@ -511,8 +511,8 @@ def edit_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-    data_mapping = RmhMapping()
-    template_vars = data_mapping.mh_to_form(
+    mm = MetaMapping()
+    template_vars = mm.mh_to_form(
         token, pid, department, mam_data, errors)
 
     # extra request necessary in order to fetch rightsmanagement/permissions
@@ -538,8 +538,20 @@ def save_item_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-    data_mapping = RmhMapping()
-    template_vars = data_mapping.form_to_mh(request, mam_data)
+    mm = MetaMapping()
+    template_vars = mm.form_to_mh(request, mam_data)
+    frag_id, ext_id, xml_sidecar = mm.xml_sidecar(mam_data, template_vars)
+    response = mh_api.update_metadata(department, frag_id, ext_id, xml_sidecar)
+
+    if response.status_code >= 200 and response.status_code < 300:
+        print("Mediahaven save ok, status code=", response.status_code)
+        template_vars['mh_synced'] = True
+    else:
+        template_vars['mh_synced'] = False
+        template_vars['mh_errors'] = [response.json()['message']]
+        print("Mediahaven ERRORS= ", response.json())
+
+    # we can even do another GET call here to validate the changed modified timestamp
 
     return render_template(
         'metadata/edit.html',
@@ -615,20 +627,22 @@ def get_subtitles(department, pid):
 def liveness_check():
     return "OK", status.HTTP_200_OK
 
+
 @app.route('/404')
 def not_found_errorpage():
-    return render_template('404.html'), 404 
+    return render_template('404.html'), 404
+
 
 @app.errorhandler(401)
 def unauthorized(e):
     # return "<h1>401</h1><p>Unauthorized</p>", 401
-    return redirect(url_for('.index', token=None) )
+    return redirect(url_for('.index', token=None))
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     # return "<h1>404</h1><p>Page not found</p>", 404
-    return redirect( url_for('.not_found_errorpage') )
+    return redirect(url_for('.not_found_errorpage'))
 
 
 # =============== Main application startup without debug mode ================

@@ -320,19 +320,18 @@ def test_send_to_mam_cancel_works(client):
 
 
 @pytest.mark.vcr
-def test_edit_metadata(client):
-        res = client.get(f"/search_media?token={jwt_token()}")
-
+def test_edit_metadata_wrong_pid(client):
     res = client.get(
-        "/edit_metadata?token=saml&pid=qs5d8ncx8c&department=testbeeld"), 
+        f"/edit_metadata?token={jwt_token()}&pid=somewrongpid&department=testbeeld",
         follow_redirects=True
     )
 
     assert res.status_code == 200
-    # assert 'Geen ondertitels bestand' in res.data.decode()
-    assert res.data.decode() == ''
+    assert 'Details opvragen met PID' in res.data.decode()
 
 
+# to save time, for actual edit get/post routes we will test
+# the MetaMapping class directly
 
 
 def test_random_404(client, setup):
@@ -351,7 +350,6 @@ def test_random_404(client, setup):
     resp = client.put('/somepage')
     assert resp.status_code == 302
     assert resp.location == 'http://localhost/404'
-    
 
 
 @pytest.mark.vcr

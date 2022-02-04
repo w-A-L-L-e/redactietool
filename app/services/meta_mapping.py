@@ -3,10 +3,11 @@
 #
 #  @Author: Walter Schreppers
 #
-#  app/services/rmh_mapping.py
+#  app/services/meta_mapping.py
 #
 #   Do mapping between redactietool form and mh target data for saving changes.
 #   Similarly load json data from MediahavenApi and populate form back.
+#   it also has a member to create the xml sidecar data by using the MetaSidecar class
 #
 import json
 import os
@@ -14,13 +15,13 @@ import markdown2
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property, get_md_array
-from app.services.mediahaven_api import MediahavenApi
+from app.services.meta_sidecar import MetaSidecar
 from markupsafe import escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
 
-class RmhMapping:
+class MetaMapping:
     def __init__(self):
         self.MAKER_OPTIONS = [
             'Maker', 'Archiefvormer', 'Auteur', 'Acteur',
@@ -445,18 +446,6 @@ class RmhMapping:
         else:
             tp['publish_item'] = False
 
-        mh_api = MediahavenApi()
-        response = mh_api.update_metadata(department, mam_data, tp)
-
-        # we can even do another GET call here to validate the changed modified timestamp
-        if response.status_code >= 200 and response.status_code < 300:
-            print("Mediahaven save ok, status code=", response.status_code)
-            tp['mh_synced'] = True
-        else:
-            tp['mh_synced'] = False
-            tp['mh_errors'] = [response.json()['message']]
-            print("Mediahaven ERRORS= ", response.json())
-
         return tp
 
     def mh_to_form(self, token, pid, department, mam_data, validation_errors):
@@ -469,3 +458,11 @@ class RmhMapping:
         # print(json.dumps(mam_data, indent=2))
 
         return self.form_params(token, pid, department, mam_data, validation_errors)
+
+    def xml_sidecar(self, metadata, tp):
+        sidecar = MetaSidecar()
+        xml_data = sidecar.generate(metadata, tp)
+        fragment_id = metadata['fragmentId']
+        external_id = metadata['externalId']
+
+        return fragment_id, external_id, xml_data
