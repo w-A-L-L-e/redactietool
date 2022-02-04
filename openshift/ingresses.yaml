@@ -1,0 +1,98 @@
+# This list creates the ingresses for the int, qas and prd environments
+# it rferes to the following kubernetes.io/tls secrets which shold be present:
+# - star.hetarchief.be-qas
+# - star.hetarchief.be-prd
+# - star.cloud.meemoo.be
+apiVersion: v1
+kind: List
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    labels:
+      app: redactietool
+      app.kubernetes.io/component: redactietool-qas
+      app.kubernetes.io/instance: redactietool-qas
+      app.kubernetes.io/name: redactietool
+      app.kubernetes.io/part-of: redactietool
+      app.openshift.io/runtime: redactietool
+      app.openshift.io/runtime-version: qas
+      env: qas
+    name: redactietool-qas
+  spec:
+    ingressClassName: nginx-qas
+    rules:
+    - host: redactie-qas.hetarchief.be
+      http:
+        paths:
+        - backend:
+            service:
+              name: redactietool-qas
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - redactie-qas.hetarchief.be
+      secretName: star.hetarchief.be-qas
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    labels:
+      app: redactietool
+      app.kubernetes.io/component: redactietool-prd
+      app.kubernetes.io/instance: redactietool-prd
+      app.kubernetes.io/name: redactietool
+      app.kubernetes.io/part-of: redactietool
+      app.openshift.io/runtime: redactietool
+      app.openshift.io/runtime-version: prd
+      env: prd
+    name: redactietool-prd
+  spec:
+    ingressClassName: nginx-prd
+    rules:
+    - host: redactie.hetarchief.be
+      http:
+        paths:
+        - backend:
+            service:
+              name: redactietool-prd
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - redactie.hetarchief.be
+      secretName: star.hetarchief.be-prd
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    labels:
+      app: redactietool
+      app.kubernetes.io/component: redactietool-int
+      app.kubernetes.io/instance: redactietool-int
+      app.kubernetes.io/name: redactietool
+      app.kubernetes.io/part-of: redactietool
+      app.openshift.io/runtime: redactietool
+      app.openshift.io/runtime-version: int
+      env: int
+    name: redactietool-int
+  spec:
+    ingressClassName: nginx-int
+    rules:
+    - host: redactie-int.private.cloud.meemoo.be
+      http:
+        paths:
+        - backend:
+            service:
+              name: redactietool-int
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - redactie-int.private.cloud.meemoo.be
+      secretName: star.cloud.meemoo.be

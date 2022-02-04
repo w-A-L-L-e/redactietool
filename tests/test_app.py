@@ -337,16 +337,21 @@ def test_edit_metadata(client):
 
 def test_random_404(client, setup):
     resp = client.delete('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.get('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.post('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.put('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
+    
 
 
 @pytest.mark.vcr
