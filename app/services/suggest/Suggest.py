@@ -35,7 +35,7 @@ WHERE {{
 GET_COLLECTION_QUERY = """
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?id ?label ?definition (count(?child) as ?children)
+SELECT ?id ?label ?definition (count(?child) as ?children) (SAMPLE(?parent) as ?parent)
 WHERE {{
     BIND(URI('{collection}') AS ?collection)
     ?collection skos:member ?id.
@@ -49,6 +49,10 @@ WHERE {{
 
     OPTIONAL {{
         ?id skos:narrower ?child.
+    }}
+
+    OPTIONAL {{
+        ?id skos:broader ?parent
     }}
 }}
 GROUP BY ?id ?label ?definition
