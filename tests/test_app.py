@@ -319,18 +319,37 @@ def test_send_to_mam_cancel_works(client):
     assert 'Bestaande ondertitels werden behouden' in res.data.decode()
 
 
+@pytest.mark.vcr
+def test_edit_metadata_wrong_pid(client):
+    res = client.get(
+        f"/edit_metadata?token={jwt_token()}&pid=somewrongpid&department=testbeeld",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    assert 'Details opvragen met PID' in res.data.decode()
+
+
+# to save time, for actual edit get/post routes we will test
+# the MetaMapping class directly
+
+
 def test_random_404(client, setup):
     resp = client.delete('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.get('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.post('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
     resp = client.put('/somepage')
-    assert resp.status_code == 404
+    assert resp.status_code == 302
+    assert resp.location == 'http://localhost/404'
 
 
 @pytest.mark.vcr

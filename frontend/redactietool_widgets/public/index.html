@@ -13,6 +13,7 @@
 
     <!-- use bulma instead TODO: bundle.js and model_dialog.js-->
     <link rel="stylesheet" href="<%= BASE_URL%>mystyles.css">
+    <link rel="stylesheet" href="<%= BASE_URL%>bulma-tooltip.min.css">
     <link rel="stylesheet" href="<%= BASE_URL%>overrides.css">
 
     <!-- icons for minimize/unfolding of lom sections -->
@@ -48,6 +49,7 @@
       
 
       <div id="item_type" style="display:none;">Audio</div>
+
       <div id="item_languages" style="display:none">[{"value": "fr", "attribute": "multiselect", "dottedKey": null}, {"value": "nl", "attribute": "multiselect", "dottedKey": null}]</div>
 
      
@@ -56,7 +58,7 @@
       </div>
      
       <div id="item_onderwijsniveaus" style="display:none;">
-        [{"value": "https://data.meemoo.be/term/onderwijs/niveau/hoger-onderwijs", "attribute": "multiselect", "dottedKey": null}]
+        [{"value": "https://data.meemoo.be/term/onderwijs/niveau/hoger-onderwijs", "attribute": "multiselect", "dottedKey": null}, {"value":"https://data.meemoo.be/term/onderwijs/niveau/secundair-onderwijs","attribute":"multiselect","dottedKey":null}]
       </div>
       <div id="item_onderwijsniveaus_legacy" style="display:none;">
         [{"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}]
@@ -64,21 +66,33 @@
 
       <div id="item_onderwijsgraden" style="display:none;">{"show_legacy": true}</div>
       <div id="item_onderwijsgraden_legacy" style="display:none;">
-        [{"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 3de graad", "attribute": "multiselect", "dottedKey": null}]
+        [{"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}]
       </div>
 
 
       <div id="item_themas" style="display:none;">
         [{"value": "https://data.meemoo.be/term/onderwijs/thema/podiumkunsten", "attribute": "multiselect", "dottedKey": null}, {"value": "https://data.meemoo.be/term/onderwijs/thema/constructie-en-productie", "attribute": "multiselect", "dottedKey": null}]
       </div>
+
       <div id="item_vakken" style="display:none;">
         [{"value": "https://data.meemoo.be/term/onderwijs/vak/afwerking-bouw", "attribute": "multiselect", "dottedKey": null}]
       </div>
 
-
+      <div id="item_vakken_legacy" style="display:none;">
+        [
+          {"value": "lichamelijke opvoeding - sport", "attribute": "multiselect", "dottedKey": null},
+          {"value": "Mens en maatschappij", "attribute": "multiselect", "dottedKey": null},
+          {"value": "ICT", "attribute": "multiselect", "dottedKey": null},
+          {"value": "Leren leren", "attribute": "multiselect", "dottedKey": null},
+          {"value": "Sociale vaardigheden - some legacy test", "attribute": "multiselect", "dottedKey": null}
+          
+        ]
+      </div>
+      
       <div id="item_keywords" style="display:none;">
         [{"value": "Christiane van den Wijngaert", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "conventie van Gen\u00e8ve", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "Internationaal Strafhof", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "justitie", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "mensenrechten", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "oorlog", "attribute": "Sleutelwoord", "dottedKey": null}]
       </div>
+
 
      <div id="item_keywords_cp" style="display:none;">
         [{"value": "reportage", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Silent Movie", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Belgium", "attribute": "Trefwoord", "dottedKey": null},{"value": "BURGER", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONFLICT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONVENTIE VAN GENEVE", "attribute": "Trefwoord", "dottedKey": null}, {"value": "INTERNATIONAAL STRAFGERECHTSHOF", "attribute": "Trefwoord", "dottedKey": null}, {"value": "MENSENRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOG", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOGSMISDAAD", "attribute": "Trefwoord", "dottedKey": null}, {"value": "SCHENDING", "attribute": "Trefwoord", "dottedKey": null}, {"value": "STRAFRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "VAN DEN WIJNGAERT CHRIS", "attribute": "Trefwoord", "dottedKey": null}]

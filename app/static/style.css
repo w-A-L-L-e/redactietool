@@ -1,4 +1,3 @@
-
 /*********************** START OF PAGE CSS CUSTOMIZATION ***********************
  * Author: Walter Schreppers
  ******************************************************************************/
@@ -33,8 +32,6 @@ a.grey-button.disabled{
   border: 1px solid #ccc;
   background-color: #ccc;
 }
-
-
 
 a.cancel-button {
   display: inline-block;
@@ -169,78 +166,6 @@ input[type=submit]:disabled.cancel{
 }
 
 
-.login_logout {
-    float: right;
-    padding-top: 2px;
-}
-
-.login_logout a {
-  border: 1px solid #bac7d1;
-  background-color: #26a4cf;
-  padding: 10px;
-  border-radius: 4px;
-  color: #fff;
-  text-decoration: none;
-}
-
-.login_logout a:hover {
-  background-color: #46a4ff;
-}
-
-.saml {
-  margin-left: 34%;
-  margin-top: 5px;
-}
-
-.sticky-submit-button {
-  /*
-    position: fixed;
-    bottom: 20px;
-    right: 14%;
-  */
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 20px;
-  float: right;
-}
-
-.label {
-  min-width: 122px;
-}
-
-.pu {
-  margin-top: -3px;
-}
-
-.narrow-input {
-  width: 18em;
-}
-
-hr {
-  margin-top: -14px;
-  background: #363636;
-  height: 1px;
-  /* imho this looks nicer:
-   * display: none;
-   */
-}
-
-.minimize-icon-wrapper{
-  float: right;
-}
-
-.icon-folded {
-  display: none;
-}
-
-/* make it more visible what controls are readonly */
-.input[readonly], .textarea[readonly] {
-    box-shadow: none;
-    background-color: #eee;
-    border: 1px solid #ddd;
-}
-
-
 /* menu login/logout tweaks to pull to right */
 @media screen and (min-width: 1024px){
   .navbar-login-logout {
@@ -256,7 +181,21 @@ hr {
   }
 }
 
-/********************* START OF CSS ANIMATION EYE CANDY ***********************/
+.file-pill{
+  border-radius: 5px;
+  border: 1px solid #9cafbd;
+  background-color: #edeff2;
+  color: #2b414f;
+  text-overflow: ellipsis;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0px 8px 0px 8px;
+  margin-bottom: 5px;
+}
+
+
+/*************************** CSS ANIMATION EYE CANDY **************************/
 /* inspiration https://code-boxx.com/ 
  * wiggle the validation error line so that it gets the users attention
  */
@@ -318,7 +257,55 @@ input[type=button].spring:hover {
   animation-timing-function: ease;
   animation-iteration-count: 1;
 }
-/*********************** END OF CSS ANIMATION EYE CANDY ***********************/
+
+
+/************************ SAML LOGIN/LOGOUT STYLING **************************/
+.login_logout {
+    float: right;
+    padding-top: 2px;
+}
+
+.login_logout a {
+  border: 1px solid #bac7d1;
+  background-color: #26a4cf;
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.login_logout a:hover {
+  background-color: #46a4ff;
+}
+
+
+.label {
+  min-width: 122px;
+}
+
+/*
+.pu {
+  margin-top: -3px;
+}
+
+.narrow-input {
+  width: 18em;
+}
+*/
+
+hr {
+  margin-top: -14px;
+  background: #363636;
+  height: 1px;
+  /* imho this looks nicer:
+   * display: none;
+   */
+}
+.saml {
+  margin-left: 34%;
+  margin-top: 5px;
+}
+
 
 .saml-login-page {
   background: url('/static/images/saml_login_background.jpg') no-repeat center;
@@ -353,7 +340,72 @@ input[type=button].spring:hover {
   }
 }
 
-/* these hidden form parts are used to inject new controls in our components */
+#saml_login_box {
+  max-width: 410px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+
+/**************************** METADATA EDIT STYLING ***************************/
+.minimize-icon-wrapper{
+  float: right;
+}
+
+.icon-folded {
+  display: none;
+}
+
+/* make it more visible what controls are readonly */
+.input[readonly], .textarea[readonly] {
+    box-shadow: none;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
+
+.sticky-submit-button {
+  /*
+    position: fixed;
+    bottom: 20px;
+    right: 14%;
+  */
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  float: right;
+}
+
+.prd-subtitle {
+  width: 6em;
+  display: inline-block;
+}
+.prd-widget {
+  margin-left: 15px;
+  min-width: 380px; 
+  width: 47%; 
+  float: left;
+}
+.prd-widget-list .prd-widget:nth-child(2n){
+  margin-left: 30px;
+}
+.full-width {
+  width: 100%;
+}
+
+@media screen and (max-width: 888px){
+  .prd-widget{
+    margin-left: 15px;
+    width: 100%;
+    float: none;
+    padding-right: 15px;
+  }
+  .prd-widget-list .prd-widget:nth-child(2n){
+    margin-left: 15px;
+  }
+}
+
 #prd_maker{
   display: none;
 }
@@ -366,7 +418,6 @@ input[type=button].spring:hover {
   display: none;
 }
 
-/* make subtitles in algemene metadata more compact */
 h3.subtitle{
   color: #363636;
   font-weight: bold;
@@ -378,7 +429,7 @@ h3.subtitle{
 }
 
 @media screen and (min-width: 768px){
-  h3.subtitle{
+  #algemeen_title_right{
     margin-top: -34px;
   }
 
@@ -390,12 +441,6 @@ h3.subtitle{
 .prd-del-btn {
   margin-top: 4px !important;
   margin-left: 5px !important;
-}
-
-#saml_login_box {
-  max-width: 410px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #alert_box {
@@ -410,4 +455,78 @@ h3.subtitle{
 
 .hidden {
   display:none;
+}
+
+#production_section{
+  display: none;
+}
+
+.form-footer-spacing {
+  height: 120px;
+}
+
+
+/* ====================== Richtext editor / quill styling =====================*/
+.richtext-wrapper {
+  width: 100%;
+}
+
+.ql-toolbar {
+  background-color: #fff;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+}
+
+.ql-editor{
+  min-height: 20em;
+  overflow-y: scroll;
+  resize: vertical;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  background-color: #fff;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  content: 'Normaal' !important;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+  content: 'Titel' !important;
+}
+
+/*
+ .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+  content: 'Titel h1';
+}
+*/
+
+table.subtitle-upload-results {
+  background: transparent;
+}
+
+table.subtitle-upload-results td {
+  border: none;
+  padding: 2px;
+}
+
+table.subtitle-upload-results tr {
+  border: none;
+}
+
+h2.sent-status{
+  color: #363636;
+  font-weight: bold;
+}
+
+h3.collapsable{
+  margin-top: 10px;
+  margin-bottom: 24px !important;
+}
+
+#upload_info_section {
+  margin-bottom: 20px;
+  display: none;
 }

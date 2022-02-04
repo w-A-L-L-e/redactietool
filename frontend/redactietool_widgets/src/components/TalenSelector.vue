@@ -6,6 +6,8 @@
       track-by="code" 
       :options="options"
       :multiple="true" 
+      :show-labels="false"
+      :hide-selected="true"
       :taggable="false"
       @input="updateValue">
 
@@ -173,9 +175,10 @@
       var languages_div = document.getElementById("item_languages");
       if(languages_div){
         var languages = JSON.parse(languages_div.innerText);
+        this.value = [];
         for(var l in languages){
           var language_code = languages[l]['value'];
-          var language_name = "todo";
+          var language_name = "";
 
           // lookup language name
           for( var o in this.options){
@@ -185,7 +188,7 @@
               break;
             }
           }
-          default_value.push(
+          this.value.push(
             {
               'name': language_name, 
               'code': language_code 
@@ -193,7 +196,7 @@
           );
         }
       }
-      this.json_value = JSON.stringify(default_value);
+      this.json_value = JSON.stringify(this.value);
     },
     methods: {
       updateValue(value){

@@ -12,7 +12,7 @@
 // have some minification done in our precompile assets makefile target.
 
 
-// ============================== SUBTITLE FORMS ===============================
+// ============================ LOGIN/LOGOUT FORMS =============================
 function execute(btn, label){
   btn.form.submit(); 
   btn.disabled=true; 
@@ -26,15 +26,63 @@ function loginSubmit(btn){
   btn.classList.add('is-loading')
 }
 
+function logoutClicked(ref){
+  // #logout_btn
+  ref.className += ' disabled';
+}
+
+function newUploadClicked(ref){
+  // #new_upload_btn
+  ref.className += ' disabled';
+}
+
+function clearButtonLoadingState(){
+  // TODO: put all buttons back in original state 
+  // this is similar to hideEmptyTitles but instead we modify
+  // a class and/or replace the button.value back
+}
+
+
+// ============================= MODAL DIALOG ==================================
+function showNavigationWarning(){
+  //v1
+  //showModalAlert(
+  //    "Waarschuwing",
+  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
+  //);
+
+  //v2.1
+  showModalAlert(
+      "Ben je zeker dat je deze pagina wilt verlaten?",
+      "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
+  );
+
+}
+
+function flashModalWarning(){
+  showModalAlert(
+      "Sync is misgelopen",
+      "Deze alert gaat na 3 seconden automatisch dicht..."
+  );
+
+  setTimeout(function(){
+    closeModalAlert();
+  }, 3000);
+}
+
+
+// ============================== SUBTITLE FORMS ===============================
 function pidSubmitForSubtitles(btn){
   hf = document.getElementById('redirect_subtitles');
   hf.value = 'yes';
+  window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
 }
 
 function pidSubmitForMetadata(btn){
   hf = document.getElementById('redirect_subtitles');
   hf.value = 'no';
+  window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
 }
 
@@ -88,51 +136,6 @@ function confirmCancel(btn){
 }
 
 
-// ============================ LOGIN/LOGOUT FORMS =============================
-function logoutClicked(ref){
-  // #logout_btn
-  ref.className += ' disabled';
-}
-
-function newUploadClicked(ref){
-  // #new_upload_btn
-  ref.className += ' disabled';
-}
-
-function clearButtonLoadingState(){
-  // TODO: put all buttons back in original state 
-  // this is similar to hideEmptyTitles but instead we modify
-  // a class and/or replace the button.value back
-}
-
-// ============================= MODAL DIALOG ==================================
-function showNavigationWarning(){
-  //v1
-  //showModalAlert(
-  //    "Waarschuwing",
-  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
-  //);
-
-  //v2.1
-  showModalAlert(
-      "Ben je zeker dat je deze pagina wilt verlaten?",
-      "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
-  );
-
-}
-
-function flashModalWarning(){
-  showModalAlert(
-      "Sync is misgelopen",
-      "Deze alert gaat na 3 seconden automatisch dicht..."
-  );
-
-  setTimeout(function(){
-    closeModalAlert();
-  }, 3000);
-}
-
-
 // ============================ METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_fields_id){
@@ -151,13 +154,15 @@ function addPrdItem(item_list_id, item_fields_id){
   // add unique ids to _input_ and _value_ fields in cloned element
   var new_id = 1;
   var item_inputs = item_list.getElementsByTagName("input");
-  var last_id = item_inputs[item_inputs.length-1].id
-  if(last_id.includes("_value_")){
-    new_id = parseInt(last_id.replace(item_fields_id+'_value_', ''))+1
+  if(item_inputs.length){
+    var last_id = item_inputs[item_inputs.length-1].id
+    if(last_id.includes("_value_")){
+      new_id = parseInt(last_id.replace(item_fields_id+'_value_', ''))+1
+    }
   }
 
   var fields_clone = item_fields.cloneNode(true);
-  fields_clone.style.display = 'flex';
+  //fields_clone.style.display = 'flex';
   fields_clone.id = fields_clone.id+"_"+new_id;
   fields_clone.getElementsByTagName("select")[0].name = item_fields_id+"_attribute_"+new_id
   fields_clone.getElementsByTagName("select")[0].id = item_fields_id+"_attribute_"+new_id
@@ -176,28 +181,7 @@ function deletePrdItem(del_btn){
   return false;
 }
 
-function sectionToggle(section_div_id){
-  var form_section = document.getElementById(section_div_id);
-  if(!form_section) return;
-  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
-  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
-  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
-
-
-  if(form_section.style.display == 'none'){
-    // form_section.style.display="flex"
-    form_section.style.display="block";
-    unfolded_icon.style.display="block";
-    folded_icon.style.display="none";
-  }
-  else{
-    form_section.style.display="none";
-    unfolded_icon.style.display="none";
-    folded_icon.style.display="block";
-  }
-}
-
-function collapseSection(section_div_id){
+function closeSection(section_div_id){
   var form_section = document.getElementById(section_div_id);
   if(!form_section) return;
   var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
@@ -207,6 +191,47 @@ function collapseSection(section_div_id){
   form_section.style.display="none";
   unfolded_icon.style.display="none";
   folded_icon.style.display="block";
+}
+
+function openSection(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(!form_section) return;
+  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
+  var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
+
+  form_section.style.display="block";
+  unfolded_icon.style.display="block";
+  folded_icon.style.display="none";
+}
+
+function sectionToggle(section_div_id){
+  var form_section = document.getElementById(section_div_id);
+  if(!form_section) return;
+ 
+  if(form_section.style.display == 'none'){
+    if(section_div_id=="productie_section"){
+      window.localStorage.setItem("productie_section_opened", "true");
+    }
+    openSection(section_div_id);
+  }
+  else{
+    if(section_div_id=="productie_section"){
+      window.localStorage.removeItem("productie_section_opened");
+    }
+
+    closeSection(section_div_id);
+  }
+}
+
+function updateProductionSection(){
+  // use localstorage to keep state of opened production section
+  if(window.localStorage.getItem("productie_section_opened") == "true"){
+    openSection("productio_section");
+  }
+  else{
+    closeSection("productie_section");
+  }
 }
 
 function collapseEmptyTextarea(area_id, uncollapsable=false){
@@ -315,6 +340,73 @@ function refreshKeyframeImage(img_id){
   // in dom and update background tag.
 }
 
+function injectApiUrl(url_div_id){
+  var api_url_div = document.getElementById('redactie_api_url');
+  if(api_url_div){
+    api_url_div.innerText = window.location.protocol+'//'+window.location.host;
+  }
+  else{
+    console.log("Warning could not inject api url into div=", url_div_id);
+  }
+}
+
+function isValidDate(dateString) {
+  var reg_ex = /^\d{4}-\d{2}-\d{2}$/;
+  if(!dateString.match(reg_ex)) return false;  // Invalid format
+  var d = new Date(dateString);
+  var ts = d.getTime();
+  if(!ts && ts !== 0) return false; // NaN, invalid timestamp
+  return d.toISOString().substr(0,10) === dateString;
+}
+
+function checkDateInput(date_id){
+  var date_div = document.getElementById(date_id)
+  if(!date_div) return;
+
+  var valid = isValidDate(date_div.value);
+  var error_div = document.getElementById(date_id+"_error");
+  if(!valid){ //show error
+    date_div.classList.add("is-danger");
+    if(error_div) error_div.classList.remove("hidden");
+  }
+  else{
+    date_div.classList.remove("is-danger");
+    if(error_div) error_div.classList.add("hidden");
+  }
+}
+
+function checkDateInputs(){
+  // checkDateInput("creatiedatum"); // per request disable checks here
+  checkDateInput("uitzenddatum");
+}
+
+
+//function checkPageSaved(){
+//  // vanilla pagesave check test, still issues with this:
+//  //window.addEventListener('beforeunload', function (e) {
+//  //  // Cancel the event as stated by the standard.
+//  //  e.preventDefault();
+//  //  // Chrome requires returnValue to be set.
+//  //  e.returnValue = '';
+//
+//
+//  showNavigationWarning();
+//  flashModalWarning();
+//  showModalAlert("hello", "world");
+//  // event.preventDefault();
+//  // return event.returnValue = "Ben je zeker?";
+//  //  console.log("HIER EEN CUSTOM DIALOG!!!")
+//  //});
+//
+//  window.onbeforeunload = (event) => {
+//    console.log("HIER EEN CUSTOM DIALOG!!!")
+//    if (false) {
+//      return "";
+//    }
+//  };
+//}
+
+
 // =========================== DOCUMENT READY EVENT ============================
 // Handle burger menu open/close on all pages.
 // Handle collapsing and hiding of inputs, textareas 
@@ -346,17 +438,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  collapseSection('productie_section');
   collapseEmptyTextareas();
   hideEmptyTitles();
+  updateProductionSection();
+  closeSection("upload_info_section");
   autoCloseSavedAlert();
   autoCloseAlert();
   clearButtonLoadingState();
-  
-  // For demo, show modal dialogs
-  // ============================
-  // showNavigationWarning();
-  // flashModalWarning();
-  // showModalAlert("hello", "world");
+  checkDateInputs(); 
 });
 

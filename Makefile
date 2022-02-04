@@ -111,16 +111,3 @@ precompile_assets:
 	cd frontend && ./deploy_to_flask.sh
 	git add app/static/vue
 
-# these will either be deprecated or integrated in our app soon
-.PHONY: status
-status:
-	open frontend/dirty_forms_poc/wireframes_vs_implemented.html
-
-.PHONY: dirty_forms
-dirty_forms:
-	open frontend/dirty_forms_poc/index.html
-
-.PHONY: richtext_demo
-richtext_demo:
-	open frontend/richtext_poc/index.html
-

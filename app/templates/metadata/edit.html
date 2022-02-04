@@ -18,23 +18,37 @@ Metadata bewerken
     </div> 
   </div>
   
-  {% if data_saved_to_mam %}
+  {% if mh_synced %}
     <div class="columns" id="data_saved_alert_box">
       <div class="column">
         <div class="notification is-success">
           <button class="delete" onclick="closeSavedAlert(); return false;"></button>
           De metadata voor item <b>{{pid}}</b> werd verstuurd naar Mediahaven. <br/>
-          <!--
-          Deze call is async en het kan even duren vooraleer de get request de nieuwe aanpassingen weergeeft.
-          -->
         </div>
       </div>
     </div>
   {% else %}
-    {% include 'includes/form_errors.html' %}
+
+    {% if mh_errors %}
+    <div class="columns" id="data_saved_errors">
+      <div class="column content">
+        <div class="notification is-warning">
+          <button class="delete" onclick="closeSavedAlert('data_saved_errors'); return false;"></button>
+          De metadata voor item <b>{{pid}}</b> kon niet opgeslagen worden bij Mediahaven. <br/>
+          Foutmeldingen:  <br/>
+          <ul>
+            {% for error in mh_errors: %}
+            <li> {{ error }} </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif%}
+
   {% endif %}
   
-  <form class="metadata_form" action="/edit_metadata" method="POST" enctype="multipart/form-data">
+  <form class="metadata_form" action="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}" method="POST" enctype="multipart/form-data">
     <div class="columns">
       <div class="column">
         <div id="player_container"></div>
@@ -47,15 +61,14 @@ Metadata bewerken
               subtitles:{ 
                 tracks:[
                   { 
-                    src: "https://archief-media.meemoo.be/viaa/MOB/TESTBEELD/0a5ed81f068d4b499c99bdcd2b1fd3da79e23eacf06d4e5db0b70c8a603935b8/0a5ed81f068d4b499c99bdcd2b1fd3da79e23eacf06d4e5db0b70c8a603935b8.srt",
-                    label: "English",
-                    id: "English-en",
+                    src: "/item_subtitles/{{department}}/{{pid}}/closed",
+                    label: "Nederlands",
+                    id: "Nederlands-nl",
                     default: true,
                     crossorigin: "anonymous" 
                   }
                 ]
               }
-
           })
         </script>
         
@@ -65,24 +78,7 @@ Metadata bewerken
             <ion-icon name="key-outline" class="pr-3"></ion-icon>
             Keyframe Aanpassen
           </a>
-  
-          <!--
-          <a class="button is-info mt-3"
-             href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
-            Bewerk ondertitels
-          </a>
-          -->
-  
-          <!--
-          <button class="button is-info mt-3" 
-            onclick="refreshKeyframeImage(); return false;" >
-            <ion-icon name="refresh-outline" class="pr-3"></ion-icon>
-            Refresh Keyframe
-          </a>
-          -->
-  
         {% endif %}
-  
       </div>
     </div>
   
@@ -92,7 +88,6 @@ Metadata bewerken
     {% include 'metadata/components/inhoud_section.html' %}
   
     <!-- ======================== Leerobject section ========================== -->
-    <!-- flask data injection here -->
     <div class="hidden" id="redactie_api_url">deployed_server_url</div>
     <div class="hidden" id="pid">{{pid}}</div>
     <div class="hidden" id="item_type">{{item_type}}</div>
@@ -100,6 +95,7 @@ Metadata bewerken
     <div class="hidden" id="item_eindgebruikers">{{item_eindgebruikers}}</div>
     <div class="hidden" id="item_themas">{{item_themas}}</div>
     <div class="hidden" id="item_vakken">{{item_vakken}}</div>
+    <div class="hidden" id="item_vakken_legacy">{{item_vakken_legacy}}</div>
     <div class="hidden" id="item_onderwijsniveaus">{{item_onderwijsniveaus}}</div>
     <div class="hidden" id="item_onderwijsniveaus_legacy">{{item_onderwijsniveaus_legacy}}</div>
     <div class="hidden" id="item_onderwijsgraden">{{item_onderwijsgraden}}</div>
@@ -117,7 +113,15 @@ Metadata bewerken
         <h2 class="title">Publicatiestatus</h2>
         <hr/>
         <label class="checkbox">
-          <input type="checkbox" name="publicatiestatus"/>
+          {% if publish_item %}
+            <input type="checkbox"
+                   name="publicatiestatus_checked" 
+                     id="publicatiestatus_checked" checked/>
+          {% else %}
+            <input type="checkbox"
+                   name="publicatiestatus_checked"
+                     id="publicatiestatus_checked"/>
+          {% endif %}
           Dit item mag gepubliceerd worden op 
           <a target="blank" href="https://onderwijs.hetarchief.be">Het Archief voor Onderwijs.</a>
         </label>
@@ -128,18 +132,14 @@ Metadata bewerken
       Metadata opslaan
     </button>
   
-  </form> <!-- end of metadata edit form -->
-  <br/><br/><br/><br/>
+  </form>
+
+  <div class="form-footer-spacing"></div>
   
   <script type="text/javascript">
-    // Keep this here. It needs to be injected even before the
-    // dom ready event so that vue components
-    // can pick it up to do the correct axios calls
+    // inject api url before dom ready for the vue component axios requests
     function setRedactieApiUrl(){
-      var api_url_div = document.getElementById('redactie_api_url');
-      if(api_url_div){
-        api_url_div.innerText = window.location.protocol+'//'+window.location.host;
-      }
+      injectApiUrl("redactie_api_url"); 
     }
   
     setRedactieApiUrl();

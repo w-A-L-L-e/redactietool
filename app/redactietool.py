@@ -42,7 +42,7 @@ from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
-    move_subtitle, get_property, not_deleted, srt_to_vtt
+    move_subtitle, get_property, not_deleted, get_vtt_subtitles
 )
 from app.services.validation import (pid_error, upload_error, validate_input,
                                      validate_upload, validate_conversion)
@@ -50,7 +50,7 @@ from app.services.validation import (pid_error, upload_error, validate_input,
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from flask_login import LoginManager, login_required  # current_user
-from app.services.rmh_mapping import RmhMapping
+from app.services.meta_mapping import MetaMapping
 from app.services.user import User
 
 
@@ -63,12 +63,19 @@ app.config.from_object(flask_environment())
 # disables caching of srt and other files
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-# TODO: replace these with some ENV vars soon:
+# session cookie secret key
+app.config['SECRET_KEY'] = os.environ.get(
+    'SECRET_KEY', 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
+)
 
-# session cookie/saml key TODO: put this in env var!
-app.config['SECRET_KEY'] = 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
+# subtitles object store url
+app.config['OBJECT_STORE_URL'] = os.environ.get(
+    'OBJECT_STORE_URL', 'https://archief-media-qas.viaa.be/viaa/MOB'
+)
+
 app.config['SAML_PATH'] = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'saml'
+    os.path.dirname(os.path.abspath(__file__)),
+    os.environ.get('SAML_ENV', 'saml/localhost')
 )
 
 # optional:
@@ -261,26 +268,6 @@ def index():
         )
 
 
-# This route is only usefull for development...
-# @app.route('/metadata/')
-# @requires_authorization
-# @login_required
-# def metadata():
-#     req = prepare_flask_request(request)
-#     auth = init_saml_auth(req)
-#     settings = auth.get_settings()
-#     metadata = settings.get_sp_metadata()
-#     errors = settings.validate_metadata(metadata)
-#
-#     # make_response is needed here to set correct header and response code
-#     if len(errors) == 0:
-#         resp = make_response(metadata, 200)
-#         resp.headers['Content-Type'] = 'text/xml'
-#     else:
-#         resp = make_response(', '.join(errors), 500)
-#     return resp
-
-
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
 @requires_authorization
@@ -338,12 +325,19 @@ def get_upload():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
+    # subtitle files already uploaded:
+    all_subs = mh_api.get_subtitles(department, pid)
+    subfiles = []
+    for sub in all_subs:
+        subfiles.append(sub.get('Descriptive').get('OriginalFilename'))
+
     return render_template(
         'subtitles/upload.html',
         token=token,
         pid=pid,
         department=department,
         mam_data=json.dumps(mam_data),
+        subtitle_files=subfiles,
         title=mam_data.get('title'),
         keyframe=mam_data.get('previewImagePath'),
         description=mam_data.get('description'),
@@ -430,11 +424,13 @@ def cancel_upload():
 @app.route('/send_to_mam', methods=['POST'])
 @requires_authorization
 @login_required
-def send_to_mam():
+def send_subtitles_to_mam():
+
     tp = {
         'token': request.form.get('token'),
         'pid': request.form.get('pid'),
         'department': request.form.get('department'),
+        'video_url': request.form.get('video_url'),
         'subtitle_type': request.form.get('subtitle_type'),
         'srt_file': request.form.get('subtitle_file'),
         'vtt_file': request.form.get('vtt_file'),
@@ -445,6 +441,12 @@ def send_to_mam():
         'replace_existing': request.form.get('replace_existing'),
         'transfer_method': request.form.get('transfer_method')
     }
+
+    video_data = json.loads(tp['mam_data'])
+    tp['title'] = video_data.get('title')
+    tp['keyframe'] = video_data.get('previewImagePath')
+    tp['flowplayer_token'] = os.environ.get(
+        'FLOWPLAYER_TOKEN', 'set_in_secrets')
 
     if tp['replace_existing'] == 'cancel':
         # abort and remove temporary files
@@ -481,6 +483,8 @@ def send_to_mam():
             ftp_response = ftp_uploader.upload_subtitles(
                 upload_folder(), metadata, tp)
             tp['mh_response'] = json.dumps(ftp_response)
+            if 'ftp_error' in ftp_response:
+                tp['mh_error'] = True
 
         # cleanup temp files and show final page with mh request results
         delete_files(upload_folder(), tp)
@@ -498,12 +502,12 @@ def send_to_mam():
 @requires_authorization
 @login_required
 def edit_metadata():
-    logger.info('GET item_meta route')
-
     token = request.args.get('token')
     pid = request.args.get('pid').strip()
     department = request.args.get('department')
     errors = request.args.get('validation_errors')
+
+    logger.info(f'GET item_metadata pid={pid}')
 
     validation_error = validate_input(pid, department)
     if validation_error:
@@ -514,12 +518,17 @@ def edit_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-    data_mapping = RmhMapping()
-    td = data_mapping.mh_to_form(token, pid, department, errors, mam_data)
+    mm = MetaMapping()
+    template_vars = mm.mh_to_form(
+        token, pid, department, mam_data, errors)
+
+    # extra request necessary in order to fetch rightsmanagement/permissions
+    template_vars['publish_item'] = mh_api.get_publicatiestatus(
+        department, pid)
 
     return render_template(
         'metadata/edit.html',
-        **td
+        **template_vars
     )
 
 
@@ -536,12 +545,24 @@ def save_item_metadata():
     if not mam_data:
         return pid_error(token, pid, f"PID niet gevonden in {department}")
 
-    data_mapping = RmhMapping()
-    tp, json_data, errors = data_mapping.form_to_mh(request, mam_data)
+    mm = MetaMapping()
+    template_vars = mm.form_to_mh(request, mam_data)
+    frag_id, ext_id, xml_sidecar = mm.xml_sidecar(mam_data, template_vars)
+    response = mh_api.update_metadata(department, frag_id, ext_id, xml_sidecar)
+
+    if response.status_code >= 200 and response.status_code < 300:
+        print("Mediahaven save ok, status code=", response.status_code)
+        template_vars['mh_synced'] = True
+    else:
+        template_vars['mh_synced'] = False
+        template_vars['mh_errors'] = [response.json()['message']]
+        print("Mediahaven ERRORS= ", response.json())
+
+    # we can even do another GET call here to validate the changed modified timestamp
 
     return render_template(
         'metadata/edit.html',
-        **tp
+        **template_vars
     )
 
 
@@ -582,30 +603,30 @@ def get_vakken():
 @login_required
 def get_vakken_suggesties():
     json_data = request.json
-    print("json_data=", json_data)
     suggest_api = SuggestApi()
     result = suggest_api.get_vakken_suggesties(
         json_data['graden'], json_data['themas'])
     return result
 
 
-@app.route('/item_subtitles', methods=['GET'])
+@app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
 @requires_authorization
 @login_required
-def get_subtitles():
-    # see this on how to construct a proper link
-    # https://meemoo.atlassian.net/browse/DEV-1872?focusedCommentId=25119
-    srt_url = 'https://archief-media.meemoo.be/viaa/MOB/TESTBEELD/...35b8.srt'
-    return srt_to_vtt(srt_url)
+def get_subtitle_by_type(department, pid, subtype):
+    mh_api = MediahavenApi()
+    sub_response = mh_api.get_subtitle(department, pid, subtype)
 
-# debugging route to see vue components can submit nicely to flask
-# @app.route('/edit_metadata_vue', methods=['POST'])
-# def read_vue_component_values():
-#     print("talen=", request.form.get('talen'))
-#     print("themas=", request.form.get('themas'))
-#     print("vakken=", request.form.get('vakken'))
-#     print("trefwoorden=", request.form.get('trefwoorden'))
-#     return render_template('edit_metadata.html')
+    if not sub_response:
+        return ""
+
+    object_store_url = app.config.get('OBJECT_STORE_URL')
+    object_id = sub_response.get('Internal').get('MediaObjectId', '')
+    org_name = sub_response.get('Administrative').get(
+        'OrganisationName').upper()
+    srt_url = f"{object_store_url}/{org_name}/{object_id}/{object_id}.srt"
+    print("SRT LINK:", srt_url)
+
+    return get_vtt_subtitles(srt_url)
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
@@ -614,18 +635,21 @@ def liveness_check():
     return "OK", status.HTTP_200_OK
 
 
+@app.route('/404')
+def not_found_errorpage():
+    return render_template('404.html'), 404
+
+
 @app.errorhandler(401)
 def unauthorized(e):
     # return "<h1>401</h1><p>Unauthorized</p>", 401
-    return redirect(
-        url_for('.index', token=None)
-    )
+    return redirect(url_for('.index', token=None))
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # TODO: also a redirect but set some flash message here
-    return "<h1>404</h1><p>Page not found</p>", 404
+    # return "<h1>404</h1><p>Page not found</p>", 404
+    return redirect(url_for('.not_found_errorpage'))
 
 
 # =============== Main application startup without debug mode ================

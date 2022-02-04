@@ -7,19 +7,27 @@
       {{suggestie_btn_label}}
     </a>
 
+    <!-- possibly add this if needed
+      open-direction="top"
+    -->
     <multiselect v-model="value" 
-      id="vakken_multiselect"
-      tag-placeholder="Kies vakken" 
-      placeholder="Selecteer vak" 
+      tag-placeholder="Selecteer vakken" 
+      placeholder="Selecteer vakken" 
       label="label" 
       track-by="id" 
-      :options="options" :multiple="true" 
-      :taggable="false" @input="updateValue">
+      :options="options" 
+      :option-height="104" 
+      :show-labels="false"
+      :hide-selected="true"
+      :multiple="true"
+      :loading="vakken_loading"
+      :taggable="false" @input="updateValue"
+      >
 
       <template slot="noResult">Vak niet gevonden</template>
 
       <!--
-      disable custom styling 
+      custom template styling 
       <template 
         slot="singleLabel" 
         slot-scope="props">
@@ -45,10 +53,25 @@
 
     </multiselect>
 
+    <div class="inline-suggesties" v-if="showInlineSuggesties()">
+      <div class="inline-suggesties-title">Suggesties</div>
 
-  <div class="vak-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-    Vak werd al toegevoegd
-  </div>
+      <div v-if="loading">
+        <button class="button is-loading">Loading</button>
+      </div>
+
+      <div v-if="!loading" class="inline-suggesties-list">
+        <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
+          <div v-for="vak in row" :key="vak.id"  
+                class="inline-suggestie-pill is-pulled-left"
+                v-bind:class="[vakIsSelected(vak) ? 'inline-suggestie-selected' : '']"
+                v-on:click="toggleVakSelect(vak)">
+            {{vak.label}}
+          </div>
+          <div class="is-clearfix"></div>
+        </div>
+      </div>
+    </div>
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
@@ -57,15 +80,24 @@
         <div class="modal-card">
 
           <header class="modal-card-head">
-            <p class="modal-card-title">Selecteer vakken</p>
+            <p class="modal-card-title">Vakken</p>
 
+            <label class="checkbox thema-show-def-selector">
+              <input
+                type="checkbox"
+                v-model="show_tooltips"
+                v-on:click="toggleTooltips()"
+              >
+                Tooltips
+            </label>
 
             <label class="checkbox thema-show-def-selector">
               <input
                 type="checkbox"
                 v-model="show_definitions"
+                v-on:click="toggleBeschrijvingen()"
               >
-                Toon beschrijvingen
+                Beschrijvingen
             </label>
 
             <div class="vak-search">
@@ -89,24 +121,31 @@
 
           <section class="modal-card-body">
 
-            <h3 class="subtitle vakken-title">Suggesties voor vakken</h3>
+            <h3 v-if="suggesties_filtered.length" class="subtitle vakken-title">
+              Suggesties
+            </h3>
 
-            <div v-if="!vakken_suggesties.length" class="notification is-info is-light">
-              Geen suggesties gevonden. Probeer andere themas of onderwijsgraden te selecteren.
-            </div>
-
-            <div class="columns"  v-for="(row, index) in vakken_suggesties" :key="'vak'+index">
+            <div class="columns"  v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
               <div class="column is-one-fifth" v-for="vak in row" :key="vak.id">
                 <div class="tile is-ancestor">
                   <div class="tile is-vertical mr-2 mt-2" >
                     <div class="card" 
                       v-on:click="toggleVakSelect(vak)"
                       v-bind:class="[vakIsSelected(vak) ? 'vak-selected' : '']"
+                      v-on:mouseover="changeToprowTooltip($event)"
                       >
                       <header class="card-header">
-                        <p class="card-header-title">
+                        <p v-if="show_definitions || !show_tooltips" 
+                          class="card-header-title">
                           {{vak.label}}
                         </p>
+
+                        <p v-if="show_tooltips" 
+                          class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
+                          :data-tooltip="vak.definition">
+                          {{vak.label}}
+                        </p>
+
                       </header>
                       <div class="card-content" v-if="show_definitions">
                           {{vak.definition}} 
@@ -117,22 +156,50 @@
               </div>
             </div>
 
-            <h3 class="subtitle vakken-title">Overige vakken</h3>
-            <div class="columns"  v-for="(row2, index2) in overige_vakken" :key="'sug'+index2">
-              <div class="column is-one-fifth" v-for="ovak in row2" :key="ovak.id">
-                <div class="tile is-ancestor">
-                  <div class="tile is-vertical mr-2 mt-2" >
-                    <div class="card" 
-                      v-on:click="toggleVakSelect(ovak)"
-                      v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
-                    >
-                      <header class="card-header">
-                        <p class="card-header-title">
-                          {{ovak.label}}
-                        </p>
-                      </header>
-                      <div class="card-content" v-if="show_definitions">
-                          {{ovak.definition}} 
+            
+            <h3 v-if="suggesties_filtered.length" class="subtitle vakken-title">Overige vakken</h3>
+
+            <div v-if="hogerOfVolwassenOnderwijs()">
+              <div class="notification is-info is-light">
+              Aan de opgegeven onderwijsniveaus zijn geen vakken gelinkt, wil je toch een vak toevoegen op dit item, selecteer dan kleuter, lager of secundair onderwijs.
+              </div>
+            </div>
+
+            <h3 v-if="overige_vakken.length && !suggesties_filtered.length && !hogerOfVolwassenOnderwijs()" 
+                class="subtitle vakken-title">
+              Geen suggesties beschikbaar, volgende vakken zijn mogelijk.
+            </h3>
+
+            <div v-if="loading" class="modal-loader">
+              <!--progress class="progress is-large is-info" max="100">60%</progress-->
+              <button class="button is-loading">Loading</button>
+            </div>
+
+            <div v-if="!hogerOfVolwassenOnderwijs()">
+              <div class="columns"  v-for="(row2, index2) in overige_filtered" :key="'sug'+index2">
+                <div class="column is-one-fifth" v-for="ovak in row2" :key="ovak.id">
+                  <div class="tile is-ancestor">
+                    <div class="tile is-vertical mr-2 mt-2" >
+                      <div class="card" 
+                        v-on:click="toggleVakSelect(ovak)"
+                        v-bind:class="[vakIsSelected(ovak) ? 'vak-selected' : '']"
+                        v-on:mouseover="changeToprowTooltip($event)"
+                      >
+                        <header class="card-header">
+                          <p v-if="show_definitions || !show_tooltips" 
+                            class="card-header-title">
+                            {{ovak.label}}
+                          </p>
+
+                          <p v-if="show_tooltips" 
+                            class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
+                            :data-tooltip="ovak.definition">
+                            {{ovak.label}}
+                          </p>
+                        </header>
+                        <div class="card-content" v-if="show_definitions">
+                            {{ovak.definition}} 
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -144,7 +211,7 @@
           <footer class="modal-card-foot">
             <a class="button is-link close-themas-button" 
               v-on:click="toggleSuggesties($event)">
-                Vakken sluiten
+                Sluiten
             </a>
             <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
           </footer>
@@ -176,38 +243,48 @@
       return {
         value: default_value,
         json_value: JSON.stringify(default_value),
-        options: [
-          { 
-            id: "1", 
-            label: "Vakken inladen...", 
-            definition: "Vakken inladen..."
-          },
-        ],
+        options: [],
         show_vakken_suggesties: false,
-        show_already_added_warning: false,
         suggestie_btn_label: "Toon suggesties voor vakken",
-        vakken_suggesties:[],
-        overige_vakken:[],
+        vakken_suggesties: [],
+        suggesties_filtered: [],
+        overige_vakken: [],
+        overige_filtered: [],
+        niveaus: [],
         graden: [],
         themas: [],
         vakken_search: "",
         vakken_prev_search: "",
         show_definitions: false,
+        show_tooltips: false,
+        loading: false,
+        vakken_loading: true
       }
     },
     mounted: function() {
-      this.$root.$on('graden_changed', data => {
-        console.log('graden changed data=', data);
-        this.graden = data;
-        this.updateSuggestions();
-      });
-
       this.$root.$on('themas_changed', data => {
-        console.log('themas changed data=',data);
+        // console.log('themas_changed event');
         this.themas = data;
         this.updateSuggestions();
       });
 
+      this.$root.$on('onderwijs_changed', data => {
+        this.niveaus = data['niveaus'];
+        this.graden = data['graden']
+        this.updateSuggestions();
+      });
+
+      // these are only emitted in case of comboEnabled=false 
+      // aka with the 2 seperate selectors
+      this.$root.$on('niveaus_changed', data => {
+        this.niveaus = data;
+        this.updateSuggestions();
+      });
+
+      this.$root.$on('graden_changed', data => {
+        this.graden = data;
+        this.updateSuggestions();
+      });
     },
     created: function() { 
       // smart way to use mocked data during development
@@ -217,15 +294,25 @@
       if( redactie_api_div ){
         redactie_api_url = redactie_api_div.innerText;
       }
-      else{
+      else{ // only load if redactie_api_url div is present
         return;
       }
 
-      // only load if redactie_api_url div is present
+      this.loading = true;
       axios
         .get(redactie_api_url+'/vakken')
         .then(res => {
-          this.options = res.data;
+          this.options = [];
+          for(var i in res.data){
+            var vak = res.data[i];
+            this.options.push({
+              'id': vak.id,
+              'label': this.truncateLabel(vak.label),
+              'definition': vak.definition
+            })
+          }
+          this.loading = false;
+          this.vakken_loading = false;
           this.loadSavedVakken();
         })
     },
@@ -234,6 +321,7 @@
         var vakken_div = document.getElementById("item_vakken");
         if(vakken_div){
           var vakken = JSON.parse(vakken_div.innerText);
+          this.value = [];
           for(var l in vakken){
             var vak_id = vakken[l]['value'];
             var vak_label = '';
@@ -249,7 +337,7 @@
               }
             }
             if( vak_label.length>0 ){
-              default_value.push(
+              this.value.push(
                 {
                   'id': vak_id, 
                   'label': vak_label, 
@@ -259,10 +347,12 @@
             }
           }
         }
-        this.json_value = JSON.stringify(default_value);
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('vakken_changed', this.value);
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit('vakken_changed', value);
       },
       vakIsSelected(vak){
         for( var i in this.value ){
@@ -271,30 +361,28 @@
         }
         return false;
       },
-      updateOverigeVakken(redactie_api_url, suggest_map){
-        //nu fetch van alle overige vakken, zijn alle vakken - de suggestions
-        axios
-          .get(redactie_api_url+'/vakken')
-          .then(res2 => {
-            this.overige_vakken = [];
-            var row2 = [];
-            for( var vak_index in res2.data){
-              var ovak = res2.data[vak_index];
-              if(suggest_map[ovak.id] == undefined){ 
-                // row2.push(ovak);
-                // fix duplicate entries 
-                row2.push(Object.assign({}, ovak));
-              }
+      updateOverigeVakken(suggest_map){
+        this.overige_vakken = [];
+        var row2 = [];
 
-              if(row2.length>=5){
-                this.overige_vakken.push(row2);
-                row2=[];
-              }
-            }
-            if(row2.length>0){
-              this.overige_vakken.push(row2);
-            }
-          })
+        for(var vak_index in this.options ){
+          var ovak = this.options[vak_index];
+          if(suggest_map[ovak.id] == undefined){ 
+            // row2.push(ovak);
+            // fix duplicate entries 
+            row2.push(Object.assign({}, ovak));
+          }
+
+          if(row2.length>=5){
+            this.overige_vakken.push(row2);
+            row2=[];
+          }
+        }
+        if(row2.length>0){
+          this.overige_vakken.push(row2);
+        }
+
+        this.overige_filtered = JSON.parse(JSON.stringify(this.overige_vakken)); 
       },
       updateSuggestions(){
         var redactie_api_url = 'http://localhost:5000';
@@ -306,22 +394,23 @@
           return;
         }
 
-        if(!this.show_vakken_suggesties){
-          console.log("Vakken suggestions is closed, not loading...");
-          return;
-        }
-
         var post_data = {
           'graden': this.graden,
           'themas': this.themas
         }
 
-        if(post_data['graden'].length==0 || post_data['themas'].length==0 ){
+        if(
+            post_data['graden'].length==0 || 
+            post_data['themas'].length==0 ||
+            this.hogerOfVolwassenOnderwijs()
+          ){
           this.vakken_suggesties = []; //clear suggestions
-          this.updateOverigeVakken(redactie_api_url, {});
+          this.suggesties_filtered = [];
+          this.updateOverigeVakken({});
           return;
         }
 
+        this.loading = true;
         axios
           .post(redactie_api_url+'/vakken_suggest', post_data)
           .then(res => {
@@ -329,8 +418,8 @@
             var row = [];
             var suggest_map = {};
             for( var vak_index in res.data){
-              //if(vak_index>5) break; //simulate suggestions by only taking first 6
               var vak = res.data[vak_index];
+              vak.label = this.truncateLabel(vak.label);
               suggest_map[vak.id] = vak; 
               row.push(Object.assign({}, vak));
               if(row.length>=5){
@@ -341,9 +430,9 @@
             if(row.length>0){
               this.vakken_suggesties.push(row);
             }
-            
-            console.log("suggest_map=", suggest_map);
-            this.updateOverigeVakken(redactie_api_url, suggest_map);
+            this.loading = false;
+            this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
+            this.updateOverigeVakken(suggest_map);
           })
       },
       toggleSuggesties(event){
@@ -354,6 +443,7 @@
         }
         else{
           this.suggestie_btn_label = "Toon suggesties voor vakken";
+          this.$root.$emit('vakken_changed', this.value);
         }
         
         this.updateSuggestions();
@@ -366,7 +456,6 @@
           if(okw.id == vak.id){
             unselect = true;
             this.value.splice(o,1); // remove selection
-            this.json_value = JSON.stringify(this.value);
             break;
           } 
         }
@@ -379,13 +468,93 @@
           };
           // this.options.push(new_vak); //only needed for entirely new vak (create)
           this.value.push(new_vak);
-          this.json_value = JSON.stringify(this.value);
         }
+        
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('vakken_changed', this.value);
+      },
+      zoek(search_str, src_rows){
+        var result = [];
+        var row = [];
+        for( var ri in src_rows ){
+          var src_row = src_rows[ri];
+          for( var index in src_row){
+            var vak = src_row[index];
+            // make searching case insensitive
+            var search_lower = search_str.toLowerCase();
+            var label = vak.label.toLowerCase();
+            var definition = vak.definition.toLowerCase();
+
+            if(label.includes(search_lower) || definition.includes(search_lower)){
+              row.push(Object.assign({}, vak));
+            }
+            if(row.length>=5){
+              result.push(JSON.parse(JSON.stringify(row)));
+              row=[];
+            }
+          }
+          
+        }
+
+        if(row.length>0){
+          result.push(JSON.parse(JSON.stringify(row)));
+        }
+        return result;
       },
       zoekVakken(event){
+        this.suggesties_filtered = this.zoek(this.vakken_search, this.vakken_suggesties);
+        this.overige_filtered = this.zoek(this.vakken_search, this.overige_vakken);
+
+        this.vakken_prev_search = this.vakken_search;
+        this.vakken_search = ""; //clear for next search
         event.preventDefault();
-        console.log("TODO search this", this.vakken_search);
+      },
+      changeToprowTooltip(event){
+        // attempt to make top row tooltip show on bottom
+        // console.log(event);
+        var pos = event.clientY; //pageY doesnt work right
+
+        if(pos<200){
+          event.target.classList.add('has-tooltip-bottom')
+        }
+        else{
+          event.target.classList.remove('has-tooltip-bottom')
+        }
+        return true;
+      },
+      truncateLabel(text) {
+        var length=45;
+        var suffix='...';
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
+      hogerOfVolwassenOnderwijs(){
+        for(var i in this.niveaus){
+          var niv = this.niveaus[i];
+          if(niv.id.includes('kleuter')) return false;
+          if(niv.id.includes('lager')) return false;
+          if(niv.id.includes('secundair')) return false;
+        }
+
+        // enkel hoger, volwassen of geen niveaus geselecteerd
+        return true;
+      },
+      toggleTooltips(){
+        this.show_definitions = false;
+      },
+      toggleBeschrijvingen(){
+        this.show_tooltips = false;
+      },
+      showInlineSuggesties(){
+        if( !this.suggesties_filtered.length ) return false;
+        //algernate if we hide suggests: also return false if all suggestions are selected
+        return true;
       }
+
     },
     filters: {
       truncate: function (text, length, suffix) {
@@ -395,7 +564,7 @@
         else{
           return text;
         }
-      },
+      }
     }
   }
 </script>
@@ -499,5 +668,44 @@
   
   .hide{
     display: hidden;
+  }
+
+  .inline-suggesties{
+    margin-top: 10px;
+  }
+
+  .inline-suggesties-list{
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+
+  .inline-suggesties-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #363636;
+  }
+  .inline-suggestie-pill {
+    border-radius: 5px;
+    border: 1px solid #9cafbd;
+    background-color: #eff5fb;
+    color: #296fa8;
+    text-overflow: ellipsis;
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .inline-suggestie-selected{
+    background-color: #93b6d3;
+    border: 1px solid #9cafbd;
+    color: #fff;
+  }
+
+  .modal-loader {
+    text-align: center;
+    height: 54px;
+    margin-top: -52px;
   }
 </style>

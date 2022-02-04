@@ -2,36 +2,50 @@
   <div id="trefwoorden_selector">
     <multiselect v-model="value" 
       tag-placeholder="Maak nieuw trefwoord aan" 
-      placeholder="Zoek of voeg een nieuw trefwoord toe" 
+      select-label="Selecteer trefwoord"
+      deselect-label="Verwijder trefwoord"
+      selected-label=""
+      :show-labels="false"
+      :hide-selected="true"
+      placeholder="Voeg nieuw trefwoord toe" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true" 
       :taggable="true" @tag="addTrefwoord" @input="updateValue">
+
+      <template slot="noOptions">
+        &nbsp;
+      </template>
     </multiselect>
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
-    <div class="cp_keywords_button">
-      <a class="" v-on:click="toggleKeywordCollapse">
-        {{cp_keyword_label}}
-      </a>
-      <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-        Keyword werd al toegevoegd
-      </div>
-    </div>
-
-    <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
-
-      <div v-if="!cp_keywords.length" class="notification is-info is-light">
-        Voor dit item zijn er geen Content Partner trefwoorden.
+    <div v-if="cp_keywords.length">
+      <div class="cp_keywords_button">
+        <a class="" v-on:click="toggleKeywordCollapse">
+          {{cp_keyword_label}}
+        </a>
+        <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+          Keyword werd al toegevoegd
+        </div>
       </div>
 
-      <div 
-        class="keyword-pill" 
-        v-for="keyword in cp_keywords" 
-        :key="keyword.code"
-        v-on:click="addCpKeyword(keyword)"
-        >
-        {{keyword.name}}
+      <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
+
+        <div v-if="!cp_keywords.length" class="notification is-info is-light">
+          Voor dit item zijn er geen Content Partner trefwoorden.
+        </div>
+
+        <!-- 
+          v-on:click="addCpKeyword(keyword)"
+        -->
+        <div 
+          class="keyword-pill is-pulled-left" 
+          v-for="keyword in cp_keywords" 
+          :key="keyword.code"
+          >
+          {{keyword.name}}
+        </div>
+        <div class="is-clearfix"></div>
       </div>
     </div>
 
@@ -53,55 +67,37 @@
         value: default_value,
         json_value: JSON.stringify(default_value),
         options: [
-          { name: 'reportage', code: 'reportage' },
-          { name: 'Silent Movie', code: 'Silent Movie' },
-          { name: 'Belgium', code: 'Belgium' },
-          { name: 'France', code: 'France' },
-          { name: 'Spain', code: 'Spain' },
-          { name: "BURGER", code: 'BURGER' }, 
-          { name: "CONFLICT", code: 'CONFLICT' }, 
-          { name: "CONVENTIE VAN GENEVE", code: 'CONVENTIE VAN GENEVE' }, 
-          { name: "INTERNATIONAAL STRAFGERECHTSHOF", code: 'INTERNATIONAAL STRAFGERECHTSHOF' }, 
-          { name: "MENSENRECHT", code: 'MENSENRECHT' }, 
-          { name: "OORLOG", code: 'OORLOG' }, 
-          { name: "OORLOGSMISDAAD", code: 'OORLOGSMISDAAD' }, 
-          { name: "SCHENDING", code: 'SCHENDING' }, 
-          { name: "STRAFRECHT", code: 'STRAFRECHT' }, 
-          { name: "VAN DEN WIJNGAERT CHRIS", code: 'VAN DEN WIJNGAERT CHRIS' }, 
-          { name: "VEILIGHEID", code: 'VEILIGHEID' },
-          { name: "Christiane van den Wijngaert", code: "Christiane van den Wijngaert"},
-          { name: "conventie van Gen\u00e8ve", code: "conventie van Gen\u00e8ve"},
-          { name: "Internationaal Strafhof", code: "Internationaal Strafhof"},
-          { name: "justitie", code: "justitie"},
-          { name: "mensenrechten", code: "mensenrechten"},
-          { name: "oorlog", code: "oorlog"} 
-          // should be coming from the suggest library (aka knowledge graph).
+          // { name: 'reportage', code: 'reportage' },
+          // should be coming from the suggest library or eleastic search in next
+          // release
         ],
         cp_keywords: [],
-        show_cp_keywords: false,
+        show_cp_keywords: true,
         show_already_added_warning: false,
-        cp_keyword_label: "Bekijk trefwoorden van Content Partners"
+        cp_keyword_label: "Verberg trefwoorden van Content Partners"
       }
     },
     created(){
       var keyword_div = document.getElementById("item_keywords");
       if(keyword_div){
         var keywords = JSON.parse(keyword_div.innerText);
+        this.value = [];
         for(var k in keywords){
           var keyword = keywords[k]
-          default_value.push(
+          this.value.push(
             {
               'name': keyword['value'],
               'code': keyword['value']
             }
           );
         }
-        this.json_value = JSON.stringify(default_value);
+        this.json_value = JSON.stringify(this.value);
       }
 
       var keywords_cp_div = document.getElementById("item_keywords_cp");
       if( keywords_cp_div ){
         var keywords_cp = JSON.parse(keywords_cp_div.innerText);
+        this.cp_keywords = [];
         for(var cpk in keywords_cp){
           var cp_keyword = keywords_cp[cpk]
           this.cp_keywords.push(
@@ -191,24 +187,21 @@
   }
   .keyword-pill{
     border-radius: 5px;
-    /*background: #41b883;*/
     border: 1px solid #9cafbd;
     background-color: #edeff2;
     color: #2b414f;
     text-overflow: ellipsis;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
-    padding: 1px 8px 1px 8px;
+    margin-right: 8px;
+    padding: 0px 8px 0px 8px;
     margin-bottom: 5px;
-    cursor: pointer;
   }
   .warning-pill{
     border-radius: 5px;
     background: #ff6a6a;
     color: #eee;
     display: inline-block;
-    float: right;
     text-overflow: ellipsis;
     padding: 2px 8px 2px 13px;
     margin-bottom: 5px;

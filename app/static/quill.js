@@ -10435,7 +10435,7 @@ var List = function (_Container) {
       }
     };
 
-    domNode.addEventListener('touchstart', listEventHandler);
+    //domNode.addEventListener('touchstart', listEventHandler);
     domNode.addEventListener('mousedown', listEventHandler);
     return _this2;
   }

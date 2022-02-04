@@ -61,7 +61,6 @@ class SuggestApi:
         return json.dumps(vakken)
 
     def get_vakken_suggesties(self, graden, themas):
-        print("graden=", graden, "themas=", themas)
         graden_ids = []
         for g in graden:
             graden_ids.append(g['id'])
@@ -70,8 +69,6 @@ class SuggestApi:
         for t in themas:
             thema_ids.append(t['id'])
 
-        # graden_ids = ['https://data.meemoo.be/term/onderwijs/graad/lager-1ste-graad']
-        # thema_ids = ['https://data.meemoo.be/term/onderwijs/thema/nederlandse-taal']
         vakken = []
         for r in self.suggest.suggest(thema_ids, graden_ids):
             vakken.append(r)

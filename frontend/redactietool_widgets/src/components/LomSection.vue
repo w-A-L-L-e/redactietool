@@ -35,24 +35,7 @@
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsniveaus</label>
-        </div>
-        <div class="field-body">
-          <OnderwijsniveausSelector/> 
-        </div>
-      </div>
- 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Onderwijsgraden</label>
-        </div>
-        <div class="field-body">
-          <OnderwijsgradenSelector/> 
-        </div>
-      </div>
-
+      <OnderwijsSelector v-bind:comboEdit="onderwijsCombo"/>
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -72,6 +55,8 @@
           <VakkenSelector/>
         </div>
       </div>
+      
+      <LegacyVakken/>
 
 
       <div class="field is-horizontal">
@@ -92,10 +77,10 @@
   import TypeSelector from './TypeSelector.vue'
   import EindgebruikerSelector from './EindgebruikerSelector.vue'
   import TalenSelector from './TalenSelector.vue'
-  import OnderwijsniveausSelector from './OnderwijsniveausSelector.vue'
-  import OnderwijsgradenSelector from './OnderwijsgradenSelector.vue'
+  import OnderwijsSelector from './OnderwijsSelector.vue'
   import ThemaSelector from './ThemaSelector.vue'
   import VakkenSelector from './VakkenSelector.vue'
+  import LegacyVakken from './LegacyVakken.vue'
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
   import CollapseIcon from './CollapseIcon.vue'
 
@@ -111,16 +96,17 @@
       TypeSelector,
       EindgebruikerSelector,
       TalenSelector,
-      OnderwijsniveausSelector,
-      OnderwijsgradenSelector,
+      OnderwijsSelector,
       ThemaSelector,
       VakkenSelector,
+      LegacyVakken,
       TrefwoordenSelector,
       CollapseIcon
     },
     data () {
       return {
         isMinimized: false,
+        onderwijsCombo: true, //set to false 2 seperate multi-selects for graden and niveaus
         pid: pid
       }
     },
@@ -180,6 +166,9 @@
 
   .multiselect__option--selected.multiselect__option--highlight{
     color: #222; 
+  }
+  .multiselect__spinner:after, .multiselect__spinner:before {
+    border-top-color: #3e8ed0;
   }
   
 </style>

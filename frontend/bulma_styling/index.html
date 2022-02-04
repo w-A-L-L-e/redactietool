@@ -7,6 +7,7 @@
     <title>Meemoo Redactietool</title>
     <link rel="stylesheet" href="dist/css/mystyles.css">
     <link rel="stylesheet" href="src/overrides.css">
+    <link rel="stylesheet" href="node_modules/@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css">
     <script src="src/modal_dialog.js"></script>
     <script src="dist/js/bundle.js"></script>
 
@@ -18,10 +19,34 @@
       #thema_widget{
         display: none;
       }
+
+      .prd-widget {
+        margin-left: 15px;
+        min-width: 380px; 
+        width: 47%; 
+        float: left;
+      }
+      .prd-widget:nth-child(2n){
+        margin-left: 30px;
+      }
+      
+      @media screen and (max-width: 888px){
+        .prd-widget{
+          margin-left: 15px;
+          width: 100%;
+          float: none;
+          padding-right: 15px;
+        }
+        .prd-widget:nth-child(2n){
+          margin-left: 15px;
+        }
+      }
+
     </style>
   </head>
 
-  <body>
+  <body class="ml-5 mr-5">
+
 
     <!-- main menu bar restyled to match original but now with modern bulma which also works on mobile...-->
     <nav class="navbar is-fixed-top is-primary has-text-white" role="navigation" aria-label="main navigation">
@@ -107,11 +132,242 @@
           <ion-icon name="create-outline"></ion-icon>
         </span>
         <br/>
-        <a href="" class="button is-link" onclick="toggleThemas(); return false;">Kies themas</a>
       </h1>
 
 
+      <!-- small proof of concept if I can show subtitles without using flowplayer, and yes it's actually pretty easy with html5 video ;) -->
+      <video id="sample_video" width="100%" controls style="border-radius: 8px;">
+        <source src="https://iandevlin.github.io/mdn/video-player-with-captions/video/sintel-short.mp4" type="video/mp4">
+        <!-- <source src="https://iandevlin.github.io/mdn/video-player-with-captions/video/sintel-short.webm" type="video/webm"> -->
 
+        <!-- this would work, but we need to load it from our local server...-->
+        <track label="Nederlands" kind="subtitles" srclang="nl" src="https://iandevlin.github.io/mdn/video-player-with-captions/subtitles/vtt/sintel-en.vtt" default>
+        <track label="Español" kind="subtitles" srclang="es" src="https://iandevlin.github.io/mdn/video-player-with-captions/subtitles/vtt/sintel-es.vtt">
+        <track label="English" kind="subtitles" srclang="en" src="https://iandevlin.github.io/mdn/video-player-with-captions/subtitles/vtt/sintel-en.vtt">
+        <track label="German" kind="subtitles" srclang="de" src="https://iandevlin.github.io/mdn/video-player-with-captions/subtitles/vtt/sintel-de.vtt">
+      </video>
+      <br/><br/>
+
+
+
+      <h2 class="subtitle">Prod section with regular columns</h2>
+        <p>
+        problem is this makes the js harder when adding 1 item you need to keep
+        track of your rows (and with mod 2 add new row).
+        </p>
+
+      <div class="columns">
+        <div class="column">
+
+          <div class="field has-addons"  style="margin-right: -24px;">
+            <div class="control mr-1">
+              <span class="select is-small">
+                <select name="prd_maker_attribute" id="prd_maker_attribute">
+                  <option value="Maker">Maker</a>
+                  <option value="Archiefvormer">Archiefvormer</a>
+                  <option value="Auteur">Auteur</a>
+                  <option value="Acteur">Acteur</a>
+                  <option value="Cineast">Cineast</a>
+                  <option value="Componist">Componist</a>
+                  <option value="Choreograaf">Choreograaf</a>
+                  <option value="Danser">Danser</a>
+                  <option value="Documentairemaker">Documentairemaker</a>
+                  <option value="Fotograaf">Fotograaf</a>
+                  <option value="Interviewer">Interviewer</a>
+                  <option value="Kunstenaar">Kunstenaar</a>
+                  <option value="Muzikant">Muzikant</a>
+                  <option value="Performer">Performer</a>
+                  <option value="Producer">Producer</a>
+                  <option value="Productiehuis">Productiehuis</a>
+                  <option value="Regisseur">Regisseur</a>
+                  <option value="Schrijver">Schrijver</a>
+                  <option value="Opdrachtgever">Opdrachtgever</a>
+                </select>
+              </span>
+            </div>
+            <div class="control mr-1"  style="width:100%;" >
+              <input class="input is-small" type="text" placeholder="input here">
+            </div>
+            <div class="control mr-5">
+              <a class="is-small button is-danger">
+                x 
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="column">
+
+          <div class="field has-addons" style="margin-right: -24px;">
+            <div class="control mr-1">
+              <span class="select is-small">
+                <select name="prd_maker_attribute" id="prd_maker_attribute">
+                  <option value="Maker">Maker</a>
+                  <option value="Archiefvormer">Archiefvormer</a>
+                  <option value="Auteur">Auteur</a>
+                  <option value="Acteur">Acteur</a>
+                  <option value="Cineast">Cineast</a>
+                  <option value="Componist">Componist</a>
+                  <option value="Choreograaf">Choreograaf</a>
+                  <option value="Danser">Danser</a>
+                  <option value="Documentairemaker">Documentairemaker</a>
+                  <option value="Fotograaf">Fotograaf</a>
+                  <option value="Interviewer">Interviewer</a>
+                  <option value="Kunstenaar">Kunstenaar</a>
+                  <option value="Muzikant">Muzikant</a>
+                  <option value="Performer">Performer</a>
+                  <option value="Producer">Producer</a>
+                  <option value="Productiehuis">Productiehuis</a>
+                  <option value="Regisseur">Regisseur</a>
+                  <option value="Schrijver">Schrijver</a>
+                  <option value="Opdrachtgever">Opdrachtgever</a>
+                </select>
+              </span>
+            </div>
+            <div class="control mr-1"  style="width:100%;" >
+              <input class="input is-small" type="text" placeholder="input here">
+            </div>
+            <div class="control mr-5">
+              <a class="button is-small is-danger">
+                x 
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <h2 class="subtitle">Productie section with flow lefts</h2>
+      <p>
+          Js code stays simple, make css handle 2 to 1 rows with some media queries instead
+      </p>
+
+      <div class="columns">
+        <div class="column">
+
+          <div class="field has-addons prd-widget">
+            <div class="control mr-1">
+              <span class="select is-small">
+                <select name="prd_maker_attribute" id="prd_maker_attribute">
+                  <option value="Maker">Maker</a>
+                  <option value="Archiefvormer">Archiefvormer</a>
+                  <option value="Auteur">Auteur</a>
+                  <option value="Acteur">Acteur</a>
+                  <option value="Cineast">Cineast</a>
+                  <option value="Componist">Componist</a>
+                  <option value="Choreograaf">Choreograaf</a>
+                  <option value="Danser">Danser</a>
+                  <option value="Documentairemaker">Documentairemaker</a>
+                  <option value="Fotograaf">Fotograaf</a>
+                  <option value="Interviewer">Interviewer</a>
+                  <option value="Kunstenaar">Kunstenaar</a>
+                  <option value="Muzikant">Muzikant</a>
+                  <option value="Performer">Performer</a>
+                  <option value="Producer">Producer</a>
+                  <option value="Productiehuis">Productiehuis</a>
+                  <option value="Regisseur">Regisseur</a>
+                  <option value="Schrijver">Schrijver</a>
+                  <option value="Opdrachtgever">Opdrachtgever</a>
+                </select>
+              </span>
+            </div>
+            <div class="control mr-1"  style="width:100%;" >
+              <input class="input is-small" type="text" placeholder="input 1">
+            </div>
+            <div class="control">
+              <a class="is-small button is-danger">
+                x 
+              </a>
+            </div>
+          </div>
+
+          <div class="field has-addons prd-widget">
+            <div class="control mr-1">
+              <span class="select is-small">
+                <select name="prd_maker_attribute" id="prd_maker_attribute">
+                  <option value="Maker">Maker</a>
+                  <option value="Archiefvormer">Archiefvormer</a>
+                  <option value="Auteur">Auteur</a>
+                  <option value="Acteur">Acteur</a>
+                  <option value="Cineast">Cineast</a>
+                  <option value="Componist">Componist</a>
+                  <option value="Choreograaf">Choreograaf</a>
+                  <option value="Danser">Danser</a>
+                  <option value="Documentairemaker">Documentairemaker</a>
+                  <option value="Fotograaf">Fotograaf</a>
+                  <option value="Interviewer">Interviewer</a>
+                  <option value="Kunstenaar">Kunstenaar</a>
+                  <option value="Muzikant">Muzikant</a>
+                  <option value="Performer">Performer</a>
+                  <option value="Producer">Producer</a>
+                  <option value="Productiehuis">Productiehuis</a>
+                  <option value="Regisseur">Regisseur</a>
+                  <option value="Schrijver">Schrijver</a>
+                  <option value="Opdrachtgever">Opdrachtgever</a>
+                </select>
+              </span>
+            </div>
+            <div class="control mr-1"  style="width:100%;" >
+              <input class="input is-small" type="text" placeholder="input 2">
+            </div>
+            <div class="control">
+              <a class="is-small button is-danger">
+                x 
+              </a>
+            </div>
+          </div>
+
+
+          <div class="field has-addons prd-widget">
+            <div class="control mr-1">
+              <span class="select is-small">
+                <select name="prd_maker_attribute" id="prd_maker_attribute">
+                  <option value="Maker">Maker</a>
+                  <option value="Archiefvormer">Archiefvormer</a>
+                  <option value="Auteur">Auteur</a>
+                  <option value="Acteur">Acteur</a>
+                  <option value="Cineast">Cineast</a>
+                  <option value="Componist">Componist</a>
+                  <option value="Choreograaf">Choreograaf</a>
+                  <option value="Danser">Danser</a>
+                  <option value="Documentairemaker">Documentairemaker</a>
+                  <option value="Fotograaf">Fotograaf</a>
+                  <option value="Interviewer">Interviewer</a>
+                  <option value="Kunstenaar">Kunstenaar</a>
+                  <option value="Muzikant">Muzikant</a>
+                  <option value="Performer">Performer</a>
+                  <option value="Producer">Producer</a>
+                  <option value="Productiehuis">Productiehuis</a>
+                  <option value="Regisseur">Regisseur</a>
+                  <option value="Schrijver">Schrijver</a>
+                  <option value="Opdrachtgever">Opdrachtgever</a>
+                </select>
+              </span>
+            </div>
+            <div class="control mr-1"  style="width:100%;" >
+              <input class="input is-small" type="text" placeholder="input 3">
+            </div>
+            <div class="control">
+              <a class="is-small button is-danger">
+                x 
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="clearfix"></div> <br/>
+
+
+      <button class="button is-primary has-tooltip-arrow" data-tooltip="Tooltip Text">Tooltip test button</button>
+
+      <a href="" class="button is-link" onclick="toggleThemas(); return false;">Kies themas</a>
       <div class="container" id="thema_widget">
         <h2 class="title">Kies themas: </h2>
 

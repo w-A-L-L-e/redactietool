@@ -6,6 +6,8 @@
       track-by="code" 
       :options="options"
       :multiple="true"
+      :show-labels="false"
+      :hide-selected="true"
       :searchable="false"
       :taggable="false"
       @input="updateValue">
@@ -19,9 +21,7 @@
 
 <script>
   import Multiselect from 'vue-multiselect'
-
-  // todo: load in this from mam or jinja view and what is the mapping?
-  var default_value = []  
+  var default_value = [];
 
   export default {
     name: 'EindgebruikerSelector',
@@ -53,9 +53,10 @@
       var value_div = document.getElementById("item_eindgebruikers");
       if(value_div){
         var values = JSON.parse(value_div.innerText);
+        this.value = [];
         for(var k in values){
           var preset_value = values[k]
-          default_value.push(
+          this.value.push(
             {
               'name': preset_value['value'],
               'code': preset_value['value']
@@ -63,7 +64,7 @@
           );
         }
       }
-      this.json_value = JSON.stringify(default_value);
+      this.json_value = JSON.stringify(this.value);
     },
     methods: {
       updateValue(value){

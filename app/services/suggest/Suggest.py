@@ -34,7 +34,7 @@ ORDER BY ASC(?label)
 GET_COLLECTION_QUERY = """
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT DISTINCT ?id ?label ?definition
+SELECT ?id ?label ?definition (count(?child) as ?children)
 WHERE {{
     BIND(URI('{collection}') AS ?collection)
     ?collection skos:member ?id.
@@ -45,8 +45,12 @@ WHERE {{
     OPTIONAL {{
         ?id skos:definition ?definition .
     }}
+
+    OPTIONAL {{
+        ?id skos:narrower ?child.
+    }}
 }}
-ORDER BY ASC(?label)
+GROUP BY ?id ?label ?definition
 """
 
 GET_CHILDREN_QUERY = """

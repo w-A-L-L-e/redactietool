@@ -15,7 +15,9 @@
     :options="options" 
     :option-height="104" 
     :show-labels="false"
+    :hide-selected="true"
     :multiple="true"
+    :loading="loading"
     :taggable="false" @input="updateValue"
   >
 
@@ -52,7 +54,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Selecteer themas</p>
+          <p class="modal-card-title">Themas</p>
 
           <!-- div class="select thema-show-def-selector">
             <select v-model="show_definitions">
@@ -64,13 +66,25 @@
               </option>
             </select>
           </div-->
+
+          <label class="checkbox thema-show-def-selector">
+            <input
+              type="checkbox"
+              v-model="show_tooltips"
+              v-on:click="toggleTooltips()"
+            >
+            Tooltips
+          </label>
+
+
           
           <label class="checkbox thema-show-def-selector">
             <input
               type="checkbox"
               v-model="show_definitions"
+              v-on:click="toggleBeschrijvingen()"
             >
-            Toon beschrijvingen
+            Beschrijvingen
           </label>
 
           <div class="thema-search">
@@ -91,46 +105,62 @@
           </div>
 
           <!-- button class="delete" aria-label="close" v-on:click="toggleThemas" ></button-->
-
         </header>
-        <section class="modal-card-body">
 
-          <div class="thema-warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
+        <section class="modal-card-body">
+          <div class="thema-warning-pill"
+                v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
             Thema werd al toegevoegd
           </div>
 
-           <div v-if="!thema_cards.length" class="notification is-info is-light">
-              Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
-            </div>
+          <div v-if="!thema_cards.length" class="notification is-info is-light">
+            Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
+          </div>
 
-            <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
-              <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
-                <div class="tile is-ancestor">
-                  <div class="tile is-vertical mr-2 mt-2" >
-                    <div class="card" 
-                      v-on:click="toggleThemaSelect(thema)"
-                      v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
-                      >
-                      <header class="card-header">
-                        <p class="card-header-title">
-                          {{thema.label}}
-                        </p>
-                      </header>
-                      <div class="card-content" v-if="show_definitions">
-                          {{thema.definition}} 
-                      </div>
+          <!-- div v-if="!show_definitions" class="tooltip-top-spacer">
+          <br/><br/>
+          </div -->
+
+          <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
+            <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
+              <div class="tile is-ancestor">
+                <div class="tile is-vertical mr-2 mt-2" >
+                  <div class="card" 
+                    v-on:click="toggleThemaSelect(thema)"
+                    v-on:mouseover="changeToprowTooltip($event)"
+                    v-bind:class="[themaIsSelected(thema) ? 'thema-selected' : '']"
+                    >
+
+                    <header class="card-header">
+                      <p v-if="show_definitions || !show_tooltips" 
+                        class="card-header-title">
+                        {{thema.label}}
+                      </p>
+
+                      <p v-if="show_tooltips" 
+                        class="card-header-title is-primary
+                        has-tooltip-arrow has-tooltip-multiline" 
+                        :data-tooltip="thema.definition">
+                        {{thema.label}}
+                      </p>
+                    </header>
+
+                    <div class="card-content" v-if="show_definitions">
+                        {{thema.definition}} 
                     </div>
+
                   </div>
                 </div>
-
               </div>
-            </div>
 
+            </div>
+          </div>
         </section>
+
         <footer class="modal-card-foot">
           <a class="button is-link close-themas-button" 
             v-on:click="toggleThemas($event)">
-              Themas sluiten
+              Sluiten
           </a>
           <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
         </footer>
@@ -175,6 +205,8 @@
         thema_search: "",
         thema_prev_search: "",
         show_definitions: false,
+        show_tooltips: false,
+        loading: true
         // show_definitions_options: [
         //   { text: "Toon beschrijvingen", value: true },
         //   { text: "Verberg beschrijvingen", value: false}
@@ -200,21 +232,22 @@
           for(var o in res.data){
             var thema = res.data[o];
             if(thema.label.length>1){
-              this.options.push(thema);
+              this.options.push({
+                'id': thema.id,
+                'label': this.truncateLabel(thema.label),
+                'definition': thema.definition
+              });
             }
           }
           this.loadSavedThemas();
         })
-
-      // todo fetch currently set themas here (look at Onderwijsgraden for example)
-      // then also emit the currently set themas so our vakken selector can pass it to suggest:
-      // this.$root.$emit('themas_changed', this.value);
     },
     methods: {
       loadSavedThemas(){
         var themas_div = document.getElementById("item_themas");
         if(themas_div){
           var themas = JSON.parse(themas_div.innerText);
+          this.value = [];
           for(var l in themas){
             var thema_id = themas[l]['value'];
             var thema_label = '';
@@ -230,7 +263,7 @@
               }
             }
             if( thema_label.length>0 ){
-              default_value.push(
+              this.value.push(
                 {
                   'id': thema_id, 
                   'label': thema_label, 
@@ -240,7 +273,9 @@
             }
           }
         }
-        this.json_value = JSON.stringify(default_value);
+        this.loading = false;
+        this.json_value = JSON.stringify(this.value);
+        this.$root.$emit('themas_changed', this.value);
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)
@@ -285,8 +320,11 @@
           this.show_themas_label = "Verberg themas";
         }
         else{
+          // upon closing thema modal we emit the changed selections
           this.show_themas_label = "Toon themas";
           this.thema_cards = [];
+          this.$root.$emit('themas_changed', this.value);
+          return;
         }
 
         this.thema_cards = [];
@@ -323,9 +361,40 @@
           };
           this.value.push(new_thema);
           this.json_value = JSON.stringify(this.value);
+          // this works but hammers the suggest lib on each card selection
+          // this.$root.$emit('themas_changed', this.value);
         }
-      }
+      },
+      changeToprowTooltip(event){
+        // attempt to make top row tooltip show on bottom
+        // console.log(event);
+        var pos = event.clientY; //pageY doesnt work right
+        // console.log(pos);
 
+        if(pos<200){
+          event.target.classList.add('has-tooltip-bottom')
+        }
+        else{
+          event.target.classList.remove('has-tooltip-bottom')
+        }
+        return true;
+      },
+      truncateLabel: function (text) {
+        var length=45;
+        var suffix='...';
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
+      toggleTooltips(){
+        this.show_definitions = false;
+      },
+      toggleBeschrijvingen(){
+        this.show_tooltips = false;
+      },
       //addThema: function(thema){
       //  console.log("addThema thema=", thema);
       //  var already_added = false;
@@ -356,7 +425,18 @@
       //    }, 3000);
       //  }
       //}
+    },
+    filters: {
+      truncate: function (text, length, suffix) {
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } 
+        else{
+          return text;
+        }
+      },
     }
+
   }
 </script>
 
@@ -527,5 +607,12 @@
     padding-bottom: 5px;
   }
  
+  /* attempt to make tooltip visible on top line 
+  overflow: visible on parent element may help as well
+
+  [data-tooltip]:not(.is-loading), [data-tooltip]:not(.is-disabled), [data-tooltip]:not([disabled] {
+    position: absolute;
+  }
+  */
 
 </style>

@@ -1,10 +1,10 @@
 ﻿1
 00:00:01,000 --> 00:00:03,023
-Derde subtitle test
+Redactietool ondertitels hier
 
 2
 00:00:03,676 --> 00:00:05,930
-Tweede zin
+Redactietool tweede zin...
 
 3
 00:00:06,972 --> 00:50:16,350

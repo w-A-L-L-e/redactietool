@@ -118,20 +118,72 @@
           <p class="panel-heading">
             Het archief voor Onderwijs beschrijving
           </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="avo_beschrijving"
-                id="avo_beschrijving"
-                class="textarea is-hover" 
-                placeholder="AVO beschrijving" 
-                cols="45"
-                rows="10">{{avo_beschrijving}}</textarea>
-            </p>
-
+          <div class="panel-block" id="avo_beschrijving_panel">
+            <div class="richtext-wrapper" id="richtext_bounds">
+              <div id="redactietool-richtext-editor">{{avo_beschrijving | safe}}</div> 
+           </div>
           </div>
+
+          <textarea name="avo_beschrijving"
+                  id="avo_beschrijving"
+                  class="textarea is-hover hidden" 
+                  placeholder="AVO beschrijving" 
+                  cols="45"
+                  rows="10">{{avo_beschrijving}}</textarea>
         </article>
+
+
       </div> <!-- inhoud_section -->
 
     </div>
   </div>
+
+<script>
+  function richtext_changed(){
+    var editor_div = document.getElementById("redactietool-richtext-editor");
+    if(editor_div){
+      var html_content = editor_div.firstChild.innerHTML
+
+      // for html output
+      // var editor_form_target = document.getElementById("avo_beschrijving");
+      // if(editor_form_target){
+      //   editor_form_target.value = html_content;
+      // }
+
+      // for markdown output
+      var markdown_target = document.getElementById("avo_beschrijving");
+      if(markdown_target){
+        var markdown = turndownService.turndown(html_content);
+        // remove extra whitespace from markdown
+        markdown_target.value = markdown.split("\n\n  \n\n").join("\n\n");
+      }
+    }
+  }
+
+  var turndownService = new TurndownService();
+  var quill = new Quill('#redactietool-richtext-editor', {
+    modules: {
+      toolbar: [
+        [{ header: [2, false] }],
+        // ['bold', 'italic', 'underline'],
+        ['bold', 'italic'], 
+        [{'list': 'ordered'}, {'list': 'bullet'}, {'link': 1}]
+      ]
+    },
+    // formats: ['header', 'bold', 'italic', 'underline', 'link', 'list'], //markdown has no undrline
+    formats: ['header', 'bold', 'italic', 'link', 'list'],
+    bounds: '#richtext_bounds',
+    placeholder: 'AVO beschrijving',
+    theme: 'snow'
+  });
+
+ 
+  document.addEventListener('DOMContentLoaded', () => {
+   richtext_changed();
+   quill.on('editor-change', function(eventName, ...args) {
+      richtext_changed(); 
+    });
+  });
+
+</script>
 

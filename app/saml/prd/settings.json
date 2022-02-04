@@ -1,0 +1,31 @@
+{
+  
+    "strict": true,
+    "debug": true,
+    "sp": {
+        "entityId": "http://redactietool/sp",
+        "assertionConsumerService": {
+            "url": "https://redactie.hetarchief.be/?acs",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+        },
+        "singleLogoutService": {
+            "url": "https://redactie.hetarchief.be/?sls",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+    },
+    "idp": {
+        "entityId": "http://idp.viaa.be/idp",
+        "singleSignOnService": {
+            "url": "https://idp.viaa.be/saml2/idp/SSOService.php",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "singleLogoutService": {
+            "url": "https://idp.viaa.be/saml2/idp/SingleLogoutService.php",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "x509cert": "MIIEtzCCAx+gAwIBAgIUA0qrPaMHEPYZsD3C2ELY5zNLF60wDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQkUxEzARBgNVBAgMClZsYWFuZGVyZW4xDTALBgNVBAcMBEdlbnQxDzANBgNVBAoMBm1lZW1vbzEVMBMGA1UECwwMVGVhbSBBcmNoaWVmMRAwDgYDVQQDDAdpZHAtcHJkMB4XDTIwMTEwOTE3MDIwOFoXDTIwMTExMDE3MDIwOFowazELMAkGA1UEBhMCQkUxEzARBgNVBAgMClZsYWFuZGVyZW4xDTALBgNVBAcMBEdlbnQxDzANBgNVBAoMBm1lZW1vbzEVMBMGA1UECwwMVGVhbSBBcmNoaWVmMRAwDgYDVQQDDAdpZHAtcHJkMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAspfLxEmYJyF9MikmGMLs01PnXQ3rl7+2AZ0hAH5yXoYZ70d2IkQsHvhnFhI2N2GpcsIQqM4JPMzIGqO1amVrkCMt3L8sLEGC/NMD8c4/kF6iLifUr87fA0rnEHiMdrjGCw/6yiu9LkGauGNxVv102CGkssjKEWtrO/J4k3z9ssKDZY0X7YGLd1OWVYPhAO57Z2Symszm2bsKEQaQ750TkhtkqO9QKvGLmWDfnUUMt4rIMVxpZzy+v7yXAoJS/d+6RJ7kd8KW1nGCIe3Z86yZpdAUk5a5U0hTEDV1Otak0qZutWdJjf+xdz6rr10VdI/RNdKAxSJgFLo9XZNBT6pZ/qgvVSTScOdugpzU5/YIEG0QmU/jHGzt4CickNlrjynGZl7RF1QHoJ68M7PDESz6PyselGQOhpIVf7+DUMlbDTpCEuV5WWvHE3a7yrhzELkpZ4LpzM4IbqFdqc1/kOfsE1sQwEpvBCt9s0/lGn1AtSwfANwoSPtZiuRsQqeYTa9BAgMBAAGjUzBRMB0GA1UdDgQWBBQekCPfyUSyf27YwZ6GjLAL4cowOTAfBgNVHSMEGDAWgBQekCPfyUSyf27YwZ6GjLAL4cowOTAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBgQBeEE8v0sZMe/D0OtONZcjTp8ESAMhQtFE9YDwsC3NbovCW7kD410Hp4BP0NsiN2pxBg2F0Ihtxeq9o/tuiyELSVb0StfRMDTqgSkAw7TiMQfnq625R6VnhpCiEzw29DBti4hUM0DmMZNu8SE7HnESyb87h0tlnL5jy4TpTriGzlG6L97GliHfS/JY0HOx0Xq525iXShwYHipJVCSLyiLc6RT+e6CU8QokdPjPrg7rYv729TYgvhveenNCvmMd6q0ymcySrlZKAnVoyU9vxCktoB4wrf29nGzhbGzV3NgXIfmAUpJBFFKLvy5XnsaosfxhXoLyT9XCLhbSo9SwfCQn5AwIwaPKM6LR70KyBx/SgtAY77XmyI24kfav3EI9G5M+BSCoJkm6r4q3s1uxBcHPdiFlVtBwSx7vuZONiAfBpCtKWgaRS0DVaSAIK6JiMa2Q8JijZa+cm8IHQ1ru1Q74bvhCEh4ye1QY51IKv2Dwl1w3tTBUrJw01cEe5Lv7p74c="
+    }
+}
+
+
