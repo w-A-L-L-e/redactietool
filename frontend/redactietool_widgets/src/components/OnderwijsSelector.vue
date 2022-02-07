@@ -16,6 +16,7 @@
             :multiple="true" 
             :show-labels="false"
             :hide-selected="true"
+            :blockKeys="['Delete']"
             :searchable="false"
             :taggable="false"
             :loading="loading"

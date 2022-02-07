@@ -6,6 +6,7 @@
       deselect-label="Verwijder trefwoord"
       selected-label=""
       :show-labels="false"
+      :blockKeys="['Delete']"
       :hide-selected="true"
       placeholder="Voeg nieuw trefwoord toe" 
       label="name" 

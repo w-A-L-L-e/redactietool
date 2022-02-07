@@ -18,6 +18,7 @@
       :options="options" 
       :option-height="104" 
       :show-labels="false"
+      :blockKeys="['Delete']"
       :hide-selected="true"
       :multiple="true"
       :loading="vakken_loading"

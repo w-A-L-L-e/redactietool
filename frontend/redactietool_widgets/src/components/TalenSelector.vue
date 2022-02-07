@@ -7,6 +7,7 @@
       :options="options"
       :multiple="true" 
       :show-labels="false"
+      :blockKeys="['Delete']"
       :hide-selected="true"
       :taggable="false"
       @input="updateValue">
