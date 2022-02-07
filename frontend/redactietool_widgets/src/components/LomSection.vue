@@ -39,7 +39,7 @@
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Thema</label>
+          <label class="label">Thema's</label>
         </div>
         <div class="field-body">
           <ThemaSelector/>

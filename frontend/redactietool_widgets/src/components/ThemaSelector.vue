@@ -9,7 +9,7 @@
 
   <multiselect v-model="value" 
     tag-placeholder="Voeg nieuw thema toe" 
-    placeholder="Selecteer thema" 
+    placeholder="Selecteer thema's" 
     label="label" 
     track-by="id" 
     :options="options" 
@@ -54,7 +54,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Themas</p>
+          <p class="modal-card-title">Thema's</p>
 
           <!-- div class="select thema-show-def-selector">
             <select v-model="show_definitions">

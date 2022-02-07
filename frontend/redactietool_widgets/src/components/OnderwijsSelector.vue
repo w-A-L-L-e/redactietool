@@ -3,7 +3,7 @@
 
     <div  v-if="comboEdit" class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">Onderwijs</label>
+        <label class="label">Onderwijsstructuur</label>
       </div>
       <div class="field-body">
 

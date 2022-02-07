@@ -25,14 +25,14 @@
           {{cp_keyword_label}}
         </a>
         <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-          Keyword werd al toegevoegd
+          Trefwoord werd al toegevoegd.
         </div>
       </div>
 
       <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
 
         <div v-if="!cp_keywords.length" class="notification is-info is-light">
-          Voor dit item zijn er geen Content Partner trefwoorden.
+          Voor dit item zijn er geen contentpartner trefwoorden.
         </div>
 
         <!-- 
@@ -74,7 +74,7 @@
         cp_keywords: [],
         show_cp_keywords: true,
         show_already_added_warning: false,
-        cp_keyword_label: "Verberg trefwoorden van Content Partners"
+        cp_keyword_label: "Verberg de trefwoorden van de contentpartner"
       }
     },
     created(){
@@ -113,7 +113,7 @@
       addTrefwoord(new_keyword) {
         // instead this should call some suggest lib or other
         // api to create a new keyword (and show a modal with ok/cancel)
-        console.log("addTrefwoord nieuw woord=", new_keyword);
+        console.log("addTrefwoord: woord=", new_keyword);
         const tw = {
           name: new_keyword,
           code: new_keyword.substring(0, 2) + Math.floor((Math.random() * 10000000))
@@ -128,10 +128,10 @@
       toggleKeywordCollapse: function(){
         this.show_cp_keywords= !this.show_cp_keywords;
         if(this.show_cp_keywords){
-          this.cp_keyword_label = "Verberg trefwoorden van Content Partners";
+          this.cp_keyword_label = "Verberg de trefwoorden van de contentpartner";
         }
         else{
-          this.cp_keyword_label = "Bekijk trefwoorden van Content Partners";
+          this.cp_keyword_label = "Bekijk de trefwoorden van de contentpartner";
         }
       },
       addCpKeyword: function(kw){
