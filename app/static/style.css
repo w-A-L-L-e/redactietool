@@ -478,12 +478,16 @@ h3.subtitle{
 }
 
 .ql-editor{
-  min-height: 20em;
+  min-height: 200px;
+  max-height: 300px;
   overflow-y: scroll;
   resize: vertical;
   border-bottom-left-radius:5px;
   border-bottom-right-radius:5px;
   background-color: #fff;
+}
+.ql-editor[style*="height"] {
+  max-height: unset; 
 }
 
 .ql-snow .ql-picker.ql-header .ql-picker-label::before,

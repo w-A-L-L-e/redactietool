@@ -502,7 +502,6 @@
   .thema-cards {
     height: 370px;
     overflow-y: scroll;
-    /* overflow-y: hidden;*/
     overflow-x: hidden;
     border: 1px solid #e8e8e8;
     padding: 5px;

@@ -190,7 +190,7 @@
   .inline-niveau-list{
     /*
     max-height: 150px;
-    overflow-y: scroll;
+    overflow-y: auto;
     */
   }
 
