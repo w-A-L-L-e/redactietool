@@ -25,7 +25,7 @@
             <template slot="noResult">niet gevonden</template>
             <template slot="noOptions">loading...</template>
           </multiselect>
-          <p v-if="show_vakken_warning" class="help is-danger hidden vakken-warning">
+          <p v-if="show_vakken_warning" class="help is-danger vakken-warning">
             Opgelet: indien je deze waarde verwijdert, 
             zijn mogelijks een aantal vakken niet meer relevant &nbsp;
              <!-- button class="delete" v-on:click="closeVakkenWarning($event)"></button> -->
