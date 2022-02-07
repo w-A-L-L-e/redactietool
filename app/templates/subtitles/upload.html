@@ -39,19 +39,6 @@ Ondertitelbestand
         }
       })
     </script>
-
-    <div class="field">
-        <label class="label">Bestaande ondertitel bestanden</label>
-        <div class="control">
-            {% for subfile in subtitle_files %}
-              <div class="file-pill is-pulled-left">
-                {{subfile}}
-              </div>
-            {% endfor %}
-            <div class="is-clearfix"></div>
-        </div>
-      </div>
-
   </div>
 
   <div class="column is-half">
@@ -79,8 +66,19 @@ Ondertitelbestand
         </div>
       </div>
 
+      <div class="field">
+        <label class="label">Bestaande ondertitel bestanden</label>
+        <div class="control">
+            {% for subfile in subtitle_files %}
+              <div class="file-pill is-pulled-left">
+                {{subfile}}
+              </div>
+            {% endfor %}
+            <div class="is-clearfix"></div>
+        </div>
+      </div>
+
       {% include 'includes/form_errors.html' %}
-      <br/>
 
       <div class="field is-grouped is-pulled-right">
         <div class="control">
