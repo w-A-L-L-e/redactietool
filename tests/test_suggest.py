@@ -5,6 +5,8 @@
 from app.services.suggest.Suggest import Suggest
 
 # sparql-endpoint-fixture>=0.5.0
+
+
 def test_instantiation():
     suggest = Suggest("http://localhost/", "x", "y")
     assert suggest
@@ -33,7 +35,8 @@ def test_suggest_by_label(sparql_endpoint):
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(suggest.suggest_by_label(["Nederlandse taal"], ["Lager 1ste graad"]))
+    results = list(suggest.suggest_by_label(
+        ["Nederlandse taal"], ["Lager 1ste graad"]))
     assert len(results) == 1
     assert results[0] == {
         "definition": "lorem ipsum",
@@ -150,7 +153,8 @@ def test_get_children(sparql_endpoint):
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(suggest.get_children([f"{suggest.OND_NS}niveau/lager-onderwijs"]))
+    results = list(suggest.get_children(
+        [f"{suggest.OND_NS}niveau/lager-onderwijs"]))
     assert len(results) == 1
     assert results[0] == {
         "definition": "Lager 1ste graad",
@@ -166,7 +170,8 @@ def test_get_related(sparql_endpoint):
     )
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
-    results = list(suggest.get_related_vak([f"{suggest.OND_NS}graad/lager-1ste-graad"]))
+    results = list(suggest.get_related_vak(
+        [f"{suggest.OND_NS}graad/lager-1ste-graad"]))
     assert len(results) == 2
     assert results[0] == {
         "definition": "lorem ipsum",

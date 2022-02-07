@@ -62,10 +62,10 @@ PREFIX : <https://stackoverflow.com/q/17523804/1281433/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?id ?label ?definition (count(?mid)-1 as ?position) 
-WHERE {{ 
+SELECT ?id ?label ?definition (count(?mid)-1 as ?position)
+WHERE {{
   BIND(URI('{collection}') AS ?collection)
-  ?collection skos:memberList/rdf:rest* ?mid . 
+  ?collection skos:memberList/rdf:rest* ?mid .
   ?mid rdf:rest* ?node .
   ?node rdf:first ?id .
 
@@ -311,7 +311,8 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError("The id {} is not a valid URI.".format(collection))
+            raise ValueError(
+                "The id {} is not a valid URI.".format(collection))
 
         query = GET_COLLECTION_QUERY
         if sorted:
