@@ -20,7 +20,7 @@
             :searchable="false"
             :taggable="false"
             :loading="loading"
-            @input="updateValue" @remove="removeValue">
+            @input="updateValue" @remove="removeValue" @select="addValue">
 
             <template slot="noResult">niet gevonden</template>
             <template slot="noOptions">loading...</template>
@@ -131,6 +131,9 @@
         else{
           this.show_vakken_warning = false;
         }
+      },
+      addValue(){
+        this.show_vakken_warning = false;
       },
       closeVakkenWarning(ev){
         ev.preventDefault();
