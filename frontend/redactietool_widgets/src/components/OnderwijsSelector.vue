@@ -25,30 +25,21 @@
             <template slot="noResult">niet gevonden</template>
             <template slot="noOptions">loading...</template>
           </multiselect>
+          <p v-if="show_vakken_warning" class="help is-danger hidden vakken-warning">
+            Opgelet: indien je deze waarde verwijdert, 
+            zijn mogelijks een aantal vakken niet meer relevant &nbsp;
+             <!-- button class="delete" v-on:click="closeVakkenWarning($event)"></button> -->
+          </p>
           
           <!-- this is actually not needed here, but nice to have for debugging -->
           <textarea name="lom_onderwijs_combo" v-model="json_value" id="onderwijs_json_value"></textarea>
+
+
         </div>
 
       </div>
     </div>
 
-    <div v-if="show_vakken_warning">
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label"></label>
-        </div>
-        <div class="field-body">
-          <div class="notification is-warning vakken-warning">
-             <button class="delete" v-on:click="closeVakkenWarning($event)"></button>
-              Opgelet: indien je deze waarde verwijdert, 
-              zijn mogelijks een aantal vakken niet meer relevant
-          </div>
-          <br/>
-        </div>
-      </div>
-    </div>
-   
     <OnderwijsniveausSelector v-bind:comboEdit="comboEdit"/> 
     <OnderwijsgradenSelector v-bind:comboEdit="comboEdit"/> 
  
@@ -136,6 +127,9 @@
       removeValue(){
         if(this.vakken_selected){
           this.show_vakken_warning = true;
+        }
+        else{
+          this.show_vakken_warning = false;
         }
       },
       closeVakkenWarning(ev){
@@ -280,9 +274,5 @@
     margin-bottom: -24px !important;
   }
   .vakken-warning{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 14px;
-    margin-bottom: 15px !important;
   }
 </style>
