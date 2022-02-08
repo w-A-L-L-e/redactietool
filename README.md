@@ -9,7 +9,18 @@ Finally submit to mediahaven (show confirmation dialog if a srt is already linke
 Allows basically to upload both closed and open srt files to videos for 'testbeeld' tenant
 (tenant is now only one but can be easily extended for multiple tenants).
 
-## Prerequisites
+## Functional
+
+### Server
+
+| **Environment**     |  **Host**         |
+| :----------------:  | :---------------: |
+| INT                 | https://redactie-int.private.cloud.meemoo.be/  |
+| QAS                 | https://redactie-qas.hetarchief.be  |
+| PRD                 | https://redactie.hetarchief.be  |
+
+
+### Prerequisites
 
 * Git
 * Docker
@@ -17,7 +28,7 @@ Allows basically to upload both closed and open srt files to videos for 'testbee
 * Linux (if you want to run it locally, uwsgi is not available on other platforms.)
 * Access to the meemoo PyPi
 
-## Usage
+### Usage
 
 1. Clone this repository with:
 
