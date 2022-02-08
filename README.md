@@ -215,10 +215,6 @@ export FLASK_ENV=PRODUCTION
 export FLOWPLAYER_TOKEN= lookup or ask Bart or Walter for this token
 ```
 
-For production deploys you also set the OAS_JWT_SECRET (see last section on verification of bearer token). Flowplayer token is also needed to be able to preview the subtitles in the flow player (on dev/localhost it works without token,but once deployed you need it to not get an error from the player).
-This env var is exposed to javascript code starting flowplayer in app/templates/preview.html
-
-
 ### Running the server locally:
 
 To run a server on port 8080:
