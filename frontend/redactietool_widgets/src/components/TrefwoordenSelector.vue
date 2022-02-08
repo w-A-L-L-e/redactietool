@@ -73,9 +73,9 @@
           // release
         ],
         cp_keywords: [],
-        show_cp_keywords: true,
+        show_cp_keywords: false,
         show_already_added_warning: false,
-        cp_keyword_label: "Verberg de trefwoorden van de contentpartner"
+        cp_keyword_label: "Bekijk de trefwoorden van de contentpartner"
       }
     },
     created(){
