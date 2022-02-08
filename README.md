@@ -196,10 +196,22 @@ metadata by pid functional:
 export MEDIAHAVEN_API=https://archief-qas.viaa.be/mediahaven-rest-api
 export MEDIAHAVEN_USER= lookup in team pass
 export MEDIAHAVEN_PASS= lookup in team pass
-
-export OAS_SERVER=https://oas-qas.viaa.be
-export OAS_APPNAME=mediahaven
-
+export SAML_ENV 'saml/localhost' # or 'saml/prd' or...
+export OAS_APPNAME 'mediahaven'  # or whatever the application access app name needs be
+export SECRET_KEY 'set_in_secrets_for_meemoo_saml_cookie'
+export OBJECT_STORE_URL 'https://archief-media-qas.viaa.be/viaa/MOB'
+export FTP_SERVER '' # ftp url for uploading subtitles (internal vpn url)
+export FTP_DIR '/'
+export TESTBEELD_PERM_ID 'uuid_here'
+export ONDERWIJS_PERM_ID 'uuid2_here'
+export ADMIN_PERM_ID 'uuid3_here'
+export FTP_USER 'user'
+export FTP_PASS 'pass'
+export KEYFRAME_EDITING_LINK 'https://archief-qas.viaa.be/player?id='
+export SPARQL_ENDPOINT = 'https://sparql_api_url'
+export SPARQL_USER = lookup in team pass
+export SPARQL_PASS = lookup in team pass
+export FLASK_ENV=PRODUCTION  
 export FLOWPLAYER_TOKEN= lookup or ask Bart or Walter for this token
 ```
 
