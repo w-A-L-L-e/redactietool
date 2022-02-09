@@ -522,7 +522,6 @@
     overflow-wrap: anywhere;
     font-size: 14px;
     padding: 4px 15px;
-    text-transform: capitalize;
   }
   .card-content {
     overflow-wrap: anywhere;
