@@ -15,7 +15,7 @@ app:
 test:
 	docker run --rm --name "${APP_NAME}_test" \
 					--entrypoint python "${APP_NAME}:${VERSION}" \
-					"-m" "pytest"
+					"-m" "pytest" "--cov=app"
 
 lint:
 	docker run --name "${APP_NAME}_lint" \

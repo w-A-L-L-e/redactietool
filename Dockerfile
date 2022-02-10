@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Let the appuser own the files so he can rwx during runtime.
 COPY --chown=1001:0 . .
-RUN  apt-get update &&  apt-get install -y --no-install-recommends  libxml2-dev libxmlsec1-dev libxmlsec1-openssl
+RUN  apt-get clean && apt-get update &&  apt-get install -y --no-install-recommends  libxml2-dev libxmlsec1-dev libxmlsec1-openssl
 # Install gcc and libc6-dev to be able to compile uWSGI
 RUN set -ex; \
     build_deps='build-essential pkg-config' ;\
@@ -29,8 +29,8 @@ RUN  pip install viaa-chassis==0.1.3 \
   pip install -r requirements.txt --no-warn-script-location
 ENV PATH=/home/appuser/.local/bin:$PATH   
 # PLEASE use this only in the test keep main image clean
-RUN   pip3 install -r requirements-test.txt && \
-   pip3 install flake8
+#   pip3 install -r requirements-test.txt && \
+#   pip3 install flake8
 
 #USER appuser
 

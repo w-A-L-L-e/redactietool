@@ -23,7 +23,7 @@ ocol:graad a skos:Collection ;
 
 ocol:niveau a skos:Collection ;
     skos:prefLabel "Onderwijsniveaus"@nl ;
-    skos:member ostr:basis-onderwijs .
+    skos:member ostr:basisonderwijs .
 
 ocol:subniveau a skos:Collection ;
     skos:prefLabel "Onderwijs subniveaus"@nl ;
@@ -31,10 +31,12 @@ ocol:subniveau a skos:Collection ;
 
 ocol:vak a skos:OrderedCollection ;
     skos:prefLabel "Vakken"@nl ;
+    skos:member vak:nederlands, vak:burgerschap;
     skos:memberList ( vak:nederlands vak:burgerschap ).
 
 col:thema a skos:OrderedCollection ;
     skos:prefLabel "Thema's"@nl ;
+    skos:member thema:nederlandse-taal, thema:recht;
     skos:memberList ( thema:nederlandse-taal thema:recht ).
 
 vak:nederlands a skos:Concept ;
@@ -69,7 +71,7 @@ ostr:lager-1e-graad a skos:Concept ;
     skos:definition "Lager 1ste graad"@nl ;
     skos:inScheme ond:structuur ;
     skos:prefLabel "lager 1ste graad"@nl ;
-    skos:related vak:nederlands .
+    skos:related vak:nederlands, vak:burgerschap .
 
 ostr:lager-onderwijs a skos:Concept ;
     skos:definition "Lager onderwijs"@nl ;
@@ -78,7 +80,7 @@ ostr:lager-onderwijs a skos:Concept ;
     skos:narrower ostr:lager-1e-graad;
     skos:prefLabel "lager onderwijs"@nl .
 
-ostr:basis-onderwijs a skos:Concept ;
+ostr:basisonderwijs a skos:Concept ;
     skos:definition "Basisonderwijs"@nl ;
     skos:inScheme ond:structuur ;
     skos:narrower ostr:lager-onderwijs;

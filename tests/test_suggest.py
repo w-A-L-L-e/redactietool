@@ -72,16 +72,14 @@ def test_get_niveaus(sparql_endpoint):
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_niveaus())
-    assert len(results) == 2
+    assert len(results) == 1
     assert results[0] == {
-        "definition": "Basisonderwijs",
-        "id": f"{Suggest.EXT_NS}structuur/basisonderwijs",
-        "label": "basisonderwijs",
-    }
-    assert results[1] == {
         "definition": "Lager onderwijs",
         "id": f"{Suggest.EXT_NS}structuur/lager-onderwijs",
         "label": "lager onderwijs",
+        'child_count': 0,
+        'collection': 'Onderwijs subniveaus',
+        'parent': 'https://w3id.org/onderwijs-vlaanderen/id/structuur/basis-onderwijs'
     }
 
 
@@ -97,12 +95,14 @@ def test_get_themas(sparql_endpoint):
     assert results[0] == {
         "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
         "id": f"{Suggest.OND_NS}thema/nederlandse-taal",
-        "label": "Nederlandse taal"
+        "label": "Nederlandse taal",
+        'child_count': 0
     }
     assert results[1] == {
         "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
         "id": f"{suggest.OND_NS}thema/recht",
-        "label": "recht"
+        "label": "recht",
+        'child_count': 0
     }
 
 

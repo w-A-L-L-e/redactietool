@@ -28,7 +28,7 @@ PREFIX ocol: <{OND_NS}collectie/>
 GET_NIVEAUS = (
     PREFIX
     + """
-SELECT ?id ?label ?definition ?collection (count(?child) as ?children) (SAMPLE(?parent) as ?parent)
+SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent)
 WHERE {{
     {{ col:niveau skos:member ?id. 
        FILTER (?id != str:basisonderwijs)
@@ -218,10 +218,17 @@ class Suggest:
         formatted = query.format(**kwargs)
         print(formatted)
         self.sparql.setQuery(formatted)
-        ret = self.sparql.queryAndConvert()
 
-        for result in ret.bindings:
-            yield {k: v.value for k, v in result.items()}
+        for binding in self.sparql.query().convert().bindings:
+            r = {}
+            for k, v in binding.items():
+                if v.datatype == "http://www.w3.org/2001/XMLSchema#integer":
+                    r[k] = int(v.value)
+                else:
+                    r[k] = v.value
+            yield r
+
+            #yield {k: v.value for k, v in result.items()}
 
     def get_concept(self, concept: List[str]):
         """Get thesaurus concept by ids."""
