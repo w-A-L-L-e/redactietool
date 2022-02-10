@@ -243,6 +243,7 @@ class Suggest:
 
     def __exec_query(self, query: str, **kwargs):
         formatted = query.format(**kwargs)
+        print(formatted)
         self.sparql.setQuery(formatted)
         ret = self.sparql.queryAndConvert()
 
