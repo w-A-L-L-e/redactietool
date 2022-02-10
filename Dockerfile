@@ -29,8 +29,8 @@ RUN  pip install viaa-chassis==0.1.3 \
   pip install -r requirements.txt --no-warn-script-location
 ENV PATH=/home/appuser/.local/bin:$PATH   
 # PLEASE use this only in the test keep main image clean
-#    pip3 install -r requirements-test.txt && \
-#    pip3 install flake8
+RUN   pip3 install -r requirements-test.txt && \
+   pip3 install flake8
 
 #USER appuser
 

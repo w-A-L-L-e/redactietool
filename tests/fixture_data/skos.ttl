@@ -1,32 +1,38 @@
-@prefix graad: <https://data.hetarchief.be/term/onderwijs/graad/> .
-@prefix niveau: <https://data.hetarchief.be/term/onderwijs/niveau/> .
-@prefix ond: <https://data.hetarchief.be/term/onderwijs/> .
+@prefix ond:   <https://data.hetarchief.be/id/onderwijs/> .
+@prefix thema: <https://data.hetarchief.be/id/onderwijs/thema/> .
+@prefix col:   <https://data.hetarchief.be/id/onderwijs/collectie/> .
+@prefix o:    <https://w3id.org/onderwijs-vlaanderen/id/> .
+@prefix ocol: <https://w3id.org/onderwijs-vlaanderen/id/collectie/> .
+@prefix ostr: <https://w3id.org/onderwijs-vlaanderen/id/structuur/> .
+@prefix vak:  <https://w3id.org/onderwijs-vlaanderen/id/vak/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix thema: <https://data.hetarchief.be/term/onderwijs/thema/> .
-@prefix vak: <https://data.hetarchief.be/term/onderwijs/vak/> .
 
-ond:vak a skos:ConceptScheme;
+o:vak a skos:ConceptScheme;
 skos:hasTopConcept vak:nederlands.
 
 ond:thema a skos:ConceptScheme;
 skos:hasTopConcept thema:nederlandse-taal.
 
-ond:structuur a skos:ConceptScheme.
+o:structuur a skos:ConceptScheme.
 
-ond:graad a skos:Collection ;
+ocol:graad a skos:Collection ;
     rdfs:label "Onderwijsgraden"@nl ;
-    skos:member graad:lager-1ste-graad.
+    skos:member ostr:lager-1e-graad.
 
-ond:niveau a skos:Collection ;
+ocol:niveau a skos:Collection ;
     rdfs:label "Onderwijsniveaus"@nl ;
-    skos:member niveau:lager-onderwijs .
+    skos:member ostr:basis-onderwijs .
 
-ond:vak-volgorde a skos:OrderedCollection ;
+ocol:subniveau a skos:Collection ;
+    rdfs:label "Onderwijs subniveaus"@nl ;
+    skos:member ostr:lager-onderwijs .
+
+ocol:vak a skos:OrderedCollection ;
     rdfs:label "Vakken"@nl ;
     skos:memberList ( vak:nederlands vak:burgerschap ).
 
-ond:thema-volgorde a skos:OrderedCollection ;
+col:thema a skos:OrderedCollection ;
     rdfs:label "Thema's"@nl ;
     skos:memberList ( thema:nederlandse-taal thema:recht ).
 
@@ -34,13 +40,13 @@ vak:nederlands a skos:Concept ;
     skos:definition "lorem ipsum"@nl ;
     skos:inScheme ond:vak ;
     skos:prefLabel "Nederlands"@nl ;
-    skos:related graad:lager-1ste-graad, thema:nederlandse-taal.
+    skos:related ostr:lager-1e-graad, thema:nederlandse-taal.
 
 vak:burgerschap a skos:Concept ;
-    skos:definition "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie"@nl ;
+    skos:definition "Identiteit, diversiteit, ..."@nl ;
     skos:inScheme ond:vak ;
     skos:prefLabel "burgerschap"@nl ;
-    skos:related graad:lager-1ste-graad, thema:recht ;
+    skos:related ostr:lager-1e-graad, thema:recht ;
     skos:topConceptOf ond:vak .
 
 thema:nederlandse-taal a skos:Concept ;
@@ -51,22 +57,29 @@ thema:nederlandse-taal a skos:Concept ;
     skos:topConceptOf ond:thema .
 
 thema:recht a skos:Concept;
-    skos:prefLabel "Recht"@nl;
+    skos:prefLabel "recht"@nl;
     skos:definition "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ..."@nl;
     skos:topConceptOf ond:thema;
     skos:inScheme ond:thema;
     skos:related vak:burgerschap.
 
-graad:lager-1ste-graad a skos:Concept ;
-    skos:broader niveau:lager-onderwijs ;
+ostr:lager-1e-graad a skos:Concept ;
+    skos:broader ostr:lager-onderwijs ;
     skos:definition "Lager 1ste graad"@nl ;
     skos:inScheme ond:structuur ;
-    skos:prefLabel "Lager 1ste graad"@nl ;
+    skos:prefLabel "lager 1ste graad"@nl ;
     skos:related vak:nederlands .
 
-niveau:lager-onderwijs a skos:Concept ;
+ostr:lager-onderwijs a skos:Concept ;
     skos:definition "Lager onderwijs"@nl ;
+    skos:broader ostr:basis-onderwijs;
     skos:inScheme ond:structuur ;
-    skos:narrower graad:lager-1ste-graad;
-    skos:prefLabel "Lager onderwijs"@nl ;
+    skos:narrower ostr:lager-1e-graad;
+    skos:prefLabel "lager onderwijs"@nl .
+
+ostr:basis-onderwijs a skos:Concept ;
+    skos:definition "Basisonderwijs"@nl ;
+    skos:inScheme ond:structuur ;
+    skos:narrower ostr:lager-onderwijs;
+    skos:prefLabel "basisonderwijs"@nl ;
     skos:topConceptOf ond:structuur .
