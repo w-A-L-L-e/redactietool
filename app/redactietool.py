@@ -23,9 +23,10 @@
 
 import os
 import json
+import datetime
 
-from flask import (Flask, request, render_template, session,  # make_response,
-                   redirect, url_for, send_from_directory)
+from flask import (Flask, request, render_template, session,
+                   redirect, url_for, send_from_directory, Response)
 
 # only needed for saml debug session
 # from flask import abort, jsonify
@@ -59,9 +60,6 @@ config = ConfigParser()
 logger = logging.get_logger(__name__, config=config)
 
 app.config.from_object(flask_environment())
-
-# disables caching of srt and other files
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # session cookie secret key
 app.config['SECRET_KEY'] = os.environ.get(
@@ -396,13 +394,6 @@ def upload_folder():
     return os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
 
 
-@app.route('/subtitles/<filename>')
-@requires_authorization
-@login_required
-def uploaded_subtitles(filename):
-    return send_from_directory(upload_folder(), filename)
-
-
 @app.route('/cancel_upload')
 @requires_authorization
 @login_required
@@ -523,6 +514,9 @@ def edit_metadata():
         token, pid, department, mam_data, errors)
 
     # extra request necessary in order to fetch rightsmanagement/permissions
+    # TODO: for better performance move this into seperate request + axios
+    # like we do for vakken, themas. If refactor to v2 is done this extra request
+    # becomes deprecated...
     template_vars['publish_item'] = mh_api.get_publicatiestatus(
         department, pid)
 
@@ -609,6 +603,7 @@ def get_vakken_suggesties():
     return result
 
 
+# for subtitles we need to switch of caching so we get the correct/latest content
 @app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
 @requires_authorization
 @login_required
@@ -626,7 +621,27 @@ def get_subtitle_by_type(department, pid, subtype):
     srt_url = f"{object_store_url}/{org_name}/{object_id}/{object_id}.srt"
     print("SRT LINK:", srt_url)
 
-    return get_vtt_subtitles(srt_url)
+    response = Response(get_vtt_subtitles(srt_url))
+    response.cache_control.max_age = 0
+    response.headers.add('Last-Modified', datetime.datetime.now())
+    response.headers.add(
+        'Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers.add('Pragma', 'no-cache')
+    return response
+
+
+@app.route('/subtitles/<filename>')
+@requires_authorization
+@login_required
+def uploaded_subtitles(filename):
+    response = send_from_directory(upload_folder(), filename)
+    response.cache_control.max_age = 0
+    response.headers.add('Last-Modified', datetime.datetime.now())
+    response.headers.add(
+        'Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers.add('Pragma', 'no-cache')
+
+    return response
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
