@@ -13,7 +13,7 @@ URI_REGEX = (
     + "._\\+~#?&//=]*)"
 )
 
-OND_NS = "https://data.hetarchief.be/term/onderwijs/"
+OND_NS = "https://data.hetarchief.be/id/onderwijs/"
 EXT_NS = "https://w3id.org/onderwijs-vlaanderen/id/"
 
 PREFIX = f"""
@@ -34,10 +34,12 @@ WHERE {{
        FILTER (?id != str:basisonderwijs)
     }} UNION {{ col:subniveau skos:member ?id. }} 
 
-    ?id a skos:Concept; skos:prefLabel ?label.
+    ?id a skos:Concept; 
+        skos:prefLabel ?label; 
+        skos:definition ?definition .
+    
     ?c skos:member ?id; skos:prefLabel ?collection.
 
-    OPTIONAL {{ ?id skos:definition ?definition . }}
     OPTIONAL {{ ?id skos:narrower ?child. }}
     OPTIONAL {{ ?id skos:broader ?parent }}
 }}
@@ -53,9 +55,10 @@ WHERE {{
     BIND(URI('{collection}') AS ?collection)
     ?collection a skos:Collection; skos:member ?id.
 
-    ?id a skos:Concept; skos:prefLabel ?label.
+    ?id a skos:Concept; 
+        skos:prefLabel ?label; 
+        skos:definition ?definition .
 
-    OPTIONAL {{ ?id skos:definition ?definition . }}
     OPTIONAL {{ ?id skos:narrower ?child. }}
     OPTIONAL {{ ?id skos:broader ?parent }}
 }}
@@ -69,22 +72,18 @@ GET_SORTED_COLLECTION_QUERY = (
 SELECT ?id ?label ?definition ?child_count ?parent_id {{
     SELECT ?id ?label ?definition (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
     WHERE {{ 
-WHERE {{ 
-    WHERE {{ 
         BIND(URI('{collection}') AS ?collection)
         
         ?collection a skos:OrderedCollection .
 
         ?collection skos:memberList/rdf:rest* ?mid . 
-  ?collection skos:memberList/rdf:rest* ?mid . 
-        ?collection skos:memberList/rdf:rest* ?mid . 
         ?mid rdf:rest* ?node .
         ?node rdf:first ?id .
 
         ?id a skos:Concept;
-            skos:prefLabel ?label.
+            skos:prefLabel ?label;
+            skos:definition ?definition .
 
-        OPTIONAL {{ ?id skos:definition ?definition . }}
         OPTIONAL {{ ?id skos:narrower ?child. }}
         OPTIONAL {{ ?id skos:broader ?parent }}
     }}
@@ -101,14 +100,11 @@ GET_CHILDREN_QUERY = (
 SELECT DISTINCT ?id ?label ?definition ?parent
 WHERE {{
     ?parent skos:narrower ?id.
-    FILTER (?parent IN ({concept}))
+    VALUES ?parent {{ {concept} }}
 
     ?id a skos:Concept;
-    skos:prefLabel ?label.
-
-    OPTIONAL {{ ?id skos:definition ?definition .}}
+    skos:prefLabel ?label; skos:definition ?definition.
 }}
-ORDER BY ASC(?label)
 """
 )
 
@@ -123,12 +119,12 @@ WHERE {{
 
     ?id a skos:Concept;
         skos:prefLabel ?label;
+        skos:definition ?definition;
         skos:related ?thema, ?graad.
 
-    OPTIONAL {{ ?id skos:definition ?definition . }}
-    FILTER (?thema IN ({themas}) && ?graad IN ({graden}) )
+    VALUES ?thema {{ {themas} }}
+    VALUES ?graad {{ {graden} }}
 }}
-ORDER BY ASC(?label)
 """
 )
 
@@ -138,32 +134,10 @@ GET_CONCEPT_BY_IDS_QUERY = (
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
     ?id a skos:Concept;
-    skos:prefLabel ?label.
+    skos:prefLabel ?label; skos:definition ?definition .
 
-    OPTIONAL {{ ?id skos:definition ?definition .}}
-    FILTER (?id IN ({concept}))
+    VALUES ?id {{ {concept} }}
 }}
-ORDER BY ASC(?label)
-"""
-)
-
-GET_CANDIDATES_QUERY = (
-    PREFIX
-    + """
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-    ocol:thema skos:member ?thema.
-    col:graad skos:member ?graad.
-    col:vak skos:member ?id.
-
-    ?id a skos:Concept;
-        skos:prefLabel ?label;
-        skos:related ?thema, ?graad.
-
-    OPTIONAL {{ ?id skos:definition ?definition . }}
-    FILTER (?thema IN ({themas}) || ?graad IN ({graden}) )
-}}
-ORDER BY ASC(?label)
 """
 )
 
@@ -176,12 +150,11 @@ WHERE {{
 
     ?id a skos:Concept;
     skos:prefLabel ?label;
+    skos:definition ?definition;
     skos:related ?concept.
 
-    OPTIONAL {{ ?id skos:definition ?definition . }}
-    FILTER (?concept IN ({concepts}))
+    VALUES ?concept {{ {concept} }}
 }}
-ORDER BY ASC(?label)
 """
 )
 
@@ -211,7 +184,7 @@ def join_ids(ids):
         if not isValidURI(id):
             raise ValueError("The id {} is not a valid URL.".format(id))
 
-    return ", ".join("<" + str(id) + ">" for id in ids)
+    return " ".join("<" + str(id) + ">" for id in ids)
 
 
 def read_query(file_path):
@@ -311,18 +284,8 @@ class Suggest:
         ):
             yield res
 
-    def get_candidates(self, thema: List[str], graad: List[str]):
-        """Get all possible 'vakken' based on the identifiers of 'onderwijsgraad' and 'thema'."""
-
-        for res in self.__exec_query(
-            GET_CANDIDATES_QUERY,
-            themas=join_ids(thema),
-            graden=join_ids(graad),
-        ):
-            yield res
-
     def get_related_vak(self, concept: List[str]):
         """Get related vak by concept ids."""
 
-        for res in self.__exec_query(GET_RELATED_VAK_QUERY, concepts=join_ids(concept)):
+        for res in self.__exec_query(GET_RELATED_VAK_QUERY, concept=join_ids(concept)):
             yield res

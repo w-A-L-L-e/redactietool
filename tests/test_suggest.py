@@ -46,33 +46,6 @@ def test_suggest(sparql_endpoint):
     }
 
 
-def test_get_candidates(sparql_endpoint):
-    # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(
-        "https://my.rdfdb.com/repo/sparql", ["tests/fixture_data/skos.ttl"]
-    )
-    suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
-
-    results = list(
-        suggest.get_candidates(
-            [f"{Suggest.OND_NS}thema/nederlandse-taal"],
-            [f"{Suggest.EXT_NS}structuur/lager-1e-graad"],
-        )
-    )
-    assert len(results) == 2
-    assert results[0] == {
-        "definition": "lorem ipsum",
-        "id": f"{Suggest.EXT_NS}vak/nederlands",
-        "label": "Nederlands",
-    }
-    assert results[1] == {
-        # pylint: disable=line-too-long
-        "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie",
-        "id": f"{Suggest.EXT_NS}vak/burgerschap",
-        "label": "burgerschap",
-    }
-
-
 def test_get_graden(sparql_endpoint):
     # pylint: disable=unused-variable
     endpoint = sparql_endpoint(
@@ -86,8 +59,8 @@ def test_get_graden(sparql_endpoint):
         "definition": "Lager 1ste graad",
         "id": f"{Suggest.EXT_NS}structuur/lager-1e-graad",
         "label": "lager 1ste graad",
-        'children': 0,
-        'parent': f"{suggest.EXT_NS}structuur/lager-onderwijs"
+        'child_count': 0,
+        'parent_id': f"{suggest.EXT_NS}structuur/lager-onderwijs"
     }
 
 
@@ -99,10 +72,15 @@ def test_get_niveaus(sparql_endpoint):
     suggest = Suggest("https://my.rdfdb.com/repo/sparql", "x", "y")
 
     results = list(suggest.get_niveaus())
-    assert len(results) == 1
+    assert len(results) == 2
     assert results[0] == {
+        "definition": "Basisonderwijs",
+        "id": f"{Suggest.EXT_NS}structuur/basisonderwijs",
+        "label": "basisonderwijs",
+    }
+    assert results[1] == {
         "definition": "Lager onderwijs",
-        "id": f"{Suggest.EXT_NS}niveau/lager-onderwijs",
+        "id": f"{Suggest.EXT_NS}structuur/lager-onderwijs",
         "label": "lager onderwijs",
     }
 

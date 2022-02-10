@@ -5,35 +5,36 @@
 @prefix ocol: <https://w3id.org/onderwijs-vlaanderen/id/collectie/> .
 @prefix ostr: <https://w3id.org/onderwijs-vlaanderen/id/structuur/> .
 @prefix vak:  <https://w3id.org/onderwijs-vlaanderen/id/vak/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 o:vak a skos:ConceptScheme;
+skos:prefLabel "Thesaurus Vakken"@nl ;
 skos:hasTopConcept vak:nederlands.
 
 ond:thema a skos:ConceptScheme;
+skos:prefLabel "Thesaurus Thema's"@nl ;
 skos:hasTopConcept thema:nederlandse-taal.
 
 o:structuur a skos:ConceptScheme.
 
 ocol:graad a skos:Collection ;
-    rdfs:label "Onderwijsgraden"@nl ;
+    skos:prefLabel "Onderwijsgraden"@nl ;
     skos:member ostr:lager-1e-graad.
 
 ocol:niveau a skos:Collection ;
-    rdfs:label "Onderwijsniveaus"@nl ;
+    skos:prefLabel "Onderwijsniveaus"@nl ;
     skos:member ostr:basis-onderwijs .
 
 ocol:subniveau a skos:Collection ;
-    rdfs:label "Onderwijs subniveaus"@nl ;
+    skos:prefLabel "Onderwijs subniveaus"@nl ;
     skos:member ostr:lager-onderwijs .
 
 ocol:vak a skos:OrderedCollection ;
-    rdfs:label "Vakken"@nl ;
+    skos:prefLabel "Vakken"@nl ;
     skos:memberList ( vak:nederlands vak:burgerschap ).
 
 col:thema a skos:OrderedCollection ;
-    rdfs:label "Thema's"@nl ;
+    skos:prefLabel "Thema's"@nl ;
     skos:memberList ( thema:nederlandse-taal thema:recht ).
 
 vak:nederlands a skos:Concept ;
