@@ -28,7 +28,7 @@ PREFIX ocol: <{OND_NS}collectie/>
 GET_NIVEAUS = (
     PREFIX
     + """
-SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent)
+SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
 WHERE {{
     {{ col:niveau skos:member ?id. 
        FILTER (?id != str:basisonderwijs)
@@ -97,9 +97,9 @@ SELECT ?id ?label ?definition ?child_count ?parent_id {{
 GET_CHILDREN_QUERY = (
     PREFIX
     + """
-SELECT DISTINCT ?id ?label ?definition ?parent
+SELECT DISTINCT ?id ?label ?definition ?parent_id
 WHERE {{
-    ?parent skos:narrower ?id.
+    ?parent_id skos:narrower ?id.
     VALUES ?parent {{ {concept} }}
 
     ?id a skos:Concept;
