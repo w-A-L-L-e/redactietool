@@ -591,8 +591,8 @@ def save_item_metadata():
 @requires_authorization
 @login_required
 def publicatie_status():
-    pid = request.form.get('pid')
-    department = request.form.get('department')
+    pid = request.args.get('pid')
+    department = request.args.get('department')
 
     # extra request necessary in order to fetch rightsmanagement/permissions
     # can be deprecated if we move to v2
