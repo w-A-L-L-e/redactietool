@@ -32,6 +32,9 @@
     components: {
       Multiselect 
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -173,9 +176,8 @@
       }
     },
     created(){
-      var languages_div = document.getElementById("item_languages");
-      if(languages_div){
-        var languages = JSON.parse(languages_div.innerText);
+      if(this.metadata.item_languages){
+        var languages = this.metadata.item_languages;
         this.value = [];
         for(var l in languages){
           var language_code = languages[l]['value'];
@@ -211,7 +213,7 @@
 
 <style>
   #talen_selector{
-    min-width: 30em;
+    min-width: 20em;
   }
 
   #talen_json_value{

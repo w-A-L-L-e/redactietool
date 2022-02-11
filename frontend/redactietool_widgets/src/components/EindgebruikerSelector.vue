@@ -29,6 +29,9 @@
     components: {
       Multiselect 
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -51,12 +54,11 @@
       }
     },
     created(){
-      var value_div = document.getElementById("item_eindgebruikers");
-      if(value_div){
-        var values = JSON.parse(value_div.innerText);
+      if(this.metadata.item_eindgebruikers){
+        var meta_values = this.metadata.item_eindgebruikers;
         this.value = [];
-        for(var k in values){
-          var preset_value = values[k]
+        for(var k in meta_values){
+          var preset_value = meta_values[k]
           this.value.push(
             {
               'name': preset_value['value'],
@@ -79,7 +81,7 @@
 
 <style>
   #eindgebruikers_selector{
-    min-width: 30em;
+    min-width: 20em;
   }
 
   #eindgebruikers_json_value{

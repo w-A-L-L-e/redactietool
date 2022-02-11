@@ -62,7 +62,9 @@
     components: {
       Multiselect 
     },
-    props: {},
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -79,9 +81,8 @@
       }
     },
     created(){
-      var keyword_div = document.getElementById("item_keywords");
-      if(keyword_div){
-        var keywords = JSON.parse(keyword_div.innerText);
+      if(this.metadata.item_keywords){
+        var keywords = this.metadata.item_keywords;
         this.value = [];
         for(var k in keywords){
           var keyword = keywords[k]
@@ -95,9 +96,8 @@
         this.json_value = JSON.stringify(this.value);
       }
 
-      var keywords_cp_div = document.getElementById("item_keywords_cp");
-      if( keywords_cp_div ){
-        var keywords_cp = JSON.parse(keywords_cp_div.innerText);
+      if( this.metadata.item_keywords_cp ){
+        var keywords_cp = this.metadata.item_keywords_cp;
         this.cp_keywords = [];
         for(var cpk in keywords_cp){
           var cp_keyword = keywords_cp[cpk]
@@ -172,7 +172,7 @@
 
 <style>
   #trefwoorden_selector{
-    min-width: 30em;
+    min-width: 25em;
   }
   #trefwoorden_json_value{
     margin-top: 20px;

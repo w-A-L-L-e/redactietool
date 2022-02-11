@@ -137,6 +137,15 @@ def get_vakken_suggesties():
     return send_from_directory('vakken', 'suggested_vakken.json')
 
 
+@app.route('/publicatie_status', methods=['GET'])
+@cross_origin()
+def mock_pub_status():
+    # request.form.pid and request.form.department are passed
+    return {
+        'publish_item': True
+    }
+
+
 @app.route('/')
 def api_docs():
     return render_template('api.html')

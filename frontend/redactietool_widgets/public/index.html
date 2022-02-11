@@ -44,63 +44,94 @@
     <form class="metadata_form" 
       action="http://localhost:8080/edit_metadata_vue" method="POST" enctype="multipart/form-data">
 
-      <!-- show an easy way to push data from a flask jinja view back into vue component -->
-      <div id="pid">qs5d8ncx8c</div>
-      
-
-      <div id="item_type" style="display:none;">Audio</div>
-
-      <div id="item_languages" style="display:none">[{"value": "fr", "attribute": "multiselect", "dottedKey": null}, {"value": "nl", "attribute": "multiselect", "dottedKey": null}]</div>
-
+      <p>
+        <b>redactie_api_url: </b>
+        <span id="redactie_api_url">http://localhost:5000</span>
+      </p>
      
-      <div id="item_eindgebruikers" style="display:none;">
-        [{"value": "Docent", "attribute": "multiselect", "dottedKey": null}, {"value": "Student", "attribute": "multiselect", "dottedKey": null}]
-      </div>
+      <p>
+        <b>redactie_metadata: </b>
+        <textarea 
+          id="redactie_metadata"
+          name="redactie_metadata_hidden"
+          class="textarea"
+        >
+{
+  "pid":"qspn8xbd0p",
+  "department":"testbeeld",
+  "item_type":"Audio",
+  "item_languages":[
+    {"value":"nl", "attribute":"multiselect", "dottedKey":null},
+    {"value": "fr", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_eindgebruikers":[
+     {
+        "value":"Student",
+        "attribute":"multiselect",
+        "dottedKey":null
+     },
+     {
+        "value":"Docent",
+        "attribute":"multiselect",
+        "dottedKey":null
+     }
+  ],
+  "item_themas":[
+     {"value": "https://data.meemoo.be/term/onderwijs/thema/podiumkunsten", "attribute": "multiselect", "dottedKey": null}, {"value": "https://data.meemoo.be/term/onderwijs/thema/constructie-en-productie", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_vakken":[
      
-      <div id="item_onderwijsniveaus" style="display:none;">
-        [{"value": "https://data.meemoo.be/term/onderwijs/niveau/hoger-onderwijs", "attribute": "multiselect", "dottedKey": null}, {"value":"https://data.meemoo.be/term/onderwijs/niveau/secundair-onderwijs","attribute":"multiselect","dottedKey":null}]
-      </div>
-      <div id="item_onderwijsniveaus_legacy" style="display:none;">
-        [{"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}]
-      </div>
+  ],
+  "item_vakken_legacy":[
+     {"value": "lichamelijke opvoeding - sport", "attribute": "multiselect", "dottedKey": null},
+    {"value": "Mens en maatschappij", "attribute": "multiselect", "dottedKey": null},
+    {"value": "ICT", "attribute": "multiselect", "dottedKey": null},
+    {"value": "Leren leren", "attribute": "multiselect", "dottedKey": null},
+    {"value": "Sociale vaardigheden - some legacy test", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_onderwijsniveaus": { 
+    "show_legacy": true 
+   },
+  "item_onderwijsniveaus_legacy":[
+    {"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_onderwijsgraden":{
+     "show_legacy":true
+  },
+  "item_onderwijsgraden_legacy":[
+     {"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_keywords":[
+     {
+        "value":"reportage",
+        "attribute":"Sleutelwoord",
+        "dottedKey":null
+     },
+     {
+        "value":"CONVENTIE VAN GENEVE",
+        "attribute":"Sleutelwoord",
+        "dottedKey":null
+     },
+     {
+        "value":"honderd",
+        "attribute":"Sleutelwoord",
+        "dottedKey":null
+     },
+     {
+        "value":"redactietool",
+        "attribute":"Sleutelwoord",
+        "dottedKey":null
+     }
+  ],
+  "item_keywords_cp":[
+{"value": "reportage", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Silent Movie", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Belgium", "attribute": "Trefwoord", "dottedKey": null},{"value": "BURGER", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONFLICT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONVENTIE VAN GENEVE", "attribute": "Trefwoord", "dottedKey": null}, {"value": "INTERNATIONAAL STRAFGERECHTSHOF", "attribute": "Trefwoord", "dottedKey": null}, {"value": "MENSENRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOG", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOGSMISDAAD", "attribute": "Trefwoord", "dottedKey": null}, {"value": "SCHENDING", "attribute": "Trefwoord", "dottedKey": null}, {"value": "STRAFRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "VAN DEN WIJNGAERT CHRIS", "attribute": "Trefwoord", "dottedKey": null}
+     
+  ],
+  "publish_item":"ajax"
+}
+        </textarea>
+      </p>
 
-      <div id="item_onderwijsgraden" style="display:none;">{"show_legacy": true}</div>
-      <div id="item_onderwijsgraden_legacy" style="display:none;">
-        [{"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}]
-      </div>
-
-
-      <div id="item_themas" style="display:none;">
-        [{"value": "https://data.meemoo.be/term/onderwijs/thema/podiumkunsten", "attribute": "multiselect", "dottedKey": null}, {"value": "https://data.meemoo.be/term/onderwijs/thema/constructie-en-productie", "attribute": "multiselect", "dottedKey": null}]
-      </div>
-
-      <div id="item_vakken" style="display:none;">
-        [{"value": "https://data.meemoo.be/term/onderwijs/vak/afwerking-bouw", "attribute": "multiselect", "dottedKey": null}]
-      </div>
-
-      <div id="item_vakken_legacy" style="display:none;">
-        [
-          {"value": "lichamelijke opvoeding - sport", "attribute": "multiselect", "dottedKey": null},
-          {"value": "Mens en maatschappij", "attribute": "multiselect", "dottedKey": null},
-          {"value": "ICT", "attribute": "multiselect", "dottedKey": null},
-          {"value": "Leren leren", "attribute": "multiselect", "dottedKey": null},
-          {"value": "Sociale vaardigheden - some legacy test", "attribute": "multiselect", "dottedKey": null}
-          
-        ]
-      </div>
-      
-      <div id="item_keywords" style="display:none;">
-        [{"value": "Christiane van den Wijngaert", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "conventie van Gen\u00e8ve", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "Internationaal Strafhof", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "justitie", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "mensenrechten", "attribute": "Sleutelwoord", "dottedKey": null}, {"value": "oorlog", "attribute": "Sleutelwoord", "dottedKey": null}]
-      </div>
-
-
-     <div id="item_keywords_cp" style="display:none;">
-        [{"value": "reportage", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Silent Movie", "attribute": "Trefwoord", "dottedKey": null}, {"value": "Belgium", "attribute": "Trefwoord", "dottedKey": null},{"value": "BURGER", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONFLICT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "CONVENTIE VAN GENEVE", "attribute": "Trefwoord", "dottedKey": null}, {"value": "INTERNATIONAAL STRAFGERECHTSHOF", "attribute": "Trefwoord", "dottedKey": null}, {"value": "MENSENRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOG", "attribute": "Trefwoord", "dottedKey": null}, {"value": "OORLOGSMISDAAD", "attribute": "Trefwoord", "dottedKey": null}, {"value": "SCHENDING", "attribute": "Trefwoord", "dottedKey": null}, {"value": "STRAFRECHT", "attribute": "Trefwoord", "dottedKey": null}, {"value": "VAN DEN WIJNGAERT CHRIS", "attribute": "Trefwoord", "dottedKey": null}]
-      </div>
-
-      
-      REDACTIE_API_URL:
-      <span id="redactie_api_url">http://localhost:5000</span>
 
       <div class="clearfix"></div>
       <br/>
@@ -108,10 +139,9 @@
       <div id="app"></div>
       <!-- built files will be auto injected -->
 
-      <p>
-        Further docs for styling other custom selectors here:
-        <a href="https://vue-multiselect.js.org/#sub-tagging" target="_blank">Vue-multiselect docs</a>
-      </p>
+
+      <br/><br/>
+      
 
       <!-- make sure we can mix and match legace + new vue components -->
       <input id="save_button" class="button is-link" type="submit" value="Metadata opslaan"/>

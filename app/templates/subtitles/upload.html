@@ -66,6 +66,7 @@ Ondertitelbestand
         </div>
       </div>
 
+      {% if subtitle_files|length > 0 %}
       <div class="field">
         <label class="label">Bestaande ondertitel bestanden</label>
         <div class="control">
@@ -77,6 +78,7 @@ Ondertitelbestand
             <div class="is-clearfix"></div>
         </div>
       </div>
+      {% endif %}
 
       {% include 'includes/form_errors.html' %}
 

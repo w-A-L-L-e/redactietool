@@ -188,6 +188,9 @@
     components: {
       Multiselect 
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -245,9 +248,8 @@
     },
     methods: {
       loadSavedThemas(){
-        var themas_div = document.getElementById("item_themas");
-        if(themas_div){
-          var themas = JSON.parse(themas_div.innerText);
+        if(this.metadata.item_themas){
+          var themas = this.metadata.item_themas;
           this.value = [];
           for(var l in themas){
             var thema_id = themas[l]['value'];
@@ -445,7 +447,7 @@
 
 <style>
   #thema_selector{
-    min-width: 30em;
+    min-width: 25em;
   }
 
   #thema_json_value{

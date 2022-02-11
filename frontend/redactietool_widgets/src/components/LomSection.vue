@@ -13,7 +13,7 @@
           <label class="label">Type</label>
         </div>
         <div class="field-body">
-          <TypeSelector/>
+          <TypeSelector v-bind:metadata="metadata"/>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
           <label class="label label-two-lines">Beoogde eindgebruiker</label>
         </div>
         <div class="field-body">
-          <EindgebruikerSelector/>
+          <EindgebruikerSelector v-bind:metadata="metadata"/>
         </div>
       </div>
 
@@ -31,18 +31,21 @@
           <label class="label">Taal</label>
         </div>
         <div class="field-body">
-          <TalenSelector/>
+          <TalenSelector v-bind:metadata="metadata"/>
         </div>
       </div>
 
-      <OnderwijsSelector v-bind:comboEdit="onderwijsCombo"/>
+      <OnderwijsSelector 
+        v-bind:comboEdit="onderwijsCombo" 
+        v-bind:metadata="metadata"
+      />
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Thema's</label>
         </div>
         <div class="field-body">
-          <ThemaSelector/>
+          <ThemaSelector v-bind:metadata="metadata"/>
         </div>
       </div>
 
@@ -52,11 +55,11 @@
           <label class="label">Vakken</label>
         </div>
         <div class="field-body">
-          <VakkenSelector/>
+          <VakkenSelector v-bind:metadata="metadata"/>
         </div>
       </div>
       
-      <LegacyVakken/>
+      <LegacyVakken v-bind:metadata="metadata"/>
 
 
       <div class="field is-horizontal">
@@ -64,7 +67,7 @@
           <label class="label">Trefwoorden</label>
         </div>
         <div class="field-body">
-          <TrefwoordenSelector/>
+          <TrefwoordenSelector v-bind:metadata="metadata"/>
         </div>
       </div>
 
@@ -84,12 +87,6 @@
   import TrefwoordenSelector from './TrefwoordenSelector.vue'
   import CollapseIcon from './CollapseIcon.vue'
 
-  var pid_div = document.getElementById("pid");
-  if(pid_div){
-    var pid = pid_div.innerText;
-    console.log("LomSection for pid=", pid );
-  }
-
   export default {
     name: 'LomSection',
     components: {
@@ -103,13 +100,16 @@
       TrefwoordenSelector,
       CollapseIcon
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         isMinimized: false,
         onderwijsCombo: true, //set to false 2 seperate multi-selects for graden and niveaus
-        pid: pid
       }
     },
+    created(){},
     methods: {
       toggleCollapse: function(){
         this.isMinimized = !this.isMinimized;

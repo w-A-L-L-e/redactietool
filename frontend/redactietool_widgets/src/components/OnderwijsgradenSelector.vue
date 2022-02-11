@@ -61,7 +61,8 @@
       Multiselect 
     },
     props: {
-      comboEdit: Boolean
+      comboEdit: Boolean,
+      metadata: Object
     },
     data () {
       return {
@@ -113,17 +114,15 @@
           // set selected options for this specific item
           this.value = [];
 
-          var value_div = document.getElementById("item_onderwijsgraden");
-          if(value_div){
-            var onderwijsgraden = JSON.parse(value_div.innerText);
+          if(this.metadata.item_onderwijsgraden){
+            var onderwijsgraden = this.metadata.item_onderwijsgraden;
             var option_item = {};
 
             // do fallback, in case only old string values are present
-            if(value_div && onderwijsgraden['show_legacy'] ){
-              console.log("legacy fallback voor onderwijsgraden (lom_typicalagerange)...");
-              var value_div_legacy = document.getElementById("item_onderwijsgraden_legacy");
-              if(value_div_legacy){
-                var values = JSON.parse(value_div_legacy.innerText);
+            if(onderwijsgraden['show_legacy'] ){
+              if(this.metadata.item_onderwijsgraden_legacy){
+                console.log("legacy fallback voor onderwijsgraden (lom_typicalagerange)");
+                var values = this.metadata.item_onderwijsgraden_legacy;
                 var item = {};
                 for(var k in values){
                   var definition = values[k]['value'];

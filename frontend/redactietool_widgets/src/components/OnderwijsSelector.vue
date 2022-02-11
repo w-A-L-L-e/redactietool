@@ -1,6 +1,5 @@
 <template>
-  <div id="onderwijs_selector" v-bind:class="[(!comboEdit || value.length) ? '' : 'onderwijs-pull-up']">
-
+  <div id="onderwijs_selector">
     <div  v-if="comboEdit" class="field is-horizontal">
       <div class="field-label is-normal">
         <label class="label">Onderwijsstructuur</label>
@@ -40,8 +39,8 @@
       </div>
     </div>
 
-    <OnderwijsniveausSelector v-bind:comboEdit="comboEdit"/> 
-    <OnderwijsgradenSelector v-bind:comboEdit="comboEdit"/> 
+    <OnderwijsniveausSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
+    <OnderwijsgradenSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
  
   </div>
 </template>
@@ -61,7 +60,8 @@
       OnderwijsniveausSelector
     },
     props: {
-      comboEdit: Boolean
+      comboEdit: Boolean,
+      metadata: Object
     },
     data () {
       return {
@@ -263,7 +263,7 @@
   }
 
   #onderwijs_selector_dropdown{
-    min-width: 30em;
+    min-width: 25em;
   }
 
   #onderwijs_json_value{
@@ -273,9 +273,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .onderwijs-pull-up{
-    margin-bottom: -24px !important;
-  }
+  
   .vakken-warning{
   }
 </style>
