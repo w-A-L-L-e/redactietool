@@ -1,5 +1,5 @@
 <template>
-  <div class="columns">
+  <div class="columns pub-status-section">
     <div class="column">
       <h2 class="title">Publicatiestatus</h2>
       <hr/>
@@ -16,6 +16,7 @@
 
       </label>
     </div>
+    <br/>
   </div>
 </template>
 
@@ -81,4 +82,8 @@
     margin-left: -17px;
     margin-right: -10px;
  } 
+
+ .pub-status-section{
+    margin-top: 15px;
+ }
 </style>
