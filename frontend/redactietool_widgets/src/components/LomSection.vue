@@ -128,10 +128,11 @@
     line-height: 17px;
   }
 
+  /*
   hr {
     border-bottom: 1px solid #363636;
-    margin-top: -20px;
-  }
+    margin-top: -17px;
+  }*/
 
   .minimized {
     display: none;
