@@ -458,13 +458,14 @@ class MetaMapping:
 
         tp = self.form_params(token, pid, department, mam_data)
 
-        frontend_metadata = json.loads(tp['frontend_metadata'])
+        # update publish_item in tp and in frontend json
         if request.form.get('publicatiestatus_checked'):
-            frontend_metadata['publish_item'] = True
             tp['publish_item'] = True
         else:
-            frontend_metadata['publish_item'] = False
             tp['publish_item'] = False
+
+        frontend_metadata = json.loads(tp['frontend_metadata'])
+        frontend_metadata['publish_item'] = tp['publish_item']
         tp['frontend_metadata'] = json.dumps(frontend_metadata)
 
         return tp
