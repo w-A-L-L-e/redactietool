@@ -461,9 +461,10 @@ class MetaMapping:
         frontend_metadata = json.loads(tp['frontend_metadata'])
         if request.form.get('publicatiestatus_checked'):
             frontend_metadata['publish_item'] = True
+            tp['publish_item'] = True
         else:
             frontend_metadata['publish_item'] = False
-
+            tp['publish_item'] = False
         tp['frontend_metadata'] = json.dumps(frontend_metadata)
 
         return tp
