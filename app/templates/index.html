@@ -13,8 +13,8 @@ Login
 
     {% if success_slo %}
       <div class="column" id="alert_box">
-        <div class="notification is-success">
-          <button class="delete" onclick="closeAlert(); return false;"></button>
+        <div class="notification is-success fadein">
+          <button class="delete" onclick="closeAlert('alert_box'); return false;"></button>
           Je bent uitgelogd. <br/>
         </div>
       </div>
@@ -22,8 +22,8 @@ Login
 
     {% if not_auth_warn %}
       <div class="column" id="alert_box">
-        <div class="notification is-danger">
-          <button class="delete" onclick="closeAlert(); return false;"></button>
+        <div class="notification is-danger fadein">
+          <button class="delete" onclick="closeAlert('alert_box'); return false;"></button>
           Authenticatie mislukt <br/>
         </div>
       </div>

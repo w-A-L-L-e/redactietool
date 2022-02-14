@@ -205,7 +205,7 @@ class MetaMapping:
         if item_type_lom and len(item_type_lom) > 0:
             item_type = item_type_lom[0]['value']
 
-        return json.dumps({
+        return {
             'pid': pid,
             'department': department,
             'item_type': item_type,
@@ -234,7 +234,7 @@ class MetaMapping:
             'item_keywords_cp': get_md_array(mam_data, 'dc_subjects'),
             # TODO: signal ajax request, later fetch directly after v2 refactor
             'publish_item': 'ajax'
-        })
+        }
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
@@ -323,9 +323,6 @@ class MetaMapping:
             }
 
     def update_legacy_flag(self, request, mam_data):
-        # na optimalisatie is momenteel
-        # legacy vakken ( lom_classification )
-        # niet nodig voor deze check zie DEV-1881
         # default waarde voor lom_legacy
         lom_legacy = "true"
 
@@ -346,9 +343,6 @@ class MetaMapping:
         """
         convert form metadata hash into json data
         """
-        # print("DEBUG form metadata:\n", request.form)
-        # logic and checks here that can generate errors, warnings etc.
-
         pid = escape(request.form.get('pid'))
         token = escape(request.form.get('token'))
         department = escape(escape(request.form.get('department')))
@@ -458,15 +452,11 @@ class MetaMapping:
 
         tp = self.form_params(token, pid, department, mam_data)
 
-        # update publish_item in tp and in frontend json
+        # update publish_item, no extra ajax call needed here
         if request.form.get('publicatiestatus_checked'):
-            tp['publish_item'] = True
+            tp['frontend_metadata']['publish_item'] = True
         else:
-            tp['publish_item'] = False
-
-        frontend_metadata = json.loads(tp['frontend_metadata'])
-        frontend_metadata['publish_item'] = tp['publish_item']
-        tp['frontend_metadata'] = json.dumps(frontend_metadata)
+            tp['frontend_metadata']['publish_item'] = False
 
         return tp
 

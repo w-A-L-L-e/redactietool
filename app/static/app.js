@@ -12,6 +12,10 @@
 // have some minification done in our precompile assets makefile target.
 
 
+function get_id(div_id){
+  return document.getElementById(div_id);
+}
+
 // ============================ LOGIN/LOGOUT FORMS =============================
 function execute(btn, label){
   btn.form.submit(); 
@@ -73,14 +77,14 @@ function flashModalWarning(){
 
 // ============================== SUBTITLE FORMS ===============================
 function pidSubmitForSubtitles(btn){
-  hf = document.getElementById('redirect_subtitles');
+  hf = get_id('redirect_subtitles');
   hf.value = 'yes';
   window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
 }
 
 function pidSubmitForMetadata(btn){
-  hf = document.getElementById('redirect_subtitles');
+  hf = get_id('redirect_subtitles');
   hf.value = 'no';
   window.localStorage.removeItem("productie_section_opened");
   execute(btn, 'Item opzoeken...');
@@ -90,7 +94,7 @@ function uploadSubmit(btn){
   execute(btn, 'Opladen...');
 
   // also disable anuleren link
-  cancel_btn = document.getElementById('upload_cancel');
+  cancel_btn = get_id('upload_cancel');
   if( cancel_btn ){ 
     cancel_btn.className += ' disabled';
     cancel_btn.href = "#disabled";
@@ -106,7 +110,7 @@ function previewSubmit(btn){
   execute(btn, 'Versturen...')
 
   //disable wissen button
-  cancel_btn = document.getElementById('preview_cancel');
+  cancel_btn = get_id('preview_cancel');
   if( cancel_btn ){ 
     cancel_btn.className += ' disabled';
     cancel_btn.href = "#disabled";
@@ -120,7 +124,7 @@ function previewCancel(ref){
 function confirmSubmit(btn){
   execute(btn, 'Versturen...');
 
-  cancel_btn = document.getElementById('confirm_cancel')
+  cancel_btn = get_id('confirm_cancel')
   if(cancel_btn){
     cancel_btn.disabled=true;
   }
@@ -129,7 +133,7 @@ function confirmSubmit(btn){
 function confirmCancel(btn){
   execute(btn, 'Wissen...');
 
-  repl_btn = document.getElementById('confirm_submit')
+  repl_btn = get_id('confirm_submit')
   if(repl_btn){
     repl_btn.disabled=true;
   }
@@ -139,13 +143,13 @@ function confirmCancel(btn){
 // ============================ METADATA EDIT FORM =============================
 // add item method for 'productie' section
 function addPrdItem(item_list_id, item_fields_id){
-  var item_fields = document.getElementById(item_fields_id);
+  var item_fields = get_id(item_fields_id);
   if(!item_fields){
     console.log("ERROR in addPrdItem: could not find item_fields_id=", item_fields_id);
     return false;
   }
 
-  var item_list = document.getElementById(item_list_id);
+  var item_list = get_id(item_list_id);
   if(!item_list){
     console.log("ERROR in addPrdItem: could not find item_list_id=", item_list_id);
     return false;
@@ -182,9 +186,9 @@ function deletePrdItem(del_btn){
 }
 
 function closeSection(section_div_id){
-  var form_section = document.getElementById(section_div_id);
+  var form_section = get_id(section_div_id);
   if(!form_section) return;
-  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var close_icon_wrapper = get_id(section_div_id + "_icon");
   var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
   var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
 
@@ -194,9 +198,9 @@ function closeSection(section_div_id){
 }
 
 function openSection(section_div_id){
-  var form_section = document.getElementById(section_div_id);
+  var form_section = get_id(section_div_id);
   if(!form_section) return;
-  var close_icon_wrapper = document.getElementById(section_div_id + "_icon");
+  var close_icon_wrapper = get_id(section_div_id + "_icon");
   var folded_icon = close_icon_wrapper.getElementsByClassName("icon-folded")[0];
   var unfolded_icon = close_icon_wrapper.getElementsByClassName("icon-unfolded")[0];
 
@@ -206,7 +210,7 @@ function openSection(section_div_id){
 }
 
 function sectionToggle(section_div_id){
-  var form_section = document.getElementById(section_div_id);
+  var form_section = get_id(section_div_id);
   if(!form_section) return;
  
   if(form_section.style.display == 'none'){
@@ -235,7 +239,7 @@ function updateProductionSection(){
 }
 
 function collapseEmptyTextarea(area_id, uncollapsable=false){
-  var ta = document.getElementById(area_id);
+  var ta = get_id(area_id);
   if( ta && ta.innerHTML.length == 0){
     if(uncollapsable){
       ta.parentNode.parentNode.style.display="none";
@@ -261,7 +265,7 @@ function collapseEmptyTextareas(){
 }
 
 function hideTitleInput(input_id){
-  var input_field = document.getElementById(input_id);
+  var input_field = get_id(input_id);
   if( input_field ){
     var input_box = input_field.getElementsByTagName("input")[0];
     if( input_box && input_box.value.length == 0){
@@ -287,7 +291,7 @@ function hideEmptyTitles(){
 }
 
 function showTitleInput(input_id){
-  var input_field = document.getElementById(input_id);
+  var input_field = get_id(input_id);
   if( input_field ){
     input_field.style.display = "flex";
   }
@@ -308,30 +312,24 @@ function showEmptyTitles(){
   showTitleInput("titel_registratie");
 }
 
-function closeSavedAlert(){
-  var alert_box = document.getElementById("data_saved_alert_box");
+function closeAlert(box_id){
+  var alert_box = get_id(box_id);
   if(alert_box){
-    alert_box.style.display = "none";
+    alert_box.classList.remove("fadein");
+    alert_box.classList.add("fadeout");
+    setTimeout(function(){
+      alert_box.style.display = "none";
+    }, 400);
   }
 }
 
-function autoCloseSavedAlert(){
-  setTimeout(function(){
-    closeSavedAlert();
-  }, 4000); 
-}
-
-function closeAlert(){
-  var alert_box = document.getElementById("alert_box");
+function autoCloseAlert(box_id){
+  var alert_box = get_id(box_id);
   if(alert_box){
-    alert_box.style.display = "none";
+    setTimeout(function(){
+      closeAlert(box_id);
+    }, 4000); 
   }
-}
-
-function autoCloseAlert(){
-  setTimeout(function(){
-    closeAlert();
-  }, 4000); 
 }
 
 function refreshKeyframeImage(img_id){
@@ -341,7 +339,7 @@ function refreshKeyframeImage(img_id){
 }
 
 function injectApiUrl(url_div_id){
-  var api_url_div = document.getElementById('redactie_api_url');
+  var api_url_div = get_id('redactie_api_url');
   if(api_url_div){
     api_url_div.innerText = window.location.protocol+'//'+window.location.host;
   }
@@ -360,11 +358,11 @@ function isValidDate(dateString) {
 }
 
 function checkDateInput(date_id){
-  var date_div = document.getElementById(date_id)
+  var date_div = get_id(date_id)
   if(!date_div) return;
 
   var valid = isValidDate(date_div.value);
-  var error_div = document.getElementById(date_id+"_error");
+  var error_div = get_id(date_id+"_error");
   if(!valid){ //show error
     date_div.classList.add("is-danger");
     if(error_div) error_div.classList.remove("hidden");
@@ -415,25 +413,22 @@ function checkDateInputs(){
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(
+  const navbarBurgers = Array.prototype.slice.call(
     document.querySelectorAll('.navbar-burger'), 0
   );
 
   // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-
+  if (navbarBurgers.length > 0) {
     // Add a click event on each of them
-    $navbarBurgers.forEach( el => {
+    navbarBurgers.forEach( el => {
       el.addEventListener('click', () => {
-
         // Get the target from the "data-target" attribute
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
+        const data_target = el.dataset.target;
+        const target = get_id(data_target);
 
         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
         el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-
+        target.classList.toggle('is-active');
       });
     });
   }
@@ -442,8 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
   hideEmptyTitles();
   updateProductionSection();
   closeSection("upload_info_section");
-  autoCloseSavedAlert();
-  autoCloseAlert();
+  autoCloseAlert("alert_box");
+  autoCloseAlert("data_saved_alert_box");
   clearButtonLoadingState();
   checkDateInputs(); 
 });

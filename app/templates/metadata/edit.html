@@ -21,8 +21,8 @@ Metadata bewerken
   {% if mh_synced %}
     <div class="columns" id="data_saved_alert_box">
       <div class="column">
-        <div class="notification is-success spring">
-          <button class="delete" onclick="closeSavedAlert(); return false;"></button>
+        <div class="notification is-success fadein">
+          <button class="delete" onclick="closeAlert('data_saved_alert_box'); return false;"></button>
           De metadata voor item <b>{{pid}}</b> werden opgeslagen.<br/>
         </div>
       </div>
@@ -32,8 +32,8 @@ Metadata bewerken
     {% if mh_errors %}
     <div class="columns" id="data_saved_errors">
       <div class="column content">
-        <div class="notification is-warning">
-          <button class="delete" onclick="closeSavedAlert('data_saved_errors'); return false;"></button>
+        <div class="notification is-warning fadein">
+          <button class="delete" onclick="closeAlert('data_saved_errors'); return false;"></button>
           De metadata voor item <b>{{pid}}</b> kon niet opgeslagen worden bij Mediahaven. <br/>
           Foutmeldingen:  <br/>
           <ul>
@@ -93,7 +93,7 @@ Metadata bewerken
       id="redactie_metadata" 
       name="redactie_metadata_hidden"
       class="hidden" disabled>
-      {{frontend_metadata}}
+      {{frontend_metadata|tojson|safe}}
     </textarea>
 
     <div id="app"></div>
