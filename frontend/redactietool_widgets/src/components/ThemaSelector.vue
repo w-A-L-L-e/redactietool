@@ -9,12 +9,13 @@
 
   <multiselect v-model="value" 
     tag-placeholder="Voeg nieuw thema toe" 
-    placeholder="Selecteer thema" 
+    placeholder="Selecteer thema's" 
     label="label" 
     track-by="id" 
     :options="options" 
     :option-height="104" 
     :show-labels="false"
+    :blockKeys="['Delete']"
     :hide-selected="true"
     :multiple="true"
     :loading="loading"
@@ -54,7 +55,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Themas</p>
+          <p class="modal-card-title">Thema's</p>
 
           <!-- div class="select thema-show-def-selector">
             <select v-model="show_definitions">
@@ -187,6 +188,9 @@
     components: {
       Multiselect 
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -244,9 +248,8 @@
     },
     methods: {
       loadSavedThemas(){
-        var themas_div = document.getElementById("item_themas");
-        if(themas_div){
-          var themas = JSON.parse(themas_div.innerText);
+        if(this.metadata.item_themas){
+          var themas = this.metadata.item_themas;
           this.value = [];
           for(var l in themas){
             var thema_id = themas[l]['value'];
@@ -444,7 +447,7 @@
 
 <style>
   #thema_selector{
-    min-width: 30em;
+    min-width: 25em;
   }
 
   #thema_json_value{
@@ -502,7 +505,6 @@
   .thema-cards {
     height: 370px;
     overflow-y: scroll;
-    /* overflow-y: hidden;*/
     overflow-x: hidden;
     border: 1px solid #e8e8e8;
     padding: 5px;
@@ -522,7 +524,6 @@
     overflow-wrap: anywhere;
     font-size: 14px;
     padding: 4px 15px;
-    text-transform: capitalize;
   }
   .card-content {
     overflow-wrap: anywhere;

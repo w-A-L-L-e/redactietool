@@ -18,6 +18,7 @@
       :options="options" 
       :option-height="104" 
       :show-labels="false"
+      :blockKeys="['Delete']"
       :hide-selected="true"
       :multiple="true"
       :loading="vakken_loading"
@@ -238,7 +239,9 @@
     components: {
       Multiselect 
     },
-    props: {},
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -318,9 +321,8 @@
     },
     methods: {
       loadSavedVakken(){
-        var vakken_div = document.getElementById("item_vakken");
-        if(vakken_div){
-          var vakken = JSON.parse(vakken_div.innerText);
+        if(this.metadata.item_vakken){
+          var vakken = this.metadata.item_vakken;
           this.value = [];
           for(var l in vakken){
             var vak_id = vakken[l]['value'];
@@ -575,7 +577,7 @@
 
 <style>
   #vakken_selector{
-    min-width: 30em;
+    min-width: 25em;
   }
   #vakken_json_value{
     margin-top: 20px;
@@ -676,7 +678,7 @@
 
   .inline-suggesties-list{
     max-height: 150px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .inline-suggesties-title{

@@ -228,7 +228,7 @@ class Suggest:
                     r[k] = v.value
             yield r
 
-            #yield {k: v.value for k, v in result.items()}
+            # yield {k: v.value for k, v in result.items()}
 
     def get_concept(self, concept: List[str]):
         """Get thesaurus concept by ids."""

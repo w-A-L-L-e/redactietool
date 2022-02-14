@@ -1,10 +1,10 @@
 ﻿1
 00:00:01,000 --> 00:00:03,023
-Tweede subtitle test
+Redactietool subtitle test
 
 2
 00:00:03,676 --> 00:00:15,930
-Gewone tekst hier
+Redactietool tweede test
 
 3
 00:00:16,972 --> 00:50:16,350

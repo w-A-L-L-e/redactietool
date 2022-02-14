@@ -14,21 +14,17 @@
 #   It stores and converts an uploaded srt file to webvtt format,
 #   shows preview with flowplayer and subtitles.
 #   Metadata is fetched with mediahaven_api using a pid.
-#   Authorization is done by feching jwt token from oas.viaa.be and passing
-#   jwt between forms and pages as 'token'. This token is verified in the
-#   authorization.py module, using decorator @requires_authorization
+#   Authorization is refactored to use SAML. For debugging and local
+#   development the token is still supported.
+#   We also use calls to the thesaurus tool using the suggest library
+#   from Miel.
 #
-#   Future work is also editing metadata for same PID entry with addition
-#   of calls to knowledgegraph api from Miel Vander Sande
-
 import os
 import json
+import datetime
 
-from flask import (Flask, request, render_template, session,  # make_response,
-                   redirect, url_for, send_from_directory)
-
-# only needed for saml debug session
-# from flask import abort, jsonify
+from flask import (Flask, request, render_template, session,
+                   redirect, url_for, send_from_directory, Response)
 
 from flask_api import status
 from viaa.configuration import ConfigParser
@@ -60,9 +56,6 @@ logger = logging.get_logger(__name__, config=config)
 
 app.config.from_object(flask_environment())
 
-# disables caching of srt and other files
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
 # session cookie secret key
 app.config['SECRET_KEY'] = os.environ.get(
     'SECRET_KEY', 'meemoo_saml_secret_to_be_set_using_configmap_or_secrets'
@@ -78,10 +71,8 @@ app.config['SAML_PATH'] = os.path.join(
     os.environ.get('SAML_ENV', 'saml/localhost')
 )
 
-# optional:
-# right now session expires only when browser is closed
+# optionally session expiry can be set like so if wanted:
 # app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(hours=9)
-# with this we need to set :
 # sesson.permanent = True
 
 
@@ -396,13 +387,6 @@ def upload_folder():
     return os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
 
 
-@app.route('/subtitles/<filename>')
-@requires_authorization
-@login_required
-def uploaded_subtitles(filename):
-    return send_from_directory(upload_folder(), filename)
-
-
 @app.route('/cancel_upload')
 @requires_authorization
 @login_required
@@ -497,6 +481,47 @@ def send_subtitles_to_mam():
         return render_template('subtitles/sent.html', **tp)
 
 
+# for subtitles files we need to switch of caching so we get the latest content
+@app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
+@requires_authorization
+@login_required
+def get_subtitle_by_type(department, pid, subtype):
+    mh_api = MediahavenApi()
+    sub_response = mh_api.get_subtitle(department, pid, subtype)
+
+    if not sub_response:
+        return ""
+
+    object_store_url = app.config.get('OBJECT_STORE_URL')
+    object_id = sub_response.get('Internal').get('MediaObjectId', '')
+    org_name = sub_response.get('Administrative').get(
+        'OrganisationName').upper()
+    srt_url = f"{object_store_url}/{org_name}/{object_id}/{object_id}.srt"
+    print("SRT LINK:", srt_url)
+
+    response = Response(get_vtt_subtitles(srt_url))
+    response.cache_control.max_age = 0
+    response.headers.add('Last-Modified', datetime.datetime.now())
+    response.headers.add(
+        'Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers.add('Pragma', 'no-cache')
+    return response
+
+
+@app.route('/subtitles/<filename>')
+@requires_authorization
+@login_required
+def uploaded_subtitles(filename):
+    response = send_from_directory(upload_folder(), filename)
+    response.cache_control.max_age = 0
+    response.headers.add('Last-Modified', datetime.datetime.now())
+    response.headers.add(
+        'Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers.add('Pragma', 'no-cache')
+
+    return response
+
+
 # ====================== Redactietool metadata ROUTES =========================
 @app.route('/edit_metadata', methods=['GET'])
 @requires_authorization
@@ -521,10 +546,6 @@ def edit_metadata():
     mm = MetaMapping()
     template_vars = mm.mh_to_form(
         token, pid, department, mam_data, errors)
-
-    # extra request necessary in order to fetch rightsmanagement/permissions
-    template_vars['publish_item'] = mh_api.get_publicatiestatus(
-        department, pid)
 
     return render_template(
         'metadata/edit.html',
@@ -564,6 +585,21 @@ def save_item_metadata():
         'metadata/edit.html',
         **template_vars
     )
+
+
+@app.route('/publicatie_status', methods=['GET'])
+@requires_authorization
+@login_required
+def publicatie_status():
+    pid = request.args.get('pid')
+    department = request.args.get('department')
+
+    # extra request necessary in order to fetch rightsmanagement/permissions
+    # can be deprecated if we move to v2
+    mh_api = MediahavenApi()
+    return {
+        'publish_item': mh_api.get_publicatiestatus(department, pid)
+    }
 
 
 @app.route('/onderwijsniveaus', methods=['GET'])
@@ -607,26 +643,6 @@ def get_vakken_suggesties():
     result = suggest_api.get_vakken_suggesties(
         json_data['graden'], json_data['themas'])
     return result
-
-
-@app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
-@requires_authorization
-@login_required
-def get_subtitle_by_type(department, pid, subtype):
-    mh_api = MediahavenApi()
-    sub_response = mh_api.get_subtitle(department, pid, subtype)
-
-    if not sub_response:
-        return ""
-
-    object_store_url = app.config.get('OBJECT_STORE_URL')
-    object_id = sub_response.get('Internal').get('MediaObjectId', '')
-    org_name = sub_response.get('Administrative').get(
-        'OrganisationName').upper()
-    srt_url = f"{object_store_url}/{org_name}/{object_id}/{object_id}.srt"
-    print("SRT LINK:", srt_url)
-
-    return get_vtt_subtitles(srt_url)
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================

@@ -48,13 +48,16 @@ class MetaSidecar:
                          MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(perms, '{%s}Read' % MH_NS).text = self.ADMIN_PERM_ID
 
-        if tp.get('publish_item'):
+        if tp.get('frontend_metadata').get('publish_item'):
             etree.SubElement(perms, '{%s}Read' %
                              MH_NS).text = self.ONDERWIJS_PERM_ID
             print(
-                "publicatiestatus is TRUE, added read permission =",
+                "publicatiestatus == TRUE, added read permission =",
                 self.ONDERWIJS_PERM_ID
             )
+
+        else:
+            print("publicatiestatus== FALSE")
 
         etree.SubElement(perms, '{%s}Write' %
                          MH_NS).text = self.TESTBEELD_PERM_ID

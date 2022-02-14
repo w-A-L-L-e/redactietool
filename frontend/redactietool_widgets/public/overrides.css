@@ -19,5 +19,14 @@
   position: fixed;
   bottom: 20px;
   right: 15%;
+}
 
+hr {
+  margin-top: -18px;
+  border-bottom: 2px solid #323232;
+  height: 2px;
+}
+
+h2.title{
+  line-height: 1em !important;
 }

@@ -184,6 +184,7 @@ class MetaMapping:
         safe_content = safe_content.replace("&amp;lt;", "&lt;")
         safe_content = safe_content.replace("&amp;gt;", "&gt;")
         safe_content = safe_content.replace("&lt;br&gt;", "<br>")
+        safe_content = safe_content.replace("&amp;", "&")
 
         return safe_content
 
@@ -197,6 +198,43 @@ class MetaMapping:
     def cleanup_markdown(self, markdown_text):
         markdown_text = markdown_text.replace("&#13;\n", "").replace("\r", "")
         return markdown_text
+
+    def frontend_metadata(self, pid, department, mam_data):
+        item_type = mam_data.get('type')
+        item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
+        if item_type_lom and len(item_type_lom) > 0:
+            item_type = item_type_lom[0]['value']
+
+        return {
+            'pid': pid,
+            'department': department,
+            'item_type': item_type,
+            'item_languages': get_md_array(mam_data, 'lom_languages'),
+            'item_eindgebruikers': get_md_array(mam_data, 'lom_intendedenduserrole'),
+            'item_themas': get_md_array(mam_data, 'lom_thema'),
+            'item_vakken': get_md_array(mam_data, 'lom_vak'),
+            'item_vakken_legacy': get_md_array(mam_data, 'lom_classification'),
+            'item_onderwijsniveaus': get_md_array(
+                mam_data,
+                'lom_onderwijsniveau',
+                legacy_fallback=True
+            ),
+            'item_onderwijsniveaus_legacy': get_md_array(
+                mam_data, 'lom_context'),
+            'item_onderwijsgraden': get_md_array(
+                mam_data,
+                'lom_onderwijsgraad',
+                legacy_fallback=True
+            ),
+            'item_onderwijsgraden_legacy': get_md_array(
+                mam_data,
+                'lom_typicalagerange'
+            ),
+            'item_keywords': get_md_array(mam_data, 'lom_keywords'),
+            'item_keywords_cp': get_md_array(mam_data, 'dc_subjects'),
+            # TODO: signal ajax request, later fetch directly after v2 refactor
+            'publish_item': 'ajax'
+        }
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
@@ -231,34 +269,13 @@ class MetaMapping:
             'publishers': get_md_array(mam_data, 'dc_publishers'),
             'publisher_options': self.PUBLISHER_OPTIONS,
             'item_type': item_type,
-            'item_themas': json.dumps(get_md_array(mam_data, 'lom_thema')),
-            'item_vakken': json.dumps(get_md_array(mam_data, 'lom_vak')),
-            'item_vakken_legacy': json.dumps(get_md_array(mam_data, 'lom_classification')),
-            'item_languages': json.dumps(get_md_array(mam_data, 'lom_languages')),
-            'item_eindgebruikers': json.dumps(get_md_array(mam_data, 'lom_intendedenduserrole')),
-            'item_onderwijsniveaus': json.dumps(
-                get_md_array(
-                    mam_data,
-                    'lom_onderwijsniveau',
-                    legacy_fallback=True
-                )
-            ),
-            'item_onderwijsniveaus_legacy': json.dumps(get_md_array(mam_data, 'lom_context')),
-            'item_onderwijsgraden': json.dumps(
-                get_md_array(
-                    mam_data,
-                    'lom_onderwijsgraad',
-                    legacy_fallback=True
-                )
-            ),
-            'item_onderwijsgraden_legacy': json.dumps(get_md_array(mam_data, 'lom_typicalagerange')),
-            'item_keywords_cp': json.dumps(get_md_array(mam_data, 'dc_subjects')),
-            'item_keywords': json.dumps(get_md_array(mam_data, 'lom_keywords')),
+            'frontend_metadata': self.frontend_metadata(pid, department, mam_data),
             'dc_identifier_localid': get_property(mam_data, 'dc_identifier_localid'),
             'keyframe': mam_data.get('previewImagePath'),
             'pid': pid,
             'title': mam_data.get('title'),
             'ontsluitingstitel': get_property(mam_data, 'dc_title'),
+
             'titel_serie': get_array_property(mam_data, 'dc_titles', 'serie'),
             'titel_episode': get_array_property(mam_data, 'dc_titles', 'episode'),
             'titel_aflevering': get_array_property(mam_data, 'dc_titles', 'aflevering'),
@@ -306,9 +323,6 @@ class MetaMapping:
             }
 
     def update_legacy_flag(self, request, mam_data):
-        # na optimalisatie is momenteel
-        # legacy vakken ( lom_classification )
-        # niet nodig voor deze check zie DEV-1881
         # default waarde voor lom_legacy
         lom_legacy = "true"
 
@@ -329,9 +343,6 @@ class MetaMapping:
         """
         convert form metadata hash into json data
         """
-        # print("DEBUG form metadata:\n", request.form)
-        # logic and checks here that can generate errors, warnings etc.
-
         pid = escape(request.form.get('pid'))
         token = escape(request.form.get('token'))
         department = escape(escape(request.form.get('department')))
@@ -441,10 +452,11 @@ class MetaMapping:
 
         tp = self.form_params(token, pid, department, mam_data)
 
+        # update publish_item, no extra ajax call needed here
         if request.form.get('publicatiestatus_checked'):
-            tp['publish_item'] = True
+            tp['frontend_metadata']['publish_item'] = True
         else:
-            tp['publish_item'] = False
+            tp['frontend_metadata']['publish_item'] = False
 
         return tp
 

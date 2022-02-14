@@ -29,6 +29,9 @@
     components: {
       Multiselect 
     },
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -40,12 +43,9 @@
       }
     },
     created(){
-      var item_type_div = document.getElementById("item_type");
-      if(item_type_div){
-        var item_type = item_type_div.innerText;
-        if(item_type){
-          this.value = [{name: item_type, code: item_type}];
-        }
+      if(this.metadata.item_type){
+        var item_type = this.metadata.item_type;
+        this.value = [{name: item_type, code: item_type}];
         this.json_value = JSON.stringify(this.value);
       }
       
@@ -64,7 +64,7 @@
 <style>
   
   #lom_type_selector{
-    min-width: 30em;
+    min-width: 20em;
   }
 
   #lom_type_json_value{

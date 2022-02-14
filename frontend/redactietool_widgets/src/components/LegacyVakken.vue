@@ -29,7 +29,9 @@
     name: 'LegacyVakken',
     components: {
     },
-    props: {},
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         legacy_vakken: [],
@@ -43,10 +45,8 @@
       }
     },
     created: function() { 
-      var legacy_vakken_div = document.getElementById("item_vakken_legacy");
-      if(legacy_vakken_div){
-        var legacy_vakken_values = JSON.parse(legacy_vakken_div.innerText);
-        this.legacy_vakken = legacy_vakken_values
+      if(this.metadata.item_vakken_legacy){
+        this.legacy_vakken = this.metadata.item_vakken_legacy;
       }
     },
     methods: {

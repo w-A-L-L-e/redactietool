@@ -6,6 +6,7 @@
       deselect-label="Verwijder trefwoord"
       selected-label=""
       :show-labels="false"
+      :blockKeys="['Delete']"
       :hide-selected="true"
       placeholder="Voeg nieuw trefwoord toe" 
       label="name" 
@@ -25,14 +26,14 @@
           {{cp_keyword_label}}
         </a>
         <div class="warning-pill" v-bind:class="[show_already_added_warning ? 'show' : 'hide']">
-          Keyword werd al toegevoegd
+          Trefwoord werd al toegevoegd.
         </div>
       </div>
 
       <div class="cp_keywords" v-bind:class="[show_cp_keywords ? 'show' : 'hide']">
 
         <div v-if="!cp_keywords.length" class="notification is-info is-light">
-          Voor dit item zijn er geen Content Partner trefwoorden.
+          Voor dit item zijn er geen contentpartner trefwoorden.
         </div>
 
         <!-- 
@@ -61,7 +62,9 @@
     components: {
       Multiselect 
     },
-    props: {},
+    props: {
+      metadata: Object
+    },
     data () {
       return {
         value: default_value,
@@ -72,15 +75,14 @@
           // release
         ],
         cp_keywords: [],
-        show_cp_keywords: true,
+        show_cp_keywords: false,
         show_already_added_warning: false,
-        cp_keyword_label: "Verberg trefwoorden van Content Partners"
+        cp_keyword_label: "Bekijk de trefwoorden van de contentpartner"
       }
     },
     created(){
-      var keyword_div = document.getElementById("item_keywords");
-      if(keyword_div){
-        var keywords = JSON.parse(keyword_div.innerText);
+      if(this.metadata.item_keywords){
+        var keywords = this.metadata.item_keywords;
         this.value = [];
         for(var k in keywords){
           var keyword = keywords[k]
@@ -94,9 +96,8 @@
         this.json_value = JSON.stringify(this.value);
       }
 
-      var keywords_cp_div = document.getElementById("item_keywords_cp");
-      if( keywords_cp_div ){
-        var keywords_cp = JSON.parse(keywords_cp_div.innerText);
+      if( this.metadata.item_keywords_cp ){
+        var keywords_cp = this.metadata.item_keywords_cp;
         this.cp_keywords = [];
         for(var cpk in keywords_cp){
           var cp_keyword = keywords_cp[cpk]
@@ -113,7 +114,7 @@
       addTrefwoord(new_keyword) {
         // instead this should call some suggest lib or other
         // api to create a new keyword (and show a modal with ok/cancel)
-        console.log("addTrefwoord nieuw woord=", new_keyword);
+        console.log("addTrefwoord: woord=", new_keyword);
         const tw = {
           name: new_keyword,
           code: new_keyword.substring(0, 2) + Math.floor((Math.random() * 10000000))
@@ -128,10 +129,10 @@
       toggleKeywordCollapse: function(){
         this.show_cp_keywords= !this.show_cp_keywords;
         if(this.show_cp_keywords){
-          this.cp_keyword_label = "Verberg trefwoorden van Content Partners";
+          this.cp_keyword_label = "Verberg de trefwoorden van de contentpartner";
         }
         else{
-          this.cp_keyword_label = "Bekijk trefwoorden van Content Partners";
+          this.cp_keyword_label = "Bekijk de trefwoorden van de contentpartner";
         }
       },
       addCpKeyword: function(kw){
@@ -171,7 +172,7 @@
 
 <style>
   #trefwoorden_selector{
-    min-width: 30em;
+    min-width: 25em;
   }
   #trefwoorden_json_value{
     margin-top: 20px;

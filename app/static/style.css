@@ -259,6 +259,80 @@ input[type=button].spring:hover {
 }
 
 
+.fadein {
+  animation: fadeIn 0.5s;
+  animation-iteration-count: 1;
+  -webkit-animation: fadeIn 0.5s;
+  -moz-animation: fadeIn 0.5s;
+  -o-animation: fadeIn 0.5s;
+  -ms-animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  0% {transform:scale(1.0, 0.0);}
+  100% {transform:scale(1.0,1.0);}
+}
+
+@-moz-keyframes fadeIn {
+  0% {transform:scale(1.0, 0.0);}
+  100% {transform:scale(1.0,1.0);}
+}
+
+@-webkit-keyframes fadeIn {
+/*  0% {opacity:0;}
+  100% {opacity:1;}
+  */
+  0% {transform:scale(1.0, 0.0);}
+  100% {transform:scale(1.0,1.0);}
+}
+
+@-o-keyframes fadeIn {
+  0% {transform:scale(1.0, 0.0);}
+  100% {transform:scale(1.0,1.0);}
+}
+
+@-ms-keyframes fadeIn {
+  0% {transform:scale(1.0, 0.0);}
+  100% {transform:scale(1.0,1.0);}
+}
+
+.fadeout {
+  animation: fadeOut 0.5s;
+  animation-iteration-count: 1;
+  -webkit-animation: fadeOut 0.5s;
+  -moz-animation: fadeOut 0.5s;
+  -o-animation: fadeOut 0.5s;
+  -ms-animation: fadeOut 0.5s;
+}
+@keyframes fadeOut {
+  0% {transform:scale(1.0,1.0);}
+  100% {transform:scale(1.0, 0.0);}
+}
+
+@-moz-keyframes fadeOut {
+  0% {transform:scale(1.0,1.0);}
+  100% {transform:scale(1.0, 0.0);}
+}
+
+@-webkit-keyframes fadeOut {
+/*  0% {opacity:0;}
+  100% {opacity:1;}
+  */
+  0% {transform:scale(1.0,1.0);}
+  100% {transform:scale(1.0, 0.0);}
+}
+
+@-o-keyframes fadeOut {
+  0% {transform:scale(1.0,1.0);}
+  100% {transform:scale(1.0, 0.0);}
+}
+
+@-ms-keyframes fadeOut {
+  0% {transform:scale(1.0,1.0);}
+  100% {transform:scale(1.0, 0.0);}
+}
+
+
+
 /************************ SAML LOGIN/LOGOUT STYLING **************************/
 .login_logout {
     float: right;
@@ -283,24 +357,12 @@ input[type=button].spring:hover {
   min-width: 122px;
 }
 
-/*
-.pu {
-  margin-top: -3px;
-}
-
-.narrow-input {
-  width: 18em;
-}
-*/
-
 hr {
-  margin-top: -14px;
-  background: #363636;
-  height: 1px;
-  /* imho this looks nicer:
-   * display: none;
-   */
+  margin-top: -18px;
+  border-bottom: 2px solid #363636;
+  height: 2px;
 }
+
 .saml {
   margin-left: 34%;
   margin-top: 5px;
@@ -462,7 +524,7 @@ h3.subtitle{
 }
 
 .form-footer-spacing {
-  height: 120px;
+  height: 60px;
 }
 
 
@@ -478,12 +540,16 @@ h3.subtitle{
 }
 
 .ql-editor{
-  min-height: 20em;
+  min-height: 200px;
+  max-height: 300px;
   overflow-y: scroll;
   resize: vertical;
   border-bottom-left-radius:5px;
   border-bottom-right-radius:5px;
   background-color: #fff;
+}
+.ql-editor[style*="height"] {
+  max-height: unset; 
 }
 
 .ql-snow .ql-picker.ql-header .ql-picker-label::before,
@@ -530,3 +596,9 @@ h3.collapsable{
   margin-bottom: 20px;
   display: none;
 }
+
+h2.title {
+  margin-bottom: 24px !important;
+}
+
+

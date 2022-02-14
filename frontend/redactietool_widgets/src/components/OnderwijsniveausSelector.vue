@@ -1,10 +1,16 @@
 <template>
-  <div class="field is-horizontal">
+  <div 
+    v-bind:class="[(!value.length) ? 'niveaus-pull-up' : '']"
+    class="field is-horizontal"
+  >
     <div class="field-label is-normal">
       <label class="label" v-if="!comboEdit">Onderwijsniveaus</label>
-      <label class="label" v-if="comboEdit"></label>
+      <label 
+        class="label" v-if="comboEdit"></label>
     </div>
-    <div class="field-body">
+    <div 
+      class="field-body"
+      >
       <div id="onderwijsniveaus_selector" class=""> 
         <span v-if="!comboEdit">
           <multiselect v-model="value" 
@@ -57,7 +63,8 @@
       Multiselect 
     },
     props: {
-      comboEdit: Boolean
+      comboEdit: Boolean,
+      metadata: Object
     },
     data () {
       return {
@@ -98,19 +105,16 @@
 
           // set selected options for this specific item
           this.value = [];
-
-          var value_div = document.getElementById("item_onderwijsniveaus");
-          if(value_div){
-            var onderwijsniveaus = JSON.parse(value_div.innerText);
+          if(this.metadata.item_onderwijsniveaus){
+            var onderwijsniveaus = this.metadata.item_onderwijsniveaus;
             var item = {};
             var option_item = {};
 
             // do fallback, in case only old string values are present
             if( onderwijsniveaus['show_legacy'] ){
               console.log("legacy fallback voor onderwijsniveaus (lom_context)...");
-              var value_div_legacy = document.getElementById("item_onderwijsniveaus_legacy");
-              if(value_div_legacy){
-                var values = JSON.parse(value_div_legacy.innerText);
+              if(this.metadata.item_onderwijsniveaus_legacy){
+                var values = this.metadata.item_onderwijsniveaus_legacy;
                 for(var k in values){
                   item['definition'] = values[k]['value'];
                   
@@ -190,7 +194,7 @@
   .inline-niveau-list{
     /*
     max-height: 150px;
-    overflow-y: scroll;
+    overflow-y: auto;
     */
   }
 
@@ -210,6 +214,12 @@
   .inline-niveau-wrapper {
     margin-top: -8px;
     margin-bottom: 0px;
+  }
+
+  @media screen and (min-width: 769px){
+    .niveaus-pull-up {
+      margin-bottom: -22px !important;
+    }
   }
 
 </style>

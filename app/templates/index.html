@@ -13,17 +13,17 @@ Login
 
     {% if success_slo %}
       <div class="column" id="alert_box">
-        <div class="notification is-success">
-          <button class="delete" onclick="closeAlert(); return false;"></button>
-          Je bent uitgelogged. <br/>
+        <div class="notification is-success fadein">
+          <button class="delete" onclick="closeAlert('alert_box'); return false;"></button>
+          Je bent uitgelogd. <br/>
         </div>
       </div>
     {% endif %}
 
     {% if not_auth_warn %}
       <div class="column" id="alert_box">
-        <div class="notification is-danger">
-          <button class="delete" onclick="closeAlert(); return false;"></button>
+        <div class="notification is-danger fadein">
+          <button class="delete" onclick="closeAlert('alert_box'); return false;"></button>
           Authenticatie mislukt <br/>
         </div>
       </div>
@@ -32,10 +32,10 @@ Login
 
     <div class="card" id="saml_login_box">
       <h1 class="title">
-        Redactietool 
         <span class="icon">
           <ion-icon name="create-outline"></ion-icon>
         </span>
+        Redactietool 
       </h1>
 
       <p>
@@ -50,7 +50,7 @@ Login
           </a>
         {% endif %}
 
-        <a href="?sso" class="button is-primary">Login</a>
+        <a href="?sso" class="button is-primary"> Inloggen </a>
       </div>
       <div class="clearfix"></div><br/><br/>
 

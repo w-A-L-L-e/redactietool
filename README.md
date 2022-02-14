@@ -9,7 +9,18 @@ Finally submit to mediahaven (show confirmation dialog if a srt is already linke
 Allows basically to upload both closed and open srt files to videos for 'testbeeld' tenant
 (tenant is now only one but can be easily extended for multiple tenants).
 
-## Prerequisites
+## Functional
+
+### Server
+
+| **Environment**     |  **Host**         |
+| :----------------:  | :---------------: |
+| INT                 | https://redactie-int.private.cloud.meemoo.be/  |
+| QAS                 | https://redactie-qas.hetarchief.be  |
+| PRD                 | https://redactie.hetarchief.be  |
+
+
+### Prerequisites
 
 * Git
 * Docker
@@ -17,7 +28,7 @@ Allows basically to upload both closed and open srt files to videos for 'testbee
 * Linux (if you want to run it locally, uwsgi is not available on other platforms.)
 * Access to the meemoo PyPi
 
-## Usage
+### Usage
 
 1. Clone this repository with:
 
@@ -185,16 +196,24 @@ metadata by pid functional:
 export MEDIAHAVEN_API=https://archief-qas.viaa.be/mediahaven-rest-api
 export MEDIAHAVEN_USER= lookup in team pass
 export MEDIAHAVEN_PASS= lookup in team pass
-
-export OAS_SERVER=https://oas-qas.viaa.be
-export OAS_APPNAME=mediahaven
-
+export SAML_ENV 'saml/localhost' # or 'saml/prd' or...
+export OAS_APPNAME 'mediahaven'  # or whatever the application access app name needs be
+export SECRET_KEY 'set_in_secrets_for_meemoo_saml_cookie'
+export OBJECT_STORE_URL 'https://archief-media-qas.viaa.be/viaa/MOB'
+export FTP_SERVER '' # ftp url for uploading subtitles (internal vpn url)
+export FTP_DIR '/'
+export TESTBEELD_PERM_ID 'uuid_here'
+export ONDERWIJS_PERM_ID 'uuid2_here'
+export ADMIN_PERM_ID 'uuid3_here'
+export FTP_USER 'user'
+export FTP_PASS 'pass'
+export KEYFRAME_EDITING_LINK 'https://archief-qas.viaa.be/player?id='
+export SPARQL_ENDPOINT = 'https://sparql_api_url'
+export SPARQL_USER = lookup in team pass
+export SPARQL_PASS = lookup in team pass
+export FLASK_ENV=PRODUCTION  
 export FLOWPLAYER_TOKEN= lookup or ask Bart or Walter for this token
 ```
-
-For production deploys you also set the OAS_JWT_SECRET (see last section on verification of bearer token). Flowplayer token is also needed to be able to preview the subtitles in the flow player (on dev/localhost it works without token,but once deployed you need it to not get an error from the player).
-This env var is exposed to javascript code starting flowplayer in app/templates/preview.html
-
 
 ### Running the server locally:
 
@@ -251,9 +270,9 @@ all done.
 ```
 
 
-### Developing on the Vue.js components/widgets for the metadata form
+### Developing on the Vue.js components used in the metadata form
 
-To easily work on the frontend there's now a new makefile command:
+To easily work on the Vue.js frontend there's now a new makefile command:
 
 ```
 $ make vue_develop
@@ -261,6 +280,16 @@ $ make vue_develop
 
 Then you just open a browser to port http://localhost:8081 and whenever you edit something in
 frontend/redactietool_widgets/src folder this will auto reload and show your changes.
+
+
+The frontend also needs some data to work on. To be able to work fully offline there is also a mocking server
+that supplies data to the frontend to populate the dropdowns and vakken suggestions. To start it just use the
+following make command in a seperate terminal window:
+
+```
+$ make vue_develop_api
+```
+That starts a seperate minimal flask server with some mocked data responses.
 
 Once you are satisfied with the updates you can push it to flask and it will automatically appear inside the metadata
 edit form. For making a new build of the vue components and auto inject into the flask jinja templates you use the following
@@ -291,11 +320,46 @@ Updating vue includes in flask app...done.
 ```
 
 The benefit here is it auto generates a unique and minified app.xyz.js file so the users see the new vue application when visiting the site without the need to shift-reload and also we update the version (git tag) in the dropdown menu so we can see what version is deployed on the openshift server.
+It also updates the flask base.html so that the new javascript and css imports point to the latest version.
 
 
 ### SAML authentication
 
-Work in progress (the older OAS_JWT_SECRET and token will be deprecated soon...).
+Implementation was done using OneLogin's SAML Python Toolkit here https://github.com/onelogin/python3-saml.
+To have a seperate settings.json file per environment we made the following structure:
+```
+app/saml
+├── int
+│   ├── advanced_settings.json
+│   ├── certs
+│   │   └── README
+│   └── settings.json
+├── localhost
+│   ├── advanced_settings.json
+│   ├── certs
+│   │   └── README
+│   └── settings.json
+├── prd
+│   ├── advanced_settings.json
+│   ├── certs
+│   │   └── README
+│   └── settings.json
+└── qas
+    ├── advanced_settings.json
+    ├── certs
+    │   └── README
+    └── settings.json
+```
+
+So for each environment a sp.key and sp.crt file is inserted using a volume mount that points to some openshift secrets defined in
+redactietool-saml-qas and redactietool-saml-prd. They mount to /app/app/saml/qas/sp.key and /app/app/saml/prd/sp.key and sp.crt respectively.
+
+Future work could involve instead of having a seperate settings.json and advanced_settings.json per environment to do parsing of the 
+the xml response from the idp and then generating the settings.json upon application startup. Mind that we still would need a way to
+correctly fill in the sp urls per environment also. The only real benefit would be that the public x509cert and the two urls singleSignOnService
+and singleLogoutService would be refetched dynamically upon application startup (but if these are changed you still need to remember to restart all
+related pods also).
+
 
 
 ### Dislaimer regarding pytest pyvcr recordings.

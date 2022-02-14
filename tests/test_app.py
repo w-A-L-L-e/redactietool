@@ -36,7 +36,7 @@ def vcr_config():
 def test_home(client):
     res = client.get('/')
     assert res.status_code == status.HTTP_200_OK
-    assert b'Login' in res.data
+    assert b'Inloggen' in res.data
 
 
 def test_liveness_check(client):
@@ -293,7 +293,7 @@ def test_send_to_mam_confirm_works(client):
 
     assert res.status_code == 200
     print(res.data.decode(), flush=True)
-    assert 'Ondertitels en sidecar zijn verstuurd' in res.data.decode()
+    assert 'De ondertitels werden succesvol opgeladen' in res.data.decode()
 
 
 @pytest.mark.vcr
@@ -327,7 +327,7 @@ def test_edit_metadata_wrong_pid(client):
     )
 
     assert res.status_code == 200
-    assert 'Details opvragen met PID' in res.data.decode()
+    assert 'Zoek een item op' in res.data.decode()
 
 
 # to save time, for actual edit get/post routes we will test
@@ -422,5 +422,5 @@ def test_subtitle_ftp_upload(client, mocker):
 
     assert res.status_code == 200
     print(res.data.decode(), flush=True)
-    assert 'Ondertitels en sidecar zijn verstuurd' in res.data.decode()
+    assert 'De ondertitels werden succesvol opgeladen' in res.data.decode()
     assert '226 Transfer complete' in res.data.decode()

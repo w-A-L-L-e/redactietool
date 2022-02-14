@@ -210,7 +210,8 @@ class MediahavenApi:
 
     def update_metadata(self, department, fragment_id, external_id, xml_sidecar):
         send_url = f"{self.API_SERVER}/resources/media/{fragment_id}"
-        logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
+        # logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
+        logger.info("Syncing fragment to mediahaven with sidecar post:", data=send_url)
 
         file_fields = {
             'metadata': ('metadata.xml', xml_sidecar),
