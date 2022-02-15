@@ -29,14 +29,14 @@ GET_NIVEAUS = (
     + """
 SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
 WHERE {{
-    {{ col:niveau skos:member ?id. 
+    {{ col:niveau skos:member ?id.
        FILTER (?id != str:basisonderwijs)
-    }} UNION {{ col:subniveau skos:member ?id. }} 
+    }} UNION {{ col:subniveau skos:member ?id. }}
 
-    ?id a skos:Concept; 
-        skos:prefLabel ?label; 
+    ?id a skos:Concept;
+        skos:prefLabel ?label;
         skos:definition ?definition .
-    
+
     ?c skos:member ?id; skos:prefLabel ?collection.
 
     OPTIONAL {{ ?id skos:narrower ?child. }}
@@ -54,8 +54,8 @@ WHERE {{
     BIND(URI('{collection}') AS ?collection)
     ?collection a skos:Collection; skos:member ?id.
 
-    ?id a skos:Concept; 
-        skos:prefLabel ?label; 
+    ?id a skos:Concept;
+        skos:prefLabel ?label;
         skos:definition ?definition .
 
     OPTIONAL {{ ?id skos:narrower ?child. }}
@@ -69,14 +69,14 @@ GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
 SELECT ?id ?label ?definition ?child_count ?parent_id {{
-    SELECT ?id ?label ?definition 
+    SELECT ?id ?label ?definition
     (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
-    WHERE {{ 
+    WHERE {{
         BIND(URI('{collection}') AS ?collection)
-        
+
         ?collection a skos:OrderedCollection .
 
-        ?collection skos:memberList/rdf:rest* ?mid . 
+        ?collection skos:memberList/rdf:rest* ?mid .
         ?mid rdf:rest* ?node .
         ?node rdf:first ?id .
 
@@ -87,7 +87,7 @@ SELECT ?id ?label ?definition ?child_count ?parent_id {{
         OPTIONAL {{ ?id skos:narrower ?child. }}
         OPTIONAL {{ ?id skos:broader ?parent }}
     }}
-    
+
     GROUP BY ?node ?id ?label ?definition
     ORDER BY ?position
 }}
