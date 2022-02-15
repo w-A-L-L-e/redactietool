@@ -74,9 +74,9 @@ def test_get_niveaus(sparql_endpoint):
         "definition": "Lager onderwijs",
         "id": f"{Suggest.EXT_NS}structuur/lager-onderwijs",
         "label": "lager onderwijs",
-        "child_count": 0,
+        "child_count": 1,
         "collection": "Onderwijs subniveaus",
-        "parent": "https://w3id.org/onderwijs-vlaanderen/id/structuur/basis-onderwijs",
+        "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/basis-onderwijs",
     }
 
 
@@ -106,13 +106,14 @@ def test_get_children(sparql_endpoint):
     endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
-    results = list(suggest.get_children([f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
-    assert len(results) == 1
+    results = list(suggest.get_children(
+        [f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
+    assert len(results) == 2
     assert results[0] == {
         "definition": "Lager 1ste graad",
         "id": f"{Suggest.EXT_NS}structuur/lager-1e-graad",
         "label": "lager 1ste graad",
-        "parent": f"{Suggest.EXT_NS}structuur/lager-onderwijs",
+        "parent_id": f"{Suggest.EXT_NS}structuur/lager-onderwijs",
     }
 
 
