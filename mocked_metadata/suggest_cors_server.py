@@ -45,22 +45,42 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+# export MEDIAHAVEN_API=http://localhost:5000
 @app.route('/resources/media')
 @cross_origin()
 def send_json_file():
-    print("in send json")
     search_qry = request.args.get('q')
     start_index = request.args.get('startIndex')
     nr_of_results = request.args.get('nrOfResults')
     print("q=", search_qry)
-    print("start_index=", start_index)
-    print("nr results=", nr_of_results)
-    json_file = search_qry.split('ExternalId:')[1].split(')')[
-        0].strip() + '.json'
-    print("json_file to respond=", json_file)
+    #print("start_index=", start_index)
+    #print("nr results=", nr_of_results)
 
-    # return send_from_directory('items', json_file, as_attachment=True)
-    return send_from_directory('items', json_file)
+    json_data = '{}'
+    result_count = 0
+
+    # verwant_aan for subs:
+    if(len(search_qry.split('dc_relationsis_verwant_aan:')) > 1):
+        json_file = search_qry.split('dc_relationsis_verwant_aan:')[
+            1].split(')')[0].strip() + '.json'
+        print("json file to fetch in sub_items=", json_file)
+        # result_count=1
+        # json_data = open('./sub_items/'+json_file).read()
+        result_count = 0
+
+    # check if we search pid:
+    if(len(search_qry.split('ExternalId:')) > 1):
+        result_count = 1
+        json_file = search_qry.split('ExternalId:')[1].split(')')[
+            0].strip() + '.json'
+        # return send_from_directory('items', json_file, as_attachment=True)
+        # return send_from_directory('items', json_file)
+        json_data = open('./items/'+json_file).read()
+
+    return {
+        'totalNrOfResults': result_count,
+        'mediaDataList': [json.loads(json_data)]
+    }
 
 
 def csv_to_suggest_response(csv_path, id_prefix, title_col=0, desc_col=1):

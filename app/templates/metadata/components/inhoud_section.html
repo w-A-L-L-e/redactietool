@@ -177,6 +177,30 @@
     theme: 'snow'
   });
 
+  //only plaintext
+  quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+    let ops = []
+    delta.ops.forEach(op => {
+      if (op.insert && typeof op.insert === 'string') {
+        ops.push({
+          insert: op.insert
+        })
+      }
+    })
+    delta.ops = ops
+    return delta
+  })
+
+  // only nodes
+  // quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+  // delta.ops = delta.ops.map(op => {
+  //   return {
+  //     insert: op.insert
+  //   }
+  // })
+  // return delta
+  // })
+
  
   document.addEventListener('DOMContentLoaded', () => {
    richtext_changed();

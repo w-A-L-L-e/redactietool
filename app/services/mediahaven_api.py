@@ -62,6 +62,11 @@ class MediahavenApi:
             auth=(self.api_user(department), self.API_PASSWORD)
         )
 
+        if response.status_code > 400:
+            logger.info(
+                f"ERROR {response.status_code} from mediahaven", data=response.text)
+            return {'totalNrOfResults': 0, 'data': []}
+
         return response.json()
 
     def list_objects(self, department, search='', enable_v2_header=False, offset=0, limit=25):
@@ -211,7 +216,8 @@ class MediahavenApi:
     def update_metadata(self, department, fragment_id, external_id, xml_sidecar):
         send_url = f"{self.API_SERVER}/resources/media/{fragment_id}"
         # logger.info("syncing metadata to mediahaven...", data=xml_sidecar)
-        logger.info("Syncing fragment to mediahaven with sidecar post:", data=send_url)
+        logger.info(
+            "Syncing fragment to mediahaven with sidecar post:", data=send_url)
 
         file_fields = {
             'metadata': ('metadata.xml', xml_sidecar),
