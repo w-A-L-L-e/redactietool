@@ -1,4 +1,3 @@
-from distutils.sysconfig import PREFIX
 import os
 import re
 from typing import List
@@ -70,7 +69,8 @@ GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
 SELECT ?id ?label ?definition ?child_count ?parent_id {{
-    SELECT ?id ?label ?definition (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
+    SELECT ?id ?label ?definition 
+    (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
     WHERE {{ 
         BIND(URI('{collection}') AS ?collection)
         
@@ -161,30 +161,30 @@ WHERE {{
 
 # Function to validate URL
 # using regular expression
-def isValidURI(str):
+def is_valid_uri(value):
 
     # Compile the ReGex
     p = re.compile(URI_REGEX)
 
     # If the string is empty
     # return false
-    if str is None:
+    if value is None:
         return False
 
     # Return if the string
     # matched the ReGex
-    if re.search(p, str):
+    if re.search(p, value):
         return True
 
     return False
 
 
-def join_ids(ids):
-    for id in ids:
-        if not isValidURI(id):
-            raise ValueError("The id {} is not a valid URL.".format(id))
+def join_ids(identifiers):
+    for idx in identifiers:
+        if not is_valid_uri(idx):
+            raise ValueError(f"The id {idx} is not a valid URL.")
 
-    return " ".join("<" + str(id) + ">" for id in ids)
+    return " ".join("<" + str(idx) + ">" for idx in identifiers)
 
 
 def read_query(file_path):
@@ -238,15 +238,14 @@ class Suggest:
         ):
             yield res
 
-    def get_collection(self, collection: str, sorted: bool = False):
+    def get_collection(self, collection: str, is_sorted: bool = False):
         """Get a collection members by collection id."""
 
-        if not isValidURI(collection):
-            raise ValueError(
-                "The id {} is not a valid URI.".format(collection))
+        if not is_valid_uri(collection):
+            raise ValueError("The id {} is not a valid URI.".format(collection))
 
         query = GET_COLLECTION_QUERY
-        if sorted:
+        if is_sorted:
             query = GET_SORTED_COLLECTION_QUERY
 
         for res in self.__exec_query(query, collection=collection):
