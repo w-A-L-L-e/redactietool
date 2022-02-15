@@ -50,11 +50,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def send_json_file():
     search_qry = request.args.get('q')
-    start_index = request.args.get('startIndex')
-    nr_of_results = request.args.get('nrOfResults')
     print("q=", search_qry)
-    #print("start_index=", start_index)
-    #print("nr results=", nr_of_results)
+    # start_index = request.args.get('startIndex')
+    # nr_of_results = request.args.get('nrOfResults')
+    # print("start_index=", start_index)
+    # print("nr results=", nr_of_results)
 
     json_data = '{}'
     result_count = 0
