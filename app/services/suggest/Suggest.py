@@ -1,3 +1,4 @@
+from distutils.sysconfig import PREFIX
 import os
 import re
 from typing import List
@@ -12,218 +13,150 @@ URI_REGEX = (
     + "._\\+~#?&//=]*)"
 )
 
-GET_LIST_QUERY = """
+OND_NS = "https://data.hetarchief.be/id/onderwijs/"
+EXT_NS = "https://w3id.org/onderwijs-vlaanderen/id/"
+
+PREFIX = f"""
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX str: <{EXT_NS}structuur/>
+PREFIX col: <{EXT_NS}collectie/>
+PREFIX ocol: <{OND_NS}collectie/>
 
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-
-    BIND(URI('{scheme}') AS ?scheme)
-
-    ?id a skos:Concept;
-    skos:prefLabel ?label;
-    skos:inScheme ?scheme.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-}}
-ORDER BY ASC(?label)
 """
 
-GET_COLLECTION_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+GET_NIVEAUS = (
+    PREFIX
+    + """
+SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
+WHERE {{
+    {{ col:niveau skos:member ?id. 
+       FILTER (?id != str:basisonderwijs)
+    }} UNION {{ col:subniveau skos:member ?id. }} 
 
-SELECT ?id ?label ?definition (count(?child) as ?children) (SAMPLE(?parent) as ?parent)
+    ?id a skos:Concept; 
+        skos:prefLabel ?label; 
+        skos:definition ?definition .
+    
+    ?c skos:member ?id; skos:prefLabel ?collection.
+
+    OPTIONAL {{ ?id skos:narrower ?child. }}
+    OPTIONAL {{ ?id skos:broader ?parent }}
+}}
+GROUP BY ?id ?label ?definition ?collection
+"""
+)
+
+GET_COLLECTION_QUERY = (
+    PREFIX
+    + """
+SELECT ?id ?label ?definition (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
 WHERE {{
     BIND(URI('{collection}') AS ?collection)
-    ?collection skos:member ?id.
+    ?collection a skos:Collection; skos:member ?id.
 
-    ?id a skos:Concept;
-    skos:prefLabel ?label.
+    ?id a skos:Concept; 
+        skos:prefLabel ?label; 
+        skos:definition ?definition .
 
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    OPTIONAL {{
-        ?id skos:narrower ?child.
-    }}
-
-    OPTIONAL {{
-        ?id skos:broader ?parent
-    }}
+    OPTIONAL {{ ?id skos:narrower ?child. }}
+    OPTIONAL {{ ?id skos:broader ?parent }}
 }}
 GROUP BY ?id ?label ?definition
 """
+)
 
-GET_SORTED_COLLECTION_QUERY = """
-PREFIX : <https://stackoverflow.com/q/17523804/1281433/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+GET_SORTED_COLLECTION_QUERY = (
+    PREFIX
+    + """
+SELECT ?id ?label ?definition ?child_count ?parent_id {{
+    SELECT ?id ?label ?definition (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
+    WHERE {{ 
+        BIND(URI('{collection}') AS ?collection)
+        
+        ?collection a skos:OrderedCollection .
 
-SELECT ?id ?label ?definition (count(?mid)-1 as ?position)
-WHERE {{
-  BIND(URI('{collection}') AS ?collection)
-  ?collection skos:memberList/rdf:rest* ?mid .
-  ?mid rdf:rest* ?node .
-  ?node rdf:first ?id .
+        ?collection skos:memberList/rdf:rest* ?mid . 
+        ?mid rdf:rest* ?node .
+        ?node rdf:first ?id .
 
-  ?id a skos:Concept;
-    skos:prefLabel ?label.
+        ?id a skos:Concept;
+            skos:prefLabel ?label;
+            skos:definition ?definition .
 
-    OPTIONAL {{
-        ?id skos:definition ?definition .
+        OPTIONAL {{ ?id skos:narrower ?child. }}
+        OPTIONAL {{ ?id skos:broader ?parent }}
     }}
+    
+    GROUP BY ?node ?id ?label ?definition
+    ORDER BY ?position
 }}
-GROUP BY ?node ?id ?label ?definition
-ORDER BY ?position
 """
+)
 
-GET_CHILDREN_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?id ?label ?definition ?parent
+GET_CHILDREN_QUERY = (
+    PREFIX
+    + """
+SELECT DISTINCT ?id ?label ?definition ?parent_id
 WHERE {{
-    ?parent skos:narrower ?id.
-    FILTER (?parent IN ({concept}))
+    ?parent_id skos:narrower ?id.
+    VALUES ?parent {{ {concept} }}
 
     ?id a skos:Concept;
-    skos:prefLabel ?label.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
+    skos:prefLabel ?label; skos:definition ?definition.
 }}
-ORDER BY ASC(?label)
 """
+)
 
-SUGGEST_BY_LABELS_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
+SUGGEST_BY_IDS_QUERY = (
+    PREFIX
+    + """
 SELECT DISTINCT ?id ?label ?definition
 WHERE {{
-    BIND(URI('{thema_scheme}') AS ?thema_scheme)
-    BIND(URI('{graad_scheme}') AS ?graad_scheme)
-    BIND(URI('{vak_scheme}') AS ?vak_scheme)
+    ocol:thema skos:member ?thema.
+    col:graad skos:member ?graad.
+    col:vak skos:member ?id.
+
+    ?id a skos:Concept;
+        skos:prefLabel ?label;
+        skos:definition ?definition;
+        skos:related ?thema, ?graad.
+
+    VALUES ?thema {{ {themas} }}
+    VALUES ?graad {{ {graden} }}
+}}
+"""
+)
+
+GET_CONCEPT_BY_IDS_QUERY = (
+    PREFIX
+    + """
+SELECT DISTINCT ?id ?label ?definition
+WHERE {{
+    ?id a skos:Concept;
+    skos:prefLabel ?label; skos:definition ?definition .
+
+    VALUES ?id {{ {concept} }}
+}}
+"""
+)
+
+GET_RELATED_VAK_QUERY = (
+    PREFIX
+    + """
+SELECT DISTINCT ?id ?label ?definition
+WHERE {{
+    col:vak skos:member ?id.
 
     ?id a skos:Concept;
     skos:prefLabel ?label;
-    skos:inScheme ?vak_scheme;
-    skos:related ?thema, ?graad.
-
-    ?thema skos:inScheme ?thema_scheme.
-    ?graad_scheme skos:member ?graad.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    ?thema skos:prefLabel ?thema_label.
-    ?graad skos:prefLabel ?graad_label.
-
-    FILTER (
-        STR(?thema_label) IN ({themas}) &&
-        STR(?graad_label) IN ({graden}) )
-}}
-ORDER BY ASC(?label)
-"""
-
-SUGGEST_BY_IDS_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-    BIND(URI('{thema_scheme}') AS ?thema_scheme)
-    BIND(URI('{graad_scheme}') AS ?graad_scheme)
-    BIND(URI('{vak_scheme}') AS ?vak_scheme)
-
-    ?id a skos:Concept;
-    skos:prefLabel ?label;
-    skos:inScheme ?vak_scheme;
-    skos:related ?thema, ?graad.
-
-    ?thema skos:inScheme ?thema_scheme.
-    ?graad_scheme skos:member ?graad.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    FILTER (
-        ?thema IN ({themas}) &&
-        ?graad IN ({graden}) )
-}}
-ORDER BY ASC(?label)
-"""
-
-GET_CONCEPT_BY_IDS_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-    ?id a skos:Concept;
-    skos:prefLabel ?label.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    FILTER (?id IN ({concept}))
-}}
-ORDER BY ASC(?label)
-"""
-
-GET_CANDIDATES_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-    BIND(URI('{thema_scheme}') AS ?thema_scheme)
-    BIND(URI('{graad_scheme}') AS ?graad_scheme)
-    BIND(URI('{vak_scheme}') AS ?vak_scheme)
-
-    ?id a skos:Concept;
-    skos:prefLabel ?label;
-    skos:inScheme ?vak_scheme;
-    skos:related ?thema, ?graad.
-
-    ?thema skos:inScheme ?thema_scheme.
-    ?graad_scheme skos:member ?graad.
-
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    FILTER (
-        ?thema IN ({themas}) ||
-        ?graad IN ({graden}) )
-
-}}
-ORDER BY ASC(?label)
-"""
-
-GET_RELATED_VAK_QUERY = """
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT DISTINCT ?id ?label ?definition
-WHERE {{
-    BIND(URI('{vak_scheme}') AS ?vak_scheme)
-
-    ?id a skos:Concept;
-    skos:prefLabel ?label;
-    skos:inScheme ?vak_scheme;
+    skos:definition ?definition;
     skos:related ?concept.
 
-    OPTIONAL {{
-        ?id skos:definition ?definition .
-    }}
-
-    FILTER (?concept IN ({concepts}))
-
+    VALUES ?concept {{ {concept} }}
 }}
-ORDER BY ASC(?label)
 """
+)
 
 
 # Function to validate URL
@@ -251,7 +184,7 @@ def join_ids(ids):
         if not isValidURI(id):
             raise ValueError("The id {} is not a valid URL.".format(id))
 
-    return ", ".join("<" + str(id) + ">" for id in ids)
+    return " ".join("<" + str(id) + ">" for id in ids)
 
 
 def read_query(file_path):
@@ -272,7 +205,8 @@ def read_query(file_path):
 class Suggest:
     """A simple api for vocbench data"""
 
-    OND_NS = "https://data.hetarchief.be/term/onderwijs/"
+    OND_NS = OND_NS
+    EXT_NS = EXT_NS
 
     def __init__(self, endpoint: str, user: str, password: str):
         self.sparql = SPARQLWrapper2(endpoint)
@@ -282,37 +216,33 @@ class Suggest:
 
     def __exec_query(self, query: str, **kwargs):
         formatted = query.format(**kwargs)
+        print(formatted)
         self.sparql.setQuery(formatted)
-        for result in self.sparql.query().bindings:
-            yield {
-                "id": result["id"].value,
-                "label": result["label"].value,
-                "definition": result["definition"].value,
-            }
 
-    def get_list(self, scheme: str):
-        """Get thesaurus concepts by scheme id."""
+        for binding in self.sparql.query().convert().bindings:
+            r = {}
+            for k, v in binding.items():
+                if v.datatype == "http://www.w3.org/2001/XMLSchema#integer":
+                    r[k] = int(v.value)
+                else:
+                    r[k] = v.value
+            yield r
 
-        if not isValidURI(scheme):
-            raise ValueError("The id {} is not a valid URL.".format(scheme))
-
-        for res in self.__exec_query(GET_LIST_QUERY, scheme=scheme):
-            yield res
+            # yield {k: v.value for k, v in result.items()}
 
     def get_concept(self, concept: List[str]):
         """Get thesaurus concept by ids."""
 
-        concepts = join_ids(concept)
-
-        for res in self.__exec_query(GET_CONCEPT_BY_IDS_QUERY, concept=concepts):
+        for res in self.__exec_query(
+            GET_CONCEPT_BY_IDS_QUERY, concept=join_ids(concept)
+        ):
             yield res
 
     def get_collection(self, collection: str, sorted: bool = False):
         """Get a collection members by collection id."""
 
         if not isValidURI(collection):
-            raise ValueError(
-                "The id {} is not a valid URI.".format(collection))
+            raise ValueError("The id {} is not a valid URI.".format(collection))
 
         query = GET_COLLECTION_QUERY
         if sorted:
@@ -324,90 +254,45 @@ class Suggest:
     def get_children(self, concept: List[str]):
         """Get the children of a list of concept ids."""
 
-        concepts = join_ids(concept)
-
-        for res in self.__exec_query(GET_CHILDREN_QUERY, concept=concepts):
+        for res in self.__exec_query(GET_CHILDREN_QUERY, concept=join_ids(concept)):
             yield res
 
     def get_vakken(self):
         """Get list 'vakken'."""
 
-        for res in self.get_collection(f"{self.OND_NS}vak-volgorde", True):
+        for res in self.get_collection(f"{self.EXT_NS}collectie/vak", True):
             yield res
 
     def get_themas(self):
         """Get list 'themas'."""
 
-        for res in self.get_collection(f"{self.OND_NS}thema-volgorde", True):
+        for res in self.get_collection(f"{self.OND_NS}collectie/thema", True):
             yield res
 
     def get_graden(self):
         """Get list 'onderwijsgraden'."""
 
-        for res in self.get_collection(f"{self.OND_NS}graad"):
+        for res in self.get_collection(f"{self.EXT_NS}collectie/graad"):
             yield res
 
     def get_niveaus(self):
         """Get list 'onderwijsniveaus'."""
 
-        for res in self.get_collection(f"{self.OND_NS}niveau"):
+        for res in self.__exec_query(GET_NIVEAUS):
             yield res
 
     def suggest(self, thema: List[str], graad: List[str]):
         """Suggest 'vakken' based on the identifiers of 'onderwijsgraad' and 'thema'."""
 
-        themas = join_ids(thema)
-        graden = join_ids(graad)
-
         for res in self.__exec_query(
             SUGGEST_BY_IDS_QUERY,
-            thema_scheme=f"{self.OND_NS}thema",
-            vak_scheme=f"{self.OND_NS}vak",
-            graad_scheme=f"{self.OND_NS}graad",
-            themas=themas,
-            graden=graden,
-        ):
-            yield res
-
-    def suggest_by_label(self, thema: List[str], graad: List[str]):
-        """Suggest 'vakken' based on 'onderwijsgraad' and 'thema'."""
-
-        themas = ", ".join('"' + str(t) + '"' for t in thema)
-        graden = ", ".join('"' + str(g) + '"' for g in graad)
-
-        print("running qry=", SUGGEST_BY_LABELS_QUERY)
-        for res in self.__exec_query(
-            SUGGEST_BY_LABELS_QUERY,
-            thema_scheme=f"{self.OND_NS}thema",
-            vak_scheme=f"{self.OND_NS}vak",
-            graad_scheme=f"{self.OND_NS}graad",
-            themas=themas,
-            graden=graden,
-        ):
-            yield res
-
-    def get_candidates(self, thema: List[str], graad: List[str]):
-        """Get all possible 'vakken' based on the identifiers of 'onderwijsgraad' and 'thema'."""
-
-        themas = join_ids(thema)
-        graden = join_ids(graad)
-
-        for res in self.__exec_query(
-            GET_CANDIDATES_QUERY,
-            thema_scheme=f"{self.OND_NS}thema",
-            vak_scheme=f"{self.OND_NS}vak",
-            graad_scheme=f"{self.OND_NS}graad",
-            themas=themas,
-            graden=graden,
+            themas=join_ids(thema),
+            graden=join_ids(graad),
         ):
             yield res
 
     def get_related_vak(self, concept: List[str]):
         """Get related vak by concept ids."""
 
-        concepts = join_ids(concept)
-
-        for res in self.__exec_query(
-            GET_RELATED_VAK_QUERY, vak_scheme=f"{self.OND_NS}vak", concepts=concepts
-        ):
+        for res in self.__exec_query(GET_RELATED_VAK_QUERY, concept=join_ids(concept)):
             yield res

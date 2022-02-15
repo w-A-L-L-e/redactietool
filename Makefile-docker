@@ -13,7 +13,7 @@ app:
 	docker run -p 8080:8080 --rm "${APP_NAME}:${VERSION}"
 
 test:
-	docker run --name "${APP_NAME}_test" \
+	docker run --rm --name "${APP_NAME}_test" \
 					--entrypoint python "${APP_NAME}:${VERSION}" \
 					"-m" "pytest" "--cov=app"
 
