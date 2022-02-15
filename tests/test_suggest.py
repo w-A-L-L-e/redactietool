@@ -16,7 +16,7 @@ def test_instantiation():
 
 def test_get_concept(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(suggest.get_concept([f"{Suggest.EXT_NS}vak/nederlands"]))
@@ -30,7 +30,7 @@ def test_get_concept(sparql_endpoint):
 
 def test_suggest(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(
@@ -49,7 +49,7 @@ def test_suggest(sparql_endpoint):
 
 def test_get_graden(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(suggest.get_graden())
@@ -65,7 +65,7 @@ def test_get_graden(sparql_endpoint):
 
 def test_get_niveaus(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(suggest.get_niveaus())
@@ -82,7 +82,7 @@ def test_get_niveaus(sparql_endpoint):
 
 def test_get_themas(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(suggest.get_themas())
@@ -103,7 +103,7 @@ def test_get_themas(sparql_endpoint):
 
 def test_get_children(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(suggest.get_children(
@@ -119,7 +119,7 @@ def test_get_children(sparql_endpoint):
 
 def test_get_related(sparql_endpoint):
     # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])
+    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
     results = list(
