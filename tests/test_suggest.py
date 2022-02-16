@@ -91,13 +91,11 @@ def test_get_themas(sparql_endpoint):
         "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
         "id": f"{Suggest.OND_NS}thema/nederlandse-taal",
         "label": "Nederlandse taal",
-        "child_count": 0,
     }
     assert results[1] == {
         "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
         "id": f"{suggest.OND_NS}thema/recht",
         "label": "recht",
-        "child_count": 0,
     }
 
 

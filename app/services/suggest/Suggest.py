@@ -68,7 +68,7 @@ GROUP BY ?id ?label ?definition
 GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
-SELECT DISTINCT ?id ?label ?definition ?child_count ?parent_id {{
+SELECT DISTINCT ?id ?label ?definition (0 AS ?child_count) ?parent_id {{
 WHERE {{
     BIND(URI('{collection}') AS ?collection)
     ?collection skos:memberList ?list .
