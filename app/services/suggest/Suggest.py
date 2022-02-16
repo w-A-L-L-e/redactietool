@@ -68,21 +68,17 @@ GROUP BY ?id ?label ?definition
 GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
-SELECT ?id ?label ?definition ?child_count ?parent_id {{
-    SELECT ?id ?label ?definition (count(?mid)-1 as ?position)
-    WHERE {{
-        BIND(URI('{collection}') AS ?collection)
-        ?collection skos:memberList/rdf:rest* ?mid .
-        ?mid rdf:rest* ?node .
-        ?node rdf:first ?id .
+SELECT DISTINCT ?id ?label ?definition ?child_count ?parent_id {{
+WHERE {{
+    BIND(URI('{collection}') AS ?collection)
+    ?collection skos:memberList ?list .
+    ?list stardog:list:member (?id ?index) .
 
-        ?id a skos:Concept;
-            skos:prefLabel ?label;
-            skos:definition ?definition .
-    }}
-
-    GROUP BY ?id ?label ?definition
-    ORDER BY ?position
+    ?id a skos:Concept;
+    skos:prefLabel ?label;
+    skos:definition ?definition .
+}}
+ORDER BY ?index
 }}
 """
 )
