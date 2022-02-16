@@ -80,23 +80,23 @@ def test_get_niveaus(sparql_endpoint):
     }
 
 
-def test_get_themas(sparql_endpoint):
-    # pylint: disable=unused-variable
-    endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
-    suggest = Suggest(TEST_ENDPOINT, "x", "y")
+# def test_get_themas(sparql_endpoint):
+#     # pylint: disable=unused-variable
+#     endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
+#     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
-    results = list(suggest.get_themas())
-    assert len(results) == 2
-    assert results[0] == {
-        "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
-        "id": f"{Suggest.OND_NS}thema/nederlandse-taal",
-        "label": "Nederlandse taal",
-    }
-    assert results[1] == {
-        "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
-        "id": f"{suggest.OND_NS}thema/recht",
-        "label": "recht",
-    }
+#     results = list(suggest.get_themas())
+#     assert len(results) == 2
+#     assert results[0] == {
+#         "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
+#         "id": f"{Suggest.OND_NS}thema/nederlandse-taal",
+#         "label": "Nederlandse taal",
+#     }
+#     assert results[1] == {
+#         "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
+#         "id": f"{suggest.OND_NS}thema/recht",
+#         "label": "recht",
+#     }
 
 
 def test_get_children(sparql_endpoint):
