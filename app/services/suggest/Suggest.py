@@ -69,13 +69,9 @@ GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
 SELECT ?id ?label ?definition ?child_count ?parent_id {{
-    SELECT ?id ?label ?definition
-    (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
+    SELECT ?id ?label ?definition (count(?mid)-1 as ?position)
     WHERE {{
         BIND(URI('{collection}') AS ?collection)
-
-        ?collection a skos:OrderedCollection .
-
         ?collection skos:memberList/rdf:rest* ?mid .
         ?mid rdf:rest* ?node .
         ?node rdf:first ?id .
@@ -83,12 +79,9 @@ SELECT ?id ?label ?definition ?child_count ?parent_id {{
         ?id a skos:Concept;
             skos:prefLabel ?label;
             skos:definition ?definition .
-
-        OPTIONAL {{ ?id skos:narrower ?child. }}
-        OPTIONAL {{ ?id skos:broader ?parent }}
     }}
 
-    GROUP BY ?node ?id ?label ?definition
+    GROUP BY ?id ?label ?definition
     ORDER BY ?position
 }}
 """
