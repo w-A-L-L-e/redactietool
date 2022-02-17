@@ -21,6 +21,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX str: <{EXT_NS}structuur/>
 PREFIX col: <{EXT_NS}collectie/>
 PREFIX ocol: <{OND_NS}collectie/>
+PREFIX stardog: <tag:stardog:api:>
 
 """
 
@@ -68,29 +69,17 @@ GROUP BY ?id ?label ?definition
 GET_SORTED_COLLECTION_QUERY = (
     PREFIX
     + """
-SELECT ?id ?label ?definition ?child_count ?parent_id {{
-    SELECT ?id ?label ?definition
-    (count(?mid)-1 as ?position) (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
-    WHERE {{
-        BIND(URI('{collection}') AS ?collection)
+SELECT DISTINCT ?id ?label ?definition (0 AS ?child_count) ?parent_id
+WHERE {{
+    BIND(URI('{collection}') AS ?collection)
+    ?collection skos:memberList ?list .
+    ?list stardog:list:member (?id ?index) .
 
-        ?collection a skos:OrderedCollection .
-
-        ?collection skos:memberList/rdf:rest* ?mid .
-        ?mid rdf:rest* ?node .
-        ?node rdf:first ?id .
-
-        ?id a skos:Concept;
-            skos:prefLabel ?label;
-            skos:definition ?definition .
-
-        OPTIONAL {{ ?id skos:narrower ?child. }}
-        OPTIONAL {{ ?id skos:broader ?parent }}
-    }}
-
-    GROUP BY ?node ?id ?label ?definition
-    ORDER BY ?position
+    ?id a skos:Concept;
+    skos:prefLabel ?label;
+    skos:definition ?definition .
 }}
+ORDER BY ?index
 """
 )
 
