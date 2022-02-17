@@ -159,7 +159,7 @@
           if(val.type == 'niveau'){
             // also here we should have the niveau.child_count from suggest lib
             // which will be there when we merge and we only add ones with count=0 here
-            if(!(val.label.includes("Secundair")||val.label.includes("Lager"))){
+            if(!(val.label.includes("secundair")||val.label.includes("lager"))){
               changed_niveaus.push({
                 'id': val.id,
                 'label': val.label,
@@ -173,8 +173,8 @@
               'label': val.label,
               'definition': val.definition
             })
-            if(val.label.includes("Secundair")) secundair_used = true;
-            if(val.label.includes("Lager")) lager_used = true;
+            if(val.label.includes("secundair")) secundair_used = true;
+            if(val.label.includes("lager")) lager_used = true;
           }
         }
 
@@ -198,7 +198,7 @@
 
         for(var n in this.niveaus){
           var niv = this.niveaus[n];
-          if(!(niv.label.includes("Secundair")||niv.label.includes("Lager"))){
+          if(!(niv.label.includes("secundair")||niv.label.includes("lager"))){
             this.value.push({
               'id': niv.id,
               'label': niv.label,
@@ -223,10 +223,10 @@
 
         for(var n in this.niveau_options){
           var niv = this.niveau_options[n];
-          if( niv.label.includes("Secundair") ){
+          if( niv.label.includes("secundair") ){
             this.secundair_niveau = JSON.parse(JSON.stringify(niv));
           }
-          else if( niv.label.includes("Lager") ){
+          else if( niv.label.includes("lager") ){
             this.lager_niveau = JSON.parse(JSON.stringify(niv));
           }
           else{

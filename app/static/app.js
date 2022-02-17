@@ -243,7 +243,6 @@ function collapseEmptyTextarea(area_id, uncollapsable=false){
   if( ta && ta.innerHTML.length == 0){
     if(uncollapsable){
       ta.parentNode.parentNode.style.display="none";
-      console.log("found empty area", area_id, "TODO: change folded/unfolded icon...");
     }
     else{
       ta.parentNode.parentNode.parentNode.style.display="none";

@@ -190,16 +190,16 @@
         var showSecundair = false;
         for(var n in this.niveaus){
           var niv = this.niveaus[n];
-          if(niv.label.includes("Secundair")) showSecundair = true;
-          if(niv.label.includes("Lager")) showLager = true;
+          if(niv.label.includes("secundair")) showSecundair = true;
+          if(niv.label.includes("lager")) showLager = true;
         }
 
         this.graden_filtered = [];
         for(var i in this.options){
           var graad = this.options[i];
           if(
-              (showSecundair && graad.label.includes("Secundair")) ||
-              (showLager && graad.label.includes("Lager"))
+              (showSecundair && graad.label.includes("secundair")) ||
+              (showLager && graad.label.includes("lager"))
             ){
 
             this.graden_filtered.push(graad);
