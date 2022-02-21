@@ -31,7 +31,7 @@ GET_NIVEAUS = (
 SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
 WHERE {{
     {{ col:niveau skos:member ?id.
-       FILTER (?id != str:basisonderwijs)
+       FILTER (?id NOT IN ( str:basisonderwijs ) )
     }} UNION {{ col:subniveau skos:member ?id. }}
 
     ?id a skos:Concept;
@@ -40,7 +40,10 @@ WHERE {{
 
     ?c skos:member ?id; skos:prefLabel ?collection.
 
-    OPTIONAL {{ ?id skos:narrower ?child. }}
+    OPTIONAL {{ 
+        ?id skos:narrower ?child. 
+        col:graad skos:member ?child  
+    }}
     OPTIONAL {{ ?id skos:broader ?parent }}
 }}
 GROUP BY ?id ?label ?definition ?collection
