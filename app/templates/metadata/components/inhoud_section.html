@@ -1,3 +1,4 @@
+{% from 'metadata/components/textarea_readonly.html' import textarea_readonly%}
 
   <div class="columns">
     <div class="column">
@@ -15,105 +16,20 @@
       <hr/>
 
       <div id="inhoud_section">
-        <article class="panel">
-           <p class="panel-heading">
-             Hoofdbeschrijving
-           </p>
-           <div class="panel-block">
-             <p class="control">
-               <textarea name="originele_hoofdbeschrijving"
-                 id="originele_hoofdbeschrijving"
-                 class="textarea is-hover" 
-                 placeholder="Originele hoofdbeschrijving"
-                 cols="45"
-                 rows="5" readonly>{{description}}</textarea>
-             </p>
 
-           </div>
-        </article>
 
-        <article class="panel">
-          <p class="panel-heading">
-            Uitgebreide beschrijving
-          </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="originele_uitgebreide_hoofdbeschrijving"
-                id="originele_uitgebreide_hoofdbeschrijving"
-                class="textarea is-hover" 
-                placeholder="Originele uitgebreide hoofdebeschrijving"
-                cols="45"
-                rows="5" readonly>{{dc_description_lang}}</textarea>
-            </p>
-          </div>
-        </article>
+        {{- textarea_readonly('Hoofdbeschrijving', 'originele_hoofdbeschrijving', description) }}
+        {{- textarea_readonly(
+          'Uitgebreide beschrijving', 
+          'originele_uitgebreide_hoofdbeschrijving', 
+          dc_description_lang) 
+        }}
+        {{- textarea_readonly('Ondertitels', 'ondertitels', ondertitels) }}
+        {{- textarea_readonly('Programmabeschrijving', 'programma_beschrijving', programma_beschrijving) }}
+        {{- textarea_readonly('Cast', 'cast', cast) }}
+        {{- textarea_readonly('Transcriptie', 'transcriptie', transcriptie) }}
 
-        <article class="panel">
-          <p class="panel-heading">
-            Ondertitels
-          </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="ondertitels"
-                id="ondertitels"
-                class="textarea is-hover" 
-                placeholder="Ondertitles (read-only)" 
-                cols="45"
-                rows="5" readonly>{{ondertitels}}</textarea>
-            </p>
-          </div>
-        </article>
-
-        <article class="panel">
-          <p class="panel-heading">
-            Programmabeschrijving
-          </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="programma_beschrijving"
-                id="programma_beschrijving"
-                class="textarea is-hover" 
-                placeholder="Programma omschrijving (read-only)" 
-                cols="45"
-                rows="5" readonly>{{programma_beschrijving}}</textarea>
-            </p>
-          </div>
-        </article>
-
-        <article class="panel">
-          <p class="panel-heading">
-            Cast 
-          </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="cast"
-                id="cast"
-                class="textarea is-hover" 
-                placeholder="Cast (read-only)" 
-                cols="45"
-                rows="5" readonly>{{cast}}</textarea>
-            </p>
-          </div>
-        </article>
-
-        <article class="panel">
-          <p class="panel-heading">
-            Transcriptie
-          </p>
-          <div class="panel-block">
-            <p class="control">
-              <textarea name="transcriptie"
-                id="transcriptie"
-                class="textarea is-hover" 
-                placeholder="Transcriptie (read-only)" 
-                cols="45"
-                rows="5" readonly>{{transcriptie}}</textarea>
-            </p>
-
-          </div>
-        </article>
-
-        <!-- deze is een editable panel en in toekomst wss een rich text edit indien nog gewenst -->
+       
         <article class="panel">
           <p class="panel-heading">
             Beschrijving Het Archief voor Onderwijs

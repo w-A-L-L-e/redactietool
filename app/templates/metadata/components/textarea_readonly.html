@@ -1,0 +1,19 @@
+{%- macro textarea_readonly(label, name, value) %}
+ <article class="panel">
+    <p class="panel-heading">
+    {{label}}
+    </p>
+    <div class="panel-block">
+      <p class="control">
+      <textarea
+          name="{{name}}"
+          id="{{name}}"
+          class="textarea is-hover" 
+          placeholder="{{label}}"
+          cols="45"
+          rows="5" readonly>{{value}}</textarea>
+      </p>
+
+    </div>
+ </article>
+{%- endmacro %}
