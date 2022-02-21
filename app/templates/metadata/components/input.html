@@ -1,0 +1,19 @@
+{%- macro input(label, name, value) %}
+<div class="field is-horizontal" id="{{name}}">
+  <div class="field-label is-normal">
+    <label class="label">{{label}}</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <input name="{{name}}" 
+          class="input is-small" 
+          type="text" 
+          placeholder="{{label}}"
+          value="{{value}}">
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro %}
+
