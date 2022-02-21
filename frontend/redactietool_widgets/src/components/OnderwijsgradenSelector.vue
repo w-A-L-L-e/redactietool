@@ -123,21 +123,18 @@
               if(this.metadata.item_onderwijsgraden_legacy){
                 console.log("legacy fallback voor onderwijsgraden (lom_typicalagerange)");
                 var values = this.metadata.item_onderwijsgraden_legacy;
-                var item = {};
                 for(var k in values){
                   var definition = values[k]['value'];
-                  item['definition'] = definition;
-                  
-                  //get id corresponding to def
+                  // match on definition
                   for( var i in this.options ){
                     option_item = this.options[i];
-                    if( item['definition'] == option_item['definition'] ){
-                      item['id'] = option_item['id'];
-                      item['label'] = option_item['label']
+                    if( definition == option_item['definition'] ){
                       this.value.push( {
-                        id: item['id'],
-                        label: item['label'],
-                        definition: item['definition']
+                        'id': option_item['id'],
+                        'label': option_item['label'],
+                        'definition': option_item['definition'],
+                        'child_count': option_item['child_count'],
+                        'parent_id': option_item['parent_id']
                       });
                       break;
                     }
@@ -149,14 +146,16 @@
               console.log("loading new onderwijsgraden from (lom_onderwijsgraad)...");
               for(var o in onderwijsgraden){
                 var item_id = onderwijsgraden[o]['value'];
-                //get label and definition
+                // match on item_id
                 for(var j in this.options ){
                   option_item = this.options[j];
                   if( item_id == option_item['id'] ){
                     this.value.push({
                       'id': item_id,
                       'label': option_item['label'],
-                      'definition': option_item['definition']
+                      'definition': option_item['definition'],
+                      'child_count': option_item['child_count'],
+                      'parent_id': option_item['parent_id']
                     });
                     break;
                   }
@@ -174,7 +173,7 @@
     },
     methods: {
       removeGraad(graad){
-        // todo give this warning if vakken are selected: 
+        // TODO: give this warning if vakken are selected: 
         // “Opgelet: indien je deze waarde verwijdert, zijn mogelijks een aantal vakken niet meer relevant
         console.log("removed graad, check vakken values and give warning here=", graad);
       },
@@ -183,25 +182,16 @@
         this.$root.$emit('graden_changed', value);
       },
       filterGraden(){
-        // check niveau and only show related graden
-        // TODO: ask miel for a call to do this without hardcoding
-        // We need the parent id on niveaus or something...
-        var showLager = false;
-        var showSecundair = false;
+        var parents={};
         for(var n in this.niveaus){
           var niv = this.niveaus[n];
-          if(niv.label.includes("secundair")) showSecundair = true;
-          if(niv.label.includes("lager")) showLager = true;
+          parents[niv.id]='niveau_selected';
         }
 
         this.graden_filtered = [];
         for(var i in this.options){
           var graad = this.options[i];
-          if(
-              (showSecundair && graad.label.includes("secundair")) ||
-              (showLager && graad.label.includes("lager"))
-            ){
-
+          if( parents[graad['parent_id']] == 'niveau_selected' ){
             this.graden_filtered.push(graad);
           }
         }

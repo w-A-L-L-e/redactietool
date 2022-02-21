@@ -127,7 +127,10 @@
                       this.value.push({
                         'id': item['id'],
                         'label': item['label'],
-                        'definition': item['definition']
+                        'definition': item['definition'],
+                        'collection': item['collection'],
+                        'child_count': item['child_count'],
+                        'parent_id': item['parent_id']
                       });
                       break;
                     }
@@ -148,7 +151,10 @@
                     this.value.push({
                       'id': item['id'],
                       'label': item['label'],
-                      'definition': item['definition']
+                      'definition': item['definition'],
+                      'collection': item['collection'],
+                      'child_count': item['child_count'],
+                      'parent_id': item['parent_id']
                     });
                     break;
                   }

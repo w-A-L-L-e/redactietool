@@ -78,8 +78,6 @@
         graden: [],
         niveau_options: [],
         graden_options: [],
-        secundair_niveau: {},
-        lager_niveau: {},
         loading: true,
         show_vakken_warning: false,
         vakken_selected: false
@@ -139,6 +137,11 @@
         ev.preventDefault();
         this.show_vakken_warning = false;
       },
+      isLeaf(val){
+        // Kleuteronderwijs has 3 unknown children, return as leaf instead!
+        if(val.label.toLowerCase().includes("kleuter")) return true;
+        return val.child_count == 0;
+      },
       updateValue(values){
         //strictly this is not necessary but it's nice for debugging later:
         this.json_value = JSON.stringify(values)
@@ -147,43 +150,44 @@
         // and emit a change event for each
         var changed_graden = [];
         var changed_niveaus = [];
-
-        // TODO: later we need suggest lib from Miel to return parent_id on graden
-        // this wil make this simpler and more robust for future
-        // instead we can then use an array of ids of the parent to append to niveaus.
-        var secundair_used = false;
-        var lager_used = false;
+        var parents = {}
 
         for( var v in values ){
           var val = values[v];
-          if(val.type == 'niveau'){
-            // also here we should have the niveau.child_count from suggest lib
-            // which will be there when we merge and we only add ones with count=0 here
-            if(!(val.label.includes("secundair")||val.label.includes("lager"))){
+          if(val.type == 'niveau'){ 
+            if(this.isLeaf(val)){
               changed_niveaus.push({
                 'id': val.id,
-                'label': val.label,
-                'definition': val.definition
+                'label': val['label'],
+                'definition': val['definition'],
+                'collection': val['collection'],
+                'child_count': val['child_count'],
+                'parent_id': val['parent_id']
               })
+              if(val['parent_id']) parents[val['parent_id']] = val;
             }
           }
+
+          // graad means it always has a parent_id and is a leaf also
           if(val.type == 'graad'){
             changed_graden.push({
               'id': val.id,
-              'label': val.label,
-              'definition': val.definition
+              'label': val['label'],
+              'definition': val['definition'],
+              'child_count': val['child_count'],
+              'parent_id': val['parent_id']
             })
-            if(val.label.includes("secundair")) secundair_used = true;
-            if(val.label.includes("lager")) lager_used = true;
+            if(val['parent_id']) parents[val['parent_id']] = val;
           }
         }
 
-        // add secundair or lager niveau in case used=true
-        if( lager_used ){
-          changed_niveaus.push( this.lager_niveau );
-        }
-        if( secundair_used ){
-          changed_niveaus.push( this.secundair_niveau );
+        for( var p in parents){
+          for( var n in this.niveau_options){
+            var niv = this.niveau_options[n];
+            if(niv.id==p){
+              changed_niveaus.push(niv);
+            }
+          } 
         }
         
         var data = {
@@ -198,11 +202,14 @@
 
         for(var n in this.niveaus){
           var niv = this.niveaus[n];
-          if(!(niv.label.includes("secundair")||niv.label.includes("lager"))){
+          if(this.isLeaf(niv)){
             this.value.push({
               'id': niv.id,
-              'label': niv.label,
-              'definition': niv.definition,
+              'label': niv['label'],
+              'definition': niv['definition'],
+              'collection': niv['collection'],
+              'child_count': niv['child_count'],
+              'parent_id': niv['parent_id'],
               'type': 'niveau'
             })
           }
@@ -212,8 +219,10 @@
           var grd = this.graden[g];
           this.value.push({
             'id': grd.id,
-            'label': grd.label,
-            'definition': grd.definition,
+            'label': grd['label'],
+            'definition': grd['definition'],
+            'child_count': grd['child_count'],
+            'parent_id': grd['parent_id'],
             'type': 'graad'
           })
         }
@@ -223,17 +232,14 @@
 
         for(var n in this.niveau_options){
           var niv = this.niveau_options[n];
-          if( niv.label.includes("secundair") ){
-            this.secundair_niveau = JSON.parse(JSON.stringify(niv));
-          }
-          else if( niv.label.includes("lager") ){
-            this.lager_niveau = JSON.parse(JSON.stringify(niv));
-          }
-          else{
+          if(this.isLeaf(niv)){
             this.options.push({
               'id': niv.id,
-              'label': niv.label,
-              'definition': niv.definition,
+              'label': niv['label'],
+              'definition': niv['definition'],
+              'collection': niv['collection'],
+              'child_count': niv['child_count'],
+              'parent_id': niv['parent_id'],
               'type': 'niveau'
             })
           }
@@ -243,8 +249,10 @@
           var grd = this.graden_options[g];
           this.options.push({
             'id': grd.id,
-            'label': grd.label,
-            'definition': grd.definition,
+            'label': grd['label'],
+            'definition': grd['definition'],
+            'child_count': grd['child_count'],
+            'parent_id': grd['parent_id'],
             'type': 'graad'
           })
         }
