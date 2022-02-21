@@ -40,9 +40,9 @@ WHERE {{
 
     ?c skos:member ?id; skos:prefLabel ?collection.
 
-    OPTIONAL {{ 
-        ?id skos:narrower ?child. 
-        col:graad skos:member ?child  
+    OPTIONAL {{
+        ?id skos:narrower ?child.
+        col:graad skos:member ?child
     }}
     OPTIONAL {{ ?id skos:broader ?parent }}
 }}

@@ -30,7 +30,8 @@
              <!-- button class="delete" v-on:click="closeVakkenWarning($event)"></button> -->
           </p>
           
-          <!-- this is actually not needed here, but nice to have for debugging -->
+          <!-- not necessary as we split up and populate graden+niveaus seperately,
+          but keeping it as we might evolve into one field with tree structure in future-->
           <textarea name="lom_onderwijs_combo" v-model="json_value" id="onderwijs_json_value"></textarea>
 
 
@@ -138,8 +139,6 @@
         this.show_vakken_warning = false;
       },
       isLeaf(val){
-        // Kleuteronderwijs has 3 unknown children, return as leaf instead!
-        if(val.label.toLowerCase().includes("kleuter")) return true;
         return val.child_count == 0;
       },
       updateValue(values){
