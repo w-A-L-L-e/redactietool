@@ -64,7 +64,26 @@ Available make commands:
 
 ```
 
+
 1. Start by running make install which installs the pip packages and sets up the environment.
+First make sure you can also fetch the VIAA/Meemoo specific packages.
+This is done on macOS by editing the pip configuration file and then running make install:
+
+```
+$ vi .config/pip/pip.conf
+
+insert following:
+[global]
+index = http://meemoo_mvn_server:PORT/repository/pypi-all/pypi
+index-url = http://meemoo_mvn_server:PORT/repository/pypi-all/simple
+trusted-host = meemoo_mvn_server 
+
+
+$ make install
+```
+
+This creates a virtual env and installs all packages.
+
 
 2. Start the server in debug mode like so:
 
