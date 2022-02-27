@@ -48,7 +48,7 @@ def secure_unescape(html_content):
     return safe_content
 
 
-def cleanup_markdown(self, markdown_text):
+def cleanup_markdown(markdown_text):
     markdown_text = markdown_text.replace("&#13;\n", "").replace("\r", "")
 
     return markdown_text
