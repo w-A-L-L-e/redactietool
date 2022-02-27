@@ -32,7 +32,10 @@ SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPL
 WHERE {{
     {{ col:niveau skos:member ?id.
        FILTER (?id NOT IN ( str:basisonderwijs ) )
-    }} UNION {{ col:subniveau skos:member ?id. }}
+    }} UNION {{ 
+        col:subniveau skos:member ?id.
+        FILTER (?id NOT IN ( str:secundair-volwassenenonderwijs, str:basiseducatie ) )
+    }}
 
     ?id a skos:Concept;
         skos:prefLabel ?label;
