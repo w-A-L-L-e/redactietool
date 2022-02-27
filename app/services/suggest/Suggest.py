@@ -234,7 +234,8 @@ class Suggest:
         """Get a collection members by collection id."""
 
         if not is_valid_uri(collection):
-            raise ValueError("The id {} is not a valid URI.".format(collection))
+            raise ValueError(
+                "The id {} is not a valid URI.".format(collection))
 
         query = GET_COLLECTION_QUERY
         if is_sorted:

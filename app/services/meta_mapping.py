@@ -11,12 +11,11 @@
 #
 import json
 import os
-import markdown2
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
 from app.services.subtitle_files import get_property, get_array_property, get_md_array
 from app.services.meta_sidecar import MetaSidecar
-from markupsafe import escape
+from app.services.input_escaping import markdown_to_html, cleanup_markdown, escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -144,61 +143,6 @@ class MetaMapping:
 
         return mam_data
 
-    def unescape_tag(self, content, tag):
-        content = content.replace(f'&lt;{tag}&gt;', f'<{tag}>')
-        content = content.replace(f'&lt;/{tag}&gt;', f'</{tag}>')
-        return content
-
-    def secure_unescape(self, html_content):
-        safe_content = str(escape(html_content))
-        safe_content = self.unescape_tag(safe_content, 'p')
-        safe_content = self.unescape_tag(safe_content, 'h2')
-        safe_content = self.unescape_tag(safe_content, 'br')
-        safe_content = self.unescape_tag(safe_content, 'strong')
-        safe_content = self.unescape_tag(safe_content, 'em')
-        safe_content = self.unescape_tag(safe_content, 'u')
-
-        # editor also supports lists
-        safe_content = self.unescape_tag(safe_content, 'ol')
-        safe_content = self.unescape_tag(safe_content, 'ul')
-        safe_content = self.unescape_tag(safe_content, 'li')
-
-        # sanitize a href tags and add target = _blank
-        safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
-
-        # href tag escaping in case of html edit mode:
-        # safe_content = safe_content.replace(
-        #     '&#34; target=&#34;_blank&#34;&gt;',
-        #     '" target="_blank">'
-        # )
-
-        # href tags in markdown mode:
-        safe_content = safe_content.replace("&lt;a href=&#34;", '<a href="')
-        safe_content = safe_content.replace(
-            '&#34;&gt;',
-            '" target="_blank">'
-        )
-        safe_content = safe_content.replace('&lt;/a&gt;', '</a>')
-
-        # allow regular < and > to still work
-        safe_content = safe_content.replace("&amp;lt;", "&lt;")
-        safe_content = safe_content.replace("&amp;gt;", "&gt;")
-        safe_content = safe_content.replace("&lt;br&gt;", "<br>")
-        safe_content = safe_content.replace("&amp;", "&")
-
-        return safe_content
-
-    def markdown_to_html(self, markdown_content):
-        markdown_text = self.cleanup_markdown(markdown_content)
-        html_content = markdown2.markdown(markdown_text)
-        html_content = html_content.replace("\n\n", "<br>")
-        html_content = html_content.replace("\n", "")
-        return self.secure_unescape(html_content)
-
-    def cleanup_markdown(self, markdown_text):
-        markdown_text = markdown_text.replace("&#13;\n", "").replace("\r", "")
-        return markdown_text
-
     def frontend_metadata(self, pid, department, mam_data):
         item_type = mam_data.get('type')
         item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
@@ -254,7 +198,7 @@ class MetaMapping:
             item_type = item_type_lom[0]['value']
 
         dcterms_abstract = get_property(mam_data, 'dcterms_abstract')
-        avo_beschrijving = self.markdown_to_html(dcterms_abstract)
+        avo_beschrijving = markdown_to_html(dcterms_abstract)
 
         return {
             'token': token,
@@ -361,7 +305,7 @@ class MetaMapping:
         # deze nog eventjes un-escaped
         mam_data = self.set_property(
             mam_data, 'dcterms_abstract',
-            self.cleanup_markdown(request.form.get('avo_beschrijving'))
+            cleanup_markdown(request.form.get('avo_beschrijving'))
         )
 
         # array value serie in subsection dc_titles

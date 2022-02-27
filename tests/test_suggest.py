@@ -104,7 +104,8 @@ def test_get_children(sparql_endpoint):
     endpoint = sparql_endpoint(TEST_ENDPOINT, ["tests/fixture_data/skos.ttl"])  # noqa: F841
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
-    results = list(suggest.get_children([f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
+    results = list(suggest.get_children(
+        [f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
     assert len(results) == 2
     assert results[0] == {
         "definition": "Lager 1ste graad",
