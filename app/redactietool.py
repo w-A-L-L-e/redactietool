@@ -137,6 +137,11 @@ def login():
 # ========================== SAML Authentication ==============================
 def init_saml_auth(req):
     auth = OneLogin_Saml2_Auth(req, custom_base_path=app.config['SAML_PATH'])
+
+    # this is a possible replacement for settings.json to be tested (not sure how certs will load with this) :
+    # idp_data = OneLogin_Saml2_IdPMetadataParser.parse_remote(https://example.com/metadatas, entity_id='idp_entity_id')
+    # idp_data = OneLogin_Saml2_IdPMetadataParser.parse_remote('https://example.com/auth/saml2/idp/metadata', timeout=5)
+    # auth = OneLogin_Saml2_Auth(req, old_settings=idp_data)
     return auth
 
 
