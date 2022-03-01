@@ -30,7 +30,7 @@ Ondertitels toevoegen
       <div class="field">
         <label class="label">Geef een pid in</label>
         <div class="control">
-          <input class="input" type="text" name="pid" placeholder="Item pid" autofocus/>
+          <input id="pid_search" class="input" type="text" name="pid" placeholder="Item pid" autofocus/>
         </div>
       </div>
       <input type="hidden" value="yes" name="redirect_subtitles" id="redirect_subtitles"/>
@@ -39,6 +39,7 @@ Ondertitels toevoegen
       
       <div class="buttons pt-2">
         <input 
+          id="btn_metadata_bewerken"
           name="action"
           class="button is-primary is-pulled-left"
           type="submit" 
@@ -47,6 +48,7 @@ Ondertitels toevoegen
         />
 
         <input 
+          id="btn_ondertitels_toevoegen"
           name="action"
           class="button is-primary is-pulled-right ml-4"
           type="submit" 

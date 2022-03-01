@@ -40,10 +40,36 @@ function newUploadClicked(ref){
   ref.className += ' disabled';
 }
 
+function restoreButton(btn_id, btn_label){
+  console.log("restoring button=", btn_id);
+  btn = get_id(btn_id);
+  if(btn){
+    btn.disabled=false;
+    btn.value=btn_label;
+  }
+}
+
 function clearButtonLoadingState(){
-  // TODO: put all buttons back in original state 
-  // this is similar to hideEmptyTitles but instead we modify
-  // a class and/or replace the button.value back
+  restoreButton("btn_metadata_bewerken", "Metadata bewerken");
+  restoreButton("btn_ondertitels_toevoegen", "Ondertitels toevoegen");
+}
+
+function resetSearch(){
+  clearButtonLoadingState();
+
+  setTimeout(function(){
+    search_input = get_id("pid_search");
+    if(search_input){ 
+        console.log("clearing pid_search!");
+        search_input.value = "";
+    }
+
+    // only do this if some hidden input is not set
+    return;
+    error_div = get_id("validation_errors");
+    if(error_div) error_div.style.display = "none";
+  }, 200);
+
 }
 
 
@@ -435,13 +461,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  console.log("dom ready event fired!");
   collapseEmptyTextareas();
   hideEmptyTitles();
   updateProductionSection();
   closeSection("upload_info_section");
   autoCloseAlert("alert_box");
   autoCloseAlert("data_saved_alert_box");
-  clearButtonLoadingState();
   checkDateInputs(); 
+  resetSearch();
 });
 
+
+// force dom ready with back button
+window.addEventListener('unload', function(){});
