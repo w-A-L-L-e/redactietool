@@ -63,12 +63,7 @@ function resetSearch(){
         console.log("clearing pid_search!");
         search_input.value = "";
     }
-
-    // only do this if some hidden input is not set
-    return;
-    error_div = get_id("validation_errors");
-    if(error_div) error_div.style.display = "none";
-  }, 200);
+  }, 50);
 
 }
 

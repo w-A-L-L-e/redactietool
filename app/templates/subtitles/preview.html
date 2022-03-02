@@ -77,9 +77,10 @@ Ondertitels valideren
         (api mode is disabled until mediahaven call is fixed to upload directly)
         option value="api" with label = Mediahaven API ...
       </select>
+      include 'includes/form_errors.html'
       -->
 
-      {% include 'includes/form_errors.html' %}
+      {% include 'includes/flash_errors.html' %}
 
       <div class="field is-grouped is-pulled-right">
         <div class="control">

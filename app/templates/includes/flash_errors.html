@@ -1,0 +1,16 @@
+{% with errors = get_flashed_messages() %}
+
+{% if errors %}
+  {%- for msg in errors %}
+  <span 
+    id="validation_errors" 
+    class="has-text-danger-dark	is-pulled-right animate-errors">
+      {{ msg }}
+  </span>
+  {% endfor -%}
+  <br/>
+{% else %}
+  <br/>
+{% endif %}
+
+{% endwith %}

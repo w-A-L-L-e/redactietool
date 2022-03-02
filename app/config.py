@@ -25,7 +25,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'somesecret_key_here234232425223faifaf'
+    # SECRET_KEY = 'somesecret_key_here234232425223faifaf'
     UPLOAD_FOLDER = 'subtitle_uploads'
 
 
@@ -36,7 +36,7 @@ class PrdConfig(Config):
 
 class DevConfig(Config):
     DEVELOPMENT = True
-    DEBUG = True
+    DEBUG = False
 
 
 class TestConfig(Config):

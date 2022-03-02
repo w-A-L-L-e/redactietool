@@ -88,14 +88,15 @@ def load_user_from_request(request):
     if check_saml_session():
         user.save_saml_username(session.get('samlUserdata'))
     else:
-        # and throw away invalid or timed out session
-        session.clear()
         token = request.form.get('token', None)
         if not token:
             token = request.args.get('token', None)
 
         if token:
             user.save_jwt_username(token)
+        else:
+            # throw away invalid or timed out session
+            session.clear()
 
     return user
 
@@ -276,9 +277,7 @@ def search_media():
     else:
         token = request.args.get('token')
 
-    validation_errors = request.args.get('validation_errors')
     logger.info('search_media')
-
     return render_template('search_media.html', **locals())
 
 
@@ -310,7 +309,6 @@ def get_upload():
     token = request.args.get('token')
     pid = request.args.get('pid').strip()
     department = request.args.get('department')
-    errors = request.args.get('validation_errors')
 
     validation_error = validate_input(pid, department)
     if validation_error:
@@ -342,8 +340,8 @@ def get_upload():
         original_cp=get_property(mam_data, 'Original_CP'),
         # for v2 mam_data['Internal']['PathToVideo']
         video_url=mam_data.get('videoPath'),
-        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets'),
-        validation_errors=errors)
+        flowplayer_token=os.environ.get('FLOWPLAYER_TOKEN', 'set_in_secrets')
+    )
 
 
 @app.route('/upload', methods=['POST'])
