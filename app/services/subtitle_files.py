@@ -4,7 +4,7 @@
 #
 #  app/subtitle_files.py
 #
-#   description: methods to create temporary srt, vtt and xml files
+#   methods to create temporary srt, vtt and xml files
 #   used for sending to mediahaven and streaming in the flowplayer preview.html
 #   we also save the subtitle xml sidecar here for ftp uploading
 #

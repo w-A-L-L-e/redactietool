@@ -4,7 +4,7 @@
 #
 #  app/srt_converter.py
 #
-#   description: Uses webvtt wrappers to do string with
+#   Uses webvtt wrappers to do string with
 #   subtitles in srt format into webvtt format
 #
 

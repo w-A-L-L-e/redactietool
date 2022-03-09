@@ -192,12 +192,6 @@ class XMLSidecar:
         return xml_data
 
     def subtitle_sidecar(self, metadata, tp):
-        TESTBEELD_PERM_ID = os.environ.get(
-            'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
-        ONDERWIJS_PERM_ID = os.environ.get(
-            'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
-        ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
-
         cp_id = get_property(metadata, 'CP_id')
         cp = get_property(metadata, 'CP')
         xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
@@ -215,17 +209,17 @@ class XMLSidecar:
             root, '{%s}RightsManagement' % MHS_NS)  # of Structural?
         permissions = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
         etree.SubElement(permissions, '{%s}Read' %
-                         MH_NS).text = TESTBEELD_PERM_ID
+                         MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(permissions, '{%s}Read' %
-                         MH_NS).text = ONDERWIJS_PERM_ID
-        etree.SubElement(permissions, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
+                         MH_NS).text = self.ONDERWIJS_PERM_ID
+        etree.SubElement(permissions, '{%s}Read' % MH_NS).text = self.ADMIN_PERM_ID
         etree.SubElement(permissions, '{%s}Write' %
-                         MH_NS).text = TESTBEELD_PERM_ID
-        etree.SubElement(permissions, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
+                         MH_NS).text = self.TESTBEELD_PERM_ID
+        etree.SubElement(permissions, '{%s}Write' % MH_NS).text = self.ADMIN_PERM_ID
         etree.SubElement(permissions, '{%s}Export' %
-                         MH_NS).text = TESTBEELD_PERM_ID
+                         MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(permissions, '{%s}Export' %
-                         MH_NS).text = ADMIN_PERM_ID
+                         MH_NS).text = self.ADMIN_PERM_ID
 
         mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
 

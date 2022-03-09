@@ -5,7 +5,7 @@
 #
 #  app/services/mh_properties.py
 #
-#  Setting, getting properties and array properties in v1 json of Mediahaven.
+#   Setting, getting properties and array properties in v1 json of Mediahaven.
 #
 
 import json
