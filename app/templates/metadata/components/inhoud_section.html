@@ -80,20 +80,22 @@
   var quill = new Quill('#redactietool-richtext-editor', {
     modules: {
       toolbar: [
-        [{ header: [2, false] }],
+        // [{ header: [2, false] }],
         // ['bold', 'italic', 'underline'],
         ['bold', 'italic'], 
-        [{'list': 'ordered'}, {'list': 'bullet'}, {'link': 1}]
+        [{'list': 'ordered'}, {'list': 'bullet'}, {'link': 1}],
+        ['clean']
       ]
     },
-    // formats: ['header', 'bold', 'italic', 'underline', 'link', 'list'], //markdown has no undrline
-    formats: ['header', 'bold', 'italic', 'link', 'list'],
+    // markdown has no undrline and header also not supported in avo
+    // formats: ['header', 'bold', 'italic', 'underline', 'link', 'list'], 
+    formats: ['bold', 'italic', 'link', 'list'],
     bounds: '#richtext_bounds',
     placeholder: 'AVO beschrijving',
     theme: 'snow'
   });
 
-  //only plaintext
+  //only plaintext when pasting
   quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
     let ops = []
     delta.ops.forEach(op => {
@@ -107,7 +109,7 @@
     return delta
   })
 
-  // only nodes
+  // only supported nodes when pasting
   // quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
   // delta.ops = delta.ops.map(op => {
   //   return {
