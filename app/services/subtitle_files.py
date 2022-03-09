@@ -15,6 +15,7 @@ import webvtt
 import requests
 
 from app.services.srt_converter import convert_srt
+from app.services.meta_sidecar import get_property, sidecar_root
 from werkzeug.utils import secure_filename
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
@@ -103,72 +104,6 @@ def move_subtitle(upload_folder, tp):
     if not os.path.exists(new_path):
         os.rename(orig_path, new_path)
     return new_filename
-
-
-def get_property(mam_data, attribute):
-    props = mam_data.get('mdProperties', [])
-    result = ''
-    for prop in props:
-        if prop.get('attribute') == attribute:
-            return prop.get('value', '')
-
-    return result
-
-
-def get_array_property(mam_data, attribute, array_attribute):
-    props = mam_data.get('mdProperties', [])
-    result = ''
-    for prop in props:
-        if prop.get('attribute') == attribute:
-            array_values = prop.get('value', '')
-            for att in array_values:
-                if att.get('attribute') == array_attribute:
-                    return att.get('value', '')
-
-    return result
-
-
-def get_md_array(mam_data, attribute, legacy_fallback=False):
-    props = mam_data.get('mdProperties', [])
-    for prop in props:
-        if prop.get('attribute') == attribute:
-            return prop.get('value', [])
-
-    if legacy_fallback:
-        return {'show_legacy': True}
-    else:
-        return []
-
-
-def sidecar_root():
-    MH_NS = 'https://zeticon.mediahaven.com/metadata/20.3/mh/'
-    MHS_NS = 'https://zeticon.mediahaven.com/metadata/20.3/mhs/'
-    XSI_NS = 'http://www.w3.org/2001/XMLSchema-instance'  # version="20.3"
-
-    schema_loc = etree.QName(
-        "http://www.w3.org/2001/XMLSchema-instance", "schemaLocation")
-    zeticon_mhs = 'https://zeticon.mediahaven.com/metadata/20.3/mhs/'
-    zeticon_mhs_xsd = 'https://zeticon.mediahaven.com/metadata/20.3/mhs.xsd'
-    zeticon_mh = 'https://zeticon.mediahaven.com/metadata/20.3/mh/'
-    zeticon_mh_xsd = 'https://zeticon.mediahaven.com/metadata/20.3/mh.xsd'
-    XSI_LOC = f"{zeticon_mhs} {zeticon_mhs_xsd} {zeticon_mh} {zeticon_mh_xsd}"
-
-    NSMAP = {
-        'mh': MH_NS,
-        'mhs': MHS_NS,
-        'xsi': XSI_NS
-    }
-
-    root = etree.Element(
-        "{%s}Sidecar" % MHS_NS,
-        {
-            'version': '20.3',
-            schema_loc: XSI_LOC
-        },
-        nsmap=NSMAP
-    )
-
-    return root, MH_NS, MHS_NS, XSI_NS
 
 
 def save_sidecar_xml(upload_folder, metadata, tp):

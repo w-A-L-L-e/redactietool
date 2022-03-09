@@ -7,14 +7,18 @@
 #
 #   Do mapping between redactietool form and mh target data for saving changes.
 #   Similarly load json data from MediahavenApi and populate form back.
-#   it also has a member to create the xml sidecar data by using the MetaSidecar class
+#   it also has a member to create the xml sidecar data by using the
+#   MetaSidecar class
 #
+
 import json
 import os
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from app.services.subtitle_files import get_property, get_array_property, get_md_array
-from app.services.meta_sidecar import MetaSidecar
+from app.services.meta_sidecar import (get_property, set_property,
+                                       get_md_array,
+                                       get_array_property, set_array_property,
+                                       set_json_array_property, MetaSidecar)
 from app.services.input_escaping import markdown_to_html, cleanup_markdown, escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
@@ -50,99 +54,6 @@ class MetaMapping:
             'Persagentschap', 'Publisher'
         ]
 
-    def set_property(self, mam_data, propkey, propvalue):
-        for prop in mam_data['mdProperties']:
-            if prop.get('attribute') == propkey:
-                prop['value'] = propvalue
-                return mam_data
-
-        # if we get here. we need to add a new property as it was cleared and
-        # is not present anymore
-        mam_data['mdProperties'].append({
-            'value': propvalue,
-            'attribute': propkey,
-            'dottedKey': None
-        })
-
-        return mam_data
-
-    def set_json_array_property(self, mam_data, propkey, jkey, jvalue, prop_name="multiselect"):
-        values = json.loads(jvalue)
-        array_values = []
-        for v in values:
-            array_values.append({
-                'value': v[jkey],
-                'attribute': prop_name,
-                'dottedKey': None
-            })
-
-        # print("set_json_array values=", array_values, "prop_name", prop_name)
-
-        for prop in mam_data['mdProperties']:
-            if prop.get('attribute') == propkey:
-                prop['value'] = array_values
-                return mam_data
-
-        mh_prop = {
-            'value': array_values,
-            'attribute': propkey,
-            'dottedKey': None
-        }
-
-        # extra subKey to set here
-        if prop_name == 'multiselect':
-            mh_prop['subKey'] = 'multiselect'
-
-        mam_data['mdProperties'].append(mh_prop)
-        return mam_data
-
-    def set_array_property(self, mam_data, attribute, array_attribute, propvalue):
-        props = mam_data.get('mdProperties', [])
-        array_attrib_exists = False
-        array_prop = None
-        for prop in props:
-            if prop.get('attribute') == attribute:
-                array_prop = prop
-                array_values = prop.get('value', '')
-                for att in array_values:
-                    if att.get('attribute') == array_attribute:
-                        array_attrib_exists = True
-                        att['value'] = propvalue
-                        return mam_data
-
-        if not array_prop:
-            array_val = [{
-                'value': propvalue,
-                'attribute': array_attribute,
-                'dottedKey': None
-            }]
-            array_prop = {
-                'attribute': attribute,
-                'dottedKey': None,
-                'value': array_val
-            }
-            mam_data['mdProperties'].append(array_prop)
-            return mam_data
-
-        if array_prop and not array_attrib_exists:
-            array_prop['value'].append({
-                'value': propvalue,
-                'attribute': array_attribute,
-                'dottedKey': None
-            })
-            return mam_data
-
-        # in case it's new array prop (bail out for now):
-        print(
-            "ERROR in set_array_property: {}/{} with value {} not saved!".format(
-                attribute,
-                array_attribute,
-                propvalue
-            )
-        )
-
-        return mam_data
-
     def frontend_metadata(self, pid, department, mam_data):
         item_type = mam_data.get('type')
         item_type_lom = get_md_array(mam_data, 'lom_learningresourcetype')
@@ -176,8 +87,8 @@ class MetaMapping:
             ),
             'item_keywords': get_md_array(mam_data, 'lom_keywords'),
             'item_keywords_cp': get_md_array(mam_data, 'dc_subjects'),
-            # TODO: signal ajax request, later fetch directly after v2 refactor
-            'publish_item': 'ajax'
+            # TODO: later fetch directly after v2 refactor
+            'publish_item': 'ajax'  # signal ajax request to frontend
         }
 
     def form_params(self, token, pid, department, mam_data, errors=[]):
@@ -276,7 +187,7 @@ class MetaMapping:
         if(themas and vakken and len(themas) > 0 and len(vakken) > 0):
             lom_legacy = "false"
 
-        mam_data = self.set_property(
+        mam_data = set_property(
             mam_data, 'lom_legacy',
             lom_legacy
         )
@@ -292,70 +203,71 @@ class MetaMapping:
         department = escape(escape(request.form.get('department')))
 
         # fields we can alter+save:
-        mam_data = self.set_property(
+        mam_data = set_property(
             mam_data, 'dc_title',
             request.form.get('ontsluitingstitel')
         )
 
-        mam_data = self.set_property(
+        mam_data = set_property(
             mam_data, 'dcterms_issued',
             request.form.get('uitzenddatum')
         )
 
         # deze nog eventjes un-escaped
-        mam_data = self.set_property(
+        mam_data = set_property(
             mam_data, 'dcterms_abstract',
             cleanup_markdown(request.form.get('avo_beschrijving'))
         )
 
         # array value serie in subsection dc_titles
-        # (this is also how we need to save our productie section values soon!!!)
-        mam_data = self.set_array_property(
+        mam_data = set_array_property(
             mam_data, 'dc_titles',
             'serie', request.form.get('serie')
         )
 
         # single select item_type -> lom_learningresourcetype
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_learningresourcetype', 'code',
             request.form.get('lom_type'),
         )
 
         # multiselect talen -> lom_languages
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_languages', 'code',
             request.form.get('talen'),
         )
 
         # multiselect item_eindgebruikers -> lom_intendedenduserrole
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_intendedenduserrole', 'code',
             request.form.get('lom1_beoogde_eindgebruiker'),
         )
 
-        # multiselect item_onderwijsniveaus of item_onderwijsnivaus_legacy -> lom_onderwijsniveau
-        mam_data = self.set_json_array_property(
+        # multiselect item_onderwijsniveaus of
+        # item_onderwijsnivaus_legacy -> lom_onderwijsniveau
+        mam_data = set_json_array_property(
             mam_data, 'lom_onderwijsniveau', 'id',
             request.form.get('lom1_onderwijsniveaus'),
             'Onderwijsniveau'
         )
 
-        # multiselect item_onderwijsgraden of item_onderwijsgraden_legacy -> lom_onderwijsgraad
-        mam_data = self.set_json_array_property(
+        # multiselect item_onderwijsgraden of
+        # item_onderwijsgraden_legacy -> lom_onderwijsgraad
+        mam_data = set_json_array_property(
             mam_data, 'lom_onderwijsgraad', 'id',
             request.form.get('lom1_onderwijsgraden'),
             'Onderwijsgraad'
         )
 
         # multiselect themas -> lom_thema
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_thema', 'id',
             request.form.get('themas'),
             'Thema'
         )
 
         # multiselect vakken -> lom_vak
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_vak', 'id',
             request.form.get('vakken'),
             'Vak'
@@ -364,7 +276,7 @@ class MetaMapping:
         mam_data = self.update_legacy_flag(request, mam_data)
 
         # Sleutelwoord(en) trefwoorden -> lom_keywords
-        mam_data = self.set_json_array_property(
+        mam_data = set_json_array_property(
             mam_data, 'lom_keywords', 'name',
             request.form.get('trefwoorden'),
             'Sleutelwoord'
@@ -389,10 +301,10 @@ class MetaMapping:
             if publisher:
                 dc_publishers.append(publisher)
 
-        mam_data = self.set_property(mam_data, 'dc_creators', dc_creators)
-        mam_data = self.set_property(
+        mam_data = set_property(mam_data, 'dc_creators', dc_creators)
+        mam_data = set_property(
             mam_data, 'dc_contributors', dc_contributors)
-        mam_data = self.set_property(mam_data, 'dc_publishers', dc_publishers)
+        mam_data = set_property(mam_data, 'dc_publishers', dc_publishers)
 
         tp = self.form_params(token, pid, department, mam_data)
 
