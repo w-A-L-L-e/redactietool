@@ -40,7 +40,7 @@ from app.services.subtitle_files import (
     save_subtitles, delete_files, save_sidecar_xml,
     move_subtitle, not_deleted, get_vtt_subtitles
 )
-from app.services.meta_sidecar import get_property
+from app.services.mh_properties import get_property
 from app.services.validation import (pid_error, upload_error, validate_input,
                                      validate_upload, validate_conversion)
 

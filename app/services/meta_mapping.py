@@ -15,10 +15,13 @@ import json
 import os
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from app.services.meta_sidecar import (get_property, set_property,
-                                       get_md_array,
-                                       get_array_property, set_array_property,
-                                       set_json_array_property, MetaSidecar)
+from app.services.mh_properties import (
+    get_property, set_property,
+    get_md_array,
+    get_array_property, set_array_property,
+    set_json_array_property
+)
+from app.services.xml_sidecar import XMLSidecar
 from app.services.input_escaping import markdown_to_html, cleanup_markdown, escape
 
 logger = logging.get_logger(__name__, config=ConfigParser())
@@ -328,8 +331,7 @@ class MetaMapping:
         return self.form_params(token, pid, department, mam_data, validation_errors)
 
     def xml_sidecar(self, metadata, tp):
-        sidecar = MetaSidecar()
-        xml_data = sidecar.generate(metadata, tp)
+        xml_data = XMLSidecar().metadata_sidecar(metadata, tp)
         fragment_id = metadata['fragmentId']
         external_id = metadata['externalId']
 

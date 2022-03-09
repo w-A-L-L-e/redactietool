@@ -6,8 +6,7 @@
 #
 #   description: methods to create temporary srt, vtt and xml files
 #   used for sending to mediahaven and streaming in the flowplayer preview.html
-#   get_property is easy helper method to iterate mdProperties inside
-#   returned data from find_item_by_pid call.
+#   we also save the subtitle xml sidecar here for ftp uploading
 #
 
 import os
@@ -15,11 +14,10 @@ import webvtt
 import requests
 
 from app.services.srt_converter import convert_srt
-from app.services.meta_sidecar import get_property, sidecar_root
+from app.services.xml_sidecar import XMLSidecar
 from werkzeug.utils import secure_filename
 from viaa.configuration import ConfigParser
 from viaa.observability import logging
-from lxml import etree
 
 logger = logging.get_logger(__name__, config=ConfigParser())
 
@@ -107,55 +105,10 @@ def move_subtitle(upload_folder, tp):
 
 
 def save_sidecar_xml(upload_folder, metadata, tp):
-    TESTBEELD_PERM_ID = os.environ.get(
-        'TESTBEELD_PERM_ID', 'config_testbeeld_uuid')
-    ONDERWIJS_PERM_ID = os.environ.get(
-        'ONDERWIJS_PERM_ID', 'config_onderwijs_uuid')
-    ADMIN_PERM_ID = os.environ.get('ADMIN_PERM_ID', 'config_admin_uuid')
-
-    cp_id = get_property(metadata, 'CP_id')
-    cp = get_property(metadata, 'CP')
-    xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
-
-    root, MH_NS, MHS_NS, XSI_NS = sidecar_root()
-
-    descriptive = etree.SubElement(root, '{%s}Descriptive' % MHS_NS)
-    etree.SubElement(descriptive, '{%s}Title' % MH_NS).text = tp['srt_file']
-    description = f"Subtitles for item {tp['pid']}"
-    etree.SubElement(descriptive, '{%s}Description' % MH_NS).text = description
-
-    rights = etree.SubElement(
-        root, '{%s}RightsManagement' % MHS_NS)  # of Structural?
-    permissions = etree.SubElement(rights, '{%s}Permissions' % MH_NS)
-    etree.SubElement(permissions, '{%s}Read' % MH_NS).text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, '{%s}Read' % MH_NS).text = ONDERWIJS_PERM_ID
-    etree.SubElement(permissions, '{%s}Read' % MH_NS).text = ADMIN_PERM_ID
-    etree.SubElement(permissions, '{%s}Write' % MH_NS).text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, '{%s}Write' % MH_NS).text = ADMIN_PERM_ID
-    etree.SubElement(permissions, '{%s}Export' %
-                     MH_NS).text = TESTBEELD_PERM_ID
-    etree.SubElement(permissions, '{%s}Export' % MH_NS).text = ADMIN_PERM_ID
-
-    mdprops = etree.SubElement(root, "{%s}Dynamic" % MHS_NS)
-
-    # set is_verwant_aan needs overwrite strategy and is needed for new items
-    relations = etree.SubElement(mdprops, "dc_relations")
-    relations.set('strategy', 'OVERWRITE')
-    etree.SubElement(relations, "is_verwant_aan").text = tp['pid']
-
-    etree.SubElement(mdprops, "CP_id").text = cp_id
-    # mediahaven computes external_id for us.
-    # etree.SubElement(mdprops, "external_id").text = xml_pid
-    etree.SubElement(mdprops, "PID").text = xml_pid
-    etree.SubElement(mdprops, "CP").text = cp
-    etree.SubElement(mdprops, "sp_name").text = 'borndigital'
-
-    xml_data = etree.tostring(
-        root, pretty_print=True, encoding="UTF-8", xml_declaration=True
-    ).decode()
-
     # now write data to correct filename
+    xml_pid = f"{tp['pid']}_{tp['subtitle_type']}"
     xml_filename = f"{xml_pid}.xml"
+    xml_data = XMLSidecar().subtitle_sidecar(metadata, tp)
     sf = open(os.path.join(upload_folder, xml_filename), 'w')
     sf.write(xml_data)
     sf.close()
