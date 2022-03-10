@@ -2,7 +2,7 @@
   <div id="onderwijs_selector">
     <div  v-if="comboEdit" class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">Onderwijsstructuur</label>
+        <label class="label">Onderwijs</label>
       </div>
       <div class="field-body">
 
@@ -33,15 +33,31 @@
           <!-- not necessary as we split up and populate graden+niveaus seperately,
           but keeping it as we might evolve into one field with tree structure in future-->
           <textarea name="lom_onderwijs_combo" v-model="json_value" id="onderwijs_json_value"></textarea>
-
-
         </div>
 
       </div>
     </div>
 
-    <OnderwijsniveausSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
-    <OnderwijsgradenSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
+    <div v-bind:class="[value.length && !show_onderwijsstructuur ? 'show' : 'hide']">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal"></div>
+        <div class="field-body">
+          <a v-on:click="toggleOnderwijsstructuur">Bekijk de onderwijsstructuur</a>
+        </div>
+      </div>
+    </div>
+    
+    <div v-bind:class="[value.length && show_onderwijsstructuur ? 'show' : 'hide']">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal"></div>
+        <div class="field-body">
+          <a v-on:click="toggleOnderwijsstructuur">Verberg de onderwijsstructuur</a>
+        </div>
+      </div>
+
+      <OnderwijsniveausSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
+      <OnderwijsgradenSelector v-bind:metadata="metadata" v-bind:comboEdit="comboEdit"/> 
+    </div>
  
   </div>
 </template>
@@ -81,7 +97,8 @@
         graden_options: [],
         loading: true,
         show_vakken_warning: false,
-        vakken_selected: false
+        vakken_selected: false,
+        show_onderwijsstructuur: false
       }
     },
     mounted: function() {
@@ -123,6 +140,9 @@
     },
 
     methods: {
+      toggleOnderwijsstructuur(){
+        this.show_onderwijsstructuur = !this.show_onderwijsstructuur;
+      },
       removeValue(){
         if(this.vakken_selected){
           this.show_vakken_warning = true;

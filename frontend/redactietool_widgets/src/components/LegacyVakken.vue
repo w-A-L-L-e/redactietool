@@ -2,12 +2,26 @@
   <div id="legacy_vakken" v-if="legacy_vakken.length>0">
 
     <div class="field is-horizontal">
+      <div class="field-label is-normal"><label class="label"></label></div>
+      <div class="field-body">
+        <div v-if="legacy_vakken.length && !show_legacyvakken">
+          <a v-on:click="toggleLegacyvakken">Bekijk de legacy vakken</a>
+        </div>
+        <div v-if="legacy_vakken.length && show_legacyvakken">
+          <a v-on:click="toggleLegacyvakken">Verberg de legacy vakken</a>
+        </div>
+
+      </div>
+   </div>
+
+    <div v-if="show_legacyvakken" class="field is-horizontal">
       <div class="field-label is-normal">
         <label class="label"></label>
       </div>
+     
       <div class="field-body">
         <div class="legacy-vakken-list">
-          <div class="legacy-title">Legacy vakken</div>
+          <div class="legacy-title"></div>
           <div 
             class="legacy-vak-pill is-pulled-left" 
             v-for="vak, index in legacy_vakken" 
@@ -42,6 +56,7 @@
         vakken_search: "",
         vakken_prev_search: "",
         show_definitions: false,
+        show_legacyvakken: false
       }
     },
     created: function() { 
@@ -50,7 +65,9 @@
       }
     },
     methods: {
-     
+      toggleLegacyvakken(){
+        this.show_legacyvakken = !this.show_legacyvakken;
+      } 
     },
     filters: {
       truncate: function (text, length, suffix) {
@@ -69,7 +86,8 @@
 
 <style>
   #legacy_vakken{
-    margin-top: -14px;
+    margin-top: -5px;
+    margin-bottom: 10px;
   }
   .legacy-title{
     font-weight: bold;
@@ -81,11 +99,12 @@
     margin-top: 5px;
   }
   .legacy-vakken-list {
+    margin-top: -15px;
     min-height: 40px;
     min-width: 478px;
     padding: 5px;
     padding-top: 7px;
-    margin-bottom: 10px;
+    padding-left: 0px;
   }
   .legacy-vak-pill {
     border-radius: 5px;
