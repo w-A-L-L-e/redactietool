@@ -1,4 +1,4 @@
-NAME := ldap2db
+NAME := redactietool
 FOLDERS := ./app/ ./tests/
 
 .DEFAULT_GOAL := help

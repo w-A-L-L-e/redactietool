@@ -212,10 +212,12 @@ class XMLSidecar:
                          MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(permissions, '{%s}Read' %
                          MH_NS).text = self.ONDERWIJS_PERM_ID
-        etree.SubElement(permissions, '{%s}Read' % MH_NS).text = self.ADMIN_PERM_ID
+        etree.SubElement(permissions, '{%s}Read' %
+                         MH_NS).text = self.ADMIN_PERM_ID
         etree.SubElement(permissions, '{%s}Write' %
                          MH_NS).text = self.TESTBEELD_PERM_ID
-        etree.SubElement(permissions, '{%s}Write' % MH_NS).text = self.ADMIN_PERM_ID
+        etree.SubElement(permissions, '{%s}Write' %
+                         MH_NS).text = self.ADMIN_PERM_ID
         etree.SubElement(permissions, '{%s}Export' %
                          MH_NS).text = self.TESTBEELD_PERM_ID
         etree.SubElement(permissions, '{%s}Export' %
