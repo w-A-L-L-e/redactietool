@@ -18,13 +18,12 @@ from markupsafe import escape
 logger = logging.get_logger(__name__, config=ConfigParser())
 
 
-def pid_error(token, pid, msg):
+def pid_error(pid, msg):
     logger.info('search_media', data={'error': msg})
     flash(msg)
     return redirect(
         url_for(
             '.search_media',
-            token=escape(token),
             pid=escape(pid),
         )
     )
@@ -36,7 +35,6 @@ def upload_error(template_params, error_msg):
     return redirect(
         url_for(
             '.get_upload',
-            token=escape(template_params['token']),
             pid=escape(template_params['pid']),
             department=escape(template_params['department']),
         )

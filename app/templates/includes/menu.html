@@ -20,60 +20,49 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
 
+    {% if session.get('samlUserdata') %}
     <div class="navbar-start">
-      {% if token or session.get('samlUserdata') %}
         <a class="navbar-item {{'is-active' if url_for(request.endpoint) == '/search_media'}}"
-           href="/search_media?token={{token}}">
+           href="/search_media">
           Selecteer PID
         </a>
-      {% endif %}
     </div>
 
     <div class="navbar-end "> 
-      {% if (pid and token) or (pid and session.get('samlUserdata')) %}
+      {% if pid %}
         <a class="navbar-item {{'is-active' if url_for(request.endpoint) == '/edit_metadata'}}"
-          href="/edit_metadata?token={{token}}&pid={{pid}}&department={{department}}">
+          href="/edit_metadata?pid={{pid}}&department={{department}}">
           Metadata
         </a>
 
         <a class="navbar-item {{'is-active' if url_for(request.endpoint) in ['/upload', '/preview', '/send_to_mam']}}"
-           href="/upload?token={{token}}&pid={{pid}}&department={{department}}">
+           href="/upload?pid={{pid}}&department={{department}}">
           Ondertitels
         </a>
       {% endif %}
       
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          {{ current_user.name | default('Voornaam Achternaam', true) }}
+        </a>
+        <div class="navbar-dropdown is-right">
+          {% if session.get('samlUserdata') %}
+            <a class="navbar-item button is-info ml-2 mr-2"
+               href="/?slo">
+               Logout
+            </a> 
+          {% endif%}
 
-      <!-- legacy login -->
-      {% if token or session.get('samlUserdata')%}
-        <div class="navbar-item has-dropdown is-hoverable">
-           <a class="navbar-link">
-              {{ current_user.name | default('Voornaam Achternaam', true) }}
-           </a>
-           <div class="navbar-dropdown is-right">
-
-
-            {% if session.get('samlUserdata') %}
-              <a class="navbar-item button is-info ml-2 mr-2"
-                 href="/?slo">
-                 Logout
-              </a> 
-            {% else %}
-              <a class="navbar-item button is-info ml-2 mr-2"
-                 href="/">
-                 Logout
-              </a>
-            {% endif%}
-
-             <hr class="navbar-divider mt-2">
-             <div class="navbar-item is-pulled-right">
-               <ion-icon name="create-outline" class="mr-1"></ion-icon>
-               {% include 'includes/version.html' %}
-             </div>
+           <hr class="navbar-divider mt-2">
+           <div class="navbar-item is-pulled-right">
+             <ion-icon name="create-outline" class="mr-1"></ion-icon>
+             {% include 'includes/version.html' %}
            </div>
         </div>
-      {% endif %}
-
+      </div>
     </div>
-  </div>
-</nav>
+    {% endif %}
 
+  </div>
+
+</nav>

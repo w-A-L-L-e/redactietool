@@ -9,14 +9,21 @@
 #
 
 import os
-import jwt
 from flask_login import UserMixin
+from flask import session
 
-
-# we might need this back laters...
-OAS_SERVER = os.environ.get('OAS_SERVER', 'https://oas-qas.viaa.be')
 OAS_APPNAME = os.environ.get('OAS_APPNAME', 'mediahaven')
-OAS_JWT_SECRET = os.environ.get('OAS_JWT_SECRET', '')
+
+
+def check_saml_session():
+    if 'samlUserdata' in session:
+        user_data = session.get('samlUserdata')
+        if 'apps' not in user_data:
+            return False
+        if OAS_APPNAME in user_data['apps']:
+            return True
+
+    return False
 
 
 class User(UserMixin):
@@ -32,22 +39,3 @@ class User(UserMixin):
         # ('oNickname', ['meemoo']), ('role', ['Meemoo']), ('sector', ['Cultuur']), ('sn', ['Lastname'])])
         # session.get('samlUserdata').get('cn')[0]
         self.name = saml_attribs.get('cn')[0]
-
-    def save_jwt_username(self, token):
-        try:
-            dt = jwt.decode(
-                token,
-                audience=[OAS_APPNAME],
-                algorithms=['HS256'],
-                verify=False,
-                options={'verify_signature': False}
-            )
-
-            self.name = dt.get('cn')
-
-        except jwt.exceptions.DecodeError:
-            self.name = "Developer Login"
-        except jwt.exceptions.ExpiredSignatureError:
-            self.name = "JWT Session Expired"
-        except jwt.exceptions.InvalidAudienceError:
-            self.name = "JWT Invalid Audience"

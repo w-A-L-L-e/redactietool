@@ -30,6 +30,7 @@ Login
     {% endif %}
 
 
+
     <div class="card" id="saml_login_box">
       <h1 class="title">
         <span class="icon">
@@ -41,12 +42,13 @@ Login
       <p>
          Log in om gebruik te maken van de Redactietool.
       </p>
-      <br/>
+
+      {% include 'includes/form_errors.html' %}
       
       <div class="buttons is-pulled-right">
-        {% if legact_login_enabled %}
+        {% if legacy_login_enabled %}
           <a href="/legacy_login" class="button is-link is-light">
-            Development authenticatie
+            Development login
           </a>
         {% endif %}
 

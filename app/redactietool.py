@@ -14,8 +14,7 @@
 #   It stores and converts an uploaded srt file to webvtt format,
 #   shows preview with flowplayer and subtitles.
 #   Metadata is fetched with mediahaven_api using a pid.
-#   Authorization is refactored to use SAML. For debugging and local
-#   development the token is still supported.
+#   Authorization is refactored to use SAML.
 #   We also use calls to the thesaurus tool using the suggest library
 #   from Miel.
 #
@@ -31,8 +30,6 @@ from viaa.configuration import ConfigParser
 from viaa.observability import logging
 
 from app.config import flask_environment
-from app.services.authorization import (get_token, requires_authorization,
-                                        verify_token, check_saml_session, OAS_APPNAME)
 from app.services.mediahaven_api import MediahavenApi
 from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
@@ -48,7 +45,7 @@ from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from flask_login import LoginManager, login_required  # current_user
 from app.services.meta_mapping import MetaMapping
-from app.services.user import User
+from app.services.user import User, check_saml_session, OAS_APPNAME
 
 
 app = Flask(__name__)
@@ -80,7 +77,7 @@ app.config['SAML_PATH'] = os.path.join(
 # mixin/model for current_user method of flask login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'index'
 
 
 @login_manager.request_loader
@@ -88,21 +85,12 @@ def load_user_from_request(request):
     user = User()
     if check_saml_session():
         user.save_saml_username(session.get('samlUserdata'))
+        return user
     else:
-        token = request.form.get('token', None)
-        if not token:
-            token = request.args.get('token', None)
-
-        if token:
-            user.save_jwt_username(token)
-        else:
-            # throw away invalid or timed out session
-            session.clear()
-
-    return user
+        session.clear()  # clear bad or timed out session
 
 
-# ====================== LEGACY LOGIN RELATED ROUTES ==========================
+# ====================== Development LOGIN RELATED ROUTES ==========================
 @app.route('/legacy_login', methods=['GET'])
 def legacy_login():
     return render_template('legacy_login.html')
@@ -111,29 +99,27 @@ def legacy_login():
 @app.route('/legacy_login', methods=['POST'])
 def login():
     if app.config['DEBUG'] is True and not app.config['TESTING']:
-        print('DISABLE login checks for development/debug mode')
-        return redirect(
-            url_for('.search_media', token='debug_authorization_disabled')
-        )
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    username = request.form.get('username')
-    password = request.form.get('password')
-    logger.info("POST login =", dictionary={
-        'username': username,
-        'password': '[FILTERED]'
-    })
-    token = get_token(username, password)
-    if token:
-        if verify_token(token['access_token']):
-            return redirect(url_for('.search_media', token=token['access_token']))
-        else:
-            return render_template(
-                'legacy_login.html',
-                validation_errors=f"Login correct, maar geen toegang tot {OAS_APPNAME}"
+        logger.info("POST login =", dictionary={
+            'username': username,
+            'password': '[FILTERED]'
+        })
+
+        if username == 'admin' and password == 'admin':
+            session['samlUserdata'] = {}
+            session['samlUserdata']['cn'] = [username]
+            session['samlUserdata']['apps'] = [OAS_APPNAME]
+            return redirect(
+                url_for('.search_media')
             )
+        else:
+            session.clear()  # clear bad or timed out session
+            return render_template('legacy_login.html', validation_errors='Fout email of wachtwoord')
 
     else:
-        return render_template('legacy_login.html', validation_errors='Fout email of wachtwoord')
+        return render_template('legacy_login.html', validation_errors='Development login disabled')
 
 
 # ========================== SAML Authentication ==============================
@@ -167,7 +153,7 @@ def index():
     not_auth_warn = False
     success_slo = False
     attributes = False
-    legact_login_enabled = app.config['DEBUG'] is True and not app.config['TESTING']
+    legacy_login_enabled = app.config['DEBUG'] is True and not app.config['TESTING']
 
     if 'sso' in request.args:
         # If AuthNRequest ID need to be stored in
@@ -262,36 +248,31 @@ def index():
             not_auth_warn=not_auth_warn,
             success_slo=success_slo,
             attributes=attributes,
-            legact_login_enabled=legact_login_enabled,
+            legacy_login_enabled=legacy_login_enabled,
+            # validation_errors=f'Invalid login or no access to {OAS_APPNAME}'
         )
 
 
 # ======================== SUBLOADER RELATED ROUTES ===========================
 @app.route('/search_media', methods=['GET'])
-@requires_authorization
 @login_required
 def search_media():
     if 'samlUserdata' in session:
         if len(session['samlUserdata']) > 0:
             attributes = session['samlUserdata'].items()
-        token = 'saml'
-    else:
-        token = request.args.get('token')
 
     logger.info('search_media')
     return render_template('search_media.html', **locals())
 
 
 @app.route('/search_media', methods=['POST'])
-@requires_authorization
 @login_required
 def post_media():
-    token = request.form.get('token')
     pid = request.form.get('pid')
     department = request.form.get('department')
 
     if not pid:
-        return pid_error(token, pid, 'Geef een PID')
+        return pid_error(pid, 'Geef een PID')
     else:
         if request.form.get('redirect_subtitles') == 'yes':
             logger.info('post_media, editing subtitles', data={'pid': pid})
@@ -302,23 +283,21 @@ def post_media():
 
 
 @app.route('/upload', methods=['GET'])
-@requires_authorization
 @login_required
 def get_upload():
     logger.info('get_upload')
 
-    token = request.args.get('token')
     pid = request.args.get('pid').strip()
     department = request.args.get('department')
 
     validation_error = validate_input(pid, department)
     if validation_error:
-        return pid_error(token, pid, validation_error)
+        return pid_error(pid, validation_error)
 
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
-        return pid_error(token, pid, f"PID niet gevonden in {department}")
+        return pid_error(pid, f"PID niet gevonden in {department}")
 
     # subtitle files already uploaded:
     all_subs = mh_api.get_subtitles(department, pid)
@@ -328,7 +307,6 @@ def get_upload():
 
     return render_template(
         'subtitles/upload.html',
-        token=token,
         pid=pid,
         department=department,
         mam_data=json.dumps(mam_data),
@@ -346,11 +324,9 @@ def get_upload():
 
 
 @app.route('/upload', methods=['POST'])
-@requires_authorization
 @login_required
 def post_upload():
     tp = {
-        'token': request.form.get('token'),
         'pid': request.form.get('pid'),
         'department': request.form.get('department'),
         'mam_data': request.form.get('mam_data'),
@@ -392,10 +368,8 @@ def upload_folder():
 
 
 @app.route('/cancel_upload')
-@requires_authorization
 @login_required
 def cancel_upload():
-    token = request.args.get('token')
     pid = request.args.get('pid')
     department = request.args.get('department')
     vtt_file = request.args.get('vtt_file')
@@ -406,16 +380,14 @@ def cancel_upload():
         'vtt_file': vtt_file
     })
 
-    return redirect(url_for('.get_upload', token=token, pid=pid, department=department))
+    return redirect(url_for('.get_upload', pid=pid, department=department))
 
 
 @app.route('/send_to_mam', methods=['POST'])
-@requires_authorization
 @login_required
 def send_subtitles_to_mam():
 
     tp = {
-        'token': request.form.get('token'),
         'pid': request.form.get('pid'),
         'department': request.form.get('department'),
         'video_url': request.form.get('video_url'),
@@ -487,7 +459,6 @@ def send_subtitles_to_mam():
 
 # for subtitles files we need to switch of caching so we get the latest content
 @app.route('/item_subtitles/<string:department>/<string:pid>/<string:subtype>', methods=['GET'])
-@requires_authorization
 @login_required
 def get_subtitle_by_type(department, pid, subtype):
     mh_api = MediahavenApi()
@@ -513,7 +484,6 @@ def get_subtitle_by_type(department, pid, subtype):
 
 
 @app.route('/subtitles/<filename>')
-@requires_authorization
 @login_required
 def uploaded_subtitles(filename):
     response = send_from_directory(upload_folder(), filename)
@@ -528,10 +498,8 @@ def uploaded_subtitles(filename):
 
 # ====================== Redactietool metadata ROUTES =========================
 @app.route('/edit_metadata', methods=['GET'])
-@requires_authorization
 @login_required
 def edit_metadata():
-    token = request.args.get('token')
     pid = request.args.get('pid').strip()
     department = request.args.get('department')
     errors = request.args.get('validation_errors')
@@ -540,16 +508,15 @@ def edit_metadata():
 
     validation_error = validate_input(pid, department)
     if validation_error:
-        return pid_error(token, pid, validation_error)
+        return pid_error(pid, validation_error)
 
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
-        return pid_error(token, pid, f"PID niet gevonden in {department}")
+        return pid_error(pid, f"PID niet gevonden in {department}")
 
     mm = MetaMapping()
-    template_vars = mm.mh_to_form(
-        token, pid, department, mam_data, errors)
+    template_vars = mm.mh_to_form(pid, department, mam_data, errors)
 
     return render_template(
         'metadata/edit.html',
@@ -558,17 +525,15 @@ def edit_metadata():
 
 
 @app.route('/edit_metadata', methods=['POST'])
-@requires_authorization
 @login_required
 def save_item_metadata():
-    token = request.form.get('token')
     pid = request.form.get('pid')
     department = request.form.get('department')
 
     mh_api = MediahavenApi()
     mam_data = mh_api.find_item_by_pid(department, pid)
     if not mam_data:
-        return pid_error(token, pid, f"PID niet gevonden in {department}")
+        return pid_error(pid, f"PID niet gevonden in {department}")
 
     mm = MetaMapping()
     template_vars = mm.form_to_mh(request, mam_data)
@@ -592,7 +557,6 @@ def save_item_metadata():
 
 
 @app.route('/publicatie_status', methods=['GET'])
-@requires_authorization
 @login_required
 def publicatie_status():
     pid = request.args.get('pid')
@@ -607,7 +571,6 @@ def publicatie_status():
 
 
 @app.route('/onderwijsniveaus', methods=['GET'])
-@requires_authorization
 @login_required
 def get_onderwijsniveaus():
     suggest_api = SuggestApi()
@@ -615,7 +578,6 @@ def get_onderwijsniveaus():
 
 
 @app.route('/onderwijsgraden', methods=['GET'])
-@requires_authorization
 @login_required
 def get_onderwijsgraden():
     suggest_api = SuggestApi()
@@ -623,7 +585,6 @@ def get_onderwijsgraden():
 
 
 @app.route('/themas', methods=['GET'])
-@requires_authorization
 @login_required
 def get_themas():
     suggest_api = SuggestApi()
@@ -631,7 +592,6 @@ def get_themas():
 
 
 @app.route('/vakken', methods=['GET'])
-@requires_authorization
 @login_required
 def get_vakken():
     suggest_api = SuggestApi()
@@ -639,7 +599,6 @@ def get_vakken():
 
 
 @app.route('/vakken_suggest', methods=['POST'])
-@requires_authorization
 @login_required
 def get_vakken_suggesties():
     json_data = request.json
@@ -663,7 +622,7 @@ def not_found_errorpage():
 @app.errorhandler(401)
 def unauthorized(e):
     # return "<h1>401</h1><p>Unauthorized</p>", 401
-    return redirect(url_for('.index', token=None))
+    return redirect(url_for('.index'))
 
 
 @app.errorhandler(404)

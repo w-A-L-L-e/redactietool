@@ -94,7 +94,7 @@ class MetaMapping:
             'publish_item': 'ajax'  # signal ajax request to frontend
         }
 
-    def form_params(self, token, pid, department, mam_data, errors=[]):
+    def form_params(self, pid, department, mam_data, errors=[]):
         dc_description_lang = get_property(mam_data, 'dc_description_lang')
         ondertitels = get_property(mam_data, 'dc_description_ondertitels')
         cast = get_property(mam_data, 'dc_description_cast')
@@ -115,7 +115,6 @@ class MetaMapping:
         avo_beschrijving = markdown_to_html(dcterms_abstract)
 
         return {
-            'token': token,
             'department': department,
             'mam_data': json.dumps(mam_data),
             'publish_item': False,
@@ -202,7 +201,6 @@ class MetaMapping:
         convert form metadata hash into json data
         """
         pid = escape(request.form.get('pid'))
-        token = escape(request.form.get('token'))
         department = escape(escape(request.form.get('department')))
 
         # fields we can alter+save:
@@ -309,7 +307,7 @@ class MetaMapping:
             mam_data, 'dc_contributors', dc_contributors)
         mam_data = set_property(mam_data, 'dc_publishers', dc_publishers)
 
-        tp = self.form_params(token, pid, department, mam_data)
+        tp = self.form_params(pid, department, mam_data)
 
         # update publish_item, no extra ajax call needed here
         if request.form.get('publicatiestatus_checked'):
@@ -319,7 +317,7 @@ class MetaMapping:
 
         return tp
 
-    def mh_to_form(self, token, pid, department, mam_data, validation_errors):
+    def mh_to_form(self, pid, department, mam_data, validation_errors):
         """
         convert json metadata from MediahavenApi back into a
         python hash for populating the view and do the mapping from mh names to
@@ -328,7 +326,7 @@ class MetaMapping:
         # print("DEBUG: mediahaven json_data:\n")
         # print(json.dumps(mam_data, indent=2))
 
-        return self.form_params(token, pid, department, mam_data, validation_errors)
+        return self.form_params(pid, department, mam_data, validation_errors)
 
     def xml_sidecar(self, metadata, tp):
         xml_data = XMLSidecar().metadata_sidecar(metadata, tp)
