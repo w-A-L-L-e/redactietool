@@ -9,7 +9,9 @@ import pytest
 from unittest.mock import MagicMock
 from flask_api import status
 from app.redactietool import app
-from .fixtures import jwt_token
+# from .fixtures import jwt_token
+from flask import session
+
 import io
 import os
 import yaml
@@ -55,13 +57,17 @@ def test_search_media_security(client):
 
 
 def test_search_media(client):
-    res = client.get(f"/search_media?token={jwt_token()}")
+    with client.session_transaction() as session:
+        session['samlUserdata']={}
+        session['samlUserdata']['cn'] = ['Test user']
+        session['samlUserdata']['apps'] = ['mediahaven']
+
+    res = client.get(f"/search_media")
     assert res.status_code == 200
 
 
 def test_invalid_pid_entry(client):
     res = client.post("/search_media", data={
-        'token': jwt_token(),
         'department': 'testbeeld',
         'pid': 'abc123#'
     }, follow_redirects=True)
@@ -72,7 +78,6 @@ def test_invalid_pid_entry(client):
 
 def test_empty_pid(client):
     res = client.post("/search_media", data={
-        'token': jwt_token(),
         'department': 'testbeeld',
         'pid': ''
     }, follow_redirects=True)
@@ -84,7 +89,6 @@ def test_empty_pid(client):
 @pytest.mark.vcr
 def test_wrong_pid_entry(client):
     res = client.post("/search_media", data={
-        'token': jwt_token(),
         'department': 'testbeeld',
         'pid': 'abc123'
     }, follow_redirects=True)
@@ -96,7 +100,6 @@ def test_wrong_pid_entry(client):
 @pytest.mark.vcr
 def test_working_pid_search(client):
     res = client.post("/search_media", data={
-        'token': jwt_token(),
         'department': 'testbeeld',
         'pid': 'qsxs5jbm5c',
         'redirect_subtitles': 'yes'
@@ -111,7 +114,6 @@ def test_bad_srt_upload(client):
     filename = 'subtitles.srt'
 
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': '',
@@ -129,7 +131,6 @@ def test_invalid_upload(client):
     filename = 'somefile.png'
 
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': '',
@@ -145,7 +146,6 @@ def test_invalid_upload(client):
 @pytest.mark.vcr
 def test_empty_upload(client):
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': '',
@@ -168,7 +168,6 @@ def test_valid_subtitle(client):
             'mediaDataList'][0]
 
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': json.dumps(mam_data),
@@ -196,7 +195,6 @@ def test_valid_subtitle_capitals(client):
             'mediaDataList'][0]
 
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': json.dumps(mam_data),
@@ -217,7 +215,6 @@ def test_valid_subtitle_capitals(client):
 @pytest.mark.vcr
 def test_cancel_upload(client):
     data = {
-        'token': jwt_token(),
         'pid': 'abc',
         'department': 'testbeeld',
         'srt_file': 'somefile.srt',
@@ -231,23 +228,17 @@ def test_cancel_upload(client):
     assert 'PID niet gevonden in testbeeld' in res.data.decode()
 
 
-# extra security added (we neow block if saml session cookie not present)
 @pytest.mark.vcr
 def test_subtitle_videoplayer_route(client):
     res = client.get('/subtitles/qsxs5jbm5c.vtt')
-    assert res.status_code == 302
+    assert res.status_code == 200
 
-# TOOD: also add back case where 200 reply works
-# @pytest.mark.vcr
-# def test_subtitle_videoplayer_route(client):
-#     res = client.get('/subtitles/qsxs5jbm5c.vtt')
-#     assert res.status_code == 200
-#
-#
-# @pytest.mark.vcr
-# def test_subtitle_videoplayer_route_unknownfile(client):
-#     res = client.get('/subtitles/someinvalidpath.vtt')
-#     assert res.status_code == 404
+
+@pytest.mark.vcr
+def test_subtitle_videoplayer_route_unknownfile(client):
+    res = client.get('/subtitles/someinvalidpath.vtt')
+    assert res.status_code == 302 # redirects to 404 page
+
 
 
 @pytest.mark.vcr
@@ -257,7 +248,6 @@ def test_send_to_mam_shows_confirmation(client):
             'mediaDataList'][0]
 
     res = client.post("/send_to_mam", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'subtitle_type': 'closed',
@@ -280,7 +270,6 @@ def test_send_to_mam_confirm_works(client):
 
     # replace existing subtitle now
     res = client.post("/send_to_mam", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'subtitle_type': 'closed',
@@ -304,7 +293,6 @@ def test_send_to_mam_cancel_works(client):
 
     # replace existing subtitle now
     res = client.post("/send_to_mam", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'subtitle_type': 'closed',
@@ -322,12 +310,21 @@ def test_send_to_mam_cancel_works(client):
 @pytest.mark.vcr
 def test_edit_metadata_wrong_pid(client):
     res = client.get(
-        f"/edit_metadata?token={jwt_token()}&pid=somewrongpid&department=testbeeld",
+        f"/edit_metadata?pid=somewrongpid&department=testbeeld",
         follow_redirects=True
     )
 
     assert res.status_code == 200
     assert 'Zoek een item op' in res.data.decode()
+
+
+# security check without session routes redirect to login:
+@pytest.mark.vcr
+def test_subtitle_videoplayer_route(client):
+    with client.session_transaction() as session:
+        session.clear()
+    res = client.get('/subtitles/qsxs5jbm5c.vtt')
+    assert res.status_code == 302
 
 
 # to save time, for actual edit get/post routes we will test
@@ -362,7 +359,6 @@ def test_valid_subtitle_for_ftp(client):
             'mediaDataList'][0]
 
     res = client.post("/upload", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'mam_data': json.dumps(mam_data),
@@ -404,7 +400,6 @@ def test_subtitle_ftp_upload(client, mocker):
 
     # replace existing subtitle now
     res = client.post("/send_to_mam", data={
-        'token': jwt_token(),
         'pid': 'qsxs5jbm5c',
         'department': 'testbeeld',
         'subtitle_type': 'closed',
