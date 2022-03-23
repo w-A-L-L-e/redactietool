@@ -357,10 +357,46 @@ def test_update_metadata(client):
         'lom1_beoogde_eindgebruiker': '[{"name":"Student","code":"Student"}]',
         'talen': '[{"name":"Nederlands","code":"nl"}]',
         'lom_onderwijs_combo': '[]',
-        'lom1_onderwijsniveaus': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/hoger-onderwijs","label":"hoger onderwijs","definition":"hoger onderwijs","collection":"onderwijsniveaus","child_count":0},{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs","label":"lager onderwijs","definition":"lager onderwijs","collection":"onderwijs subniveaus","child_count":3,"parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"}]',
-        'lom1_onderwijsgraden': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad","label":"lager 1e graad","definition":"lager 1e graad","child_count":2,"parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"}]',
-        'themas': '[{"id":"https://data.hetarchief.be/id/onderwijs/thema/sport-en-spel","label":"sport en spel","definition":"Alles over lichaamsbeweging, (top)sport, spellen en spelen"}]',
-        'vakken': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/vak/ict","label":"ICT","definition":"ICT, computationeel denken"}]',
+        'lom1_onderwijsniveaus': """
+          [
+            {
+              "id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/hoger-onderwijs",
+              "label":"hoger onderwijs",
+              "definition":"hoger onderwijs",
+              "collection":"onderwijsniveaus",
+              "child_count":0
+            },
+            {
+              "id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs",
+              "label":"lager onderwijs",
+              "definition":"lager onderwijs",
+              "collection":"onderwijs subniveaus",
+              "child_count":3,
+              "parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"}
+            ]
+        """,
+        'lom1_onderwijsgraden': """
+          [{
+                "id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+                "label":"lager 1e graad",
+                "definition":"lager 1e graad",
+                "child_count":2,
+                "parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+          }]""",
+        'themas': """
+          [
+            {
+                "id":"https://data.hetarchief.be/id/onderwijs/thema/sport-en-spel",
+                "label":"sport en spel",
+                "definition":"Alles over lichaamsbeweging, (top)sport, spellen en spelen"
+            }
+          ]""",
+        'vakken': """
+          [{
+            "id":"https://w3id.org/onderwijs-vlaanderen/id/vak/ict",
+            "label":"ICT",
+            "definition":"ICT, computationeel denken"
+          }]""",
         'trefwoorden': '[{"name":"Belgium","code":"Belgium"}]'
     }, follow_redirects=True)
 

@@ -5,9 +5,6 @@
 #  tests/test_authorization.py
 #
 
-import pytest
-
-
 def test_wrong_credentials(client):
     res = client.post('/legacy_login', data=dict(
         username='avo-syncrator',
