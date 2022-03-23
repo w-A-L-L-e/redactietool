@@ -317,6 +317,57 @@ def test_edit_metadata_wrong_pid(client):
     assert 'Zoek een item op' in res.data.decode()
 
 
+@pytest.mark.vcr
+def test_edit_metadata_working_pid(client):
+    res = client.get(
+        "/edit_metadata?pid=qs5d8ncx8c&department=testbeeld",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    assert 'Algemene metadata' in res.data.decode()
+
+
+@pytest.mark.vcr
+def test_update_metadata(client):
+    with open('./tests/edit_mam_data.json', "r") as f:
+        mam_data = json.loads(f.read())
+
+    res = client.post("/edit_metadata?pid=qsf7664p39&department=testbeeld", data={
+        'pid': 'qsf7664p39',
+        'department': 'testbeeld',
+        'mam_data': json.dumps(mam_data),
+        'serie': 'Serie veld test',
+        'uitzenddatum': '2021-11-21',
+        'ontsluitingstitel': 'Fietsstraten in centrum Gent',
+        'prd_maker_attribute': 'Maker',
+        'prd_maker_value': '',
+        'prd_maker_attribute_1': 'Maker',
+        'prd_maker_value_1': 'maker test',
+        'prd_bijdrager_attribute': 'Aanwezig',
+        'prd_bijdrager_value': '',
+        'prd_bijdrager_attribute_1': 'Bijdrager',
+        'prd_bijdrager_value_1': 'bijdrager test2',
+        'prd_publisher_attribute': 'Distributeur',
+        'prd_publisher_value': '',
+        'prd_publisher_attribute_1': 'Distributeur',
+        'prd_publisher_value_1': 'distributeur test',
+        'avo_beschrijving': 'Beschrijving test 1234',
+        'lom_type': '[{"name":"Video","code":"Video"}]',
+        'lom1_beoogde_eindgebruiker': '[{"name":"Student","code":"Student"}]',
+        'talen': '[{"name":"Nederlands","code":"nl"}]',
+        'lom_onderwijs_combo': '[]',
+        'lom1_onderwijsniveaus': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/hoger-onderwijs","label":"hoger onderwijs","definition":"hoger onderwijs","collection":"onderwijsniveaus","child_count":0},{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs","label":"lager onderwijs","definition":"lager onderwijs","collection":"onderwijs subniveaus","child_count":3,"parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"}]',
+        'lom1_onderwijsgraden': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad","label":"lager 1e graad","definition":"lager 1e graad","child_count":2,"parent_id":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"}]',
+        'themas': '[{"id":"https://data.hetarchief.be/id/onderwijs/thema/sport-en-spel","label":"sport en spel","definition":"Alles over lichaamsbeweging, (top)sport, spellen en spelen"}]',
+        'vakken': '[{"id":"https://w3id.org/onderwijs-vlaanderen/id/vak/ict","label":"ICT","definition":"ICT, computationeel denken"}]',
+        'trefwoorden': '[{"name":"Belgium","code":"Belgium"}]'
+    }, follow_redirects=True)
+
+    assert res.status_code == 200
+    assert 'werden opgeslagen' in res.data.decode()
+
+
 def test_random_404(client, setup):
     resp = client.delete('/somepage')
     assert resp.status_code == 302
