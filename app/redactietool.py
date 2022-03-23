@@ -98,7 +98,7 @@ def legacy_login():
 
 @app.route('/legacy_login', methods=['POST'])
 def login():
-    if app.config['DEBUG'] is True and not app.config['TESTING']:
+    if app.config['DEBUG'] is True or app.config['TESTING']:
         username = request.form.get('username')
         password = request.form.get('password')
 
@@ -153,7 +153,7 @@ def index():
     not_auth_warn = False
     success_slo = False
     attributes = False
-    legacy_login_enabled = app.config['DEBUG'] is True and not app.config['TESTING']
+    legacy_login_enabled = app.config['DEBUG'] is True or app.config['TESTING']
 
     if 'sso' in request.args:
         # If AuthNRequest ID need to be stored in

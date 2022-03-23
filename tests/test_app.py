@@ -10,7 +10,7 @@ from unittest.mock import MagicMock
 from flask_api import status
 from app.redactietool import app
 # from .fixtures import jwt_token
-from flask import session
+# from flask import session
 
 import io
 import os
@@ -58,11 +58,11 @@ def test_search_media_security(client):
 
 def test_search_media(client):
     with client.session_transaction() as session:
-        session['samlUserdata']={}
+        session['samlUserdata'] = {}
         session['samlUserdata']['cn'] = ['Test user']
         session['samlUserdata']['apps'] = ['mediahaven']
 
-    res = client.get(f"/search_media")
+    res = client.get("/search_media")
     assert res.status_code == 200
 
 
@@ -237,8 +237,7 @@ def test_subtitle_videoplayer_route(client):
 @pytest.mark.vcr
 def test_subtitle_videoplayer_route_unknownfile(client):
     res = client.get('/subtitles/someinvalidpath.vtt')
-    assert res.status_code == 302 # redirects to 404 page
-
+    assert res.status_code == 302  # redirects to 404 page
 
 
 @pytest.mark.vcr
@@ -310,25 +309,12 @@ def test_send_to_mam_cancel_works(client):
 @pytest.mark.vcr
 def test_edit_metadata_wrong_pid(client):
     res = client.get(
-        f"/edit_metadata?pid=somewrongpid&department=testbeeld",
+        "/edit_metadata?pid=somewrongpid&department=testbeeld",
         follow_redirects=True
     )
 
     assert res.status_code == 200
     assert 'Zoek een item op' in res.data.decode()
-
-
-# security check without session routes redirect to login:
-@pytest.mark.vcr
-def test_subtitle_videoplayer_route(client):
-    with client.session_transaction() as session:
-        session.clear()
-    res = client.get('/subtitles/qsxs5jbm5c.vtt')
-    assert res.status_code == 302
-
-
-# to save time, for actual edit get/post routes we will test
-# the MetaMapping class directly
 
 
 def test_random_404(client, setup):
@@ -419,3 +405,16 @@ def test_subtitle_ftp_upload(client, mocker):
     print(res.data.decode(), flush=True)
     assert 'De ondertitels werden succesvol opgeladen' in res.data.decode()
     assert '226 Transfer complete' in res.data.decode()
+
+
+# security check without session routes redirect to login:
+@pytest.mark.vcr
+def test_subtitle_videoplayer_route_without_session(client):
+    with client.session_transaction() as session:
+        session.clear()
+    res = client.get('/subtitles/qsxs5jbm5c.vtt')
+    assert res.status_code == 302
+
+
+# to save time, for actual edit get/post routes we will test
+# the MetaMapping class directly
