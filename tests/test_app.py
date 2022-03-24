@@ -445,7 +445,7 @@ def test_publicatie_status_404(client):
 
 @pytest.mark.vcr
 def test_update_metadata(client):
-    with open('./tests/edit_mam_data.json', "r") as f:
+    with open('./tests/fixture_data/edit_mam_data.json', "r") as f:
         mam_data = json.loads(f.read())
 
     res = client.post("/edit_metadata?pid=qsf7664p39&department=testbeeld", data={
