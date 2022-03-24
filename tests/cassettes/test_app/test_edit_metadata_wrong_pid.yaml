@@ -16,19 +16,18 @@ interactions:
     uri: https://archief-qas.viaa.be/mediahaven-rest-api/resources/media?q=%2B(ExternalId:somewrongpid)&startIndex=0&nrOfResults=25
   response:
     body:
-      string: "{\n  \"message\" : \"User is not authorized. Please check if authorization
-        headers are correctly set\",\n  \"status\" : 401,\n  \"code\" : \"EUNAUTH\"\n}"
+      string: '{"totalNrOfResults":0,"startIndex":0,"mediaDataList":[]}'
     headers:
       Cache-Control:
       - no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
       Connection:
       - keep-alive
       Content-Length:
-      - '139'
+      - '56'
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Feb 2022 11:08:20 GMT
+      - Thu, 24 Mar 2022 09:02:12 GMT
       Expires:
       - '0'
       Pragma:
@@ -40,13 +39,13 @@ interactions:
       Via:
       - kong/0.13.1
       X-Correlation-ID:
-      - 355db4ab29e82df1106f5137d6d9aa3b
+      - 18fbde0ecec5d6aebce3c4f4374a31bd
       X-Kong-Proxy-Latency:
       - '0'
       X-Kong-Upstream-Latency:
-      - '1113'
+      - '900'
       X-MediaHavenVersion:
-      - '21.3'
+      - '22.1'
       X-RateLimit-Limit-second:
       - '10'
       X-RateLimit-Remaining-second:
@@ -54,6 +53,6 @@ interactions:
       x-forwarded-proto:
       - https
     status:
-      code: 401
+      code: 200
       message: ''
 version: 1

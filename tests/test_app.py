@@ -315,6 +315,7 @@ def test_edit_metadata_wrong_pid(client):
 
     assert res.status_code == 200
     assert 'Zoek een item op' in res.data.decode()
+    assert 'niet gevonden' in res.data.decode()
 
 
 @pytest.mark.vcr
@@ -326,6 +327,92 @@ def test_edit_metadata_working_pid(client):
 
     assert res.status_code == 200
     assert 'Algemene metadata' in res.data.decode()
+
+
+@pytest.mark.vcr
+def test_subtitles_on_metadata_edit(client):
+    res = client.get(
+        "/item_subtitles/testbeeld/qs5d8ncx8c/closed",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+
+
+@pytest.mark.vcr
+def test_onderwijsniveaus(client):
+    res = client.get(
+        "/onderwijsniveaus",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+
+
+@pytest.mark.vcr
+def test_onderwijsgraden(client):
+    res = client.get(
+        "/onderwijsgraden",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+
+
+@pytest.mark.vcr
+def test_themas(client):
+    res = client.get(
+        "/themas",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+
+
+@pytest.mark.vcr
+def test_vakken(client):
+    res = client.get(
+        "/vakken",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+
+
+# todo
+# supply json['graden'] and json['themas']
+# with post request
+# @pytest.mark.vcr
+# def test_vakken_suggesties(client):
+#     res = client.post(
+#         "/vakken_suggest",
+#         follow_redirects=True
+#     )
+#
+#     assert res.status_code == 200
+
+
+@pytest.mark.vcr
+def test_publicatie_status(client):
+    res = client.get(
+        "/publicatie_status?pid=qs5d8ncx8c&department=testbeeld",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    assert 'publish_item' in res.json.keys()
+
+
+@pytest.mark.vcr
+def test_publicatie_status_404(client):
+    res = client.get(
+        "/publicatie_status?pid=randompid&department=testbeeld",
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    assert 'publish_item' in res.json.keys()
+    assert res.json['publish_item'] is False
 
 
 @pytest.mark.vcr
@@ -499,9 +586,22 @@ def test_subtitle_ftp_upload(client, mocker):
 def test_subtitle_videoplayer_route_without_session(client):
     with client.session_transaction() as session:
         session.clear()
-    res = client.get('/subtitles/qsxs5jbm5c.vtt')
-    assert res.status_code == 302
+    res = client.get(
+        '/subtitles/qsxs5jbm5c.vtt',
+        follow_redirects=True
+    )
+    assert res.status_code == 200
+    assert 'Log in om gebruik te maken' in res.data.decode()
 
 
-# to save time, for actual edit get/post routes we will test
-# the MetaMapping class directly
+@pytest.mark.vcr
+def test_publicatie_status_protected(client):
+    with client.session_transaction() as session:
+        session.clear()
+
+    res = client.get(
+        "/publicatie_status?pid=qs5d8ncx8c&department=testbeeld",
+        follow_redirects=True
+    )
+    assert res.status_code == 200
+    assert 'Log in om gebruik te maken' in res.data.decode()
