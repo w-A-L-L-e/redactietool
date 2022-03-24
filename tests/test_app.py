@@ -6,16 +6,14 @@
 #
 
 import pytest
-from unittest.mock import MagicMock
-from flask_api import status
-from app.redactietool import app
-# from .fixtures import jwt_token
-# from flask import session
-
 import io
 import os
 import yaml
 import json
+
+from unittest.mock import MagicMock
+from flask_api import status
+from app.redactietool import app
 
 
 @pytest.fixture(scope="module")
@@ -107,6 +105,36 @@ def test_working_pid_search(client):
 
     assert res.status_code == 200
     assert 'Kies ondertitelbestand' in res.data.decode()
+
+
+def test_invalid_long_pid_entry(client):
+    res = client.post("/search_media", data={
+        'department': 'testbeeld',
+        'pid': 'abc123'*40
+    }, follow_redirects=True)
+
+    assert res.status_code == 200
+    assert 'PID te lang' in res.data.decode()
+
+
+def test_invalid_department_entry(client):
+    res = client.post("/search_media", data={
+        'department': 'testbeeld%^',
+        'pid': 'abc123'
+    }, follow_redirects=True)
+
+    assert res.status_code == 200
+    assert 'Department formaat foutief' in res.data.decode()
+
+
+def test_invalid_long_department(client):
+    res = client.post("/search_media", data={
+        'department': 'testbeeld_te_lang'*40,
+        'pid': 'abc123'
+    }, follow_redirects=True)
+
+    assert res.status_code == 200
+    assert 'department te lang' in res.data.decode()
 
 
 @pytest.mark.vcr
