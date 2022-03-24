@@ -17,8 +17,6 @@
 
 import os
 import json
-# from viaa.configuration import ConfigParser
-# from viaa.observability import logging
 from app.services.suggest.Suggest import Suggest
 
 
