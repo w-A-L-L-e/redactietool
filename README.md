@@ -176,27 +176,37 @@ Test coverage report can be generated with following coverage makefile command:
 
 ```
 $ make coverage
-Name                          Stmts   Miss  Cover
--------------------------------------------------
-app/__init__.py                   0      0   100%
-app/authorization.py             50     24    52%
-app/config.py                    19      0   100%
-app/ftp_uploader.py              30      7    77%
-app/mediahaven_api.py            54     10    81%
-app/redactietool.py             243     95    61%
-app/subtitle_files.py           146      3    98%
-app/validation.py                35      6    83%
-debug.py                          3      3     0%
-list_videos.py                    8      8     0%
-tests/__init__.py                 2      0   100%
-tests/conftest.py                 9      0   100%
-tests/fixtures.py                21      0   100%
-tests/test_app.py               172      0   100%
-tests/test_authorization.py      31      0   100%
-tests/test_sidecar.py            14      0   100%
-wsgi.py                           3      3     0%
--------------------------------------------------
-TOTAL                           840    159    81%
+
+...
+Name                              Stmts   Miss  Cover
+-----------------------------------------------------
+app/__init__.py                       0      0   100%
+app/config.py                        20      0   100%
+app/redactietool.py                 339     58    83%
+app/services/ftp_uploader.py         33     10    70%
+app/services/input_escaping.py       35      0   100%
+app/services/mediahaven_api.py      103     22    79%
+app/services/meta_mapping.py         90      1    99%
+app/services/mh_properties.py        70     18    74%
+app/services/srt_converter.py        18      3    83%
+app/services/subtitle_files.py       71      2    97%
+app/services/suggest/Suggest.py      84     10    88%
+app/services/suggest_api.py          40     10    75%
+app/services/user.py                 18      1    94%
+app/services/validation.py           38      3    92%
+app/services/xml_sidecar.py         111      3    97%
+debug.py                              3      3     0%
+tests/__init__.py                     2      0   100%
+tests/conftest.py                    10      0   100%
+tests/fixtures.py                     7      0   100%
+tests/test_app.py                   257      0   100%
+tests/test_authorization.py          20      0   100%
+tests/test_sidecar.py                10      0   100%
+tests/test_srt_converter.py           5      0   100%
+tests/test_suggest.py                42      0   100%
+wsgi.py                               3      3     0%
+-----------------------------------------------------
+TOTAL                              1429    147    90%
 Coverage HTML written to dir htmlcov
 ```
 
