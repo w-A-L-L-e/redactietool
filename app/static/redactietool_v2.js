@@ -187,12 +187,14 @@ function addPrdItem(item_list_id, item_fields_id){
   // now append our cloned fields with unique name+id
   console.log("adding item_fields=", fields_clone);
   item_list.append(fields_clone);
+  metadataInputChanged(item_fields_id);
   return false;
 }
 
-// delete item method for 'productie' section item
+// delete item method for 'productie' sections
 function deletePrdItem(del_btn){
   del_btn.parentNode.parentNode.remove();
+  metadataInputChanged('deleted_production_item');
   return false;
 }
 
@@ -370,7 +372,7 @@ function isValidDate(dateString) {
   return d.toISOString().substr(0,10) === dateString;
 }
 
-function checkDateInput(date_id){
+function checkDate(date_id){
   var date_div = get_id(date_id)
   if(!date_div) return;
 
@@ -386,13 +388,17 @@ function checkDateInput(date_id){
   }
 }
 
+function checkDateInput(date_id){
+  checkDate(date_id); 
+  metadataInputChanged(date_id);
+}
+
 function checkDateInputs(){
-  // checkDateInput("creatiedatum"); // per request disable checks here
-  checkDateInput("uitzenddatum");
+  // checkDate("creatiedatum"); // per request disable checks here
+  checkDate("uitzenddatum");
 }
 
 function metadataInputChanged(name){
-  console.log("change event name=", name);
   edited = get_id("metadata_form_edited");
   edited.value = "true";
 }
@@ -422,6 +428,7 @@ function metadataSubmit(btn){
   edited = get_id("metadata_form_edited");
   edited.value = "false";
   btn.form.submit();
+  btn.disabled=true; 
 }
 
 // =========================== DOCUMENT READY EVENT ============================

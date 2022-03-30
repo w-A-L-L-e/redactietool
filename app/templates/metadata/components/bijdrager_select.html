@@ -10,7 +10,9 @@
 <div class="field has-addons prd-widget" id="prd_bijdrager">
   <div class="control mr-2">
     <span class="select is-small">
-      <select name="prd_bijdrager_attribute" id="prd_bijdrager_attribute">
+      <select name="prd_bijdrager_attribute" 
+        oninput="metadataInputChanged('bijdrager_input');"
+        id="prd_bijdrager_attribute">
       {% for option_val in contributor_options %}
         {{- select_option(option_val, option_val, '') }}
       {% endfor %}
@@ -22,6 +24,7 @@
            id="prd_bijdrager_value"
            class="input is-small" 
            type="text" placeholder="" 
+           oninput="metadataInputChanged('bijdrager_input');"
            value="">
   </div>
   <div class="control mr-1">
@@ -37,7 +40,9 @@
   <div class="field has-addons prd-widget" id="prd_bijdrager_{{loop.index}}">
     <div class="control mr-2">
       <span class="select is-small">
-        <select name="prd_bijdrager_attribute_{{loop.index}}" id="prd_bijdrager_attribute_{{loop.index}}">
+        <select name="prd_bijdrager_attribute_{{loop.index}}" 
+           oninput="metadataInputChanged('bijdrager_input');"
+          id="prd_bijdrager_attribute_{{loop.index}}">
         {% for option_val in contributor_options %}
           {{- select_option(option_val, option_val, contributor['attribute']) }}
         {% endfor %}
@@ -53,6 +58,7 @@
              id="prd_bijdrager_value_{{loop.index}}"
              class="input is-small mr-1" 
              type="text" placeholder="" 
+             oninput="metadataInputChanged('bijdrager_input');"
              value="{{contributor['value']}}">
     </div>
     <div class="control mr-1">
