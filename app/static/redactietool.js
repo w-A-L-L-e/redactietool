@@ -70,18 +70,10 @@ function resetSearch(){
 
 // ============================= MODAL DIALOG ==================================
 function showNavigationWarning(){
-  //v1
-  //showModalAlert(
-  //    "Waarschuwing",
-  //    "Opgelet: je bewerkingen zijn niet opgeslagen. Ben je zeker dat je deze pagina wil verlaten?"
-  //);
-
-  //v2.1
   showModalAlert(
       "Ben je zeker dat je deze pagina wilt verlaten?",
       "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat."
   );
-
 }
 
 function flashModalWarning(){
@@ -401,32 +393,32 @@ function checkDateInputs(){
   checkDateInput("uitzenddatum");
 }
 
+function metadataInputChanged(name){
+  console.log("change event name=", name);
+  edited = get_id("metadata_form_edited");
+  edited.value = "true";
+}
 
-//function checkPageSaved(){
-//  // vanilla pagesave check test, still issues with this:
-//  //window.addEventListener('beforeunload', function (e) {
-//  //  // Cancel the event as stated by the standard.
-//  //  e.preventDefault();
-//  //  // Chrome requires returnValue to be set.
-//  //  e.returnValue = '';
-//
-//
-//  showNavigationWarning();
-//  flashModalWarning();
-//  showModalAlert("hello", "world");
-//  // event.preventDefault();
-//  // return event.returnValue = "Ben je zeker?";
-//  //  console.log("HIER EEN CUSTOM DIALOG!!!")
-//  //});
-//
-//  window.onbeforeunload = (event) => {
-//    console.log("HIER EEN CUSTOM DIALOG!!!")
-//    if (false) {
-//      return "";
-//    }
-//  };
-//}
+function metadataFormEdited(){
+  edited = get_id("metadata_form_edited");
+  if(edited){
+    return edited.value == "true"
+  }
+  else{
+    return false;
+  }
+}
 
+function checkMetadataSaved(event) {
+  if(metadataFormEdited()){
+    console.log("edited == true, warning dialog !!!");
+    // shows native dialog with warning you close or navigate away
+    event.returnValue = "Opgelet: je bewerkingen worden niet bewaard wanneer je deze pagina verlaat.";
+  }
+  else{
+    delete event['returnValue']; // cancel native dialog
+  }
+}
 
 // =========================== DOCUMENT READY EVENT ============================
 // Handle burger menu open/close on all pages.
@@ -465,8 +457,14 @@ document.addEventListener('DOMContentLoaded', () => {
   autoCloseAlert("data_saved_alert_box");
   checkDateInputs(); 
   resetSearch();
-});
+
+ });
 
 
 // force dom ready with back button
 window.addEventListener('unload', function(){});
+
+// show navigation dialog on metadata edit after editing
+window.addEventListener('beforeunload', checkMetadataSaved);
+
+

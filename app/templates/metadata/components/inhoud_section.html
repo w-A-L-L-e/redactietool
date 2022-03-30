@@ -55,7 +55,7 @@
   </div>
 
 <script>
-  function richtext_changed(){
+  function update_richtext(){
     var editor_div = document.getElementById("redactietool-richtext-editor");
     if(editor_div){
       var html_content = editor_div.firstChild.innerHTML
@@ -74,6 +74,11 @@
         markdown_target.value = markdown.split("\n\n  \n\n").join("\n\n");
       }
     }
+  }
+
+  function richtext_changed(){
+    metadataInputChanged('avo_beschrijving');
+    update_richtext(); 
   }
 
   var turndownService = new TurndownService();
@@ -121,7 +126,7 @@
 
  
   document.addEventListener('DOMContentLoaded', () => {
-   richtext_changed();
+   update_richtext();
    quill.on('editor-change', function(eventName, ...args) {
       richtext_changed(); 
     });

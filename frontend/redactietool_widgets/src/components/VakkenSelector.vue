@@ -76,7 +76,7 @@
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
-      <div class="modal is-active" id='modal_dlg'>
+      <div class="modal is-active" id='vakken_modal'>
         <div class="modal-background"></div>
         <div class="modal-card">
 
@@ -710,4 +710,21 @@
     height: 54px;
     margin-top: -52px;
   }
+
+  #vakken_modal .modal-content {
+    width: 900px;
+  }
+
+  @media screen and (min-width: 769px){
+    #vakken_modal .modal-content, #vakken_modal .modal-card {
+      margin: 0 auto;
+      max-height: calc(100vh - 40px);
+      width: calc(100vw - 50px);
+    }
+  }
+  #vakken_modal .modal-card-head, #vakken_modal .modal-card-foot{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
 </style>
