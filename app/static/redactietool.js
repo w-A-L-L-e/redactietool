@@ -25,8 +25,6 @@ function execute(btn, label){
 
 function loginSubmit(btn){
   execute(btn, "Authenticeren..."); 
-  btn.form.submit();
-  btn.disabled=true;
   btn.classList.add('is-loading')
 }
 
@@ -418,6 +416,12 @@ function checkMetadataSaved(event) {
   else{
     delete event['returnValue']; // cancel native dialog
   }
+}
+
+function metadataSubmit(btn){
+  edited = get_id("metadata_form_edited");
+  edited.value = "false";
+  btn.form.submit();
 }
 
 // =========================== DOCUMENT READY EVENT ============================
