@@ -20,6 +20,12 @@ export default {
     LomSection,
     PublicatieStatus
   },
+  mounted(){
+    this.$root.$on('metadata_edited', (val) => {
+      var edited = document.getElementById("metadata_form_edited");
+      if(edited) edited.value=val;
+    });
+  },
   created(){
     var metadata_div = document.getElementById("redactie_metadata");
       if(metadata_div){

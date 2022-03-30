@@ -355,6 +355,7 @@
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('vakken_changed', value);
+        this.$root.$emit("metadata_edited", "true");
       },
       vakIsSelected(vak){
         for( var i in this.value ){
@@ -474,6 +475,7 @@
         
         this.json_value = JSON.stringify(this.value);
         this.$root.$emit('vakken_changed', this.value);
+        this.$root.$emit("metadata_edited", "true");
       },
       zoek(search_str, src_rows){
         var result = [];

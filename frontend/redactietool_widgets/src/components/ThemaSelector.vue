@@ -283,6 +283,7 @@
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('themas_changed', value);
+        this.$root.$emit("metadata_edited", "true");
       },
       zoekThemas(event){
         this.thema_cards = [];
@@ -366,6 +367,7 @@
           this.json_value = JSON.stringify(this.value);
           // this works but hammers the suggest lib on each card selection
           // this.$root.$emit('themas_changed', this.value);
+          this.$root.$emit("metadata_edited", "true");
         }
       },
       changeToprowTooltip(event){
