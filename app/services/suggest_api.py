@@ -22,17 +22,12 @@ from app.services.suggest.Suggest import Suggest
 
 class SuggestApi:
 
-    SPARQL_ENDPOINT = os.environ.get(
-        'SPARQL_ENDPOINT', 'http://sparql_test_endpoint')
-    USER = os.environ.get('SPARQL_USER', "test")
-    PASSWORD = os.environ.get('SPARQL_PASS', "test")
+    SPARQL_ENDPOINT = os.environ.get("SPARQL_ENDPOINT", "http://sparql_test_endpoint")
+    USER = os.environ.get("SPARQL_USER", "test")
+    PASSWORD = os.environ.get("SPARQL_PASS", "test")
 
     def __init__(self):
-        self.suggest = Suggest(
-            self.SPARQL_ENDPOINT,
-            self.USER,
-            self.PASSWORD
-        )
+        self.suggest = Suggest(self.SPARQL_ENDPOINT, self.USER, self.PASSWORD)
 
     def get_onderwijsniveaus(self):
         res = []
@@ -58,14 +53,27 @@ class SuggestApi:
             vakken.append(r)
         return json.dumps(vakken)
 
+    def get_vakken_related(self, graden, niveaus):
+        concept_ids = []
+        for g in graden:
+            concept_ids.append(g["id"])
+
+        for n in niveaus:
+            concept_ids.append(n["id"])
+
+        vakken = []
+        for r in self.suggest.get_related_vak(concept_ids):
+            vakken.append(r)
+        return json.dumps(vakken)
+
     def get_vakken_suggesties(self, graden, themas):
         graden_ids = []
         for g in graden:
-            graden_ids.append(g['id'])
+            graden_ids.append(g["id"])
 
         thema_ids = []
         for t in themas:
-            thema_ids.append(t['id'])
+            thema_ids.append(t["id"])
 
         vakken = []
         for r in self.suggest.suggest(thema_ids, graden_ids):

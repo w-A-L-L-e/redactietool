@@ -139,7 +139,7 @@ WHERE {{
 GET_RELATED_VAK_QUERY = (
     PREFIX
     + """
-SELECT DISTINCT ?id ?label ?definition
+SELECT ?id ?label ?definition (SAMPLE(?parent) as ?parent_id)
 WHERE {{
     col:vak skos:member ?id.
 
@@ -148,8 +148,11 @@ WHERE {{
     skos:definition ?definition;
     skos:related ?concept.
 
+    OPTIONAL {{ ?id skos:broader ?parent }}
+
     VALUES ?concept {{ {concept} }}
 }}
+GROUP BY ?id ?label ?definition
 """
 )
 
