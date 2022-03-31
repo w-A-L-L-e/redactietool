@@ -51,7 +51,7 @@
    
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
 
-    <div class="modal is-active" id='modal_dlg'>
+    <div class="modal is-active" id='thema_modal'>
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
@@ -283,6 +283,7 @@
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit('themas_changed', value);
+        this.$root.$emit("metadata_edited", "true");
       },
       zoekThemas(event){
         this.thema_cards = [];
@@ -366,6 +367,7 @@
           this.json_value = JSON.stringify(this.value);
           // this works but hammers the suggest lib on each card selection
           // this.$root.$emit('themas_changed', this.value);
+          this.$root.$emit("metadata_edited", "true");
         }
       },
       changeToprowTooltip(event){
@@ -592,22 +594,22 @@
     display: block;
   }
 
-  .modal-content {
+  #thema_modal .modal-content {
     width: 900px;
   }
 
   @media screen and (min-width: 769px){
-    .modal-content, .modal-card {
+    #thema_modal .modal-content, #thema_modal .modal-card {
       margin: 0 auto;
       max-height: calc(100vh - 40px);
       width: calc(100vw - 50px);
     }
   }
-  .modal-card-head, .modal-card-foot{
+  #thema_modal .modal-card-head, #thema_modal .modal-card-foot{
     padding-top: 5px;
     padding-bottom: 5px;
   }
- 
+
   /* attempt to make tooltip visible on top line 
   overflow: visible on parent element may help as well
 

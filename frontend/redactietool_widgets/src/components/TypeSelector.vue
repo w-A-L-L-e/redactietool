@@ -52,8 +52,9 @@
     },
 
     methods: {
-      updateValue(value){
+      updateValue(value){ 
         this.json_value = JSON.stringify([value])
+        this.$root.$emit("metadata_edited", "true");
       }
     }
   }

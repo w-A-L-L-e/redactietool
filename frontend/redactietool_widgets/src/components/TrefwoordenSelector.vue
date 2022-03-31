@@ -122,9 +122,11 @@
         this.options.push(tw)
         this.value.push(tw)
         this.json_value = JSON.stringify(this.value)
+        this.$root.$emit("metadata_edited", "true");
       },
       updateValue(value){
         this.json_value = JSON.stringify(value)
+        this.$root.$emit("metadata_edited", "true");
       },
       toggleKeywordCollapse: function(){
         this.show_cp_keywords= !this.show_cp_keywords;

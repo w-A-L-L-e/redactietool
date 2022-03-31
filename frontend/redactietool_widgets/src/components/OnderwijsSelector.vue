@@ -215,6 +215,7 @@
         }
 
         this.$root.$emit('onderwijs_changed', data);
+        this.$root.$emit("metadata_edited", "true");
       },
       readValues(){
         this.value = [];

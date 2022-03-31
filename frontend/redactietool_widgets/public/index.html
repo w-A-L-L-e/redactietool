@@ -42,13 +42,17 @@
 
     <!-- inject this into our metadata form for the lom sections -->
     <form class="metadata_form" 
-      action="http://localhost:8080/edit_metadata_vue" method="POST" enctype="multipart/form-data">
+      action="http://localhost:5000/edit_metadata" method="POST" enctype="multipart/form-data">
 
       <p>
         <b>redactie_api_url: </b>
         <span id="redactie_api_url">http://localhost:5000</span>
       </p>
      
+      <p>
+        <b>metadata_form_edited</b>: 
+        <input id="metadata_form_edited" type="input" value="false"/>
+      </p>
       <p>
         <b>redactie_metadata: </b>
         <textarea 
@@ -139,24 +143,27 @@
       <div id="app"></div>
       <!-- built files will be auto injected -->
 
-
       <br/><br/>
-      
 
       <!-- make sure we can mix and match legace + new vue components -->
-      <input id="save_button" class="button is-link" type="submit" value="Metadata opslaan"/>
-
-      <!--
-      <input name="maker_value" type="input" value="maker test"/>
-      <input name="token" type="input" value="debug_session_for_vue_components"/>
-      <input name="pid" type="input" value="qs5d8ncx8c"/>
-      -->
+      <input id="save_button" 
+        class="button is-link" 
+        type="submit" 
+        value="Metadata opslaan"
+        onclick="return saveMetadata(this);"
+        />
     </form>
 
     <br/><br/>
 
   </div>
-
-
   </body>
+      <script type="text/javascript">
+        function saveMetadata(event){
+          form_edited = document.getElementById("metadata_form_edited");
+          if(form_edited) form_edited.value="false";
+
+          return false; //cancel the submit
+        }
+      </script>
 </html>

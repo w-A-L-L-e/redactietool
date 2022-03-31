@@ -47,6 +47,8 @@ Metadata bewerken
     {% endif%}
 
   {% endif %}
+
+  <input id="metadata_form_edited" type="hidden" value="false"/>
   
   <form class="metadata_form" action="/edit_metadata?pid={{pid}}&department={{department}}" method="POST" enctype="multipart/form-data">
     <div class="columns">
@@ -98,7 +100,10 @@ Metadata bewerken
 
     <div id="app"></div>
     
-    <button type="submit" class="button is-primary spring sticky-submit-button">
+    <button type="submit" 
+      class="button is-primary spring sticky-submit-button"
+      onclick="metadataSubmit(this);"
+      >
       Metadata opslaan
     </button>
   

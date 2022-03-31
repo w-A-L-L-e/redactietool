@@ -10,7 +10,9 @@
 <div class="field has-addons prd-widget" id="prd_publisher">
   <div class="control mr-2">
     <span class="select is-small">
-      <select name="prd_publisher_attribute" id="prd_publisher_attribute"> 
+      <select name="prd_publisher_attribute" 
+        oninput="metadataInputChanged('publisher_input');"
+        id="prd_publisher_attribute"> 
       {% for option_val in publisher_options %}
         {{- select_option(option_val, option_val, '') }}
       {% endfor %}
@@ -22,6 +24,7 @@
            id="prd_publisher_value"
            class="input is-small" 
            type="text" placeholder="" 
+           oninput="metadataInputChanged('publisher_input');"
            value="">
   </div>
   <div class="control mr-1">
@@ -39,6 +42,7 @@
       <span class="select is-small">
         <select 
           name="prd_publisher_attribute_{{loop.index}}" 
+          oninput="metadataInputChanged('publisher_input');"
           id="prd_publisher_attribute_{{loop.index}}">
         {% for option_val in publisher_options %}
           {{- select_option(option_val, option_val, publisher['attribute']) }}
@@ -56,6 +60,7 @@
              id="prd_publisher_value_{{loop.index}}"
              class="input is-small mr-1" 
              type="text" placeholder="" 
+             oninput="metadataInputChanged('publisher_input');"
              value="{{publisher['value']}}">
     </div>
     <div class="control mr-1">

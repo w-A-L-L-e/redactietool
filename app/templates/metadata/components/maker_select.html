@@ -11,7 +11,9 @@
 <div class="field has-addons prd-widget" id="prd_maker">
   <div class="control mr-2">
     <span class="select is-small">
-      <select name="prd_maker_attribute" id="prd_maker_attribute">
+      <select name="prd_maker_attribute" 
+        oninput="metadataInputChanged('maker');"
+        id="prd_maker_attribute">
       {% for option_val in maker_options %}
         {{- select_option(option_val, option_val, '') }}
       {% endfor %}
@@ -23,6 +25,7 @@
            id="prd_maker_value"
            class="input is-small" 
            type="text" placeholder="" 
+           oninput="metadataInputChanged('maker_input');"
            value="">
   </div>
   <div class="control mr-1">
@@ -38,7 +41,9 @@
   <div class="field has-addons prd-widget" id="prd_maker_{{loop.index}}">
     <div class="control mr-2">
       <span class="select is-small">
-        <select name="prd_maker_attribute_{{loop.index}}" id="prd_maker_attribute_{{loop.index}}">
+        <select name="prd_maker_attribute_{{loop.index}}" 
+          oninput="metadataInputChanged('maker');"
+          id="prd_maker_attribute_{{loop.index}}">
         {% for option_val in maker_options %}
           {{- select_option(option_val, option_val, maker['attribute']) }}
         {% endfor %}
@@ -54,6 +59,7 @@
              id="prd_maker_value_{{loop.index}}"
              class="input is-small mr-1" 
              type="text" placeholder="" 
+             oninput="metadataInputChanged('maker_input');"
              value="{{maker['value']}}">
     </div>
     <div class="control mr-1">

@@ -3,7 +3,7 @@
 // for now this is easy enough to use in our redactietool.
 
 function getModalDialog(){
-  return document.getElementById('modal_dlg');
+  return document.getElementById('modal_alert');
 }
 
 function closeModalAlert(){

@@ -8,7 +8,8 @@
                type="checkbox"
                name="publicatiestatus_checked" 
                id="publicatiestatus_checked"
-               v-model="publish_item"/>
+               v-model="publish_item"
+               @change="statusChanged"/>
         <div class="checkbox-spinner multiselect__spinner" v-if="loading"></div>
 
         Dit item mag gepubliceerd worden op 
@@ -32,6 +33,11 @@
       return {
         publish_item: false,
         loading: true
+      }
+    },
+    methods:{
+      statusChanged(){
+        this.$root.$emit("metadata_edited", "true");
       }
     },
     created(){
