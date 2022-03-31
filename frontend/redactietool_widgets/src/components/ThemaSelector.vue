@@ -1,5 +1,5 @@
 <template>
-  <div id="thema_selector">
+<div id="thema_selector">
 
   <a class="button is-link is-small toon-themas-button" 
       v-on:click="toggleThemas" 
@@ -24,49 +24,15 @@
 
     <template slot="noResult">Thema niet gevonden</template>
 
-    <!--template 
-      slot="singleLabel" 
-      slot-scope="props">
-        <span class="option__desc">
-          <span class="option__title">
-            {{ props.option.label}}
-          </span>
-          <span class="option_small">
-            {{props.option.definition}}
-          </span>
-        </span>
-    </template>
-
-    <template 
-      slot="option" 
-      slot-scope="props">
-        <div class="option__desc">
-          <span class="option__title">{{ props.option.label}}</span>
-          <span class="option__small">{{ props.option.definition}}</span>
-        </div>
-    </template-->
-
   </multiselect>
 
-   
   <div class="thema-cards" v-bind:class="[show_thema_cards ? 'show' : 'hide']">
 
-    <div class="modal is-active" id='thema_modal'>
+    <div class="modal is-active" id="thema_modal">
       <div class="modal-background"></div>
-      <div class="modal-card">
+      <div class="modal-card" id="thema_modal_card">
         <header class="modal-card-head">
           <p class="modal-card-title">Thema's</p>
-
-          <!-- div class="select thema-show-def-selector">
-            <select v-model="show_definitions">
-              <option 
-                v-for="(option, index) in show_definitions_options" 
-                v-bind:value="option.value" 
-                :key="index">
-              {{option.text}}
-              </option>
-            </select>
-          </div-->
 
           <label class="checkbox thema-show-def-selector">
             <input
@@ -77,8 +43,6 @@
             Tooltips
           </label>
 
-
-          
           <label class="checkbox thema-show-def-selector">
             <input
               type="checkbox"
@@ -104,8 +68,6 @@
               </div>
             </div>
           </div>
-
-          <!-- button class="delete" aria-label="close" v-on:click="toggleThemas" ></button-->
         </header>
 
         <section class="modal-card-body">
@@ -117,10 +79,6 @@
           <div v-if="!thema_cards.length" class="notification is-info is-light">
             Geen themas gevonden met de zoekterm "{{ thema_prev_search }}".
           </div>
-
-          <!-- div v-if="!show_definitions" class="tooltip-top-spacer">
-          <br/><br/>
-          </div -->
 
           <div class="columns"  v-for="(row, index) in thema_cards" :key="index">
             <div class="column is-one-fifth" v-for="thema in row" :key="thema.id">
@@ -163,14 +121,11 @@
             v-on:click="toggleThemas($event)">
               Sluiten
           </a>
-          <!-- button class="button" onClick="modalCancelClicked();">Annuleren</button -->
         </footer>
       </div>
     </div>
 
-       
   </div>
-
 
   <textarea name="themas" v-model="json_value" id="thema_json_value"></textarea>
 
@@ -209,12 +164,8 @@
         thema_search: "",
         thema_prev_search: "",
         show_definitions: false,
-        show_tooltips: false,
+        show_tooltips: true,
         loading: true
-        // show_definitions_options: [
-        //   { text: "Toon beschrijvingen", value: true },
-        //   { text: "Verberg beschrijvingen", value: false}
-        // ]
       }
     },
     created: function() { 
@@ -371,11 +322,11 @@
         }
       },
       changeToprowTooltip(event){
-        // attempt to make top row tooltip show on bottom
-        // console.log(event);
-        var pos = event.clientY; //pageY doesnt work right
-        // console.log(pos);
+        var btnY = event.clientY;
+        var modalTop = document.getElementById("thema_modal_card").getBoundingClientRect().top
+        var pos = btnY - modalTop;
 
+        // make top rows tooltip position bottom so it isn't hidden outside dialog
         if(pos<200){
           event.target.classList.add('has-tooltip-bottom')
         }
@@ -400,36 +351,6 @@
       toggleBeschrijvingen(){
         this.show_tooltips = false;
       },
-      //addThema: function(thema){
-      //  console.log("addThema thema=", thema);
-      //  var already_added = false;
-
-      //  for(var o in this.value){
-      //    var okw = this.value[o];
-      //    if(okw.id == thema.id){
-      //      already_added = true;
-      //      break;
-      //    } 
-      //  }
-
-      //  if(!already_added){
-      //    const new_thema = {
-      //      id: thema.id,
-      //      label: thema.label,
-      //      definition: thema.definition
-      //    };
-      //    this.options.push(new_thema);
-      //    this.value.push(new_thema);
-      //    this.json_value = JSON.stringify(this.value);
-      //    this.$root.$emit('themas_changed', this.value);
-      //  }
-      //  else{
-      //    this.show_already_added_warning = true;
-      //    setTimeout(()=>{
-      //      this.show_already_added_warning = false;
-      //    }, 3000);
-      //  }
-      //}
     },
     filters: {
       truncate: function (text, length, suffix) {
@@ -460,40 +381,6 @@
     margin-bottom: 20px;
     display: none;
   }
-
-  /*
-  .option__title{
-    display: block;
-    text-decoration: none;
-    padding-bottom: 8px;
-    font-style: bold;
-    font-size: 1.2em;
-    text-transform: none;
-    vertical-align: top;
-    position: relative;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .option__small{
-    display: block;
-  }
-  .option__desc{
-    display: block;
-  }
-  .multiselect__option {
-    display: block;
-    padding: 12px;
-    min-height: 40px;
-    line-height: 16px;
-    text-decoration: none;
-    text-transform: none;
-    vertical-align: middle;
-    position: relative;
-    cursor: pointer;
-    white-space: normal;
-    border-bottom: 1px solid #eee;
-  }
-  */
 
   .toon-themas-button {
     margin-bottom: 10px;
@@ -605,6 +492,7 @@
       width: calc(100vw - 50px);
     }
   }
+
   #thema_modal .modal-card-head, #thema_modal .modal-card-foot{
     padding-top: 5px;
     padding-bottom: 5px;

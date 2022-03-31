@@ -1,5 +1,5 @@
 <template>
-  <div id="vakken_selector">
+<div id="vakken_selector">
 
     <a class="button is-link is-small vakken-suggest-button" 
       v-on:click="toggleSuggesties" 
@@ -7,9 +7,6 @@
       {{suggestie_btn_label}}
     </a>
 
-    <!-- possibly add this if needed
-      open-direction="top"
-    -->
     <multiselect v-model="value" 
       tag-placeholder="Selecteer vakken" 
       placeholder="Selecteer vakken" 
@@ -24,34 +21,7 @@
       :loading="vakken_loading"
       :taggable="false" @input="updateValue"
       >
-
       <template slot="noResult">Vak niet gevonden</template>
-
-      <!--
-      custom template styling 
-      <template 
-        slot="singleLabel" 
-        slot-scope="props">
-          <span class="option__desc">
-            <span class="option__title">
-              {{ props.option.label}}
-            </span>
-            <span class="option_small">
-              {{props.option.definition}}
-            </span>
-          </span>
-      </template>
-
-      <template 
-        slot="option" 
-        slot-scope="props">
-          <div class="option__desc">
-            <span class="option__title">{{ props.option.label}}</span>
-            <span class="option__small">{{ props.option.definition}}</span>
-          </div>
-      </template>
-      -->
-
     </multiselect>
 
     <div class="inline-suggesties" v-if="showInlineSuggesties()">
@@ -76,9 +46,9 @@
 
     <div class="vakken-suggesties" v-bind:class="[show_vakken_suggesties ? 'show' : 'hide']">
 
-      <div class="modal is-active" id='vakken_modal'>
+      <div class="modal is-active" id="vakken_modal">
         <div class="modal-background"></div>
-        <div class="modal-card">
+        <div class="modal-card" id="vakken_modal_card">
 
           <header class="modal-card-head">
             <p class="modal-card-title">Vakken</p>
@@ -218,10 +188,9 @@
           </footer>
         </div>
       </div>
+    </div>
 
-      </div>
-
-    <textarea name="vakken" v-model="json_value" id="vakken_json_value"></textarea>
+  <textarea name="vakken" v-model="json_value" id="vakken_json_value"></textarea>
 </div>
 </template>
 
@@ -259,14 +228,13 @@
         vakken_search: "",
         vakken_prev_search: "",
         show_definitions: false,
-        show_tooltips: false,
+        show_tooltips: true,
         loading: false,
         vakken_loading: true
       }
     },
     mounted: function() {
       this.$root.$on('themas_changed', data => {
-        // console.log('themas_changed event');
         this.themas = data;
         this.updateSuggestions();
       });
@@ -514,11 +482,12 @@
         event.preventDefault();
       },
       changeToprowTooltip(event){
-        // attempt to make top row tooltip show on bottom
-        // console.log(event);
-        var pos = event.clientY; //pageY doesnt work right
+        var btnY = event.clientY;
+        var modalTop = document.getElementById("vakken_modal_card").getBoundingClientRect().top
+        var pos = btnY - modalTop;
 
-        if(pos<200){
+        // make top row tooltip position bottom so it isn't hidden outside dialog
+        if(pos < 200){
           event.target.classList.add('has-tooltip-bottom')
         }
         else{
@@ -573,8 +542,6 @@
   }
 </script>
 
-<!-- New step!
-     Add Multiselect CSS. Can be added as a static asset or inside a component. -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
@@ -629,24 +596,6 @@
     margin-bottom: 5px !important;
     color: #222;
   }
-
-  /* use for custom template
-  .multiselect__element{
-    max-width: 50em;
-  }
-
-  .multiselect__content{
-    max-width: 50em;
-  }
-
-  .option__title{
-    overflow-wrap: anywhere;
-    max-width: 50em;
-  }
-  .option__small {
-    overflow-wrap: anywhere;
-    max-width: 50em;
-  }*/
 
   .card{
     cursor: pointer;
