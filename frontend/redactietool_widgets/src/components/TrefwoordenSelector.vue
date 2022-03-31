@@ -1,5 +1,6 @@
 <template>
   <div id="trefwoorden_selector">
+
     <multiselect v-model="value" 
       tag-placeholder="Maak nieuw trefwoord aan" 
       select-label="Selecteer trefwoord"
@@ -8,17 +9,65 @@
       :show-labels="false"
       :blockKeys="['Delete']"
       :hide-selected="true"
-      placeholder="Voeg nieuw trefwoord toe" 
+      placeholder="Zoek trefwoord" 
       label="name" 
       track-by="code" 
-      :options="options" :multiple="true" 
-      :taggable="true" @tag="addTrefwoord" @input="updateValue">
+      :options="options" :multiple="true"
+      @search-change="elasticSearch"
+      :taggable="true" @tag="addKeywordDialog" @input="updateValue">
 
       <template slot="noOptions">
         &nbsp;
       </template>
     </multiselect>
+
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
+
+    <div class="create-trefwoord" v-bind:class="[show_keyword_dialog? 'show' : 'hide']">
+      <div class="modal is-active" id="keyword_modal">
+        <div class="modal-background"></div>
+        <div class="modal-card" id="keyword_modal_card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Nieuw trefwoord</p>
+          </header>
+
+          <section class="modal-card-body">
+            <p>
+              Ben je zeker dat je een volledig nieuw trefwoord wil toevoegen?
+            </p>
+            <br/>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                Trefwoord
+              </div>
+
+              <div class="field-body">
+                <div class="field">
+                <div class="control">
+                  <input 
+                    id="keyword_input"
+                    class="input keyword-input" 
+                    type="text" 
+                    v-model="new_keyword"/>
+                </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <footer class="modal-card-foot buttons-right">
+              <a class="button is-link is-light cancel-keywords-button" 
+                v-on:click="cancelKeywordDialog()">
+                  Annuleren 
+              </a>
+              <a class="button is-link close-keywords-button" 
+                v-on:click="addKeyword(new_keyword)">
+                  Toevoegen
+              </a>
+          </footer>
+        </div>
+      </div>
+    </div>
 
     <div v-if="cp_keywords.length">
       <div class="cp_keywords_button">
@@ -37,6 +86,7 @@
         </div>
 
         <!-- 
+          addinc content parnter keywords has been disabled
           v-on:click="addCpKeyword(keyword)"
         -->
         <div 
@@ -50,7 +100,7 @@
       </div>
     </div>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -74,10 +124,12 @@
           // should be coming from the suggest library or eleastic search in next
           // release
         ],
+        cp_keyword_label: "Bekijk de trefwoorden van de contentpartner",
         cp_keywords: [],
         show_cp_keywords: false,
         show_already_added_warning: false,
-        cp_keyword_label: "Bekijk de trefwoorden van de contentpartner"
+        new_keyword: "",
+        show_keyword_dialog: false
       }
     },
     created(){
@@ -110,25 +162,13 @@
         }
       }
     },
-    methods: {
-      addTrefwoord(new_keyword) {
-        // instead this should call some suggest lib or other
-        // api to create a new keyword (and show a modal with ok/cancel)
-        console.log("addTrefwoord: woord=", new_keyword);
-        const tw = {
-          name: new_keyword,
-          code: new_keyword.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        }
-        this.options.push(tw)
-        this.value.push(tw)
-        this.json_value = JSON.stringify(this.value)
-        this.$root.$emit("metadata_edited", "true");
-      },
+    methods: { 
       updateValue(value){
         this.json_value = JSON.stringify(value)
         this.$root.$emit("metadata_edited", "true");
       },
-      toggleKeywordCollapse: function(){
+      
+      toggleKeywordCollapse(){
         this.show_cp_keywords= !this.show_cp_keywords;
         if(this.show_cp_keywords){
           this.cp_keyword_label = "Verberg de trefwoorden van de contentpartner";
@@ -137,7 +177,8 @@
           this.cp_keyword_label = "Bekijk de trefwoorden van de contentpartner";
         }
       },
-      addCpKeyword: function(kw){
+
+      addCpKeyword(kw){
         var already_added = false;
 
         for( var o in this.value){
@@ -163,13 +204,57 @@
             this.show_already_added_warning = false;
           }, 3000);
         }
+      },
+
+      addKeyword(new_keyword) {
+        this.show_keyword_dialog=false;
+        const tw = {
+          name: new_keyword,
+          code: new_keyword.substring(0, 2) + Math.floor((Math.random() * 10000000))
+        }
+        this.options.push(tw)
+        this.value.push(tw)
+        this.json_value = JSON.stringify(this.value)
+        this.$root.$emit("metadata_edited", "true");
+      },
+
+      cancelKeywordDialog(){
+        this.show_keyword_dialog = false;
+      },
+
+      addKeywordDialog(keyword){
+        this.new_keyword = keyword;
+        this.show_keyword_dialog = true;
+        setTimeout(function(){
+          document.getElementById("keyword_input").focus();
+        }, 100);
+      },
+
+      elasticSearch(qry){
+        if(qry.length < 3){
+          console.log("not searching, at least 3 chars qry=", qry);
+          this.options = [];
+          return
+        }
+        console.log("Search ES with string=", qry);
+        
+        if(this.options.length>3) return;
+        //mock some ES search results
+        this.options.push({name: 'school', code:'school'})
+        this.options.push({name: 'schaal', code:'schaal'})
+        this.options.push({name: 'schep', code:'schep'})
+
+        this.options.push({name: 'straf', code:'straf'})
+        this.options.push({name: 'strik', code:'strik'})
+        this.options.push({name: 'strijk', code:'strijk'})
+        this.options.push({name: 'straal', code:'straal'})
+        this.options.push({name: 'stroop', code:'stroop'})
+
       }
     }
   }
 </script>
 
-<!-- New step!
-     Add Multiselect CSS. Can be added as a static asset or inside a component. -->
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
@@ -215,5 +300,14 @@
   }
   .show{
     display: block;
+  }
+  .cancel-keywords-button{
+    border-color: #97b8d3 !important;
+  }
+  .keyword-input{
+    border-color: #9cafbd;
+  }
+  .buttons-right{
+    justify-content: flex-end;
   }
 </style>
