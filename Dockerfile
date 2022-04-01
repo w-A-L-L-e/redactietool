@@ -53,6 +53,7 @@ ENV KEYFRAME_EDITING_LINK 'https://archief-qas.viaa.be/player?id='
 ENV SPARQL_ENDPOINT = 'https://sparql_api_url'
 ENV SPARQL_USER = 'user'
 ENV SPARQL_PASS = 'pass'
+ENV ES_SERVER = 'https://elasticsearch-ingest-qas-avo.private.cloud.meemoo.be'
 ENV FLASK_ENV=production
 
 
