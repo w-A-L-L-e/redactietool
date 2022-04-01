@@ -9,6 +9,7 @@
       :show-labels="false"
       :blockKeys="['Delete']"
       :hide-selected="true"
+      :loading="loading"
       placeholder="Zoek trefwoord" 
       label="name" 
       track-by="code" 
@@ -56,11 +57,11 @@
           </section>
 
           <footer class="modal-card-foot buttons-right">
-              <a class="button is-link is-light cancel-keywords-button" 
+              <a class="button is-link is-light" 
                 v-on:click="cancelKeywordDialog()">
                   Annuleren 
               </a>
-              <a class="button is-link close-keywords-button" 
+              <a class="button is-link" 
                 v-on:click="addKeyword(new_keyword)">
                   Toevoegen
               </a>
@@ -105,6 +106,7 @@
 
 <script>
   import Multiselect from 'vue-multiselect'
+  import axios from 'axios';
 
   var default_value = [];
   export default {
@@ -124,6 +126,8 @@
           // should be coming from the suggest library or eleastic search in next
           // release
         ],
+        loading: false,
+        redactie_api_url: "",
         cp_keyword_label: "Bekijk de trefwoorden van de contentpartner",
         cp_keywords: [],
         show_cp_keywords: false,
@@ -161,6 +165,14 @@
           );
         }
       }
+
+      // use mocked data on port 5000 during development (run: make vue_develop_api)
+      // this.redactie_api_url = 'http://localhost:5000';
+      var redactie_api_div = document.getElementById('redactie_api_url');
+      if( redactie_api_div ){
+        this.redactie_api_url = redactie_api_div.innerText;
+      }
+
     },
     methods: { 
       updateValue(value){
@@ -232,24 +244,29 @@
 
       elasticSearch(qry){
         if(qry.length < 3){
-          console.log("not searching, at least 3 chars qry=", qry);
+          // console.log("not searching, need 3 chars, current qry=", qry);
           this.options = [];
           return
         }
-        console.log("Search ES with string=", qry);
-        
-        if(this.options.length>3) return;
-        //mock some ES search results
-        this.options.push({name: 'school', code:'school'})
-        this.options.push({name: 'schaal', code:'schaal'})
-        this.options.push({name: 'schep', code:'schep'})
-
-        this.options.push({name: 'straf', code:'straf'})
-        this.options.push({name: 'strik', code:'strik'})
-        this.options.push({name: 'strijk', code:'strijk'})
-        this.options.push({name: 'straal', code:'straal'})
-        this.options.push({name: 'stroop', code:'stroop'})
-
+        this.loading = true;
+        axios
+          .post(this.redactie_api_url+'/keyword_search', {qry: qry})
+          .then(res => {
+            this.options = [];
+            for(var i in res.data){
+              var es_result = res.data[i];
+              const tw = {
+                name: es_result['text'],
+                code: es_result['_id']
+              };
+              this.options.push(tw);
+            }
+            this.loading = false;
+          })
+          .catch(error => {
+            console.log("keywoard search error=", error.message);
+            this.loading = false;
+          });
       }
     }
   }
@@ -301,7 +318,7 @@
   .show{
     display: block;
   }
-  .cancel-keywords-button{
+  .button.is-link.is-light{
     border-color: #97b8d3 !important;
   }
   .keyword-input{

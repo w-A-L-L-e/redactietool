@@ -258,8 +258,7 @@
       });
     },
     created: function() { 
-      // smart way to use mocked data during development
-      // after deploy in flask this uses a different url on deployed pod
+      // use mocked data on port 5000 during development (run: make vue_develop_api)
       var redactie_api_url = 'http://localhost:5000';
       var redactie_api_div = document.getElementById('redactie_api_url');
       if( redactie_api_div ){

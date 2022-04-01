@@ -608,6 +608,37 @@ def get_vakken_suggesties():
     return result
 
 
+@app.route('/keyword_search', methods=['POST'])
+@login_required
+def keyword_search():
+    json_data = request.json
+    print("TODO: make ES call with qry=", json_data['qry'])
+
+    # return some mocked data for now:
+    return json.dumps([
+        {
+            'text': 'strik',
+            '_id': '_strik',
+            '_score': 1.0
+        },
+        {
+            'text': 'striik',
+            '_id': '_strijk',
+            '_score': 1.0
+        },
+        {
+            'text': 'straf',
+            '_id': '_straf',
+            '_score': 1.0
+        },
+        {
+            'text': 'stroop',
+            '_id': '_stroop',
+            '_score': 1.0
+        },
+    ])
+
+
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
 @app.route("/health/live")
 def liveness_check():
