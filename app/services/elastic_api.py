@@ -43,7 +43,8 @@ class ElasticApi:
                 "keyword-suggest": {
                     "prefix": qry,
                     "completion": {
-                        "field": "lom_keywords.suggest"
+                        "field": "lom_keywords.suggest",
+                        "skip_duplicates": True 
                     }
                 }
             }
