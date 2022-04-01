@@ -31,6 +31,7 @@ from viaa.observability import logging
 
 from app.config import flask_environment
 from app.services.mediahaven_api import MediahavenApi
+from app.services.elastic_api import ElasticApi
 from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
@@ -612,31 +613,8 @@ def get_vakken_suggesties():
 @login_required
 def keyword_search():
     json_data = request.json
-    print("TODO: make ES call with qry=", json_data['qry'])
-
-    # return some mocked data for now:
-    return json.dumps([
-        {
-            'text': 'strik',
-            '_id': '_strik',
-            '_score': 1.0
-        },
-        {
-            'text': 'striik',
-            '_id': '_strijk',
-            '_score': 1.0
-        },
-        {
-            'text': 'straf',
-            '_id': '_straf',
-            '_score': 1.0
-        },
-        {
-            'text': 'stroop',
-            '_id': '_stroop',
-            '_score': 1.0
-        },
-    ])
+    es_api = ElasticApi()
+    return es_api.search_keyword(json_data['qry'])
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
