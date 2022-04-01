@@ -407,8 +407,21 @@ def test_vakken(client):
     assert res.status_code == 200
 
 
-# todo
-# supply json['graden'] and json['themas']
+@pytest.mark.vcr
+def test_keyword_search(client):
+    res = client.post(
+        "/keyword_search",
+        json={'qry': 'zoek'},
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    search_results = json.loads(res.data)
+    assert len(search_results) >= 4
+    assert search_results[0]['text'] == 'zoekactie'
+
+
+# TODO: supply json['graden'] and json['themas']
 # with post request
 # @pytest.mark.vcr
 # def test_vakken_suggesties(client):

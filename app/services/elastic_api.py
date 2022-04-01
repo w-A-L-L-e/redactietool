@@ -20,8 +20,8 @@ logger = logging.get_logger(__name__, config=ConfigParser())
 class ElasticApi:
     # Voor v2 is endpoint hier /mediahaven-rest-api/v2/resources/
     # en met oauth ipv basic auth
-    API_SERVER = os.environ.get(
-        'ELASTIC_API',
+    ES_SERVER = os.environ.get(
+        'ES_SERVER',
         'https://elasticsearch-ingest-qas-avo.private.cloud.meemoo.be'
     )
 
@@ -32,7 +32,7 @@ class ElasticApi:
             self.session = session
 
     def search_keyword(self, qry):
-        search_url = f"{self.API_SERVER}/avo*/_search"
+        search_url = f"{self.ES_SERVER}/avo*/_search"
         headers = {
             'Content-Type': 'application/json',
         }
@@ -57,7 +57,8 @@ class ElasticApi:
 
         if response.status_code >= 400:
             logger.error(
-                f"search_keyword(qry={qry}). Elastic search error={response.content}")
+                f"Elastic search_keyword(qry={qry}): error={response.content}"
+            )
             return json.dumps([
                 {
                     'text': f"Elastic Search ERROR: {response.status_code}",
@@ -65,6 +66,8 @@ class ElasticApi:
                 }
             ])
         else:
+            result_data = response.json()
+            options = result_data['suggest']['keyword-suggest'][0]['options']
             return json.dumps(
-                response['suggest']['keyword-suggest']['options']
+                options
             )
