@@ -426,6 +426,9 @@ hr {
     border: 1px solid #ddd;
 }
 
+.button.is-link.is-light{
+  border-color: #97b8d3 !important;
+}
 
 .sticky-submit-button {
   /*
@@ -562,12 +565,6 @@ h3.subtitle{
   content: 'Titel' !important;
 }
 
-/*
- .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-  content: 'Titel h1';
-}
-*/
 
 table.subtitle-upload-results {
   background: transparent;
@@ -600,5 +597,4 @@ h3.collapsable{
 h2.title {
   margin-bottom: 24px !important;
 }
-
 

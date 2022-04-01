@@ -157,6 +157,48 @@ def get_vakken_suggesties():
     return send_from_directory('vakken', 'suggested_vakken.json')
 
 
+@app.route('/keyword_search', methods=['POST'])
+@cross_origin()
+def keyword_search():
+    json_data = json.loads(request.data)
+    print("TODO ES call with qry=", json_data['qry'])
+
+    # suggest->title->options
+    return json.dumps([
+        {
+            'text': 'strik',
+            '_id': '_strik',
+            '_score': 1.0
+        },
+        {
+            'text': 'strijk',
+            '_id': '_strijk',
+            '_score': 1.0
+        },
+        {
+            'text': 'straf',
+            '_id': '_straf',
+            '_score': 1.0
+        },
+        {
+            'text': 'strop',
+            '_id': '_strop',
+            '_score': 1.0
+        },
+        {
+            'text': 'stroop',
+            '_id': '_stroop',
+            '_score': 1.0
+        },
+        {
+            'text': 'stramien',
+            '_id': '_stramien',
+            '_score': 1.0
+        },
+
+    ])
+
+
 @app.route('/publicatie_status', methods=['GET'])
 @cross_origin()
 def mock_pub_status():

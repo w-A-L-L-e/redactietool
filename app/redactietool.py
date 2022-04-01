@@ -31,6 +31,7 @@ from viaa.observability import logging
 
 from app.config import flask_environment
 from app.services.mediahaven_api import MediahavenApi
+from app.services.elastic_api import ElasticApi
 from app.services.suggest_api import SuggestApi
 from app.services.ftp_uploader import FtpUploader
 from app.services.subtitle_files import (
@@ -606,6 +607,14 @@ def get_vakken_suggesties():
     result = suggest_api.get_vakken_suggesties(
         json_data['graden'], json_data['themas'])
     return result
+
+
+@app.route('/keyword_search', methods=['POST'])
+@login_required
+def keyword_search():
+    json_data = request.json
+    es_api = ElasticApi()
+    return es_api.search_keyword(json_data['qry'])
 
 
 # =================== HEALTH CHECK ROUTES AND ERROR HANDLING ==================
