@@ -44,7 +44,7 @@ class ElasticApi:
                     "prefix": qry,
                     "completion": {
                         "field": "lom_keywords.suggest",
-                        "skip_duplicates": True 
+                        "skip_duplicates": True
                     }
                 }
             }
