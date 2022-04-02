@@ -5,7 +5,8 @@
 #
 #  app/services/elastic_api.py
 #
-#   Make calls in Elastic Search AVO for keyword searches
+#   Make calls to Elastic Search server from Archief voor Onderwijs to do
+#   keyword searches in Leerobject section Metadata editing page
 #
 
 import os
@@ -18,8 +19,6 @@ logger = logging.get_logger(__name__, config=ConfigParser())
 
 
 class ElasticApi:
-    # Voor v2 is endpoint hier /mediahaven-rest-api/v2/resources/
-    # en met oauth ipv basic auth
     ES_SERVER = os.environ.get(
         'ES_SERVER',
         'https://elasticsearch-ingest-qas-avo.private.cloud.meemoo.be'
