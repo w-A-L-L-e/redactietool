@@ -601,11 +601,21 @@ def get_vakken():
 
 @app.route('/vakken_suggest', methods=['POST'])
 @login_required
-def get_vakken_suggesties():
+def vakken_suggest():
     json_data = request.json
     suggest_api = SuggestApi()
     result = suggest_api.get_vakken_suggesties(
         json_data['graden'], json_data['themas'])
+    return result
+
+
+@app.route('/vakken_related', methods=['POST'])
+@login_required
+def vakken_related():
+    json_data = request.json
+    suggest_api = SuggestApi()
+    result = suggest_api.get_vakken_related(
+        json_data['graden'], json_data['niveaus'])
     return result
 
 

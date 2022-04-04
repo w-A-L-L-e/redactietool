@@ -331,28 +331,36 @@
         }
         return false;
       },
-      updateOverigeVakken(suggest_map){
-        this.overige_vakken = [];
-        var row2 = [];
-
-        for(var vak_index in this.options ){
-          var ovak = this.options[vak_index];
-          if(suggest_map[ovak.id] == undefined){ 
-            // row2.push(ovak);
-            // fix duplicate entries 
-            row2.push(Object.assign({}, ovak));
-          }
-
-          if(row2.length>=5){
-            this.overige_vakken.push(row2);
-            row2=[];
-          }
-        }
-        if(row2.length>0){
-          this.overige_vakken.push(row2);
+      updateOverigeVakken(redactie_api_url, suggest_map){
+        // todo: suggest_map is now deprecated, refactor it away
+        console.log("suggest_map not used =", suggest_map);
+        var post_data = {
+          'graden': this.graden,
+          'niveaus': this.niveaus
         }
 
-        this.overige_filtered = JSON.parse(JSON.stringify(this.overige_vakken)); 
+        this.loading = true;
+        axios
+          .post(redactie_api_url+'/vakken_related', post_data)
+          .then(res => {
+            this.overige_vakken = [];
+            var row = [];
+            for( var vak_index in res.data){
+              var vak = res.data[vak_index];
+              vak.label = this.truncateLabel(vak.label);
+              suggest_map[vak.id] = vak; 
+              row.push(Object.assign({}, vak));
+              if(row.length>=5){
+                this.overige_vakken.push(row);
+                row=[];
+              }
+            }
+            if(row.length>0){
+              this.overige_vakken.push(row);
+            }
+            this.loading = false;
+            this.overige_filtered = JSON.parse(JSON.stringify(this.overige_vakken)); 
+          })
       },
       updateSuggestions(){
         var redactie_api_url = 'http://localhost:5000';
@@ -376,7 +384,7 @@
           ){
           this.vakken_suggesties = []; //clear suggestions
           this.suggesties_filtered = [];
-          this.updateOverigeVakken({});
+          this.updateOverigeVakken(redactie_api_url, {});
           return;
         }
 
@@ -402,7 +410,7 @@
             }
             this.loading = false;
             this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
-            this.updateOverigeVakken(suggest_map);
+            this.updateOverigeVakken(redactie_api_url, suggest_map);
           })
       },
       toggleSuggesties(event){
@@ -497,7 +505,7 @@
       truncateLabel(text) {
         var length=45;
         var suffix='...';
-        if (text.length > length) {
+        if ((text)&&(text.length > length)) {
           return text.substring(0, length) + suffix;
         } 
         else{
