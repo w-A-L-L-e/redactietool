@@ -11,11 +11,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Host:
-      - do-qas-mdm-01.do.viaa.be:5820
+      - sparql_test_endpoint
       User-Agent:
       - sparqlwrapper 1.8.5 (rdflib.github.io/sparqlwrapper)
     method: POST
-    uri: http://do-qas-mdm-01.do.viaa.be:5820/meemoo/query?reasoning=false&flushResponseHeaders=true&graph-uri=https://data.meemoo.be/graphs/schema/onderwijs
+    uri: http://sparql_test_endpoint
   response:
     body:
       string: '{"head":{"vars":["id","label","definition"]},"results":{"bindings":[{"definition":{"xml:lang":"nl","type":"literal","value":"Beeld,
