@@ -5,23 +5,22 @@
       tag-placeholder="Maak nieuw trefwoord aan" 
       select-label="Selecteer trefwoord"
       deselect-label="Verwijder trefwoord"
-      selected-label=""
       :show-labels="false"
       :blockKeys="['Delete']"
       :hide-selected="true"
       :loading="loading"
-      placeholder="Zoek trefwoord" 
+      placeholder="" 
       label="name" 
       track-by="code" 
       :options="options" :multiple="true"
       @search-change="elasticSearch"
       :taggable="true" @tag="addKeywordDialog" @input="updateValue">
 
-      <template slot="noOptions">
-        &nbsp;
-      </template>
+      <span slot="noOptions">Zoek trefwoord</span>
+      <span slot="noResult">Trefwoord niet gevonden</span>
     </multiselect>
 
+     
     <textarea name="trefwoorden" v-model="json_value" id="trefwoorden_json_value"></textarea>
 
     <div class="create-trefwoord" v-bind:class="[show_keyword_dialog? 'show' : 'hide']">
@@ -121,11 +120,7 @@
       return {
         value: default_value,
         json_value: JSON.stringify(default_value),
-        options: [
-          // { name: 'reportage', code: 'reportage' },
-          // should be coming from the suggest library or eleastic search in next
-          // release
-        ],
+        options: [],
         loading: false,
         redactie_api_url: "",
         cp_keyword_label: "Bekijk de trefwoorden van de contentpartner",
