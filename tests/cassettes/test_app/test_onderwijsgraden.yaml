@@ -11,11 +11,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Host:
-      - sparql_test_endpoint:80 
+      - do-qas-mdm-01.do.viaa.be:5820
       User-Agent:
       - sparqlwrapper 1.8.5 (rdflib.github.io/sparqlwrapper)
     method: POST
-    uri: http://sparql_test_endpoint:80
+    uri: http://do-qas-mdm-01.do.viaa.be:5820/meemoo/query?reasoning=false&flushResponseHeaders=true&graph-uri=https://data.meemoo.be/graphs/schema/onderwijs
   response:
     body:
       string: '{"head":{"vars":["id","label","definition","child_count","parent_id"]},"results":{"bindings":[{"child_count":{"datatype":"http://www.w3.org/2001/XMLSchema#integer","type":"literal","value":"2"},"parent_id":{"type":"uri","value":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"},"definition":{"xml:lang":"nl","type":"literal","value":"lager
@@ -41,9 +41,9 @@ interactions:
       Content-Type:
       - application/sparql-results+json
       Date:
-      - Thu, 24 Mar 2022 09:21:33 GMT
+      - Mon, 04 Apr 2022 14:57:12 GMT
       SD-Query-Id:
-      - '8747'
+      - '6350'
       Transfer-Encoding:
       - chunked
     status:

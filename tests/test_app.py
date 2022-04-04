@@ -421,16 +421,75 @@ def test_keyword_search(client):
     assert search_results[0]['text'] == 'zoekactie'
 
 
-# TODO: supply json['graden'] and json['themas']
-# with post request
-# @pytest.mark.vcr
-# def test_vakken_suggesties(client):
-#     res = client.post(
-#         "/vakken_suggest",
-#         follow_redirects=True
-#     )
-#
-#     assert res.status_code == 200
+@pytest.mark.vcr
+def test_vakken_suggesties(client):
+    graden_en_themas = {
+      "graden": [
+        {
+          "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+          "label": "lager 1e graad",
+          "definition": "lager 1e graad",
+          "child_count": 2,
+          "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+        }
+      ],
+      "themas": [
+        {
+          "id": "https://data.hetarchief.be/id/onderwijs/thema/klassieke-talen",
+          "label": "klassieke talen",
+          "definition": "Taalkunde, exclusief literatuur, voor de klassieke talen"
+        },
+        {
+          "id": "https://data.hetarchief.be/id/onderwijs/thema/media-en-communicatie",
+          "label": "media en communicatie",
+          "definition": "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media"
+        }
+      ]
+    }
+
+    res = client.post(
+        "/vakken_suggest",
+        json=graden_en_themas,
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    suggesties = json.loads(res.data)
+    assert len(suggesties) == 3
+
+
+@pytest.mark.vcr
+def test_vakken_related(client):
+    graden_en_niveaus = {
+        "graden": [
+          {
+            "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+            "label": "lager 1e graad",
+            "definition": "lager 1e graad",
+            "child_count": 2,
+            "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+          }
+        ],
+        "niveaus": [
+          {
+            "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs",
+            "label": "lager onderwijs",
+            "definition": "lager onderwijs",
+            "collection": "onderwijs subniveaus",
+            "child_count": 3,
+            "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"
+          }
+        ]
+    }
+    res = client.post(
+        "/vakken_related",
+        json=graden_en_niveaus,
+        follow_redirects=True
+    )
+
+    assert res.status_code == 200
+    overige_vakken = json.loads(res.data)
+    assert len(overige_vakken) == 12
 
 
 @pytest.mark.vcr
