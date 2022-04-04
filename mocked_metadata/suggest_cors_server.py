@@ -157,6 +157,15 @@ def get_vakken_suggesties():
     return send_from_directory('vakken', 'suggested_vakken.json')
 
 
+@app.route('/vakken_related', methods=['POST'])
+@cross_origin()
+def get_vakken_related():
+    json_data = json.loads(request.data)
+    print("graden=", json_data['graden'])
+    print("niveaus=", json_data['niveaus'])
+    return send_from_directory('vakken', 'related_vakken.json')
+
+
 @app.route('/keyword_search', methods=['POST'])
 @cross_origin()
 def keyword_search():

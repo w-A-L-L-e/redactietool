@@ -199,8 +199,6 @@
   import Multiselect from 'vue-multiselect'
   import axios from 'axios';
 
-  //example of default value filled in voor vakken in metadata:
-  // var default_value = [{ name: 'Vak 1', code: 'vak1' }]
   var default_value = [];
 
   export default {
@@ -331,9 +329,7 @@
         }
         return false;
       },
-      updateOverigeVakken(redactie_api_url, suggest_map){
-        // todo: suggest_map is now deprecated, refactor it away
-        console.log("suggest_map not used =", suggest_map);
+      updateOverigeVakken(redactie_api_url){
         var post_data = {
           'graden': this.graden,
           'niveaus': this.niveaus
@@ -348,7 +344,6 @@
             for( var vak_index in res.data){
               var vak = res.data[vak_index];
               vak.label = this.truncateLabel(vak.label);
-              suggest_map[vak.id] = vak; 
               row.push(Object.assign({}, vak));
               if(row.length>=5){
                 this.overige_vakken.push(row);
@@ -384,7 +379,7 @@
           ){
           this.vakken_suggesties = []; //clear suggestions
           this.suggesties_filtered = [];
-          this.updateOverigeVakken(redactie_api_url, {});
+          this.updateOverigeVakken(redactie_api_url);
           return;
         }
 
@@ -394,11 +389,9 @@
           .then(res => {
             this.vakken_suggesties = [];
             var row = [];
-            var suggest_map = {};
             for( var vak_index in res.data){
               var vak = res.data[vak_index];
               vak.label = this.truncateLabel(vak.label);
-              suggest_map[vak.id] = vak; 
               row.push(Object.assign({}, vak));
               if(row.length>=5){
                 this.vakken_suggesties.push(row);
@@ -410,7 +403,7 @@
             }
             this.loading = false;
             this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
-            this.updateOverigeVakken(redactie_api_url, suggest_map);
+            this.updateOverigeVakken(redactie_api_url);
           })
       },
       toggleSuggesties(event){
@@ -444,7 +437,6 @@
             label: vak.label,
             definition: vak.definition
           };
-          // this.options.push(new_vak); //only needed for entirely new vak (create)
           this.value.push(new_vak);
         }
         

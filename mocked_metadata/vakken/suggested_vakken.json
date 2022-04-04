@@ -1,32 +1,32 @@
 [
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/commerci%C3%ABle-technieken",
-      "label":"commerci\u00eble technieken",
-      "definition":"Verkoopstechnieken, verkoop, boekhouden, winkel houden"
-   },
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/boekhouding",
-      "label":"boekhouding",
-      "definition":"Boekhouding, financi\u00ebn, bedrijfsadministratie"
-   },
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/logistiek",
-      "label":"logistiek",
-      "definition":"Ontvangen, sorteren, opslaan, verpakken en verzenden van verschillende soorten goederen, magazijntechnieken"
-   },
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/bedrijfswetenschappen",
-      "label":"bedrijfswetenschappen",
-      "definition":"Economie, consumentenzaken, goederenmarkt, kapitaalmarkt, organisatie van bedrijven, handelsmarkten"
-   },
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/economie-",
-      "label":"economie",
-      "definition":"Conjunctuur, inflatie, beurzen, belastingen, (internationale) handel, embargo's, omzet, ondernemen, innoveren"
-   },
-   {
-      "id":"https://data.meemoo.be/term/onderwijs/vak/toegepaste-economie",
-      "label":"toegepaste economie",
-      "definition":"Praktijkvoorbeelden van economie"
-   }
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/muzische-vorming",
+    "label": "muzische vorming",
+    "definition": "Beeld, muziek, drama, beweging, media. Zelf-expressie en beleving."
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands",
+    "label": "Nederlands",
+    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/sociale-vaardigheden",
+    "label": "sociale vaardigheden",
+    "definition": "Sociale interactie, sociale relaties, dialoog, participatie"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/grieks",
+    "label": "Grieks",
+    "definition": "Woordenschat, grammatica, Griekse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/latijn",
+    "label": "Latijn",
+    "definition": "Woordenschat, grammatica, Latijnse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/maatschappelijke-vorming",
+    "label": "maatschappelijke vorming",
+    "definition": "Informatie vinden en praten over overheid, eigen leefmilieu, diversiteit, rechten, participatie, geldzaken, geschiedenis en cultuur"
+  }
 ]

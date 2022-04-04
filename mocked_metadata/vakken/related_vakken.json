@@ -1,0 +1,197 @@
+[
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/agrarische-technieken",
+    "label": "agrarische technieken",
+    "definition": "Agrarische technieken, milieu, plant, dier, landbouw, natuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/commerci%C3%ABle-technieken",
+    "label": "commerciële technieken",
+    "definition": "Verkoopstechnieken, verkoop, boekhouden, winkel houden"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/eigen-cultuur-en-religie",
+    "label": "eigen cultuur en religie",
+    "definition": "Yeshiva - God, Allah, Jahwe en de rest, godsdienst, zedenleer"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/leren-leren",
+    "label": "leren leren",
+    "definition": "Leren een leertaak zelfstandig tot een goed einde brengen"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/lichamelijke-opvoeding",
+    "label": "lichamelijke opvoeding",
+    "definition": "Beweging, atletiek, gymnastiek, balsporten, veiligheid, teamspirit, identiteit"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/schilderen-en-decoratie",
+    "label": "schilderen en decoratie",
+    "definition": "Behangen, schilderen, wand- en vloerbekleding"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/techniek",
+    "label": "techniek",
+    "definition": "Beginselen van elektriciteit, mobiliteit, constructie, ontwerpen, monteren"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/technologische-opvoeding",
+    "label": "technologische opvoeding",
+    "definition": "Beginselen van elektriciteit, mobiliteit, constructie, ontwerpen, monteren"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/textielproductie",
+    "label": "textielproductie",
+    "definition": "Maken van textielproducten in vezelvoorbereiding, de spinnerij, de voorbereiding weverij, de weverij, de tuftafdeling of de eindafwerking"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/toegepaste-informatica",
+    "label": "toegepaste informatica",
+    "definition": "Praktijkvoorbeelden van informatica"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/topsport",
+    "label": "topsport",
+    "definition": "Beweging, atletiek, gymnastiek, balsporten, motoriek, veiligheid, teamspirit, identiteit"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/verzorging",
+    "label": "verzorging",
+    "definition": "Alles rond de kinder-, bejaarden- en thuiszorg"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/voeding",
+    "label": "voeding",
+    "definition": "Voeding, ambachtelijke bereidingen en industriële productie van levensmiddelen"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/wiskunde",
+    "label": "wiskunde",
+    "definition": "Getallenleer, meetkunde, algebra, analyse, kansrekenen, modelleren"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/zeemanschap",
+    "label": "zeemanschap",
+    "definition": "Opleiding om een matroos te worden"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/artistieke-expressie",
+    "label": "artistieke expressie",
+    "definition": "Verkennen van dans, beeld, muziek, expressie - woord (basis)"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/elektriciteit",
+    "label": "elektriciteit",
+    "definition": "Alles rond elektriciteit: basis, kenmerken, leggen, netwerk monteren,.."
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/ict",
+    "label": "ICT",
+    "definition": "ICT, computationeel denken"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/muzikale-opvoeding",
+    "label": "muzikale opvoeding",
+    "definition": "Muziek beluisteren, spelen, beschrijven, mening vormen over, zelfexpressie, cultuur, diversiteit"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands-voor-nieuwkomers",
+    "label": "Nederlands voor nieuwkomers (vak voorbehouden aan OKAN)",
+    "definition": "Woordenschat, grammatica, Nederlandse cultuur, vaardigheden voor beginners"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/plastische-opvoeding",
+    "label": "plastische opvoeding",
+    "definition": "Waarnemen, vormgeven, stijlen, materialen, tekenen, schilderen, beeldhouwen, collages, foto ..."
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/economie-",
+    "label": "economie",
+    "definition": "Conjunctuur, inflatie, beurzen, belastingen, (internationale) handel, embargo's, omzet, ondernemen, innoveren"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/engels-",
+    "label": "Engels",
+    "definition": "Woordenschat, grammatica, Angelsaksische cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/frans",
+    "label": "Frans",
+    "definition": "Woordenschat, grammatica, Franse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/muzische-vorming",
+    "label": "muzische vorming",
+    "definition": "Beeld, muziek, drama, beweging, media. Zelf-expressie en beleving."
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/natuurwetenschappen",
+    "label": "natuurwetenschappen",
+    "definition": "Combinatie van biologie, chemie en fysica"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands",
+    "label": "Nederlands",
+    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/sociale-vaardigheden",
+    "label": "sociale vaardigheden",
+    "definition": "Sociale interactie, sociale relaties, dialoog, participatie"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/godsdienst-",
+    "label": "godsdienst",
+    "definition": "religie, geloof, de Kerk, filosofie, ethische kwesties, identiteit, diversiteit"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/grieks",
+    "label": "Grieks",
+    "definition": "Woordenschat, grammatica, Griekse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/latijn",
+    "label": "Latijn",
+    "definition": "Woordenschat, grammatica, Latijnse cultuur, vaardigheden, literatuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/niet-confessionele-zedenleer-",
+    "label": "niet-confessionele zedenleer",
+    "definition": "Vrijzinnig humanisme, identiteit, samenleven, democratie, diversiteit, andere levensbeschouwingen"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/mens-en-maatschappij",
+    "label": "mens en maatschappij",
+    "definition": "Mens, maatschappij, tijd, ruimte, verkeer"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/aardrijkskunde",
+    "label": "aardrijkskunde",
+    "definition": "Aarde, ruimte, reliëf, bevolking, weer en klimaat, natuurverschijnselen"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/geschiedenis",
+    "label": "geschiedenis",
+    "definition": "tijdvakken, bronnenonderzoek, historische kritiek, erfgoed"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/project-stem",
+    "label": "project STEM",
+    "definition": "Idee onderzoeken, innoveren, technisch tekenen, constructies, programmeren, mechanieken"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/maatschappelijke-vorming",
+    "label": "maatschappelijke vorming",
+    "definition": "Informatie vinden en praten over overheid, eigen leefmilieu, diversiteit, rechten, participatie, geldzaken, geschiedenis en cultuur"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/burgerschap",
+    "label": "burgerschap",
+    "definition": "Identiteit, diversiteit, dialoog, mensenrechten, plichten, rechtstaat, democratie, politiek, stemrecht, participatie"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/wetenschappen-en-techniek",
+    "label": "wetenschappen en techniek",
+    "definition": "Wetenschappen, techniek, natuur"
+  }
+]
