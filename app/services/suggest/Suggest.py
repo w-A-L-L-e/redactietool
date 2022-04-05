@@ -25,7 +25,7 @@ PREFIX stardog: <tag:stardog:api:>
 
 """
 
-GET_NIVEAUS = (
+GET_NIVEAUS_QUERY = (
     PREFIX
     + """
 SELECT ?id ?label ?definition ?collection (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
@@ -53,13 +53,57 @@ GROUP BY ?id ?label ?definition ?collection
 """
 )
 
-GET_COLLECTION_QUERY = (
+GET_VAKKEN_QUERY = (
+    PREFIX
+    + """
+SELECT ?id ?label ?definition (0 AS ?child_count) (GROUP_CONCAT(?rel; separator=",") as ?related_id)
+WHERE {{
+    col:vak skos:memberList ?list .
+    ?list stardog:list:member (?id ?index) .
+
+    ?id a skos:Concept;
+    skos:prefLabel ?label;
+    skos:definition ?definition .
+
+    OPTIONAL { 
+      ?id skos:related ?rel.
+      col:graad skos:member ?rel. 
+    }
+}}
+GROUP BY ?id ?label ?definition ?index
+ORDER BY ?index
+"""
+)
+
+GET_RELATED_VAK_QUERY = (
+    PREFIX
+    + """
+SELECT ?id ?label ?definition (GROUP_CONCAT(?rel; separator=",") as ?related_id)
+WHERE {{
+    col:vak skos:member ?id.
+
+    ?id a skos:Concept;
+    skos:prefLabel ?label;
+    skos:definition ?definition;
+    skos:related ?concept.
+
+    OPTIONAL {{ 
+      ?id skos:related ?rel.
+      col:graad skos:member ?rel. 
+    }}
+
+    VALUES ?concept {{ {concept} }}
+}}
+GROUP BY ?id ?label ?definition
+"""
+)
+
+GET_GRADEN_QUERY = (
     PREFIX
     + """
 SELECT ?id ?label ?definition (count(?child) as ?child_count) (SAMPLE(?parent) as ?parent_id)
 WHERE {{
-    BIND(URI('{collection}') AS ?collection)
-    ?collection a skos:Collection; skos:member ?id.
+    col:graad a skos:Collection; skos:member ?id.
 
     ?id a skos:Concept;
         skos:prefLabel ?label;
@@ -72,20 +116,17 @@ GROUP BY ?id ?label ?definition
 """
 )
 
-GET_SORTED_COLLECTION_QUERY = (
+GET_THEMAS_QUERY = (
     PREFIX
     + """
-SELECT DISTINCT ?id ?label ?definition (0 AS ?child_count) ?parent_id
+SELECT DISTINCT ?id ?label ?definition (0 AS ?child_count)
 WHERE {{
-    BIND(URI('{collection}') AS ?collection)
-    ?collection skos:memberList ?list .
+    col:thema skos:memberList ?list .
     ?list stardog:list:member (?id ?index) .
 
     ?id a skos:Concept;
     skos:prefLabel ?label;
     skos:definition ?definition .
-
-    OPTIONAL {{ ?id skos:broader ?parent_id }}
 }}
 ORDER BY ?index
 """
@@ -138,26 +179,6 @@ WHERE {{
 
     VALUES ?id {{ {concept} }}
 }}
-"""
-)
-
-GET_RELATED_VAK_QUERY = (
-    PREFIX
-    + """
-SELECT ?id ?label ?definition (SAMPLE(?parent) as ?parent_id)
-WHERE {{
-    col:vak skos:member ?id.
-
-    ?id a skos:Concept;
-    skos:prefLabel ?label;
-    skos:definition ?definition;
-    skos:related ?concept.
-
-    OPTIONAL {{ ?id skos:broader ?parent }}
-
-    VALUES ?concept {{ {concept} }}
-}}
-GROUP BY ?id ?label ?definition
 """
 )
 
@@ -241,20 +262,6 @@ class Suggest:
         ):
             yield res
 
-    def get_collection(self, collection: str, is_sorted: bool = False):
-        """Get a collection members by collection id."""
-
-        if not is_valid_uri(collection):
-            raise ValueError(
-                "The id {} is not a valid URI.".format(collection))
-
-        query = GET_COLLECTION_QUERY
-        if is_sorted:
-            query = GET_SORTED_COLLECTION_QUERY
-
-        for res in self.__exec_query(query, collection=collection):
-            yield res
-
     def get_children(self, concept: List[str]):
         """Get the children of a list of concept ids."""
 
@@ -264,25 +271,25 @@ class Suggest:
     def get_vakken(self):
         """Get list 'vakken'."""
 
-        for res in self.get_collection(f"{self.EXT_NS}collectie/vak", True):
+        for res in self.__exec_query(GET_VAKKEN_QUERY):
             yield res
 
     def get_themas(self):
         """Get list 'themas'."""
 
-        for res in self.get_collection(f"{self.OND_NS}collectie/thema", True):
+        for res in self.__exec_query(GET_THEMAS_QUERY):
             yield res
 
     def get_graden(self):
         """Get list 'onderwijsgraden'."""
 
-        for res in self.get_collection(f"{self.EXT_NS}collectie/graad"):
+        for res in self.__exec_query(GET_GRADEN_QUERY):
             yield res
 
     def get_niveaus(self):
         """Get list 'onderwijsniveaus'."""
 
-        for res in self.__exec_query(GET_NIVEAUS):
+        for res in self.__exec_query(GET_NIVEAUS_QUERY):
             yield res
 
     def suggest(self, thema: List[str], graad: List[str]):
