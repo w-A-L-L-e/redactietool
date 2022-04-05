@@ -146,10 +146,10 @@ WHERE {{
 """
 )
 
-SUGGEST_BY_IDS_QUERY = (
+SUGGEST_VAKKEN_BY_IDS_QUERY = (
     PREFIX
     + """
-SELECT ?id ?label ?definition (SAMPLE(?parent) as ?parent_id)
+SELECT ?id ?label ?definition (GROUP_CONCAT(?graad; separator=",") as ?related_id)
 WHERE {{
     ocol:thema skos:member ?thema.
     col:graad skos:member ?graad.
@@ -159,8 +159,6 @@ WHERE {{
         skos:prefLabel ?label;
         skos:definition ?definition;
         skos:related ?thema, ?graad.
-
-    OPTIONAL {{ ?id skos:broader ?parent }}
 
     VALUES ?thema {{ {themas} }}
     VALUES ?graad {{ {graden} }}
@@ -296,7 +294,7 @@ class Suggest:
         """Suggest 'vakken' based on the identifiers of 'onderwijsgraad' and 'thema'."""
 
         for res in self.__exec_query(
-            SUGGEST_BY_IDS_QUERY,
+            SUGGEST_VAKKEN_BY_IDS_QUERY,
             themas=join_ids(thema),
             graden=join_ids(graad),
         ):
