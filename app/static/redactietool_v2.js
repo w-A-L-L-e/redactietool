@@ -427,8 +427,14 @@ function checkMetadataSaved(event) {
 function metadataSubmit(btn){
   edited = get_id("metadata_form_edited");
   edited.value = "false";
+  btn.classList.add('is-loading');
   btn.form.submit();
-  btn.disabled=true; 
+}
+
+function resetMetadataSubmit(){
+  console.log("reset submit");
+  btn = get_id("metadata_submit_btn");
+  if(btn) btn.classList.remove('is-loading');
 }
 
 // =========================== DOCUMENT READY EVENT ============================
@@ -468,12 +474,15 @@ document.addEventListener('DOMContentLoaded', () => {
   autoCloseAlert("data_saved_alert_box");
   checkDateInputs(); 
   resetSearch();
-
+  resetMetadataSubmit();
  });
 
 
 // force dom ready with back button
-window.addEventListener('unload', function(){});
+window.addEventListener('unload', function(){
+  resetSearch();
+  resetMetadataSubmit();
+});
 
 // show navigation dialog on metadata edit after editing
 window.addEventListener('beforeunload', checkMetadataSaved);
