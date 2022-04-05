@@ -27,9 +27,7 @@
     <div class="inline-suggesties" v-if="showInlineSuggesties()">
       <div class="inline-suggesties-title">Suggesties</div>
 
-      <div v-if="loading">
-        <button class="button is-loading">Loading</button>
-      </div>
+      <div class="vakken-spinner multiselect__spinner" v-if="loading"></div>
 
       <div v-if="!loading" class="inline-suggesties-list">
         <div v-for="(row, index) in suggesties_filtered" :key="'vak'+index">
@@ -141,10 +139,7 @@
               Geen suggesties beschikbaar, volgende vakken zijn mogelijk.
             </h3>
 
-            <div v-if="loading" class="modal-loader">
-              <!--progress class="progress is-large is-info" max="100">60%</progress-->
-              <button class="button is-loading">Loading</button>
-            </div>
+            <div class="vakken-spinner-modal multiselect__spinner" v-if="loading"></div>
 
             <div v-if="!hogerOfVolwassenOnderwijs()">
               <div class="columns"  v-for="(row2, index2) in overige_filtered" :key="'sug'+index2">
@@ -667,10 +662,23 @@
     color: #fff;
   }
 
-  .modal-loader {
+  .vakken-spinner{
+    display: inline-block;
+    position: relative;
+    float: left;
+    background: transparent;
+    margin-top: -10px;
+    margin-left: -17px;
+    margin-right: -10px;
+  } 
+
+  .vakken-spinner-modal{
+    display: inline-block;
+    position: absolute;
+    top: 42%;
+    left: 48%;
+    background: transparent;
     text-align: center;
-    height: 54px;
-    margin-top: -52px;
   }
 
   #vakken_modal .modal-content {
