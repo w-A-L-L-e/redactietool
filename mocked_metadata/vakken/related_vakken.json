@@ -1,77 +1,74 @@
 [
   {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/agrarische-technieken",
-    "label": "agrarische technieken",
-    "definition": "Agrarische technieken, milieu, plant, dier, landbouw, natuur"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/commerci%C3%ABle-technieken",
-    "label": "commerciële technieken",
-    "definition": "Verkoopstechnieken, verkoop, boekhouden, winkel houden"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/eigen-cultuur-en-religie",
-    "label": "eigen cultuur en religie",
-    "definition": "Yeshiva - God, Allah, Jahwe en de rest, godsdienst, zedenleer"
-  },
-  {
     "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/leren-leren",
     "label": "leren leren",
-    "definition": "Leren een leertaak zelfstandig tot een goed einde brengen"
+    "definition": "Leren een leertaak zelfstandig tot een goed einde brengen",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad"
   },
   {
     "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/lichamelijke-opvoeding",
     "label": "lichamelijke opvoeding",
-    "definition": "Beweging, atletiek, gymnastiek, balsporten, veiligheid, teamspirit, identiteit"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/schilderen-en-decoratie",
-    "label": "schilderen en decoratie",
-    "definition": "Behangen, schilderen, wand- en vloerbekleding"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/techniek",
-    "label": "techniek",
-    "definition": "Beginselen van elektriciteit, mobiliteit, constructie, ontwerpen, monteren"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/technologische-opvoeding",
-    "label": "technologische opvoeding",
-    "definition": "Beginselen van elektriciteit, mobiliteit, constructie, ontwerpen, monteren"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/textielproductie",
-    "label": "textielproductie",
-    "definition": "Maken van textielproducten in vezelvoorbereiding, de spinnerij, de voorbereiding weverij, de weverij, de tuftafdeling of de eindafwerking"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/toegepaste-informatica",
-    "label": "toegepaste informatica",
-    "definition": "Praktijkvoorbeelden van informatica"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/topsport",
-    "label": "topsport",
-    "definition": "Beweging, atletiek, gymnastiek, balsporten, motoriek, veiligheid, teamspirit, identiteit"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/verzorging",
-    "label": "verzorging",
-    "definition": "Alles rond de kinder-, bejaarden- en thuiszorg"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/voeding",
-    "label": "voeding",
-    "definition": "Voeding, ambachtelijke bereidingen en industriële productie van levensmiddelen"
+    "definition": "Beweging, atletiek, gymnastiek, balsporten, veiligheid, teamspirit, identiteit",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
   },
   {
     "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/wiskunde",
     "label": "wiskunde",
-    "definition": "Getallenleer, meetkunde, algebra, analyse, kansrekenen, modelleren"
+    "definition": "Getallenleer, meetkunde, algebra, analyse, kansrekenen, modelleren",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
   },
   {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/zeemanschap",
-    "label": "zeemanschap",
-    "definition": "Opleiding om een matroos te worden"
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/ict",
+    "label": "ICT",
+    "definition": "ICT, computationeel denken",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands-voor-nieuwkomers",
+    "label": "Nederlands voor nieuwkomers (vak voorbehouden aan OKAN)",
+    "definition": "Woordenschat, grammatica, Nederlandse cultuur, vaardigheden voor beginners",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/muzische-vorming",
+    "label": "muzische vorming",
+    "definition": "Beeld, muziek, drama, beweging, media. Zelf-expressie en beleving.",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands",
+    "label": "Nederlands",
+    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/sociale-vaardigheden",
+    "label": "sociale vaardigheden",
+    "definition": "Sociale interactie, sociale relaties, dialoog, participatie",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/godsdienst-",
+    "label": "godsdienst",
+    "definition": "religie, geloof, de Kerk, filosofie, ethische kwesties, identiteit, diversiteit",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/niet-confessionele-zedenleer-",
+    "label": "niet-confessionele zedenleer",
+    "definition": "Vrijzinnig humanisme, identiteit, samenleven, democratie, diversiteit, andere levensbeschouwingen",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/mens-en-maatschappij",
+    "label": "mens en maatschappij",
+    "definition": "Mens, maatschappij, tijd, ruimte, verkeer",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/wetenschappen-en-techniek",
+    "label": "wetenschappen en techniek",
+    "definition": "Wetenschappen, techniek, natuur",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad,https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
   }
 ]

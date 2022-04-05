@@ -97,7 +97,7 @@
         graden_options: [],
         loading: true,
         show_vakken_warning: false,
-        vakken_selected: false,
+        vakken_selected: [],
         show_onderwijsstructuur: false
       }
     },
@@ -124,10 +124,10 @@
 
       this.$root.$on('vakken_changed', data => {
         if(data.length) {
-          this.vakken_selected = true;
+          this.vakken_selected = data;
         }
         else{
-          this.vakken_selected = false;
+          this.vakken_selected = [];
         }
       });
 
@@ -143,12 +143,18 @@
       toggleOnderwijsstructuur(){
         this.show_onderwijsstructuur = !this.show_onderwijsstructuur;
       },
-      removeValue(){
-        if(this.vakken_selected){
-          this.show_vakken_warning = true;
-        }
-        else{
-          this.show_vakken_warning = false;
+      removeValue(val){
+        this.show_vakken_warning = false;
+        if(this.vakken_selected.length){
+          for(var v in this.vakken_selected){
+            var vak = this.vakken_selected[v];
+            console.log("rel_id=", vak['related_id'], "removed id=", val['id'])
+            if(vak['related_id'] && vak['related_id'] == val['id']){
+              console.log("bingo")
+              this.show_vakken_warning = true;
+              return;
+            }
+          }
         }
       },
       addValue(){

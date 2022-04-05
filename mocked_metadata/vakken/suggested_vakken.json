@@ -1,32 +1,14 @@
 [
   {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/muzische-vorming",
-    "label": "muzische vorming",
-    "definition": "Beeld, muziek, drama, beweging, media. Zelf-expressie en beleving."
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands-voor-nieuwkomers",
+    "label": "Nederlands voor nieuwkomers (vak voorbehouden aan OKAN)",
+    "definition": "Woordenschat, grammatica, Nederlandse cultuur, vaardigheden voor beginners",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
   },
   {
     "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands",
     "label": "Nederlands",
-    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/sociale-vaardigheden",
-    "label": "sociale vaardigheden",
-    "definition": "Sociale interactie, sociale relaties, dialoog, participatie"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/grieks",
-    "label": "Grieks",
-    "definition": "Woordenschat, grammatica, Griekse cultuur, vaardigheden, literatuur"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/latijn",
-    "label": "Latijn",
-    "definition": "Woordenschat, grammatica, Latijnse cultuur, vaardigheden, literatuur"
-  },
-  {
-    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/maatschappelijke-vorming",
-    "label": "maatschappelijke vorming",
-    "definition": "Informatie vinden en praten over overheid, eigen leefmilieu, diversiteit, rechten, participatie, geldzaken, geschiedenis en cultuur"
+    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur",
+    "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
   }
 ]

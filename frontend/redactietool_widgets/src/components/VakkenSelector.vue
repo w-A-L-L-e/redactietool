@@ -276,7 +276,8 @@
             this.options.push({
               'id': vak.id,
               'label': this.truncateLabel(vak.label),
-              'definition': vak.definition
+              'definition': vak.definition,
+              'related_id': vak.related_id
             })
           }
           this.loading = false;
@@ -293,6 +294,7 @@
             var vak_id = vakken[l]['value'];
             var vak_label = '';
             var vak_def = '';
+            var related_id = '';
 
             // lookup language name
             for( var o in this.options){
@@ -300,6 +302,7 @@
               if( entry['id'] == vak_id ){
                 vak_label = entry['label'];
                 vak_def = entry['definition'];
+                related_id = entry['related_id'];
                 break;
               }
             }
@@ -308,7 +311,8 @@
                 {
                   'id': vak_id, 
                   'label': vak_label, 
-                  'definition': vak_def
+                  'definition': vak_def,
+                  'related_id': related_id
                 }
               );
             }
@@ -442,7 +446,8 @@
           const new_vak = {
             id: vak.id,
             label: vak.label,
-            definition: vak.definition
+            definition: vak.definition,
+            related_id: vak.related_id
           };
           this.value.push(new_vak);
         }
