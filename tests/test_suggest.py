@@ -144,10 +144,12 @@ def test_get_related(sparql_endpoint):
         "definition": "lorem ipsum",
         "id": f"{Suggest.EXT_NS}vak/nederlands",
         "label": "Nederlands",
+        'related_id': 'https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad'
     }
     assert results[1] == {
         # pylint: disable=line-too-long
         "definition": "Identiteit, diversiteit, ...",
         "id": f"{Suggest.EXT_NS}vak/burgerschap",
         "label": "burgerschap",
+        'related_id': 'https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad'
     }
