@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 
-    <!-- 
-    Todo double check if we need this later on for our bundle.js etc.
-    https://cli.vuejs.org/guide/html-and-static-assets.html#preload
-    -->
-
-    <!-- use bulma instead TODO: bundle.js and model_dialog.js-->
     <link rel="stylesheet" href="<%= BASE_URL%>mystyles.css">
     <link rel="stylesheet" href="<%= BASE_URL%>bulma-tooltip.min.css">
     <link rel="stylesheet" href="<%= BASE_URL%>overrides.css">
@@ -147,7 +141,7 @@
 }
         </textarea>
 
-        <div id="legacy_values" class="hidden" style="display:none;">
+        <!-- use these to test the legacy values in above metadata:
         {
           "item_onderwijsniveaus": { 
             "show_legacy": true 
@@ -162,13 +156,8 @@
              {"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}
           ]
         }
-        </div>
-
-        <!-- 
-        <br/>
-        <button class="button is-link" 
-          onclick="return testOnderwijsLegacy(this);">Test onderwijs legacy</button>
         -->
+
       </p>
 
       <div class="clearfix"></div>
@@ -201,29 +190,5 @@
 
           return false; //cancel the submit
         }
-
-        // app needs restarting, after changing the json... we'll do this manually for now... 
-        //function testOnderwijsLegacy(event){
-        //  var metadata_div = document.getElementById('redactie_metadata');
-        //  var metadata = JSON.parse(metadata_div.value);
- 
-        //  var legacy_data = JSON.parse( document.getElementById("legacy_values").innerHTML );
-        //  metadata['item_onderwijsgraden'] = legacy_data['item_onderwijsgraden'];
-        //  metadata['item_onderwijsgraden_legacy'] = legacy_data['item_onderwijsgraden_legacy'];
-        //  metadata['item_onderwijsniveaus'] = legacy_data['item_onderwijsniveaus'];
-        //  metadata['item_onderwijsniveaus_legacy'] = legacy_data['item_onderwijsniveaus_legacy'];
-
-        //  metadata_div.innerHTML=JSON.stringify(metadata, null, 2);
-
-        //  //restart applicaiton to reload new data
-        //  document.getElementById("app").remove()
-        //  var app_wrap = document.getElementById("application_wrapper");
-        //  var new_app = document.createElement("div");
-        //  new_app.id = "app"
-        //  app_wrap.appendChild(new_app);
-
-        //  return false;
-        //}
-
       </script>
 </html>
