@@ -1,2 +1,314 @@
-[{"id": "https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal", "label": "Nederlandse taal", "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/moderne-talen", "label": "moderne talen", "definition": "Taalkunde, exclusief literatuur, voor alle moderne talen", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/klassieke-talen", "label": "klassieke talen", "definition": "Taalkunde, exclusief literatuur, voor de klassieke talen", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/literatuur", "label": "literatuur", "definition": "Alles over literatuur, in alle talen", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/media-en-communicatie", "label": "media en communicatie", "definition": "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/sport-en-spel", "label": "sport en spel", "definition": "Alles over lichaamsbeweging, (top)sport, spellen en spelen", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/gezondheid-en-gezondheidszorg", "label": "gezondheid en gezondheidszorg", "definition": "Alle aspecten van de gezondheidszorg, lichamelijke gezondheid", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/lichamelijke-verzorging", "label": "lichamelijke verzorging", "definition": "Persoonlijke hygi\u00ebne, haartooi, cosmetica, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/voeding-en-horeca", "label": "voeding en horeca", "definition": "Alles over voeding en alle aspecten van de horeca", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/politiek-en-overheid", "label": "politiek en overheid", "definition": "Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/recht", "label": "recht", "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/participatie", "label": "participatie", "definition": "Maatschappelijke participatie", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/relaties-en-seksualiteit", "label": "relaties en seksualiteit", "definition": "Alles over persoonlijke relaties, inclusief familiebanden en vriendschap, en seksualiteit", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/psychologie", "label": "psychologie", "definition": "Alles over psychologie en mentaal welzijn", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/opvoeding-en-ontwikkeling", "label": "opvoeding en ontwikkeling", "definition": "Opvoeding van kinderen en ontwikkeling van de mens", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/identiteit", "label": "identiteit", "definition": "Het zelfbeeld van individuen en groepen. Gaande van persoonlijke, sociale, culturele tot nationale identiteitsvorming. Ook gender.", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/armoede-en-welvaart", "label": "armoede en welvaart", "definition": "Alles over armoede, kansarmoede, armoedebestrijding, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/normen-en-waarden", "label": "normen en waarden", "definition": "Alles over de waarden (idealen en motieven) van een maatschappij en de normen (richtlijnen, gedragsregels) die moeten leiden tot die waarden, plus deviant gedrag", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/rolpatronen-en-stereotypen", "label": "rolpatronen en stereotypen", "definition": "Alles over de rollen die mensen opnemen in de maatschappij en de stereotypen die daar bij komen. Ook racisme, seksisme, discriminatie, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/leren-en-onderzoeken", "label": "leren en onderzoeken", "definition": "Hoe leren mensen en alles over onderzoekscompetenties en het onderwijs", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/religie-en-geloof", "label": "religie en geloof", "definition": "Alles over religies, geloofsovertuigingen en godsdiensten", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/filosofie", "label": "filosofie", "definition": "Alles over filosofie, (rationele) levensbeschouwingen en ethische vraagstukken", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/rampen-en-conflicten", "label": "rampen en conflicten", "definition": "Denk aan oorlog, hongersnood, Arabische lente, treinramp Buizingen, Fukushima, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/economie", "label": "economie", "definition": "Micro- en macro-economie", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/bedrijfsbeheer", "label": "bedrijfsbeheer", "definition": "Bedrijfseconomie, ondernemerschap, alle aspecten van bedrijfskunde", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/omgaan-met-geld", "label": "omgaan met geld", "definition": "Persoonlijke financi\u00eble geletterdheid", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/beroepen", "label": "beroepen", "definition": "Alles over de arbeidsmarkt, arbeidsomstandigheden, beroepen, vakbonden, solliciteren, arbeidswetgeving, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/prehistorie", "label": "prehistorie", "definition": "Alles over de prehistorie", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/oudheid", "label": "oudheid", "definition": "Alles over de oudheid", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/middeleeuwen", "label": "middeleeuwen", "definition": "Alles over de middeleeuwen", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/vroegmoderne-tijd", "label": "vroegmoderne tijd", "definition": "Alles over de vroegmoderne tijd", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/moderne-tijd", "label": "moderne tijd", "definition": "Alles over de moderne tijd", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/hedendaagse-tijd", "label": "hedendaagse tijd", "definition": "Alles over de hedendaagse tijd (na WO II - 10 jaar geleden)", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/erfgoed", "label": "erfgoed", "definition": "Materieel en immaterieel erfgoed (tradities, rituelen, ...), alles over hoe we vandaag naar het verleden kijken", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/verkeer-en-mobiliteit", "label": "verkeer en mobiliteit", "definition": "Organisatie van het verkeer, verkeersveiligheid, files, geschiedenis van de fiets", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/toerisme", "label": "toerisme", "definition": "Alles over toerisme", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/weer-en-klimaat", "label": "weer en klimaat", "definition": "Alles over het weer en het klimaat", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/bevolking-en-ruimtelijke-ordening", "label": "bevolking en ruimtelijke ordening", "definition": "Demografie en ruimtelijke planning", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/landschap-en-reli%C3%ABf", "label": "landschap en reli\u00ebf", "definition": "Fysische geografie", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/het-heelal", "label": "het heelal", "definition": "To space ... and beyond", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/milieu-en-ecologie", "label": "milieu en ecologie", "definition": "Ecosystemen, biodiversiteit, habitat, milieuvervuiling, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/wiskunde", "label": "wiskunde", "definition": "Wiskunde", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/chemie", "label": "chemie", "definition": "Chemie (theorie/praktijk)", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/biologie", "label": "biologie", "definition": "Biologie (theorie/praktijk)", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/fysica", "label": "fysica", "definition": "Fysica (theorie/praktijk)", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/constructie-en-productie", "label": "constructie en productie", "definition": "Constructie is de manier waarop een groter geheel uit onderdelen samengesteld wordt. Bijvoorbeeld de assemblage van een auto, het bouwen van een woning, meubels, .... Productie is de manier waarop objecten vanuit hun grondstoffen vervaardigd worden. Bijvoorbeeld het maken van glas, karton, houten planken, ... Maar denk hierbij ook aan industri\u00eble assemblage.", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/land--en-tuinbouw", "label": "land- en tuinbouw", "definition": "Van landbouw tot bosbeheer, van veeteelt tot tuinbouw", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/digitale-vaardigheden-en-informatica", "label": "digitale vaardigheden en informatica", "definition": "Digitale technologie\u00ebn, programmeren, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/mediawijsheid", "label": "mediawijsheid", "definition": "Mediawijsheid, beeldgeletterdheid, kritische zin", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/beeldende-kunsten", "label": "beeldende kunsten", "definition": "Schilderkunst, tekenkunst, film en fotografie, beeldhouwkunst, games, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/podiumkunsten", "label": "podiumkunsten", "definition": "Dans, muziek, theater, ...", "child_count": 0}, {"id": "https://data.hetarchief.be/id/onderwijs/thema/toegepaste-kunsten", "label": "toegepaste kunsten", "definition": "Mode, sierkunsten, architectuur, design, grafische beeldvorming, ...", "child_count": 0}]
-
+[
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal",
+    "label": "Nederlandse taal",
+    "definition": "Taalkunde, exclusief literatuur, voor de Nederlandse taal",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/moderne-talen",
+    "label": "moderne talen",
+    "definition": "Taalkunde, exclusief literatuur, voor alle moderne talen",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/klassieke-talen",
+    "label": "klassieke talen",
+    "definition": "Taalkunde, exclusief literatuur, voor de klassieke talen",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/literatuur",
+    "label": "literatuur",
+    "definition": "Alles over literatuur, in alle talen",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/media-en-communicatie",
+    "label": "media en communicatie",
+    "definition": "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/sport-en-spel",
+    "label": "sport en spel",
+    "definition": "Alles over lichaamsbeweging, (top)sport, spellen en spelen",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/gezondheid-en-gezondheidszorg",
+    "label": "gezondheid en gezondheidszorg",
+    "definition": "Alle aspecten van de gezondheidszorg, lichamelijke gezondheid",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/lichamelijke-verzorging",
+    "label": "lichamelijke verzorging",
+    "definition": "Persoonlijke hygiëne, haartooi, cosmetica, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/voeding-en-horeca",
+    "label": "voeding en horeca",
+    "definition": "Alles over voeding en alle aspecten van de horeca",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/politiek-en-overheid",
+    "label": "politiek en overheid",
+    "definition": "Van politieke partijen en besluitvorming tot de werking van de overheid, wetgeving en burgerparticipatie. Zowel binnen- als buitenland",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/recht",
+    "label": "recht",
+    "definition": "Alles over rechtbanken, rechtspraak, criminaliteit, wetgeving, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/participatie",
+    "label": "participatie",
+    "definition": "Maatschappelijke participatie",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/relaties-en-seksualiteit",
+    "label": "relaties en seksualiteit",
+    "definition": "Alles over persoonlijke relaties, inclusief familiebanden en vriendschap, en seksualiteit",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/psychologie",
+    "label": "psychologie",
+    "definition": "Alles over psychologie en mentaal welzijn",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/opvoeding-en-ontwikkeling",
+    "label": "opvoeding en ontwikkeling",
+    "definition": "Opvoeding van kinderen en ontwikkeling van de mens",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/identiteit",
+    "label": "identiteit",
+    "definition": "Het zelfbeeld van individuen en groepen. Gaande van persoonlijke, sociale, culturele tot nationale identiteitsvorming. Ook gender.",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/armoede-en-welvaart",
+    "label": "armoede en welvaart",
+    "definition": "Alles over armoede, kansarmoede, armoedebestrijding, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/normen-en-waarden",
+    "label": "normen en waarden",
+    "definition": "Alles over de waarden (idealen en motieven) van een maatschappij en de normen (richtlijnen, gedragsregels) die moeten leiden tot die waarden, plus deviant gedrag",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/rolpatronen-en-stereotypen",
+    "label": "rolpatronen en stereotypen",
+    "definition": "Alles over de rollen die mensen opnemen in de maatschappij en de stereotypen die daar bij komen. Ook racisme, seksisme, discriminatie, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/leren-en-onderzoeken",
+    "label": "leren en onderzoeken",
+    "definition": "Hoe leren mensen en alles over onderzoekscompetenties en het onderwijs",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/religie-en-geloof",
+    "label": "religie en geloof",
+    "definition": "Alles over religies, geloofsovertuigingen en godsdiensten",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/filosofie",
+    "label": "filosofie",
+    "definition": "Alles over filosofie, (rationele) levensbeschouwingen en ethische vraagstukken",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/rampen-en-conflicten",
+    "label": "rampen en conflicten",
+    "definition": "Denk aan oorlog, hongersnood, Arabische lente, treinramp Buizingen, Fukushima, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/economie",
+    "label": "economie",
+    "definition": "Micro- en macro-economie",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/bedrijfsbeheer",
+    "label": "bedrijfsbeheer",
+    "definition": "Bedrijfseconomie, ondernemerschap, alle aspecten van bedrijfskunde",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/omgaan-met-geld",
+    "label": "omgaan met geld",
+    "definition": "Persoonlijke financiële geletterdheid",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/beroepen",
+    "label": "beroepen",
+    "definition": "Alles over de arbeidsmarkt, arbeidsomstandigheden, beroepen, vakbonden, solliciteren, arbeidswetgeving, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/prehistorie",
+    "label": "prehistorie",
+    "definition": "Alles over de prehistorie",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/oudheid",
+    "label": "oudheid",
+    "definition": "Alles over de oudheid",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/middeleeuwen",
+    "label": "middeleeuwen",
+    "definition": "Alles over de middeleeuwen",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/vroegmoderne-tijd",
+    "label": "vroegmoderne tijd",
+    "definition": "Alles over de vroegmoderne tijd",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/moderne-tijd",
+    "label": "moderne tijd",
+    "definition": "Alles over de moderne tijd",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/hedendaagse-tijd",
+    "label": "hedendaagse tijd",
+    "definition": "Alles over de hedendaagse tijd (na WO II - 10 jaar geleden)",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/erfgoed",
+    "label": "erfgoed",
+    "definition": "Materieel en immaterieel erfgoed (tradities, rituelen, ...), alles over hoe we vandaag naar het verleden kijken",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/verkeer-en-mobiliteit",
+    "label": "verkeer en mobiliteit",
+    "definition": "Organisatie van het verkeer, verkeersveiligheid, files, geschiedenis van de fiets",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/toerisme",
+    "label": "toerisme",
+    "definition": "Alles over toerisme",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/weer-en-klimaat",
+    "label": "weer en klimaat",
+    "definition": "Alles over het weer en het klimaat",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/bevolking-en-ruimtelijke-ordening",
+    "label": "bevolking en ruimtelijke ordening",
+    "definition": "Demografie en ruimtelijke planning",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/landschap-en-reli%C3%ABf",
+    "label": "landschap en reliëf",
+    "definition": "Fysische geografie",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/het-heelal",
+    "label": "het heelal",
+    "definition": "To space ... and beyond",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/milieu-en-ecologie",
+    "label": "milieu en ecologie",
+    "definition": "Ecosystemen, biodiversiteit, habitat, milieuvervuiling, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/wiskunde",
+    "label": "wiskunde",
+    "definition": "Wiskunde",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/chemie",
+    "label": "chemie",
+    "definition": "Chemie (theorie/praktijk)",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/biologie",
+    "label": "biologie",
+    "definition": "Biologie (theorie/praktijk)",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/fysica",
+    "label": "fysica",
+    "definition": "Fysica (theorie/praktijk)",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/constructie-en-productie",
+    "label": "constructie en productie",
+    "definition": "Constructie is de manier waarop een groter geheel uit onderdelen samengesteld wordt. Bijvoorbeeld de assemblage van een auto, het bouwen van een woning, meubels, .... Productie is de manier waarop objecten vanuit hun grondstoffen vervaardigd worden. Bijvoorbeeld het maken van glas, karton, houten planken, ... Maar denk hierbij ook aan industriële assemblage.",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/land--en-tuinbouw",
+    "label": "land- en tuinbouw",
+    "definition": "Van landbouw tot bosbeheer, van veeteelt tot tuinbouw",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/digitale-vaardigheden-en-informatica",
+    "label": "digitale vaardigheden en informatica",
+    "definition": "Digitale technologieën, programmeren, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/mediawijsheid",
+    "label": "mediawijsheid",
+    "definition": "Mediawijsheid, beeldgeletterdheid, kritische zin",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/beeldende-kunsten",
+    "label": "beeldende kunsten",
+    "definition": "Schilderkunst, tekenkunst, film en fotografie, beeldhouwkunst, games, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/podiumkunsten",
+    "label": "podiumkunsten",
+    "definition": "Dans, muziek, theater, ...",
+    "child_count": 0
+  },
+  {
+    "id": "https://data.hetarchief.be/id/onderwijs/thema/toegepaste-kunsten",
+    "label": "toegepaste kunsten",
+    "definition": "Mode, sierkunsten, architectuur, design, grafische beeldvorming, ...",
+    "child_count": 0
+  }
+]

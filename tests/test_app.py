@@ -424,27 +424,27 @@ def test_keyword_search(client):
 @pytest.mark.vcr
 def test_vakken_suggesties(client):
     graden_en_themas = {
-      "graden": [
-        {
-          "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
-          "label": "lager 1e graad",
-          "definition": "lager 1e graad",
-          "child_count": 2,
-          "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
-        }
-      ],
-      "themas": [
-        {
-          "id": "https://data.hetarchief.be/id/onderwijs/thema/klassieke-talen",
-          "label": "klassieke talen",
-          "definition": "Taalkunde, exclusief literatuur, voor de klassieke talen"
-        },
-        {
-          "id": "https://data.hetarchief.be/id/onderwijs/thema/media-en-communicatie",
-          "label": "media en communicatie",
-          "definition": "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media"
-        }
-      ]
+        "graden": [
+            {
+                "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+                "label": "lager 1e graad",
+                "definition": "lager 1e graad",
+                "child_count": 2,
+                "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+            }
+        ],
+        "themas": [
+            {
+                "id": "https://data.hetarchief.be/id/onderwijs/thema/klassieke-talen",
+                "label": "klassieke talen",
+                "definition": "Taalkunde, exclusief literatuur, voor de klassieke talen"
+            },
+            {
+                "id": "https://data.hetarchief.be/id/onderwijs/thema/media-en-communicatie",
+                "label": "media en communicatie",
+                "definition": "Alles over communicatie (verbaal, non-verbaal), communicatiemiddelen en de media"
+            }
+        ]
     }
 
     res = client.post(
@@ -462,23 +462,23 @@ def test_vakken_suggesties(client):
 def test_vakken_related(client):
     graden_en_niveaus = {
         "graden": [
-          {
-            "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
-            "label": "lager 1e graad",
-            "definition": "lager 1e graad",
-            "child_count": 2,
-            "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
-          }
+            {
+                "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+                "label": "lager 1e graad",
+                "definition": "lager 1e graad",
+                "child_count": 2,
+                "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+            }
         ],
         "niveaus": [
-          {
-            "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs",
-            "label": "lager onderwijs",
-            "definition": "lager onderwijs",
-            "collection": "onderwijs subniveaus",
-            "child_count": 3,
-            "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"
-          }
+            {
+                "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs",
+                "label": "lager onderwijs",
+                "definition": "lager onderwijs",
+                "collection": "onderwijs subniveaus",
+                "child_count": 3,
+                "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs"
+            }
         ]
     }
     res = client.post(
