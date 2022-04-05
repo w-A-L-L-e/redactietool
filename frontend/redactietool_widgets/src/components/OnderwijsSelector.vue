@@ -104,7 +104,6 @@
     mounted: function() {
       this.$root.$on('niveaus_changed', data => {
         this.niveaus = data;
-        console.log("niveaus changed, data=", this.niveaus);
         this.readValues();
       });
 

@@ -395,12 +395,14 @@
             var suggest_map = {};
             for( var vak_index in res.data){
               var vak = res.data[vak_index];
-              vak.label = this.truncateLabel(vak.label);
-              suggest_map[vak.id] = vak;
-              row.push(Object.assign({}, vak));
-              if(row.length>=5){
-                this.vakken_suggesties.push(row);
-                row=[];
+              if(vak['id']){
+                vak.label = this.truncateLabel(vak.label);
+                suggest_map[vak.id] = vak;
+                row.push(Object.assign({}, vak));
+                if(row.length>=5){
+                  this.vakken_suggesties.push(row);
+                  row=[];
+                }
               }
             }
             if(row.length>0){
