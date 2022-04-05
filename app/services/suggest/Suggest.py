@@ -84,6 +84,8 @@ WHERE {{
     ?id a skos:Concept;
     skos:prefLabel ?label;
     skos:definition ?definition .
+
+    OPTIONAL {{ ?id skos:broader ?parent_id }}
 }}
 ORDER BY ?index
 """
@@ -106,7 +108,7 @@ WHERE {{
 SUGGEST_BY_IDS_QUERY = (
     PREFIX
     + """
-SELECT DISTINCT ?id ?label ?definition
+SELECT ?id ?label ?definition (SAMPLE(?parent) as ?parent_id)
 WHERE {{
     ocol:thema skos:member ?thema.
     col:graad skos:member ?graad.
@@ -117,9 +119,12 @@ WHERE {{
         skos:definition ?definition;
         skos:related ?thema, ?graad.
 
+    OPTIONAL {{ ?id skos:broader ?parent }}
+
     VALUES ?thema {{ {themas} }}
     VALUES ?graad {{ {graden} }}
 }}
+GROUP BY ?id ?label ?definition
 """
 )
 
