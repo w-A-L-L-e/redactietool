@@ -55,6 +55,23 @@
       </p>
       <p>
         <b>redactie_metadata: </b>
+
+
+<!--
+  "item_onderwijsniveaus": { 
+    "show_legacy": true 
+   },
+  "item_onderwijsniveaus_legacy":[
+    {"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}
+  ],
+  "item_onderwijsgraden":{
+     "show_legacy":true
+  },
+  "item_onderwijsgraden_legacy":[
+     {"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}
+  ],
+-->
+
         <textarea 
           id="redactie_metadata"
           name="redactie_metadata_hidden"
@@ -93,18 +110,31 @@
     {"value": "Leren leren", "attribute": "multiselect", "dottedKey": null},
     {"value": "Sociale vaardigheden - some legacy test", "attribute": "multiselect", "dottedKey": null}
   ],
-  "item_onderwijsniveaus": { 
-    "show_legacy": true 
-   },
-  "item_onderwijsniveaus_legacy":[
-    {"value": "Secundair onderwijs", "attribute": "multiselect", "dottedKey": null}
-  ],
-  "item_onderwijsgraden":{
-     "show_legacy":true
-  },
-  "item_onderwijsgraden_legacy":[
-     {"value": "Secundair 1ste graad", "attribute": "multiselect", "dottedKey": null}, {"value": "Secundair 2de graad", "attribute": "multiselect", "dottedKey": null}
-  ],
+
+  "item_onderwijsgraden":[
+      {
+         "attribute":"Onderwijsgraad",
+         "dottedKey":null,
+         "value":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+      }
+   ],
+   "item_onderwijsgraden_legacy":[],
+
+   "item_onderwijsniveaus":[
+      {
+         "attribute":"Onderwijsniveau",
+         "dottedKey":null,
+         "value":"https://w3id.org/onderwijs-vlaanderen/id/structuur/hoger-onderwijs"
+      },
+      {
+         "attribute":"Onderwijsniveau",
+         "dottedKey":null,
+         "value":"https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+      }
+   ],
+   "item_onderwijsniveaus_legacy":[],
+
+
   "item_keywords":[
      {
         "value":"reportage",

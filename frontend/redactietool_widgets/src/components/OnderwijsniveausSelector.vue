@@ -122,15 +122,13 @@
                   for( var i in this.options ){
                     option_item = this.options[i];
                     if( item['definition'] == option_item['definition'] ){
-                      item['id'] = option_item['id'];
-                      item['label'] = option_item['label']
                       this.value.push({
-                        'id': item['id'],
-                        'label': item['label'],
-                        'definition': item['definition'],
-                        'collection': item['collection'],
-                        'child_count': item['child_count'],
-                        'parent_id': item['parent_id']
+                        'id': option_item['id'],
+                        'label': option_item['label'],
+                        'definition': option_item['definition'],
+                        'collection': option_item['collection'],
+                        'child_count': option_item['child_count'],
+                        'parent_id': option_item['parent_id']
                       });
                       break;
                     }
@@ -146,15 +144,13 @@
                 for(var j in this.options ){
                   option_item = this.options[j];
                   if( item['id'] == option_item['id'] ){
-                    item['label'] = option_item['label'];
-                    item['definition'] = option_item['definition'];
                     this.value.push({
-                      'id': item['id'],
-                      'label': item['label'],
-                      'definition': item['definition'],
-                      'collection': item['collection'],
-                      'child_count': item['child_count'],
-                      'parent_id': item['parent_id']
+                      'id': option_item['id'],
+                      'label': option_item['label'],
+                      'definition': option_item['definition'],
+                      'collection': option_item['collection'],
+                      'child_count': option_item['child_count'],
+                      'parent_id': option_item['parent_id']
                     });
                     break;
                   }
