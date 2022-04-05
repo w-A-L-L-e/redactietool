@@ -329,7 +329,7 @@
         }
         return false;
       },
-      updateOverigeVakken(redactie_api_url){
+      updateOverigeVakken(redactie_api_url, suggest_map){
         var post_data = {
           'graden': this.graden,
           'niveaus': this.niveaus
@@ -343,11 +343,14 @@
             var row = [];
             for( var vak_index in res.data){
               var vak = res.data[vak_index];
-              vak.label = this.truncateLabel(vak.label);
-              row.push(Object.assign({}, vak));
-              if(row.length>=5){
-                this.overige_vakken.push(row);
-                row=[];
+              // only show if not present in suggestions
+              if(suggest_map[vak.id] == undefined){
+                vak.label = this.truncateLabel(vak.label);
+                row.push(Object.assign({}, vak));
+                if(row.length>=5){
+                  this.overige_vakken.push(row);
+                  row=[];
+                }
               }
             }
             if(row.length>0){
@@ -379,7 +382,7 @@
           ){
           this.vakken_suggesties = []; //clear suggestions
           this.suggesties_filtered = [];
-          this.updateOverigeVakken(redactie_api_url);
+          this.overige_vakken = [];
           return;
         }
 
@@ -389,9 +392,11 @@
           .then(res => {
             this.vakken_suggesties = [];
             var row = [];
+            var suggest_map = {};
             for( var vak_index in res.data){
               var vak = res.data[vak_index];
               vak.label = this.truncateLabel(vak.label);
+              suggest_map[vak.id] = vak;
               row.push(Object.assign({}, vak));
               if(row.length>=5){
                 this.vakken_suggesties.push(row);
@@ -403,7 +408,7 @@
             }
             this.loading = false;
             this.suggesties_filtered = JSON.parse(JSON.stringify(this.vakken_suggesties)); 
-            this.updateOverigeVakken(redactie_api_url);
+            this.updateOverigeVakken(redactie_api_url, suggest_map);
           })
       },
       toggleSuggesties(event){
