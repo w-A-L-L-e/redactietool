@@ -121,7 +121,7 @@ GET_THEMAS_QUERY = (
     + """
 SELECT DISTINCT ?id ?label ?definition (0 AS ?child_count)
 WHERE {{
-    col:thema skos:memberList ?list .
+    ocol:thema skos:memberList ?list .
     ?list stardog:list:member (?id ?index) .
 
     ?id a skos:Concept;
