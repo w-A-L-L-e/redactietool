@@ -148,9 +148,7 @@
         if(this.vakken_selected.length){
           for(var v in this.vakken_selected){
             var vak = this.vakken_selected[v];
-            console.log("rel_id=", vak['related_id'], "removed id=", val['id'])
             if(vak['related_id'] && vak['related_id'] == val['id']){
-              console.log("bingo")
               this.show_vakken_warning = true;
               return;
             }
