@@ -87,13 +87,13 @@ def onderwijsgraden_json():
 @app.route('/themas')
 @cross_origin()
 def themas_json():
-    return send_from_directory('themas', 'themas_suggest_format.json')
+    return send_from_directory('themas', 'themas.json')
 
 
 @app.route('/vakken')
 @cross_origin()
 def vakken_json():
-    return send_from_directory('vakken', 'vakkenlijst_suggest_format.json')
+    return send_from_directory('vakken', 'vakken.json')
 
 
 @app.route('/vakken_suggest', methods=['POST'])
@@ -102,7 +102,7 @@ def get_vakken_suggesties():
     json_data = json.loads(request.data)
     print("graden=", json_data['graden'])
     print("themas=", json_data['themas'])
-    return send_from_directory('vakken', 'suggested_vakken.json')
+    return send_from_directory('vakken', 'vakken_suggest.json')
 
 
 @app.route('/vakken_related', methods=['POST'])
@@ -111,7 +111,7 @@ def get_vakken_related():
     json_data = json.loads(request.data)
     print("graden=", json_data['graden'])
     print("niveaus=", json_data['niveaus'])
-    return send_from_directory('vakken', 'related_vakken.json')
+    return send_from_directory('vakken', 'vakken_related.json')
 
 
 @app.route('/keyword_search', methods=['POST'])

@@ -139,7 +139,7 @@ WHERE {{
     VALUES ?parent {{ {concept} }}
 
     ?id a skos:Concept;
-        skos:prefLabel ?label; 
+        skos:prefLabel ?label;
        skos:definition ?definition.
 }}
 """

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands-voor-nieuwkomers",
+    "label": "Nederlands voor nieuwkomers (vak voorbehouden aan OKAN)",
+    "definition": "Woordenschat, grammatica, Nederlandse cultuur, vaardigheden voor beginners",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/zakelijke-communicatie",
+    "label": "zakelijke communicatie",
+    "definition": "Communicatie, reclame, online media",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/nederlands",
+    "label": "Nederlands",
+    "definition": "Woordenschat, grammatica, Vlaamse en Nederlandse cultuur, vaardigheden, literatuur",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/grieks",
+    "label": "Grieks",
+    "definition": "Woordenschat, grammatica, Griekse cultuur, vaardigheden, literatuur",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/hebreeuws",
+    "label": "Hebreeuws",
+    "definition": "Woordenschat, grammatica, Hebreeuwse cultuur, vaardigheden, literatuur",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/latijn",
+    "label": "Latijn",
+    "definition": "Woordenschat, grammatica, Latijnse cultuur, vaardigheden, literatuur",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/vak/oud-hebreeuws",
+    "label": "Oud-Hebreeuws",
+    "definition": "Woordenschat, grammatica, cultuur, literatuur",
+    "related_id": [
+      "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad"
+    ]
+  }
+]
