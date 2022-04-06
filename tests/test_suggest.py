@@ -123,7 +123,8 @@ def test_get_children(sparql_endpoint):
     )
     suggest = Suggest(TEST_ENDPOINT, "x", "y")
 
-    results = list(suggest.get_children([f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
+    results = list(suggest.get_children(
+        [f"{suggest.EXT_NS}structuur/lager-onderwijs"]))
     assert len(results) == 2
     assert results[0] == {
         "definition": "Lager 1ste graad",
@@ -154,12 +155,12 @@ def test_get_related(sparql_endpoint):
         "id": f"{Suggest.EXT_NS}vak/nederlands",
         "label": "Nederlands",
         # pylint: disable=line-too-long
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal,https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs",
+        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal,https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs",  # noqa: E501
     }
     assert results[1] == {
         # pylint: disable=line-too-long
         "definition": "Identiteit, diversiteit, ...",
         "id": f"{Suggest.EXT_NS}vak/burgerschap",
         "label": "burgerschap",
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/recht",
+        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/recht",  # noqa: E501
     }
