@@ -27,7 +27,7 @@ ocol:niveau a skos:Collection ;
 
 ocol:subniveau a skos:Collection ;
     skos:prefLabel "Onderwijs subniveaus"@nl ;
-    skos:member ostr:lager-onderwijs .
+    skos:member ostr:lager-onderwijs, ostr:kleuteronderwijs .
 
 ocol:vak a skos:OrderedCollection ;
     skos:prefLabel "Vakken"@nl ;
@@ -43,7 +43,7 @@ vak:nederlands a skos:Concept ;
     skos:definition "lorem ipsum"@nl ;
     skos:inScheme ond:vak ;
     skos:prefLabel "Nederlands"@nl ;
-    skos:related ostr:lager-1e-graad, thema:nederlandse-taal.
+    skos:related ostr:lager-1e-graad, thema:nederlandse-taal, ostr:kleuteronderwijs.
 
 vak:burgerschap a skos:Concept ;
     skos:definition "Identiteit, diversiteit, ..."@nl ;
@@ -79,6 +79,12 @@ ostr:lager-onderwijs a skos:Concept ;
     skos:inScheme ond:structuur ;
     skos:narrower ostr:lager-1e-graad;
     skos:prefLabel "lager onderwijs"@nl .
+
+ostr:kleuteronderwijs a skos:Concept ;
+    skos:definition "Kleuteronderwijs"@nl ;
+    skos:broader ostr:basis-onderwijs;
+    skos:inScheme ond:structuur ;
+    skos:prefLabel "kleuteronderwijs"@nl .
 
 ostr:basisonderwijs a skos:Concept ;
     skos:definition "Basisonderwijs"@nl ;

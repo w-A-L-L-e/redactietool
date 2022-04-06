@@ -67,7 +67,6 @@ WHERE {{
 
     OPTIONAL {{
       ?id skos:related ?rel.
-      col:graad skos:member ?rel.
     }}
 }}
 GROUP BY ?id ?label ?definition ?index
@@ -89,7 +88,6 @@ WHERE {{
 
     OPTIONAL {{
       ?id skos:related ?rel.
-      col:graad skos:member ?rel.
     }}
 
     VALUES ?concept {{ {concept} }}
@@ -141,7 +139,8 @@ WHERE {{
     VALUES ?parent {{ {concept} }}
 
     ?id a skos:Concept;
-    skos:prefLabel ?label; skos:definition ?definition.
+        skos:prefLabel ?label; 
+       skos:definition ?definition.
 }}
 """
 )
