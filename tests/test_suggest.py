@@ -154,7 +154,7 @@ def test_get_related(sparql_endpoint):
         "id": f"{Suggest.EXT_NS}vak/nederlands",
         "label": "Nederlands",
         # pylint: disable=line-too-long
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal,https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs", 
+        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal,https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs",
     }
     assert results[1] == {
         # pylint: disable=line-too-long
