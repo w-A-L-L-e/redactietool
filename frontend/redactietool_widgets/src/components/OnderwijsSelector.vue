@@ -143,12 +143,21 @@
       toggleOnderwijsstructuur(){
         this.show_onderwijsstructuur = !this.show_onderwijsstructuur;
       },
+      isRelated(vak, selected_vak){
+        if( vak['related_id'] == undefined) return false;
+        for( var r in vak['related_id'] ){
+          var related_id = vak['related_id'][r]
+          if(related_id == selected_vak['id']){
+            return true;
+          }
+        }
+      },
       removeValue(val){
         this.show_vakken_warning = false;
         if(this.vakken_selected.length){
           for(var v in this.vakken_selected){
             var vak = this.vakken_selected[v];
-            if(vak['related_id'] && vak['related_id'] == val['id']){
+            if(this.isRelated(vak, val)){
               this.show_vakken_warning = true;
               return;
             }
