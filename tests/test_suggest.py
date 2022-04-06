@@ -48,7 +48,9 @@ def test_suggest(sparql_endpoint):
         "definition": "lorem ipsum",
         "id": f"{suggest.EXT_NS}vak/nederlands",
         "label": "Nederlands",
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+        "related_id": [
+            "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad"
+        ],
     }
 
 
@@ -154,12 +156,19 @@ def test_get_related(sparql_endpoint):
         "id": f"{Suggest.EXT_NS}vak/nederlands",
         "label": "Nederlands",
         # pylint: disable=line-too-long
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal,https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs",
+        "related_id": [
+            "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+            "https://data.hetarchief.be/id/onderwijs/thema/nederlandse-taal",
+            "https://w3id.org/onderwijs-vlaanderen/id/structuur/kleuteronderwijs",
+        ],
     }
     assert results[1] == {
         # pylint: disable=line-too-long
         "definition": "Identiteit, diversiteit, ...",
         "id": f"{Suggest.EXT_NS}vak/burgerschap",
         "label": "burgerschap",
-        "related_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad,https://data.hetarchief.be/id/onderwijs/thema/recht",
+        "related_id": [
+            "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+            "https://data.hetarchief.be/id/onderwijs/thema/recht",
+        ],
     }

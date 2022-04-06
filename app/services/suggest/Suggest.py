@@ -245,6 +245,8 @@ class Suggest:
             for k, v in binding.items():
                 if v.datatype == "http://www.w3.org/2001/XMLSchema#integer":
                     r[k] = int(v.value)
+                elif k == "related_id":
+                    r[k] = v.value.split(",")
                 else:
                     r[k] = v.value
             yield r
