@@ -502,7 +502,7 @@
   [data-tooltip]:not([disabled]):hover:before {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.6s;
+    transition: opacity 0.3s;
     transition-delay: 0.8s;
     transition-property: opacity;
   }
@@ -510,7 +510,7 @@
   [data-tooltip]:not([disabled]):hover:after{
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.6s;
+    transition: opacity 0.3s;
     transition-delay: 0.8s;
     transition-property: opacity;
   }
