@@ -1,1 +1,44 @@
-[{"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad", "label": "lager 1e graad", "definition": "lager 1e graad", "child_count": 2, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"}, {"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad", "label": "lager 2e graad", "definition": "lager 2e graad", "child_count": 2, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"}, {"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad", "label": "lager 3e graad", "definition": "lager 3e graad", "child_count": 2, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"}, {"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad", "label": "secundair 1e graad", "definition": "secundair 1e graad", "child_count": 2, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"}, {"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad", "label": "secundair 2e graad", "definition": "secundair 2e graad", "child_count": 2, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"}, {"id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad", "label": "secundair 3e graad", "definition": "secundair 3e graad", "child_count": 3, "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"}]
+[
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-1e-graad",
+    "label": "lager 1e graad",
+    "definition": "lager 1e graad",
+    "child_count": 2,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-2e-graad",
+    "label": "lager 2e graad",
+    "definition": "lager 2e graad",
+    "child_count": 2,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-3e-graad",
+    "label": "lager 3e graad",
+    "definition": "lager 3e graad",
+    "child_count": 2,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/lager-onderwijs"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-1e-graad",
+    "label": "secundair 1e graad",
+    "definition": "secundair 1e graad",
+    "child_count": 2,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad",
+    "label": "secundair 2e graad",
+    "definition": "secundair 2e graad",
+    "child_count": 2,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"
+  },
+  {
+    "id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad",
+    "label": "secundair 3e graad",
+    "definition": "secundair 3e graad",
+    "child_count": 3,
+    "parent_id": "https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-onderwijs"
+  }
+]

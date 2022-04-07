@@ -233,6 +233,7 @@
       });
 
       this.$root.$on('onderwijs_changed', data => {
+        console.log("calling updateSuggestions");
         this.niveaus = data['niveaus'];
         this.graden = data['graden']
         this.updateSuggestions();
@@ -374,6 +375,7 @@
           'themas': this.themas
         }
 
+        console.log("post data=", post_data);
         if(
             post_data['graden'].length==0 || 
             post_data['themas'].length==0 ||
@@ -382,6 +384,11 @@
           this.vakken_suggesties = []; //clear suggestions
           this.suggesties_filtered = [];
           this.overige_vakken = [];
+
+          // edge case for kleuteronderwijs
+          if(!this.hogerOfVolwassenOnderwijs()){ 
+            this.updateOverigeVakken(redactie_api_url, {});
+          }
           return;
         }
 
