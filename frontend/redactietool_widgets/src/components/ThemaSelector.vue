@@ -498,12 +498,21 @@
     padding-bottom: 5px;
   }
 
-  /* attempt to make tooltip visible on top line 
-  overflow: visible on parent element may help as well
-
-  [data-tooltip]:not(.is-loading), [data-tooltip]:not(.is-disabled), [data-tooltip]:not([disabled] {
-    position: absolute;
+  /* delay en fade-in op tooltips zodat tijdens snel editen de tooltips niet zo veel storen */
+  [data-tooltip]:not([disabled]):hover:before {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.6s;
+    transition-delay: 0.8s;
+    transition-property: opacity;
   }
-  */
+
+  [data-tooltip]:not([disabled]):hover:after{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.6s;
+    transition-delay: 0.8s;
+    transition-property: opacity;
+  }
 
 </style>

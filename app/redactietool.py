@@ -74,7 +74,6 @@ app.config['SAML_PATH'] = os.path.join(
 # app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(hours=9)
 # sesson.permanent = True
 
-
 # mixin/model for current_user method of flask login
 login_manager = LoginManager()
 login_manager.init_app(app)
