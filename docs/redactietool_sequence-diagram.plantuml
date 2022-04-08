@@ -19,54 +19,72 @@ deactivate saml
 redactietool -> redactietool: Redirect to protected search page
 
 loop
-        redactietool -> mh: Search for pid (edit metadata)
+        redactietool -> mh: Search for pid
         activate mh
         mh --> redactietool: getMetadataResponse
         deactivate mh
-        redactietool -> redactietool: Parse metadata response
-        activate mh
-        redactietool -> mh: Get publicatie_status
-        redactietool -> mh: Get subtitle object
-        mh -> redactietool: return metadata, publicatie_status and subtitles
-        deactivate mh
-        redactietool -> redactietool: Update metadata, leerobject, language, type, ...
-        activate suggest
-        redactietool -> suggest: Request onderwijsniveaus
-        suggest -> redactietool: Return onderwijsniveaus list
-        redactietool -> suggest: Request onderwijsgraden
-        suggest -> redactietool: Return onderwijsgraden list
-        redactietool -> suggest: Request themas
-        suggest -> redactietool: Return themas list
-        redactietool -> suggest: Request vakken
-        suggest -> redactietool: Return vakken list
-        deactivate suggest
-        loop
-          redactietool -> redactietool: Select onderwijsniveaus and graden
-          redactietool -> redactietool: Select themas
+        alt Metadata bewerken
+          redactietool -> redactietool: Redirect to metadata edit page
+          activate mh
+          redactietool -> mh: Get publicatie_status
+          redactietool -> mh: Get subtitle object
+          mh -> redactietool: return metadata, publicatie_status and subtitles
+          deactivate mh
+          redactietool -> redactietool: Update metadata, leerobject, language, type, ...
           activate suggest
-          redactietool -> suggest: Request suggested vakken parameters:(graden, themas)
-          suggest -> redactietool: Return suggested vakken
-          redactietool -> suggest: Request related vakken parameters:(niveaus, graden)
-          suggest -> redactietool: Return related vakken
-          redactietool -> redactietool: Select vakken for this item from suggestions, related in modal or from all vakken in dropdown
+          redactietool -> suggest: Request onderwijsniveaus
+          suggest -> redactietool: Return onderwijsniveaus list
+          redactietool -> suggest: Request onderwijsgraden
+          suggest -> redactietool: Return onderwijsgraden list
+          redactietool -> suggest: Request themas
+          suggest -> redactietool: Return themas list
+          redactietool -> suggest: Request vakken
+          suggest -> redactietool: Return vakken list
           deactivate suggest
+          loop
+            redactietool -> redactietool: Select onderwijsniveaus and graden
+            redactietool -> redactietool: Select themas
+            activate suggest
+            redactietool -> suggest: Request suggested vakken parameters:(graden, themas)
+            suggest -> redactietool: Return suggested vakken
+            redactietool -> suggest: Request related vakken parameters:(niveaus, graden)
+            suggest -> redactietool: Return related vakken
+            redactietool -> redactietool: Select vakken for this item from suggestions, related in modal or from all vakken in dropdown
+            deactivate suggest
+          end
+          loop
+            redactietool -> es: Search keyword
+            activate es
+            es -> redactietool: Return matched keywords list
+            deactivate es
+            redactietool -> redactietool: Add keyword to selected keywords in Leerobject
+          end
+          redactietool -> redactietool: Construct sidecar for updating metadata
+          redactietool -> ftp: Transfer collateral to MH tra
+          activate ftp
+          redactietool -> ftp: Transfer sidecar XML to MH tra
+          deactivate ftp
+          activate mh
+          redactietool -> mh: Update object with transformed metadata
+          mh --> redactietool: Display results in metadata edit form
+          deactivate mh
+
+        else Ondertitels toevoegen
+          redactietool -> redactietool: Redirect to subtitle upload page
+          activate mh
+          redactietool -> mh: Get existing subtitle files using object request with same pid
+          mh -> redactietool: return list of uploaded subtitles to show in upload page.
+          deactivate mh
+          redactietool -> redactietool: Upload SRT file
+          redactietool -> redactietool: Parse and convert SRT into webVTT file
+          redactietool -> redactietool: Redirect to preview page that shows local webVTT in browser.
+          redactietool -> redactietool: Construct sidecar for updating subtitle file.
+          redactietool -> ftp: Transfer webVTT to MH tra
+          activate ftp
+          redactietool -> ftp: Transfer sidecar XML to MH tra
+          deactivate ftp
+          redactietool -> redactietool: display results of ftp upload response.
         end
-        loop
-          redactietool -> es: Search keyword
-          activate es
-          es -> redactietool: Return matched keywords list
-          deactivate es
-          redactietool -> redactietool: Add keyword to selected keywords in Leerobject
-        end
-        redactietool -> redactietool: Construct sidecar metadata
-        redactietool -> ftp: Transfer collateral to MH tra
-        activate ftp
-        redactietool -> ftp: Transfer sidecar XML to MH tra
-        deactivate ftp
-        activate mh
-        redactietool -> mh: Update object with transformed metadata
-        mh --> redactietool: Display results in metadata edit form
-        deactivate mh
 end
 
 redactietool -> saml: Logout request
