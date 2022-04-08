@@ -458,6 +458,11 @@
   .card{
     cursor: pointer;
   }
+  
+  .modal-card-body{
+    overflow-x: hidden;
+    padding-bottom: 4em;
+  }
 
   header.card-header{
     background-color: #edeff2;
