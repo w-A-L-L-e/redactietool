@@ -55,18 +55,8 @@
               <input
                 type="checkbox"
                 v-model="show_tooltips"
-                v-on:click="toggleTooltips()"
               >
                 Tooltips
-            </label>
-
-            <label class="checkbox thema-show-def-selector">
-              <input
-                type="checkbox"
-                v-model="show_definitions"
-                v-on:click="toggleBeschrijvingen()"
-              >
-                Beschrijvingen
             </label>
 
             <div class="vak-search">
@@ -104,19 +94,17 @@
                       v-on:mouseover="changeToprowTooltip($event)"
                       >
                       <header class="card-header">
-                        <p v-if="show_definitions || !show_tooltips" 
-                          class="card-header-title">
-                          {{vak.label}}
-                        </p>
-
                         <p v-if="show_tooltips" 
                           class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
                           :data-tooltip="vak.definition">
                           {{vak.label}}
                         </p>
-
+                        <p v-if="!show_tooltips" 
+                          class="card-header-title">
+                          {{vak.label}}
+                        </p>
                       </header>
-                      <div class="card-content" v-if="show_definitions">
+                      <div class="card-content" v-if="!show_tooltips">
                           {{vak.definition}} 
                       </div>
                     </div>
@@ -152,18 +140,17 @@
                         v-on:mouseover="changeToprowTooltip($event)"
                       >
                         <header class="card-header">
-                          <p v-if="show_definitions || !show_tooltips" 
-                            class="card-header-title">
-                            {{ovak.label}}
-                          </p>
-
                           <p v-if="show_tooltips" 
                             class="card-header-title is-primary has-tooltip-arrow has-tooltip-multiline" 
                             :data-tooltip="ovak.definition">
                             {{ovak.label}}
                           </p>
+                          <p v-if="!show_tooltips" 
+                            class="card-header-title">
+                            {{ovak.label}}
+                          </p>
                         </header>
-                        <div class="card-content" v-if="show_definitions">
+                        <div class="card-content" v-if="!show_tooltips">
                             {{ovak.definition}} 
                         </div>
                       </div>
@@ -220,7 +207,6 @@
         themas: [],
         vakken_search: "",
         vakken_prev_search: "",
-        show_definitions: false,
         show_tooltips: true,
         loading: false,
         vakken_loading: true
@@ -529,18 +515,11 @@
         // enkel hoger, volwassen of geen niveaus geselecteerd
         return true;
       },
-      toggleTooltips(){
-        this.show_definitions = false;
-      },
-      toggleBeschrijvingen(){
-        this.show_tooltips = false;
-      },
       showInlineSuggesties(){
         if( !this.suggesties_filtered.length ) return false;
         //algernate if we hide suggests: also return false if all suggestions are selected
         return true;
       }
-
     },
     filters: {
       truncate: function (text, length, suffix) {

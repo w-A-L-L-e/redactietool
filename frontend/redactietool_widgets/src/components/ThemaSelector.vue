@@ -38,18 +38,8 @@
             <input
               type="checkbox"
               v-model="show_tooltips"
-              v-on:click="toggleTooltips()"
             >
             Tooltips
-          </label>
-
-          <label class="checkbox thema-show-def-selector">
-            <input
-              type="checkbox"
-              v-model="show_definitions"
-              v-on:click="toggleBeschrijvingen()"
-            >
-            Beschrijvingen
           </label>
 
           <div class="thema-search">
@@ -91,7 +81,7 @@
                     >
 
                     <header class="card-header">
-                      <p v-if="show_definitions || !show_tooltips" 
+                      <p v-if="!show_tooltips" 
                         class="card-header-title">
                         {{thema.label}}
                       </p>
@@ -104,7 +94,7 @@
                       </p>
                     </header>
 
-                    <div class="card-content" v-if="show_definitions">
+                    <div class="card-content" v-if="!show_tooltips">
                         {{thema.definition}} 
                     </div>
 
@@ -163,7 +153,6 @@
         show_themas_label: "Toon themas",
         thema_search: "",
         thema_prev_search: "",
-        show_definitions: false,
         show_tooltips: true,
         loading: true
       }
@@ -344,12 +333,6 @@
         else{
           return text;
         }
-      },
-      toggleTooltips(){
-        this.show_definitions = false;
-      },
-      toggleBeschrijvingen(){
-        this.show_tooltips = false;
       },
     },
     filters: {
