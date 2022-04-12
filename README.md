@@ -69,6 +69,11 @@ Available make commands:
 First make sure you can also fetch the VIAA/Meemoo specific packages.
 This is done on macOS by editing the pip configuration file and then running make install:
 
+macOS additional packages needed:
+```
+brew install libxml2 libxmlsec1 pkg-config
+```
+
 ```
 $ vi .config/pip/pip.conf
 
