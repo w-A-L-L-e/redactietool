@@ -12,14 +12,13 @@
 import os
 import webvtt
 import requests
+import logging
 
 from app.services.srt_converter import convert_srt
 from app.services.xml_sidecar import XMLSidecar
 from werkzeug.utils import secure_filename
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
 
-logger = logging.get_logger(__name__, config=ConfigParser())
+logger = logging.getLogger(__name__)
 
 
 def allowed_file(filename):

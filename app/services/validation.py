@@ -11,11 +11,10 @@
 
 import re
 from flask import redirect, url_for, flash
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
 from markupsafe import escape
+import logging
 
-logger = logging.get_logger(__name__, config=ConfigParser())
+logger = logging.getLogger(__name__)
 
 
 def pid_error(pid, msg):

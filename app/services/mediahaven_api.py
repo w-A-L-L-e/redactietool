@@ -13,10 +13,8 @@
 
 import os
 from requests import Session
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
-
-logger = logging.get_logger(__name__, config=ConfigParser())
+import logging
+logger = logging.getLogger(__name__)
 
 
 class MediahavenApi:

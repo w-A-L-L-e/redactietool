@@ -11,12 +11,11 @@
 #
 
 import os
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
 from ftplib import FTP, error_perm, error_temp
 import socket
+import logging
 
-logger = logging.get_logger(__name__, config=ConfigParser())
+logger = logging.getLogger(__name__)
 
 
 class FtpUploader:

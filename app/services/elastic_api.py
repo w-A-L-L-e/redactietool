@@ -12,10 +12,9 @@
 import os
 import json
 from requests import Session
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
+import logging
 
-logger = logging.get_logger(__name__, config=ConfigParser())
+logger = logging.getLogger(__name__)
 
 
 class ElasticApi:

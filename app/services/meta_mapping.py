@@ -13,8 +13,7 @@
 
 import json
 import os
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
+import logging
 from app.services.mh_properties import (
     get_property, set_property,
     get_md_array,
@@ -24,7 +23,7 @@ from app.services.mh_properties import (
 from app.services.xml_sidecar import XMLSidecar
 from app.services.input_escaping import markdown_to_html, cleanup_markdown, escape
 
-logger = logging.get_logger(__name__, config=ConfigParser())
+logger = logging.getLogger(__name__)
 
 
 class MetaMapping:

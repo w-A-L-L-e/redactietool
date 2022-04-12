@@ -26,9 +26,6 @@ from flask import (Flask, request, render_template, session,
                    redirect, url_for, send_from_directory, Response)
 
 from flask_api import status
-from viaa.configuration import ConfigParser
-from viaa.observability import logging
-
 from app.config import flask_environment
 from app.services.mediahaven_api import MediahavenApi
 from app.services.elastic_api import ElasticApi
@@ -50,9 +47,7 @@ from app.services.user import User, check_saml_session, OAS_APPNAME
 
 
 app = Flask(__name__)
-config = ConfigParser()
-logger = logging.get_logger(__name__, config=config)
-
+logger = app.logger
 app.config.from_object(flask_environment())
 
 # session cookie secret key
